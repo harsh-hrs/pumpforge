@@ -1,0 +1,1090 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "diaphragm_metering_pump",
+  "title": "Diaphragm Metering (Dosing) Pump, Hydraulically Actuated",
+  "category": "3 · Reciprocating Positive-Displacement Pumps",
+  "library": {
+    "no": 27,
+    "phase": 1,
+    "hi_family": "positive_displacement_reciprocating",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "diaphragm_metering_pump_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flow_in",
+      "kind": "flow_suction",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.37,
+          0.03,
+          -0.0
+        ],
+        [
+          -0.095,
+          0.03,
+          -0.0
+        ],
+        [
+          -0.095,
+          0.22,
+          -0.0
+        ],
+        [
+          -0.07,
+          0.24,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "flow_out",
+      "kind": "flow_discharge",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.07,
+          0.245,
+          -0.0
+        ],
+        [
+          -0.095,
+          0.26,
+          -0.0
+        ],
+        [
+          -0.095,
+          0.48,
+          -0.0
+        ],
+        [
+          -0.37,
+          0.48,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 43490,
+    "parts": 18
+  },
+  "summary": "A metering (dosing) pump delivers a precise, adjustable volume per stroke. Here a motor turns a worm gear and eccentric that reciprocate a plunger; the plunger does not touch the chemical but pushes on hydraulic oil, which flexes a PTFE diaphragm evenly. As the diaphragm retracts, the suction ball valves open and the head fills; as it advances, they close and the discharge balls lift. Output is set by stroke length (knob) and stroke rate, typically with repeatability of the order of ±1 % — used for chemical injection, water treatment and process dosing where leakage of hazardous chemicals must be avoided.",
+  "classification": {
+    "family": "Positive displacement – reciprocating",
+    "configuration": "Hydraulically actuated diaphragm metering pump (API 675 type), simplex"
+  },
+  "model_configuration": {
+    "stroke_mm_display": 16.0,
+    "valves": "Double ball check valves (suction and discharge)",
+    "diaphragm": "PTFE (sandwich design with leak detection is common)",
+    "capacity_formula": "Q = (stroke volume × stroke % setting) × strokes per minute"
+  },
+  "standards": [
+    {
+      "id": "API 675",
+      "title": "Positive Displacement Pumps – Controlled Volume for Petroleum, Chemical, and Gas Industry Services",
+      "relevance": "The core standard for metering pumps (accuracy, linearity, repeatability).",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ANSI/HI 7.1-7.5",
+      "title": "Controlled-Volume Metering Pumps",
+      "relevance": "Nomenclature, application, operation.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 675 (scope summary).",
+    "Manufacturer metering pump literature (generic practice)."
+  ],
+  "parts": [
+    {
+      "id": "drive_housing",
+      "name": "Drive Housing (Worm Gear & Eccentric)",
+      "group": "drive",
+      "section_role": "split",
+      "nodes": [
+        "drive_housing__back",
+        "drive_housing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.0,
+        0.0,
+        -0.13
+      ],
+      "bbox_max": [
+        0.34,
+        0.4,
+        0.13
+      ],
+      "label_anchor": [
+        0.17,
+        0.2,
+        0.13
+      ],
+      "center": [
+        0.17,
+        0.2,
+        -0.0
+      ],
+      "info_ref": "mp_drive"
+    },
+    {
+      "id": "worm",
+      "name": "Worm (on Motor Shaft)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "worm"
+      ],
+      "pivot": [
+        0.16,
+        0.24,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.14001,
+        0.24,
+        -0.02
+      ],
+      "bbox_max": [
+        0.18,
+        0.44,
+        0.02
+      ],
+      "label_anchor": [
+        0.16,
+        0.34,
+        0.02
+      ],
+      "center": [
+        0.16,
+        0.34,
+        -0.0
+      ],
+      "info_ref": "mp_worm"
+    },
+    {
+      "id": "worm_wheel",
+      "name": "Worm Wheel",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "worm_wheel.001"
+      ],
+      "pivot": [
+        0.24,
+        0.305,
+        -0.0
+      ],
+      "explode_offset": [
+        0.35,
+        0.1,
+        0.35
+      ],
+      "bbox_min": [
+        0.176,
+        0.24121,
+        -0.08
+      ],
+      "bbox_max": [
+        0.304,
+        0.36879,
+        0.08
+      ],
+      "label_anchor": [
+        0.24,
+        0.305,
+        0.08
+      ],
+      "center": [
+        0.24,
+        0.305,
+        -0.0
+      ],
+      "info_ref": "mp_wheel"
+    },
+    {
+      "id": "eccentric",
+      "name": "Eccentric (Stroke-Adjustable Cam)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "eccentric"
+      ],
+      "pivot": [
+        0.17,
+        0.24,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        0.148,
+        0.21,
+        -0.08
+      ],
+      "bbox_max": [
+        0.208,
+        0.27,
+        0.08
+      ],
+      "label_anchor": [
+        0.178,
+        0.24,
+        0.08
+      ],
+      "center": [
+        0.178,
+        0.24,
+        -0.0
+      ],
+      "info_ref": "mp_eccentric"
+    },
+    {
+      "id": "plunger",
+      "name": "Plunger",
+      "group": "reciprocating",
+      "section_role": "keep",
+      "nodes": [
+        "plunger"
+      ],
+      "pivot": [
+        0.0,
+        0.24,
+        -0.0
+      ],
+      "explode_offset": [
+        0.15,
+        0.0,
+        0.25
+      ],
+      "bbox_min": [
+        -0.02,
+        0.2,
+        -0.015
+      ],
+      "bbox_max": [
+        0.141,
+        0.28,
+        0.015
+      ],
+      "label_anchor": [
+        0.0605,
+        0.24,
+        0.015
+      ],
+      "center": [
+        0.0605,
+        0.24,
+        -0.0
+      ],
+      "info_ref": "mp_plunger"
+    },
+    {
+      "id": "stroke_knob",
+      "name": "Stroke-Length Adjustment Knob (0–100 %)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "knob"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        0.205,
+        0.29,
+        -0.045
+      ],
+      "bbox_max": [
+        0.295,
+        0.45,
+        0.045
+      ],
+      "label_anchor": [
+        0.25,
+        0.37,
+        0.045
+      ],
+      "center": [
+        0.25,
+        0.37,
+        -0.0
+      ],
+      "info_ref": "mp_knob"
+    },
+    {
+      "id": "hydraulic_housing",
+      "name": "Hydraulic Chamber Housing (with Relief/Refill Valve)",
+      "group": "hydraulic",
+      "section_role": "split",
+      "nodes": [
+        "hydraulic_housing__back",
+        "hydraulic_housing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.12,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.054,
+        0.15,
+        -0.09
+      ],
+      "bbox_max": [
+        0.02,
+        0.33,
+        0.09
+      ],
+      "label_anchor": [
+        -0.017,
+        0.24,
+        0.09
+      ],
+      "center": [
+        -0.017,
+        0.24,
+        -0.0
+      ],
+      "info_ref": "mp_hydraulic"
+    },
+    {
+      "id": "diaphragm",
+      "name": "PTFE Diaphragm (Sandwich)",
+      "group": "pumping_element",
+      "section_role": "split",
+      "nodes": [
+        "diaphragm__back",
+        "diaphragm__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.08,
+        0.18,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.062,
+        0.158,
+        -0.082
+      ],
+      "bbox_max": [
+        -0.057,
+        0.322,
+        0.082
+      ],
+      "label_anchor": [
+        -0.0595,
+        0.24,
+        0.082
+      ],
+      "center": [
+        -0.0595,
+        0.24,
+        -0.0
+      ],
+      "info_ref": "mp_diaphragm"
+    },
+    {
+      "id": "liquid_end",
+      "name": "Liquid End (Pump Head)",
+      "group": "liquid_end",
+      "section_role": "split",
+      "nodes": [
+        "liquid_end__back",
+        "liquid_end__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.25,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.128,
+        0.08,
+        -0.09
+      ],
+      "bbox_max": [
+        -0.062,
+        0.4,
+        0.09
+      ],
+      "label_anchor": [
+        -0.095,
+        0.24,
+        0.09
+      ],
+      "center": [
+        -0.095,
+        0.24,
+        -0.0
+      ],
+      "info_ref": "mp_liquid_end"
+    },
+    {
+      "id": "suction_valve",
+      "name": "Suction Valve (Double Ball)",
+      "group": "check_valves",
+      "section_role": "keep",
+      "nodes": [
+        "suction_balls"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.25,
+        -0.25,
+        0.2
+      ],
+      "bbox_min": [
+        -0.103,
+        0.124,
+        -0.008
+      ],
+      "bbox_max": [
+        -0.087,
+        0.175,
+        0.008
+      ],
+      "label_anchor": [
+        -0.095,
+        0.1495,
+        0.008
+      ],
+      "center": [
+        -0.095,
+        0.1495,
+        -0.0
+      ],
+      "info_ref": "mp_ball_valve"
+    },
+    {
+      "id": "discharge_valve",
+      "name": "Discharge Valve (Double Ball)",
+      "group": "check_valves",
+      "section_role": "keep",
+      "nodes": [
+        "discharge_balls"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.25,
+        0.25,
+        0.2
+      ],
+      "bbox_min": [
+        -0.103,
+        0.304,
+        -0.008
+      ],
+      "bbox_max": [
+        -0.087,
+        0.355,
+        0.008
+      ],
+      "label_anchor": [
+        -0.095,
+        0.3295,
+        0.008
+      ],
+      "center": [
+        -0.095,
+        0.3295,
+        -0.0
+      ],
+      "info_ref": "mp_ball_valve"
+    },
+    {
+      "id": "tubing",
+      "name": "Suction & Discharge Tubing",
+      "group": "system_piping",
+      "section_role": "keep",
+      "nodes": [
+        "tubing__back",
+        "tubing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.35,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.32,
+        0.023,
+        -0.007
+      ],
+      "bbox_max": [
+        -0.088,
+        0.487,
+        0.007
+      ],
+      "label_anchor": [
+        -0.204,
+        0.255,
+        0.007
+      ],
+      "center": [
+        -0.204,
+        0.255,
+        -0.0
+      ],
+      "info_ref": "pipework"
+    },
+    {
+      "id": "m_motor_frame",
+      "name": "Vertical Motor – Frame & End Shields",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_frame__back",
+        "m_motor_frame__front"
+      ],
+      "pivot": [
+        0.16,
+        0.405,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        0.05872,
+        0.38,
+        -0.07759
+      ],
+      "bbox_max": [
+        0.235,
+        0.605,
+        0.07759
+      ],
+      "label_anchor": [
+        0.14686,
+        0.4925,
+        0.07759
+      ],
+      "center": [
+        0.14686,
+        0.4925,
+        0.0
+      ],
+      "info_ref": "motor_frame_h"
+    },
+    {
+      "id": "m_stator",
+      "name": "Vertical Motor – Stator",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_stator__back",
+        "m_stator__front"
+      ],
+      "pivot": [
+        0.16,
+        0.405,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.182,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        0.097,
+        0.423,
+        -0.063
+      ],
+      "bbox_max": [
+        0.223,
+        0.587,
+        0.063
+      ],
+      "label_anchor": [
+        0.16,
+        0.505,
+        0.063
+      ],
+      "center": [
+        0.16,
+        0.505,
+        -0.0
+      ],
+      "info_ref": "stator"
+    },
+    {
+      "id": "m_rotor",
+      "name": "Vertical Motor – Rotor & Shaft",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_rotor.001"
+      ],
+      "pivot": [
+        0.16,
+        0.405,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.4,
+        0.196
+      ],
+      "bbox_min": [
+        0.11899,
+        0.405,
+        -0.04135
+      ],
+      "bbox_max": [
+        0.20101,
+        0.625,
+        0.04135
+      ],
+      "label_anchor": [
+        0.16,
+        0.515,
+        0.04135
+      ],
+      "center": [
+        0.16,
+        0.515,
+        -0.0
+      ],
+      "info_ref": "rotor"
+    },
+    {
+      "id": "m_motor_bearings",
+      "name": "Vertical Motor – Bearings (DE & NDE)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_bearings__back",
+        "m_motor_bearings__front"
+      ],
+      "pivot": [
+        0.16,
+        0.405,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.112,
+        0.4,
+        0.196
+      ],
+      "bbox_min": [
+        0.136,
+        0.4077,
+        -0.024
+      ],
+      "bbox_max": [
+        0.184,
+        0.6023,
+        0.024
+      ],
+      "label_anchor": [
+        0.16,
+        0.505,
+        0.024
+      ],
+      "center": [
+        0.16,
+        0.505,
+        -0.0
+      ],
+      "info_ref": "motor_bearings"
+    },
+    {
+      "id": "m_motor_fan",
+      "name": "Vertical Motor – Cooling Fan",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_fan"
+      ],
+      "pivot": [
+        0.16,
+        0.605,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        0.1033,
+        0.6065,
+        -0.05619
+      ],
+      "bbox_max": [
+        0.21396,
+        0.6155,
+        0.05619
+      ],
+      "label_anchor": [
+        0.15863,
+        0.611,
+        0.05619
+      ],
+      "center": [
+        0.15863,
+        0.611,
+        -0.0
+      ],
+      "info_ref": "motor_fan"
+    },
+    {
+      "id": "m_fan_cover",
+      "name": "Vertical Motor – Fan Cover",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_fan_cover__back",
+        "m_fan_cover__front"
+      ],
+      "pivot": [
+        0.16,
+        0.405,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.58,
+        -0.0
+      ],
+      "bbox_min": [
+        0.0886,
+        0.585,
+        -0.0714
+      ],
+      "bbox_max": [
+        0.2314,
+        0.633,
+        0.0714
+      ],
+      "label_anchor": [
+        0.16,
+        0.609,
+        0.0714
+      ],
+      "center": [
+        0.16,
+        0.609,
+        -0.0
+      ],
+      "info_ref": "fan_cover"
+    }
+  ],
+  "components": {
+    "mp_drive": {
+      "function": "Encloses the speed-reducing worm gear and the stroke mechanism in an oil bath.",
+      "construction": "Cast housing with worm, worm wheel, eccentric and stroke adjustment.",
+      "material": "Cast iron/aluminium.",
+      "operating_conditions": "Oil lubricated.",
+      "failure_modes": [
+        "Oil leakage",
+        "Gear wear"
+      ],
+      "inspection": [
+        "Oil level"
+      ]
+    },
+    "mp_worm": {
+      "function": "First reduction stage from motor speed.",
+      "construction": "Single-start hardened steel worm on the motor shaft.",
+      "material": "Hardened steel.",
+      "operating_conditions": "High reduction ratio.",
+      "failure_modes": [
+        "Wear"
+      ],
+      "inspection": [
+        "Backlash"
+      ]
+    },
+    "mp_wheel": {
+      "function": "Drives the eccentric at stroke frequency.",
+      "construction": "Bronze worm wheel.",
+      "material": "Phosphor bronze.",
+      "operating_conditions": "Oil bath.",
+      "failure_modes": [
+        "Tooth wear"
+      ],
+      "inspection": [
+        "Backlash"
+      ]
+    },
+    "mp_eccentric": {
+      "function": "Converts rotation into reciprocation; its effective throw sets the stroke length.",
+      "construction": "Adjustable eccentric or lost-motion cam.",
+      "material": "Steel.",
+      "operating_conditions": "Adjust while stopped or running per design.",
+      "failure_modes": [
+        "Wear"
+      ],
+      "inspection": [
+        "Calibration check"
+      ]
+    },
+    "mp_plunger": {
+      "function": "Displaces hydraulic oil to move the diaphragm.",
+      "construction": "Ground plunger in a close-fitting bore.",
+      "material": "Hardened stainless steel.",
+      "operating_conditions": "Does not contact the process liquid.",
+      "failure_modes": [
+        "Bore wear"
+      ],
+      "inspection": [
+        "Hydraulic performance"
+      ]
+    },
+    "mp_knob": {
+      "function": "Sets stroke length (capacity) as a percentage.",
+      "construction": "Micrometer dial/knob on top of the drive; automatic actuators available.",
+      "material": "Polymer/steel.",
+      "operating_conditions": "Calibrate capacity at site with a calibration column.",
+      "failure_modes": [
+        "Drift"
+      ],
+      "inspection": [
+        "Calibration column test"
+      ]
+    },
+    "mp_hydraulic": {
+      "function": "Holds hydraulic oil between plunger and diaphragm; includes relief and refill valves that protect the pump and keep the oil volume correct.",
+      "construction": "Housing with contour plate supporting the diaphragm.",
+      "material": "Cast iron/steel.",
+      "operating_conditions": "Internal relief protects against closed discharge.",
+      "failure_modes": [
+        "Air in oil (loss of accuracy)",
+        "Relief valve setting drift"
+      ],
+      "inspection": [
+        "Oil condition, bleed air"
+      ]
+    },
+    "mp_diaphragm": {
+      "function": "Separates process liquid from hydraulic oil and transmits displacement.",
+      "construction": "PTFE (often double/sandwich with leak detection); hydraulically balanced so it is not stretched.",
+      "material": "PTFE, PTFE-faced elastomer.",
+      "operating_conditions": "Long life because pressure is balanced.",
+      "failure_modes": [
+        "Rupture (detected by leak sensor in sandwich designs)"
+      ],
+      "inspection": [
+        "Leak detector, scheduled replacement"
+      ]
+    },
+    "mp_liquid_end": {
+      "function": "Process-wetted head that holds the check valves.",
+      "construction": "Moulded or machined head bolted to the hydraulic housing.",
+      "material": "PP, PVDF, 316 SS, Alloy 20, Hastelloy.",
+      "operating_conditions": "Material selected for chemical compatibility.",
+      "failure_modes": [
+        "Chemical attack",
+        "Valve leakage"
+      ],
+      "inspection": [
+        "Inspect valves and seats"
+      ]
+    },
+    "mp_ball_valve": {
+      "function": "Double ball check valves give tight shut-off for accurate metering.",
+      "construction": "Two balls in series in cartridges with seats.",
+      "material": "Ceramic, PTFE, glass, stainless balls; PTFE/PVDF seats.",
+      "operating_conditions": "Suction balls lift on the suction stroke, discharge balls on the delivery stroke.",
+      "failure_modes": [
+        "Crystals or debris on seats → loss of accuracy"
+      ],
+      "inspection": [
+        "Clean/replace cartridges"
+      ]
+    },
+    "pipework": {
+      "function": "Connects the pump to the system.",
+      "construction": "Flanged pipe spools, fittings and supports; suction piping laid out to give uniform flow into the pump (straight run, eccentric reducers flat side up).",
+      "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate.",
+      "operating_conditions": "Piping must be supported independently so nozzle loads stay within limits.",
+      "failure_modes": [
+        "Nozzle overload from unsupported piping",
+        "Air pockets in suction",
+        "Corrosion"
+      ],
+      "inspection": [
+        "Check supports and flange alignment before bolting to pump"
+      ]
+    },
+    "motor_frame_h": {
+      "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+      "construction": "Totally enclosed fan-cooled (TEFC) frame with external cooling fins, drive-end and non-drive-end end shields, terminal box and lifting eye.",
+      "material": "Cast iron or aluminium frame; steel fasteners.",
+      "operating_conditions": "Frame size, enclosure (IP rating), efficiency class (e.g. IEC 60034-30-1 IE3/IE4) and insulation class per motor data sheet.",
+      "failure_modes": [
+        "Overheating from blocked fins or fan cover",
+        "Soft foot causing frame distortion and vibration",
+        "Moisture ingress at terminal box"
+      ],
+      "inspection": [
+        "Clean fins and fan cover",
+        "Check foot shims for soft foot",
+        "Insulation resistance before start-up"
+      ]
+    },
+    "stator": {
+      "function": "Produces the rotating magnetic field.",
+      "construction": "Laminated electrical-steel core with insulated copper windings; end turns project at each end.",
+      "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical).",
+      "operating_conditions": "Rated voltage and frequency; temperature rise within insulation class.",
+      "failure_modes": [
+        "Winding insulation failure",
+        "Single phasing",
+        "Overload overheating"
+      ],
+      "inspection": [
+        "Insulation resistance / polarisation index",
+        "Phase current balance",
+        "Winding temperature where RTDs fitted"
+      ]
+    },
+    "rotor": {
+      "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+      "construction": "Laminated core with aluminium or copper bars and end rings, shrunk on the shaft and dynamically balanced.",
+      "material": "Electrical steel, die-cast aluminium or copper.",
+      "operating_conditions": "Runs slightly below synchronous speed (slip).",
+      "failure_modes": [
+        "Broken rotor bars",
+        "Imbalance",
+        "Rotor-stator rub after bearing failure"
+      ],
+      "inspection": [
+        "Motor current signature analysis",
+        "Vibration at 1x and pole-pass sidebands"
+      ]
+    },
+    "motor_bearings": {
+      "function": "Support the motor rotor at drive and non-drive ends.",
+      "construction": "Deep-groove ball bearings (roller bearing at drive end on larger belt-driven motors); one end locates axially.",
+      "material": "Bearing steel; grease lubricated.",
+      "operating_conditions": "Regrease interval depends on speed, size and temperature; insulated bearings recommended with VFDs to prevent electrical fluting.",
+      "failure_modes": [
+        "Lubrication failure",
+        "Contamination",
+        "Electrical erosion (fluting) with VFDs"
+      ],
+      "inspection": [
+        "Temperature and vibration trend",
+        "Regrease per nameplate",
+        "High-frequency envelope analysis"
+      ]
+    },
+    "motor_fan": {
+      "function": "Draws cooling air over the finned frame.",
+      "construction": "Shaft-mounted radial or bidirectional fan at the non-drive end.",
+      "material": "Polymer, aluminium or steel.",
+      "operating_conditions": "Rotates with the shaft.",
+      "failure_modes": [
+        "Broken blades",
+        "Clogged air inlet"
+      ],
+      "inspection": [
+        "Visual check through fan cover; clean inlet"
+      ]
+    },
+    "fan_cover": {
+      "function": "Guards the fan and directs air along the fins.",
+      "construction": "Pressed-steel cowl with perforated air inlet.",
+      "material": "Steel or polymer.",
+      "operating_conditions": "Air inlet must be kept clear (minimum clearance to walls per manufacturer).",
+      "failure_modes": [
+        "Dents causing fan contact",
+        "Blocked inlet"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

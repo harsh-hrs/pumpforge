@@ -1,0 +1,905 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "horizontal_split_case_pump",
+ "no": 2,
+ "title": "Horizontal Split Case Pump",
+ "model_title": "Horizontal Split Case Pump (BB1, Double Suction)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A horizontal split case pump has its casing divided on the horizontal plane through the shaft, with both nozzles in the lower half. A double-suction impeller between two bearings takes liquid from both sides, which lowers NPSH required and balances axial thrust. Removing the upper half exposes the whole rotor for inspection without disturbing pipework or motor.",
+   "applications": [
+    "Municipal water supply and transfer",
+    "Cooling water and condenser circulation",
+    "Fire protection (NFPA 20 listed fire pumps)",
+    "Pipeline and booster stations",
+    "Irrigation and dewatering",
+    "Large HVAC systems"
+   ],
+   "key_points": [
+    "Axially split casing: lift the top half to service the rotor",
+    "Double-suction impeller: low NPSHr and balanced thrust",
+    "Bearings at both ends: stiff rotor, long seal and bearing life",
+    "High flow, medium head; efficient in large sizes"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow, single stage",
+    "configuration": "Between bearings, axially split, double suction",
+    "api_610_type": "BB1 (one- and two-stage axially split)"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A horizontal split case pump has its casing divided on the horizontal plane through the shaft centreline. The suction and discharge nozzles are cast into the lower half, so after removing the upper half the whole rotor (shaft, double-suction impeller, wear rings, sleeves, seals and bearings) can be lifted out without disturbing the pipework or the motor. Liquid from the side suction nozzle divides into two channels and enters the impeller from both sides; this halves the eye velocity (lower NPSH required) and balances the axial thrust. The impeller sits between two bearings, giving a stiff rotor suitable for large flows in water supply, cooling water, fire protection and pipeline service."
+  },
+  "model_3d": {
+   "asset": "glb/horizontal_split_case_pump.glb",
+   "metadata": "meta/horizontal_split_case_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 66282,
+   "parts": 22
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters the side suction nozzle in the lower casing half.",
+    "Inside the casing the flow divides into two suction channels that feed the impeller from both sides.",
+    "The double-suction impeller accelerates both streams outward; equal and opposite eyes cancel most of the axial thrust."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters the side suction nozzle in the lower casing half.",
+     "part": "lower_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Inside the casing the flow divides into two suction channels that feed the impeller from both sides.",
+     "part": "lower_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The double-suction impeller accelerates both streams outward; equal and opposite eyes cancel most of the axial thrust.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Casing wear rings at both eyes limit internal leakage back to suction.",
+     "part": "wear_rings",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The volute collects the combined flow and converts velocity to pressure before the side discharge nozzle.",
+     "part": "lower_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Seals at each shaft exit stop leakage; bearings outside both seals carry the rotor.",
+     "part": "seal_inboard",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Removing the upper casing half exposes the complete rotor for inspection.",
+     "part": "upper_casing",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.6,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Stable rising-to-shut-off head curve; flat efficiency peak in large sizes; low NPSHr per unit flow thanks to double suction."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "horizontal_split_case_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/horizontal_split_case_pump.json#components",
+   "key_components": "Double suction impeller, split casing, shaft, bearings",
+   "parts": [
+    {
+     "id": "lower_casing",
+     "name": "Lower Casing Half (with Nozzles & Feet)",
+     "info_ref": "sc_lower",
+     "function": "Lower half of the axially split casing: carries the suction and discharge nozzles, feet and bearing brackets, so the rotor can be removed without disturbing the piping.",
+     "material": "Cast iron, ductile iron, cast steel, bronze, duplex."
+    },
+    {
+     "id": "upper_casing",
+     "name": "Upper Casing Half (Removable)",
+     "info_ref": "sc_upper",
+     "function": "Removable top half of the casing; lifting it exposes the complete rotor for inspection.",
+     "material": "As lower half."
+    },
+    {
+     "id": "impeller",
+     "name": "Double-Suction Impeller",
+     "info_ref": "impeller_ds",
+     "function": "Double-suction impeller: liquid enters from both sides, halving eye velocity (lower NPSHr) and balancing axial thrust.",
+     "material": "Bronze, cast iron, stainless, duplex."
+    },
+    {
+     "id": "shaft",
+     "name": "Shaft & Sleeves",
+     "info_ref": "pump_shaft",
+     "function": "Transmits torque from the coupling to the impeller(s).",
+     "material": "Carbon steel, 4140 alloy steel, 410/420 or 316 stainless, duplex."
+    },
+    {
+     "id": "seal_inboard",
+     "name": "Mechanical Seal – Inboard",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_housing_inboard",
+     "name": "Bearing Housing – Inboard",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_inboard",
+     "name": "Radial Bearing – Inboard",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "seal_outboard",
+     "name": "Mechanical Seal – Outboard",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_housing_outboard",
+     "name": "Bearing Housing – Outboard",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_outboard",
+     "name": "Thrust Bearing – Outboard",
+     "info_ref": "thrust_bearing",
+     "function": "Carries axial hydraulic thrust and locates the shaft axially.",
+     "material": "Bearing steel; brass or polyamide cages."
+    },
+    {
+     "id": "wear_rings",
+     "name": "Casing Wear Rings (both eyes)",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits recirculation from discharge back to suction.",
+     "material": "Bronze, cast iron, hardened stainless steel; dissimilar hardness to avoid galling."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    },
+    {
+     "id": "nozzle_spools",
+     "name": "Suction & Discharge Spool Pieces",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "pressure_gauges",
+     "name": "Suction & Discharge Pressure Gauges",
+     "info_ref": "pressure_gauge",
+     "function": "Indicates suction or discharge pressure for operation and performance checks.",
+     "material": "Stainless steel case and wetted parts."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "100 – 30,000",
+     "unit": "m³/h",
+     "note": "Very large units exceed this."
+    },
+    "head": {
+     "typical_range": "10 – 200",
+     "unit": "m",
+     "note": "Single stage; two-stage BB1/BB3 designs go higher."
+    },
+    "pressure": {
+     "typical_range": "10 – 40",
+     "unit": "bar casing rating"
+    },
+    "speed": {
+     "typical_range": "490 – 2,980",
+     "unit": "rpm (50 Hz)",
+     "note": "Large pumps run at 4–12-pole speeds."
+    },
+    "efficiency": {
+     "typical_range": "75 – 92",
+     "unit": "%",
+     "note": "Among the highest of all centrifugal pumps in large sizes."
+    }
+   },
+   "additional": {
+    "specific_speed_Ns_US_per_eye": {
+     "typical_range": "1,000 – 3,500",
+     "unit": ""
+    },
+    "power": {
+     "typical_range": "20 – 5,000+",
+     "unit": "kW"
+    }
+   },
+   "selection_notes": [
+    "Use suction-side straight pipe so both eyes receive equal flow — elbows in the plane of the shaft cause uneven loading.",
+    "Check that the pump runs within its preferred operating region (ANSI/HI 9.6.3)."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rigid baseplate grouted on a concrete block; anchor bolts sized per the manufacturer."
+   ],
+   "alignment": [
+    "Align pump and motor shafts with dial indicators or laser after grouting and again after connecting the piping (hot alignment check for hot service).",
+    "Target the coupling manufacturer's tolerances; typical practice for 1500–3000 rpm is ≤0.05 mm offset and ≤0.05 mm/100 mm angularity — verify.",
+    "Correct soft foot (< 0.05 mm) before final alignment."
+   ],
+   "piping": [
+    "Support suction and discharge piping independently so nozzle loads stay within the manufacturer's (or API 610/HI 9.6.2) allowable values.",
+    "Provide a straight run of at least 5 pipe diameters ahead of the suction nozzle (ANSI/HI 9.6.6 guidance — verify) and use an eccentric reducer with the flat side up.",
+    "Fit isolation valves on both sides, a check valve on the discharge, and pressure gauges at suction and discharge.",
+    "Never use the pump as a pipe anchor; use expansion joints with tie rods only when designed for them.",
+    "Avoid an elbow in the horizontal plane directly at the suction nozzle — it feeds one eye more than the other (HI 9.6.6 — verify)."
+   ],
+   "commissioning": [
+    "Fill and vent the casing; never run dry.",
+    "Check rotation direction with the coupling disconnected.",
+    "Start against a partly open discharge valve, then open to the duty point; avoid running at shut-off.",
+    "Record baseline vibration, bearing temperature, suction and discharge pressure, flow and motor current."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check bearing temperature and vibration at both ends.",
+     "part": "bearing_housing_inboard",
+     "interval": "daily"
+    },
+    {
+     "task": "Check seal or gland leakage at both ends.",
+     "part": "seal_inboard",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change bearing oil / regrease.",
+     "part": "bearing_outboard",
+     "interval": "per manual"
+    },
+    {
+     "task": "Check alignment and coupling condition.",
+     "part": "coupling",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Lift the upper casing; measure wear-ring clearances on both eyes.",
+     "part": "upper_casing"
+    },
+    {
+     "task": "Inspect impeller vanes and the volute cutwater for erosion or cavitation.",
+     "part": "impeller"
+    },
+    {
+     "task": "Replace the split-joint gasket with the correct thickness — a wrong gasket changes wear-ring fits.",
+     "part": "lower_casing"
+    }
+   ],
+   "lubrication": [
+    "Oil-ring or grease lubricated rolling bearings; keep oil at the sight-glass mark."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Suction recirculation and cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise at low flow",
+      "Damage on the pressure side of vane inlets"
+     ],
+     "causes": [
+      "Running well below BEP",
+      "Oversized pump"
+     ],
+     "remedies": [
+      "Operate within the preferred region; consider VFD or smaller impeller"
+     ],
+     "part": "impeller"
+    },
+    {
+     "problem": "Unequal eye loading",
+     "category": "performance",
+     "symptoms": [
+      "Higher axial thrust",
+      "Thrust bearing overheating"
+     ],
+     "causes": [
+      "Elbow close to the suction nozzle in the shaft plane"
+     ],
+     "remedies": [
+      "Correct suction piping layout"
+     ],
+     "part": "bearing_outboard"
+    },
+    {
+     "problem": "Split-joint leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Weeping along the casing joint"
+     ],
+     "causes": [
+      "Damaged gasket",
+      "Uneven bolt tightening"
+     ],
+     "remedies": [
+      "Replace gasket; tighten in the specified sequence"
+     ],
+     "part": "upper_casing"
+    },
+    {
+     "problem": "Wear-ring wear",
+     "category": "wear",
+     "symptoms": [
+      "Falling head and flow"
+     ],
+     "causes": [
+      "Sand or silt in raw water"
+     ],
+     "remedies": [
+      "Replace rings; improve intake screening"
+     ],
+     "part": "wear_rings"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Horizontal Split Case Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "horizontal_split_case_pump.glb",
+    "duration_s": 59.0,
+    "script": [
+     {
+      "narration": "This module introduces the Horizontal Split Case Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A horizontal split case pump has its casing divided on the horizontal plane through the shaft, with both nozzles in the lower half.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A double-suction impeller between two bearings takes liquid from both sides, which lowers NPSH required and balances axial thrust.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Removing the upper half exposes the whole rotor for inspection without disturbing pipework or motor.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include municipal water supply and transfer; cooling water and condenser circulation; fire protection (NFPA 20 listed fire pumps); pipeline and booster stations.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Lower Casing Half (with Nozzles & Feet), Upper Casing Half (Removable), Double-Suction Impeller, Shaft & Sleeves.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Horizontal Split Case Pump — Operation",
+    "type": "in_app_tour",
+    "model": "horizontal_split_case_pump.glb",
+    "duration_s": 49.5,
+    "script": [
+     {
+      "narration": "How the Horizontal Split Case Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters the side suction nozzle in the lower casing half.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "lower_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Inside the casing the flow divides into two suction channels that feed the impeller from both sides.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "lower_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The double-suction impeller accelerates both streams outward; equal and opposite eyes cancel most of the axial thrust.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Casing wear rings at both eyes limit internal leakage back to suction.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "wear_rings",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The volute collects the combined flow and converts velocity to pressure before the side discharge nozzle.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "lower_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Seals at each shaft exit stop leakage; bearings outside both seals carry the rotor.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "seal_inboard",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Removing the upper casing half exposes the complete rotor for inspection.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "upper_casing",
+       "cut": false,
+       "operate": true,
+       "explode": 0.6,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Horizontal Split Case Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "horizontal_split_case_pump.glb",
+    "duration_s": 56.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Horizontal Split Case Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check bearing temperature and vibration at both ends.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_housing_inboard",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check seal or gland leakage at both ends.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "seal_inboard",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change bearing oil / regrease.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_outboard",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check alignment and coupling condition.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coupling",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift the upper casing; measure wear-ring clearances on both eyes.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "upper_casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impeller vanes and the volute cutwater for erosion or cavitation.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for suction recirculation and cavitation: noise at low flow. Common cause: running well below bep.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for unequal eye loading: higher axial thrust. Common cause: elbow close to the suction nozzle in the shaft plane.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "bearing_outboard",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for split-joint leakage: weeping along the casing joint. Common cause: damaged gasket.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "upper_casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does a double-suction impeller have a lower NPSH required than a single-suction impeller of the same flow?",
+     "options": [
+      "It runs faster",
+      "Each eye handles only half the flow, so eye velocity is lower",
+      "It has more vanes",
+      "It is made of bronze"
+     ],
+     "answer": 1,
+     "explanation": "Half the flow per eye means lower inlet velocity and lower pressure drop at the vane inlets.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the main maintenance advantage of the axially split casing?",
+     "options": [
+      "No bearings are needed",
+      "The rotor can be inspected after lifting the upper half without disturbing the piping",
+      "It never needs alignment",
+      "It can run dry"
+     ],
+     "answer": 1,
+     "explanation": "Both nozzles are in the lower half.",
+     "level": "basic"
+    },
+    {
+     "question": "Where are the bearings of a BB1 pump?",
+     "options": [
+      "Inside the impeller",
+      "At both ends of the shaft, outside the casing",
+      "Only at the coupling end",
+      "In the suction nozzle"
+     ],
+     "answer": 1,
+     "explanation": "Between-bearings design: one bearing housing at each end.",
+     "level": "basic"
+    },
+    {
+     "question": "An elbow in the plane of the shaft right at the suction nozzle can cause…",
+     "options": [
+      "Lower motor current",
+      "Unequal flow to the two eyes and extra axial thrust",
+      "Better efficiency",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "The two eyes must receive equal, uniform flow.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which API 610 code covers one- and two-stage axially split between-bearing pumps?",
+     "options": [
+      "OH2",
+      "BB1",
+      "VS4",
+      "BB5"
+     ],
+     "answer": 1,
+     "explanation": "BB = between bearings; BB1 = axially split 1–2 stage.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Lower half of the axially split casing: carries the suction and discharge nozzles, feet and bearing brackets, so the rotor can be removed without disturbing the piping.\"",
+     "options": [
+      "Bearing Housing – Outboard",
+      "Lower Casing Half (with Nozzles & Feet)",
+      "Electric Motor – Fan Cover",
+      "Mechanical Seal – Inboard"
+     ],
+     "answer": 1,
+     "explanation": "Lower Casing Half (with Nozzles & Feet): Lower half of the axially split casing: carries the suction and discharge nozzles, feet and bearing brackets, so the rotor can be removed without disturbing the piping.",
+     "level": "basic",
+     "part": "lower_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Removable top half of the casing; lifting it exposes the complete rotor for inspection.\"",
+     "options": [
+      "Coupling Guard",
+      "Upper Casing Half (Removable)",
+      "Baseplate",
+      "Bearing Housing – Inboard"
+     ],
+     "answer": 1,
+     "explanation": "Upper Casing Half (Removable): Removable top half of the casing; lifting it exposes the complete rotor for inspection.",
+     "level": "basic",
+     "part": "upper_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Double-suction impeller: liquid enters from both sides, halving eye velocity (lower NPSHr) and balancing axial thrust.\"",
+     "options": [
+      "Double-Suction Impeller",
+      "Electric Motor – Rotor & Shaft",
+      "Lower Casing Half (with Nozzles & Feet)",
+      "Casing Wear Rings (both eyes)"
+     ],
+     "answer": 0,
+     "explanation": "Double-Suction Impeller: Double-suction impeller: liquid enters from both sides, halving eye velocity (lower NPSHr) and balancing axial thrust.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,968 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "airlift_pump",
+  "title": "Airlift Pump (Compressed-Air Riser)",
+  "category": "4 · Special-Purpose Pumping Systems",
+  "library": {
+    "no": 30,
+    "phase": 3,
+    "hi_family": "special",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "airlift_pump_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flow_water",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          0.6,
+          0.4,
+          -0.0
+        ],
+        [
+          0.12,
+          0.06,
+          -0.0
+        ],
+        [
+          0.0,
+          0.14,
+          -0.0
+        ],
+        [
+          0.0,
+          2.7,
+          -0.0
+        ],
+        [
+          0.4,
+          2.75,
+          -0.0
+        ],
+        [
+          1.0,
+          2.4,
+          -0.0
+        ],
+        [
+          1.5,
+          2.35,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "flow_air",
+      "kind": "air",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.9,
+          3.0,
+          -0.0
+        ],
+        [
+          -0.15,
+          3.0,
+          -0.0
+        ],
+        [
+          -0.15,
+          0.25,
+          -0.0
+        ],
+        [
+          -0.05,
+          0.25,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 33472,
+    "parts": 15
+  },
+  "summary": "An airlift pump has no moving parts in the liquid. Compressed air is released through small holes near the bottom of a vertical riser pipe that stands in the liquid. The air–water mixture inside the riser is lighter than the water outside, so the outside water pressure (submergence) pushes the mixture up and out of the top. The deeper the injection point relative to the lift, the better the efficiency; typical submergence ratios are 50–70 %. Used for well development, aquaculture, wastewater sludge and grit transfer, and pumping corrosive or abrasive liquids.",
+  "classification": {
+    "family": "Kinetic / buoyancy (gas-lift)",
+    "configuration": "Airlift riser with foot-piece air injector"
+  },
+  "model_configuration": {
+    "submergence_ratio_note": "Submergence ratio = submergence / (submergence + lift); ~0.5–0.7 typical (verify for design)",
+    "water_level_m": 2.0,
+    "riser_diameter_mm": 100.0
+  },
+  "standards": [
+    {
+      "id": "—",
+      "title": "No single product standard",
+      "relevance": "Design is by empirical correlations and manufacturer data; pressure vessels/blowers follow their own standards.",
+      "edition": "—"
+    }
+  ],
+  "references": [
+    "Karassik et al., Pump Handbook — airlift pumps.",
+    "Stenning A.H., Martin C.B., \"An analytical and experimental study of air-lift pump performance\", ASME J. Eng. Power 1968."
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "Sump / Tank (shown cut away) with Water-Level Mark",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "tank"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.712,
+        -0.02,
+        -0.712
+      ],
+      "bbox_max": [
+        0.712,
+        2.4,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.19,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.19,
+        -0.356
+      ],
+      "info_ref": "al_tank"
+    },
+    {
+      "id": "riser_pipe",
+      "name": "Riser (Eductor) Pipe",
+      "group": "riser",
+      "section_role": "split",
+      "nodes": [
+        "riser_pipe__back",
+        "riser_pipe__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.05,
+        0.12,
+        -0.05
+      ],
+      "bbox_max": [
+        0.9,
+        2.8,
+        0.05
+      ],
+      "label_anchor": [
+        0.425,
+        1.46,
+        0.05
+      ],
+      "center": [
+        0.425,
+        1.46,
+        -0.0
+      ],
+      "info_ref": "al_riser"
+    },
+    {
+      "id": "foot_piece",
+      "name": "Air Injector (Foot Piece) & Inlet Bell",
+      "group": "air_injection",
+      "section_role": "split",
+      "nodes": [
+        "foot_piece__back",
+        "foot_piece__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.12,
+        0.04,
+        -0.12
+      ],
+      "bbox_max": [
+        0.12,
+        0.33,
+        0.12
+      ],
+      "label_anchor": [
+        0.0,
+        0.185,
+        0.12
+      ],
+      "center": [
+        0.0,
+        0.185,
+        -0.0
+      ],
+      "info_ref": "al_foot"
+    },
+    {
+      "id": "air_line",
+      "name": "Compressed-Air Supply Line",
+      "group": "air_injection",
+      "section_role": "split",
+      "nodes": [
+        "air_line__back",
+        "air_line__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9,
+        0.234,
+        -0.016
+      ],
+      "bbox_max": [
+        -0.08,
+        3.016,
+        0.016
+      ],
+      "label_anchor": [
+        -0.49,
+        1.625,
+        0.016
+      ],
+      "center": [
+        -0.49,
+        1.625,
+        -0.0
+      ],
+      "info_ref": "al_airline"
+    },
+    {
+      "id": "air_controls",
+      "name": "Air Control Valve & Pressure Gauge",
+      "group": "instrumentation",
+      "section_role": "keep",
+      "nodes": [
+        "air_controls.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.6376,
+        2.9396,
+        -0.0604
+      ],
+      "bbox_max": [
+        -0.36,
+        3.156,
+        0.0604
+      ],
+      "label_anchor": [
+        -0.4988,
+        3.0478,
+        0.0604
+      ],
+      "center": [
+        -0.4988,
+        3.0478,
+        -0.0
+      ],
+      "info_ref": "pressure_gauge"
+    },
+    {
+      "id": "blower",
+      "name": "Air Blower / Compressor & Platform",
+      "group": "air_supply",
+      "section_role": "keep",
+      "nodes": [
+        "blower"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.6,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.7,
+        0.0,
+        -0.35
+      ],
+      "bbox_max": [
+        -0.8,
+        3.035,
+        0.35
+      ],
+      "label_anchor": [
+        -1.25,
+        1.5175,
+        0.35
+      ],
+      "center": [
+        -1.25,
+        1.5175,
+        -0.0
+      ],
+      "info_ref": "al_blower"
+    },
+    {
+      "id": "m_motor_frame",
+      "name": "Electric Motor – Frame & End Shields",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_frame__back",
+        "m_motor_frame__front"
+      ],
+      "pivot": [
+        -2.6,
+        0.0,
+        0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -1.64,
+        2.62,
+        -0.13278
+      ],
+      "bbox_max": [
+        -1.3,
+        2.9862,
+        0.13278
+      ],
+      "label_anchor": [
+        -1.47,
+        2.8031,
+        0.13278
+      ],
+      "center": [
+        -1.47,
+        2.8031,
+        0.0
+      ],
+      "info_ref": "motor_frame_h"
+    },
+    {
+      "id": "m_stator",
+      "name": "Electric Motor – Stator",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_stator__back",
+        "m_stator__front"
+      ],
+      "pivot": [
+        -2.6,
+        0.0,
+        0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.312,
+        0.0
+      ],
+      "bbox_min": [
+        -1.6094,
+        2.712,
+        -0.108
+      ],
+      "bbox_max": [
+        -1.3306,
+        2.928,
+        0.108
+      ],
+      "label_anchor": [
+        -1.47,
+        2.82,
+        0.108
+      ],
+      "center": [
+        -1.47,
+        2.82,
+        0.0
+      ],
+      "info_ref": "stator"
+    },
+    {
+      "id": "m_rotor",
+      "name": "Electric Motor – Rotor & Shaft",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_rotor.001"
+      ],
+      "pivot": [
+        -1.3,
+        2.82,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.336
+      ],
+      "bbox_min": [
+        -1.66,
+        2.75112,
+        -0.06924
+      ],
+      "bbox_max": [
+        -1.25,
+        2.88888,
+        0.06924
+      ],
+      "label_anchor": [
+        -1.455,
+        2.82,
+        0.06924
+      ],
+      "center": [
+        -1.455,
+        2.82,
+        0.0
+      ],
+      "info_ref": "rotor"
+    },
+    {
+      "id": "m_motor_bearings",
+      "name": "Electric Motor – Bearings (DE & NDE)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_bearings__back",
+        "m_motor_bearings__front"
+      ],
+      "pivot": [
+        -2.6,
+        0.0,
+        0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.192,
+        -0.336
+      ],
+      "bbox_min": [
+        -1.63541,
+        2.772,
+        -0.048
+      ],
+      "bbox_max": [
+        -1.30459,
+        2.868,
+        0.048
+      ],
+      "label_anchor": [
+        -1.47,
+        2.82,
+        0.048
+      ],
+      "center": [
+        -1.47,
+        2.82,
+        0.0
+      ],
+      "info_ref": "motor_bearings"
+    },
+    {
+      "id": "m_motor_fan",
+      "name": "Electric Motor – Cooling Fan",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_fan"
+      ],
+      "pivot": [
+        -1.64,
+        2.82,
+        -0.0
+      ],
+      "explode_offset": [
+        0.33,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -1.65785,
+        2.72798,
+        -0.09607
+      ],
+      "bbox_max": [
+        -1.64255,
+        2.9172,
+        0.09607
+      ],
+      "label_anchor": [
+        -1.6502,
+        2.82259,
+        0.09607
+      ],
+      "center": [
+        -1.6502,
+        2.82259,
+        0.0
+      ],
+      "info_ref": "motor_fan"
+    },
+    {
+      "id": "m_fan_cover",
+      "name": "Electric Motor – Fan Cover",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_fan_cover__back",
+        "m_fan_cover__front"
+      ],
+      "pivot": [
+        -2.6,
+        0.0,
+        0.0
+      ],
+      "explode_offset": [
+        0.194,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -1.6876,
+        2.6976,
+        -0.1224
+      ],
+      "bbox_max": [
+        -1.62,
+        2.9424,
+        0.1224
+      ],
+      "label_anchor": [
+        -1.6538,
+        2.82,
+        0.1224
+      ],
+      "center": [
+        -1.6538,
+        2.82,
+        0.0
+      ],
+      "info_ref": "fan_cover"
+    },
+    {
+      "id": "separator",
+      "name": "Air Separator / Discharge Box",
+      "group": "riser",
+      "section_role": "split",
+      "nodes": [
+        "separator__back",
+        "separator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.8,
+        2.3,
+        -0.2
+      ],
+      "bbox_max": [
+        1.2,
+        2.8,
+        0.2
+      ],
+      "label_anchor": [
+        1.0,
+        2.55,
+        0.2
+      ],
+      "center": [
+        1.0,
+        2.55,
+        -0.0
+      ],
+      "info_ref": "al_separator"
+    },
+    {
+      "id": "air_bubbles",
+      "name": "Air Bubbles (Tracers)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "air_bubbles_0",
+        "air_bubbles_1",
+        "air_bubbles_2",
+        "air_bubbles_3",
+        "air_bubbles_4",
+        "air_bubbles_5",
+        "air_bubbles_6",
+        "air_bubbles_7",
+        "air_bubbles_8",
+        "air_bubbles_9",
+        "air_bubbles_10",
+        "air_bubbles_11",
+        "air_bubbles_12",
+        "air_bubbles_13",
+        "air_bubbles_14",
+        "air_bubbles_15",
+        "air_bubbles_16",
+        "air_bubbles_17"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.918,
+        0.232,
+        -0.018
+      ],
+      "bbox_max": [
+        0.59982,
+        3.018,
+        0.018
+      ],
+      "label_anchor": [
+        -0.15909,
+        1.625,
+        0.018
+      ],
+      "center": [
+        -0.15909,
+        1.625,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "water_flow",
+      "name": "Water Flow (Tracers)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "water_flow_0",
+        "water_flow_1",
+        "water_flow_2",
+        "water_flow_3",
+        "water_flow_4",
+        "water_flow_5",
+        "water_flow_6",
+        "water_flow_7",
+        "water_flow_8",
+        "water_flow_9",
+        "water_flow_10",
+        "water_flow_11",
+        "water_flow_12",
+        "water_flow_13",
+        "water_flow_14",
+        "water_flow_15",
+        "water_flow_16",
+        "water_flow_17"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        0.08357,
+        -0.014
+      ],
+      "bbox_max": [
+        1.15741,
+        2.73979,
+        0.014
+      ],
+      "label_anchor": [
+        0.57171,
+        1.41168,
+        0.014
+      ],
+      "center": [
+        0.57171,
+        1.41168,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "al_tank": {
+      "function": "Holds the liquid; its level sets the submergence.",
+      "construction": "Tank, well or sump.",
+      "material": "Steel, concrete.",
+      "operating_conditions": "Level must stay above minimum for airlift to work.",
+      "failure_modes": [
+        "Level too low → no flow"
+      ],
+      "inspection": [
+        "Level monitoring"
+      ]
+    },
+    "al_riser": {
+      "function": "Vertical pipe in which the air–water mixture rises.",
+      "construction": "Smooth pipe sized for mixture velocity.",
+      "material": "Stainless, PVC, HDPE, steel.",
+      "operating_conditions": "Two-phase flow (slug/churn).",
+      "failure_modes": [
+        "Scaling",
+        "Clogging"
+      ],
+      "inspection": [
+        "Clean riser"
+      ]
+    },
+    "al_foot": {
+      "function": "Injects air uniformly into the riser and admits water through the bell.",
+      "construction": "Annular air chamber with small holes (or diffuser) around the riser.",
+      "material": "Brass, stainless, plastic.",
+      "operating_conditions": "Hole size affects bubble size and efficiency.",
+      "failure_modes": [
+        "Blocked holes"
+      ],
+      "inspection": [
+        "Air pressure trend"
+      ]
+    },
+    "al_airline": {
+      "function": "Carries compressed air from blower to foot piece.",
+      "construction": "Small-bore pipe.",
+      "material": "Steel, PVC.",
+      "operating_conditions": "Air pressure must exceed submergence head.",
+      "failure_modes": [
+        "Leaks"
+      ],
+      "inspection": [
+        "Pressure check"
+      ]
+    },
+    "pressure_gauge": {
+      "function": "Indicates suction or discharge pressure for operation and performance checks.",
+      "construction": "Bourdon-tube gauge with isolation valve; glycerine filled for pulsating service.",
+      "material": "Stainless steel case and wetted parts.",
+      "operating_conditions": "Range so that normal reading is mid-scale.",
+      "failure_modes": [
+        "Pulsation damage",
+        "Blocked impulse line"
+      ],
+      "inspection": [
+        "Calibrate periodically"
+      ]
+    },
+    "al_blower": {
+      "function": "Supplies low-pressure air.",
+      "construction": "Rotary lobe/side-channel blower or compressor.",
+      "material": "Cast iron/aluminium.",
+      "operating_conditions": "Delivery pressure > static head at the injection point.",
+      "failure_modes": [
+        "Filter clogging"
+      ],
+      "inspection": [
+        "Filter, pressure"
+      ]
+    },
+    "motor_frame_h": {
+      "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+      "construction": "Totally enclosed fan-cooled (TEFC) frame with external cooling fins, drive-end and non-drive-end end shields, terminal box and lifting eye.",
+      "material": "Cast iron or aluminium frame; steel fasteners.",
+      "operating_conditions": "Frame size, enclosure (IP rating), efficiency class (e.g. IEC 60034-30-1 IE3/IE4) and insulation class per motor data sheet.",
+      "failure_modes": [
+        "Overheating from blocked fins or fan cover",
+        "Soft foot causing frame distortion and vibration",
+        "Moisture ingress at terminal box"
+      ],
+      "inspection": [
+        "Clean fins and fan cover",
+        "Check foot shims for soft foot",
+        "Insulation resistance before start-up"
+      ]
+    },
+    "stator": {
+      "function": "Produces the rotating magnetic field.",
+      "construction": "Laminated electrical-steel core with insulated copper windings; end turns project at each end.",
+      "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical).",
+      "operating_conditions": "Rated voltage and frequency; temperature rise within insulation class.",
+      "failure_modes": [
+        "Winding insulation failure",
+        "Single phasing",
+        "Overload overheating"
+      ],
+      "inspection": [
+        "Insulation resistance / polarisation index",
+        "Phase current balance",
+        "Winding temperature where RTDs fitted"
+      ]
+    },
+    "rotor": {
+      "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+      "construction": "Laminated core with aluminium or copper bars and end rings, shrunk on the shaft and dynamically balanced.",
+      "material": "Electrical steel, die-cast aluminium or copper.",
+      "operating_conditions": "Runs slightly below synchronous speed (slip).",
+      "failure_modes": [
+        "Broken rotor bars",
+        "Imbalance",
+        "Rotor-stator rub after bearing failure"
+      ],
+      "inspection": [
+        "Motor current signature analysis",
+        "Vibration at 1x and pole-pass sidebands"
+      ]
+    },
+    "motor_bearings": {
+      "function": "Support the motor rotor at drive and non-drive ends.",
+      "construction": "Deep-groove ball bearings (roller bearing at drive end on larger belt-driven motors); one end locates axially.",
+      "material": "Bearing steel; grease lubricated.",
+      "operating_conditions": "Regrease interval depends on speed, size and temperature; insulated bearings recommended with VFDs to prevent electrical fluting.",
+      "failure_modes": [
+        "Lubrication failure",
+        "Contamination",
+        "Electrical erosion (fluting) with VFDs"
+      ],
+      "inspection": [
+        "Temperature and vibration trend",
+        "Regrease per nameplate",
+        "High-frequency envelope analysis"
+      ]
+    },
+    "motor_fan": {
+      "function": "Draws cooling air over the finned frame.",
+      "construction": "Shaft-mounted radial or bidirectional fan at the non-drive end.",
+      "material": "Polymer, aluminium or steel.",
+      "operating_conditions": "Rotates with the shaft.",
+      "failure_modes": [
+        "Broken blades",
+        "Clogged air inlet"
+      ],
+      "inspection": [
+        "Visual check through fan cover; clean inlet"
+      ]
+    },
+    "fan_cover": {
+      "function": "Guards the fan and directs air along the fins.",
+      "construction": "Pressed-steel cowl with perforated air inlet.",
+      "material": "Steel or polymer.",
+      "operating_conditions": "Air inlet must be kept clear (minimum clearance to walls per manufacturer).",
+      "failure_modes": [
+        "Dents causing fan contact",
+        "Blocked inlet"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "al_separator": {
+      "function": "Lets air escape and directs water to the outlet.",
+      "construction": "Open box with outlet nozzle.",
+      "material": "Steel/plastic.",
+      "operating_conditions": "Vent to atmosphere.",
+      "failure_modes": [
+        "Splashing"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

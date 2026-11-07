@@ -1,0 +1,633 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "canned_motor_pump",
+ "no": 15,
+ "title": "Canned Motor Pump",
+ "model_title": "Canned Motor Pump (Sealless, Close-Coupled)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A canned motor pump combines pump and motor in one hermetically sealed unit: the motor rotor runs in the pumped liquid inside a thin \"can\", and the stator is sealed from the liquid by a stator liner. Part of the pumped liquid circulates through the motor to cool it and lubricate the bearings.",
+   "applications": [
+    "Hazardous and toxic chemicals",
+    "Refrigeration and ammonia",
+    "Heat-transfer oils",
+    "Nuclear and high-pressure systems"
+   ],
+   "key_points": [
+    "No shaft seal, no coupling",
+    "Double containment (stator liner + motor housing)",
+    "Bearing monitor detects wear",
+    "Liquid must lubricate and cool"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow",
+    "configuration": "Sealless, close-coupled canned motor",
+    "api_610_type": "Sealless; covered by API 685"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "The motor rotor and the pump impeller are on one shaft inside a fully enclosed pressure boundary. The stator windings are sealed from the pumped liquid by a thin stator liner (can); the rotor is sealed by its own can. A small flow of pumped liquid circulates through the motor gap to remove heat and lubricate the sleeve bearings. There is no shaft seal and no coupling, so leakage paths are eliminated; the motor housing gives secondary containment."
+  },
+  "model_3d": {
+   "asset": "glb/canned_motor_pump.glb",
+   "metadata": "meta/canned_motor_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 42158,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The impeller pumps liquid as a normal centrifugal pump.",
+    "A small flow circulates through the motor gap to cool it and lubricate the bearings.",
+    "The rotor runs in the liquid inside the rotor can; the stator is sealed behind the stator liner."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The impeller pumps liquid as a normal centrifugal pump.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A small flow circulates through the motor gap to cool it and lubricate the bearings.",
+     "part": "circulation_line",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotor runs in the liquid inside the rotor can; the stator is sealed behind the stator liner.",
+     "part": "stator_liner",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bearing monitor warns of bearing wear before the rotor touches the liner.",
+     "part": "bearing_monitor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "As centrifugal pumps; motor efficiency lower than standard motors due to the can losses."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "canned_motor_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/canned_motor_pump.json#components",
+   "key_components": "Rotor, stator, can, impeller",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Volute Casing",
+     "info_ref": "volute_casing",
+     "function": "Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.",
+     "material": "Cast iron, ductile iron, carbon steel, stainless steel (CF8M), duplex."
+    },
+    {
+     "id": "impeller",
+     "name": "Closed Impeller",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "adapter",
+     "name": "Adapter & Front Bearing Housing",
+     "info_ref": "adapter",
+     "function": "Connects casing to motor and houses the front bearing.",
+     "material": "Stainless steel or carbon steel."
+    },
+    {
+     "id": "motor_housing",
+     "name": "Motor Housing (Secondary Containment)",
+     "info_ref": "motor_housing",
+     "function": "Holds the stator and provides secondary containment if the stator liner fails.",
+     "material": "Carbon or stainless steel."
+    },
+    {
+     "id": "stator",
+     "name": "Stator Core & Windings",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "stator_liner",
+     "name": "Stator Liner (Stator Can)",
+     "info_ref": "stator_liner",
+     "function": "Thin can that separates the stator windings from the pumped liquid.",
+     "material": "Hastelloy C, stainless steel."
+    },
+    {
+     "id": "rotor",
+     "name": "Canned Rotor & Shaft",
+     "info_ref": "rotor_canned",
+     "function": "Squirrel-cage rotor sealed in its own can; carries the impeller on the common shaft.",
+     "material": "Electrical steel, stainless/Hastelloy can."
+    },
+    {
+     "id": "bearings",
+     "name": "Product-Lubricated Journal Bearings",
+     "info_ref": "product_bearings",
+     "function": "Support the rotor/impeller shaft, lubricated by the pumped liquid.",
+     "material": "Carbon-graphite, silicon carbide."
+    },
+    {
+     "id": "rear_cover",
+     "name": "Rear Bearing Housing & End Cover",
+     "info_ref": "rear_cover",
+     "function": "Closes the motor end, houses the rear bearing and returns circulation flow.",
+     "material": "Stainless/carbon steel."
+    },
+    {
+     "id": "bearing_monitor",
+     "name": "Bearing Wear Monitor",
+     "info_ref": "bearing_monitor",
+     "function": "Indicates bearing wear (rotor position) so the pump can be stopped before the cans are damaged.",
+     "material": "Stainless steel housing."
+    },
+    {
+     "id": "circulation_line",
+     "name": "Circulation Line (Discharge to Motor)",
+     "info_ref": "circulation_line",
+     "function": "Takes a small flow from discharge through the motor for cooling and bearing lubrication.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.5 – 700",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "5 – 250",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "up to 100+",
+     "unit": "bar",
+     "note": "special designs higher"
+    },
+    "speed": {
+     "typical_range": "1,450 – 2,900",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "30 – 70",
+     "unit": "% (overall)"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Small baseplate or pipe-supported."
+   ],
+   "alignment": [
+    "No coupling alignment required."
+   ],
+   "piping": [
+    "Support suction and discharge piping independently so nozzle loads stay within the manufacturer's (or API 610/HI 9.6.2) allowable values.",
+    "Provide a straight run of at least 5 pipe diameters ahead of the suction nozzle (ANSI/HI 9.6.6 guidance — verify) and use an eccentric reducer with the flat side up."
+   ],
+   "commissioning": [
+    "Vent motor section; check bearing monitor reading."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check bearing monitor and motor temperature.",
+     "part": "bearing_monitor",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check circulation line.",
+     "part": "circulation_line",
+     "interval": "per plant practice"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bearings when the monitor indicates wear.",
+     "part": "bearings"
+    }
+   ],
+   "lubrication": [
+    "Product-lubricated bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Bearing wear",
+     "category": "wear",
+     "symptoms": [
+      "Bearing monitor alarm"
+     ],
+     "causes": [
+      "Dry running, solids"
+     ],
+     "remedies": [
+      "Replace bearings"
+     ],
+     "part": "bearings"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Thermal trip"
+     ],
+     "causes": [
+      "Blocked circulation, vaporisation"
+     ],
+     "remedies": [
+      "Clear circulation; check NPSH of circulation"
+     ],
+     "part": "stator"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Canned Motor Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "canned_motor_pump.glb",
+    "duration_s": 52.8,
+    "script": [
+     {
+      "narration": "This module introduces the Canned Motor Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A canned motor pump combines pump and motor in one hermetically sealed unit: the motor rotor runs in the pumped liquid inside a thin \"can\", and the stator is sealed from the liquid by a stator liner.",
+      "duration_s": 15.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Part of the pumped liquid circulates through the motor to cool it and lubricate the bearings.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hazardous and toxic chemicals; refrigeration and ammonia; heat-transfer oils; nuclear and high-pressure systems.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Volute Casing, Closed Impeller, Adapter & Front Bearing Housing, Canned Rotor & Shaft.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Canned Motor Pump — Operation",
+    "type": "in_app_tour",
+    "model": "canned_motor_pump.glb",
+    "duration_s": 31.3,
+    "script": [
+     {
+      "narration": "How the Canned Motor Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The impeller pumps liquid as a normal centrifugal pump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A small flow circulates through the motor gap to cool it and lubricate the bearings.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "circulation_line",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotor runs in the liquid inside the rotor can; the stator is sealed behind the stator liner.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "stator_liner",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bearing monitor warns of bearing wear before the rotor touches the liner.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "bearing_monitor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Canned Motor Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "canned_motor_pump.glb",
+    "duration_s": 31.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Canned Motor Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check bearing monitor and motor temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_monitor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check circulation line.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "circulation_line",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bearings when the monitor indicates wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bearing wear: bearing monitor alarm. Common cause: dry running, solids.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: thermal trip. Common cause: blocked circulation, vaporisation.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the main advantage of a canned motor pump?",
+     "options": [
+      "Highest efficiency",
+      "No shaft seal — hermetically sealed",
+      "Cheapest",
+      "Handles slurry"
+     ],
+     "answer": 1,
+     "explanation": "Leak-free.",
+     "level": "basic"
+    },
+    {
+     "question": "What cools the motor?",
+     "options": [
+      "A fan",
+      "Circulating pumped liquid",
+      "Air",
+      "Water jacket only"
+     ],
+     "answer": 1,
+     "explanation": "Internal circulation.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is a bearing monitor fitted?",
+     "options": [
+      "To measure flow",
+      "To detect bearing wear before damage",
+      "For speed control",
+      "For priming"
+     ],
+     "answer": 1,
+     "explanation": "Rotor-to-liner contact would breach containment.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.\"",
+     "options": [
+      "Volute Casing",
+      "Closed Impeller",
+      "Bearing Wear Monitor",
+      "Stator Liner (Stator Can)"
+     ],
+     "answer": 0,
+     "explanation": "Volute Casing: Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.\"",
+     "options": [
+      "Stator Core & Windings",
+      "Closed Impeller",
+      "Product-Lubricated Journal Bearings",
+      "Adapter & Front Bearing Housing"
+     ],
+     "answer": 1,
+     "explanation": "Closed Impeller: Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Connects casing to motor and houses the front bearing.\"",
+     "options": [
+      "Baseplate",
+      "Adapter & Front Bearing Housing",
+      "Rear Bearing Housing & End Cover",
+      "Motor Housing (Secondary Containment)"
+     ],
+     "answer": 1,
+     "explanation": "Adapter & Front Bearing Housing: Connects casing to motor and houses the front bearing.",
+     "level": "basic",
+     "part": "adapter",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

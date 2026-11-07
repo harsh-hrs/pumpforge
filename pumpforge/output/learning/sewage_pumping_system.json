@@ -1,0 +1,762 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "sewage_pumping_system",
+ "no": 39,
+ "title": "Sewage Pumping System",
+ "model_title": "Sewage Pumping System (Wet-Well Lift Station)",
+ "category": "5 · Industrial Pump Applications",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A sewage pumping (lift) station collects wastewater flowing by gravity into a wet well and pumps it through a rising main to a higher sewer or treatment plant. Two submersible non-clog pumps on guide rails run duty/standby under float or level control; check and gate valves in a separate valve chamber allow each pump to be serviced.",
+   "applications": [
+    "Municipal sewerage networks",
+    "Industrial and refinery effluent collection",
+    "Storm water",
+    "Building and campus drainage"
+   ],
+   "key_points": [
+    "Built from: Submersible Sewage Pump (module 8)",
+    "Wet-well volume limits motor starts per hour",
+    "Self-cleansing velocity in the rising main",
+    "H₂S safety: ventilation and gas detection"
+   ],
+   "classification": {
+    "family": "Package / system",
+    "configuration": "Wet-well submersible lift station, duty/standby",
+    "application": "Municipal and building wastewater, storm water"
+   },
+   "hi_family": "application",
+   "summary": "A sewage lift station collects wastewater flowing by gravity into a wet well and pumps it up through a rising main to a higher sewer or treatment plant. Submersible non-clog pumps sit on the wet-well floor on guide rails, so they can be lifted out without entering the well. Float switches (or a level transmitter) start the duty pump at a set level, start the standby pump if the level keeps rising, stop the pumps at the low level and raise a high-level alarm. Non-return and isolation valves in a separate valve chamber allow each pump to be serviced while the other keeps running."
+  },
+  "model_3d": {
+   "asset": "glb/sewage_pumping_system.glb",
+   "metadata": "meta/sewage_pumping_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 66602,
+   "parts": 21
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Sewage enters through the inlet and screen basket.",
+    "The non-clog impeller lifts sewage through the duckfoot and riser.",
+    "Check and gate valves in the valve chamber lead to the rising main."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Sewage enters through the inlet and screen basket.",
+     "part": "inlet_screen",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Floats start the duty pump at the start level.",
+     "part": "float_switches",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The non-clog impeller lifts sewage through the duckfoot and riser.",
+     "part": "impeller_duty",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Check and gate valves in the valve chamber lead to the rising main.",
+     "part": "station_valves",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The standby pump starts if the level keeps rising.",
+     "part": "pump_standby",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "System curve = static lift + rising-main friction; two pumps in parallel for peak flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "sewage_pumping_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/sewage_pumping_system.json#components",
+   "key_components": "Submersible non-clog pumps",
+   "parts": [
+    {
+     "id": "wet_well",
+     "name": "Wet Well (Concrete, shown cut away) with Benching",
+     "info_ref": "ss_wetwell",
+     "function": "Receives and stores incoming sewage between pump cycles.",
+     "material": "Reinforced concrete with corrosion-resistant lining."
+    },
+    {
+     "id": "cover_slab",
+     "name": "Cover Slab & Access Hatch",
+     "info_ref": "ss_slab",
+     "function": "Covers the well and provides access for pump lifting.",
+     "material": "Concrete, aluminium."
+    },
+    {
+     "id": "inlet_screen",
+     "name": "Inlet Pipe & Screen Basket (on Rails)",
+     "info_ref": "ss_inlet",
+     "function": "Brings incoming sewage into the well and removes large debris.",
+     "material": "Stainless steel basket, concrete/PVC pipe."
+    },
+    {
+     "id": "pump_duty",
+     "name": "Duty Submersible Pump (Volute + Motor Housing)",
+     "info_ref": "ss_pump",
+     "function": "Lifts sewage from the well into the rising main.",
+     "material": "Cast iron, stainless shaft."
+    },
+    {
+     "id": "stator_duty",
+     "name": "Duty Pump – Motor Stator & Windings",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "rotor_duty",
+     "name": "Duty Pump – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "seals_duty",
+     "name": "Duty Pump – Bearings & Tandem Mechanical Seals",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "impeller_duty",
+     "name": "Duty Pump – Non-Clog Impeller",
+     "info_ref": "impeller_nonclog_s",
+     "function": "Passes solids and fibrous material with minimum clogging.",
+     "material": "Cast iron, hardened iron."
+    },
+    {
+     "id": "riser_duty",
+     "name": "Duty Duckfoot Bend, Guide Rails & Discharge Riser",
+     "info_ref": "ss_riser",
+     "function": "Guides the pump to its duckfoot coupling and carries discharge up to the valve chamber.",
+     "material": "Ductile iron, stainless rails."
+    },
+    {
+     "id": "pump_standby",
+     "name": "Standby Submersible Pump (Volute + Motor Housing)",
+     "info_ref": "ss_pump",
+     "function": "Lifts sewage from the well into the rising main.",
+     "material": "Cast iron, stainless shaft."
+    },
+    {
+     "id": "stator_standby",
+     "name": "Standby Pump – Motor Stator & Windings",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "rotor_standby",
+     "name": "Standby Pump – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "seals_standby",
+     "name": "Standby Pump – Bearings & Tandem Mechanical Seals",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "impeller_standby",
+     "name": "Standby Pump – Non-Clog Impeller",
+     "info_ref": "impeller_nonclog_s",
+     "function": "Passes solids and fibrous material with minimum clogging.",
+     "material": "Cast iron, hardened iron."
+    },
+    {
+     "id": "riser_standby",
+     "name": "Standby Duckfoot Bend, Guide Rails & Discharge Riser",
+     "info_ref": "ss_riser",
+     "function": "Guides the pump to its duckfoot coupling and carries discharge up to the valve chamber.",
+     "material": "Ductile iron, stainless rails."
+    },
+    {
+     "id": "valve_chamber",
+     "name": "Valve Chamber (Concrete)",
+     "info_ref": "ss_valve_chamber",
+     "function": "Dry chamber housing the valves so they can be maintained without entering the wet well.",
+     "material": "Concrete."
+    },
+    {
+     "id": "station_valves",
+     "name": "Non-Return & Gate Valves, Header and Rising Main",
+     "info_ref": "check_valve",
+     "function": "Prevents rising-main backflow into the well and reverse rotation of the pumps; gate valves isolate each pump.",
+     "material": "Ductile iron."
+    },
+    {
+     "id": "float_switches",
+     "name": "Float Switches (Stop / Duty Start / Standby Start / High Alarm)",
+     "info_ref": "level_sensor",
+     "function": "Measures liquid level to start/stop pumps and raise alarms.",
+     "material": "Polymer, stainless steel."
+    },
+    {
+     "id": "control_kiosk",
+     "name": "Control Kiosk (Starters, Level Controller, Telemetry) & Vent",
+     "info_ref": "control_panel",
+     "function": "Houses starters, protection and control logic for the pumps.",
+     "material": "Painted or stainless steel enclosure; IP rating per location."
+    },
+    {
+     "id": "sewage_in",
+     "name": "Incoming Sewage (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "sewage_out",
+     "name": "Pumped Sewage (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "5 – 5,000",
+     "unit": "m³/h station"
+    },
+    "head": {
+     "typical_range": "5 – 60",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "700 – 2,900",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "40 – 80",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "starts_per_hour": {
+     "typical_range": "≤ 6 – 15",
+     "unit": "",
+     "note": "per motor manufacturer — verify"
+    },
+    "rising_main_velocity": {
+     "typical_range": "≈ 0.7 – 2",
+     "unit": "m/s",
+     "note": "verify local design codes"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Concrete wet well; benching to prevent deposits."
+   ],
+   "alignment": [
+    "Guide rails plumb."
+   ],
+   "piping": [
+    "Valve chamber dry and accessible; air valves at rising-main high points."
+   ],
+   "commissioning": [
+    "Set levels; test alarms and telemetry; test alternation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check run hours and alarms.",
+     "part": "control_kiosk",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean wet well and screen basket.",
+     "part": "inlet_screen",
+     "interval": "monthly"
+    },
+    {
+     "task": "Exercise valves.",
+     "part": "station_valves",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Lift pumps; check seals and impellers.",
+     "part": "pump_duty"
+    }
+   ],
+   "lubrication": [
+    "Pump oil chambers."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Pump clogging",
+     "category": "blockage",
+     "symptoms": [
+      "High current, low flow"
+     ],
+     "causes": [
+      "Wipes, rags"
+     ],
+     "remedies": [
+      "Screening, chopper impellers"
+     ],
+     "part": "impeller_duty"
+    },
+    {
+     "problem": "Septicity and odour",
+     "category": "performance",
+     "symptoms": [
+      "H₂S"
+     ],
+     "causes": [
+      "Long retention"
+     ],
+     "remedies": [
+      "Reduce retention; ventilation"
+     ],
+     "part": "wet_well"
+    },
+    {
+     "problem": "Float failure",
+     "category": "performance",
+     "symptoms": [
+      "Overflow or dry run"
+     ],
+     "causes": [
+      "Fat build-up"
+     ],
+     "remedies": [
+      "Clean; level transmitter"
+     ],
+     "part": "float_switches"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Sewage Pumping System — Introduction",
+    "type": "in_app_tour",
+    "model": "sewage_pumping_system.glb",
+    "duration_s": 59.0,
+    "script": [
+     {
+      "narration": "This module introduces the Sewage Pumping System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A sewage pumping (lift) station collects wastewater flowing by gravity into a wet well and pumps it through a rising main to a higher sewer or treatment plant.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Two submersible non-clog pumps on guide rails run duty/standby under float or level control; check and gate valves in a separate valve chamber allow each pump to be serviced.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include municipal sewerage networks; industrial and refinery effluent collection; storm water; building and campus drainage.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Duty Submersible Pump (Volute + Motor Housing), Duty Pump – Rotor & Shaft, Duty Pump – Non-Clog Impeller, Standby Submersible Pump (Volute + Motor Housing).",
+      "duration_s": 11.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Sewage Pumping System — Operation",
+    "type": "in_app_tour",
+    "model": "sewage_pumping_system.glb",
+    "duration_s": 30.2,
+    "script": [
+     {
+      "narration": "How the Sewage Pumping System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Sewage enters through the inlet and screen basket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_screen",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Floats start the duty pump at the start level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "float_switches",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The non-clog impeller lifts sewage through the duckfoot and riser.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller_duty",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Check and gate valves in the valve chamber lead to the rising main.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "station_valves",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The standby pump starts if the level keeps rising.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_standby",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Sewage Pumping System — Maintenance",
+    "type": "in_app_tour",
+    "model": "sewage_pumping_system.glb",
+    "duration_s": 40.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Sewage Pumping System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check run hours and alarms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_kiosk",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean wet well and screen basket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_screen",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Exercise valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "station_valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift pumps; check seals and impellers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_duty",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pump clogging: high current, low flow. Common cause: wipes, rags.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "impeller_duty",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for septicity and odour: h₂s. Common cause: long retention.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "wet_well",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for float failure: overflow or dry run. Common cause: fat build-up.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "float_switches",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What limits the minimum wet-well volume?",
+     "options": [
+      "Pipe size",
+      "Maximum motor starts per hour",
+      "Colour",
+      "Rail length"
+     ],
+     "answer": 1,
+     "explanation": "Volume between start and stop levels.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are the valves in a separate dry chamber?",
+     "options": [
+      "Looks",
+      "Maintenance without entering the wet well",
+      "Lower cost",
+      "Cooling"
+     ],
+     "answer": 1,
+     "explanation": "Safety and access.",
+     "level": "basic"
+    },
+    {
+     "question": "Which hazard requires ventilation in wet wells?",
+     "options": [
+      "Oxygen excess",
+      "H₂S and methane",
+      "Steam",
+      "Nitrogen"
+     ],
+     "answer": 1,
+     "explanation": "Septic gases.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Receives and stores incoming sewage between pump cycles.\"",
+     "options": [
+      "Incoming Sewage (Tracers)",
+      "Duty Duckfoot Bend, Guide Rails & Discharge Riser",
+      "Wet Well (Concrete, shown cut away) with Benching",
+      "Standby Submersible Pump (Volute + Motor Housing)"
+     ],
+     "answer": 2,
+     "explanation": "Wet Well (Concrete, shown cut away) with Benching: Receives and stores incoming sewage between pump cycles.",
+     "level": "basic",
+     "part": "wet_well",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Covers the well and provides access for pump lifting.\"",
+     "options": [
+      "Cover Slab & Access Hatch",
+      "Wet Well (Concrete, shown cut away) with Benching",
+      "Non-Return & Gate Valves, Header and Rising Main",
+      "Standby Pump – Rotor & Shaft"
+     ],
+     "answer": 0,
+     "explanation": "Cover Slab & Access Hatch: Covers the well and provides access for pump lifting.",
+     "level": "basic",
+     "part": "cover_slab",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Brings incoming sewage into the well and removes large debris.\"",
+     "options": [
+      "Non-Return & Gate Valves, Header and Rising Main",
+      "Standby Pump – Rotor & Shaft",
+      "Cover Slab & Access Hatch",
+      "Inlet Pipe & Screen Basket (on Rails)"
+     ],
+     "answer": 3,
+     "explanation": "Inlet Pipe & Screen Basket (on Rails): Brings incoming sewage into the well and removes large debris.",
+     "level": "basic",
+     "part": "inlet_screen",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

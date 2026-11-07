@@ -1,0 +1,736 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "axial_flow_pump",
+ "no": 11,
+ "title": "Axial Flow Pump",
+ "model_title": "Axial Flow (Propeller) Pump, Vertical Wet-Pit",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An axial flow (propeller) pump moves liquid parallel to the shaft: propeller blades act like a ship's propeller, adding swirl and pressure, and guide vanes downstream remove the swirl. It delivers very large flows at low head and has the highest specific speed of rotodynamic pumps.",
+   "applications": [
+    "Flood control and storm-water stations",
+    "Power-plant condenser cooling water",
+    "Irrigation and drainage",
+    "Evaporator and crystalliser circulation (alumina, chemical)"
+   ],
+   "key_points": [
+    "Very high flow, low head",
+    "Steep head curve; power highest at shut-off — never start against a closed valve",
+    "Some designs have adjustable blade pitch"
+   ],
+   "classification": {
+    "family": "Rotodynamic, axial flow",
+    "configuration": "Vertical wet pit, single stage, line-shaft"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A propeller pump adds energy almost entirely by the lift of its blades, like a ship propeller working in a tube: liquid passes straight through axially. Straightening vanes above the propeller remove the swirl and recover pressure. It delivers very large flows at low heads with high specific speed; the head–flow curve is steep and power rises toward shut-off, so these pumps must not be started or run against a closed valve."
+  },
+  "model_3d": {
+   "asset": "glb/axial_flow_pump.glb",
+   "metadata": "meta/axial_flow_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 61284,
+   "parts": 21
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water enters through the suction bell.",
+    "The rotating propeller blades lift the water axially and add swirl.",
+    "The diffuser guide vanes remove swirl and recover pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water enters through the suction bell.",
+     "part": "suction_bell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotating propeller blades lift the water axially and add swirl.",
+     "part": "propeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diffuser guide vanes remove swirl and recover pressure.",
+     "part": "diffuser_bowl",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The column and discharge elbow lead the flow out.",
+     "part": "discharge_elbow",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Very steep head curve with a stall dip at part load; power rises towards shut-off (maximum at zero flow)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "axial_flow_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/axial_flow_pump.json#components",
+   "key_components": "Propeller, blades, guide vanes",
+   "parts": [
+    {
+     "id": "discharge_elbow",
+     "name": "Discharge Elbow Head & Floor Plate",
+     "info_ref": "discharge_elbow",
+     "function": "Turns the flow from the vertical column into the horizontal discharge pipe, supports the pump from the floor and carries the motor.",
+     "material": "Carbon steel, stainless; coated internally for seawater."
+    },
+    {
+     "id": "stuffing_box",
+     "name": "Stuffing Box Packing & Gland",
+     "info_ref": "gland_packing_v",
+     "function": "Seals the shaft where it leaves the discharge elbow.",
+     "material": "PTFE/aramid/graphite packing."
+    },
+    {
+     "id": "motor_stand",
+     "name": "Motor Stand",
+     "info_ref": "motor_stand_v",
+     "function": "Supports the vertical motor and gives access to coupling and gland.",
+     "material": "Steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Adjustable Spacer Coupling",
+     "info_ref": "coupling_vertical_s",
+     "function": "Transmits torque and axial thrust to the motor thrust bearing; nut sets impeller/propeller axial position.",
+     "material": "Steel."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "column_pipe_1",
+     "name": "Column Pipe – Upper",
+     "info_ref": "column_pipe",
+     "function": "Carries liquid from the bowls to the head and suspends the bowl assembly.",
+     "material": "Carbon, galvanised or stainless steel."
+    },
+    {
+     "id": "column_pipe_2",
+     "name": "Column Pipe – Lower",
+     "info_ref": "column_pipe",
+     "function": "Carries liquid from the bowls to the head and suspends the bowl assembly.",
+     "material": "Carbon, galvanised or stainless steel."
+    },
+    {
+     "id": "bearing_retainer_1",
+     "name": "Bearing Retainer (Spider) 1",
+     "info_ref": "bearing_retainer",
+     "function": "Holds the line-shaft bearing concentric at each column joint.",
+     "material": "Bronze, cast iron, stainless."
+    },
+    {
+     "id": "lineshaft_bearing_1",
+     "name": "Line-Shaft Bearing 1",
+     "info_ref": "lineshaft_bearing",
+     "function": "Supports the line shaft radially between head and bowls.",
+     "material": "Nitrile/neoprene rubber, bronze, polymers."
+    },
+    {
+     "id": "diffuser_bowl",
+     "name": "Diffuser Bowl (Straightening Vanes)",
+     "info_ref": "diffuser_bowl",
+     "function": "Removes swirl from the propeller discharge and converts velocity into pressure before the column.",
+     "material": "Cast iron, steel, stainless."
+    },
+    {
+     "id": "diffuser_bearing",
+     "name": "Diffuser Hub Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "propeller_housing",
+     "name": "Propeller Housing (Liner)",
+     "info_ref": "propeller_housing",
+     "function": "Close-fitting liner around the propeller blade tips.",
+     "material": "Cast iron, steel, stainless."
+    },
+    {
+     "id": "propeller",
+     "name": "Propeller (4-Blade)",
+     "info_ref": "propeller",
+     "function": "Adds energy to the liquid by blade lift, accelerating flow axially.",
+     "material": "Stainless steel, bronze, duplex."
+    },
+    {
+     "id": "suction_bell",
+     "name": "Suction Bell",
+     "info_ref": "suction_bell",
+     "function": "Guides liquid smoothly into the first-stage impeller and holds the bottom bearing.",
+     "material": "Cast iron, bronze, stainless."
+    },
+    {
+     "id": "bell_bearing",
+     "name": "Suction Bell Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "pump_shaft",
+     "name": "Pump & Line Shaft",
+     "info_ref": "line_shaft",
+     "function": "Transmits torque from the driver to the bowl shaft.",
+     "material": "Carbon steel, 416/316 stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "500 – 100,000+",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "1 – 12",
+     "unit": "m",
+     "note": "per stage"
+    },
+    "pressure": {
+     "typical_range": "low",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "250 – 1,450",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "75 – 88",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "specific_speed_Ns_US": {
+     "typical_range": "8,000 – 15,000+",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Motor stand / discharge head on a rigid floor; bell located per ANSI/HI 9.8 sump geometry."
+   ],
+   "alignment": [
+    "Plumb column and motor coupling alignment."
+   ],
+   "piping": [
+    "No discharge valve that can be closed during start, or start with it open; use flap valves/siphon breakers on outfalls."
+   ],
+   "commissioning": [
+    "Start with the discharge open.",
+    "Check submergence and vortex-free approach flow."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vibration and bearing temperature.",
+     "part": "m_motor_bearings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect propeller tip clearance.",
+     "part": "propeller_housing",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect blades for cavitation and erosion.",
+     "part": "propeller"
+    }
+   ],
+   "lubrication": [
+    "Water- or grease-lubricated column bearings per design."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Operation in stall zone",
+     "category": "performance",
+     "symptoms": [
+      "Noise, vibration, power surge"
+     ],
+     "causes": [
+      "Throttled or high system head"
+     ],
+     "remedies": [
+      "Operate on the stable part of the curve"
+     ],
+     "part": "propeller"
+    },
+    {
+     "problem": "Cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Blade pitting"
+     ],
+     "causes": [
+      "Low submergence"
+     ],
+     "remedies": [
+      "Raise water level"
+     ],
+     "part": "propeller"
+    },
+    {
+     "problem": "Overload on start",
+     "category": "performance",
+     "symptoms": [
+      "Motor trips"
+     ],
+     "causes": [
+      "Starting against a closed valve"
+     ],
+     "remedies": [
+      "Open discharge before start"
+     ],
+     "part": "discharge_elbow"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Axial Flow Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "axial_flow_pump.glb",
+    "duration_s": 52.8,
+    "script": [
+     {
+      "narration": "This module introduces the Axial Flow Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An axial flow (propeller) pump moves liquid parallel to the shaft: propeller blades act like a ship's propeller, adding swirl and pressure, and guide vanes downstream remove the swirl.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It delivers very large flows at low head and has the highest specific speed of rotodynamic pumps.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include flood control and storm-water stations; power-plant condenser cooling water; irrigation and drainage; evaporator and crystalliser circulation (alumina, chemical).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Diffuser Bowl (Straightening Vanes), Propeller Housing (Liner), Propeller (4-Blade), Suction Bell.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Axial Flow Pump — Operation",
+    "type": "in_app_tour",
+    "model": "axial_flow_pump.glb",
+    "duration_s": 24.8,
+    "script": [
+     {
+      "narration": "How the Axial Flow Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water enters through the suction bell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_bell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotating propeller blades lift the water axially and add swirl.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "propeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diffuser guide vanes remove swirl and recover pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffuser_bowl",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The column and discharge elbow lead the flow out.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "discharge_elbow",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Axial Flow Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "axial_flow_pump.glb",
+    "duration_s": 39.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Axial Flow Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vibration and bearing temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "m_motor_bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect propeller tip clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "propeller_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect blades for cavitation and erosion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "propeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for operation in stall zone: noise, vibration, power surge. Common cause: throttled or high system head.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "propeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation: blade pitting. Common cause: low submergence.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "propeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload on start: motor trips. Common cause: starting against a closed valve.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "discharge_elbow",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why must an axial flow pump not be started against a closed valve?",
+     "options": [
+      "Head is zero",
+      "Power is highest at shut-off",
+      "It cannot prime",
+      "The seal leaks"
+     ],
+     "answer": 1,
+     "explanation": "Axial pumps draw maximum power at zero flow.",
+     "level": "basic"
+    },
+    {
+     "question": "Axial pumps are suited to…",
+     "options": [
+      "High head, low flow",
+      "Very high flow, low head",
+      "Metering",
+      "Viscous oils"
+     ],
+     "answer": 1,
+     "explanation": "Highest specific speed.",
+     "level": "basic"
+    },
+    {
+     "question": "What do the guide vanes do?",
+     "options": [
+      "Increase speed",
+      "Remove swirl and recover pressure",
+      "Seal the shaft",
+      "Filter debris"
+     ],
+     "answer": 1,
+     "explanation": "Straighten flow.",
+     "level": "basic"
+    },
+    {
+     "question": "A dip in the head curve at part load indicates…",
+     "options": [
+      "Normal BEP",
+      "Blade stall region to avoid",
+      "Cavitation-free zone",
+      "Maximum efficiency"
+     ],
+     "answer": 1,
+     "explanation": "Unstable region.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Turns the flow from the vertical column into the horizontal discharge pipe, supports the pump from the floor and carries the motor.\"",
+     "options": [
+      "Discharge Elbow Head & Floor Plate",
+      "Bearing Retainer (Spider) 1",
+      "Pump & Line Shaft",
+      "Column Pipe – Lower"
+     ],
+     "answer": 0,
+     "explanation": "Discharge Elbow Head & Floor Plate: Turns the flow from the vertical column into the horizontal discharge pipe, supports the pump from the floor and carries the motor.",
+     "level": "basic",
+     "part": "discharge_elbow",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Seals the shaft where it leaves the discharge elbow.\"",
+     "options": [
+      "Vertical Motor – Stator",
+      "Stuffing Box Packing & Gland",
+      "Discharge Elbow Head & Floor Plate",
+      "Diffuser Hub Bearing"
+     ],
+     "answer": 1,
+     "explanation": "Stuffing Box Packing & Gland: Seals the shaft where it leaves the discharge elbow.",
+     "level": "basic",
+     "part": "stuffing_box",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the vertical motor and gives access to coupling and gland.\"",
+     "options": [
+      "Pump & Line Shaft",
+      "Column Pipe – Lower",
+      "Line-Shaft Bearing 1",
+      "Motor Stand"
+     ],
+     "answer": 3,
+     "explanation": "Motor Stand: Supports the vertical motor and gives access to coupling and gland.",
+     "level": "basic",
+     "part": "motor_stand",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

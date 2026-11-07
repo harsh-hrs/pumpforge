@@ -1,0 +1,620 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vacuum_relief_valve",
+ "no": 47,
+ "title": "Vacuum Relief Valve",
+ "model_title": "Vacuum Relief Valve (Spring-Loaded, Tank Roof)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vacuum relief valve (vacuum breaker) admits air into a tank or vessel when its internal pressure falls below a set vacuum, preventing implosion. Vacuum is created when a tank is pumped out, when hot vapours condense or when weather cools a tank. When the set point is reached, atmospheric pressure pushes the pallet open against its spring or weight; air flows in until pressures balance.",
+   "applications": [
+    "Atmospheric and low-pressure storage tanks",
+    "Evaporators, condensers and steam-heated vessels",
+    "Pipelines at high points (vacuum breakers)",
+    "Tank trucks and IBCs"
+   ],
+   "key_points": [
+    "Set vacuum must be below the tank's vacuum design rating",
+    "Sized for maximum pump-out + thermal in-breathing (API 2000)",
+    "Screens must not be blocked"
+   ],
+   "classification": {
+    "family": "Pressure/vacuum safety device",
+    "type": "Spring-loaded vacuum relief (vacuum breaker), roof-mounted"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A vacuum relief valve protects a tank or vessel from collapsing under vacuum — for example when it is emptied quickly or when hot vapour condenses. When the internal pressure falls below the set vacuum, atmospheric pressure pushes the pallet open against its spring and air flows in; when the pressures equalise the spring closes it."
+  },
+  "model_3d": {
+   "asset": "glb/vacuum_relief_valve.glb",
+   "metadata": "meta/vacuum_relief_valve.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9402,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Normally the spring holds the pallet against the seat — the tank is sealed.",
+    "As the tank is emptied, internal pressure drops below atmospheric.",
+    "At the set vacuum, atmospheric pressure pushes the pallet inward against the spring."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Normally the spring holds the pallet against the seat — the tank is sealed.",
+     "part": "pallet",
+     "cut": true,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "As the tank is emptied, internal pressure drops below atmospheric.",
+     "part": "tank_roof",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the set vacuum, atmospheric pressure pushes the pallet inward against the spring.",
+     "part": "pallet",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Air enters through the hood and screen into the tank.",
+     "part": "hood_screen",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When pressure equalises the spring recloses the pallet.",
+     "part": "spring",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow capacity rises with overpressure (vacuum) above the set point; full lift at ~10 % overpressure for many designs."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vacuum_relief_valve_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/vacuum_relief_valve.json#components",
+   "key_components": "Pallet, seat, spring, hood & screen",
+   "parts": [
+    {
+     "id": "tank_roof",
+     "name": "Tank Roof (shown cut away)",
+     "info_ref": "vr_roof",
+     "function": "Tank roof nozzle on which the valve is mounted.",
+     "material": "Steel."
+    },
+    {
+     "id": "nozzle",
+     "name": "Roof Nozzle & Flange",
+     "info_ref": "vr_roof",
+     "function": "Tank roof nozzle on which the valve is mounted.",
+     "material": "Steel."
+    },
+    {
+     "id": "body",
+     "name": "Valve Body & Seat Ring",
+     "info_ref": "vr_body",
+     "function": "Holds the seat and guides the pallet.",
+     "material": "Stainless, aluminium, carbon steel."
+    },
+    {
+     "id": "hood_screen",
+     "name": "Weather Hood & Bird Screen",
+     "info_ref": "vr_hood",
+     "function": "Keeps out rain, birds and debris while letting air in.",
+     "material": "Stainless."
+    },
+    {
+     "id": "pallet",
+     "name": "Pallet (Disc) & Stem — opens inward on vacuum",
+     "info_ref": "vr_pallet",
+     "function": "Opens inward when the tank is under vacuum.",
+     "material": "Stainless + PTFE/FEP."
+    },
+    {
+     "id": "spring",
+     "name": "Bridge & Set-Pressure Spring",
+     "info_ref": "vr_spring",
+     "function": "Sets the vacuum at which the pallet opens.",
+     "material": "Stainless."
+    },
+    {
+     "id": "air_in",
+     "name": "Atmospheric Air Entering (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 50 – 300",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "set vacuum ≈ -2 to -50 mbar (storage tanks)",
+     "unit": "mbar g"
+    },
+    "temperature": {
+     "typical_range": "-40 to 200",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Air capacity per API 2000 sizing (Nm³/h)",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Mount vertically on a roof nozzle at least as large as the valve inlet.",
+    "Keep the inlet free from frost and product build-up; heat-trace if needed."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Inspect screen and hood for blockage, ice or nests.",
+     "part": "hood_screen",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Lift-test the pallet and check seat.",
+     "part": "pallet",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace pallet seal and spring.",
+     "part": "spring"
+    }
+   ],
+   "lubrication": [
+    "None — clean, dry seats."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tank collapse",
+     "category": "performance",
+     "symptoms": [
+      "Buckled roof/shell"
+     ],
+     "causes": [
+      "Blocked screen, stuck pallet, undersized valve"
+     ],
+     "remedies": [
+      "Inspect, resize per API 2000"
+     ],
+     "part": "hood_screen"
+    },
+    {
+     "problem": "Leakage / emissions",
+     "category": "leakage",
+     "symptoms": [
+      "Vapour release"
+     ],
+     "causes": [
+      "Damaged seat"
+     ],
+     "remedies": [
+      "Replace seat/seal"
+     ],
+     "part": "pallet"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vacuum Relief Valve — Introduction",
+    "type": "in_app_tour",
+    "model": "vacuum_relief_valve.glb",
+    "duration_s": 59.8,
+    "script": [
+     {
+      "narration": "This module introduces the Vacuum Relief Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vacuum relief valve (vacuum breaker) admits air into a tank or vessel when its internal pressure falls below a set vacuum, preventing implosion.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Vacuum is created when a tank is pumped out, when hot vapours condense or when weather cools a tank.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "When the set point is reached, atmospheric pressure pushes the pallet open against its spring or weight; air flows in until pressures balance.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include atmospheric and low-pressure storage tanks; evaporators, condensers and steam-heated vessels; pipelines at high points (vacuum breakers); tank trucks and IBCs.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Valve Body & Seat Ring, Weather Hood & Bird Screen.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vacuum Relief Valve — Operation",
+    "type": "in_app_tour",
+    "model": "vacuum_relief_valve.glb",
+    "duration_s": 31.4,
+    "script": [
+     {
+      "narration": "How the Vacuum Relief Valve works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Normally the spring holds the pallet against the seat — the tank is sealed.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "pallet",
+       "cut": true,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "As the tank is emptied, internal pressure drops below atmospheric.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tank_roof",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the set vacuum, atmospheric pressure pushes the pallet inward against the spring.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "pallet",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Air enters through the hood and screen into the tank.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "hood_screen",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When pressure equalises the spring recloses the pallet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spring",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vacuum Relief Valve — Maintenance",
+    "type": "in_app_tour",
+    "model": "vacuum_relief_valve.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vacuum Relief Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Inspect screen and hood for blockage, ice or nests.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hood_screen",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift-test the pallet and check seat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pallet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace pallet seal and spring.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tank collapse: buckled roof/shell. Common cause: blocked screen, stuck pallet, undersized valve.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "hood_screen",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for leakage / emissions: vapour release. Common cause: damaged seat.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "pallet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What causes vacuum in a storage tank?",
+     "options": [
+      "Filling",
+      "Pumping out and cooling/condensing vapour",
+      "Heating the roof",
+      "Nitrogen blanket"
+     ],
+     "answer": 1,
+     "explanation": "Out-breathing vs. in-breathing.",
+     "level": "basic"
+    },
+    {
+     "question": "Which way does the pallet move to open?",
+     "options": [
+      "Outward",
+      "Inward into the tank",
+      "Sideways",
+      "It rotates"
+     ],
+     "answer": 1,
+     "explanation": "Atmosphere pushes it in.",
+     "level": "basic"
+    },
+    {
+     "question": "Which standard covers tank venting sizing?",
+     "options": [
+      "API 610",
+      "API 2000 / ISO 28300",
+      "ISO 5167",
+      "NFPA 20"
+     ],
+     "answer": 1,
+     "explanation": "Venting standard.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Tank roof nozzle on which the valve is mounted.\"",
+     "options": [
+      "Atmospheric Air Entering (Tracers)",
+      "Tank Roof (shown cut away)",
+      "Weather Hood & Bird Screen",
+      "Bridge & Set-Pressure Spring"
+     ],
+     "answer": 1,
+     "explanation": "Tank Roof (shown cut away): Tank roof nozzle on which the valve is mounted.",
+     "level": "basic",
+     "part": "tank_roof",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds the seat and guides the pallet.\"",
+     "options": [
+      "Weather Hood & Bird Screen",
+      "Pallet (Disc) & Stem — opens inward on vacuum",
+      "Bridge & Set-Pressure Spring",
+      "Valve Body & Seat Ring"
+     ],
+     "answer": 3,
+     "explanation": "Valve Body & Seat Ring: Holds the seat and guides the pallet.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Keeps out rain, birds and debris while letting air in.\"",
+     "options": [
+      "Atmospheric Air Entering (Tracers)",
+      "Tank Roof (shown cut away)",
+      "Valve Body & Seat Ring",
+      "Weather Hood & Bird Screen"
+     ],
+     "answer": 3,
+     "explanation": "Weather Hood & Bird Screen: Keeps out rain, birds and debris while letting air in.",
+     "level": "basic",
+     "part": "hood_screen",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

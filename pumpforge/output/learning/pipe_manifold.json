@@ -1,0 +1,600 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pipe_manifold",
+ "no": 55,
+ "title": "Pipe Manifold",
+ "model_title": "Pipe Manifold (Distribution Header with Valved Branches)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pipe manifold (header) is a large pipe that distributes flow to — or collects flow from — several branch lines. Each branch has an isolation valve so it can be opened, closed or maintained independently. Headers keep velocities low so all branches receive similar pressure.",
+   "applications": [
+    "Cooling-water and steam distribution",
+    "Pump suction and discharge headers",
+    "Gas and chemical distribution",
+    "Well-test and sampling manifolds"
+   ],
+   "key_points": [
+    "Header area ≥ sum of branch areas helps even distribution",
+    "Branch reinforcement per code",
+    "Drains at low points, vents at high points"
+   ],
+   "classification": {
+    "family": "Piping component",
+    "type": "Distribution header with valved branches"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A pipe manifold (header) collects or distributes flow among several branches from one large pipe. Each branch has its own isolation valve so lines can be opened, closed or maintained independently — typical of cooling-water, steam, gas and chemical distribution."
+  },
+  "model_3d": {
+   "asset": "glb/pipe_manifold.glb",
+   "metadata": "meta/pipe_manifold.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 12352,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Flow enters the header.",
+    "Opening a branch valve lets flow into that branch.",
+    "Branches open in sequence and draw from the common header."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flow enters the header.",
+     "part": "header",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Opening a branch valve lets flow into that branch.",
+     "part": "lever_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Branches open in sequence and draw from the common header.",
+     "part": "branch_valves",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The gauge shows header pressure; the drain empties it.",
+     "part": "gauge_drain",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Header pressure falls slightly along its length as branches draw flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pipe_manifold_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/pipe_manifold.json#components",
+   "key_components": "Header, branches, isolation valves, supports",
+   "parts": [
+    {
+     "id": "header",
+     "name": "Header Pipe, Branch Outlets & Supports",
+     "info_ref": "pm_header",
+     "function": "Carries the total flow and feeds the branches.",
+     "material": "Carbon steel/stainless."
+    },
+    {
+     "id": "branch_valves",
+     "name": "Branch Isolation Valves (ball, quarter-turn)",
+     "info_ref": "pm_valves",
+     "function": "Isolate each branch.",
+     "material": "Stainless."
+    },
+    {
+     "id": "lever_1",
+     "name": "Valve Lever – Branch 1",
+     "info_ref": "pm_lever",
+     "function": "Operates the branch valve (in line with pipe = open).",
+     "material": "Steel."
+    },
+    {
+     "id": "lever_2",
+     "name": "Valve Lever – Branch 2",
+     "info_ref": "pm_lever",
+     "function": "Operates the branch valve (in line with pipe = open).",
+     "material": "Steel."
+    },
+    {
+     "id": "lever_3",
+     "name": "Valve Lever – Branch 3",
+     "info_ref": "pm_lever",
+     "function": "Operates the branch valve (in line with pipe = open).",
+     "material": "Steel."
+    },
+    {
+     "id": "lever_4",
+     "name": "Valve Lever – Branch 4",
+     "info_ref": "pm_lever",
+     "function": "Operates the branch valve (in line with pipe = open).",
+     "material": "Steel."
+    },
+    {
+     "id": "gauge_drain",
+     "name": "Header Pressure Gauge & Drain Valve",
+     "info_ref": "pm_instruments",
+     "function": "Shows header pressure; drains the header.",
+     "material": "Stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Header DN 50 – 1,000",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Per piping class",
+     "unit": ""
+    },
+    "temperature": {
+     "typical_range": "Per service",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Sum of branch flows; velocity ~1–3 m/s for liquids (typical)",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support pipework at the intervals and on the support types shown on the piping drawings; allow for thermal expansion."
+   ],
+   "alignment": [
+    "Fit up joints within code tolerances; do not force flanges."
+   ],
+   "piping": [
+    "Follow the isometric drawings and line list (size, class, material).",
+    "Install gaskets and bolting of the specified type; tighten per ASME PCC-1."
+   ],
+   "commissioning": [
+    "Flush/blow the line, then hydrotest or pneumatic test to code.",
+    "Reinstate instruments and remove test blinds."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check branch valve positions and leaks.",
+     "part": "branch_valves",
+     "interval": "per round"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Drain sediment.",
+     "part": "gauge_drain",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect header for corrosion at dead legs.",
+     "part": "header"
+    }
+   ],
+   "lubrication": [
+    "Lubricate stem threads and operator gearing per the manufacturer; most wetted internals need no lubrication."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Uneven distribution",
+     "category": "performance",
+     "symptoms": [
+      "Far branches starved"
+     ],
+     "causes": [
+      "Undersized header"
+     ],
+     "remedies": [
+      "Larger header, balancing valves"
+     ],
+     "part": "header"
+    },
+    {
+     "problem": "Dead-leg corrosion",
+     "category": "corrosion",
+     "symptoms": [
+      "Pitting"
+     ],
+     "causes": [
+      "Stagnant ends"
+     ],
+     "remedies": [
+      "Eliminate dead legs, flush"
+     ],
+     "part": "header"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pipe Manifold — Introduction",
+    "type": "in_app_tour",
+    "model": "pipe_manifold.glb",
+    "duration_s": 47.6,
+    "script": [
+     {
+      "narration": "This module introduces the Pipe Manifold.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pipe manifold (header) is a large pipe that distributes flow to — or collects flow from — several branch lines.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Each branch has an isolation valve so it can be opened, closed or maintained independently.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Headers keep velocities low so all branches receive similar pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cooling-water and steam distribution; pump suction and discharge headers; gas and chemical distribution; well-test and sampling manifolds.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pipe Manifold — Operation",
+    "type": "in_app_tour",
+    "model": "pipe_manifold.glb",
+    "duration_s": 24.4,
+    "script": [
+     {
+      "narration": "How the Pipe Manifold works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow enters the header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "header",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Opening a branch valve lets flow into that branch.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lever_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Branches open in sequence and draw from the common header.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "branch_valves",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The gauge shows header pressure; the drain empties it.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gauge_drain",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pipe Manifold — Maintenance",
+    "type": "in_app_tour",
+    "model": "pipe_manifold.glb",
+    "duration_s": 31.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pipe Manifold.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check branch valve positions and leaks.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "branch_valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Drain sediment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gauge_drain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect header for corrosion at dead legs.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "header",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for uneven distribution: far branches starved. Common cause: undersized header.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "header",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dead-leg corrosion: pitting. Common cause: stagnant ends.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "header",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does a manifold do?",
+     "options": [
+      "Measures flow",
+      "Distributes or collects flow among several branches",
+      "Relieves pressure",
+      "Heats fluid"
+     ],
+     "answer": 1,
+     "explanation": "Header.",
+     "level": "basic"
+    },
+    {
+     "question": "Why keep header velocity low?",
+     "options": [
+      "Noise only",
+      "So all branches see similar pressure",
+      "To save paint",
+      "No reason"
+     ],
+     "answer": 1,
+     "explanation": "Even distribution.",
+     "level": "basic"
+    },
+    {
+     "question": "Ball-valve lever in line with the pipe means…",
+     "options": [
+      "Closed",
+      "Open",
+      "Half open",
+      "Broken"
+     ],
+     "answer": 1,
+     "explanation": "Quarter-turn convention.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries the total flow and feeds the branches.\"",
+     "options": [
+      "Header Pipe, Branch Outlets & Supports",
+      "Branch Isolation Valves (ball, quarter-turn)",
+      "Valve Lever – Branch 1",
+      "Header Pressure Gauge & Drain Valve"
+     ],
+     "answer": 0,
+     "explanation": "Header Pipe, Branch Outlets & Supports: Carries the total flow and feeds the branches.",
+     "level": "basic",
+     "part": "header",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Isolate each branch.\"",
+     "options": [
+      "Valve Lever – Branch 1",
+      "Header Pressure Gauge & Drain Valve",
+      "Valve Lever – Branch 2",
+      "Branch Isolation Valves (ball, quarter-turn)"
+     ],
+     "answer": 3,
+     "explanation": "Branch Isolation Valves (ball, quarter-turn): Isolate each branch.",
+     "level": "basic",
+     "part": "branch_valves",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Operates the branch valve (in line with pipe = open).\"",
+     "options": [
+      "Header Pressure Gauge & Drain Valve",
+      "Header Pipe, Branch Outlets & Supports",
+      "Valve Lever – Branch 1",
+      "Branch Isolation Valves (ball, quarter-turn)"
+     ],
+     "answer": 2,
+     "explanation": "Valve Lever – Branch 1: Operates the branch valve (in line with pipe = open).",
+     "level": "basic",
+     "part": "lever_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

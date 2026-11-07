@@ -1,0 +1,637 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pipe_insulation_system",
+ "no": 61,
+ "title": "Pipe Insulation System",
+ "model_title": "Pipe Insulation System (Hot Service, Layered Cutaway)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pipe insulation system reduces heat loss from hot lines (or heat gain to cold lines), keeps process temperatures stable, protects people from hot surfaces and prevents condensation. A hot-service system typically has an anti-corrosion coating, one or more insulation layers with staggered joints, and a weatherproof metal cladding with bands, plus insulated supports.",
+   "applications": [
+    "Steam and condensate lines",
+    "Hot process lines (alumina digestion liquor, oil)",
+    "Cold/cryogenic lines (with vapour barrier)",
+    "Personnel protection"
+   ],
+   "key_points": [
+    "Wet insulation loses most of its insulating value",
+    "Corrosion under insulation (CUI) is a major hazard",
+    "Thickness from economic/process/safety criteria"
+   ],
+   "classification": {
+    "family": "Piping system",
+    "type": "Hot-service insulation (mineral wool / calcium silicate) with metal cladding"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A pipe insulation system reduces heat loss (or gain) from piping, keeps process temperatures stable, protects personnel from hot surfaces and prevents condensation on cold lines. A typical hot-service system has an anti-corrosion coating on the pipe, one or more insulation layers with staggered joints, and a weatherproof metal cladding held by bands, plus insulated supports."
+  },
+  "model_3d": {
+   "asset": "glb/pipe_insulation_system.glb",
+   "metadata": "meta/pipe_insulation_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4468,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot fluid flows in the pipe.",
+    "The coating protects the steel from corrosion under insulation.",
+    "Insulation layers slow heat flow from the pipe surface."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot fluid flows in the pipe.",
+     "part": "process_pipe",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The coating protects the steel from corrosion under insulation.",
+     "part": "coating",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Insulation layers slow heat flow from the pipe surface.",
+     "part": "insulation",
+     "cut": true,
+     "operate": true,
+     "overlay": "heat_loss",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cladding keeps rain out and protects the insulation.",
+     "part": "cladding",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Insulated shoes support the pipe without a thermal bridge.",
+     "part": "support",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Heat loss falls steeply with the first centimetres of insulation, then more slowly (economic thickness)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pipe_insulation_system_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "heat_loss": {
+     "file": "pipe_insulation_system_heat_loss.glb",
+     "title": "Heat loss",
+     "description": "Bare pipe (left) loses heat strongly by convection and radiation; under the insulation (right) the heat flow is a fraction of that. Heat loss per metre ≈ 2πk(T_pipe − T_surface)/ln(r_out/r_in). Insulation also keeps the surface below touch-safe temperature (personnel protection, typically ≤ 60 °C — verify local regulations).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Bare pipe: high heat loss",
+       "anchor": [
+        -0.8,
+        0.7,
+        -0.0
+       ]
+      },
+      {
+       "text": "Insulated: small heat loss",
+       "anchor": [
+        0.45,
+        0.7,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/pipe_insulation_system.json#components",
+   "key_components": "Coating, insulation layers, cladding, supports",
+   "parts": [
+    {
+     "id": "process_pipe",
+     "name": "Process Pipe",
+     "info_ref": "pi_pipe",
+     "function": "Carries the hot process fluid.",
+     "material": "Carbon/alloy steel."
+    },
+    {
+     "id": "coating",
+     "name": "Anti-Corrosion Coating (CUI protection)",
+     "info_ref": "pi_coating",
+     "function": "Protects the pipe surface from corrosion under insulation.",
+     "material": "Epoxy phenolic, TSA, silicone."
+    },
+    {
+     "id": "insulation",
+     "name": "Insulation Layers (2 × 50 mm, staggered joints)",
+     "info_ref": "pi_insulation",
+     "function": "Reduces heat flow through low thermal conductivity material.",
+     "material": "Mineral wool, calcium silicate, cellular glass, aerogel."
+    },
+    {
+     "id": "cladding",
+     "name": "Metal Cladding (weatherproof jacket) & Banding",
+     "info_ref": "pi_cladding",
+     "function": "Keeps weather and water out and protects the insulation.",
+     "material": "Aluminium, stainless steel."
+    },
+    {
+     "id": "support",
+     "name": "Insulated Pipe Support (shoe & cradle)",
+     "info_ref": "pi_support",
+     "function": "Supports the pipe without crushing the insulation or creating a thermal bridge.",
+     "material": "Steel with insulating blocks."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pipe DN 15 – 1,200",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "temperature": {
+     "typical_range": "-196 to 650 (material dependent)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Thermal conductivity k ≈ 0.03 – 0.07 W/m·K (mineral wool, mean temp dependent)",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "surface_temperature": {
+     "typical_range": "≤ ~55–60 for personnel protection (verify local rules)",
+     "unit": "°C"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support pipework at the intervals and on the support types shown on the piping drawings; allow for thermal expansion."
+   ],
+   "alignment": [
+    "Fit up joints within code tolerances; do not force flanges."
+   ],
+   "piping": [
+    "Coat and dry the pipe before insulating.",
+    "Stagger joints between layers; overlap cladding to shed water; seal penetrations."
+   ],
+   "commissioning": [
+    "Flush/blow the line, then hydrotest or pneumatic test to code.",
+    "Reinstate instruments and remove test blinds."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Inspect cladding for damage and open seams.",
+     "part": "cladding",
+     "interval": "per round"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Thermographic survey for hot spots.",
+     "part": "insulation",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Remove insulation at suspect locations for CUI inspection.",
+     "part": "coating"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Corrosion under insulation (CUI)",
+     "category": "corrosion",
+     "symptoms": [
+      "Hidden wall loss, leaks"
+     ],
+     "causes": [
+      "Water ingress through damaged cladding",
+      "Coating breakdown"
+     ],
+     "remedies": [
+      "Repair cladding, coat pipe, inspect per RBI"
+     ],
+     "part": "coating"
+    },
+    {
+     "problem": "Wet / damaged insulation",
+     "category": "performance",
+     "symptoms": [
+      "Hot spots, energy loss"
+     ],
+     "causes": [
+      "Mechanical damage, rain"
+     ],
+     "remedies": [
+      "Replace insulation and seal cladding"
+     ],
+     "part": "insulation"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pipe Insulation System — Introduction",
+    "type": "in_app_tour",
+    "model": "pipe_insulation_system.glb",
+    "duration_s": 52.7,
+    "script": [
+     {
+      "narration": "This module introduces the Pipe Insulation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pipe insulation system reduces heat loss from hot lines (or heat gain to cold lines), keeps process temperatures stable, protects people from hot surfaces and prevents condensation.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A hot-service system typically has an anti-corrosion coating, one or more insulation layers with staggered joints, and a weatherproof metal cladding with bands, plus insulated supports.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include steam and condensate lines; hot process lines (alumina digestion liquor, oil); cold/cryogenic lines (with vapour barrier); personnel protection.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pipe Insulation System — Operation",
+    "type": "in_app_tour",
+    "model": "pipe_insulation_system.glb",
+    "duration_s": 37.4,
+    "script": [
+     {
+      "narration": "How the Pipe Insulation System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot fluid flows in the pipe.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "process_pipe",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The coating protects the steel from corrosion under insulation.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coating",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Insulation layers slow heat flow from the pipe surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "insulation",
+       "cut": true,
+       "operate": true,
+       "overlay": "heat_loss",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cladding keeps rain out and protects the insulation.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cladding",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Insulated shoes support the pipe without a thermal bridge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "support",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Bare pipe (left) loses heat strongly by convection and radiation; under the insulation (right) the heat flow is a fraction of that.",
+      "duration_s": 9.2,
+      "action": {
+       "overlay": "heat_loss",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pipe Insulation System — Maintenance",
+    "type": "in_app_tour",
+    "model": "pipe_insulation_system.glb",
+    "duration_s": 35.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pipe Insulation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Inspect cladding for damage and open seams.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cladding",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Thermographic survey for hot spots.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "insulation",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Remove insulation at suspect locations for CUI inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coating",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for corrosion under insulation (cui): hidden wall loss, leaks. Common cause: water ingress through damaged cladding.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "coating",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wet / damaged insulation: hot spots, energy loss. Common cause: mechanical damage, rain.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "insulation",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why must insulation stay dry?",
+     "options": [
+      "Colour",
+      "Water destroys its insulating value and causes CUI",
+      "Weight only",
+      "No reason"
+     ],
+     "answer": 1,
+     "explanation": "Wet insulation conducts heat.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the cladding do?",
+     "options": [
+      "Insulate",
+      "Keep weather out and protect insulation",
+      "Support the pipe",
+      "Heat the pipe"
+     ],
+     "answer": 1,
+     "explanation": "Jacketing.",
+     "level": "basic"
+    },
+    {
+     "question": "CUI means…",
+     "options": [
+      "Cold under ice",
+      "Corrosion under insulation",
+      "Cladding unit index",
+      "Certified insulation"
+     ],
+     "answer": 1,
+     "explanation": "Major integrity hazard.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries the hot process fluid.\"",
+     "options": [
+      "Metal Cladding (weatherproof jacket) & Banding",
+      "Insulation Layers (2 × 50 mm, staggered joints)",
+      "Process Pipe",
+      "Anti-Corrosion Coating (CUI protection)"
+     ],
+     "answer": 2,
+     "explanation": "Process Pipe: Carries the hot process fluid.",
+     "level": "basic",
+     "part": "process_pipe",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Protects the pipe surface from corrosion under insulation.\"",
+     "options": [
+      "Anti-Corrosion Coating (CUI protection)",
+      "Process Pipe",
+      "Insulated Pipe Support (shoe & cradle)",
+      "Metal Cladding (weatherproof jacket) & Banding"
+     ],
+     "answer": 0,
+     "explanation": "Anti-Corrosion Coating (CUI protection): Protects the pipe surface from corrosion under insulation.",
+     "level": "basic",
+     "part": "coating",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Reduces heat flow through low thermal conductivity material.\"",
+     "options": [
+      "Insulation Layers (2 × 50 mm, staggered joints)",
+      "Process Pipe",
+      "Insulated Pipe Support (shoe & cradle)",
+      "Metal Cladding (weatherproof jacket) & Banding"
+     ],
+     "answer": 0,
+     "explanation": "Insulation Layers (2 × 50 mm, staggered joints): Reduces heat flow through low thermal conductivity material.",
+     "level": "basic",
+     "part": "insulation",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

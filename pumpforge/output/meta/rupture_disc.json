@@ -1,0 +1,342 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "rupture_disc",
+  "title": "Rupture Disc (Forward-Acting, Scored) in Holder",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 51,
+    "phase": 4,
+    "eq_id": "EQ-129",
+    "subcategory": "Pressure Protection",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "rupture_disc_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "rupture_disc_pressure.glb",
+      "title": "Pressure across the disc",
+      "description": "Upstream (red) the system pressure rises; downstream (blue) is the relief line at near-atmospheric pressure. At the burst pressure (within the stated tolerance at the coincident temperature) the scored dome tears along the score lines and the petals open fully.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Burst at set pressure → full-bore opening, non-reclosing",
+          "anchor": [
+            0.0,
+            0.5,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "relief",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.7,
+          0.3,
+          -0.0
+        ],
+        [
+          0.7,
+          0.3,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.47,
+          0.95
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 7656,
+    "parts": 4
+  },
+  "summary": "A rupture (bursting) disc is a non-reclosing pressure-relief device: a thin metal membrane designed to burst at a specified pressure and temperature, opening a full relief path in milliseconds. It is used alone where fast, leak-tight relief is needed, or upstream of a safety valve to isolate it from corrosive process fluid.",
+  "classification": {
+    "family": "Pressure protection device (non-reclosing)",
+    "type": "Forward-acting, scored domed disc in holder"
+  },
+  "model_configuration": {
+    "animation": "Pressure rises → dome strains → bursts along score lines → petals open",
+    "reverse_acting": "Reverse-acting discs buckle and open by knife or score lines; allow higher operating ratios"
+  },
+  "standards": [
+    {
+      "id": "ISO 4126-2 / -6",
+      "title": "Safety devices for protection against excessive pressure — bursting disc safety devices",
+      "relevance": "Design, application, installation.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII Div.1 UG-127",
+      "title": "Rupture disk devices",
+      "relevance": "Certification and marking.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 520 Pt I",
+      "title": "Sizing of pressure-relieving devices",
+      "relevance": "Sizing.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Fike / BS&B / Oseco rupture disc technical guides (generic)"
+  ],
+  "parts": [
+    {
+      "id": "holder",
+      "name": "Disc Holder (inlet & outlet rings) with Tag",
+      "group": "body",
+      "section_role": "split",
+      "nodes": [
+        "holder__back",
+        "holder__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.04,
+        0.18,
+        -0.12
+      ],
+      "bbox_max": [
+        0.044,
+        0.48,
+        0.12
+      ],
+      "label_anchor": [
+        0.002,
+        0.33,
+        0.12
+      ],
+      "center": [
+        0.002,
+        0.33,
+        -0.0
+      ],
+      "info_ref": "rd_holder"
+    },
+    {
+      "id": "disc",
+      "name": "Rupture Disc (domed, cross-scored → 4 petals)",
+      "group": "disc",
+      "section_role": "keep",
+      "nodes": [
+        "pt0",
+        "pt1",
+        "pt2",
+        "pt3"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.35
+      ],
+      "bbox_min": [
+        0.0,
+        0.22801,
+        -0.07199
+      ],
+      "bbox_max": [
+        0.0015,
+        0.37199,
+        0.07199
+      ],
+      "label_anchor": [
+        0.00075,
+        0.3,
+        0.07199
+      ],
+      "center": [
+        0.00075,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "rd_disc"
+    },
+    {
+      "id": "pipework",
+      "name": "Adjoining Pipework (flanged)",
+      "group": "system_piping",
+      "section_role": "split",
+      "nodes": [
+        "pipework__back",
+        "pipework__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.35
+      ],
+      "bbox_min": [
+        -0.7,
+        0.14,
+        -0.16
+      ],
+      "bbox_max": [
+        0.7,
+        0.46,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        0.3,
+        0.16
+      ],
+      "center": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "pipework"
+    },
+    {
+      "id": "gauge",
+      "name": "Upstream Pressure Gauge",
+      "group": "instrumentation",
+      "section_role": "keep",
+      "nodes": [
+        "g"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.29,
+        0.366,
+        -0.015
+      ],
+      "bbox_max": [
+        -0.21,
+        0.506,
+        0.0175
+      ],
+      "label_anchor": [
+        -0.25,
+        0.436,
+        0.0175
+      ],
+      "center": [
+        -0.25,
+        0.436,
+        0.00125
+      ],
+      "info_ref": "pressure_gauge"
+    }
+  ],
+  "components": {
+    "rd_holder": {
+      "function": "Clamps and centres the disc between the pipe flanges.",
+      "construction": "Inlet and outlet holder rings; tag shows burst pressure, temperature, lot.",
+      "material": "Stainless, carbon steel.",
+      "operating_conditions": "Install in the correct flow direction.",
+      "failure_modes": [
+        "Mis-installation (upside down)"
+      ],
+      "inspection": [
+        "Check tag and orientation"
+      ]
+    },
+    "rd_disc": {
+      "function": "Bursts at the rated pressure to open a full relief path.",
+      "construction": "Domed metal membrane with score lines forming petals.",
+      "material": "Stainless, nickel alloys, tantalum, graphite (special).",
+      "operating_conditions": "Operating ratio (operating/burst pressure) limits life; cycling and temperature matter.",
+      "failure_modes": [
+        "Premature burst (fatigue, corrosion)",
+        "Fragmentation (wrong type)"
+      ],
+      "inspection": [
+        "Replace on schedule; never reuse"
+      ]
+    },
+    "pipework": {
+      "function": "Connects the pump to the system.",
+      "construction": "Flanged pipe spools, fittings and supports; suction piping laid out to give uniform flow into the pump (straight run, eccentric reducers flat side up).",
+      "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate.",
+      "operating_conditions": "Piping must be supported independently so nozzle loads stay within limits.",
+      "failure_modes": [
+        "Nozzle overload from unsupported piping",
+        "Air pockets in suction",
+        "Corrosion"
+      ],
+      "inspection": [
+        "Check supports and flange alignment before bolting to pump"
+      ]
+    },
+    "pressure_gauge": {
+      "function": "Indicates suction or discharge pressure for operation and performance checks.",
+      "construction": "Bourdon-tube gauge with isolation valve; glycerine filled for pulsating service.",
+      "material": "Stainless steel case and wetted parts.",
+      "operating_conditions": "Range so that normal reading is mid-scale.",
+      "failure_modes": [
+        "Pulsation damage",
+        "Blocked impulse line"
+      ],
+      "inspection": [
+        "Calibrate periodically"
+      ]
+    }
+  }
+}

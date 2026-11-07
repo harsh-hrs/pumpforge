@@ -1,0 +1,757 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "external_gear_pump",
+ "no": 17,
+ "title": "External Gear Pump",
+ "model_title": "External Gear Pump (Foot-Mounted, with Relief Valve)",
+ "category": "2 · Rotary Positive-Displacement Pumps",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An external gear pump uses two meshing gears turning in a close-fitting housing. Liquid is trapped in the spaces between the gear teeth and the casing, carried around the outside from suction to discharge, and forced out where the teeth mesh. Flow is nearly proportional to speed and almost independent of pressure.",
+   "applications": [
+    "Lubricating oil and fuel oil transfer",
+    "Hydraulic power units (high-pressure gear pumps)",
+    "Polymer, resin and chemical metering",
+    "Lube-oil systems on turbines and compressors"
+   ],
+   "key_points": [
+    "Positive displacement: flow ∝ speed",
+    "Needs a relief valve",
+    "Clean, lubricating liquids",
+    "Volumetric efficiency falls as clearances wear and viscosity drops"
+   ],
+   "classification": {
+    "family": "Positive displacement – rotary",
+    "configuration": "External gear, two shafts, gears supported between bearings (sleeve bushings)",
+    "drive": "One driven (drive) gear transmits torque to the idler through the tooth mesh"
+   },
+   "hi_family": "positive_displacement_rotary",
+   "summary": "Two meshing spur gears turn inside a close-fitting figure-8 housing. On the inlet side the teeth come out of mesh, opening volume that draws liquid in; the liquid is carried around the outside of each gear in the tooth spaces and is displaced into the outlet where the teeth re-mesh. Flow is nearly proportional to speed; pressure is set by the system, so over-pressure protection (relief valve) is essential."
+  },
+  "model_3d": {
+   "asset": "glb/external_gear_pump.glb",
+   "metadata": "meta/external_gear_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 24918,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "As the teeth come out of mesh on the suction side, the expanding space draws liquid in.",
+    "Liquid is trapped between the teeth and the housing and carried around the outside of both gears.",
+    "On the discharge side the teeth mesh again and squeeze the liquid out."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "As the teeth come out of mesh on the suction side, the expanding space draws liquid in.",
+     "part": "drive_gear_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid is trapped between the teeth and the housing and carried around the outside of both gears.",
+     "part": "pump_body",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the discharge side the teeth mesh again and squeeze the liquid out.",
+     "part": "idler_gear_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Bushings support the gear shafts and are lubricated by the pumped liquid.",
+     "part": "bushing_front_drive",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The integral relief valve opens and recirculates flow if discharge pressure exceeds its setting.",
+     "part": "relief_poppet",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow almost constant with pressure (slight fall from slip); power rises linearly with pressure; flow rises linearly with speed."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "external_gear_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/external_gear_pump.json#components",
+   "key_components": "Driving gear, driven gear, casing",
+   "parts": [
+    {
+     "id": "pump_body",
+     "name": "Pump Body (Gear Housing)",
+     "info_ref": "pump_body",
+     "function": "Forms the figure-8 gear chamber, the inlet and outlet ports and the mounting feet; its bore wall seals the tooth tips.",
+     "material": "Cast iron or ductile iron (general/oil service), cast steel, stainless steel (CF8M) for corrosive or food service."
+    },
+    {
+     "id": "front_cover",
+     "name": "Front (End) Cover",
+     "info_ref": "front_cover",
+     "function": "Closes the gear chamber and carries the front bushings; its inner face controls the gear end clearance.",
+     "material": "Same as body."
+    },
+    {
+     "id": "rear_cover",
+     "name": "Rear (Seal-Side) Cover",
+     "info_ref": "rear_cover",
+     "function": "Closes the chamber on the drive side, carries the rear bushings and forms the seal chamber for the drive shaft.",
+     "material": "Same as body."
+    },
+    {
+     "id": "bushing_front_drive",
+     "name": "Sleeve Bushing – Front, Drive Shaft",
+     "info_ref": "bushing",
+     "function": "Radial support for the gear shafts on both sides of the gears.",
+     "material": "Bronze, carbon-graphite, silicon carbide or PTFE-lined steel depending on fluid lubricity and abrasives."
+    },
+    {
+     "id": "bushing_front_idler",
+     "name": "Sleeve Bushing – Front, Idler Shaft",
+     "info_ref": "bushing",
+     "function": "Radial support for the gear shafts on both sides of the gears.",
+     "material": "Bronze, carbon-graphite, silicon carbide or PTFE-lined steel depending on fluid lubricity and abrasives."
+    },
+    {
+     "id": "bushing_rear_drive",
+     "name": "Sleeve Bushing – Rear, Drive Shaft",
+     "info_ref": "bushing",
+     "function": "Radial support for the gear shafts on both sides of the gears.",
+     "material": "Bronze, carbon-graphite, silicon carbide or PTFE-lined steel depending on fluid lubricity and abrasives."
+    },
+    {
+     "id": "bushing_rear_idler",
+     "name": "Sleeve Bushing – Rear, Idler Shaft",
+     "info_ref": "bushing",
+     "function": "Radial support for the gear shafts on both sides of the gears.",
+     "material": "Bronze, carbon-graphite, silicon carbide or PTFE-lined steel depending on fluid lubricity and abrasives."
+    },
+    {
+     "id": "drive_gear_shaft",
+     "name": "Drive Gear & Shaft",
+     "info_ref": "drive_gear",
+     "function": "Receives torque from the driver and drives the idler gear through the mesh; displaces liquid.",
+     "material": "Carburised/hardened alloy steel for oil service; stainless steel or nitrided steel for corrosive service."
+    },
+    {
+     "id": "idler_gear_shaft",
+     "name": "Idler (Driven) Gear & Shaft",
+     "info_ref": "idler_gear",
+     "function": "Meshes with the drive gear to form the second displacement path; rotates in the opposite direction.",
+     "material": "As drive gear."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Mechanical Seal",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the drive shaft where it leaves the pump.",
+     "material": "Carbon / SiC faces; stainless steel metal parts; elastomers per fluid."
+    },
+    {
+     "id": "seal_gland",
+     "name": "Seal Gland Plate",
+     "info_ref": "seal_gland",
+     "function": "Holds the stationary seat and closes the seal chamber.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "relief_valve_body",
+     "name": "Relief Valve Body",
+     "info_ref": "relief_valve_body",
+     "function": "Houses the relief poppet and connects the discharge side to suction to limit maximum pressure.",
+     "material": "Same as body."
+    },
+    {
+     "id": "relief_poppet",
+     "name": "Relief Valve Poppet",
+     "info_ref": "relief_poppet",
+     "function": "Seals on the seat until discharge pressure overcomes spring force, then opens to bypass flow to suction.",
+     "material": "Stainless or hardened steel."
+    },
+    {
+     "id": "relief_spring",
+     "name": "Relief Valve Spring",
+     "info_ref": "relief_spring",
+     "function": "Sets the cracking pressure of the relief valve.",
+     "material": "Spring steel or stainless spring steel."
+    },
+    {
+     "id": "relief_adjuster",
+     "name": "Adjusting Screw & Lock Nut",
+     "info_ref": "relief_adjuster",
+     "function": "Adjusts spring compression (set pressure); lock nut fixes the setting.",
+     "material": "Steel / stainless steel."
+    },
+    {
+     "id": "relief_cap",
+     "name": "Valve Cap",
+     "info_ref": "relief_cap",
+     "function": "Covers the adjusting screw and prevents tampering/leakage.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.1 – 300",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": "",
+     "note": "PD pumps are rated by pressure"
+    },
+    "pressure": {
+     "typical_range": "up to 20 (transfer); up to ~250–300 (hydraulic gear pumps)",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "300 – 3,600",
+     "unit": "rpm",
+     "note": "lower for viscous liquids"
+    },
+    "efficiency": {
+     "typical_range": "volumetric 85 – 98; overall 50 – 85",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "viscosity": {
+     "typical_range": "1 – 100,000",
+     "unit": "cSt"
+    },
+    "displacement": {
+     "typical_range": "per revolution, fixed",
+     "unit": "cm³/rev"
+    }
+   },
+   "selection_notes": [
+    "Reduce speed as viscosity rises to avoid cavitation in the tooth spaces.",
+    "Use hardened gears and bushings for poor-lubricity liquids."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Baseplate or flange mounting."
+   ],
+   "alignment": [
+    "Coupling alignment as for centrifugal pumps."
+   ],
+   "piping": [
+    "Size the suction line for low velocity (viscous liquids need large suction pipes); provide a strainer.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked.",
+    "Support piping independently of the pump."
+   ],
+   "commissioning": [
+    "Never start against a closed discharge valve.",
+    "Fill the pump with liquid (or ensure the suction is flooded) before start — avoid dry running unless the design allows it.",
+    "Check rotation direction.",
+    "Verify the relief-valve set pressure."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check discharge pressure and noise.",
+     "part": "pump_body",
+     "interval": "daily"
+    },
+    {
+     "task": "Check the shaft seal.",
+     "part": "mechanical_seal",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Verify relief-valve setting.",
+     "part": "relief_adjuster",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Measure gear end and tip clearances and bushing wear.",
+     "part": "bushing_front_drive"
+    }
+   ],
+   "lubrication": [
+    "Internal bushings lubricated by the pumped liquid."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of flow (slip)",
+     "category": "performance",
+     "symptoms": [
+      "Lower flow at pressure"
+     ],
+     "causes": [
+      "Worn clearances",
+      "Low viscosity"
+     ],
+     "remedies": [
+      "Replace gears/bushings"
+     ],
+     "part": "drive_gear_shaft"
+    },
+    {
+     "problem": "Cavitation noise",
+     "category": "cavitation",
+     "symptoms": [
+      "Whining, rattling"
+     ],
+     "causes": [
+      "Too high speed for the viscosity",
+      "Clogged strainer"
+     ],
+     "remedies": [
+      "Reduce speed; clean strainer"
+     ],
+     "part": "pump_body"
+    },
+    {
+     "problem": "Relief valve chatter",
+     "category": "valves",
+     "symptoms": [
+      "Noise, flow loss"
+     ],
+     "causes": [
+      "Setting too close to operating pressure"
+     ],
+     "remedies": [
+      "Reset"
+     ],
+     "part": "relief_poppet"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "External Gear Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "external_gear_pump.glb",
+    "duration_s": 58.2,
+    "script": [
+     {
+      "narration": "This module introduces the External Gear Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An external gear pump uses two meshing gears turning in a close-fitting housing.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid is trapped in the spaces between the gear teeth and the casing, carried around the outside from suction to discharge, and forced out where the teeth mesh.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow is nearly proportional to speed and almost independent of pressure.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include lubricating oil and fuel oil transfer; hydraulic power units (high-pressure gear pumps); polymer, resin and chemical metering; lube-oil systems on turbines and compressors.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Pump Body (Gear Housing), Front (End) Cover, Rear (Seal-Side) Cover, Drive Gear & Shaft.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "External Gear Pump — Operation",
+    "type": "in_app_tour",
+    "model": "external_gear_pump.glb",
+    "duration_s": 38.6,
+    "script": [
+     {
+      "narration": "How the External Gear Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "As the teeth come out of mesh on the suction side, the expanding space draws liquid in.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "drive_gear_shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid is trapped between the teeth and the housing and carried around the outside of both gears.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "pump_body",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the discharge side the teeth mesh again and squeeze the liquid out.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "idler_gear_shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Bushings support the gear shafts and are lubricated by the pumped liquid.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bushing_front_drive",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The integral relief valve opens and recirculates flow if discharge pressure exceeds its setting.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "relief_poppet",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "External Gear Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "external_gear_pump.glb",
+    "duration_s": 44.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the External Gear Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check discharge pressure and noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check the shaft seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mechanical_seal",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Verify relief-valve setting.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "relief_adjuster",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure gear end and tip clearances and bushing wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bushing_front_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of flow (slip): lower flow at pressure. Common cause: worn clearances.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "drive_gear_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation noise: whining, rattling. Common cause: too high speed for the viscosity.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "pump_body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for relief valve chatter: noise, flow loss. Common cause: setting too close to operating pressure.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "relief_poppet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Where does the liquid travel in an external gear pump?",
+     "options": [
+      "Through the mesh of the teeth",
+      "Around the outside of the gears, between teeth and casing",
+      "Through the shaft",
+      "Through the relief valve"
+     ],
+     "answer": 1,
+     "explanation": "Not through the mesh.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must a gear pump have a relief valve?",
+     "options": [
+      "To prime it",
+      "Pressure rises until failure if the discharge is blocked",
+      "To cool it",
+      "To reduce noise"
+     ],
+     "answer": 1,
+     "explanation": "PD pumps do not have a shut-off head.",
+     "level": "basic"
+    },
+    {
+     "question": "Doubling the speed of a gear pump roughly…",
+     "options": [
+      "Halves the flow",
+      "Doubles the flow",
+      "Does not change flow",
+      "Quadruples head"
+     ],
+     "answer": 1,
+     "explanation": "Flow ∝ speed × displacement.",
+     "level": "basic"
+    },
+    {
+     "question": "Slip in a gear pump increases when…",
+     "options": [
+      "Viscosity falls or clearances wear",
+      "Speed drops only",
+      "Pressure falls",
+      "Never"
+     ],
+     "answer": 0,
+     "explanation": "Leakage back through clearances.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Forms the figure-8 gear chamber, the inlet and outlet ports and the mounting feet; its bore wall seals the tooth tips.\"",
+     "options": [
+      "Pump Body (Gear Housing)",
+      "Seal Gland Plate",
+      "Sleeve Bushing – Rear, Drive Shaft",
+      "Mechanical Seal"
+     ],
+     "answer": 0,
+     "explanation": "Pump Body (Gear Housing): Forms the figure-8 gear chamber, the inlet and outlet ports and the mounting feet; its bore wall seals the tooth tips.",
+     "level": "basic",
+     "part": "pump_body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the gear chamber and carries the front bushings; its inner face controls the gear end clearance.\"",
+     "options": [
+      "Front (End) Cover",
+      "Adjusting Screw & Lock Nut",
+      "Sleeve Bushing – Front, Drive Shaft",
+      "Relief Valve Spring"
+     ],
+     "answer": 0,
+     "explanation": "Front (End) Cover: Closes the gear chamber and carries the front bushings; its inner face controls the gear end clearance.",
+     "level": "basic",
+     "part": "front_cover",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the chamber on the drive side, carries the rear bushings and forms the seal chamber for the drive shaft.\"",
+     "options": [
+      "Relief Valve Poppet",
+      "Rear (Seal-Side) Cover",
+      "Pump Body (Gear Housing)",
+      "Relief Valve Body"
+     ],
+     "answer": 1,
+     "explanation": "Rear (Seal-Side) Cover: Closes the chamber on the drive side, carries the rear bushings and forms the seal chamber for the drive shaft.",
+     "level": "basic",
+     "part": "rear_cover",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

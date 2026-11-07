@@ -1,0 +1,413 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "pipe_tracing_system",
+  "title": "Pipe Tracing System (Steam Tracing & Electric Heat Tracing)",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 62,
+    "phase": 4,
+    "eq_id": "EQ-140",
+    "subcategory": "Piping Systems",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "pipe_tracing_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "heat_input": {
+      "file": "pipe_tracing_system_heat_input.glb",
+      "title": "Heat input",
+      "description": "Tracers replace the heat the pipe loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature (e.g. caustic, heavy oil, sulphur, water lines in winter). Steam tracing: heat from condensing steam; electric: a self-regulating polymer cable whose output falls as the pipe warms.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Steam tracer heats the pipe bottom",
+          "anchor": [
+            -0.4,
+            0.2,
+            -0.0
+          ]
+        },
+        {
+          "text": "Electric cable spiral wound",
+          "anchor": [
+            0.5,
+            0.6,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "product",
+      "kind": "flow_suction",
+      "radius": 0.01,
+      "points": [
+        [
+          -1.0,
+          0.4,
+          -0.0
+        ],
+        [
+          1.0,
+          0.4,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.95,
+          0.09635,
+          -0.0367
+        ],
+        [
+          -0.95,
+          0.34635,
+          -0.0367
+        ],
+        [
+          -0.05,
+          0.34635,
+          -0.0367
+        ],
+        [
+          -0.05,
+          0.19635,
+          -0.0367
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6210,
+    "parts": 5
+  },
+  "summary": "A pipe tracing system adds heat to a pipe to replace what it loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature (for example caustic and liquor lines in alumina refineries, heavy fuel oil, sulphur and water lines in winter). Steam tracing uses small tubes carrying steam alongside the pipe, drained by a trap; electric tracing uses a self-regulating heating cable controlled by a thermostat.",
+  "classification": {
+    "family": "Piping system",
+    "type": "Steam tracing and electric (self-regulating) heat tracing"
+  },
+  "model_configuration": {
+    "steam": "Copper/stainless tracer with heat-transfer cement, thermodynamic trap",
+    "electric": "Self-regulating cable spiral, power box, thermostat"
+  },
+  "standards": [
+    {
+      "id": "IEC/IEEE 60079-30-1 / IEEE 515",
+      "title": "Electrical resistance trace heating",
+      "relevance": "Design and installation (hazardous areas).",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API RP 2000 / owner standards",
+      "title": "Steam tracing practice",
+      "relevance": "Tracer design (company standards common).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Chemelex / nVent / Thermon tracing design guides (generic)"
+  ],
+  "parts": [
+    {
+      "id": "process_pipe",
+      "name": "Process Pipe (product kept warm)",
+      "group": "piping",
+      "section_role": "split",
+      "nodes": [
+        "process_pipe__back",
+        "process_pipe__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        0.35,
+        -0.05
+      ],
+      "bbox_max": [
+        1.0,
+        0.45,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.05
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "pt_pipe"
+    },
+    {
+      "id": "steam_tracer",
+      "name": "Steam Tracer Tube (with heat-transfer cement)",
+      "group": "tracing",
+      "section_role": "split",
+      "nodes": [
+        "steam_tracer__back"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.958,
+        0.09635,
+        -0.0447
+      ],
+      "bbox_max": [
+        -0.05,
+        0.35435,
+        -0.0287
+      ],
+      "label_anchor": [
+        -0.504,
+        0.22535,
+        -0.0287
+      ],
+      "center": [
+        -0.504,
+        0.22535,
+        -0.0367
+      ],
+      "info_ref": "pt_steam_tracer"
+    },
+    {
+      "id": "tracer_trap",
+      "name": "Tracer Steam Trap (thermodynamic)",
+      "group": "tracing",
+      "section_role": "split",
+      "nodes": [
+        "tracer_trap__back"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.2
+      ],
+      "bbox_min": [
+        -0.12,
+        0.16135,
+        -0.0717
+      ],
+      "bbox_max": [
+        0.0,
+        0.34635,
+        -0.0017
+      ],
+      "label_anchor": [
+        -0.06,
+        0.25385,
+        -0.0017
+      ],
+      "center": [
+        -0.06,
+        0.25385,
+        -0.0367
+      ],
+      "info_ref": "pt_trap"
+    },
+    {
+      "id": "electric_tracer",
+      "name": "Self-Regulating Heating Cable, Power Box & Thermostat",
+      "group": "tracing",
+      "section_role": "split",
+      "nodes": [
+        "electric_tracer__back",
+        "electric_tracer__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        0.0,
+        0.335,
+        -0.06497
+      ],
+      "bbox_max": [
+        0.98,
+        0.666,
+        0.06495
+      ],
+      "label_anchor": [
+        0.49,
+        0.5005,
+        0.06495
+      ],
+      "center": [
+        0.49,
+        0.5005,
+        -1e-05
+      ],
+      "info_ref": "pt_electric"
+    },
+    {
+      "id": "insulation",
+      "name": "Insulation over Pipe and Tracers (shown partly removed)",
+      "group": "insulation",
+      "section_role": "split",
+      "nodes": [
+        "insulation__back",
+        "insulation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.6,
+        0.2825,
+        -0.1175
+      ],
+      "bbox_max": [
+        0.75,
+        0.5175,
+        0.1175
+      ],
+      "label_anchor": [
+        0.075,
+        0.4,
+        0.1175
+      ],
+      "center": [
+        0.075,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "pi_insulation"
+    }
+  ],
+  "components": {
+    "pt_pipe": {
+      "function": "Carries the product that must stay warm.",
+      "construction": "Process pipe.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Plugging if tracing fails"
+      ],
+      "inspection": [
+        "Temperature monitoring"
+      ]
+    },
+    "pt_steam_tracer": {
+      "function": "Carries steam whose condensing heat warms the pipe.",
+      "construction": "Small tube fixed along the pipe, often with heat-transfer cement.",
+      "material": "Copper, stainless.",
+      "operating_conditions": "Tracer must be continuous and free-draining.",
+      "failure_modes": [
+        "Leaks",
+        "Waterlogging (failed trap)"
+      ],
+      "inspection": [
+        "Trap survey, thermography"
+      ]
+    },
+    "pt_trap": {
+      "function": "Drains condensate from the tracer while holding steam.",
+      "construction": "Thermodynamic disc trap.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blowing steam / blocked"
+      ],
+      "inspection": [
+        "Ultrasonic test"
+      ]
+    },
+    "pt_electric": {
+      "function": "Electric heat source whose output self-limits with temperature.",
+      "construction": "Self-regulating polymer heating cable, power connection box, thermostat.",
+      "material": "Polymer core, copper buses.",
+      "operating_conditions": "Hazardous-area certification and earth-leakage protection required.",
+      "failure_modes": [
+        "Cable damage",
+        "Ground faults"
+      ],
+      "inspection": [
+        "Insulation resistance test"
+      ]
+    },
+    "pi_insulation": {
+      "function": "Keeps the supplied heat in.",
+      "construction": "Insulation and cladding over pipe and tracer.",
+      "material": "Mineral wool/aluminium.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wet insulation"
+      ],
+      "inspection": [
+        "Visual, thermography"
+      ]
+    }
+  }
+}

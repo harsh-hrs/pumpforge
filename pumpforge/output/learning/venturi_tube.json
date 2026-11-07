@@ -1,0 +1,573 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "venturi_tube",
+ "no": 58,
+ "title": "Venturi Tube",
+ "model_title": "Venturi Tube (Classical, Machined Convergent)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A venturi tube measures flow with a smooth convergent cone, a short throat and a long divergent cone. Velocity rises and pressure falls in the throat (Bernoulli); the gentle diffuser recovers most of that pressure, so the permanent loss is only about 5–20 % of the measured ΔP — the lowest of the DP meters. It also tolerates dirty liquids (ISO 5167-4).",
+   "applications": [
+    "Large water and wastewater mains",
+    "Cooling-water and raw-water intakes",
+    "Slurry and dirty liquids",
+    "Energy-sensitive pumping systems"
+   ],
+   "key_points": [
+    "Lowest permanent loss of DP meters",
+    "Long and costly but durable",
+    "Piezometer rings average pressure around the circumference"
+   ],
+   "classification": {
+    "family": "Differential-pressure flowmeter",
+    "type": "Classical Herschel venturi tube (machined convergent)"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A venturi tube measures flow with a smooth convergent cone, a short cylindrical throat and a gentle divergent cone. Pressure falls in the throat as velocity rises (Bernoulli), and the long diffuser recovers most of it, so permanent pressure loss is very low — ideal for large water mains and energy-sensitive services. It also tolerates dirty fluids better than an orifice (ISO 5167-4)."
+  },
+  "model_3d": {
+   "asset": "glb/venturi_tube.glb",
+   "metadata": "meta/venturi_tube.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 5728,
+   "parts": 3
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Flow enters the inlet cylinder (upstream tap).",
+    "The convergent cone accelerates the flow; pressure falls.",
+    "In the throat velocity is highest and pressure lowest (throat tap)."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flow enters the inlet cylinder (upstream tap).",
+     "part": "venturi",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The convergent cone accelerates the flow; pressure falls.",
+     "part": "venturi",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In the throat velocity is highest and pressure lowest (throat tap).",
+     "part": "dp_transmitter",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The divergent cone slows the flow and recovers most of the pressure.",
+     "part": "venturi",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "ΔP ∝ flow²; C ≈ 0.98 – 0.995 (ISO 5167-4)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "venturi_tube_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "venturi_tube_pressure.glb",
+     "title": "Pressure profile (Bernoulli)",
+     "description": "In the convergent cone velocity rises and static pressure falls (Bernoulli), reaching a minimum in the throat. The gentle divergent cone recovers most of the pressure, so the permanent loss is only about 5–20 % of the measured ΔP — the lowest of the differential-pressure meters (ISO 5167-4).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Inlet tap p1",
+       "anchor": [
+        -0.27,
+        0.55,
+        -0.0
+       ]
+      },
+      {
+       "text": "Throat tap p2 — lowest pressure",
+       "anchor": [
+        -0.04,
+        0.2,
+        -0.0
+       ]
+      },
+      {
+       "text": "Diffuser recovers most pressure",
+       "anchor": [
+        0.3,
+        0.52,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/venturi_tube.json#components",
+   "key_components": "Convergent cone, throat, diffuser, piezometer rings",
+   "parts": [
+    {
+     "id": "venturi",
+     "name": "Venturi Body: Inlet Cylinder, Convergent Cone, Throat & Divergent Diffuser (with piezometer rings)",
+     "info_ref": "vt_body",
+     "function": "Creates a pressure drop proportional to flow², then recovers it.",
+     "material": "Cast iron, steel, stainless."
+    },
+    {
+     "id": "meter_run",
+     "name": "Meter Run (upstream & downstream straight pipe)",
+     "info_ref": "fm_run",
+     "function": "Straight pipe for a developed flow profile.",
+     "material": "As line."
+    },
+    {
+     "id": "dp_transmitter",
+     "name": "DP Transmitter & Impulse Lines (inlet and throat taps)",
+     "info_ref": "fm_dp",
+     "function": "Measures the ΔP between inlet and throat.",
+     "material": "Stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 50 – 1,200+",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Per class",
+     "unit": ""
+    },
+    "temperature": {
+     "typical_range": "Per material",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "β = 0.3 – 0.75; permanent loss ≈ 5 – 20 % of ΔP",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the meter run; avoid vibration at the transmitter."
+   ],
+   "alignment": [
+    "Centre the element precisely in the pipe bore (eccentricity affects accuracy)."
+   ],
+   "piping": [
+    "Provide straight upstream/downstream lengths per ISO 5167 for the fittings present, or use a flow conditioner.",
+    "Slope impulse lines: liquids — transmitter below taps; gas — transmitter above taps."
+   ],
+   "commissioning": [
+    "Fill/vent impulse lines; zero the transmitter with the equalising valve.",
+    "Check the flow computation (β, density, units)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check zero and impulse lines.",
+     "part": "dp_transmitter",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Flush piezometer rings and taps.",
+     "part": "venturi",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect throat for deposits.",
+     "part": "venturi"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Blocked taps",
+     "category": "blockage",
+     "symptoms": [
+      "Flat or erratic reading"
+     ],
+     "causes": [
+      "Solids in taps"
+     ],
+     "remedies": [
+      "Rod out/flush taps"
+     ],
+     "part": "venturi"
+    },
+    {
+     "problem": "Deposits in throat",
+     "category": "performance",
+     "symptoms": [
+      "Over-reading"
+     ],
+     "causes": [
+      "Scaling"
+     ],
+     "remedies": [
+      "Clean"
+     ],
+     "part": "venturi"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Venturi Tube — Introduction",
+    "type": "in_app_tour",
+    "model": "venturi_tube.glb",
+    "duration_s": 55.8,
+    "script": [
+     {
+      "narration": "This module introduces the Venturi Tube.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A venturi tube measures flow with a smooth convergent cone, a short throat and a long divergent cone.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Velocity rises and pressure falls in the throat (Bernoulli); the gentle diffuser recovers most of that pressure, so the permanent loss is only about 5–20 % of the measured ΔP — the lowest of the DP meters.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It also tolerates dirty liquids (ISO 5167-4).",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include large water and wastewater mains; cooling-water and raw-water intakes; slurry and dirty liquids; energy-sensitive pumping systems.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Venturi Tube — Operation",
+    "type": "in_app_tour",
+    "model": "venturi_tube.glb",
+    "duration_s": 32.9,
+    "script": [
+     {
+      "narration": "How the Venturi Tube works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow enters the inlet cylinder (upstream tap).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The convergent cone accelerates the flow; pressure falls.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In the throat velocity is highest and pressure lowest (throat tap).",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "dp_transmitter",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The divergent cone slows the flow and recovers most of the pressure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "venturi",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "In the convergent cone velocity rises and static pressure falls (Bernoulli), reaching a minimum in the throat.",
+      "duration_s": 7.1,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Venturi Tube — Maintenance",
+    "type": "in_app_tour",
+    "model": "venturi_tube.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Venturi Tube.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check zero and impulse lines.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dp_transmitter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Flush piezometer rings and taps.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect throat for deposits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for blocked taps: flat or erratic reading. Common cause: solids in taps.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for deposits in throat: over-reading. Common cause: scaling.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does a venturi tube have low permanent pressure loss?",
+     "options": [
+      "Sharp edge",
+      "Gradual diffuser recovers pressure",
+      "No throat",
+      "It is short"
+     ],
+     "answer": 1,
+     "explanation": "Gentle divergence.",
+     "level": "basic"
+    },
+    {
+     "question": "Bernoulli says that where velocity rises…",
+     "options": [
+      "Static pressure rises",
+      "Static pressure falls",
+      "Nothing changes",
+      "Temperature rises"
+     ],
+     "answer": 1,
+     "explanation": "Energy conservation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which DP meter suits large water mains best for energy saving?",
+     "options": [
+      "Orifice",
+      "Venturi tube",
+      "Needle valve",
+      "Rupture disc"
+     ],
+     "answer": 1,
+     "explanation": "Low loss.",
+     "level": "basic"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,678 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "peristaltic_pump",
+ "no": 24,
+ "title": "Peristaltic Pump",
+ "model_title": "Peristaltic Hose Pump",
+ "category": "2 · Rotary Positive-Displacement Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A peristaltic (hose) pump moves liquid by squeezing a flexible hose or tube with rollers or shoes on a rotor. The occlusion travels along the hose, pushing the liquid ahead of it; the hose recovers its shape behind the shoe and draws in more liquid. The liquid touches only the hose.",
+   "applications": [
+    "Abrasive slurries and lime milk",
+    "Chemical dosing (sodium hypochlorite, ferric chloride)",
+    "Mining and alumina: thickener underflow sampling, reagent dosing",
+    "Food, pharma and lab"
+   ],
+   "key_points": [
+    "Only the hose is wetted — no seals or valves",
+    "Can run dry; self-priming to high suction lift",
+    "Accurate dosing (flow ∝ speed)",
+    "Hose life is the main cost"
+   ],
+   "classification": {
+    "family": "Positive displacement – rotary (peristaltic)",
+    "configuration": "Hose pump with two pressing shoes, lubricant-filled housing"
+   },
+   "hi_family": "positive_displacement_rotary",
+   "summary": "The liquid is enclosed in a flexible hose laid around the inside of the pump housing. Rotating shoes (or rollers) squeeze the hose completely shut and roll the closed point along, pushing the liquid ahead of them; behind the shoe the hose springs back open and draws in more liquid. Only the hose touches the product, there are no seals or valves, and the pump can run dry, self-prime and handle abrasive, viscous and shear-sensitive fluids."
+  },
+  "model_3d": {
+   "asset": "glb/peristaltic_pump.glb",
+   "metadata": "meta/peristaltic_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 35760,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "A shoe on the rotor squeezes the hose closed.",
+    "As the rotor turns, the occlusion moves along the hose and pushes liquid out.",
+    "The hose springs back behind the shoe, creating suction."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "A shoe on the rotor squeezes the hose closed.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "As the rotor turns, the occlusion moves along the hose and pushes liquid out.",
+     "part": "hose",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hose springs back behind the shoe, creating suction.",
+     "part": "hose",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The housing is part-filled with lubricant to reduce hose wear and heat.",
+     "part": "pump_housing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow ∝ speed; slight fall with pressure as the hose deforms."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "peristaltic_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/peristaltic_pump.json#components",
+   "key_components": "Flexible hose, rollers, rotor",
+   "parts": [
+    {
+     "id": "pump_housing",
+     "name": "Pump Housing (Lubricant-Filled)",
+     "info_ref": "peri_housing",
+     "function": "Holds the hose loop against the rotor and contains lubricant that cools and lubricates the hose/shoe contact.",
+     "material": "Cast iron/aluminium."
+    },
+    {
+     "id": "front_cover",
+     "name": "Front Cover with Inspection Window",
+     "info_ref": "peri_cover",
+     "function": "Closes the housing; window allows inspection of hose and lubricant.",
+     "material": "Aluminium, polycarbonate window."
+    },
+    {
+     "id": "hose",
+     "name": "Reinforced Pump Hose",
+     "info_ref": "peri_hose",
+     "function": "The only wetted part; its elastic recovery creates the suction.",
+     "material": "Natural rubber, NBR, EPDM, CSM."
+    },
+    {
+     "id": "port_flanges",
+     "name": "Inlet & Outlet Port Flanges (Hose Clamps)",
+     "info_ref": "peri_ports",
+     "function": "Connect and clamp the hose ends to the piping.",
+     "material": "Stainless steel, PP."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor with Pressing Shoes",
+     "info_ref": "peri_rotor",
+     "function": "Carries the shoes that occlude the hose.",
+     "material": "Cast iron, steel."
+    },
+    {
+     "id": "bearing_bracket",
+     "name": "Bearing Bracket",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "gear_reducer",
+     "name": "Gear Reducer",
+     "info_ref": "gear_reducer",
+     "function": "Reduces motor speed to the low rotor speed and increases torque.",
+     "material": "Cast iron, alloy steel gears."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.001 – 100",
+     "unit": "m³/h"
+    },
+    "pressure": {
+     "typical_range": "up to ~15–16",
+     "unit": "bar",
+     "note": "hose pumps"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "5 – 100",
+     "unit": "rpm (hose pumps)"
+    },
+    "efficiency": {
+     "typical_range": "—",
+     "unit": "",
+     "note": "lower than other PD types"
+    }
+   },
+   "additional": {
+    "suction_lift": {
+     "typical_range": "up to ~9",
+     "unit": "m"
+    },
+    "solids": {
+     "typical_range": "up to ~80",
+     "unit": "% (soft solids, slurries)"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Baseplate."
+   ],
+   "alignment": [
+    "Gearmotor alignment."
+   ],
+   "piping": [
+    "Flexible connections; pulsation dampeners on long lines.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked."
+   ],
+   "commissioning": [
+    "Check lubricant level; check hose installation and shimming."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for hose leakage (leak detector).",
+     "part": "hose",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change hose at planned intervals.",
+     "part": "hose",
+     "interval": "per run-hours"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect shoes and bearings.",
+     "part": "rotor"
+    }
+   ],
+   "lubrication": [
+    "Hose lubricant in housing; gearbox oil."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Hose rupture",
+     "category": "performance",
+     "symptoms": [
+      "Leak alarm"
+     ],
+     "causes": [
+      "End of life, over-pressure, chemical attack"
+     ],
+     "remedies": [
+      "Replace; check pressure and material"
+     ],
+     "part": "hose"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Hot housing"
+     ],
+     "causes": [
+      "High speed, low lubricant"
+     ],
+     "remedies": [
+      "Reduce speed; refill lubricant"
+     ],
+     "part": "pump_housing"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Peristaltic Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "peristaltic_pump.glb",
+    "duration_s": 60.0,
+    "script": [
+     {
+      "narration": "This module introduces the Peristaltic Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A peristaltic (hose) pump moves liquid by squeezing a flexible hose or tube with rollers or shoes on a rotor.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The occlusion travels along the hose, pushing the liquid ahead of it; the hose recovers its shape behind the shoe and draws in more liquid.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The liquid touches only the hose.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include abrasive slurries and lime milk; chemical dosing (sodium hypochlorite, ferric chloride); mining and alumina: thickener underflow sampling, reagent dosing; food, pharma and lab.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Pump Housing (Lubricant-Filled), Front Cover with Inspection Window, Inlet & Outlet Port Flanges (Hose Clamps), Rotor with Pressing Shoes.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Peristaltic Pump — Operation",
+    "type": "in_app_tour",
+    "model": "peristaltic_pump.glb",
+    "duration_s": 27.4,
+    "script": [
+     {
+      "narration": "How the Peristaltic Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "A shoe on the rotor squeezes the hose closed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "As the rotor turns, the occlusion moves along the hose and pushes liquid out.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "hose",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hose springs back behind the shoe, creating suction.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hose",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The housing is part-filled with lubricant to reduce hose wear and heat.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "pump_housing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Peristaltic Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "peristaltic_pump.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Peristaltic Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for hose leakage (leak detector).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hose",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change hose at planned intervals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hose",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect shoes and bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hose rupture: leak alarm. Common cause: end of life, over-pressure, chemical attack.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "hose",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: hot housing. Common cause: high speed, low lubricant.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "pump_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the only part in contact with the pumped liquid?",
+     "options": [
+      "Rotor",
+      "Hose/tube",
+      "Shoes",
+      "Bearings"
+     ],
+     "answer": 1,
+     "explanation": "No seals or valves.",
+     "level": "basic"
+    },
+    {
+     "question": "Can a peristaltic pump run dry?",
+     "options": [
+      "Yes, without damage",
+      "No, never",
+      "Only with water",
+      "Only at high speed"
+     ],
+     "answer": 0,
+     "explanation": "No internal contact surfaces in the liquid.",
+     "level": "basic"
+    },
+    {
+     "question": "The main wear item is…",
+     "options": [
+      "Impeller",
+      "The hose",
+      "Wear ring",
+      "Valve seat"
+     ],
+     "answer": 1,
+     "explanation": "Hose fatigue.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the hose loop against the rotor and contains lubricant that cools and lubricates the hose/shoe contact.\"",
+     "options": [
+      "Electric Motor – Rotor & Shaft",
+      "Pump Housing (Lubricant-Filled)",
+      "Inlet & Outlet Port Flanges (Hose Clamps)",
+      "Electric Motor – Stator"
+     ],
+     "answer": 1,
+     "explanation": "Pump Housing (Lubricant-Filled): Holds the hose loop against the rotor and contains lubricant that cools and lubricates the hose/shoe contact.",
+     "level": "basic",
+     "part": "pump_housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the housing; window allows inspection of hose and lubricant.\"",
+     "options": [
+      "Electric Motor – Rotor & Shaft",
+      "Front Cover with Inspection Window",
+      "Inlet & Outlet Port Flanges (Hose Clamps)",
+      "Electric Motor – Stator"
+     ],
+     "answer": 1,
+     "explanation": "Front Cover with Inspection Window: Closes the housing; window allows inspection of hose and lubricant.",
+     "level": "basic",
+     "part": "front_cover",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"The only wetted part; its elastic recovery creates the suction.\"",
+     "options": [
+      "Electric Motor – Stator",
+      "Front Cover with Inspection Window",
+      "Electric Motor – Frame & End Shields",
+      "Reinforced Pump Hose"
+     ],
+     "answer": 3,
+     "explanation": "Reinforced Pump Hose: The only wetted part; its elastic recovery creates the suction.",
+     "level": "basic",
+     "part": "hose",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

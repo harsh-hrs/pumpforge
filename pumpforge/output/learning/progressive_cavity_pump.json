@@ -1,0 +1,726 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "progressive_cavity_pump",
+ "no": 21,
+ "title": "Progressive Cavity Pump",
+ "model_title": "Progressive Cavity Pump (Rotor–Stator, Moineau)",
+ "category": "2 · Rotary Positive-Displacement Pumps",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A progressive cavity (PC) pump has a single-helix metal rotor turning eccentrically inside a double-helix elastomer stator. The rotor and stator form sealed cavities that progress from suction to discharge without changing shape, so the pump moves viscous, shear-sensitive and solids-laden liquids gently with a smooth flow.",
+   "applications": [
+    "Wastewater sludge and polymer dosing",
+    "Food (fruit pulp, dough)",
+    "Oil-field and mining slurries",
+    "Paper, paint and adhesives",
+    "Alumina: flocculant dosing and thickener underflow (selected duties)"
+   ],
+   "key_points": [
+    "Flow ∝ speed; pressure capability ∝ number of stages (≈ 6 bar per stage typical)",
+    "Never run dry — the stator burns",
+    "Universal-joint or flexible connecting rod",
+    "Low shear, low pulsation"
+   ],
+   "classification": {
+    "family": "Positive displacement – rotary",
+    "configuration": "Progressive cavity (Moineau), 1:2 rotor/stator lobe geometry, 2 stages"
+   },
+   "hi_family": "positive_displacement_rotary",
+   "summary": "A single-helix steel rotor turns inside a double-helix rubber stator. Because the stator pitch is twice the rotor pitch, a chain of sealed cavities forms along the pump; as the rotor turns (rolling eccentrically, its axis orbiting the stator axis), the cavities progress from suction to discharge without changing shape or volume. The result is smooth, low-shear, nearly pulse-free flow proportional to speed — ideal for sludges, pastes, viscous and shear-sensitive products, and liquids with solids or gas."
+  },
+  "model_3d": {
+   "asset": "glb/progressive_cavity_pump.glb",
+   "metadata": "meta/progressive_cavity_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 81528,
+   "parts": 18
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The rotor turns eccentrically inside the stator, driven through a connecting rod with universal joints.",
+    "Sealed cavities form at the suction end and fill with liquid.",
+    "The cavities progress along the stator to the discharge without changing volume."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The rotor turns eccentrically inside the stator, driven through a connecting rod with universal joints.",
+     "part": "connecting_rod",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sealed cavities form at the suction end and fill with liquid.",
+     "part": "suction_housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The cavities progress along the stator to the discharge without changing volume.",
+     "part": "stator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The interference fit between rotor and stator seals the cavities; more stages hold more pressure.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow almost linear with speed; slip increases with pressure and decreases with viscosity."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "progressive_cavity_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/progressive_cavity_pump.json#components",
+   "key_components": "Rotor, stator, drive shaft",
+   "parts": [
+    {
+     "id": "stator",
+     "name": "Stator (Elastomer in Steel Tube)",
+     "info_ref": "pc_stator",
+     "function": "Forms the double-helix cavity that seals against the rotor; with it, defines the progressing cavities.",
+     "material": "NBR, EPDM, FKM, natural rubber; even-wall stators for higher pressure."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor (Single Helix, Hard-Chrome)",
+     "info_ref": "pc_rotor",
+     "function": "Single-helix rotor that rolls inside the stator, displacing the liquid.",
+     "material": "Tool steel, stainless steel, hard-chrome or ceramic coated."
+    },
+    {
+     "id": "connecting_rod",
+     "name": "Connecting Rod & Universal Joints",
+     "info_ref": "pc_rod",
+     "function": "Transmits torque from the concentric drive shaft to the eccentrically moving rotor.",
+     "material": "Steel with sealed joints."
+    },
+    {
+     "id": "suction_housing",
+     "name": "Suction Housing",
+     "info_ref": "pc_suction_housing",
+     "function": "Receives the liquid and houses the connecting rod.",
+     "material": "Cast iron, stainless steel."
+    },
+    {
+     "id": "discharge_end",
+     "name": "Discharge Flange (End Housing)",
+     "info_ref": "pc_discharge",
+     "function": "Outlet end holding the stator; discharge nozzle.",
+     "material": "Cast iron, stainless."
+    },
+    {
+     "id": "tie_rods",
+     "name": "Stator Tie Rods",
+     "info_ref": "pc_tierods",
+     "function": "Clamp the stator between suction housing and discharge end.",
+     "material": "Steel."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Mechanical Seal",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "drive_shaft",
+     "name": "Drive Shaft",
+     "info_ref": "pump_shaft",
+     "function": "Transmits torque from the coupling to the impeller(s).",
+     "material": "Carbon steel, 4140 alloy steel, 410/420 or 316 stainless, duplex."
+    },
+    {
+     "id": "bearing_housing",
+     "name": "Bearing Housing",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.01 – 500",
+     "unit": "m³/h"
+    },
+    "pressure": {
+     "typical_range": "up to ~48 (multi-stage)",
+     "unit": "bar",
+     "note": "about 6 bar per stage typical — verify"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "50 – 500",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "50 – 80",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "viscosity": {
+     "typical_range": "1 – 1,000,000",
+     "unit": "cP"
+    },
+    "solids": {
+     "typical_range": "up to ~60",
+     "unit": "% by volume",
+     "note": "design dependent"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Baseplate with gearmotor."
+   ],
+   "alignment": [
+    "Gearmotor coupling alignment."
+   ],
+   "piping": [
+    "Size the suction line for low velocity (viscous liquids need large suction pipes); provide a strainer.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked.",
+    "Support piping independently of the pump.",
+    "Leave space to remove the stator from the rotor (pull-out length)."
+   ],
+   "commissioning": [
+    "Never start against a closed discharge valve.",
+    "Fill the pump with liquid (or ensure the suction is flooded) before start — avoid dry running unless the design allows it.",
+    "Check rotation direction.",
+    "Verify the relief-valve set pressure.",
+    "Dry-run protection (temperature or flow sensor in the stator)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check discharge pressure and seal.",
+     "part": "mechanical_seal",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect universal joints and their sleeves.",
+     "part": "connecting_rod",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace stator when slip rises; check rotor chrome plating.",
+     "part": "stator"
+    }
+   ],
+   "lubrication": [
+    "Joints grease-filled and sealed by sleeves."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Dry running stator burn",
+     "category": "thermal",
+     "symptoms": [
+      "Rubber smell, rapid flow loss"
+     ],
+     "causes": [
+      "Empty suction"
+     ],
+     "remedies": [
+      "Dry-run protection"
+     ],
+     "part": "stator"
+    },
+    {
+     "problem": "Stator wear / swelling",
+     "category": "wear",
+     "symptoms": [
+      "Flow loss or high torque"
+     ],
+     "causes": [
+      "Abrasives; chemical incompatibility; temperature"
+     ],
+     "remedies": [
+      "Correct elastomer"
+     ],
+     "part": "stator"
+    },
+    {
+     "problem": "Joint failure",
+     "category": "performance",
+     "symptoms": [
+      "Knocking"
+     ],
+     "causes": [
+      "Torn sleeve, lost grease"
+     ],
+     "remedies": [
+      "Replace joint and sleeve"
+     ],
+     "part": "connecting_rod"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Progressive Cavity Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "progressive_cavity_pump.glb",
+    "duration_s": 53.2,
+    "script": [
+     {
+      "narration": "This module introduces the Progressive Cavity Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A progressive cavity (PC) pump has a single-helix metal rotor turning eccentrically inside a double-helix elastomer stator.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The rotor and stator form sealed cavities that progress from suction to discharge without changing shape, so the pump moves viscous, shear-sensitive and solids-laden liquids gently with a smooth flow.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include wastewater sludge and polymer dosing; food (fruit pulp, dough); oil-field and mining slurries; paper, paint and adhesives.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Suction Housing, Discharge Flange (End Housing), Stator Tie Rods, Drive Shaft.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Progressive Cavity Pump — Operation",
+    "type": "in_app_tour",
+    "model": "progressive_cavity_pump.glb",
+    "duration_s": 30.2,
+    "script": [
+     {
+      "narration": "How the Progressive Cavity Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The rotor turns eccentrically inside the stator, driven through a connecting rod with universal joints.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "connecting_rod",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sealed cavities form at the suction end and fill with liquid.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "suction_housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The cavities progress along the stator to the discharge without changing volume.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "stator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The interference fit between rotor and stator seals the cavities; more stages hold more pressure.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Progressive Cavity Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "progressive_cavity_pump.glb",
+    "duration_s": 39.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Progressive Cavity Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check discharge pressure and seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mechanical_seal",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect universal joints and their sleeves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "connecting_rod",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace stator when slip rises; check rotor chrome plating.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dry running stator burn: rubber smell, rapid flow loss. Common cause: empty suction.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for stator wear / swelling: flow loss or high torque. Common cause: abrasives; chemical incompatibility; temperature.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for joint failure: knocking. Common cause: torn sleeve, lost grease.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "connecting_rod",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What determines the pressure a PC pump can develop?",
+     "options": [
+      "Speed",
+      "Number of stages (stator length)",
+      "Motor size only",
+      "Pipe size"
+     ],
+     "answer": 1,
+     "explanation": "Each stage holds roughly the same pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must a PC pump not run dry?",
+     "options": [
+      "Rotor rusts",
+      "The elastomer stator overheats and burns",
+      "It loses prime",
+      "Seal leaks"
+     ],
+     "answer": 1,
+     "explanation": "Friction heat.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is a PC pump good for shear-sensitive liquids?",
+     "options": [
+      "High speed",
+      "Cavities move gently without changing shape",
+      "Large impeller",
+      "Uses air"
+     ],
+     "answer": 1,
+     "explanation": "Low shear.",
+     "level": "basic"
+    },
+    {
+     "question": "What allows the rotor to orbit eccentrically while the drive shaft turns concentrically?",
+     "options": [
+      "Timing gears",
+      "Connecting rod with universal (or flexible) joints",
+      "Belts",
+      "Magnets"
+     ],
+     "answer": 1,
+     "explanation": "Joints accommodate eccentric motion.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Forms the double-helix cavity that seals against the rotor; with it, defines the progressing cavities.\"",
+     "options": [
+      "Rotor (Single Helix, Hard-Chrome)",
+      "Stator (Elastomer in Steel Tube)",
+      "Bearing Housing",
+      "Electric Motor – Cooling Fan"
+     ],
+     "answer": 1,
+     "explanation": "Stator (Elastomer in Steel Tube): Forms the double-helix cavity that seals against the rotor; with it, defines the progressing cavities.",
+     "level": "basic",
+     "part": "stator",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Single-helix rotor that rolls inside the stator, displacing the liquid.\"",
+     "options": [
+      "Connecting Rod & Universal Joints",
+      "Rotor (Single Helix, Hard-Chrome)",
+      "Flexible Coupling",
+      "Electric Motor – Fan Cover"
+     ],
+     "answer": 1,
+     "explanation": "Rotor (Single Helix, Hard-Chrome): Single-helix rotor that rolls inside the stator, displacing the liquid.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transmits torque from the concentric drive shaft to the eccentrically moving rotor.\"",
+     "options": [
+      "Connecting Rod & Universal Joints",
+      "Discharge Flange (End Housing)",
+      "Electric Motor – Frame & End Shields",
+      "Stator (Elastomer in Steel Tube)"
+     ],
+     "answer": 0,
+     "explanation": "Connecting Rod & Universal Joints: Transmits torque from the concentric drive shaft to the eccentrically moving rotor.",
+     "level": "basic",
+     "part": "connecting_rod",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

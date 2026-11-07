@@ -1,0 +1,639 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "four_way_valve",
+ "no": 46,
+ "title": "Four-Way Valve",
+ "model_title": "Four-Way Directional Control Valve (4/2 Spool) with Cylinder",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A four-way directional control valve connects a pressure supply P and a return T to two working ports A and B. Shifting the spool reverses the connections — P→A with B→T, or P→B with A→T — so a double-acting cylinder or motor reverses direction. The same idea is used in pneumatic valves and in heat-pump reversing valves.",
+   "applications": [
+    "Hydraulic cylinders and motors (presses, gates, mobile machinery)",
+    "Pneumatic actuators",
+    "Heat-pump refrigerant reversing",
+    "Valve actuators"
+   ],
+   "key_points": [
+    "Ports P, T, A, B",
+    "Spool lands open/close annular grooves",
+    "Solenoid, pilot, lever or mechanical operation",
+    "Cleanliness critical (tight clearances)"
+   ],
+   "classification": {
+    "family": "Directional control valve (hydraulic/pneumatic)",
+    "type": "4/2 spool valve, double solenoid"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A four-way directional control valve connects a pressure supply (P) and a return to tank (T) to two actuator ports (A and B). Shifting the spool reverses the connections — P→A with B→T, or P→B with A→T — so a double-acting cylinder extends and retracts. The same principle is used in pneumatic valves and in refrigeration reversing valves."
+  },
+  "model_3d": {
+   "asset": "glb/four_way_valve.glb",
+   "metadata": "meta/four_way_valve.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10932,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Pump flow enters port P; port T returns to tank.",
+    "Solenoid a shifts the spool: P connects to A and B to T.",
+    "Oil to A pushes the piston; oil from the other side returns through B to T."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Pump flow enters port P; port T returns to tank.",
+     "part": "hydraulic_lines",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Solenoid a shifts the spool: P connects to A and B to T.",
+     "part": "spool",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil to A pushes the piston; oil from the other side returns through B to T.",
+     "part": "piston_rod",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Solenoid b shifts the spool back: P→B and A→T, so the cylinder retracts.",
+     "part": "solenoids",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The spool lands seal against the bore between ports.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Directional valve: pressure drop P→A / B→T rises with flow (Δp–Q curves in data sheets)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "four_way_valve_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/four_way_valve.json#components",
+   "key_components": "Spool, lands, P/T/A/B ports, solenoids, cylinder",
+   "parts": [
+    {
+     "id": "body",
+     "name": "Valve Body with Ports P, T, A, B",
+     "info_ref": "fwv_body",
+     "function": "Contains the spool bore and the P, T, A, B galleries.",
+     "material": "Cast iron, steel."
+    },
+    {
+     "id": "spool",
+     "name": "Spool with Lands",
+     "info_ref": "fwv_spool",
+     "function": "Its lands open and close the passages between ports.",
+     "material": "Hardened steel, chrome."
+    },
+    {
+     "id": "solenoids",
+     "name": "Solenoid Operators a / b",
+     "info_ref": "fwv_solenoids",
+     "function": "Push the spool to either end position.",
+     "material": "Copper/steel."
+    },
+    {
+     "id": "cylinder",
+     "name": "Double-Acting Cylinder (actuator driven by A / B)",
+     "info_ref": "fwv_cylinder",
+     "function": "Converts oil pressure into linear force.",
+     "material": "Steel."
+    },
+    {
+     "id": "piston_rod",
+     "name": "Piston & Rod",
+     "info_ref": "fwv_piston",
+     "function": "Moves out or in depending on which side is pressurised.",
+     "material": "Steel/chrome."
+    },
+    {
+     "id": "hydraulic_lines",
+     "name": "Hydraulic Lines: P (pump), T (tank), A, B",
+     "info_ref": "fwv_lines",
+     "function": "Carry oil between pump, tank, valve and cylinder.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "NG 6 – 32 (ISO 4401 / CETOP)",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "up to ~315 – 350",
+     "unit": "bar"
+    },
+    "temperature": {
+     "typical_range": "-20 to 80 (oil)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "up to ~60 – 1,000",
+     "unit": "L/min",
+     "note": "size dependent"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Mount on a flat, clean subplate with correct O-rings.",
+    "Flush the system to the specified ISO 4406 cleanliness before connecting."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for external leaks and coil function.",
+     "part": "solenoids",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Monitor oil cleanliness and filter ΔP.",
+     "part": "hydraulic_lines",
+     "interval": "per plan"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect spool and bore for scoring.",
+     "part": "spool"
+    }
+   ],
+   "lubrication": [
+    "Lubricated by the hydraulic oil."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Spool sticking",
+     "category": "performance",
+     "symptoms": [
+      "Cylinder does not move"
+     ],
+     "causes": [
+      "Silting, varnish, contamination"
+     ],
+     "remedies": [
+      "Clean valve, improve filtration"
+     ],
+     "part": "spool"
+    },
+    {
+     "problem": "Cylinder drift",
+     "category": "performance",
+     "symptoms": [
+      "Load creeps"
+     ],
+     "causes": [
+      "Internal leakage across lands, cylinder seal leak"
+     ],
+     "remedies": [
+      "Pilot check valves; repair"
+     ],
+     "part": "piston_rod"
+    },
+    {
+     "problem": "Coil failure",
+     "category": "performance",
+     "symptoms": [
+      "No shift"
+     ],
+     "causes": [
+      "Voltage, heat"
+     ],
+     "remedies": [
+      "Replace coil"
+     ],
+     "part": "solenoids"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Four-Way Valve — Introduction",
+    "type": "in_app_tour",
+    "model": "four_way_valve.glb",
+    "duration_s": 55.6,
+    "script": [
+     {
+      "narration": "This module introduces the Four-Way Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A four-way directional control valve connects a pressure supply P and a return T to two working ports A and B.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Shifting the spool reverses the connections — P→A with B→T, or P→B with A→T — so a double-acting cylinder or motor reverses direction.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The same idea is used in pneumatic valves and in heat-pump reversing valves.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hydraulic cylinders and motors (presses, gates, mobile machinery); pneumatic actuators; heat-pump refrigerant reversing; valve actuators.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Valve Body with Ports P, T, A, B.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Four-Way Valve — Operation",
+    "type": "in_app_tour",
+    "model": "four_way_valve.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "How the Four-Way Valve works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pump flow enters port P; port T returns to tank.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "hydraulic_lines",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Solenoid a shifts the spool: P connects to A and B to T.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "spool",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil to A pushes the piston; oil from the other side returns through B to T.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "piston_rod",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Solenoid b shifts the spool back: P→B and A→T, so the cylinder retracts.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "solenoids",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The spool lands seal against the bore between ports.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Four-Way Valve — Maintenance",
+    "type": "in_app_tour",
+    "model": "four_way_valve.glb",
+    "duration_s": 38.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Four-Way Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for external leaks and coil function.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "solenoids",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Monitor oil cleanliness and filter ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hydraulic_lines",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect spool and bore for scoring.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spool",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for spool sticking: cylinder does not move. Common cause: silting, varnish, contamination.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "spool",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cylinder drift: load creeps. Common cause: internal leakage across lands, cylinder seal leak.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "piston_rod",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for coil failure: no shift. Common cause: voltage, heat.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "solenoids",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "In position 1, P connects to A. Where does B connect?",
+     "options": [
+      "P",
+      "T (tank)",
+      "Nowhere",
+      "A"
+     ],
+     "answer": 1,
+     "explanation": "B→T lets the cylinder exhaust.",
+     "level": "basic"
+    },
+    {
+     "question": "What reverses the cylinder?",
+     "options": [
+      "Changing pump speed",
+      "Shifting the spool to the other position",
+      "Closing T",
+      "Bleeding air"
+     ],
+     "answer": 1,
+     "explanation": "Cross-connection reverses.",
+     "level": "basic"
+    },
+    {
+     "question": "Which standard covers subplate mounting patterns?",
+     "options": [
+      "ISO 5167",
+      "ISO 4401",
+      "API 610",
+      "ISO 2858"
+     ],
+     "answer": 1,
+     "explanation": "CETOP/NG patterns.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Contains the spool bore and the P, T, A, B galleries.\"",
+     "options": [
+      "Double-Acting Cylinder (actuator driven by A / B)",
+      "Hydraulic Lines: P (pump), T (tank), A, B",
+      "Valve Body with Ports P, T, A, B",
+      "Solenoid Operators a / b"
+     ],
+     "answer": 2,
+     "explanation": "Valve Body with Ports P, T, A, B: Contains the spool bore and the P, T, A, B galleries.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Its lands open and close the passages between ports.\"",
+     "options": [
+      "Hydraulic Lines: P (pump), T (tank), A, B",
+      "Solenoid Operators a / b",
+      "Piston & Rod",
+      "Spool with Lands"
+     ],
+     "answer": 3,
+     "explanation": "Spool with Lands: Its lands open and close the passages between ports.",
+     "level": "basic",
+     "part": "spool",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Push the spool to either end position.\"",
+     "options": [
+      "Spool with Lands",
+      "Piston & Rod",
+      "Valve Body with Ports P, T, A, B",
+      "Solenoid Operators a / b"
+     ],
+     "answer": 3,
+     "explanation": "Solenoid Operators a / b: Push the spool to either end position.",
+     "level": "basic",
+     "part": "solenoids",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

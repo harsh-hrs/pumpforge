@@ -1,0 +1,1299 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vertical_turbine_pump",
+ "no": 4,
+ "title": "Vertical Turbine Pump",
+ "model_title": "Vertical Turbine Pump (Line-Shaft, 3-Stage)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vertical turbine pump is a vertically suspended, multistage centrifugal pump whose bowl assembly (impellers in diffuser bowls) is submerged in a sump, well or intake. A line shaft inside the column pipe drives the impellers from a motor on the discharge head at ground level. Because the impellers sit below the water, the pump needs no priming and has excellent NPSH conditions. This flagship module is prepared as a learning case for the WPIL WVT series (WVT-30-18), using a representative VS1 arrangement.",
+   "applications": [
+    "Raw-water intakes from rivers, reservoirs and sumps",
+    "Cooling-water intakes in power plants and refineries",
+    "Deep-well water supply",
+    "Irrigation and flood control",
+    "Fire protection from open water sources",
+    "Alumina and mineral process water intakes"
+   ],
+   "key_points": [
+    "Bowl stages stacked: head = stages × head per stage",
+    "Line shaft guided by water- or oil-lubricated bearings in the column",
+    "Motor thrust bearing carries hydraulic down-thrust plus rotor weight",
+    "Submergence and sump design (ANSI/HI 9.8) govern vortex-free operation",
+    "Impeller lift is set at the top adjusting nut"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), diffuser type",
+    "configuration": "Vertically suspended, wet pit, line-shaft driven, multistage",
+    "hydraulic_type": "Mixed-flow impellers with vaned diffuser bowls",
+    "api_610_type": "VS1 (wet-pit, vertically suspended, single casing, diffuser, discharge through column)"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A vertical turbine pump is a vertically suspended, multistage centrifugal pump. The bowl assembly (impellers and diffuser bowls) is submerged at the bottom of a well or sump; a line shaft running inside the column pipe transmits torque from a vertical motor mounted on the discharge head at ground level. Each stage adds head; liquid rises through the column and leaves through the discharge head nozzle."
+  },
+  "model_3d": {
+   "asset": "glb/vertical_turbine_pump.glb",
+   "metadata": "meta/vertical_turbine_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 105990,
+   "parts": 41
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water enters through the strainer and the suction bell, which accelerates it smoothly into the first impeller eye.",
+    "Each enclosed mixed-flow impeller adds energy to the water.",
+    "The diffuser vanes in each bowl remove swirl and convert velocity into pressure, then lead the water to the next stage."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water enters through the strainer and the suction bell, which accelerates it smoothly into the first impeller eye.",
+     "part": "suction_bell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Each enclosed mixed-flow impeller adds energy to the water.",
+     "part": "impeller_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diffuser vanes in each bowl remove swirl and convert velocity into pressure, then lead the water to the next stage.",
+     "part": "bowl_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pressure rises stage by stage up the bowl assembly.",
+     "part": "bowl_3",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The column pipe carries the water up to the discharge head; the line shaft runs inside it in rubber-lined bearings.",
+     "part": "column_pipe_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The discharge head turns the flow horizontal and supports the motor; the mechanical seal stops leakage at the shaft.",
+     "part": "discharge_head",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Every impeller is pushed downward; this down-thrust plus the rotor weight is carried by the motor thrust bearing.",
+     "part": "thrust_bearing",
+     "cut": true,
+     "operate": true,
+     "overlay": "thrust",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The water level must stay above the minimum submergence so no air-entraining vortices form at the bell.",
+     "part": "suction_bell",
+     "cut": false,
+     "operate": true,
+     "overlay": "installation",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Steep head curve rising to shut-off (mixed-flow stages); power can be highest at shut-off for higher specific-speed bowls — check before throttling."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vertical_turbine_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "vertical_turbine_pump_pressure.glb",
+     "title": "Stage-by-stage pressure",
+     "description": "Each bowl stage (impeller + diffuser bowl) adds about the same head; the stages are stacked so pressure rises from the bell (blue) to the top bowl (red). The column and discharge head then lose a little head to friction before the discharge flange.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Stage 1: +1Δp",
+       "anchor": [
+        0.33,
+        -2.51,
+        -0.0
+       ],
+       "value": 1
+      },
+      {
+       "text": "Stage 2: +2Δp",
+       "anchor": [
+        0.33,
+        -2.25,
+        -0.0
+       ],
+       "value": 2
+      },
+      {
+       "text": "Stage 3: +3Δp",
+       "anchor": [
+        0.33,
+        -1.99,
+        -0.0
+       ],
+       "value": 3
+      },
+      {
+       "text": "Bell inlet: lowest pressure (submergence sets NPSHa)",
+       "anchor": [
+        0.4,
+        -2.74,
+        -0.0
+       ],
+       "value": 0
+      },
+      {
+       "text": "Column & head: 3 stage heads − column/head losses",
+       "anchor": [
+        0.35,
+        -0.8,
+        -0.0
+       ],
+       "value": 3
+      }
+     ]
+    },
+    "thrust": {
+     "file": "vertical_turbine_pump_thrust.glb",
+     "title": "Axial thrust path",
+     "description": "In a vertical turbine pump the hydraulic thrust of every impeller acts downward and adds to the weight of the rotating element. The line shaft hangs from the motor: the total down-thrust is carried by the motor thrust bearing (green reaction). Impeller axial position (lift) is set at the adjusting nut / spacer coupling.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Impeller down-thrust (each stage)",
+       "anchor": [
+        -0.32,
+        -2.26,
+        -0.0
+       ]
+      },
+      {
+       "text": "Total down-thrust + rotor weight → motor thrust bearing",
+       "anchor": [
+        0.45,
+        1.6,
+        -0.0
+       ]
+      }
+     ]
+    },
+    "installation": {
+     "file": "vertical_turbine_pump_installation.glb",
+     "title": "Sump levels & submergence",
+     "description": "Water levels and the submergence S above the bell inlet. ANSI/HI 9.8 gives the minimum submergence as a function of the bell diameter D and inlet velocity (S = D(1 + 2.3·F_D), F_D = V/√(gD); verify in the current edition). Low submergence causes air-entraining vortices, vibration and loss of performance. Levels shown are illustrative.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Normal operating water level",
+       "anchor": [
+        0.95,
+        -0.9,
+        -0.0
+       ]
+      },
+      {
+       "text": "Minimum water level (illustrative)",
+       "anchor": [
+        0.95,
+        -2.266,
+        -0.0
+       ]
+      },
+      {
+       "text": "S = submergence above bell inlet",
+       "anchor": [
+        -0.75,
+        -2.599,
+        -0.0
+       ]
+      },
+      {
+       "text": "D = bell inlet diameter",
+       "anchor": [
+        0.0,
+        -3.052,
+        -0.0
+       ]
+      },
+      {
+       "text": "Floor clearance ≈ 0.3–0.5 D below the bell (ANSI/HI 9.8, verify)",
+       "anchor": [
+        0.6,
+        -3.182,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/vertical_turbine_pump.json#components",
+   "key_components": "Suction bell, bowl, impellers, column pipe, shaft",
+   "parts": [
+    {
+     "id": "discharge_head",
+     "name": "Discharge Head",
+     "info_ref": "discharge_head",
+     "function": "Supports the motor and the full suspended pump weight, turns the flow 90° from the column into the discharge nozzle and houses the shaft seal.",
+     "material": "Cast iron or ductile iron for water service; fabricated carbon steel or stainless steel for higher pressure or corrosive service."
+    },
+    {
+     "id": "seal_housing",
+     "name": "Seal Chamber / Stuffing Box",
+     "info_ref": "seal_housing",
+     "function": "Provides the seal chamber where the shaft leaves the pressurised head; locates the mechanical seal.",
+     "material": "Cast iron, ductile iron or stainless steel."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Mechanical Seal (Cartridge)",
+     "info_ref": "mechanical_seal",
+     "function": "Prevents pumped liquid escaping along the rotating shaft at the discharge head.",
+     "material": "Faces commonly carbon-graphite vs silicon carbide (or SiC vs SiC for abrasive water); stainless steel metal parts; elastomers selected for fluid and temperature."
+    },
+    {
+     "id": "head_shaft",
+     "name": "Head Shaft",
+     "info_ref": "head_shaft",
+     "function": "Connects the top of the line shaft to the motor through the coupling; passes through the seal.",
+     "material": "Carbon steel or stainless steel (e.g. 416, 410, 316 depending on fluid)."
+    },
+    {
+     "id": "coupling",
+     "name": "Adjustable Spacer Coupling",
+     "info_ref": "coupling",
+     "function": "Transmits torque from motor to pump and allows the impeller axial position (lift) to be set with the adjusting nut.",
+     "material": "Carbon steel or alloy steel; bolts per manufacturer grade."
+    },
+    {
+     "id": "motor_frame",
+     "name": "Motor Frame & End Shields",
+     "info_ref": "motor_frame",
+     "function": "Encloses and supports the stator, bearings and terminal box; the base flange locates the motor on the discharge head.",
+     "material": "Cast iron or fabricated steel."
+    },
+    {
+     "id": "drip_cover",
+     "name": "Drip Cover (Canopy)",
+     "info_ref": "drip_cover",
+     "function": "Protects the top bearing housing and the motor opening from rain and falling objects; covers the coupling access on hollow-shaft designs.",
+     "material": "Steel or cast iron, painted."
+    },
+    {
+     "id": "stator",
+     "name": "Stator Core & Windings",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field that drives the rotor.",
+     "material": "Silicon electrical steel; copper magnet wire with Class F/H insulation (typical)."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor (Squirrel Cage)",
+     "info_ref": "rotor",
+     "function": "Squirrel-cage rotor that converts the stator field into shaft torque.",
+     "material": "Electrical steel; die-cast aluminium or fabricated copper cage."
+    },
+    {
+     "id": "motor_shaft",
+     "name": "Motor Shaft",
+     "info_ref": "motor_shaft",
+     "function": "Carries the rotor and transmits torque to the pump; on solid-shaft motors it extends below the motor into the coupling.",
+     "material": "Carbon or alloy steel."
+    },
+    {
+     "id": "motor_fan",
+     "name": "Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Moves cooling air through the motor.",
+     "material": "Aluminium, steel or reinforced polymer."
+    },
+    {
+     "id": "thrust_bearing",
+     "name": "Motor Thrust Bearing (Angular-Contact Pair)",
+     "info_ref": "thrust_bearing",
+     "function": "Carries the total down-thrust: hydraulic thrust from all impellers plus the weight of the rotating element (shafts, impellers, rotor).",
+     "material": "Bearing steel rolling elements and races."
+    },
+    {
+     "id": "motor_guide_bearing",
+     "name": "Motor Lower Guide Bearing",
+     "info_ref": "motor_guide_bearing",
+     "function": "Locates the lower end of the motor shaft radially.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "column_pipe_1",
+     "name": "Column Pipe – Upper Section",
+     "info_ref": "column_pipe",
+     "function": "Carries the pumped liquid from the bowl assembly to the discharge head and suspends the bowl assembly.",
+     "material": "Carbon steel, galvanised steel or stainless steel."
+    },
+    {
+     "id": "column_pipe_2",
+     "name": "Column Pipe – Lower Section",
+     "info_ref": "column_pipe",
+     "function": "Carries the pumped liquid from the bowl assembly to the discharge head and suspends the bowl assembly.",
+     "material": "Carbon steel, galvanised steel or stainless steel."
+    },
+    {
+     "id": "column_gasket",
+     "name": "Column Flange Gasket",
+     "info_ref": "gasket",
+     "function": "Seals flanged joints.",
+     "material": "Elastomer or compressed fibre suited to the fluid."
+    },
+    {
+     "id": "bearing_retainer",
+     "name": "Bearing Retainer (Spider)",
+     "info_ref": "bearing_retainer",
+     "function": "Holds the line-shaft bearing concentric with the column at each joint.",
+     "material": "Bronze, cast iron or stainless steel."
+    },
+    {
+     "id": "lineshaft_bearing",
+     "name": "Line-Shaft Bearing (Rubber-Lined)",
+     "info_ref": "lineshaft_bearing",
+     "function": "Supports the line shaft radially and limits whip between the head and the bowls.",
+     "material": "Nitrile/neoprene rubber, bronze, or engineered polymers."
+    },
+    {
+     "id": "line_shaft",
+     "name": "Line Shaft",
+     "info_ref": "line_shaft",
+     "function": "Transmits torque from the head shaft to the bowl shaft along the column.",
+     "material": "Carbon steel, 416 or 316 stainless steel; sometimes with stainless sleeves at journals."
+    },
+    {
+     "id": "bowl_shaft",
+     "name": "Pump (Bowl) Shaft",
+     "info_ref": "bowl_shaft",
+     "function": "Carries the impellers and transmits torque from the line shaft to them.",
+     "material": "Stainless steel (410/416/316) or duplex for corrosive service."
+    },
+    {
+     "id": "shaft_couplings",
+     "name": "Threaded Line-Shaft Couplings",
+     "info_ref": "shaft_couplings",
+     "function": "Join shaft sections end-to-end.",
+     "material": "Stainless or carbon steel."
+    },
+    {
+     "id": "discharge_case",
+     "name": "Discharge Case (Top Bowl)",
+     "info_ref": "discharge_case",
+     "function": "Top bowl: collects flow from the last stage diffuser and transitions it into the column; houses the top bowl bearing.",
+     "material": "Cast iron, ductile iron, bronze or stainless steel."
+    },
+    {
+     "id": "discharge_case_bearing",
+     "name": "Discharge Case Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the bowl shaft at each bowl, discharge case and suction bell.",
+     "material": "Bronze, rubber, carbon or engineered polymers; harder materials for sandy water."
+    },
+    {
+     "id": "bowl_1",
+     "name": "Bowl – Stage 1",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts the swirl (velocity) leaving the impeller into pressure and guides flow to the next impeller eye.",
+     "material": "Cast iron (often enamel-lined), ductile iron, bronze, stainless or duplex stainless steel."
+    },
+    {
+     "id": "wear_ring_1",
+     "name": "Bowl Wear Ring – Stage 1",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits leakage from the impeller discharge back to its eye.",
+     "material": "Bronze, stainless steel or hardened materials for abrasive service."
+    },
+    {
+     "id": "bowl_bearing_1",
+     "name": "Bowl Bearing – Stage 1",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the bowl shaft at each bowl, discharge case and suction bell.",
+     "material": "Bronze, rubber, carbon or engineered polymers; harder materials for sandy water."
+    },
+    {
+     "id": "impeller_1",
+     "name": "Impeller – Stage 1",
+     "info_ref": "impeller",
+     "function": "Adds energy to the liquid: rotating blades increase angular momentum (velocity and pressure).",
+     "material": "Bronze, cast iron, stainless steel or duplex."
+    },
+    {
+     "id": "collet_1",
+     "name": "Taper Lock Collet – Stage 1",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "bowl_2",
+     "name": "Bowl – Stage 2",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts the swirl (velocity) leaving the impeller into pressure and guides flow to the next impeller eye.",
+     "material": "Cast iron (often enamel-lined), ductile iron, bronze, stainless or duplex stainless steel."
+    },
+    {
+     "id": "wear_ring_2",
+     "name": "Bowl Wear Ring – Stage 2",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits leakage from the impeller discharge back to its eye.",
+     "material": "Bronze, stainless steel or hardened materials for abrasive service."
+    },
+    {
+     "id": "bowl_bearing_2",
+     "name": "Bowl Bearing – Stage 2",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the bowl shaft at each bowl, discharge case and suction bell.",
+     "material": "Bronze, rubber, carbon or engineered polymers; harder materials for sandy water."
+    },
+    {
+     "id": "impeller_2",
+     "name": "Impeller – Stage 2",
+     "info_ref": "impeller",
+     "function": "Adds energy to the liquid: rotating blades increase angular momentum (velocity and pressure).",
+     "material": "Bronze, cast iron, stainless steel or duplex."
+    },
+    {
+     "id": "collet_2",
+     "name": "Taper Lock Collet – Stage 2",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "bowl_3",
+     "name": "Bowl – Stage 3",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts the swirl (velocity) leaving the impeller into pressure and guides flow to the next impeller eye.",
+     "material": "Cast iron (often enamel-lined), ductile iron, bronze, stainless or duplex stainless steel."
+    },
+    {
+     "id": "wear_ring_3",
+     "name": "Bowl Wear Ring – Stage 3",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits leakage from the impeller discharge back to its eye.",
+     "material": "Bronze, stainless steel or hardened materials for abrasive service."
+    },
+    {
+     "id": "bowl_bearing_3",
+     "name": "Bowl Bearing – Stage 3",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the bowl shaft at each bowl, discharge case and suction bell.",
+     "material": "Bronze, rubber, carbon or engineered polymers; harder materials for sandy water."
+    },
+    {
+     "id": "impeller_3",
+     "name": "Impeller – Stage 3",
+     "info_ref": "impeller",
+     "function": "Adds energy to the liquid: rotating blades increase angular momentum (velocity and pressure).",
+     "material": "Bronze, cast iron, stainless steel or duplex."
+    },
+    {
+     "id": "collet_3",
+     "name": "Taper Lock Collet – Stage 3",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "suction_bell",
+     "name": "Suction Bell",
+     "info_ref": "suction_bell",
+     "function": "Guides liquid smoothly into the first-stage impeller and holds the bottom shaft bearing.",
+     "material": "Cast iron, ductile iron, bronze or stainless steel."
+    },
+    {
+     "id": "bell_bearing",
+     "name": "Suction Bell Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the bowl shaft at each bowl, discharge case and suction bell.",
+     "material": "Bronze, rubber, carbon or engineered polymers; harder materials for sandy water."
+    },
+    {
+     "id": "strainer",
+     "name": "Cone Strainer",
+     "info_ref": "strainer",
+     "function": "Keeps large debris out of the pump.",
+     "material": "Galvanised or stainless steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "10 – 20,000",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "10 – 300",
+     "unit": "m",
+     "note": "Depends on stage count; deep-well pumps go higher."
+    },
+    "pressure": {
+     "typical_range": "10 – 40",
+     "unit": "bar head/column rating"
+    },
+    "speed": {
+     "typical_range": "590 – 2,960",
+     "unit": "rpm (50 Hz)"
+    },
+    "efficiency": {
+     "typical_range": "70 – 88",
+     "unit": "% bowl efficiency"
+    }
+   },
+   "additional": {
+    "stages": {
+     "typical_range": "1 – 20+",
+     "unit": ""
+    },
+    "setting_depth": {
+     "typical_range": "2 – 100+",
+     "unit": "m"
+    },
+    "specific_speed_Ns_US": {
+     "typical_range": "1,500 – 6,000",
+     "unit": ""
+    },
+    "submergence": {
+     "typical_range": "per ANSI/HI 9.8: S = D(1 + 2.3·F_D)",
+     "unit": "m",
+     "note": "verify in current edition"
+    }
+   },
+   "selection_notes": [
+    "Size the sump to ANSI/HI 9.8 (bell clearance, wall clearance, submergence, approach velocity).",
+    "Check the motor thrust-bearing rating against maximum down-thrust (including shut-off) plus rotor weight.",
+    "Choose open (product-lubricated) or enclosed (oil/clean-water-lubricated) line shaft from water quality."
+   ],
+   "reference_model": {
+    "manufacturer": "WPIL Ltd. (to be confirmed)",
+    "model": "WVT-30-18 (user learning case)",
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "geometry": {
+     "stages": null,
+     "bowl_diameter_mm": null,
+     "column_length_m": null,
+     "column_size": null,
+     "lubrication": null
+    },
+    "status": "empty — fill from the WPIL WVT-30-18 datasheet / GA drawing; the 3-D model is representative and does not reproduce WPIL dimensions"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ANSI/HI 2.1-2.2 Vertical pumps nomenclature; ANSI/HI 2.3 design and application (verify editions)",
+    "ANSI/HI 9.8 Pump Intake Design"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Discharge head on a level, rigid sole plate grouted to the sump slab; the slab must carry the full weight of pump + water column + down-thrust."
+   ],
+   "alignment": [
+    "Set the column plumb; check shaft centring in the stuffing box/seal.",
+    "Set impeller lift at the adjusting nut to the manufacturer's value before coupling the motor."
+   ],
+   "piping": [
+    "Support discharge piping so no load is transferred to the head; fit a dismantling joint.",
+    "Install air-release/vacuum valve on the discharge to handle the air column at start-up.",
+    "Fit check and isolating valves on the discharge."
+   ],
+   "commissioning": [
+    "Pre-lubricate line-shaft bearings above water if required (long dry columns).",
+    "Check rotation (reverse rotation can unscrew threaded line shafts).",
+    "Confirm water level ≥ minimum submergence.",
+    "Record vibration at the motor top and discharge head."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check motor thrust-bearing temperature and vibration at the motor top.",
+     "part": "thrust_bearing",
+     "interval": "daily"
+    },
+    {
+     "task": "Check seal leakage at the discharge head.",
+     "part": "mechanical_seal",
+     "interval": "daily"
+    },
+    {
+     "task": "Verify sump water level against minimum submergence.",
+     "part": "suction_bell",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change motor thrust-bearing oil.",
+     "part": "thrust_bearing",
+     "interval": "per motor manual"
+    },
+    {
+     "task": "Check and readjust impeller lift after the first run-in.",
+     "part": "coupling",
+     "interval": "after commissioning"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Pull the pump; inspect line-shaft bearings and shaft sleeves.",
+     "part": "lineshaft_bearing"
+    },
+    {
+     "task": "Inspect bowls, impellers and wear rings for wear and corrosion.",
+     "part": "bowl_2"
+    },
+    {
+     "task": "Clean or replace the strainer.",
+     "part": "strainer"
+    }
+   ],
+   "lubrication": [
+    "Open line shaft: lubricated by the pumped water (pre-lubrication on start for deep settings).",
+    "Enclosed line shaft: drip oil or clean injected water through the enclosing tube.",
+    "Motor thrust bearing: oil bath per motor manual."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Vortex formation",
+     "category": "performance",
+     "symptoms": [
+      "Air-entraining surface vortices",
+      "Vibration and noise",
+      "Falling flow"
+     ],
+     "causes": [
+      "Low submergence",
+      "Poor sump approach flow"
+     ],
+     "remedies": [
+      "Raise water level",
+      "Fit anti-vortex devices / correct sump geometry (ANSI/HI 9.8)"
+     ],
+     "part": "suction_bell"
+    },
+    {
+     "problem": "Line-shaft bearing wear",
+     "category": "wear",
+     "symptoms": [
+      "Rising vibration",
+      "Shaft whip"
+     ],
+     "causes": [
+      "Sand in water",
+      "Dry start of upper bearings"
+     ],
+     "remedies": [
+      "Pre-lubrication; enclosed shaft; harder bearings"
+     ],
+     "part": "lineshaft_bearing"
+    },
+    {
+     "problem": "Thrust bearing overheating",
+     "category": "bearing",
+     "symptoms": [
+      "High motor top-bearing temperature"
+     ],
+     "causes": [
+      "Excess down-thrust (worn wear rings, throttled operation)",
+      "Wrong impeller lift"
+     ],
+     "remedies": [
+      "Restore clearances; reset lift"
+     ],
+     "part": "thrust_bearing"
+    },
+    {
+     "problem": "Impeller and bowl wear",
+     "category": "wear",
+     "symptoms": [
+      "Falling head and flow"
+     ],
+     "causes": [
+      "Abrasive water",
+      "Cavitation"
+     ],
+     "remedies": [
+      "Replace wear rings/impellers; improve screening"
+     ],
+     "part": "impeller_2"
+    },
+    {
+     "problem": "Reverse rotation damage",
+     "category": "performance",
+     "symptoms": [
+      "Loosened shaft couplings after a stop"
+     ],
+     "causes": [
+      "Back-flow through the pump without a check valve / non-reverse ratchet"
+     ],
+     "remedies": [
+      "Fit check valve or non-reverse ratchet"
+     ],
+     "part": "shaft_couplings"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vertical Turbine Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "vertical_turbine_pump.glb",
+    "duration_s": 60.6,
+    "script": [
+     {
+      "narration": "This module introduces the Vertical Turbine Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vertical turbine pump is a vertically suspended, multistage centrifugal pump whose bowl assembly (impellers in diffuser bowls) is submerged in a sump, well or intake.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A line shaft inside the column pipe drives the impellers from a motor on the discharge head at ground level.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Because the impellers sit below the water, the pump needs no priming and has excellent NPSH conditions.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include raw-water intakes from rivers, reservoirs and sumps; cooling-water intakes in power plants and refineries; deep-well water supply; irrigation and flood control.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Head Shaft, Line Shaft, Pump (Bowl) Shaft, Discharge Case (Top Bowl).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vertical Turbine Pump — Operation",
+    "type": "in_app_tour",
+    "model": "vertical_turbine_pump.glb",
+    "duration_s": 89.4,
+    "script": [
+     {
+      "narration": "How the Vertical Turbine Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water enters through the strainer and the suction bell, which accelerates it smoothly into the first impeller eye.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "suction_bell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Each enclosed mixed-flow impeller adds energy to the water.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "impeller_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diffuser vanes in each bowl remove swirl and convert velocity into pressure, then lead the water to the next stage.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "bowl_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pressure rises stage by stage up the bowl assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bowl_3",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The column pipe carries the water up to the discharge head; the line shaft runs inside it in rubber-lined bearings.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "column_pipe_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The discharge head turns the flow horizontal and supports the motor; the mechanical seal stops leakage at the shaft.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "discharge_head",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Every impeller is pushed downward; this down-thrust plus the rotor weight is carried by the motor thrust bearing.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "thrust_bearing",
+       "cut": true,
+       "operate": true,
+       "overlay": "thrust",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The water level must stay above the minimum submergence so no air-entraining vortices form at the bell.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "suction_bell",
+       "cut": false,
+       "operate": true,
+       "overlay": "installation",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Each bowl stage (impeller + diffuser bowl) adds about the same head; the stages are stacked so pressure rises from the bell (blue) to the top bowl (red).",
+      "duration_s": 11.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "In a vertical turbine pump the hydraulic thrust of every impeller acts downward and adds to the weight of the rotating element.",
+      "duration_s": 9.2,
+      "action": {
+       "overlay": "thrust",
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Water levels and the submergence S above the bell inlet.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "installation",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vertical Turbine Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "vertical_turbine_pump.glb",
+    "duration_s": 58.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vertical Turbine Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check motor thrust-bearing temperature and vibration at the motor top.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "thrust_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check seal leakage at the discharge head.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mechanical_seal",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Verify sump water level against minimum submergence.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_bell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change motor thrust-bearing oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "thrust_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check and readjust impeller lift after the first run-in.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "coupling",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pull the pump; inspect line-shaft bearings and shaft sleeves.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "lineshaft_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect bowls, impellers and wear rings for wear and corrosion.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "bowl_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vortex formation: air-entraining surface vortices. Common cause: low submergence.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "suction_bell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for line-shaft bearing wear: rising vibration. Common cause: sand in water.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "lineshaft_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for thrust bearing overheating: high motor top-bearing temperature. Common cause: excess down-thrust (worn wear rings, throttled operation).",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "thrust_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What carries the hydraulic down-thrust of all impellers in a vertical turbine pump?",
+     "options": [
+      "The suction bell bearing",
+      "The motor thrust bearing",
+      "The column flanges",
+      "The strainer"
+     ],
+     "answer": 1,
+     "explanation": "The rotating element hangs from the motor shaft; the motor thrust bearing carries down-thrust plus rotor weight.",
+     "level": "basic"
+    },
+    {
+     "question": "Why does a VT pump not need priming?",
+     "options": [
+      "It runs very fast",
+      "The bowl assembly is submerged below the water level",
+      "It has a foot valve",
+      "It uses a vacuum pump"
+     ],
+     "answer": 1,
+     "explanation": "The impellers are already flooded.",
+     "level": "basic"
+    },
+    {
+     "question": "What is \"impeller lift\" and where is it set?",
+     "options": [
+      "The head per stage; at the bell",
+      "The axial running clearance of the impellers; set at the top adjusting nut",
+      "The motor slip; at the starter",
+      "The strainer size; at the bell"
+     ],
+     "answer": 1,
+     "explanation": "The adjusting nut positions the rotating element axially relative to the bowls.",
+     "level": "intermediate"
+    },
+    {
+     "question": "According to ANSI/HI 9.8, minimum submergence depends mainly on…",
+     "options": [
+      "Motor power",
+      "Bell diameter and inlet velocity (Froude number)",
+      "Column length",
+      "Number of stages"
+     ],
+     "answer": 1,
+     "explanation": "S = D(1 + 2.3·F_D) with F_D = V/√(gD) (verify current edition).",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which bearing type is used in an open line shaft?",
+     "options": [
+      "Oil-lubricated ball bearings",
+      "Water-lubricated rubber or bronze sleeve bearings",
+      "Magnetic bearings",
+      "No bearings"
+     ],
+     "answer": 1,
+     "explanation": "The pumped water lubricates fluted rubber or bronze bearings.",
+     "level": "basic"
+    },
+    {
+     "question": "Pressure in the bowl assembly is highest…",
+     "options": [
+      "At the suction bell",
+      "After the first stage",
+      "After the top (last) stage",
+      "In the strainer"
+     ],
+     "answer": 2,
+     "explanation": "Each stage adds head.",
+     "level": "basic"
+    },
+    {
+     "question": "A surface vortex at the pump column most likely means…",
+     "options": [
+      "Water level too low / poor approach flow",
+      "Motor overload",
+      "Wrong rotation",
+      "Coupling failure"
+     ],
+     "answer": 0,
+     "explanation": "Low submergence and non-uniform approach flow cause air-entraining vortices.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must a non-reverse ratchet or check valve be considered on VT pumps with threaded line shafts?",
+     "options": [
+      "To raise efficiency",
+      "Back-flow can spin the pump backwards and unscrew shaft couplings",
+      "To reduce noise",
+      "To prime the pump"
+     ],
+     "answer": 1,
+     "explanation": "Reverse rotation can loosen threaded couplings.",
+     "level": "advanced"
+    },
+    {
+     "question": "Which component has this function? \"Supports the motor and the full suspended pump weight, turns the flow 90° from the column into the discharge nozzle and houses the shaft seal.\"",
+     "options": [
+      "Bowl – Stage 3",
+      "Mechanical Seal (Cartridge)",
+      "Discharge Head",
+      "Motor Lower Guide Bearing"
+     ],
+     "answer": 2,
+     "explanation": "Discharge Head: Supports the motor and the full suspended pump weight, turns the flow 90° from the column into the discharge nozzle and houses the shaft seal.",
+     "level": "basic",
+     "part": "discharge_head",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Provides the seal chamber where the shaft leaves the pressurised head; locates the mechanical seal.\"",
+     "options": [
+      "Bowl Wear Ring – Stage 1",
+      "Cooling Fan",
+      "Seal Chamber / Stuffing Box",
+      "Impeller – Stage 2"
+     ],
+     "answer": 2,
+     "explanation": "Seal Chamber / Stuffing Box: Provides the seal chamber where the shaft leaves the pressurised head; locates the mechanical seal.",
+     "level": "basic",
+     "part": "seal_housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Prevents pumped liquid escaping along the rotating shaft at the discharge head.\"",
+     "options": [
+      "Bowl – Stage 1",
+      "Mechanical Seal (Cartridge)",
+      "Rotor (Squirrel Cage)",
+      "Bowl Bearing – Stage 2"
+     ],
+     "answer": 1,
+     "explanation": "Mechanical Seal (Cartridge): Prevents pumped liquid escaping along the rotating shaft at the discharge head.",
+     "level": "basic",
+     "part": "mechanical_seal",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

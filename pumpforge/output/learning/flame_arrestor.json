@@ -1,0 +1,591 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flame_arrestor",
+ "no": 50,
+ "title": "Flame Arrestor",
+ "model_title": "Flame Arrestor (In-Line Deflagration, Crimped-Ribbon Element)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A flame arrestor is a passive device that lets gas flow but stops a flame propagating through it. Its element divides the flow into many narrow channels; a flame entering them loses heat to the metal so quickly that it cannot sustain combustion and is extinguished.",
+   "applications": [
+    "Storage tank vents (with PV valves)",
+    "Vapour recovery and vent headers",
+    "Flare and incinerator lines",
+    "Gas burner and biogas lines"
+   ],
+   "key_points": [
+    "Gap selected for the gas explosion group (MESG)",
+    "Deflagration vs. detonation designs",
+    "Installation distance limits for in-line types",
+    "Fouling raises ΔP"
+   ],
+   "classification": {
+    "family": "Explosion protection device",
+    "type": "In-line deflagration flame arrestor, crimped-ribbon element"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A flame arrestor lets gas or vapour flow through but stops a flame from passing. Its element divides the flow into many very narrow channels; a flame entering them loses heat to the metal so fast that it is cooled below ignition and extinguished. In-line deflagration arrestors protect tanks, vent headers and burners against flashback."
+  },
+  "model_3d": {
+   "asset": "glb/flame_arrestor.glb",
+   "metadata": "meta/flame_arrestor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 19520,
+   "parts": 4
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Gas flows through the housing; the housing enlarges so velocity in the element is low.",
+    "The crimped-ribbon element creates thousands of narrow triangular channels.",
+    "A flame front travelling back towards the element enters the channels."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Gas flows through the housing; the housing enlarges so velocity in the element is low.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The crimped-ribbon element creates thousands of narrow triangular channels.",
+     "part": "element",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A flame front travelling back towards the element enters the channels.",
+     "part": "flame_front",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heat is drawn into the metal walls; the flame cools below ignition and goes out.",
+     "part": "element",
+     "cut": true,
+     "operate": true,
+     "overlay": "quench",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pressure drop rises approximately with flow² and with element fouling."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flame_arrestor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "quench": {
+     "file": "flame_arrestor_quench.glb",
+     "title": "Quenching zone",
+     "description": "The element splits the flow into many narrow channels. A flame entering them loses heat to the metal walls faster than it can release it; it cools below its ignition temperature and is extinguished. The gap size is chosen for the gas group (MESG).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Flame quenched in narrow channels (gap < MESG)",
+       "anchor": [
+        0.1,
+        0.5,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flame_arrestor.json#components",
+   "key_components": "Housing, crimped-ribbon element",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Housing (two halves bolted around the element)",
+     "info_ref": "fa_housing",
+     "function": "Expands the pipe to the element diameter so flow velocity in the element stays low.",
+     "material": "Carbon steel, stainless."
+    },
+    {
+     "id": "element",
+     "name": "Flame Arrestor Element (crimped metal ribbon, narrow gaps quench the flame)",
+     "info_ref": "fa_element",
+     "function": "Quenches the flame in narrow channels.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "pipework",
+     "name": "Adjoining Pipework (flanged)",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "flame_front",
+     "name": "Flame Front (stopped at the element)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 15 – 600",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Operating up to ~1.1 – 2 (deflagration); detonation types higher",
+     "unit": "bar abs"
+    },
+    "temperature": {
+     "typical_range": "Max operating ~60 °C typical for certification (verify)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Flow vs. ΔP per data sheet",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "gas_group": {
+     "typical_range": "IIA, IIB1–IIB3, IIC (ISO 16852)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Respect the maximum distance between ignition source and arrestor stated in the certificate.",
+    "Provide ΔP monitoring and access for element removal."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check ΔP or flow restriction.",
+     "part": "element",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Remove and clean the element.",
+     "part": "element",
+     "interval": "per fouling, e.g. annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace element after a flame event or damage.",
+     "part": "element"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Element fouling/blocking",
+     "category": "blockage",
+     "symptoms": [
+      "High ΔP, tank pressure/vacuum problems"
+     ],
+     "causes": [
+      "Polymerising vapours, dust, ice"
+     ],
+     "remedies": [
+      "Clean; heat trace"
+     ],
+     "part": "element"
+    },
+    {
+     "problem": "Flame transmission",
+     "category": "performance",
+     "symptoms": [
+      "Fire downstream"
+     ],
+     "causes": [
+      "Wrong gas group, damaged element, stabilised burning beyond rating"
+     ],
+     "remedies": [
+      "Correct selection, temperature sensor"
+     ],
+     "part": "element"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flame Arrestor — Introduction",
+    "type": "in_app_tour",
+    "model": "flame_arrestor.glb",
+    "duration_s": 50.3,
+    "script": [
+     {
+      "narration": "This module introduces the Flame Arrestor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A flame arrestor is a passive device that lets gas flow but stops a flame propagating through it.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Its element divides the flow into many narrow channels; a flame entering them loses heat to the metal so quickly that it cannot sustain combustion and is extinguished.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include storage tank vents (with PV valves); vapour recovery and vent headers; flare and incinerator lines; gas burner and biogas lines.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Housing (two halves bolted around the element).",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flame Arrestor — Operation",
+    "type": "in_app_tour",
+    "model": "flame_arrestor.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "How the Flame Arrestor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gas flows through the housing; the housing enlarges so velocity in the element is low.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The crimped-ribbon element creates thousands of narrow triangular channels.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "element",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A flame front travelling back towards the element enters the channels.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "flame_front",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heat is drawn into the metal walls; the flame cools below ignition and goes out.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "element",
+       "cut": true,
+       "operate": true,
+       "overlay": "quench",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The element splits the flow into many narrow channels.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "quench",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flame Arrestor — Maintenance",
+    "type": "in_app_tour",
+    "model": "flame_arrestor.glb",
+    "duration_s": 36.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flame Arrestor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check ΔP or flow restriction.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "element",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Remove and clean the element.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "element",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace element after a flame event or damage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "element",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for element fouling/blocking: high δp, tank pressure/vacuum problems. Common cause: polymerising vapours, dust, ice.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "element",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for flame transmission: fire downstream. Common cause: wrong gas group, damaged element, stabilised burning beyond rating.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "element",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How does a flame arrestor stop a flame?",
+     "options": [
+      "By water spray",
+      "By cooling it in narrow metal channels",
+      "By closing a valve",
+      "By nitrogen"
+     ],
+     "answer": 1,
+     "explanation": "Heat transfer quenching.",
+     "level": "basic"
+    },
+    {
+     "question": "What determines the element gap size?",
+     "options": [
+      "Pipe colour",
+      "Gas explosion group (MESG)",
+      "Flow direction",
+      "Bolt size"
+     ],
+     "answer": 1,
+     "explanation": "Narrower for hydrogen (IIC).",
+     "level": "basic"
+    },
+    {
+     "question": "Rising pressure drop across an arrestor indicates…",
+     "options": [
+      "Normal operation",
+      "Element fouling",
+      "Higher flame speed",
+      "Leak"
+     ],
+     "answer": 1,
+     "explanation": "Clean the element.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Expands the pipe to the element diameter so flow velocity in the element stays low.\"",
+     "options": [
+      "Flame Arrestor Element (crimped metal ribbon, narrow gaps quench the flame)",
+      "Housing (two halves bolted around the element)",
+      "Adjoining Pipework (flanged)",
+      "Flame Front (stopped at the element)"
+     ],
+     "answer": 1,
+     "explanation": "Housing (two halves bolted around the element): Expands the pipe to the element diameter so flow velocity in the element stays low.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Quenches the flame in narrow channels.\"",
+     "options": [
+      "Flame Front (stopped at the element)",
+      "Housing (two halves bolted around the element)",
+      "Flame Arrestor Element (crimped metal ribbon, narrow gaps quench the flame)",
+      "Adjoining Pipework (flanged)"
+     ],
+     "answer": 2,
+     "explanation": "Flame Arrestor Element (crimped metal ribbon, narrow gaps quench the flame): Quenches the flame in narrow channels.",
+     "level": "basic",
+     "part": "element",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

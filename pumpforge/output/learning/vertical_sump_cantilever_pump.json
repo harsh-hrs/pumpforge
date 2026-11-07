@@ -1,0 +1,722 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vertical_sump_cantilever_pump",
+ "no": 9,
+ "title": "Vertical Sump / Cantilever Pump",
+ "model_title": "Vertical Sump / Cantilever Pump (No Submerged Bearings)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vertical sump (cantilever) pump hangs a volute pump into a sump or tank from a mounting plate, with the motor above. In the cantilever design the shaft is supported only by bearings above the mounting plate, so there are no submerged bearings to wear — ideal for dirty or corrosive liquids and dry-running sumps.",
+   "applications": [
+    "Process drains and effluent sumps",
+    "Chemical and acid sumps",
+    "Mineral processing spillage sumps",
+    "Alumina refinery floor sumps and liquor tanks"
+   ],
+   "key_points": [
+    "No submerged bearings (cantilever)",
+    "Can run with the sump level falling to the casing",
+    "Setting depth limited by shaft stiffness",
+    "API 610 VS4 (line-shaft) / VS5 (cantilever)"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow",
+    "configuration": "Vertical cantilever (no line-shaft bearings)",
+    "api_610_type": "VS5 (cantilever sump pump); VS4 has line-shaft bearings"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A vertical pump for sumps and pits where the hydraulic end hangs in the liquid but every bearing is above the mounting plate. A short, very stiff shaft carries the impeller as a cantilever, so there are no submerged bushings to wear out on abrasive or corrosive liquids, and the pump tolerates running dry when the sump empties. Liquid enters the bottom of the volute and leaves up a separate discharge pipe."
+  },
+  "model_3d": {
+   "asset": "glb/vertical_sump_cantilever_pump.glb",
+   "metadata": "meta/vertical_sump_cantilever_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 52502,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters the bottom suction of the submerged volute casing.",
+    "The impeller raises pressure; the volute turns the flow into the discharge pipe.",
+    "The discharge pipe carries the liquid up through the mounting plate."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters the bottom suction of the submerged volute casing.",
+     "part": "volute_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The impeller raises pressure; the volute turns the flow into the discharge pipe.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The discharge pipe carries the liquid up through the mounting plate.",
+     "part": "discharge_pipe",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A stiff, large-diameter shaft is supported only by the bearing housing above the plate.",
+     "part": "bearing_housing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The support column carries the casing from the mounting plate.",
+     "part": "support_column",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Standard volute curve; avoid low-flow operation that increases shaft deflection."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vertical_sump_cantilever_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/vertical_sump_cantilever_pump.json#components",
+   "key_components": "Impeller, shaft, column, casing",
+   "parts": [
+    {
+     "id": "volute_casing",
+     "name": "Volute Casing (Submerged)",
+     "info_ref": "volute_casing",
+     "function": "Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.",
+     "material": "Cast iron, ductile iron, carbon steel, stainless steel (CF8M), duplex."
+    },
+    {
+     "id": "impeller",
+     "name": "Semi-Open Impeller",
+     "info_ref": "impeller_open",
+     "function": "Adds energy to the liquid; open/semi-open design tolerates solids and stringy material.",
+     "material": "Cast iron, stainless steel, high-chrome iron, duplex."
+    },
+    {
+     "id": "support_column",
+     "name": "Casing Cover & Support Column",
+     "info_ref": "support_column",
+     "function": "Supports the casing from the mounting plate and encloses the shaft.",
+     "material": "Carbon or stainless steel."
+    },
+    {
+     "id": "discharge_pipe",
+     "name": "Discharge Pipe",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "mounting_plate",
+     "name": "Sump Cover / Mounting Plate",
+     "info_ref": "mounting_plate",
+     "function": "Covers the sump and carries the whole pump.",
+     "material": "Steel, stainless."
+    },
+    {
+     "id": "bearing_housing",
+     "name": "Bearing Housing (Above Plate)",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearings",
+     "name": "Bearings (Radial Lower, Duplex Thrust Upper)",
+     "info_ref": "thrust_bearing",
+     "function": "Carries axial hydraulic thrust and locates the shaft axially.",
+     "material": "Bearing steel; brass or polyamide cages."
+    },
+    {
+     "id": "pump_shaft",
+     "name": "Cantilever Shaft (Large Diameter)",
+     "info_ref": "cantilever_shaft",
+     "function": "Carries the overhung impeller with small deflection so no lower bearing is needed.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "motor_stand",
+     "name": "Motor Stand",
+     "info_ref": "motor_stand_c",
+     "function": "Supports the motor above the bearing housing.",
+     "material": "Steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "5 – 1,000",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "5 – 80",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "up to ~10",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "960 – 2,900",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "40 – 75",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "setting_depth": {
+     "typical_range": "0.5 – 3",
+     "unit": "m",
+     "note": "cantilever; longer settings need line-shaft (VS4) bearings"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mounting plate bolted level on the sump cover or a steel frame."
+   ],
+   "alignment": [
+    "Check shaft run-out at the casing after installation."
+   ],
+   "piping": [
+    "Support discharge pipe above the plate.",
+    "Keep minimum submergence above the suction to avoid vortices."
+   ],
+   "commissioning": [
+    "Check rotation, current and vibration; confirm level control set-points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check bearing temperature and vibration.",
+     "part": "bearing_housing",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Grease bearings.",
+     "part": "bearings",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Lift unit; inspect impeller and casing for wear and corrosion.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Grease or oil-lubricated bearings above the plate."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Shaft deflection / rubbing",
+     "category": "performance",
+     "symptoms": [
+      "Vibration",
+      "Wear marks at casing"
+     ],
+     "causes": [
+      "Operation far from BEP"
+     ],
+     "remedies": [
+      "Operate near BEP"
+     ],
+     "part": "pump_shaft"
+    },
+    {
+     "problem": "Wear and corrosion",
+     "category": "wear",
+     "symptoms": [
+      "Falling performance"
+     ],
+     "causes": [
+      "Abrasive or corrosive sump liquid"
+     ],
+     "remedies": [
+      "Lined / alloy wet end"
+     ],
+     "part": "impeller"
+    },
+    {
+     "problem": "Vortexing",
+     "category": "performance",
+     "symptoms": [
+      "Noise, air entrainment"
+     ],
+     "causes": [
+      "Low level"
+     ],
+     "remedies": [
+      "Raise stop level"
+     ],
+     "part": "volute_casing"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vertical Sump / Cantilever Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "vertical_sump_cantilever_pump.glb",
+    "duration_s": 55.4,
+    "script": [
+     {
+      "narration": "This module introduces the Vertical Sump / Cantilever Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vertical sump (cantilever) pump hangs a volute pump into a sump or tank from a mounting plate, with the motor above.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In the cantilever design the shaft is supported only by bearings above the mounting plate, so there are no submerged bearings to wear — ideal for dirty or corrosive liquids and dry-running sumps.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process drains and effluent sumps; chemical and acid sumps; mineral processing spillage sumps; alumina refinery floor sumps and liquor tanks.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Volute Casing (Submerged), Semi-Open Impeller, Cantilever Shaft (Large Diameter).",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vertical Sump / Cantilever Pump — Operation",
+    "type": "in_app_tour",
+    "model": "vertical_sump_cantilever_pump.glb",
+    "duration_s": 32.8,
+    "script": [
+     {
+      "narration": "How the Vertical Sump / Cantilever Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters the bottom suction of the submerged volute casing.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "volute_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The impeller raises pressure; the volute turns the flow into the discharge pipe.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The discharge pipe carries the liquid up through the mounting plate.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "discharge_pipe",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A stiff, large-diameter shaft is supported only by the bearing housing above the plate.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "bearing_housing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The support column carries the casing from the mounting plate.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "support_column",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vertical Sump / Cantilever Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "vertical_sump_cantilever_pump.glb",
+    "duration_s": 37.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vertical Sump / Cantilever Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check bearing temperature and vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Grease bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift unit; inspect impeller and casing for wear and corrosion.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for shaft deflection / rubbing: vibration. Common cause: operation far from bep.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "pump_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wear and corrosion: falling performance. Common cause: abrasive or corrosive sump liquid.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vortexing: noise, air entrainment. Common cause: low level.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "volute_casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What distinguishes a cantilever sump pump?",
+     "options": [
+      "It has submerged bearings",
+      "No bearings below the mounting plate",
+      "It is horizontal",
+      "It has no motor"
+     ],
+     "answer": 1,
+     "explanation": "Bearings are all above the plate.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are cantilever sump pumps good for dirty liquids?",
+     "options": [
+      "They run faster",
+      "No submerged bearings to be worn by solids",
+      "They are cheaper",
+      "They self-prime"
+     ],
+     "answer": 1,
+     "explanation": "Bearings are kept out of the liquid.",
+     "level": "basic"
+    },
+    {
+     "question": "What limits setting depth?",
+     "options": [
+      "Motor size",
+      "Shaft stiffness/deflection",
+      "Flange size",
+      "Seal type"
+     ],
+     "answer": 1,
+     "explanation": "Long overhung shafts deflect.",
+     "level": "basic"
+    },
+    {
+     "question": "API 610 cantilever type is…",
+     "options": [
+      "VS1",
+      "VS4",
+      "VS5",
+      "OH1"
+     ],
+     "answer": 2,
+     "explanation": "VS5 = cantilever; VS4 = line-shaft driven sump pump.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.\"",
+     "options": [
+      "Semi-Open Impeller",
+      "Flexible Coupling",
+      "Vertical Motor – Fan Cover",
+      "Volute Casing (Submerged)"
+     ],
+     "answer": 3,
+     "explanation": "Volute Casing (Submerged): Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.",
+     "level": "basic",
+     "part": "volute_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the liquid; open/semi-open design tolerates solids and stringy material.\"",
+     "options": [
+      "Flexible Coupling",
+      "Semi-Open Impeller",
+      "Vertical Motor – Fan Cover",
+      "Motor Stand"
+     ],
+     "answer": 1,
+     "explanation": "Semi-Open Impeller: Adds energy to the liquid; open/semi-open design tolerates solids and stringy material.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the casing from the mounting plate and encloses the shaft.\"",
+     "options": [
+      "Casing Cover & Support Column",
+      "Sump Cover / Mounting Plate",
+      "Vertical Motor – Frame & End Shields",
+      "Semi-Open Impeller"
+     ],
+     "answer": 0,
+     "explanation": "Casing Cover & Support Column: Supports the casing from the mounting plate and encloses the shaft.",
+     "level": "basic",
+     "part": "support_column",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

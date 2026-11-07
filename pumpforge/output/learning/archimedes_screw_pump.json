@@ -1,0 +1,664 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "archimedes_screw_pump",
+ "no": 31,
+ "title": "Archimedes Screw Pump",
+ "model_title": "Archimedes Screw Pump (Inclined, Open Trough)",
+ "category": "4 · Special-Purpose Pumping Systems",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An Archimedes screw pump is a large, slowly rotating screw set at an incline in an open trough. Each turn of the flights traps a pocket of water and lifts it up the slope to discharge at the top. It handles large flows at low lift, passes debris and is self-regulating: flow follows the inlet level.",
+   "applications": [
+    "Wastewater treatment plant inlet lift",
+    "Storm water and land drainage",
+    "Return activated sludge",
+    "Hydropower (reverse operation as a generator)"
+   ],
+   "key_points": [
+    "Low speed (20–100 rpm)",
+    "Self-regulating with inlet level",
+    "Clog-free; gentle on fish",
+    "Lift limited (~8–10 m per screw)"
+   ],
+   "classification": {
+    "family": "Positive displacement (open screw) / kinetic lift",
+    "configuration": "Inclined open screw in a trough, 3 flights"
+   },
+   "hi_family": "special",
+   "summary": "One of the oldest pumps: a large screw — helical flights welded around a central tube — is set at an angle in a close-fitting trough with its lower end in the inlet basin. As the screw turns slowly, each flight scoops water and carries it upward in a pocket bounded by the flights and the trough until it spills into the outlet channel. Flow adjusts itself to the inlet level, efficiency stays high over a wide range, and large solids and fish can pass, so screws are used for wastewater lift stations, storm water, land drainage and return sludge."
+  },
+  "model_3d": {
+   "asset": "glb/archimedes_screw_pump.glb",
+   "metadata": "meta/archimedes_screw_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 47330,
+   "parts": 14
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water at the lower basin fills the pockets between flights at the bottom of the screw.",
+    "The rotating screw lifts each pocket up the trough.",
+    "Pockets empty into the outlet channel at the top."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water at the lower basin fills the pockets between flights at the bottom of the screw.",
+     "part": "lower_basin",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotating screw lifts each pocket up the trough.",
+     "part": "screw",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pockets empty into the outlet channel at the top.",
+     "part": "outlet_channel",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A gear reducer and motor drive the screw at low speed; bearings at both ends carry it.",
+     "part": "gear_reducer",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow rises with inlet level up to the \"fill point\"; efficiency stays high over a wide range of flows."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "archimedes_screw_pump_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/archimedes_screw_pump.json#components",
+   "key_components": "Screw, trough, bearings, drive",
+   "parts": [
+    {
+     "id": "screw",
+     "name": "Screw (Central Tube + 3 Helical Flights)",
+     "info_ref": "arch_screw",
+     "function": "Lifts water in pockets formed between flights and trough.",
+     "material": "Carbon steel (coated), stainless."
+    },
+    {
+     "id": "trough",
+     "name": "Trough (Concrete/Steel, Close Clearance)",
+     "info_ref": "arch_trough",
+     "function": "Close-fitting bed that seals the pockets.",
+     "material": "Concrete, steel."
+    },
+    {
+     "id": "lower_bearing",
+     "name": "Lower (Submerged) Bearing & Support",
+     "info_ref": "arch_lower_bearing",
+     "function": "Supports the submerged lower end.",
+     "material": "Steel, bronze, polymer."
+    },
+    {
+     "id": "upper_bearing",
+     "name": "Upper Bearing (Radial + Thrust)",
+     "info_ref": "thrust_bearing",
+     "function": "Carries axial hydraulic thrust and locates the shaft axially.",
+     "material": "Bearing steel; brass or polyamide cages."
+    },
+    {
+     "id": "gear_reducer",
+     "name": "Gear Reducer (High Ratio)",
+     "info_ref": "gear_reducer_a",
+     "function": "Reduces motor speed to the very low screw speed.",
+     "material": "Cast iron, alloy gears."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "lower_basin",
+     "name": "Inlet Basin (Lower Level)",
+     "info_ref": "arch_basin",
+     "function": "Inlet and outlet structures.",
+     "material": "Concrete."
+    },
+    {
+     "id": "outlet_channel",
+     "name": "Outlet Channel (Upper Level)",
+     "info_ref": "arch_basin",
+     "function": "Inlet and outlet structures.",
+     "material": "Concrete."
+    },
+    {
+     "id": "water_pockets",
+     "name": "Water Pockets (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.01 – 5+",
+     "unit": "m³/s"
+    },
+    "head": {
+     "typical_range": "up to ~8 – 10",
+     "unit": "m per screw"
+    },
+    "pressure": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "20 – 100",
+     "unit": "rpm",
+     "note": "lower for larger diameters"
+    },
+    "efficiency": {
+     "typical_range": "65 – 80",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "inclination": {
+     "typical_range": "22 – 38",
+     "unit": "°",
+     "note": "30–38° typical"
+    },
+    "diameter": {
+     "typical_range": "0.3 – 5",
+     "unit": "m"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Concrete trough and supports for upper and lower bearings."
+   ],
+   "alignment": [
+    "Screw-to-trough gap set precisely along the length."
+   ],
+   "piping": [
+    "Open channels; trash screens upstream optional."
+   ],
+   "commissioning": [
+    "Check trough clearance and lower bearing lubrication."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check lower bearing lubrication.",
+     "part": "lower_bearing",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change gearbox oil.",
+     "part": "gear_reducer",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect flights and trough gap.",
+     "part": "screw"
+    }
+   ],
+   "lubrication": [
+    "Grease to the submerged lower bearing (automatic lubricator)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Lower bearing failure",
+     "category": "bearing",
+     "symptoms": [
+      "Noise, wobble"
+     ],
+     "causes": [
+      "Lubrication loss"
+     ],
+     "remedies": [
+      "Restore lubrication"
+     ],
+     "part": "lower_bearing"
+    },
+    {
+     "problem": "Trough gap growth",
+     "category": "performance",
+     "symptoms": [
+      "Lower flow"
+     ],
+     "causes": [
+      "Wear of trough grout"
+     ],
+     "remedies": [
+      "Regrout"
+     ],
+     "part": "trough"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Archimedes Screw Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "archimedes_screw_pump.glb",
+    "duration_s": 54.1,
+    "script": [
+     {
+      "narration": "This module introduces the Archimedes Screw Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An Archimedes screw pump is a large, slowly rotating screw set at an incline in an open trough.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Each turn of the flights traps a pocket of water and lifts it up the slope to discharge at the top.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It handles large flows at low lift, passes debris and is self-regulating: flow follows the inlet level.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include wastewater treatment plant inlet lift; storm water and land drainage; return activated sludge; hydropower (reverse operation as a generator).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Screw (Central Tube + 3 Helical Flights).",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Archimedes Screw Pump — Operation",
+    "type": "in_app_tour",
+    "model": "archimedes_screw_pump.glb",
+    "duration_s": 30.0,
+    "script": [
+     {
+      "narration": "How the Archimedes Screw Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water at the lower basin fills the pockets between flights at the bottom of the screw.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "lower_basin",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotating screw lifts each pocket up the trough.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pockets empty into the outlet channel at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outlet_channel",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A gear reducer and motor drive the screw at low speed; bearings at both ends carry it.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "gear_reducer",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Archimedes Screw Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "archimedes_screw_pump.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Archimedes Screw Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check lower bearing lubrication.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lower_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change gearbox oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gear_reducer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect flights and trough gap.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for lower bearing failure: noise, wobble. Common cause: lubrication loss.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "lower_bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for trough gap growth: lower flow. Common cause: wear of trough grout.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "trough",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is an Archimedes screw \"self-regulating\"?",
+     "options": [
+      "A VFD controls it",
+      "Flow automatically follows the inlet water level",
+      "It has a float valve",
+      "It is not"
+     ],
+     "answer": 1,
+     "explanation": "Pockets fill only as far as the level allows.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical rotation speed?",
+     "options": [
+      "20–100 rpm",
+      "1,500 rpm",
+      "3,000 rpm",
+      "10,000 rpm"
+     ],
+     "answer": 0,
+     "explanation": "Very slow.",
+     "level": "basic"
+    },
+    {
+     "question": "Main limitation?",
+     "options": [
+      "Low flow",
+      "Limited lift per screw",
+      "Cannot handle debris",
+      "Needs priming"
+     ],
+     "answer": 1,
+     "explanation": "About 8–10 m.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Lifts water in pockets formed between flights and trough.\"",
+     "options": [
+      "Lower (Submerged) Bearing & Support",
+      "Electric Motor – Bearings (DE & NDE)",
+      "Upper Bearing (Radial + Thrust)",
+      "Screw (Central Tube + 3 Helical Flights)"
+     ],
+     "answer": 3,
+     "explanation": "Screw (Central Tube + 3 Helical Flights): Lifts water in pockets formed between flights and trough.",
+     "level": "basic",
+     "part": "screw",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Close-fitting bed that seals the pockets.\"",
+     "options": [
+      "Outlet Channel (Upper Level)",
+      "Electric Motor – Frame & End Shields",
+      "Trough (Concrete/Steel, Close Clearance)",
+      "Water Pockets (Tracers)"
+     ],
+     "answer": 2,
+     "explanation": "Trough (Concrete/Steel, Close Clearance): Close-fitting bed that seals the pockets.",
+     "level": "basic",
+     "part": "trough",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the submerged lower end.\"",
+     "options": [
+      "Lower (Submerged) Bearing & Support",
+      "Inlet Basin (Lower Level)",
+      "Outlet Channel (Upper Level)",
+      "Electric Motor – Frame & End Shields"
+     ],
+     "answer": 0,
+     "explanation": "Lower (Submerged) Bearing & Support: Supports the submerged lower end.",
+     "level": "basic",
+     "part": "lower_bearing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

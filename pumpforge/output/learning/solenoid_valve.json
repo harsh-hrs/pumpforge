@@ -1,0 +1,672 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "solenoid_valve",
+ "no": 44,
+ "title": "Solenoid Valve",
+ "model_title": "Solenoid Valve (2/2 NC, Pilot-Operated Diaphragm)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A solenoid valve is an electrically operated on/off valve. Current in the coil creates a magnetic field that lifts a plunger. In the pilot-operated (servo) type modelled, the plunger opens a small pilot orifice; the pressure above the diaphragm bleeds to the outlet and line pressure lifts the diaphragm off the main seat. When the coil is switched off the spring closes the pilot and the diaphragm reseats.",
+   "applications": [
+    "Water, air and gas shut-off in automation",
+    "Burner fuel shut-off (safety shut-off valves)",
+    "Cooling water and process utilities",
+    "Pneumatic control circuits",
+    "Irrigation"
+   ],
+   "key_points": [
+    "Normally closed (NC) or normally open (NO)",
+    "Pilot-operated needs a minimum ΔP; direct-acting does not",
+    "Fast acting — beware water hammer",
+    "Coil voltage and duty must match"
+   ],
+   "classification": {
+    "family": "Automated on/off valve",
+    "type": "2/2-way normally closed, servo (pilot) operated diaphragm"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A solenoid valve opens and closes electrically. In this normally-closed, pilot-operated design the coil lifts a small plunger, which opens a pilot orifice; pressure above the diaphragm bleeds away and line pressure lifts the diaphragm off the main seat. De-energising the coil lets the spring push the plunger back and the valve closes. A minimum pressure difference is needed to operate."
+  },
+  "model_3d": {
+   "asset": "glb/solenoid_valve.glb",
+   "metadata": "meta/solenoid_valve.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6194,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "De-energised: the spring holds the plunger on the pilot orifice; inlet pressure above the diaphragm keeps it closed.",
+    "Energised: the coil field pulls the plunger up.",
+    "The pilot orifice opens; cover pressure escapes to the outlet faster than the bleed hole refills it."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "De-energised: the spring holds the plunger on the pilot orifice; inlet pressure above the diaphragm keeps it closed.",
+     "part": "plunger",
+     "cut": true,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Energised: the coil field pulls the plunger up.",
+     "part": "coil",
+     "cut": true,
+     "operate": true,
+     "overlay": "magnetic_field",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pilot orifice opens; cover pressure escapes to the outlet faster than the bleed hole refills it.",
+     "part": "diaphragm",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Line pressure lifts the diaphragm and flow passes the main orifice.",
+     "part": "diaphragm",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "De-energising lets the plunger drop; pressure builds above the diaphragm and the valve closes.",
+     "part": "armature_tube",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "On/off device; response time from tens of milliseconds (direct) to ~1 s (large pilot valves)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "solenoid_valve_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "magnetic_field": {
+     "file": "solenoid_valve_magnetic_field.glb",
+     "title": "Magnetic field",
+     "description": "When the coil is energised its magnetic field (loops) is concentrated by the plunger and pulls it up, opening the pilot orifice. Cover pressure then bleeds to the outlet, so line pressure lifts the diaphragm and the main orifice opens.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Coil energised → field pulls plunger up",
+       "anchor": [
+        0.12,
+        0.31,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/solenoid_valve.json#components",
+   "key_components": "Coil, plunger, pilot orifice, diaphragm",
+   "parts": [
+    {
+     "id": "body",
+     "name": "Valve Body (Brass) with Main Orifice",
+     "info_ref": "sv_body",
+     "function": "Contains inlet, main orifice and outlet.",
+     "material": "Brass, stainless, plastic."
+    },
+    {
+     "id": "diaphragm",
+     "name": "Main Diaphragm with Pilot & Bleed Orifices",
+     "info_ref": "sv_diaphragm",
+     "function": "Main closing element moved by pressure difference.",
+     "material": "NBR, EPDM, FKM."
+    },
+    {
+     "id": "armature_tube",
+     "name": "Bonnet & Armature (Plunger) Tube",
+     "info_ref": "sv_tube",
+     "function": "Pressure-tight guide for the plunger through the coil.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "plunger",
+     "name": "Plunger (Armature), Pilot Seal & Spring",
+     "info_ref": "sv_plunger",
+     "function": "Moved by the magnetic field to open the pilot orifice.",
+     "material": "Magnetic stainless."
+    },
+    {
+     "id": "coil",
+     "name": "Solenoid Coil (Encapsulated) & Connector",
+     "info_ref": "sv_coil",
+     "function": "Produces the magnetic field when energised.",
+     "material": "Copper, epoxy."
+    },
+    {
+     "id": "pipework",
+     "name": "Threaded Pipework",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "1/8\" – 3\" (DN 3 – 80)",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "up to ~16 – 40 (body); min ΔP ≈ 0.1 – 0.5 bar for pilot types",
+     "unit": "bar"
+    },
+    "temperature": {
+     "typical_range": "-10 to 90 (NBR); up to ~180 (PTFE/FKM, steam types)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Kv ≈ 0.1 – 100",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {
+    "coil": {
+     "typical_range": "12/24 V DC, 24/110/230 V AC; ~5 – 20 W",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Fit a strainer upstream — dirt blocks the bleed and pilot orifices.",
+    "Install with the coil upward where recommended."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check coil temperature and operation.",
+     "part": "coil",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean diaphragm, bleed and pilot orifices.",
+     "part": "diaphragm",
+     "interval": "per service"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace diaphragm, plunger seal and spring with a repair kit.",
+     "part": "plunger"
+    }
+   ],
+   "lubrication": [
+    "None — do not oil the plunger tube."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Valve does not open",
+     "category": "valves",
+     "symptoms": [
+      "Coil energised, no flow"
+     ],
+     "causes": [
+      "ΔP below minimum",
+      "Burnt coil",
+      "Blocked pilot"
+     ],
+     "remedies": [
+      "Check ΔP, coil resistance, clean pilot"
+     ],
+     "part": "coil"
+    },
+    {
+     "problem": "Valve does not close",
+     "category": "valves",
+     "symptoms": [
+      "Flow continues"
+     ],
+     "causes": [
+      "Blocked bleed hole, torn diaphragm, dirt on seat"
+     ],
+     "remedies": [
+      "Clean/replace diaphragm"
+     ],
+     "part": "diaphragm"
+    },
+    {
+     "problem": "Coil burn-out",
+     "category": "performance",
+     "symptoms": [
+      "Coil open-circuit, smell"
+     ],
+     "causes": [
+      "Wrong voltage, stuck plunger (AC)"
+     ],
+     "remedies": [
+      "Correct voltage; free plunger"
+     ],
+     "part": "coil"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Solenoid Valve — Introduction",
+    "type": "in_app_tour",
+    "model": "solenoid_valve.glb",
+    "duration_s": 55.3,
+    "script": [
+     {
+      "narration": "This module introduces the Solenoid Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A solenoid valve is an electrically operated on/off valve.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Current in the coil creates a magnetic field that lifts a plunger.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In the pilot-operated (servo) type modelled, the plunger opens a small pilot orifice; the pressure above the diaphragm bleeds to the outlet and line pressure lifts the diaphragm off the main seat.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include water, air and gas shut-off in automation; burner fuel shut-off (safety shut-off valves); cooling water and process utilities; pneumatic control circuits.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Valve Body (Brass) with Main Orifice.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Solenoid Valve — Operation",
+    "type": "in_app_tour",
+    "model": "solenoid_valve.glb",
+    "duration_s": 47.2,
+    "script": [
+     {
+      "narration": "How the Solenoid Valve works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "De-energised: the spring holds the plunger on the pilot orifice; inlet pressure above the diaphragm keeps it closed.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "plunger",
+       "cut": true,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Energised: the coil field pulls the plunger up.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coil",
+       "cut": true,
+       "operate": true,
+       "overlay": "magnetic_field",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pilot orifice opens; cover pressure escapes to the outlet faster than the bleed hole refills it.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "diaphragm",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Line pressure lifts the diaphragm and flow passes the main orifice.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "diaphragm",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "De-energising lets the plunger drop; pressure builds above the diaphragm and the valve closes.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "armature_tube",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "When the coil is energised its magnetic field (loops) is concentrated by the plunger and pulls it up, opening the pilot orifice.",
+      "duration_s": 9.2,
+      "action": {
+       "overlay": "magnetic_field",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Solenoid Valve — Maintenance",
+    "type": "in_app_tour",
+    "model": "solenoid_valve.glb",
+    "duration_s": 42.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Solenoid Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check coil temperature and operation.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean diaphragm, bleed and pilot orifices.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragm",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace diaphragm, plunger seal and spring with a repair kit.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "plunger",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for valve does not open: coil energised, no flow. Common cause: δp below minimum.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for valve does not close: flow continues. Common cause: blocked bleed hole, torn diaphragm, dirt on seat.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "diaphragm",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for coil burn-out: coil open-circuit, smell. Common cause: wrong voltage, stuck plunger (ac).",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does a pilot-operated solenoid valve need a minimum pressure difference?",
+     "options": [
+      "To cool the coil",
+      "Line pressure is what lifts the diaphragm",
+      "For the spring",
+      "It does not"
+     ],
+     "answer": 1,
+     "explanation": "Servo-assisted opening.",
+     "level": "basic"
+    },
+    {
+     "question": "NC means…",
+     "options": [
+      "Normally closed: closed when de-energised",
+      "Never closes",
+      "No coil",
+      "Needle controlled"
+     ],
+     "answer": 0,
+     "explanation": "Fail-closed on power loss.",
+     "level": "basic"
+    },
+    {
+     "question": "A common cause of AC coil burn-out is…",
+     "options": [
+      "Low pressure",
+      "Plunger stuck so the coil draws high inrush current",
+      "Clean water",
+      "Too short cable"
+     ],
+     "answer": 1,
+     "explanation": "AC coil current falls only when the plunger closes the magnetic circuit.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Contains inlet, main orifice and outlet.\"",
+     "options": [
+      "Threaded Pipework",
+      "Valve Body (Brass) with Main Orifice",
+      "Bonnet & Armature (Plunger) Tube",
+      "Solenoid Coil (Encapsulated) & Connector"
+     ],
+     "answer": 1,
+     "explanation": "Valve Body (Brass) with Main Orifice: Contains inlet, main orifice and outlet.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Main closing element moved by pressure difference.\"",
+     "options": [
+      "Plunger (Armature), Pilot Seal & Spring",
+      "Main Diaphragm with Pilot & Bleed Orifices",
+      "Threaded Pipework",
+      "Bonnet & Armature (Plunger) Tube"
+     ],
+     "answer": 1,
+     "explanation": "Main Diaphragm with Pilot & Bleed Orifices: Main closing element moved by pressure difference.",
+     "level": "basic",
+     "part": "diaphragm",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Pressure-tight guide for the plunger through the coil.\"",
+     "options": [
+      "Main Diaphragm with Pilot & Bleed Orifices",
+      "Solenoid Coil (Encapsulated) & Connector",
+      "Valve Body (Brass) with Main Orifice",
+      "Bonnet & Armature (Plunger) Tube"
+     ],
+     "answer": 3,
+     "explanation": "Bonnet & Armature (Plunger) Tube: Pressure-tight guide for the plunger through the coil.",
+     "level": "basic",
+     "part": "armature_tube",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

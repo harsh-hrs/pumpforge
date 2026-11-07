@@ -1,0 +1,753 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "diaphragm_metering_pump",
+ "no": 27,
+ "title": "Diaphragm Metering Pump",
+ "model_title": "Diaphragm Metering (Dosing) Pump, Hydraulically Actuated",
+ "category": "3 · Reciprocating Positive-Displacement Pumps",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A diaphragm metering pump delivers a precise, adjustable volume per stroke: a diaphragm separates the liquid from the drive, and its stroke is set by a stroke-length adjustment and speed. In the hydraulic design modelled, a plunger moves hydraulic oil that flexes the diaphragm, so the diaphragm is evenly supported and suits higher pressures.",
+   "applications": [
+    "Chemical dosing: chlorine/hypochlorite, coagulants, acids, caustic",
+    "Boiler and cooling-water treatment",
+    "Refinery and oil-field chemical injection",
+    "Alumina: flocculant and additive dosing"
+   ],
+   "key_points": [
+    "Leak-free (diaphragm)",
+    "Accuracy typically ±1 % steady-state (API 675)",
+    "Turndown 10:1 by stroke, more with speed",
+    "Check valves on the liquid end"
+   ],
+   "classification": {
+    "family": "Positive displacement – reciprocating",
+    "configuration": "Hydraulically actuated diaphragm metering pump (API 675 type), simplex"
+   },
+   "hi_family": "positive_displacement_reciprocating",
+   "summary": "A metering (dosing) pump delivers a precise, adjustable volume per stroke. Here a motor turns a worm gear and eccentric that reciprocate a plunger; the plunger does not touch the chemical but pushes on hydraulic oil, which flexes a PTFE diaphragm evenly. As the diaphragm retracts, the suction ball valves open and the head fills; as it advances, they close and the discharge balls lift. Output is set by stroke length (knob) and stroke rate, typically with repeatability of the order of ±1 % — used for chemical injection, water treatment and process dosing where leakage of hazardous chemicals must be avoided."
+  },
+  "model_3d": {
+   "asset": "glb/diaphragm_metering_pump.glb",
+   "metadata": "meta/diaphragm_metering_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 43490,
+   "parts": 18
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor drives a worm gear and eccentric that move the plunger back and forth.",
+    "The stroke-length knob sets how far the plunger travels — the flow adjustment.",
+    "The plunger pushes hydraulic oil, which flexes the diaphragm."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor drives a worm gear and eccentric that move the plunger back and forth.",
+     "part": "eccentric",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The stroke-length knob sets how far the plunger travels — the flow adjustment.",
+     "part": "stroke_knob",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The plunger pushes hydraulic oil, which flexes the diaphragm.",
+     "part": "hydraulic_housing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the suction stroke the suction check valve opens and the liquid end fills.",
+     "part": "suction_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the discharge stroke the diaphragm pushes the liquid out through the discharge check valve.",
+     "part": "discharge_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow nearly linear with stroke length and speed; almost independent of pressure."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "diaphragm_metering_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/diaphragm_metering_pump.json#components",
+   "key_components": "Diaphragm, metering head, drive",
+   "parts": [
+    {
+     "id": "drive_housing",
+     "name": "Drive Housing (Worm Gear & Eccentric)",
+     "info_ref": "mp_drive",
+     "function": "Encloses the speed-reducing worm gear and the stroke mechanism in an oil bath.",
+     "material": "Cast iron/aluminium."
+    },
+    {
+     "id": "worm",
+     "name": "Worm (on Motor Shaft)",
+     "info_ref": "mp_worm",
+     "function": "First reduction stage from motor speed.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "worm_wheel",
+     "name": "Worm Wheel",
+     "info_ref": "mp_wheel",
+     "function": "Drives the eccentric at stroke frequency.",
+     "material": "Phosphor bronze."
+    },
+    {
+     "id": "eccentric",
+     "name": "Eccentric (Stroke-Adjustable Cam)",
+     "info_ref": "mp_eccentric",
+     "function": "Converts rotation into reciprocation; its effective throw sets the stroke length.",
+     "material": "Steel."
+    },
+    {
+     "id": "plunger",
+     "name": "Plunger",
+     "info_ref": "mp_plunger",
+     "function": "Displaces hydraulic oil to move the diaphragm.",
+     "material": "Hardened stainless steel."
+    },
+    {
+     "id": "stroke_knob",
+     "name": "Stroke-Length Adjustment Knob (0–100 %)",
+     "info_ref": "mp_knob",
+     "function": "Sets stroke length (capacity) as a percentage.",
+     "material": "Polymer/steel."
+    },
+    {
+     "id": "hydraulic_housing",
+     "name": "Hydraulic Chamber Housing (with Relief/Refill Valve)",
+     "info_ref": "mp_hydraulic",
+     "function": "Holds hydraulic oil between plunger and diaphragm; includes relief and refill valves that protect the pump and keep the oil volume correct.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "diaphragm",
+     "name": "PTFE Diaphragm (Sandwich)",
+     "info_ref": "mp_diaphragm",
+     "function": "Separates process liquid from hydraulic oil and transmits displacement.",
+     "material": "PTFE, PTFE-faced elastomer."
+    },
+    {
+     "id": "liquid_end",
+     "name": "Liquid End (Pump Head)",
+     "info_ref": "mp_liquid_end",
+     "function": "Process-wetted head that holds the check valves.",
+     "material": "PP, PVDF, 316 SS, Alloy 20, Hastelloy."
+    },
+    {
+     "id": "suction_valve",
+     "name": "Suction Valve (Double Ball)",
+     "info_ref": "mp_ball_valve",
+     "function": "Double ball check valves give tight shut-off for accurate metering.",
+     "material": "Ceramic, PTFE, glass, stainless balls; PTFE/PVDF seats."
+    },
+    {
+     "id": "discharge_valve",
+     "name": "Discharge Valve (Double Ball)",
+     "info_ref": "mp_ball_valve",
+     "function": "Double ball check valves give tight shut-off for accurate metering.",
+     "material": "Ceramic, PTFE, glass, stainless balls; PTFE/PVDF seats."
+    },
+    {
+     "id": "tubing",
+     "name": "Suction & Discharge Tubing",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.1 L/h – 30 m³/h",
+     "unit": ""
+    },
+    "pressure": {
+     "typical_range": "up to ~20 (mechanical); up to ~350+ (hydraulic diaphragm)",
+     "unit": "bar"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "20 – 180",
+     "unit": "strokes/min"
+    },
+    "efficiency": {
+     "typical_range": "—",
+     "unit": "",
+     "note": "accuracy matters more"
+    }
+   },
+   "additional": {
+    "steady_state_accuracy": {
+     "typical_range": "±1",
+     "unit": "%",
+     "note": "API 675 criterion"
+    },
+    "turndown": {
+     "typical_range": "10:1 (stroke), up to 100:1 with VFD",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Skid or bund."
+   ],
+   "alignment": [
+    "Integral drive."
+   ],
+   "piping": [
+    "Back-pressure valve to prevent siphoning; pulsation dampener; calibration column on suction.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked."
+   ],
+   "commissioning": [
+    "Prime the liquid end; calibrate flow at several stroke settings."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check dosing rate with the calibration column.",
+     "part": "liquid_end",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace diaphragm.",
+     "part": "diaphragm",
+     "interval": "per manual"
+    },
+    {
+     "task": "Clean/replace check valves.",
+     "part": "suction_valve",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Change hydraulic and gear oil.",
+     "part": "drive_housing"
+    }
+   ],
+   "lubrication": [
+    "Gear oil and hydraulic oil per manual."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Inaccurate dosing",
+     "category": "performance",
+     "symptoms": [
+      "Wrong flow"
+     ],
+     "causes": [
+      "Dirty check valves, air in liquid end",
+      "No back-pressure (siphoning)"
+     ],
+     "remedies": [
+      "Clean valves; vent; fit back-pressure valve"
+     ],
+     "part": "discharge_valve"
+    },
+    {
+     "problem": "Diaphragm rupture",
+     "category": "performance",
+     "symptoms": [
+      "Leak detector alarm"
+     ],
+     "causes": [
+      "Fatigue, over-pressure"
+     ],
+     "remedies": [
+      "Replace diaphragm"
+     ],
+     "part": "diaphragm"
+    },
+    {
+     "problem": "Gas locking",
+     "category": "performance",
+     "symptoms": [
+      "No delivery"
+     ],
+     "causes": [
+      "Off-gassing chemicals (hypochlorite)"
+     ],
+     "remedies": [
+      "Degassing liquid end"
+     ],
+     "part": "liquid_end"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Diaphragm Metering Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "diaphragm_metering_pump.glb",
+    "duration_s": 53.8,
+    "script": [
+     {
+      "narration": "This module introduces the Diaphragm Metering Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A diaphragm metering pump delivers a precise, adjustable volume per stroke: a diaphragm separates the liquid from the drive, and its stroke is set by a stroke-length adjustment and speed.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In the hydraulic design modelled, a plunger moves hydraulic oil that flexes the diaphragm, so the diaphragm is evenly supported and suits higher pressures.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include chemical dosing: chlorine/hypochlorite, coagulants, acids, caustic; boiler and cooling-water treatment; refinery and oil-field chemical injection; alumina: flocculant and additive dosing.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Diaphragm Metering Pump — Operation",
+    "type": "in_app_tour",
+    "model": "diaphragm_metering_pump.glb",
+    "duration_s": 35.8,
+    "script": [
+     {
+      "narration": "How the Diaphragm Metering Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor drives a worm gear and eccentric that move the plunger back and forth.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "eccentric",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The stroke-length knob sets how far the plunger travels — the flow adjustment.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "stroke_knob",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The plunger pushes hydraulic oil, which flexes the diaphragm.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hydraulic_housing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the suction stroke the suction check valve opens and the liquid end fills.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "suction_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the discharge stroke the diaphragm pushes the liquid out through the discharge check valve.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "discharge_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Diaphragm Metering Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "diaphragm_metering_pump.glb",
+    "duration_s": 42.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Diaphragm Metering Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check dosing rate with the calibration column.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid_end",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace diaphragm.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragm",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean/replace check valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change hydraulic and gear oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for inaccurate dosing: wrong flow. Common cause: dirty check valves, air in liquid end.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "discharge_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for diaphragm rupture: leak detector alarm. Common cause: fatigue, over-pressure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "diaphragm",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for gas locking: no delivery. Common cause: off-gassing chemicals (hypochlorite).",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "liquid_end",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is the flow of a metering pump usually adjusted?",
+     "options": [
+      "Throttling valve",
+      "Stroke length and stroke frequency",
+      "Impeller trimming",
+      "Bypass only"
+     ],
+     "answer": 1,
+     "explanation": "Both change displaced volume per time.",
+     "level": "basic"
+    },
+    {
+     "question": "Why fit a back-pressure valve on a dosing line into a low-pressure point?",
+     "options": [
+      "To increase flow",
+      "To prevent siphoning/over-dosing",
+      "To cool",
+      "To prime"
+     ],
+     "answer": 1,
+     "explanation": "Ensures valves seat properly.",
+     "level": "basic"
+    },
+    {
+     "question": "Which standard covers controlled-volume (metering) pumps?",
+     "options": [
+      "API 610",
+      "API 674",
+      "API 675",
+      "NFPA 20"
+     ],
+     "answer": 2,
+     "explanation": "API 675.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Advantage of hydraulic actuation of the diaphragm?",
+     "options": [
+      "Lower cost",
+      "Diaphragm evenly supported by oil — higher pressures and longer life",
+      "No oil needed",
+      "Higher speed"
+     ],
+     "answer": 1,
+     "explanation": "Balanced pressure across the diaphragm.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the speed-reducing worm gear and the stroke mechanism in an oil bath.\"",
+     "options": [
+      "Stroke-Length Adjustment Knob (0–100 %)",
+      "Vertical Motor – Frame & End Shields",
+      "Drive Housing (Worm Gear & Eccentric)",
+      "Worm Wheel"
+     ],
+     "answer": 2,
+     "explanation": "Drive Housing (Worm Gear & Eccentric): Encloses the speed-reducing worm gear and the stroke mechanism in an oil bath.",
+     "level": "basic",
+     "part": "drive_housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"First reduction stage from motor speed.\"",
+     "options": [
+      "Plunger",
+      "Suction & Discharge Tubing",
+      "Drive Housing (Worm Gear & Eccentric)",
+      "Worm (on Motor Shaft)"
+     ],
+     "answer": 3,
+     "explanation": "Worm (on Motor Shaft): First reduction stage from motor speed.",
+     "level": "basic",
+     "part": "worm",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drives the eccentric at stroke frequency.\"",
+     "options": [
+      "Worm Wheel",
+      "Plunger",
+      "Suction & Discharge Tubing",
+      "Drive Housing (Worm Gear & Eccentric)"
+     ],
+     "answer": 0,
+     "explanation": "Worm Wheel: Drives the eccentric at stroke frequency.",
+     "level": "basic",
+     "part": "worm_wheel",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

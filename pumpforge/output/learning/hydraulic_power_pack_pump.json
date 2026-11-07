@@ -1,0 +1,755 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydraulic_power_pack_pump",
+ "no": 37,
+ "title": "Hydraulic Power Pack Pump",
+ "model_title": "Hydraulic Power Pack (Motor–Pump Unit on Reservoir)",
+ "category": "5 · Industrial Pump Applications",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A hydraulic power pack (HPU) supplies pressurised oil to hydraulic cylinders and motors. A motor drives a positive-displacement pump — here an external gear pump inside the reservoir bell housing — with relief and directional valves on a manifold, an accumulator, filters, a cooler and instrumentation.",
+   "applications": [
+    "Presses and machine tools",
+    "Valve actuators and gate operators",
+    "Mobile and marine equipment",
+    "Alumina and steel plant hydraulics (filter presses, kiln drives)"
+   ],
+   "key_points": [
+    "Built from: External Gear Pump (17); vane or piston pumps for higher pressures",
+    "Relief valve sets maximum pressure",
+    "Cleanliness (ISO 4406) governs component life"
+   ],
+   "classification": {
+    "family": "Package / system (positive displacement pump)",
+    "configuration": "Vertical motor-pump unit on reservoir lid, submerged gear pump"
+   },
+   "hi_family": "application",
+   "summary": "A hydraulic power unit (power pack) converts electrical power into hydraulic power for cylinders and motors. A motor drives a positive-displacement pump (here a submerged gear pump) that draws oil from the reservoir through a strainer and delivers it to a valve manifold. A relief valve limits maximum pressure; directional valves route oil to the actuators; an accumulator stores energy and absorbs shocks; returning oil passes through a filter and cooler back to the tank, where it settles, releases air and cools."
+  },
+  "model_3d": {
+   "asset": "glb/hydraulic_power_pack_pump.glb",
+   "metadata": "meta/hydraulic_power_pack_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 26970,
+   "parts": 21
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor drives the gear pump through the bell housing and coupling.",
+    "The pump draws oil from the reservoir through the suction strainer.",
+    "Oil is delivered to the valve manifold; the relief valve limits pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor drives the gear pump through the bell housing and coupling.",
+     "part": "gear_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pump draws oil from the reservoir through the suction strainer.",
+     "part": "suction_strainer",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil is delivered to the valve manifold; the relief valve limits pressure.",
+     "part": "valve_manifold",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The accumulator stores energy and smooths pressure.",
+     "part": "accumulator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Return oil passes the filter and cooler back to the reservoir.",
+     "part": "return_filter",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow ∝ speed × displacement; pressure set by load up to the relief setting."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydraulic_power_pack_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/hydraulic_power_pack_pump.json#components",
+   "key_components": "Gear, vane or piston pump",
+   "parts": [
+    {
+     "id": "reservoir",
+     "name": "Oil Reservoir (Tank) with Baffle",
+     "info_ref": "hpu_tank",
+     "function": "Stores oil, allows air release and settling, dissipates heat.",
+     "material": "Steel (painted inside), stainless, aluminium."
+    },
+    {
+     "id": "tank_lid",
+     "name": "Tank Lid (Pump Mounting Plate)",
+     "info_ref": "hpu_lid",
+     "function": "Mounting plate for motor-pump group, valves and filters.",
+     "material": "Steel."
+    },
+    {
+     "id": "bell_housing",
+     "name": "Bell Housing (Motor–Pump Adapter)",
+     "info_ref": "hpu_bell",
+     "function": "Aligns motor and pump and encloses the coupling.",
+     "material": "Aluminium/cast iron."
+    },
+    {
+     "id": "coupling_shaft",
+     "name": "Jaw Coupling & Pump Drive Shaft",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "gear_pump",
+     "name": "Gear Pump Body (Submerged)",
+     "info_ref": "hpu_pump",
+     "function": "Converts mechanical power into hydraulic flow.",
+     "material": "Aluminium body, steel gears."
+    },
+    {
+     "id": "pump_gear_1",
+     "name": "Pump Gear 1",
+     "info_ref": "hpu_gear",
+     "function": "Meshing gears that carry oil from the inlet to the outlet around the housing.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "pump_gear_2",
+     "name": "Pump Gear 2",
+     "info_ref": "hpu_gear",
+     "function": "Meshing gears that carry oil from the inlet to the outlet around the housing.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "suction_strainer",
+     "name": "Suction Strainer",
+     "info_ref": "hpu_strainer",
+     "function": "Protects the pump from large particles.",
+     "material": "Stainless mesh."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "valve_manifold",
+     "name": "Valve Manifold: Relief Valve + Solenoid Directional Valves",
+     "info_ref": "hpu_valves",
+     "function": "Control pressure (relief valve) and direction of flow to actuators.",
+     "material": "Steel/cast iron."
+    },
+    {
+     "id": "accumulator",
+     "name": "Bladder Accumulator",
+     "info_ref": "hpu_accumulator",
+     "function": "Stores pressurised oil, absorbs shocks and pulsation, provides emergency flow.",
+     "material": "Steel, NBR bladder."
+    },
+    {
+     "id": "return_filter",
+     "name": "Return-Line Filter",
+     "info_ref": "hpu_filter",
+     "function": "Removes particles from returning oil.",
+     "material": "Aluminium housing, glass-fibre element."
+    },
+    {
+     "id": "breather_level",
+     "name": "Filler-Breather & Level/Temperature Gauge",
+     "info_ref": "hpu_breather",
+     "function": "Lets air in/out as level changes while filtering it; shows level and temperature.",
+     "material": "Polymer/steel."
+    },
+    {
+     "id": "oil_cooler",
+     "name": "Air–Oil Cooler",
+     "info_ref": "hpu_cooler",
+     "function": "Removes heat generated by losses.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "tubing",
+     "name": "Pressure & Return Tubing",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "pressure_gauge",
+     "name": "System Pressure Gauge",
+     "info_ref": "pressure_gauge",
+     "function": "Indicates suction or discharge pressure for operation and performance checks.",
+     "material": "Stainless steel case and wetted parts."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "1 – 500",
+     "unit": "L/min"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "pressure": {
+     "typical_range": "70 – 350",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 1,800",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "80 – 92 (gear/vane/piston pump overall)",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "oil_cleanliness": {
+     "typical_range": "ISO 4406 e.g. 18/16/13 or better",
+     "unit": "",
+     "note": "system dependent"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level, vibration-isolated base."
+   ],
+   "alignment": [
+    "Bell housing ensures alignment."
+   ],
+   "piping": [
+    "Suction line short and large; hoses rated for pressure."
+   ],
+   "commissioning": [
+    "Flush system; bleed air; set relief valve."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check oil level and temperature.",
+     "part": "breather_level",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace return filter element.",
+     "part": "return_filter",
+     "interval": "per ΔP indicator"
+    },
+    {
+     "task": "Check accumulator pre-charge.",
+     "part": "accumulator",
+     "interval": "6 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Oil analysis and change.",
+     "part": "reservoir"
+    }
+   ],
+   "lubrication": [
+    "Hydraulic oil (ISO VG 32/46/68)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Hot oil"
+     ],
+     "causes": [
+      "Relief valve bypassing continuously, cooler fouled"
+     ],
+     "remedies": [
+      "Adjust/repair; clean cooler"
+     ],
+     "part": "oil_cooler"
+    },
+    {
+     "problem": "Pump wear from contamination",
+     "category": "wear",
+     "symptoms": [
+      "Slow actuators"
+     ],
+     "causes": [
+      "Dirty oil"
+     ],
+     "remedies": [
+      "Filtration"
+     ],
+     "part": "gear_pump"
+    },
+    {
+     "problem": "Pump cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise"
+     ],
+     "causes": [
+      "Clogged strainer, cold oil"
+     ],
+     "remedies": [
+      "Clean; warm oil"
+     ],
+     "part": "suction_strainer"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Power Pack Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "hydraulic_power_pack_pump.glb",
+    "duration_s": 49.2,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Power Pack Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A hydraulic power pack (HPU) supplies pressurised oil to hydraulic cylinders and motors.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A motor drives a positive-displacement pump — here an external gear pump inside the reservoir bell housing — with relief and directional valves on a manifold, an accumulator, filters, a cooler and instrumentation.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include presses and machine tools; valve actuators and gate operators; mobile and marine equipment; alumina and steel plant hydraulics (filter presses, kiln drives).",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Power Pack Pump — Operation",
+    "type": "in_app_tour",
+    "model": "hydraulic_power_pack_pump.glb",
+    "duration_s": 31.4,
+    "script": [
+     {
+      "narration": "How the Hydraulic Power Pack Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor drives the gear pump through the bell housing and coupling.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "gear_pump",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pump draws oil from the reservoir through the suction strainer.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "suction_strainer",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil is delivered to the valve manifold; the relief valve limits pressure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "valve_manifold",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The accumulator stores energy and smooths pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "accumulator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Return oil passes the filter and cooler back to the reservoir.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "return_filter",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Power Pack Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydraulic_power_pack_pump.glb",
+    "duration_s": 41.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Power Pack Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check oil level and temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "breather_level",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace return filter element.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "return_filter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check accumulator pre-charge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "accumulator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Oil analysis and change.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "reservoir",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: hot oil. Common cause: relief valve bypassing continuously, cooler fouled.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "oil_cooler",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pump wear from contamination: slow actuators. Common cause: dirty oil.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "gear_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pump cavitation: noise. Common cause: clogged strainer, cold oil.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "suction_strainer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What sets the maximum system pressure?",
+     "options": [
+      "Pump speed",
+      "The relief valve",
+      "Oil level",
+      "Cooler"
+     ],
+     "answer": 1,
+     "explanation": "Relief valve.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is oil cleanliness critical?",
+     "options": [
+      "Colour",
+      "Contaminants wear pumps and valves",
+      "Smell",
+      "It is not"
+     ],
+     "answer": 1,
+     "explanation": "Tight clearances.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the accumulator do?",
+     "options": [
+      "Cools oil",
+      "Stores pressurised oil energy and dampens pulsations",
+      "Filters oil",
+      "Drives the pump"
+     ],
+     "answer": 1,
+     "explanation": "Gas-charged energy store.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores oil, allows air release and settling, dissipates heat.\"",
+     "options": [
+      "Oil Reservoir (Tank) with Baffle",
+      "Tank Lid (Pump Mounting Plate)",
+      "Bladder Accumulator",
+      "Vertical Motor – Rotor & Shaft"
+     ],
+     "answer": 0,
+     "explanation": "Oil Reservoir (Tank) with Baffle: Stores oil, allows air release and settling, dissipates heat.",
+     "level": "basic",
+     "part": "reservoir",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mounting plate for motor-pump group, valves and filters.\"",
+     "options": [
+      "Bell Housing (Motor–Pump Adapter)",
+      "Tank Lid (Pump Mounting Plate)",
+      "Return-Line Filter",
+      "Vertical Motor – Bearings (DE & NDE)"
+     ],
+     "answer": 1,
+     "explanation": "Tank Lid (Pump Mounting Plate): Mounting plate for motor-pump group, valves and filters.",
+     "level": "basic",
+     "part": "tank_lid",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Aligns motor and pump and encloses the coupling.\"",
+     "options": [
+      "Bladder Accumulator",
+      "Vertical Motor – Rotor & Shaft",
+      "Tank Lid (Pump Mounting Plate)",
+      "Bell Housing (Motor–Pump Adapter)"
+     ],
+     "answer": 3,
+     "explanation": "Bell Housing (Motor–Pump Adapter): Aligns motor and pump and encloses the coupling.",
+     "level": "basic",
+     "part": "bell_housing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,722 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "mixed_flow_pump",
+ "no": 12,
+ "title": "Mixed Flow Pump",
+ "model_title": "Mixed Flow Pump (Vertical Wet-Pit, Single Stage)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A mixed flow pump has impellers whose flow leaves at an angle between radial and axial, combining centrifugal and lift forces. It sits between radial and axial pumps in specific speed: higher flow than a radial pump and more head than an axial pump.",
+   "applications": [
+    "Irrigation and drainage",
+    "Cooling-water intakes",
+    "Municipal raw-water and storm water",
+    "Flood control"
+   ],
+   "key_points": [
+    "Medium-high specific speed",
+    "Non-overloading or slightly rising power curve depending on design",
+    "Vertical (bowl) or horizontal (volute) versions"
+   ],
+   "classification": {
+    "family": "Rotodynamic, mixed flow",
+    "configuration": "Vertical wet pit, single stage, line-shaft",
+    "api_610_type": "VS1 / VS3-style arrangement"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A mixed-flow pump adds energy partly by centrifugal action and partly by the lift of its blades: liquid leaves the impeller diagonally, between the radial direction of a centrifugal pump and the axial direction of a propeller pump. This suits large flows at moderate heads (specific speed roughly between radial and axial machines). In the vertical wet-pit form shown, the bowl hangs in the intake sump and a discharge elbow above the floor turns the flow into the outlet pipe."
+  },
+  "model_3d": {
+   "asset": "glb/mixed_flow_pump.glb",
+   "metadata": "meta/mixed_flow_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 64280,
+   "parts": 24
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water enters through the suction bell.",
+    "The mixed-flow impeller discharges diagonally, adding both centrifugal and lift energy.",
+    "The diffuser bowl removes swirl and converts velocity to pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water enters through the suction bell.",
+     "part": "suction_bell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The mixed-flow impeller discharges diagonally, adding both centrifugal and lift energy.",
+     "part": "impeller_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diffuser bowl removes swirl and converts velocity to pressure.",
+     "part": "bowl_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The column and elbow lead the water to discharge.",
+     "part": "discharge_elbow",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Moderately steep head curve; power approximately flat across the range for many designs."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "mixed_flow_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/mixed_flow_pump.json#components",
+   "key_components": "Mixed-flow impeller, casing, guide vanes",
+   "parts": [
+    {
+     "id": "discharge_elbow",
+     "name": "Discharge Elbow Head & Floor Plate",
+     "info_ref": "discharge_elbow",
+     "function": "Turns the flow from the vertical column into the horizontal discharge pipe, supports the pump from the floor and carries the motor.",
+     "material": "Carbon steel, stainless; coated internally for seawater."
+    },
+    {
+     "id": "stuffing_box",
+     "name": "Stuffing Box Packing & Gland",
+     "info_ref": "gland_packing_v",
+     "function": "Seals the shaft where it leaves the discharge elbow.",
+     "material": "PTFE/aramid/graphite packing."
+    },
+    {
+     "id": "motor_stand",
+     "name": "Motor Stand",
+     "info_ref": "motor_stand_v",
+     "function": "Supports the vertical motor and gives access to coupling and gland.",
+     "material": "Steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Adjustable Spacer Coupling",
+     "info_ref": "coupling_vertical_s",
+     "function": "Transmits torque and axial thrust to the motor thrust bearing; nut sets impeller/propeller axial position.",
+     "material": "Steel."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "column_pipe_1",
+     "name": "Column Pipe – Upper",
+     "info_ref": "column_pipe",
+     "function": "Carries liquid from the bowls to the head and suspends the bowl assembly.",
+     "material": "Carbon, galvanised or stainless steel."
+    },
+    {
+     "id": "column_pipe_2",
+     "name": "Column Pipe – Lower",
+     "info_ref": "column_pipe",
+     "function": "Carries liquid from the bowls to the head and suspends the bowl assembly.",
+     "material": "Carbon, galvanised or stainless steel."
+    },
+    {
+     "id": "bearing_retainer_1",
+     "name": "Bearing Retainer (Spider) 1",
+     "info_ref": "bearing_retainer",
+     "function": "Holds the line-shaft bearing concentric at each column joint.",
+     "material": "Bronze, cast iron, stainless."
+    },
+    {
+     "id": "lineshaft_bearing_1",
+     "name": "Line-Shaft Bearing 1",
+     "info_ref": "lineshaft_bearing",
+     "function": "Supports the line shaft radially between head and bowls.",
+     "material": "Nitrile/neoprene rubber, bronze, polymers."
+    },
+    {
+     "id": "discharge_case",
+     "name": "Discharge Case (Top Bowl)",
+     "info_ref": "discharge_case",
+     "function": "Top bowl: collects flow from the last diffuser and turns it into the column.",
+     "material": "Cast iron, bronze, stainless."
+    },
+    {
+     "id": "discharge_case_bearing",
+     "name": "Discharge Case Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "bowl_1",
+     "name": "Bowl – Pump 1",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts swirl leaving the impeller into pressure and guides flow to the next impeller.",
+     "material": "Cast iron, ductile iron, bronze, stainless or duplex."
+    },
+    {
+     "id": "wear_ring_1",
+     "name": "Bowl Wear Ring – Pump 1",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits recirculation from discharge back to suction.",
+     "material": "Bronze, cast iron, hardened stainless steel; dissimilar hardness to avoid galling."
+    },
+    {
+     "id": "bowl_bearing_1",
+     "name": "Bowl Bearing – Pump 1",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "impeller_1",
+     "name": "Impeller – Pump 1",
+     "info_ref": "impeller_mixed",
+     "function": "Adds energy to the liquid; mixed-flow blades discharge diagonally (between radial and axial).",
+     "material": "Bronze, cast iron, stainless steel, duplex."
+    },
+    {
+     "id": "collet_1",
+     "name": "Taper Lock Collet – Pump 1",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "suction_bell",
+     "name": "Suction Bell",
+     "info_ref": "suction_bell",
+     "function": "Guides liquid smoothly into the first-stage impeller and holds the bottom bearing.",
+     "material": "Cast iron, bronze, stainless."
+    },
+    {
+     "id": "bell_bearing",
+     "name": "Suction Bell Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "pump_shaft",
+     "name": "Pump & Line Shaft",
+     "info_ref": "line_shaft",
+     "function": "Transmits torque from the driver to the bowl shaft.",
+     "material": "Carbon steel, 416/316 stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "200 – 50,000",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "5 – 40",
+     "unit": "m",
+     "note": "per stage"
+    },
+    "pressure": {
+     "typical_range": "low–medium",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "370 – 1,480",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "75 – 90",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "specific_speed_Ns_US": {
+     "typical_range": "4,000 – 9,000",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "As vertical turbine pumps."
+   ],
+   "alignment": [
+    "Plumb column; motor alignment."
+   ],
+   "piping": [
+    "Discharge check and isolation; air valve."
+   ],
+   "commissioning": [
+    "Check submergence and rotation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor vibration and thrust-bearing temperature.",
+     "part": "m_motor_bearings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check impeller clearance.",
+     "part": "wear_ring_1",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect impeller and bowl.",
+     "part": "impeller_1"
+    }
+   ],
+   "lubrication": [
+    "Product-lubricated column bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Vortex / air entrainment",
+     "category": "priming",
+     "symptoms": [
+      "Noise, falling flow"
+     ],
+     "causes": [
+      "Low submergence"
+     ],
+     "remedies": [
+      "Raise level / sump fix"
+     ],
+     "part": "suction_bell"
+    },
+    {
+     "problem": "Wear",
+     "category": "wear",
+     "symptoms": [
+      "Lower performance"
+     ],
+     "causes": [
+      "Silt"
+     ],
+     "remedies": [
+      "Replace wear parts"
+     ],
+     "part": "impeller_1"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Mixed Flow Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "mixed_flow_pump.glb",
+    "duration_s": 50.4,
+    "script": [
+     {
+      "narration": "This module introduces the Mixed Flow Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A mixed flow pump has impellers whose flow leaves at an angle between radial and axial, combining centrifugal and lift forces.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It sits between radial and axial pumps in specific speed: higher flow than a radial pump and more head than an axial pump.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include irrigation and drainage; cooling-water intakes; municipal raw-water and storm water; flood control.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Discharge Case (Top Bowl), Bowl – Pump 1, Bowl Wear Ring – Pump 1, Impeller – Pump 1.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Mixed Flow Pump — Operation",
+    "type": "in_app_tour",
+    "model": "mixed_flow_pump.glb",
+    "duration_s": 25.4,
+    "script": [
+     {
+      "narration": "How the Mixed Flow Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water enters through the suction bell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_bell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The mixed-flow impeller discharges diagonally, adding both centrifugal and lift energy.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "impeller_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diffuser bowl removes swirl and converts velocity to pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "bowl_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The column and elbow lead the water to discharge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "discharge_elbow",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Mixed Flow Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "mixed_flow_pump.glb",
+    "duration_s": 31.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Mixed Flow Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor vibration and thrust-bearing temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "m_motor_bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check impeller clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wear_ring_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impeller and bowl.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vortex / air entrainment: noise, falling flow. Common cause: low submergence.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "suction_bell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wear: lower performance. Common cause: silt.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "A mixed-flow impeller discharges…",
+     "options": [
+      "Purely radially",
+      "Purely axially",
+      "Diagonally, between radial and axial",
+      "Tangentially"
+     ],
+     "answer": 2,
+     "explanation": "Hence the name.",
+     "level": "basic"
+    },
+    {
+     "question": "Compared with an axial pump, a mixed-flow pump gives…",
+     "options": [
+      "Less head",
+      "More head at lower flow",
+      "No head",
+      "Same"
+     ],
+     "answer": 1,
+     "explanation": "Lower specific speed.",
+     "level": "basic"
+    },
+    {
+     "question": "Specific speed of mixed-flow pumps is…",
+     "options": [
+      "Lowest of all",
+      "Between radial and axial",
+      "Highest of all",
+      "Undefined"
+     ],
+     "answer": 1,
+     "explanation": "Ns ≈ 4,000–9,000 (US).",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Turns the flow from the vertical column into the horizontal discharge pipe, supports the pump from the floor and carries the motor.\"",
+     "options": [
+      "Vertical Motor – Rotor & Shaft",
+      "Discharge Elbow Head & Floor Plate",
+      "Stuffing Box Packing & Gland",
+      "Discharge Case Bearing"
+     ],
+     "answer": 1,
+     "explanation": "Discharge Elbow Head & Floor Plate: Turns the flow from the vertical column into the horizontal discharge pipe, supports the pump from the floor and carries the motor.",
+     "level": "basic",
+     "part": "discharge_elbow",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Seals the shaft where it leaves the discharge elbow.\"",
+     "options": [
+      "Column Pipe – Upper",
+      "Impeller – Pump 1",
+      "Stuffing Box Packing & Gland",
+      "Vertical Motor – Bearings (DE & NDE)"
+     ],
+     "answer": 2,
+     "explanation": "Stuffing Box Packing & Gland: Seals the shaft where it leaves the discharge elbow.",
+     "level": "basic",
+     "part": "stuffing_box",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the vertical motor and gives access to coupling and gland.\"",
+     "options": [
+      "Vertical Motor – Stator",
+      "Suction Bell Bearing",
+      "Motor Stand",
+      "Discharge Case (Top Bowl)"
+     ],
+     "answer": 2,
+     "explanation": "Motor Stand: Supports the vertical motor and gives access to coupling and gland.",
+     "level": "basic",
+     "part": "motor_stand",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

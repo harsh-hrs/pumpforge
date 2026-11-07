@@ -1,0 +1,799 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "chemical_dosing_system",
+ "no": 34,
+ "title": "Chemical Dosing System",
+ "model_title": "Chemical Dosing System (Skid-Mounted)",
+ "category": "5 · Industrial Pump Applications",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A chemical dosing system stores a treatment chemical and injects it accurately into a process stream using metering pumps. It typically comprises a storage tank with mixer and level gauge, duty and standby diaphragm metering pumps, suction and discharge lines with calibration column, pulsation dampener and back-pressure valve, all on a bunded skid with a control panel.",
+   "applications": [
+    "Water treatment: chlorine, coagulants, pH control",
+    "Cooling-water and boiler chemical treatment",
+    "Alumina: flocculant, antiscalant and caustic dosing",
+    "Oil & gas: corrosion inhibitor, methanol injection"
+   ],
+   "key_points": [
+    "Built from: Diaphragm Metering Pump (module 27) or Plunger Pump (module 26)",
+    "Duty/standby pumps",
+    "Bund (secondary containment)",
+    "Flow-pacing to process flow"
+   ],
+   "classification": {
+    "family": "Package / system (controlled-volume pumps)",
+    "configuration": "Duty/standby diaphragm metering pumps on bunded skid",
+    "application": "Water treatment, process chemical injection"
+   },
+   "hi_family": "application",
+   "summary": "A chemical dosing system injects a measured quantity of chemical (coagulant, chlorine, inhibitor, pH control, odorant) into a process or water line. Chemical is stored in a tank (often with a mixer), drawn through a strainer by a duty metering pump (with a standby), and delivered through a pulsation dampener and back-pressure valve to an injection quill. A calibration column on the suction lets operators measure the actual pump output; a safety relief valve protects the pump and piping; everything sits on a bunded skid to contain spills."
+  },
+  "model_3d": {
+   "asset": "glb/chemical_dosing_system.glb",
+   "metadata": "meta/chemical_dosing_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 69084,
+   "parts": 30
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The chemical is prepared in the storage tank and kept mixed by the agitator.",
+    "The duty metering pump draws chemical through the suction line.",
+    "The diaphragm displaces a set volume each stroke into the discharge line."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The chemical is prepared in the storage tank and kept mixed by the agitator.",
+     "part": "storage_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The duty metering pump draws chemical through the suction line.",
+     "part": "metering_pump_duty",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diaphragm displaces a set volume each stroke into the discharge line.",
+     "part": "diaphragm_duty",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The control panel paces stroke rate to the process flow or analyser signal.",
+     "part": "control_panel",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bund contains any leakage.",
+     "part": "bund_skid",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow ∝ stroke length × frequency; calibrate with the calibration column."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "chemical_dosing_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/chemical_dosing_system.json#components",
+   "key_components": "Diaphragm or plunger metering pump",
+   "parts": [
+    {
+     "id": "bund_skid",
+     "name": "Bunded Skid (Spill Containment)",
+     "info_ref": "cd_skid",
+     "function": "Supports the equipment and contains spills/leaks.",
+     "material": "Steel (coated), PP, SS."
+    },
+    {
+     "id": "storage_tank",
+     "name": "Chemical Storage Tank (PE) with Contents",
+     "info_ref": "cd_tank",
+     "function": "Stores and (with mixer) keeps the chemical solution uniform.",
+     "material": "HDPE, PP, GRP, SS."
+    },
+    {
+     "id": "agitator",
+     "name": "Agitator (Mixer) Shaft & Impeller",
+     "info_ref": "cd_agitator",
+     "function": "Mixes or keeps solids in suspension.",
+     "material": "Stainless/coated steel."
+    },
+    {
+     "id": "mx_motor_frame",
+     "name": "Agitator Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "mx_stator",
+     "name": "Agitator Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "mx_rotor",
+     "name": "Agitator Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "mx_motor_bearings",
+     "name": "Agitator Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "mx_motor_fan",
+     "name": "Agitator Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "mx_fan_cover",
+     "name": "Agitator Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "level_gauge",
+     "name": "Tank Level Gauge",
+     "info_ref": "level_sensor",
+     "function": "Measures liquid level to start/stop pumps and raise alarms.",
+     "material": "Polymer, stainless steel."
+    },
+    {
+     "id": "metering_pump_duty",
+     "name": "Duty Metering Pump (Diaphragm)",
+     "info_ref": "cd_pump",
+     "function": "Delivers an accurate, adjustable flow of chemical.",
+     "material": "PP/PVDF/SS liquid end."
+    },
+    {
+     "id": "diaphragm_duty",
+     "name": "Duty Pump Diaphragm",
+     "info_ref": "mp_diaphragm",
+     "function": "Flexing membrane that displaces the chemical.",
+     "material": "PTFE."
+    },
+    {
+     "id": "mduty_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "mduty_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "mduty_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "mduty_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "mduty_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "mduty_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "metering_pump_standby",
+     "name": "Standby Metering Pump (Diaphragm)",
+     "info_ref": "cd_pump",
+     "function": "Delivers an accurate, adjustable flow of chemical.",
+     "material": "PP/PVDF/SS liquid end."
+    },
+    {
+     "id": "diaphragm_standby",
+     "name": "Standby Pump Diaphragm",
+     "info_ref": "mp_diaphragm",
+     "function": "Flexing membrane that displaces the chemical.",
+     "material": "PTFE."
+    },
+    {
+     "id": "mstandby_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "mstandby_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "mstandby_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "mstandby_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "mstandby_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "mstandby_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "suction_line",
+     "name": "Suction Line with Strainer & Calibration Column",
+     "info_ref": "cd_suction",
+     "function": "Feeds pumps with flooded suction; strainer protects valves; calibration column measures actual flow.",
+     "material": "PP/PVC/PVDF."
+    },
+    {
+     "id": "discharge_line",
+     "name": "Discharge Line: Pulsation Dampener, PSV, Back-Pressure Valve, Gauge & Injection Quill",
+     "info_ref": "cd_discharge",
+     "function": "Delivers chemical to the injection point with smooth flow and protection.",
+     "material": "PP/PVDF/SS; PTFE diaphragms."
+    },
+    {
+     "id": "control_panel",
+     "name": "Local Control Panel",
+     "info_ref": "control_panel",
+     "function": "Houses starters, protection and control logic for the pumps.",
+     "material": "Painted or stainless steel enclosure; IP rating per location."
+    },
+    {
+     "id": "chemical_tracers",
+     "name": "Chemical Flow (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.1 L/h – 10 m³/h",
+     "unit": ""
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "pressure": {
+     "typical_range": "up to ~20 (mechanical diaphragm)",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "up to ~180",
+     "unit": "strokes/min"
+    },
+    "efficiency": {
+     "typical_range": "—",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "accuracy": {
+     "typical_range": "±1 – 2",
+     "unit": "%"
+    },
+    "bund_volume": {
+     "typical_range": "≥ 110 % of largest tank (common rule — verify local regulations)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level bunded skid; chemical-resistant surfaces."
+   ],
+   "alignment": [
+    "Integral drives."
+   ],
+   "piping": [
+    "Compatible materials (PVC, PVDF, stainless); injection quill at the dosing point; back-pressure valve."
+   ],
+   "commissioning": [
+    "Calibrate each pump; test duty/standby changeover; test leak and level alarms."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check tank level and dosing rate.",
+     "part": "level_gauge",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Calibrate pumps.",
+     "part": "metering_pump_duty",
+     "interval": "monthly"
+    },
+    {
+     "task": "Replace diaphragms and valves.",
+     "part": "diaphragm_duty",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect tank, mixer and piping for chemical attack.",
+     "part": "storage_tank"
+    }
+   ],
+   "lubrication": [
+    "Pump gear oil."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Over- or under-dosing",
+     "category": "performance",
+     "symptoms": [
+      "Process off-spec"
+     ],
+     "causes": [
+      "Siphoning, gas lock, worn valves"
+     ],
+     "remedies": [
+      "Back-pressure valve, degassing, valve service"
+     ],
+     "part": "discharge_line"
+    },
+    {
+     "problem": "Chemical leak",
+     "category": "leakage",
+     "symptoms": [
+      "Liquid in bund"
+     ],
+     "causes": [
+      "Fitting failure, material incompatibility"
+     ],
+     "remedies": [
+      "Repair; correct materials"
+     ],
+     "part": "bund_skid"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Chemical Dosing System — Introduction",
+    "type": "in_app_tour",
+    "model": "chemical_dosing_system.glb",
+    "duration_s": 59.7,
+    "script": [
+     {
+      "narration": "This module introduces the Chemical Dosing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A chemical dosing system stores a treatment chemical and injects it accurately into a process stream using metering pumps.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It typically comprises a storage tank with mixer and level gauge, duty and standby diaphragm metering pumps, suction and discharge lines with calibration column, pulsation dampener and back-pressure valve, all on a bunded skid with a control panel.",
+      "duration_s": 16.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include water treatment: chlorine, coagulants, pH control; cooling-water and boiler chemical treatment; alumina: flocculant, antiscalant and caustic dosing; oil & gas: corrosion inhibitor, methanol injection.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Duty Metering Pump (Diaphragm), Duty Pump Diaphragm, Standby Metering Pump (Diaphragm), Standby Pump Diaphragm.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Chemical Dosing System — Operation",
+    "type": "in_app_tour",
+    "model": "chemical_dosing_system.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "How the Chemical Dosing System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The chemical is prepared in the storage tank and kept mixed by the agitator.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "storage_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The duty metering pump draws chemical through the suction line.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "metering_pump_duty",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diaphragm displaces a set volume each stroke into the discharge line.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "diaphragm_duty",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The control panel paces stroke rate to the process flow or analyser signal.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "control_panel",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bund contains any leakage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bund_skid",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Chemical Dosing System — Maintenance",
+    "type": "in_app_tour",
+    "model": "chemical_dosing_system.glb",
+    "duration_s": 38.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Chemical Dosing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check tank level and dosing rate.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "level_gauge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Calibrate pumps.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "metering_pump_duty",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace diaphragms and valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragm_duty",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tank, mixer and piping for chemical attack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "storage_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for over- or under-dosing: process off-spec. Common cause: siphoning, gas lock, worn valves.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "discharge_line",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chemical leak: liquid in bund. Common cause: fitting failure, material incompatibility.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "bund_skid",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does a dosing skid have a bund?",
+     "options": [
+      "To support the pumps",
+      "Secondary containment of chemical leaks",
+      "To mix chemicals",
+      "For cooling"
+     ],
+     "answer": 1,
+     "explanation": "Spill containment.",
+     "level": "basic"
+    },
+    {
+     "question": "What tool is used to check the actual dosing rate?",
+     "options": [
+      "Pressure gauge",
+      "Calibration column",
+      "Thermometer",
+      "Level switch"
+     ],
+     "answer": 1,
+     "explanation": "Timed drawdown.",
+     "level": "basic"
+    },
+    {
+     "question": "Why duty and standby pumps?",
+     "options": [
+      "Double flow",
+      "Continuity of dosing during maintenance or failure",
+      "Lower cost",
+      "Noise"
+     ],
+     "answer": 1,
+     "explanation": "Redundancy.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supports the equipment and contains spills/leaks.\"",
+     "options": [
+      "Chemical Flow (Tracers)",
+      "Bunded Skid (Spill Containment)",
+      "Discharge Line: Pulsation Dampener, PSV, Back-Pressure Valve, Gauge & Injection Quill",
+      "Agitator Motor – Fan Cover"
+     ],
+     "answer": 1,
+     "explanation": "Bunded Skid (Spill Containment): Supports the equipment and contains spills/leaks.",
+     "level": "basic",
+     "part": "bund_skid",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Stores and (with mixer) keeps the chemical solution uniform.\"",
+     "options": [
+      "Duty Metering Pump (Diaphragm)",
+      "Agitator Motor – Rotor & Shaft",
+      "Chemical Storage Tank (PE) with Contents",
+      "Vertical Motor – Bearings (DE & NDE)"
+     ],
+     "answer": 2,
+     "explanation": "Chemical Storage Tank (PE) with Contents: Stores and (with mixer) keeps the chemical solution uniform.",
+     "level": "basic",
+     "part": "storage_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes or keeps solids in suspension.\"",
+     "options": [
+      "Agitator (Mixer) Shaft & Impeller",
+      "Agitator Motor – Bearings (DE & NDE)",
+      "Vertical Motor – Cooling Fan",
+      "Vertical Motor – Bearings (DE & NDE)"
+     ],
+     "answer": 0,
+     "explanation": "Agitator (Mixer) Shaft & Impeller: Mixes or keeps solids in suspension.",
+     "level": "basic",
+     "part": "agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,625 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "jet_pump_eductor",
+ "no": 29,
+ "title": "Jet Pump / Eductor",
+ "model_title": "Jet Pump / Eductor",
+ "category": "4 · Special-Purpose Pumping Systems",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A jet pump (eductor or ejector) has no moving parts. A motive fluid under pressure accelerates through a converging nozzle into a high-velocity jet; the low static pressure and momentum of the jet entrain the suction fluid, the two streams mix in the throat, and the diffuser converts velocity back into pressure.",
+   "applications": [
+    "Tank mixing and sludge suspension",
+    "Priming centrifugal pumps and vacuum duties",
+    "Deep-well jet pumps for domestic water",
+    "Chemical induction and dewatering",
+    "Steam ejectors for condenser vacuum"
+   ],
+   "key_points": [
+    "No moving parts — robust and simple",
+    "Efficiency typically 10–35 %",
+    "Performance set by area ratio and flow ratio",
+    "Handles solids, corrosives and gas"
+   ],
+   "classification": {
+    "family": "Kinetic – jet (ejector/eductor)",
+    "configuration": "Liquid-motive eductor, single nozzle"
+   },
+   "hi_family": "special",
+   "summary": "A jet pump has no moving parts. A motive fluid (water, steam or air) under pressure accelerates through a converging nozzle into a high-velocity jet. The jet's low static pressure and its momentum drag the surrounding suction fluid into the mixing throat, where the two streams exchange momentum and mix; the diffuser then slows the mixture and converts velocity back into pressure. Efficiency is modest, but the device is simple, robust, self-priming and handles slurries, corrosives and gases."
+  },
+  "model_3d": {
+   "asset": "glb/jet_pump_eductor.glb",
+   "metadata": "meta/jet_pump_eductor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 16964,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Motive liquid accelerates through the converging nozzle into a fast jet.",
+    "Around the jet the pressure falls, drawing suction fluid into the suction chamber.",
+    "In the throat the streams exchange momentum and mix."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Motive liquid accelerates through the converging nozzle into a fast jet.",
+     "part": "motive_nozzle",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Around the jet the pressure falls, drawing suction fluid into the suction chamber.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In the throat the streams exchange momentum and mix.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diffuser slows the mixture and recovers pressure.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gauges on motive, suction and discharge show the operating point.",
+     "part": "instruments",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Entrained flow falls as discharge back-pressure rises; performance depends on the nozzle-to-throat area ratio."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "jet_pump_eductor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/jet_pump_eductor.json#components",
+   "key_components": "Motive nozzle, suction chamber, throat, diffuser",
+   "parts": [
+    {
+     "id": "body",
+     "name": "Eductor Body (Suction Chamber, Throat, Diffuser)",
+     "info_ref": "eductor_body",
+     "function": "Forms the suction chamber, mixing throat and diffuser.",
+     "material": "Cast iron, stainless steel, PVDF, PTFE-lined, carbon steel."
+    },
+    {
+     "id": "motive_nozzle",
+     "name": "Motive Nozzle (Converging)",
+     "info_ref": "motive_nozzle",
+     "function": "Converts motive pressure to a high-velocity jet.",
+     "material": "Hardened stainless, ceramic, tungsten carbide."
+    },
+    {
+     "id": "pipework",
+     "name": "Motive, Suction & Discharge Piping",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "instruments",
+     "name": "Pressure Gauges & Motive Isolation Valve",
+     "info_ref": "pressure_gauge",
+     "function": "Indicates suction or discharge pressure for operation and performance checks.",
+     "material": "Stainless steel case and wetted parts."
+    },
+    {
+     "id": "motive_tracers",
+     "name": "Motive Flow (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "suction_tracers",
+     "name": "Entrained Suction Flow (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "depends on motive flow; entrainment ratio ~0.5 – 4",
+     "unit": "suction/motive"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "pressure": {
+     "typical_range": "motive 2 – 10 typical (liquid)",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "—",
+     "unit": "",
+     "note": "no moving parts"
+    },
+    "efficiency": {
+     "typical_range": "10 – 35",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "suction_lift": {
+     "typical_range": "up to ~7",
+     "unit": "m (liquid motive)"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Pipe-supported."
+   ],
+   "alignment": [
+    "Straight pipe runs before motive and after discharge."
+   ],
+   "piping": [
+    "Avoid restrictions on the discharge; size motive supply for the design pressure."
+   ],
+   "commissioning": [
+    "Set motive pressure; check suction and discharge pressures against the design."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor motive and suction pressure.",
+     "part": "instruments",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure nozzle bore wear.",
+     "part": "motive_nozzle",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect throat for erosion.",
+     "part": "body"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Nozzle wear",
+     "category": "wear",
+     "symptoms": [
+      "Higher motive flow, lower suction"
+     ],
+     "causes": [
+      "Erosion"
+     ],
+     "remedies": [
+      "Replace nozzle"
+     ],
+     "part": "motive_nozzle"
+    },
+    {
+     "problem": "Blockage",
+     "category": "blockage",
+     "symptoms": [
+      "No suction"
+     ],
+     "causes": [
+      "Debris in nozzle"
+     ],
+     "remedies": [
+      "Strainer on motive line"
+     ],
+     "part": "motive_nozzle"
+    },
+    {
+     "problem": "Back-flow into suction",
+     "category": "performance",
+     "symptoms": [
+      "Motive fluid exits suction"
+     ],
+     "causes": [
+      "Discharge blocked"
+     ],
+     "remedies": [
+      "Clear discharge; fit check valve"
+     ],
+     "part": "body"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Jet Pump / Eductor — Introduction",
+    "type": "in_app_tour",
+    "model": "jet_pump_eductor.glb",
+    "duration_s": 53.6,
+    "script": [
+     {
+      "narration": "This module introduces the Jet Pump / Eductor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A jet pump (eductor or ejector) has no moving parts.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A motive fluid under pressure accelerates through a converging nozzle into a high-velocity jet; the low static pressure and momentum of the jet entrain the suction fluid, the two streams mix in the throat, and the diffuser converts velocity back into pressure.",
+      "duration_s": 17.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include tank mixing and sludge suspension; priming centrifugal pumps and vacuum duties; deep-well jet pumps for domestic water; chemical induction and dewatering.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Eductor Body (Suction Chamber, Throat, Diffuser).",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Jet Pump / Eductor — Operation",
+    "type": "in_app_tour",
+    "model": "jet_pump_eductor.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "How the Jet Pump / Eductor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Motive liquid accelerates through the converging nozzle into a fast jet.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "motive_nozzle",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Around the jet the pressure falls, drawing suction fluid into the suction chamber.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In the throat the streams exchange momentum and mix.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diffuser slows the mixture and recovers pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gauges on motive, suction and discharge show the operating point.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "instruments",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Jet Pump / Eductor — Maintenance",
+    "type": "in_app_tour",
+    "model": "jet_pump_eductor.glb",
+    "duration_s": 37.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Jet Pump / Eductor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor motive and suction pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "instruments",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure nozzle bore wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "motive_nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect throat for erosion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for nozzle wear: higher motive flow, lower suction. Common cause: erosion.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "motive_nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for blockage: no suction. Common cause: debris in nozzle.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "motive_nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for back-flow into suction: motive fluid exits suction. Common cause: discharge blocked.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What creates suction in an eductor?",
+     "options": [
+      "An impeller",
+      "The high-velocity motive jet",
+      "A piston",
+      "A vacuum pump"
+     ],
+     "answer": 1,
+     "explanation": "Jet entrainment.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical eductor efficiency?",
+     "options": [
+      "80–90 %",
+      "10–35 %",
+      "100 %",
+      "50–60 %"
+     ],
+     "answer": 1,
+     "explanation": "Mixing losses are large.",
+     "level": "basic"
+    },
+    {
+     "question": "Main advantage?",
+     "options": [
+      "High efficiency",
+      "No moving parts",
+      "Low motive flow",
+      "High head"
+     ],
+     "answer": 1,
+     "explanation": "Very robust.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Forms the suction chamber, mixing throat and diffuser.\"",
+     "options": [
+      "Eductor Body (Suction Chamber, Throat, Diffuser)",
+      "Pressure Gauges & Motive Isolation Valve",
+      "Entrained Suction Flow (Tracers)",
+      "Motive, Suction & Discharge Piping"
+     ],
+     "answer": 0,
+     "explanation": "Eductor Body (Suction Chamber, Throat, Diffuser): Forms the suction chamber, mixing throat and diffuser.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts motive pressure to a high-velocity jet.\"",
+     "options": [
+      "Entrained Suction Flow (Tracers)",
+      "Motive Nozzle (Converging)",
+      "Motive, Suction & Discharge Piping",
+      "Motive Flow (Tracers)"
+     ],
+     "answer": 1,
+     "explanation": "Motive Nozzle (Converging): Converts motive pressure to a high-velocity jet.",
+     "level": "basic",
+     "part": "motive_nozzle",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

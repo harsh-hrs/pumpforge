@@ -1,0 +1,1292 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "hydraulic_power_pack_pump",
+  "title": "Hydraulic Power Pack (Motor–Pump Unit on Reservoir)",
+  "category": "5 · Industrial Pump Applications",
+  "library": {
+    "no": 37,
+    "phase": 3,
+    "hi_family": "application",
+    "flagship": false,
+    "built_from": [
+      "external_gear_pump",
+      "sliding_vane_pump",
+      "piston_pump"
+    ]
+  },
+  "overlays": {
+    "flow": {
+      "file": "hydraulic_power_pack_pump_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flow_suction",
+      "kind": "flow_suction",
+      "radius": 0.005,
+      "points": [
+        [
+          -0.19,
+          0.2,
+          -0.024
+        ],
+        [
+          -0.19,
+          0.28,
+          -0.024
+        ],
+        [
+          -0.15,
+          0.32,
+          -0.024
+        ]
+      ]
+    },
+    {
+      "name": "flow_pressure",
+      "kind": "flow_discharge",
+      "radius": 0.005,
+      "points": [
+        [
+          -0.11,
+          0.32,
+          -0.0
+        ],
+        [
+          -0.11,
+          0.67,
+          -0.0
+        ],
+        [
+          0.22,
+          0.67,
+          -0.0
+        ],
+        [
+          0.34,
+          0.68,
+          -0.0
+        ],
+        [
+          0.36,
+          0.68,
+          -0.18
+        ]
+      ]
+    },
+    {
+      "name": "flow_return",
+      "kind": "flow_suction",
+      "radius": 0.005,
+      "points": [
+        [
+          0.5,
+          0.76,
+          0.3
+        ],
+        [
+          0.3,
+          0.76,
+          0.18
+        ],
+        [
+          0.3,
+          0.42,
+          0.18
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 26970,
+    "parts": 21
+  },
+  "summary": "A hydraulic power unit (power pack) converts electrical power into hydraulic power for cylinders and motors. A motor drives a positive-displacement pump (here a submerged gear pump) that draws oil from the reservoir through a strainer and delivers it to a valve manifold. A relief valve limits maximum pressure; directional valves route oil to the actuators; an accumulator stores energy and absorbs shocks; returning oil passes through a filter and cooler back to the tank, where it settles, releases air and cools.",
+  "classification": {
+    "family": "Package / system (positive displacement pump)",
+    "configuration": "Vertical motor-pump unit on reservoir lid, submerged gear pump"
+  },
+  "model_configuration": {
+    "pump": "External gear pump (vane or axial piston pumps are also common)",
+    "tank_rule_note": "Reservoir volume often sized at ~3–5 × pump flow per minute (rule of thumb — verify).",
+    "valves": "Relief valve + 2 solenoid directional valves (CETOP/ISO 4401 pattern)"
+  },
+  "standards": [
+    {
+      "id": "ISO 4413",
+      "title": "Hydraulic fluid power — General rules and safety requirements for systems and their components",
+      "relevance": "Core safety/design standard for hydraulic systems.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 4401",
+      "title": "Hydraulic fluid power — Four-port directional control valves — Mounting surfaces",
+      "relevance": "Valve interface pattern.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 4406",
+      "title": "Hydraulic fluid power — Fluids — Method for coding the level of contamination by solid particles",
+      "relevance": "Cleanliness targets.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 1219",
+      "title": "Fluid power systems — Graphical symbols and circuit diagrams",
+      "relevance": "Schematics.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Parker / Bosch Rexroth hydraulic trainer manuals (generic practice).",
+    "ISO 4413 (scope summary)."
+  ],
+  "parts": [
+    {
+      "id": "reservoir",
+      "name": "Oil Reservoir (Tank) with Baffle",
+      "group": "reservoir",
+      "section_role": "split",
+      "nodes": [
+        "reservoir__back",
+        "reservoir__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.45,
+        0.0,
+        -0.3
+      ],
+      "bbox_max": [
+        0.45,
+        0.61834,
+        0.3
+      ],
+      "label_anchor": [
+        0.0,
+        0.30917,
+        0.3
+      ],
+      "center": [
+        0.0,
+        0.30917,
+        -0.0
+      ],
+      "info_ref": "hpu_tank"
+    },
+    {
+      "id": "tank_lid",
+      "name": "Tank Lid (Pump Mounting Plate)",
+      "group": "reservoir",
+      "section_role": "split",
+      "nodes": [
+        "tank_lid__back",
+        "tank_lid__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.25,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.465,
+        0.62,
+        -0.315
+      ],
+      "bbox_max": [
+        0.465,
+        0.64,
+        0.315
+      ],
+      "label_anchor": [
+        0.0,
+        0.63,
+        0.315
+      ],
+      "center": [
+        0.0,
+        0.63,
+        -0.0
+      ],
+      "info_ref": "hpu_lid"
+    },
+    {
+      "id": "bell_housing",
+      "name": "Bell Housing (Motor–Pump Adapter)",
+      "group": "drive",
+      "section_role": "split",
+      "nodes": [
+        "bell_housing__back",
+        "bell_housing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.28,
+        0.64,
+        -0.13
+      ],
+      "bbox_max": [
+        -0.02,
+        0.86,
+        0.13
+      ],
+      "label_anchor": [
+        -0.15,
+        0.75,
+        0.13
+      ],
+      "center": [
+        -0.15,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "hpu_bell"
+    },
+    {
+      "id": "coupling_shaft",
+      "name": "Jaw Coupling & Pump Drive Shaft",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "coupling"
+      ],
+      "pivot": [
+        -0.15,
+        0.62,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.185,
+        0.32,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.115,
+        0.785,
+        0.035
+      ],
+      "label_anchor": [
+        -0.15,
+        0.5525,
+        0.035
+      ],
+      "center": [
+        -0.15,
+        0.5525,
+        -0.0
+      ],
+      "info_ref": "coupling_flex"
+    },
+    {
+      "id": "gear_pump",
+      "name": "Gear Pump Body (Submerged)",
+      "group": "pump",
+      "section_role": "split",
+      "nodes": [
+        "gear_pump__back",
+        "gear_pump__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.215,
+        0.285,
+        -0.045
+      ],
+      "bbox_max": [
+        -0.085,
+        0.62,
+        0.045
+      ],
+      "label_anchor": [
+        -0.15,
+        0.4525,
+        0.045
+      ],
+      "center": [
+        -0.15,
+        0.4525,
+        -0.0
+      ],
+      "info_ref": "hpu_pump"
+    },
+    {
+      "id": "pump_gear_1",
+      "name": "Pump Gear 1",
+      "group": "pump",
+      "section_role": "keep",
+      "nodes": [
+        "gear0"
+      ],
+      "pivot": [
+        -0.15,
+        0.32,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.0,
+        0.55
+      ],
+      "bbox_min": [
+        -0.178,
+        0.295,
+        -0.028
+      ],
+      "bbox_max": [
+        -0.122,
+        0.345,
+        0.028
+      ],
+      "label_anchor": [
+        -0.15,
+        0.32,
+        0.028
+      ],
+      "center": [
+        -0.15,
+        0.32,
+        -0.0
+      ],
+      "info_ref": "hpu_gear"
+    },
+    {
+      "id": "pump_gear_2",
+      "name": "Pump Gear 2",
+      "group": "pump",
+      "section_role": "keep",
+      "nodes": [
+        "gear1"
+      ],
+      "pivot": [
+        -0.15,
+        0.32,
+        -0.048
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.55
+      ],
+      "bbox_min": [
+        -0.17726,
+        0.295,
+        -0.07526
+      ],
+      "bbox_max": [
+        -0.12274,
+        0.345,
+        -0.02074
+      ],
+      "label_anchor": [
+        -0.15,
+        0.32,
+        -0.02074
+      ],
+      "center": [
+        -0.15,
+        0.32,
+        -0.048
+      ],
+      "info_ref": "hpu_gear"
+    },
+    {
+      "id": "suction_strainer",
+      "name": "Suction Strainer",
+      "group": "pump",
+      "section_role": "keep",
+      "nodes": [
+        "strainer"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.25,
+        0.3
+      ],
+      "bbox_min": [
+        -0.225,
+        0.18,
+        -0.059
+      ],
+      "bbox_max": [
+        -0.155,
+        0.3,
+        0.011
+      ],
+      "label_anchor": [
+        -0.19,
+        0.24,
+        0.011
+      ],
+      "center": [
+        -0.19,
+        0.24,
+        -0.024
+      ],
+      "info_ref": "hpu_strainer"
+    },
+    {
+      "id": "m_motor_frame",
+      "name": "Vertical Motor – Frame & End Shields",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_frame__back",
+        "m_motor_frame__front"
+      ],
+      "pivot": [
+        -0.15,
+        0.885,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.3026,
+        0.86,
+        -0.135
+      ],
+      "bbox_max": [
+        -0.015,
+        1.205,
+        0.135
+      ],
+      "label_anchor": [
+        -0.1588,
+        1.0325,
+        0.135
+      ],
+      "center": [
+        -0.1588,
+        1.0325,
+        -0.0
+      ],
+      "info_ref": "motor_frame_h"
+    },
+    {
+      "id": "m_stator",
+      "name": "Vertical Motor – Stator",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_stator__back",
+        "m_stator__front"
+      ],
+      "pivot": [
+        -0.15,
+        0.885,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.286,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.249,
+        0.9138,
+        -0.099
+      ],
+      "bbox_max": [
+        -0.051,
+        1.1762,
+        0.099
+      ],
+      "label_anchor": [
+        -0.15,
+        1.045,
+        0.099
+      ],
+      "center": [
+        -0.15,
+        1.045,
+        -0.0
+      ],
+      "info_ref": "stator"
+    },
+    {
+      "id": "m_rotor",
+      "name": "Vertical Motor – Rotor & Shaft",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_rotor.001"
+      ],
+      "pivot": [
+        -0.15,
+        0.885,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.6,
+        0.308
+      ],
+      "bbox_min": [
+        -0.21321,
+        0.785,
+        -0.06355
+      ],
+      "bbox_max": [
+        -0.08679,
+        1.225,
+        0.06355
+      ],
+      "label_anchor": [
+        -0.15,
+        1.005,
+        0.06355
+      ],
+      "center": [
+        -0.15,
+        1.005,
+        -0.0
+      ],
+      "info_ref": "rotor"
+    },
+    {
+      "id": "m_motor_bearings",
+      "name": "Vertical Motor – Bearings (DE & NDE)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_bearings__back",
+        "m_motor_bearings__front"
+      ],
+      "pivot": [
+        -0.15,
+        0.885,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.176,
+        0.6,
+        0.308
+      ],
+      "bbox_min": [
+        -0.1884,
+        0.88932,
+        -0.0384
+      ],
+      "bbox_max": [
+        -0.1116,
+        1.20068,
+        0.0384
+      ],
+      "label_anchor": [
+        -0.15,
+        1.045,
+        0.0384
+      ],
+      "center": [
+        -0.15,
+        1.045,
+        -0.0
+      ],
+      "info_ref": "motor_bearings"
+    },
+    {
+      "id": "m_motor_fan",
+      "name": "Vertical Motor – Cooling Fan",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_fan"
+      ],
+      "pivot": [
+        -0.15,
+        1.205,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.76,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2391,
+        1.2074,
+        -0.08809
+      ],
+      "bbox_max": [
+        -0.06559,
+        1.2218,
+        0.08809
+      ],
+      "label_anchor": [
+        -0.15234,
+        1.2146,
+        0.08809
+      ],
+      "center": [
+        -0.15234,
+        1.2146,
+        -0.0
+      ],
+      "info_ref": "motor_fan"
+    },
+    {
+      "id": "m_fan_cover",
+      "name": "Vertical Motor – Fan Cover",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_fan_cover__back",
+        "m_fan_cover__front"
+      ],
+      "pivot": [
+        -0.15,
+        0.885,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.0,
+        0.888,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2622,
+        1.185,
+        -0.1122
+      ],
+      "bbox_max": [
+        -0.0378,
+        1.2498,
+        0.1122
+      ],
+      "label_anchor": [
+        -0.15,
+        1.2174,
+        0.1122
+      ],
+      "center": [
+        -0.15,
+        1.2174,
+        -0.0
+      ],
+      "info_ref": "fan_cover"
+    },
+    {
+      "id": "valve_manifold",
+      "name": "Valve Manifold: Relief Valve + Solenoid Directional Valves",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "manifold"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.09,
+        0.64,
+        -0.135
+      ],
+      "bbox_max": [
+        0.32,
+        0.77,
+        0.085
+      ],
+      "label_anchor": [
+        0.205,
+        0.705,
+        0.085
+      ],
+      "center": [
+        0.205,
+        0.705,
+        -0.025
+      ],
+      "info_ref": "hpu_valves"
+    },
+    {
+      "id": "accumulator",
+      "name": "Bladder Accumulator",
+      "group": "accumulator",
+      "section_role": "keep",
+      "nodes": [
+        "accumulator"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.3,
+        -0.3
+      ],
+      "bbox_min": [
+        0.29,
+        0.67,
+        -0.25
+      ],
+      "bbox_max": [
+        0.43,
+        1.1,
+        -0.11
+      ],
+      "label_anchor": [
+        0.36,
+        0.885,
+        -0.11
+      ],
+      "center": [
+        0.36,
+        0.885,
+        -0.18
+      ],
+      "info_ref": "hpu_accumulator"
+    },
+    {
+      "id": "return_filter",
+      "name": "Return-Line Filter",
+      "group": "filtration",
+      "section_role": "keep",
+      "nodes": [
+        "return_filter"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.25,
+        0.42,
+        0.13
+      ],
+      "bbox_max": [
+        0.35,
+        0.76,
+        0.23
+      ],
+      "label_anchor": [
+        0.3,
+        0.59,
+        0.23
+      ],
+      "center": [
+        0.3,
+        0.59,
+        0.18
+      ],
+      "info_ref": "hpu_filter"
+    },
+    {
+      "id": "breather_level",
+      "name": "Filler-Breather & Level/Temperature Gauge",
+      "group": "reservoir",
+      "section_role": "keep",
+      "nodes": [
+        "bl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.42,
+        0.22,
+        0.16
+      ],
+      "bbox_max": [
+        0.215,
+        0.71,
+        0.315
+      ],
+      "label_anchor": [
+        -0.1025,
+        0.465,
+        0.315
+      ],
+      "center": [
+        -0.1025,
+        0.465,
+        0.2375
+      ],
+      "info_ref": "hpu_breather"
+    },
+    {
+      "id": "oil_cooler",
+      "name": "Air–Oil Cooler",
+      "group": "cooling",
+      "section_role": "keep",
+      "nodes": [
+        "cooler"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.48,
+        0.29,
+        -0.2
+      ],
+      "bbox_max": [
+        0.57,
+        0.59,
+        0.2
+      ],
+      "label_anchor": [
+        0.525,
+        0.44,
+        0.2
+      ],
+      "center": [
+        0.525,
+        0.44,
+        -0.0
+      ],
+      "info_ref": "hpu_cooler"
+    },
+    {
+      "id": "tubing",
+      "name": "Pressure & Return Tubing",
+      "group": "system_piping",
+      "section_role": "keep",
+      "nodes": [
+        "tubing.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.12,
+        0.62,
+        -0.18258
+      ],
+      "bbox_max": [
+        0.36966,
+        0.76914,
+        0.18406
+      ],
+      "label_anchor": [
+        0.12483,
+        0.69457,
+        0.18406
+      ],
+      "center": [
+        0.12483,
+        0.69457,
+        0.00074
+      ],
+      "info_ref": "pipework"
+    },
+    {
+      "id": "pressure_gauge",
+      "name": "System Pressure Gauge",
+      "group": "instrumentation",
+      "section_role": "keep",
+      "nodes": [
+        "pg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.2
+      ],
+      "bbox_min": [
+        0.23,
+        0.72,
+        0.055
+      ],
+      "bbox_max": [
+        0.31,
+        0.86,
+        0.0875
+      ],
+      "label_anchor": [
+        0.27,
+        0.79,
+        0.0875
+      ],
+      "center": [
+        0.27,
+        0.79,
+        0.07125
+      ],
+      "info_ref": "pressure_gauge"
+    }
+  ],
+  "components": {
+    "hpu_tank": {
+      "function": "Stores oil, allows air release and settling, dissipates heat.",
+      "construction": "Welded steel tank with baffle separating return and suction zones, drain and clean-out covers.",
+      "material": "Steel (painted inside), stainless, aluminium.",
+      "operating_conditions": "Oil level and temperature must stay within limits.",
+      "failure_modes": [
+        "Contamination",
+        "Water condensation",
+        "Overheating"
+      ],
+      "inspection": [
+        "Oil analysis (ISO 4406)",
+        "Level/temperature"
+      ]
+    },
+    "hpu_lid": {
+      "function": "Mounting plate for motor-pump group, valves and filters.",
+      "construction": "Thick steel plate bolted to the tank with gasket.",
+      "material": "Steel.",
+      "operating_conditions": "Seals tank from dirt.",
+      "failure_modes": [
+        "Gasket leaks"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hpu_bell": {
+      "function": "Aligns motor and pump and encloses the coupling.",
+      "construction": "Machined aluminium bell housing with registers.",
+      "material": "Aluminium/cast iron.",
+      "operating_conditions": "Guarantees concentricity.",
+      "failure_modes": [
+        "Damage to registers"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "coupling_flex": {
+      "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+      "construction": "Two hubs with a flexible element (elastomer spider, pin-and-bush, disc pack or gear); spacer versions allow seal removal without moving the motor.",
+      "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements.",
+      "operating_conditions": "Misalignment must still be corrected to manufacturer and pump tolerance; flexible couplings are not a substitute for alignment.",
+      "failure_modes": [
+        "Element wear or rupture from misalignment",
+        "Fretting of hub bores",
+        "Loose set screws/keys"
+      ],
+      "inspection": [
+        "Laser or dial alignment after grouting, after piping connection and at operating temperature",
+        "Inspect flexible element"
+      ]
+    },
+    "hpu_pump": {
+      "function": "Converts mechanical power into hydraulic flow.",
+      "construction": "Fixed-displacement external gear pump (shown submerged).",
+      "material": "Aluminium body, steel gears.",
+      "operating_conditions": "Pressure set by load and relief valve.",
+      "failure_modes": [
+        "Wear from contaminated oil",
+        "Cavitation if strainer blocked"
+      ],
+      "inspection": [
+        "Case temperature, noise",
+        "Flow test"
+      ]
+    },
+    "hpu_gear": {
+      "function": "Meshing gears that carry oil from the inlet to the outlet around the housing.",
+      "construction": "Involute spur gears (one driven, one idler) in a figure-8 housing.",
+      "material": "Hardened steel.",
+      "operating_conditions": "Lubricated by the hydraulic oil.",
+      "failure_modes": [
+        "Tooth and side-plate wear"
+      ],
+      "inspection": [
+        "Volumetric efficiency test"
+      ]
+    },
+    "hpu_strainer": {
+      "function": "Protects the pump from large particles.",
+      "construction": "Wire-mesh suction strainer.",
+      "material": "Stainless mesh.",
+      "operating_conditions": "Must not restrict suction.",
+      "failure_modes": [
+        "Clogging → cavitation"
+      ],
+      "inspection": [
+        "Clean periodically"
+      ]
+    },
+    "motor_frame_h": {
+      "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+      "construction": "Totally enclosed fan-cooled (TEFC) frame with external cooling fins, drive-end and non-drive-end end shields, terminal box and lifting eye.",
+      "material": "Cast iron or aluminium frame; steel fasteners.",
+      "operating_conditions": "Frame size, enclosure (IP rating), efficiency class (e.g. IEC 60034-30-1 IE3/IE4) and insulation class per motor data sheet.",
+      "failure_modes": [
+        "Overheating from blocked fins or fan cover",
+        "Soft foot causing frame distortion and vibration",
+        "Moisture ingress at terminal box"
+      ],
+      "inspection": [
+        "Clean fins and fan cover",
+        "Check foot shims for soft foot",
+        "Insulation resistance before start-up"
+      ]
+    },
+    "stator": {
+      "function": "Produces the rotating magnetic field.",
+      "construction": "Laminated electrical-steel core with insulated copper windings; end turns project at each end.",
+      "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical).",
+      "operating_conditions": "Rated voltage and frequency; temperature rise within insulation class.",
+      "failure_modes": [
+        "Winding insulation failure",
+        "Single phasing",
+        "Overload overheating"
+      ],
+      "inspection": [
+        "Insulation resistance / polarisation index",
+        "Phase current balance",
+        "Winding temperature where RTDs fitted"
+      ]
+    },
+    "rotor": {
+      "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+      "construction": "Laminated core with aluminium or copper bars and end rings, shrunk on the shaft and dynamically balanced.",
+      "material": "Electrical steel, die-cast aluminium or copper.",
+      "operating_conditions": "Runs slightly below synchronous speed (slip).",
+      "failure_modes": [
+        "Broken rotor bars",
+        "Imbalance",
+        "Rotor-stator rub after bearing failure"
+      ],
+      "inspection": [
+        "Motor current signature analysis",
+        "Vibration at 1x and pole-pass sidebands"
+      ]
+    },
+    "motor_bearings": {
+      "function": "Support the motor rotor at drive and non-drive ends.",
+      "construction": "Deep-groove ball bearings (roller bearing at drive end on larger belt-driven motors); one end locates axially.",
+      "material": "Bearing steel; grease lubricated.",
+      "operating_conditions": "Regrease interval depends on speed, size and temperature; insulated bearings recommended with VFDs to prevent electrical fluting.",
+      "failure_modes": [
+        "Lubrication failure",
+        "Contamination",
+        "Electrical erosion (fluting) with VFDs"
+      ],
+      "inspection": [
+        "Temperature and vibration trend",
+        "Regrease per nameplate",
+        "High-frequency envelope analysis"
+      ]
+    },
+    "motor_fan": {
+      "function": "Draws cooling air over the finned frame.",
+      "construction": "Shaft-mounted radial or bidirectional fan at the non-drive end.",
+      "material": "Polymer, aluminium or steel.",
+      "operating_conditions": "Rotates with the shaft.",
+      "failure_modes": [
+        "Broken blades",
+        "Clogged air inlet"
+      ],
+      "inspection": [
+        "Visual check through fan cover; clean inlet"
+      ]
+    },
+    "fan_cover": {
+      "function": "Guards the fan and directs air along the fins.",
+      "construction": "Pressed-steel cowl with perforated air inlet.",
+      "material": "Steel or polymer.",
+      "operating_conditions": "Air inlet must be kept clear (minimum clearance to walls per manufacturer).",
+      "failure_modes": [
+        "Dents causing fan contact",
+        "Blocked inlet"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hpu_valves": {
+      "function": "Control pressure (relief valve) and direction of flow to actuators.",
+      "construction": "Manifold block with relief cartridge and solenoid-operated directional valves.",
+      "material": "Steel/cast iron.",
+      "operating_conditions": "Solenoid voltage per design.",
+      "failure_modes": [
+        "Spool sticking from dirt",
+        "Coil burn-out"
+      ],
+      "inspection": [
+        "Function test"
+      ]
+    },
+    "hpu_accumulator": {
+      "function": "Stores pressurised oil, absorbs shocks and pulsation, provides emergency flow.",
+      "construction": "Steel shell with nitrogen-filled bladder and gas valve.",
+      "material": "Steel, NBR bladder.",
+      "operating_conditions": "Pre-charge pressure must be checked; pressure vessel rules apply.",
+      "failure_modes": [
+        "Loss of pre-charge",
+        "Bladder rupture"
+      ],
+      "inspection": [
+        "Pre-charge check"
+      ]
+    },
+    "hpu_filter": {
+      "function": "Removes particles from returning oil.",
+      "construction": "Tank-top return filter with bypass valve and clogging indicator.",
+      "material": "Aluminium housing, glass-fibre element.",
+      "operating_conditions": "β-ratio rating per ISO 16889.",
+      "failure_modes": [
+        "Element clogging → bypass"
+      ],
+      "inspection": [
+        "Indicator, change element"
+      ]
+    },
+    "hpu_breather": {
+      "function": "Lets air in/out as level changes while filtering it; shows level and temperature.",
+      "construction": "Filler-breather cap; sight level gauge with thermometer.",
+      "material": "Polymer/steel.",
+      "operating_conditions": "Desiccant breathers in humid areas.",
+      "failure_modes": [
+        "Clogged breather",
+        "Broken sight glass"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hpu_cooler": {
+      "function": "Removes heat generated by losses.",
+      "construction": "Fan-cooled aluminium core.",
+      "material": "Aluminium.",
+      "operating_conditions": "Sized for heat load.",
+      "failure_modes": [
+        "Fin fouling"
+      ],
+      "inspection": [
+        "Clean fins"
+      ]
+    },
+    "pipework": {
+      "function": "Connects the pump to the system.",
+      "construction": "Flanged pipe spools, fittings and supports; suction piping laid out to give uniform flow into the pump (straight run, eccentric reducers flat side up).",
+      "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate.",
+      "operating_conditions": "Piping must be supported independently so nozzle loads stay within limits.",
+      "failure_modes": [
+        "Nozzle overload from unsupported piping",
+        "Air pockets in suction",
+        "Corrosion"
+      ],
+      "inspection": [
+        "Check supports and flange alignment before bolting to pump"
+      ]
+    },
+    "pressure_gauge": {
+      "function": "Indicates suction or discharge pressure for operation and performance checks.",
+      "construction": "Bourdon-tube gauge with isolation valve; glycerine filled for pulsating service.",
+      "material": "Stainless steel case and wetted parts.",
+      "operating_conditions": "Range so that normal reading is mid-scale.",
+      "failure_modes": [
+        "Pulsation damage",
+        "Blocked impulse line"
+      ],
+      "inspection": [
+        "Calibrate periodically"
+      ]
+    }
+  }
+}

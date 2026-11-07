@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PumpForge Learning Library</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: engineering workstation &mdash; navy command bar, 3-D stage left, inspector right; stacks on phones */
+:root {
+  --bg: #e9edf2; --stage: #f6f8fb; --stage2: #dde3ea; --panel: #ffffff; --ink: #122033; --muted: #556579;
+  --line: #d3dae3; --nav: #0e1c30; --nav-ink: #e8eef6; --accent: #1d63c9; --accent-ink: #ffffff; --chip: #e5edf9; --chip-ink: #164f9e;
+  --section: #d64a2b;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b1420; --stage: #172436; --stage2: #0d1724; --panel: #111c2b; --ink: #e3eaf3; --muted: #94a5ba;
+  --line: #24344a; --nav: #070e18; --nav-ink: #e3eaf3; --accent: #4d8ff0; --accent-ink: #06101d; --chip: #1a2d47; --chip-ink: #9cc2ff; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b1420; --stage: #172436; --stage2: #0d1724; --panel: #111c2b; --ink: #e3eaf3; --muted: #94a5ba;
+  --line: #24344a; --nav: #070e18; --nav-ink: #e3eaf3; --accent: #4d8ff0; --accent-ink: #06101d; --chip: #1a2d47; --chip-ink: #9cc2ff; color-scheme: dark }
+html, body { height: 100%; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--f-body); }
+* { box-sizing: border-box; }
+.wrap { height: 100%; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); }
+header { background: var(--nav); color: var(--nav-ink); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px;
+  padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.brand { font: 600 17px/1.1 var(--f-display); letter-spacing: .3px; }
+.brand small { display: block; font: 400 11px/1.3 var(--f-mono); color: #8fa3bb; letter-spacing: .4px; text-transform: uppercase; }
+nav { display: flex; gap: 6px; align-items: center; min-width: 0; flex: 1 1 320px; max-width: 520px; }
+nav button { font: 500 15px var(--f-body); color: var(--nav-ink); background: transparent; border: 1px solid #2a3c55; border-radius: 6px; width: 34px; height: 34px; cursor: pointer; flex: none; }
+nav select { flex: 1; min-width: 0; width: 100%; font: 500 14px var(--f-body); color: var(--nav-ink); background: #16263d; border: 1px solid #2a3c55; border-radius: 6px; padding: 7px 10px; height: 34px; }
+nav select option, nav select optgroup { color: #122033; background: #fff; }
+nav button:focus-visible, nav select:focus-visible, .tool:focus-visible { outline: 2px solid #8bb8ff; outline-offset: 2px; }
+.planned { margin-left: auto; font: 400 12px var(--f-mono); color: #8fa3bb; }
+main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; min-height: 0; }
+#stage { position: relative; min-height: 0; background: radial-gradient(120% 90% at 50% 35%, var(--stage) 0%, var(--stage2) 100%); }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.toolbar { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tool { font: 500 13px var(--f-body); background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+.tool[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.slider { display: flex; align-items: center; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px 12px; font-weight: 500; }
+.slider input { width: 120px; accent-color: var(--accent); }
+.hint { max-width: calc(100% - 24px); position: absolute; top: 12px; left: 14px; font: 400 12px var(--f-mono); color: var(--muted); }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; font: 500 13px var(--f-mono); color: var(--muted); }
+aside { background: var(--panel); border-left: 1px solid var(--line); overflow: auto; min-height: 0; padding: 18px 18px 28px; }
+aside h2 { font: 600 21px/1.2 var(--f-display); margin: 0 0 6px; text-wrap: balance; }
+aside h3 { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin: 18px 0 6px; }
+aside p { margin: 0 0 8px; max-width: 65ch; }
+aside ul { margin: 0; padding-left: 18px; } aside li { margin-bottom: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+.chip { font: 500 11.5px var(--f-mono); background: var(--chip); color: var(--chip-ink); border-radius: 4px; padding: 2px 7px; }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; }
+.spec dt { color: var(--muted); } .spec dd { margin: 0; font-variant-numeric: tabular-nums; }
+.parts { list-style: none; padding: 0; margin: 0; columns: 1; }
+.parts li { margin: 0; }
+.parts button { all: unset; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; width: 100%; padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.parts button:hover, .parts button:focus-visible { color: var(--accent); }
+.parts .g { font: 400 11px var(--f-mono); color: var(--muted); white-space: nowrap; }
+.back { all: unset; cursor: pointer; color: var(--accent); font-weight: 500; font-size: 13px; }
+.std { font-size: 13px; margin-bottom: 6px; } .std b { font-family: var(--f-mono); font-weight: 500; }
+.disc { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font: 400 12px var(--f-mono); color: var(--muted); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+@media (max-width: 860px) {
+  main { grid-template-columns: minmax(0, 1fr); grid-template-rows: 62vh auto; }
+  aside { border-left: 0; border-top: 1px solid var(--line); overflow: visible; }
+  .planned { margin-left: 0; width: 100%; }
+  .wrap { height: auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+
+/* learning-library additions */
+#stage { overflow: hidden; }
+.tabs { min-width: 0; display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin: 10px -18px 0; padding: 0 12px; overflow-x: auto; scrollbar-width: none; position: sticky; top: -18px; background: var(--panel); z-index: 2; }
+.tabs button { all: unset; cursor: pointer; font: 500 12.5px var(--f-body); color: var(--muted); padding: 9px 8px 8px; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.ovl { display: flex; gap: 6px; flex-wrap: wrap; }
+.olabel { position: absolute; transform: translate(-50%, -50%); background: rgba(14, 28, 48, .88); color: #fff; font: 500 11px var(--f-body); padding: 3px 7px; border-radius: 4px; white-space: nowrap; pointer-events: none; z-index: 3; }
+.caption { position: absolute; left: 50%; transform: translateX(-50%); top: 38px; width: min(640px, calc(100% - 32px)); background: rgba(14, 28, 48, .9); color: #fff; padding: 10px 14px; border-radius: 8px; font: 400 14px/1.45 var(--f-body); z-index: 4; }
+.caption small { display: block; font: 400 11px var(--f-mono); color: #9fb3cc; margin-bottom: 3px; }
+.ptable { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ptable th, .ptable td { text-align: left; vertical-align: top; padding: 6px 6px 6px 0; border-bottom: 1px solid var(--line); }
+.ptable th { font-weight: 500; color: var(--muted); width: 34%; }
+.ptable td .n { display: block; color: var(--muted); font-size: 12px; }
+.note { background: var(--chip); color: var(--chip-ink); border-radius: 6px; padding: 8px 10px; font-size: 12.5px; margin: 8px 0; }
+.fa { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+.fa h4 { margin: 0 0 4px; font: 600 14px var(--f-body); display: flex; justify-content: space-between; gap: 8px; }
+.fa h4 .chip { font-size: 10.5px; }
+.fa b { font: 500 11px var(--f-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+.link { all: unset; cursor: pointer; color: var(--accent); font-size: 12.5px; font-weight: 500; }
+.tour { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.tour .t { font-weight: 600; } .tour .d { color: var(--muted); font-size: 12px; }
+.qz { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+.qz p { font-weight: 500; }
+.qz label { display: flex; gap: 8px; align-items: flex-start; padding: 4px 0; font-size: 13.5px; cursor: pointer; }
+.qz .ok { color: #1f8a4c; } .qz .bad { color: #c0392b; }
+.qz .ex { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+.score { font: 600 15px var(--f-body); margin: 6px 0 12px; }
+/* v1.1 features */
+.hdrtools { display: flex; gap: 6px; align-items: center; flex: 1 1 220px; min-width: 0; max-width: 420px; }
+.hdrtools input { flex: 1; min-width: 0; height: 34px; border-radius: 6px; border: 1px solid #2a3c55; background: #16263d; color: var(--nav-ink); padding: 0 10px; font: 400 14px var(--f-body); }
+.hbtn { font: 500 13px var(--f-body); color: var(--nav-ink); background: transparent; border: 1px solid #2a3c55; border-radius: 6px; height: 34px; padding: 0 10px; cursor: pointer; }
+.hbtn[aria-pressed="true"] { color: #ffd34d; border-color: #ffd34d; }
+.stepper { position: absolute; left: 12px; top: 36px; width: min(380px, calc(100% - 24px)); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; z-index: 5; box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+.stepper p { margin: 6px 0 10px; font-size: 14px; }
+@media (max-width: 860px) { .stepper { top: 8px; left: 8px; width: calc(100% - 16px); padding: 7px 10px; } .stepper p { font-size: 13px; margin: 4px 0 6px; } .stepper button { padding-top: 4px; padding-bottom: 4px; } }
+.st-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+.st-nav { display: flex; gap: 6px; justify-content: space-between; }
+.measure { position: absolute; right: 12px; top: 36px; background: rgba(14,28,48,.9); color: #fff; padding: 6px 10px; border-radius: 6px; font: 500 12px var(--f-mono); z-index: 5; }
+.modal { position: fixed; inset: 0; background: rgba(8,16,28,.55); z-index: 20; display: grid; place-items: center; padding: 16px; }
+.sheet { background: var(--panel); color: var(--ink); width: min(900px, 100%); max-height: 88vh; overflow: auto; border-radius: 12px; padding: 14px 16px; }
+.sheet-head { display: flex; gap: 8px; align-items: center; position: sticky; top: -14px; background: var(--panel); padding: 4px 0 8px; z-index: 2; }
+.sheet-head input { flex: 1; min-width: 0; height: 36px; border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; font: 400 14px var(--f-body); background: var(--bg); color: var(--ink); }
+.chk { display: flex; gap: 6px; align-items: center; font-size: 13px; white-space: nowrap; }
+.libsum { font-size: 12.5px; color: var(--muted); margin: 2px 0 8px; }
+.libcat { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin: 14px 0 6px; }
+.librow { display: grid; grid-template-columns: 58px 1fr auto auto; gap: 8px; align-items: center; padding: 7px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.librow:hover { background: var(--chip); }
+.librow .no { font: 500 12px var(--f-mono); color: var(--muted); }
+.librow .t { font-weight: 500; } .librow .sub { display: block; font-size: 12px; color: var(--muted); }
+.badge { font: 500 11px var(--f-mono); border-radius: 4px; padding: 1px 6px; background: var(--chip); color: var(--chip-ink); white-space: nowrap; }
+.badge.ok { background: #dff3e6; color: #1b6b3a; } .star { color: #c99400; font-size: 16px; }
+.calc { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+.calc h4 { margin: 0 0 6px; font: 600 14px var(--f-body); }
+.calc .row { display: grid; grid-template-columns: 1fr 120px; gap: 6px; align-items: center; margin-bottom: 4px; font-size: 13px; }
+.calc input, .calc select, .tools textarea, .tools select { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 6px; padding: 5px 7px; font: 400 13px var(--f-body); background: var(--bg); color: var(--ink); }
+.calc .out { margin-top: 6px; font: 500 13px var(--f-mono); color: var(--chip-ink); background: var(--chip); border-radius: 6px; padding: 6px 8px; white-space: pre-wrap; }
+.tools textarea { min-height: 110px; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 12.5px; } .cmp th, .cmp td { border-bottom: 1px solid var(--line); padding: 5px 4px; text-align: left; vertical-align: top; }
+@media (max-width: 860px) { .hdrtools { max-width: none; flex-basis: 100%; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">PumpForge<small>Pumps &middot; valves &middot; piping &middot; <span id="nmods">62</span> modules</small></div>
+    <nav id="nav" aria-label="Pump model"><button id="bPrev" aria-label="Previous module">&lsaquo;</button><select id="pick" aria-label="Choose a pump module"></select><button id="bNext" aria-label="Next module">&rsaquo;</button></nav>
+    <div class="hdrtools"><input id="search" type="search" placeholder="Search equipment…" aria-label="Search the library"><button id="bLib" class="hbtn" aria-label="Open library">Library</button><button id="bStar" class="hbtn" aria-pressed="false" aria-label="Bookmark this module">&#9734;</button></div><span class="planned" id="count"></span>
+  </header>
+  <main>
+    <div id="stage">
+      <div class="hint">Drag to orbit &middot; pinch or scroll to zoom &middot; tap a part</div>
+      <div class="loading" id="loading">Loading model&hellip;</div>
+      <div class="caption" id="caption" hidden></div>
+      <div class="stepper" id="stepper" hidden><div class="st-head"><b id="stCount"></b><button class="link" id="stClose" aria-label="Close step player">Close</button></div>
+        <p id="stText"></p><div class="st-nav"><button class="tool" id="stPrev">&lsaquo; Back</button><button class="tool" id="stAuto" aria-pressed="false">Auto</button><button class="tool" id="stNext">Next &rsaquo;</button></div></div>
+      <div class="measure" id="measure" hidden></div>
+      <div class="toolbar">
+        <button class="tool" id="bOperate" aria-pressed="false">Operate</button>
+        <button class="tool" id="bCut" aria-pressed="false">Cutaway</button>
+        <button class="tool" id="bXray" aria-pressed="false">X-ray</button>
+        <button class="tool" id="bLive" aria-pressed="true">Live flow</button>
+        <button class="tool" id="bSteps">How it works</button>
+        <span class="ovl" id="ovlBar"></span>
+        <label class="slider" for="sExplode">Explode <input id="sExplode" type="range" min="0" max="1" step="0.01" value="0"></label>
+        <button class="tool" id="bReset">Reset view</button>
+      </div>
+    </div>
+    <aside id="info" aria-live="polite"></aside>
+  </main>
+</div>
+<div class="modal" id="lib" hidden><div class="sheet"><div class="sheet-head"><input id="libSearch" type="search" placeholder="Search by name, EQ number, category…" aria-label="Search library">
+  <label class="chk"><input type="checkbox" id="onlyStar"> Bookmarks</label><button class="tool" id="libClose">Close</button></div>
+  <div class="libsum" id="libSum"></div><div id="libList"></div></div></div>
+
+<script type="importmap">
+{ "imports": { "three": "./node_modules/three/build/three.module.js",
+               "three/addons/": "./node_modules/three/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const stage = document.getElementById('stage'), info = document.getElementById('info'), cap = document.getElementById('caption');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.shadowMap.enabled = true;
+stage.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+scene.add(sun, sun.target);
+const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 200);
+const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+const ground = new THREE.Mesh(new THREE.CircleGeometry(30, 64), new THREE.ShadowMaterial({ opacity: 0.16 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+
+let root, meta, learn, mixer, actions = {}, parts = {}, selected = null, operate = false, cut = false, explode = 0, current, tab = 'overview';
+let ovl = {}, labels = [], tourRun = 0, narrate = false, quizState = {};
+let xray = false, live = true, animMeshes = new Set(), particles = [], stepIdx = -1, stepAuto = 0, measuring = false, mPts = [], mLine = null, hiddenParts = new Set();
+// per-device progress, bookmarks, notes and datasheets (localStorage; the app works without it)
+const STORE_KEY = 'pumpforge.v1';
+const store = (() => { let d = {}; try { d = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) {} return {
+  get: (k, def) => (d[k] ?? def), set: (k, v) => { d[k] = v; try { localStorage.setItem(STORE_KEY, JSON.stringify(d)); } catch (e) {} } }; })();
+const prog = id => store.get('prog', {})[id] || {};
+function setProg(id, patch) { const all = store.get('prog', {}); all[id] = Object.assign(all[id] || {}, patch); store.set('prog', all); }
+const cache = {}, ovlCache = {};
+const clock = new THREE.Clock();
+const loader = new GLTFLoader();
+// Local reference player for the learning library (serve the repo root, open /viewer/library.html).
+async function loadModel(name) { return loader.loadAsync(`../output/glb/${name}.glb`); }
+function resize() { const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%'; camera.aspect = w / h; camera.updateProjectionMatrix(); }
+new ResizeObserver(resize).observe(stage);
+
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const list = a => a && a.length ? `<ul>${a.map(x => `<li>${esc(typeof x === 'string' ? x : x.task + (x.interval ? ` (${x.interval})` : ''))}</li>`).join('')}</ul>` : '<p>&mdash;</p>';
+const nice = k => k.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase());
+
+// ------------------------------------------------------------- catalogue / navigation
+const INDEX = await (await fetch('../output/learning/index.json')).json();
+const MODELS = INDEX.modules; document.getElementById('nmods').textContent = MODELS.length;
+const pick = document.getElementById('pick');
+let lastCat;
+for (const m of MODELS) {
+  if (m.category !== lastCat) { lastCat = m.category; const og = document.createElement('optgroup'); og.label = m.category; pick.appendChild(og); }
+  const o = document.createElement('option'); o.value = m.id; o.textContent = `${m.no}. ${m.title}${m.flagship ? ' ★' : ''}`; pick.lastChild.appendChild(o);
+}
+pick.onchange = () => load(pick.value);
+const stepModel = d => { const i = MODELS.findIndex(m => m.id === current); load(MODELS[(i + d + MODELS.length) % MODELS.length].id); };
+document.getElementById('bPrev').onclick = () => stepModel(-1);
+document.getElementById('bNext').onclick = () => stepModel(1);
+
+async function load(id) {
+  if (id === current) return; current = id; stopTour();
+  pick.value = id; const ix = MODELS.findIndex(m => m.id === id);
+  document.getElementById('count').textContent = `${MODELS[ix].eq_id || 'Module ' + MODELS[ix].no} · ${MODELS[ix].no}/${MODELS.length}`;
+  document.getElementById('loading').hidden = false;
+  if (root) scene.remove(root); clearOverlays();
+  try {
+    if (!cache[id]) {
+      const [m, l, g] = await Promise.all([fetch(`../output/meta/${id}.json`).then(r => r.json()), fetch(`../output/learning/${id}.json`).then(r => r.json()), loadModel(id)]);
+      cache[id] = { meta: m, learn: l, gltf: g };
+    }
+  } catch (e) { document.getElementById('loading').textContent = 'Could not load this model.'; console.error(e); return; }
+  if (id !== current) return;
+  ({ meta, learn } = cache[id]); const gltf = cache[id].gltf;
+  root = gltf.scene; scene.add(root); parts = {}; selected = null; quizState = {};
+  root.traverse(o => {
+    if (o.isMesh) { o.castShadow = o.receiveShadow = true; if (!o.userData._own) { o.material = o.material.clone(); o.userData._own = true; } }
+    if (o.userData.part_id && !o.isMesh && o.userData.explode_offset) {
+      if (!o.userData._rest) o.userData._rest = o.position.clone();
+      parts[o.userData.part_id] = { node: o, rest: o.userData._rest, off: new THREE.Vector3(...o.userData.explode_offset) };
+    }
+  });
+  mixer = new THREE.AnimationMixer(root); actions = {};
+  gltf.animations.forEach(c => actions[c.name] = mixer.clipAction(c));
+  root.traverse(o => { if (o.isMesh) o.material.emissive?.setHex(0); });
+  animMeshes = new Set();
+  const op = gltf.animations.find(c => c.name === 'Operate');
+  if (op) for (const t of op.tracks) animMeshes.add(t.name.split('.')[0]);
+  root.traverse(o => { if (o.isMesh) { const pid = partOf(o); if (pid) o.userData._pid = pid; } });
+  const movingParts = new Set(); root.traverse(o => { if (o.isMesh && (animMeshes.has(o.name) || animMeshes.has(o.parent?.name))) movingParts.add(o.userData._pid); });
+  root.traverse(o => { if (o.isMesh) o.userData._static = !movingParts.has(o.userData._pid) && meta.parts.find(p => p.id === o.userData._pid)?.group !== 'flow_tracers'; });
+  hiddenParts = new Set(); clearMeasure(); stepIdx = -1; document.getElementById('stepper').hidden = true;
+  buildParticles(); buildOverlayBar(); applyState();
+  setProg(id, { seen: Date.now() }); document.getElementById('bStar').setAttribute('aria-pressed', String(!!store.get('stars', {})[id]));
+  const box = new THREE.Box3().setFromObject(root); ground.position.y = box.min.y - 0.002;
+  frame(box); render();
+  document.getElementById('loading').hidden = true;
+}
+
+// ------------------------------------------------------------- camera
+function frame(box, dir = [0.85, 0.45, 1.1], tight = 1.15) {
+  const c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3()), s = sz.length();
+  const vf = THREE.MathUtils.degToRad(camera.fov) / 2, hf = Math.atan(Math.tan(vf) * camera.aspect);
+  const d = Math.max(sz.y / 2 / Math.tan(vf), Math.max(sz.x, sz.z) / 2 / Math.tan(hf)) * tight + Math.max(sz.x, sz.z) / 2;
+  camera.position.copy(c).addScaledVector(new THREE.Vector3(...dir).normalize(), d);
+  camera.near = Math.max(d / 200, 0.005); camera.far = d * 20; camera.updateProjectionMatrix();
+  controls.target.copy(c); controls.update();
+  if (box === undefined || !root) return;
+  const full = new THREE.Box3().setFromObject(root), fs = full.getSize(new THREE.Vector3()).length(), fc = full.getCenter(new THREE.Vector3());
+  Object.assign(sun.shadow.camera, { left: -fs, right: fs, top: fs, bottom: -fs }); sun.shadow.camera.updateProjectionMatrix();
+  sun.position.copy(fc).add(new THREE.Vector3(fs * 0.6, fs * 1.2, fs * 0.8)); sun.target.position.copy(fc);
+}
+function framePart(id) {
+  const p = meta.parts.find(x => x.id === id); if (!p) return;
+  const b = new THREE.Box3(new THREE.Vector3(...p.bbox_min), new THREE.Vector3(...p.bbox_max));
+  const full = new THREE.Box3().setFromObject(root), fsz = full.getSize(new THREE.Vector3()).length();
+  b.expandByScalar(Math.max(0.12 * fsz, 0.05)); frame(b, [0.7, 0.35, 1.1], 1.25);
+}
+
+// ------------------------------------------------------------- state
+function setPressed(id, v) { const e = document.getElementById(id); if (e) e.setAttribute('aria-pressed', String(v)); }
+function applyState() {
+  if (!root) return;
+  root.traverse(o => {
+    const r = o.userData.section_role;
+    if (r === 'front' || r === 'hide') o.visible = !cut;
+    if (o.isMesh && o.material.name === 'section') o.visible = cut;
+    if (o.isMesh) {
+      const ghost = xray && o.userData._static;
+      if (o.material.name !== 'section') { o.material.transparent = ghost; o.material.opacity = ghost ? 0.14 : 1; o.material.depthWrite = !ghost; o.material.needsUpdate = true; }
+      if (hiddenParts.has(o.userData._pid)) o.visible = false;
+    }
+  });
+  for (const k in ovl) ovl[k].traverse(o => { if (o.userData.section_role === 'front') o.visible = !cut; });
+  for (const k in parts) { const p = parts[k]; p.node.position.copy(p.rest).addScaledVector(p.off, explode); }
+  if (actions.Operate) { if (operate) actions.Operate.play(); actions.Operate.paused = !operate; }
+  setPressed('bOperate', operate); setPressed('bCut', cut); setPressed('bXray', xray); setPressed('bLive', live); particles.forEach(p => p.mesh.visible = live); document.getElementById('sExplode').value = explode;
+}
+
+// ------------------------------------------------------------- overlays (flow, pressure, thrust, wear, installation)
+function buildOverlayBar() {
+  const bar = document.getElementById('ovlBar');
+  bar.innerHTML = Object.entries(meta.overlays || {}).map(([k, v]) => `<button class="tool" data-k="${esc(k)}" aria-pressed="false">${esc(v.title)}</button>`).join('');
+  bar.querySelectorAll('button').forEach(b => b.onclick = () => toggleOverlay(b.dataset.k, !ovl[b.dataset.k]));
+}
+function clearOverlays() { for (const k in ovl) scene.remove(ovl[k]); ovl = {}; labels.forEach(l => l.el.remove()); labels = []; }
+async function toggleOverlay(k, on) {
+  const id = current, infoO = (meta.overlays || {})[k]; if (!infoO) return;
+  if (ovl[k]) { scene.remove(ovl[k]); delete ovl[k]; }
+  labels.filter(l => l.k === k).forEach(l => l.el.remove()); labels = labels.filter(l => l.k !== k);
+  document.querySelectorAll('#ovlBar button').forEach(b => { if (b.dataset.k === k) b.setAttribute('aria-pressed', String(!!on)); });
+  if (!on) return;
+  const key = `${id}_${k}`;
+  try { if (!ovlCache[key]) ovlCache[key] = await loadModel(key); } catch (e) { console.warn(e); return; }
+  if (id !== current) return;
+  const g = ovlCache[key].scene; ovl[k] = g; scene.add(g);
+  if (infoO.render === 'xray') g.traverse(o => { if (o.isMesh && !o.userData._x) { o.material = o.material.clone(); Object.assign(o.material, { depthTest: false, depthWrite: false, transparent: true, opacity: 0.9 }); o.renderOrder = 10; o.userData._x = 1; } });
+  for (const a of infoO.annotations || []) { const el = document.createElement('div'); el.className = 'olabel'; el.textContent = a.text; stage.appendChild(el); labels.push({ k, el, p: new THREE.Vector3(...a.anchor) }); }
+  applyState();
+}
+function setOverlayExclusive(k) {
+  for (const key of Object.keys(meta.overlays || {})) { const want = key === k; if (!!ovl[key] !== want) toggleOverlay(key, want); }
+}
+function placeLabels() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  for (const l of labels) { const v = l.p.clone().project(camera); l.el.style.left = ((v.x + 1) / 2 * w) + 'px'; l.el.style.top = ((1 - v.y) / 2 * h) + 'px'; l.el.style.display = v.z < 1 ? '' : 'none'; }
+}
+
+// ------------------------------------------------------------- live flow particles (from meta.flow_paths)
+const KIND_COL = { flow_suction: 0x2b95ff, flow_discharge: 0xff6a1f, air: 0x7cc832, water: 0x3d8fd6, steam: 0xe8eef3, hydraulic_oil: 0xe0a526, flame: 0xff5a00 };
+function clearParticles() { particles.forEach(p => { scene.remove(p.mesh); p.mesh.geometry.dispose(); p.mesh.material.dispose(); }); particles = []; }
+function buildParticles() {
+  clearParticles();
+  const full = new THREE.Box3().setFromObject(root), size = full.getSize(new THREE.Vector3()).length();
+  for (const fp of meta.flow_paths || []) {
+    const pts = fp.points.map(q => new THREE.Vector3(...q)); if (pts.length < 2) continue;
+    const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + pts[i].distanceTo(pts[i - 1]));
+    const L = cum[cum.length - 1]; if (L <= 0) continue;
+    const r = Math.max(0.0025, Math.min(0.03, (fp.radius || 0.01) * 0.95));
+    const n = Math.max(6, Math.min(80, Math.round(L / (r * 7))));
+    const mesh = new THREE.InstancedMesh(new THREE.SphereGeometry(r, 10, 8), new THREE.MeshBasicMaterial({ color: KIND_COL[fp.kind] ?? 0x2b95ff }), n);
+    mesh.frustumCulled = false; mesh.renderOrder = 6; scene.add(mesh);
+    particles.push({ mesh, pts, cum, L, n, u: Array.from({ length: n }, (_, i) => i / n), speed: fp.speed, active: fp.active, base: Math.max(0.08, size * 0.12) });
+  }
+}
+const _m4 = new THREE.Matrix4(), _v = new THREE.Vector3();
+function phaseNow() { const a = actions.Operate; return a ? ((a.time % a.getClip().duration) / a.getClip().duration) : 0; }
+function updateParticles(dt) {
+  if (!particles.length || !live) return;
+  const ph = phaseNow();
+  for (const p of particles) {
+    const on = !p.active || p.active.some(([a, b]) => ph >= a && ph <= b);
+    p.mesh.visible = live && on && (!xray || true);
+    if (!on) continue;
+    for (let i = 0; i < p.n; i++) {
+      const s = (p.u[i] % 1) * p.L; let k = 1; while (k < p.cum.length - 1 && p.cum[k] < s) k++;
+      const t = (s - p.cum[k - 1]) / Math.max(1e-9, p.cum[k] - p.cum[k - 1]);
+      const f = p.speed ? (p.speed[k - 1] + (p.speed[k] - p.speed[k - 1]) * t) : 1;
+      p.u[i] = (p.u[i] + dt * p.base * f / p.L) % 1;
+      _v.copy(p.pts[k - 1]).lerp(p.pts[k], t); _m4.makeTranslation(_v.x, _v.y, _v.z); p.mesh.setMatrixAt(i, _m4);
+    }
+    p.mesh.instanceMatrix.needsUpdate = true;
+  }
+}
+
+// ------------------------------------------------------------- step-by-step "How it works" player
+function showStep(i) {
+  const st = learn.sections.working_principle.steps; if (!st.length) return;
+  stepIdx = (i + st.length) % st.length; const s = st[stepIdx];
+  document.getElementById('stepper').hidden = false;
+  document.getElementById('stCount').textContent = `Step ${stepIdx + 1} of ${st.length}`;
+  document.getElementById('stText').textContent = s.text;
+  runAction({ cut: s.cut, operate: true, overlay: s.overlay || null, highlight: s.part, explode: s.explode || 0, view: s.part ? 'part' : 'front' });
+  if (narrate) ttsSpeak(s.text);
+}
+function closeSteps() { stepIdx = -1; clearInterval(stepAuto); stepAuto = 0; setPressed('stAuto', false); document.getElementById('stepper').hidden = true; }
+document.getElementById('bSteps').onclick = () => showStep(0);
+document.getElementById('stNext').onclick = () => showStep(stepIdx + 1);
+document.getElementById('stPrev').onclick = () => showStep(stepIdx - 1);
+document.getElementById('stClose').onclick = closeSteps;
+document.getElementById('stAuto').onclick = () => { if (stepAuto) { clearInterval(stepAuto); stepAuto = 0; setPressed('stAuto', false); } else { stepAuto = setInterval(() => showStep(stepIdx + 1), 6000); setPressed('stAuto', true); } };
+
+// ------------------------------------------------------------- library: search, progress, bookmarks
+function libOpen(q = '') { document.getElementById('lib').hidden = false; const s = document.getElementById('libSearch'); s.value = q; renderLib(); setTimeout(() => s.focus(), 30); }
+function renderLib() {
+  const q = document.getElementById('libSearch').value.trim().toLowerCase(), only = document.getElementById('onlyStar').checked, stars = store.get('stars', {});
+  const all = store.get('prog', {}), seen = MODELS.filter(m => all[m.id]?.seen).length, passed = MODELS.filter(m => (all[m.id]?.best ?? 0) >= 70).length;
+  document.getElementById('libSum').textContent = `${MODELS.length} modules · ${seen} opened · ${passed} quizzes passed · ${Object.keys(stars).filter(k => stars[k]).length} bookmarked`;
+  let html = '', cat = null;
+  for (const m of MODELS) {
+    const hay = `${m.title} ${m.id} ${m.eq_id || ''} ${m.category} ${m.subcategory || ''} ${(m.keywords || []).join(' ')}`.toLowerCase();
+    if (q && !q.split(/\s+/).every(w => hay.includes(w))) continue;
+    if (only && !stars[m.id]) continue;
+    if (m.category !== cat) { cat = m.category; html += `<div class="libcat">${esc(cat)}</div>`; }
+    const p = all[m.id] || {};
+    html += `<div class="librow" data-id="${esc(m.id)}"><span class="no">${esc(m.eq_id || '#' + m.no)}</span><span><span class="t">${esc(m.title)}${m.flagship ? ' ★' : ''}</span><span class="sub">${esc(m.subcategory || 'Phase ' + m.phase)}</span></span>
+      <span>${p.seen ? '<span class="badge ok">opened</span>' : ''} ${p.best != null ? `<span class="badge ${p.best >= 70 ? 'ok' : ''}">quiz ${p.best}%</span>` : ''}</span><span class="star">${stars[m.id] ? '★' : ''}</span></div>`;
+  }
+  document.getElementById('libList').innerHTML = html || '<p>No matches.</p>';
+  document.querySelectorAll('.librow').forEach(r => r.onclick = () => { document.getElementById('lib').hidden = true; load(r.dataset.id); });
+}
+document.getElementById('bLib').onclick = () => libOpen();
+document.getElementById('libClose').onclick = () => document.getElementById('lib').hidden = true;
+document.getElementById('libSearch').oninput = renderLib; document.getElementById('onlyStar').onchange = renderLib;
+document.getElementById('search').onkeydown = e => { if (e.key === 'Enter') { libOpen(e.target.value); e.target.value = ''; } };
+document.getElementById('search').oninput = e => { if (e.target.value.length >= 2) { libOpen(e.target.value); e.target.value = ''; } };
+document.getElementById('bStar').onclick = () => { const s = store.get('stars', {}); s[current] = !s[current]; store.set('stars', s); document.getElementById('bStar').setAttribute('aria-pressed', String(!!s[current])); };
+document.getElementById('lib').onclick = e => { if (e.target.id === 'lib') document.getElementById('lib').hidden = true; };
+
+// ------------------------------------------------------------- measure tool
+function clearMeasure() { mPts = []; if (mLine) { scene.remove(mLine); mLine = null; } const el = document.getElementById('measure'); if (el) el.hidden = !measuring; if (measuring && el) el.textContent = 'Measure: tap two points'; }
+function addMeasurePoint(p) {
+  mPts.push(p.clone()); const el = document.getElementById('measure');
+  if (mPts.length === 1) { el.textContent = 'Measure: tap the second point'; return; }
+  if (mLine) scene.remove(mLine);
+  mLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(mPts.slice(-2)), new THREE.LineBasicMaterial({ color: 0xff2d55, depthTest: false })); mLine.renderOrder = 20; scene.add(mLine);
+  const d = mPts[mPts.length - 2].distanceTo(mPts[mPts.length - 1]); el.textContent = `Distance ≈ ${(d * 1000).toFixed(0)} mm (model scale)`; mPts = [];
+}
+
+// ------------------------------------------------------------- SME tools: calculators, datasheet, notes, compare
+const G = 9.80665;
+const CALCS = {
+  pump_power: { t: 'Pump power', f: [['Flow Q (m³/h)', 100], ['Head H (m)', 50], ['Density ρ (kg/m³)', 1000], ['Pump efficiency η (%)', 75], ['Motor efficiency (%)', 94]],
+    run: ([Q, H, r, e, em]) => { const ph = r * G * Q / 3600 * H / 1000, ps = ph / (e / 100); return `Hydraulic power  ${ph.toFixed(2)} kW\nShaft power      ${ps.toFixed(2)} kW\nElectrical input ${(ps / (em / 100)).toFixed(2)} kW`; } },
+  affinity: { t: 'Affinity laws (speed change)', f: [['Speed n1 (rpm)', 2950], ['Speed n2 (rpm)', 1475], ['Flow Q1 (m³/h)', 100], ['Head H1 (m)', 50], ['Power P1 (kW)', 18]],
+    run: ([n1, n2, Q, H, P]) => { const k = n2 / n1; return `Q2 = ${(Q * k).toFixed(1)} m³/h\nH2 = ${(H * k * k).toFixed(1)} m\nP2 = ${(P * k ** 3).toFixed(2)} kW\n(valid for the same impeller; approximate for large changes)`; } },
+  npsha: { t: 'NPSH available', f: [['Pressure on liquid surface (kPa abs)', 101.3], ['Vapour pressure (kPa abs)', 2.34], ['Density ρ (kg/m³)', 998], ['Static height of liquid above pump centreline z (m, negative = lift)', 2], ['Suction losses hf (m)', 0.8], ['NPSHr of pump (m)', 3]],
+    run: ([ps, pv, r, z, hf, req]) => { const a = (ps - pv) * 1000 / (r * G) + z - hf; return `NPSHa = ${a.toFixed(2)} m\nMargin = ${(a - req).toFixed(2)} m  (ratio ${(a / req).toFixed(2)})\nCheck margin against ANSI/HI 9.6.1 for the application.`; } },
+  ns: { t: 'Specific speed', f: [['Speed n (rpm)', 1480], ['Flow per eye Q (m³/h)', 500], ['Head per stage H (m)', 40]],
+    run: ([n, Q, H]) => { const nq = n * Math.sqrt(Q / 3600) / H ** 0.75, us = n * Math.sqrt(Q * 4.4029) / (H * 3.2808) ** 0.75; return `n_q (metric, m³/s, m) = ${nq.toFixed(1)}\nN_s (US, gpm, ft) = ${us.toFixed(0)}\n< ~1,500 radial · 4,000–9,000 mixed · > 9,000 axial (US units, approx.)`; } },
+  valve: { t: 'Valve flow coefficient (liquids)', f: [['Kv (m³/h at 1 bar)', 40], ['Pressure drop ΔP (bar)', 0.5], ['Specific gravity SG', 1.0]],
+    run: ([kv, dp, sg]) => `Flow Q = ${(kv * Math.sqrt(dp / sg)).toFixed(2)} m³/h\nCv = ${(kv * 1.156).toFixed(1)} (US gpm at 1 psi)\nNon-choked, turbulent liquid flow (IEC 60534-2-1 simplified).` },
+  dpmeter: { t: 'Differential-pressure flowmeter', f: [['Pipe ID D (mm)', 100], ['Beta ratio β = d/D', 0.6], ['Discharge coefficient C', 0.605], ['ΔP (kPa)', 25], ['Density ρ (kg/m³)', 998]],
+    run: ([D, b, C, dp, r]) => { const d = D / 1000 * b, q = C / Math.sqrt(1 - b ** 4) * Math.PI / 4 * d * d * Math.sqrt(2 * dp * 1000 / r); return `Volume flow ≈ ${(q * 3600).toFixed(2)} m³/h\nMass flow ≈ ${(q * r * 3600 / 1000).toFixed(2)} t/h\nTypical C: orifice ~0.60, nozzle ~0.98, venturi ~0.985 (ISO 5167; liquid, ε = 1).`; } },
+  pipe: { t: 'Pipe velocity & friction loss', f: [['Flow Q (m³/h)', 100], ['Pipe ID (mm)', 102], ['Length L (m)', 100], ['Roughness ε (mm)', 0.045], ['Density ρ (kg/m³)', 998], ['Viscosity μ (cP)', 1.0]],
+    run: ([Q, D, L, e, r, mu]) => { const d = D / 1000, A = Math.PI * d * d / 4, v = Q / 3600 / A, Re = r * v * d / (mu / 1000);
+      const f = Re < 2300 ? 64 / Re : 0.25 / Math.log10(e / 1000 / (3.7 * d) + 5.74 / Re ** 0.9) ** 2, hf = f * L / d * v * v / (2 * G);
+      return `Velocity v = ${v.toFixed(2)} m/s\nReynolds Re = ${Re.toFixed(0)} (${Re < 2300 ? 'laminar' : 'turbulent'})\nFriction factor f = ${f.toFixed(4)} (Swamee–Jain)\nHead loss = ${hf.toFixed(2)} m  ·  ΔP = ${(hf * r * G / 1e5).toFixed(3)} bar`; } },
+  insul: { t: 'Insulated pipe heat loss (per metre)', f: [['Pipe temperature (°C)', 180], ['Ambient (°C)', 25], ['Pipe OD (mm)', 114.3], ['Insulation thickness (mm)', 50], ['Insulation k (W/m·K)', 0.045], ['Outer surface coefficient h (W/m²·K)', 10]],
+    run: ([Tp, Ta, OD, t, k, h]) => { const r1 = OD / 2000, r2 = r1 + t / 1000, q = (Tp - Ta) / (Math.log(r2 / r1) / (2 * Math.PI * k) + 1 / (2 * Math.PI * r2 * h)), qb = 2 * Math.PI * r1 * h * (Tp - Ta);
+      return `Insulated loss ≈ ${q.toFixed(1)} W/m\nSurface temperature ≈ ${(Ta + q / (2 * Math.PI * r2 * h)).toFixed(1)} °C\nBare pipe (same h) ≈ ${qb.toFixed(0)} W/m  →  saving ${(100 * (1 - q / qb)).toFixed(0)} %\n(simplified: combined convection/radiation in h)`; } },
+  units: { t: 'Unit converter', f: [['Value', 1], ['Quantity: 1 pressure, 2 flow, 3 power, 4 temperature, 5 length', 1]],
+    run: ([v, q]) => { q = Math.round(q);
+      if (q === 1) return `${v} bar = ${(v * 100).toFixed(3)} kPa = ${(v * 14.5038).toFixed(3)} psi = ${(v * 10.197).toFixed(3)} mH₂O = ${(v / 1.01325).toFixed(4)} atm`;
+      if (q === 2) return `${v} m³/h = ${(v / 3.6).toFixed(3)} L/s = ${(v * 16.667).toFixed(2)} L/min = ${(v * 4.4029).toFixed(2)} US gpm`;
+      if (q === 3) return `${v} kW = ${(v * 1.341).toFixed(3)} hp`;
+      if (q === 4) return `${v} °C = ${(v * 9 / 5 + 32).toFixed(2)} °F = ${(v + 273.15).toFixed(2)} K`;
+      if (q === 5) return `${v} mm = ${(v / 25.4).toFixed(4)} in`; return 'Choose 1–5'; } },
+};
+const FAMILY_CALCS = { valves_piping: ['valve', 'dpmeter', 'pipe', 'insul', 'units'], default: ['pump_power', 'affinity', 'npsha', 'ns', 'pipe', 'valve', 'units'] };
+function calcHTML(key) {
+  const c = CALCS[key];
+  return `<div class="calc" data-c="${key}"><h4>${esc(c.t)}</h4>${c.f.map(([l, v], i) => `<div class="row"><label for="c_${key}_${i}">${esc(l)}</label><input id="c_${key}_${i}" type="number" step="any" value="${v}"></div>`).join('')}<div class="out"></div></div>`;
+}
+function wireCalcs() {
+  info.querySelectorAll('.calc[data-c]').forEach(el => { const c = CALCS[el.dataset.c]; const upd = () => { try { el.querySelector('.out').textContent = c.run([...el.querySelectorAll('input')].map(i => +i.value)); } catch (e) { el.querySelector('.out').textContent = '—'; } };
+    el.querySelectorAll('input').forEach(i => i.oninput = upd); upd(); });
+}
+function toolsHTML(s) {
+  const fam = learn.sections.introduction.hi_family, keys = FAMILY_CALCS[fam] || FAMILY_CALCS.default;
+  const rm = Object.assign({}, s.engineering_parameters.reference_model || {}, store.get('ds', {})[current] || {});
+  const rp = Object.assign({}, (s.engineering_parameters.reference_model || {}).rated_point || {}, rm.rated_point || {});
+  return `<div class="tools"><p class="disc">Tools for engineers and subject-matter experts. Calculations are simplified textbook relations — verify against the relevant standards before design decisions.</p>
+    <h3>Engineering calculators</h3>${keys.map(calcHTML).join('')}
+    <details><summary style="cursor:pointer;margin:6px 0">More calculators</summary>${Object.keys(CALCS).filter(k => !keys.includes(k)).map(calcHTML).join('')}</details>
+    <h3>Reference datasheet (your data)</h3>
+    <div class="calc ds"><div class="row"><label>Manufacturer</label><input data-ds="manufacturer" value="${esc(rm.manufacturer || '')}"></div><div class="row"><label>Model</label><input data-ds="model" value="${esc(rm.model || '')}"></div>
+      ${Object.keys(rp).map(k => `<div class="row"><label>${esc(nice(k))}</label><input data-rp="${esc(k)}" value="${esc(rp[k] ?? '')}"></div>`).join('')}
+      <button class="tool" id="dsCopy">Copy as JSON</button> <span class="disc" id="dsMsg">Saved on this device.</span></div>
+    <h3>Notes</h3><textarea id="notes" placeholder="Site observations, settings, lessons learned…">${esc(store.get('notes', {})[current] || '')}</textarea>
+    <h3>Compare with another item</h3><select id="cmpSel"><option value="">Choose…</option>${MODELS.filter(m => m.id !== current).map(m => `<option value="${esc(m.id)}">${esc((m.eq_id || '#' + m.no) + ' ' + m.title)}</option>`).join('')}</select><div id="cmpOut"></div>
+    <h3>Model tools</h3><button class="tool" id="bMeasure" aria-pressed="${measuring}">Measure distance</button> <button class="tool" id="bShowAll">Show all parts</button></div>`;
+}
+function wireTools() {
+  wireCalcs();
+  const saveDs = () => { const ds = store.get('ds', {}); const o = { rated_point: {} }; info.querySelectorAll('[data-ds]').forEach(i => o[i.dataset.ds] = i.value); info.querySelectorAll('[data-rp]').forEach(i => o.rated_point[i.dataset.rp] = i.value);
+    ds[current] = o; store.set('ds', ds); return o; };
+  info.querySelectorAll('[data-ds],[data-rp]').forEach(i => i.oninput = saveDs);
+  document.getElementById('dsCopy').onclick = async () => { const txt = JSON.stringify({ pump_id: current, reference_model: saveDs() }, null, 1); let ok = false;
+    try { await navigator.clipboard.writeText(txt); ok = true; } catch (e) {} document.getElementById('dsMsg').textContent = ok ? 'Copied to clipboard.' : txt; };
+  document.getElementById('notes').oninput = e => { const n = store.get('notes', {}); n[current] = e.target.value; store.set('notes', n); };
+  document.getElementById('cmpSel').onchange = async e => { const id = e.target.value, out = document.getElementById('cmpOut'); if (!id) { out.innerHTML = ''; return; }
+    let o; try { o = await (await fetch(`../output/learning/${id}.json`)).json(); } catch (err) { out.textContent = 'Could not load.'; return; }
+    const a = Object.assign({}, learn.sections.engineering_parameters.parameters, learn.sections.engineering_parameters.additional), b = Object.assign({}, o.sections.engineering_parameters.parameters, o.sections.engineering_parameters.additional);
+    const keys = [...new Set([...Object.keys(a), ...Object.keys(b)])], cell = v => v ? `${esc(v.typical_range)} ${esc(v.unit || '')}` : '—';
+    out.innerHTML = `<table class="cmp"><tr><th></th><th>${esc(learn.title)}</th><th>${esc(o.title)}</th></tr>${keys.map(k => `<tr><th>${esc(nice(k))}</th><td>${cell(a[k])}</td><td>${cell(b[k])}</td></tr>`).join('')}
+      <tr><th>Key points</th><td>${esc((learn.sections.introduction.key_points || []).join('; '))}</td><td>${esc((o.sections.introduction.key_points || []).join('; '))}</td></tr></table>`; };
+  document.getElementById('bMeasure').onclick = e => { measuring = !measuring; e.target.setAttribute('aria-pressed', String(measuring)); clearMeasure(); };
+  document.getElementById('bShowAll').onclick = () => { hiddenParts.clear(); applyState(); };
+}
+
+// ------------------------------------------------------------- inspector (13 sections in 7 tabs)
+const TABS = [['overview', 'Overview'], ['params', 'Specs'], ['care', 'Install & care'], ['failures', 'Failures'], ['tours', 'Tours'], ['quiz', 'Quiz'], ['tools', 'Tools']];
+function render() {
+  if (selected) return;
+  const s = learn.sections, m = MODELS.find(x => x.id === current);
+  const head = `<h2>${esc(m.no)}. ${esc(learn.title)}</h2>
+    <div class="chips"><span class="chip">${esc(learn.category)}</span><span class="chip">Phase ${learn.phase}</span>${learn.flagship ? '<span class="chip">Flagship</span>' : ''}<span class="chip">${meta.stats.parts} parts</span></div>
+    <div class="tabs" role="tablist">${TABS.map(([k, t]) => `<button role="tab" data-t="${k}" aria-selected="${tab === k}">${t}</button>`).join('')}</div>`;
+  info.innerHTML = head + `<div id="tabBody">${renderTab(s)}</div>`;
+  info.querySelectorAll('.tabs button').forEach(b => b.onclick = () => { tab = b.dataset.t; render(); const tb = info.querySelector('.tabs'), sb = tb && tb.querySelector('button[aria-selected="true"]'); if (sb) tb.scrollLeft = Math.max(0, sb.offsetLeft - tb.clientWidth / 2 + sb.offsetWidth / 2); });
+  wireTab();
+}
+function partBtn(id, label) { return id && parts[id] ? `<button class="link" data-part="${esc(id)}">${esc(label || 'Show in 3-D')}</button>` : ''; }
+function renderTab(s) {
+  if (tab === 'overview') {
+    const i = s.introduction, cfg = Object.entries(meta.model_configuration || {}).filter(([, v]) => typeof v !== 'object');
+    return `<h3>Introduction</h3><p>${esc(i.definition)}</p>
+      <h3>Applications</h3>${list(i.applications)}
+      ${i.key_points.length ? `<h3>Key points</h3>${list(i.key_points)}` : ''}
+      <h3>Working principle &middot; tap a step</h3><ol style="padding-left:18px;margin:0">${s.working_principle.steps.map((st, n) => `<li style="margin-bottom:6px">${esc(st.text)} ${partBtn(st.part, 'Show')}${st.overlay ? ` <button class="link" data-step="${n}">Play</button>` : ''}</li>`).join('')}</ol>
+      ${s.working_principle.characteristic_curve ? `<h3>Characteristic curve</h3><p>${esc(s.working_principle.characteristic_curve)}</p>` : ''}
+      ${Object.keys(s.flow_animation.other_overlays || {}).length ? `<h3>Teaching overlays</h3>${Object.entries(s.flow_animation.other_overlays).map(([k, v]) => `<p><b>${esc(v.title)}.</b> ${esc(v.description)}</p>`).join('')}` : ''}
+      <h3>Model configuration</h3><dl class="spec">${cfg.map(([k, v]) => `<dt>${esc(nice(k))}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      <h3>Components &middot; tap to inspect</h3>
+      <ul class="parts">${meta.parts.map(p => `<li><button data-id="${esc(p.id)}"><span>${esc(p.name)}</span><span class="g">${esc(p.group.replace(/_/g, ' '))}</span></button></li>`).join('')}</ul>
+      <h3>Standards</h3>${(meta.standards || []).map(x => `<div class="std"><b>${esc(x.id)}</b> &middot; ${esc(x.relevance)} <span style="color:var(--muted)">(edition ${esc(x.edition)})</span></div>`).join('')}
+      <p class="disc">${esc(meta.disclaimer)}</p>`;
+  }
+  if (tab === 'params') {
+    const e = s.engineering_parameters, row = (k, v) => `<tr><th>${esc(nice(k))}</th><td>${esc(v.typical_range)} ${esc(v.unit || '')}${v.note ? `<span class="n">${esc(v.note)}</span>` : ''}</td></tr>`;
+    const rm = e.reference_model || {}, rp = rm.rated_point || {};
+    return `<div class="note">${esc(e.basis)}</div>
+      <h3>Design-class ranges</h3><table class="ptable">${Object.entries(e.parameters).map(([k, v]) => row(k, v)).join('')}${Object.entries(e.additional || {}).map(([k, v]) => row(k, v)).join('')}</table>
+      ${e.selection_notes.length ? `<h3>Selection notes</h3>${list(e.selection_notes)}` : ''}
+      <h3>Reference model (manufacturer datasheet)</h3>
+      <dl class="spec"><dt>Manufacturer</dt><dd>${esc(rm.manufacturer || '— not set')}</dd><dt>Model</dt><dd>${esc(rm.model || '— not set')}</dd>
+      ${Object.entries(rp).map(([k, v]) => `<dt>${esc(nice(k))}</dt><dd>${v == null ? '<span style="color:var(--muted)">to be filled</span>' : esc(v)}</dd>`).join('')}</dl>
+      <p class="disc">${esc(rm.status || '')}</p>
+      <h3>Sources</h3>${list(e.sources)}`;
+  }
+  if (tab === 'care') {
+    const I = s.installation, Mt = s.maintenance;
+    return `<h3>Foundation</h3>${list(I.foundation)}<h3>Alignment</h3>${list(I.alignment)}<h3>Piping</h3>${list(I.piping)}<h3>Commissioning</h3>${list(I.commissioning)}
+      <h3>Routine checks</h3>${list(Mt.routine)}<h3>Periodic maintenance</h3>${list(Mt.periodic)}<h3>Overhaul</h3>${list(Mt.overhaul)}<h3>Lubrication</h3>${list(Mt.lubrication)}`;
+  }
+  if (tab === 'failures') {
+    return s.failure_analysis.items.map(f => `<div class="fa"><h4>${esc(f.problem)} <span class="chip">${esc(f.category)}</span></h4>
+      <b>Symptoms</b>${list(f.symptoms)}<b>Causes</b>${list(f.causes)}<b>Remedies</b>${list(f.remedies)}${partBtn(f.part, 'Show affected part')}</div>`).join('');
+  }
+  if (tab === 'tours') {
+    return `<p>Each tour plays on the 3-D model: the camera, cutaway, explode, animation and overlays follow the script. Captions show the narration.</p>
+      <label style="display:flex;gap:8px;align-items:center;margin:8px 0 12px;font-size:13px"><input type="checkbox" id="narr" ${narrate ? 'checked' : ''}> Read narration aloud (text-to-speech)</label>
+      ${s.video_tutorials.map((v, n) => `<div class="tour"><div><div class="t">${esc(v.title.split(' — ')[1] || v.title)}</div><div class="d">${v.script.length} scenes &middot; ${Math.round(v.duration_s / 60 * 10) / 10} min</div></div>
+      <button class="tool" data-tour="${n}">${tourRun && tourRun.n === n ? 'Stop' : 'Play'}</button></div>`).join('')}`;
+  }
+  if (tab === 'tools') return toolsHTML(s);
+  if (tab === 'quiz') {
+    const Qs = s.assessment.questions, done = Object.keys(quizState).length, right = Object.entries(quizState).filter(([i, a]) => Qs[i].answer === a).length;
+    return `<div class="score">${done ? `Score: ${right} / ${done} answered${done === Qs.length ? ` &middot; ${Math.round(100 * right / Qs.length)} % (pass ${s.assessment.pass_mark_pct} %)` : ''}` : `${Qs.length} questions &middot; pass mark ${s.assessment.pass_mark_pct} %`}</div>
+      ${Qs.map((q, i) => { const a = quizState[i]; return `<div class="qz"><p>${i + 1}. ${esc(q.question)}</p>${q.options.map((o, j) => `<label><input type="radio" name="q${i}" data-q="${i}" data-a="${j}" ${a === j ? 'checked' : ''} ${a !== undefined ? 'disabled' : ''}> <span class="${a !== undefined ? (j === q.answer ? 'ok' : (j === a ? 'bad' : '')) : ''}">${esc(o)}</span></label>`).join('')}
+      ${a !== undefined ? `<div class="ex">${a === q.answer ? 'Correct. ' : 'Not quite. '}${esc(q.explanation)} ${partBtn(q.part, 'Show in 3-D')}</div>` : ''}</div>`; }).join('')}
+      ${done ? '<button class="tool" id="qReset">Reset quiz</button>' : ''}`;
+  }
+  return '';
+}
+function wireTab() {
+  info.querySelectorAll('.parts button').forEach(b => b.onclick = () => select(b.dataset.id));
+  info.querySelectorAll('[data-part]').forEach(b => b.onclick = () => { if (!cut) { cut = true; applyState(); } flash(b.dataset.part); framePart(b.dataset.part); });
+  info.querySelectorAll('[data-step]').forEach(b => b.onclick = () => { const st = learn.sections.working_principle.steps[+b.dataset.step]; runAction({ cut: st.cut, operate: st.operate, overlay: st.overlay, highlight: st.part, view: st.part ? 'part' : 'front' }); });
+  info.querySelectorAll('[data-q]').forEach(r => r.onchange = () => { quizState[+r.dataset.q] = +r.dataset.a; const q = learn.sections.assessment.questions[+r.dataset.q]; if (q.part && parts[q.part]) flash(q.part); const y = info.scrollTop; render(); info.scrollTop = y; });
+  if (tab === 'tools') wireTools();
+  { const Qs = learn.sections.assessment.questions, n = Object.keys(quizState).length;
+    if (tab === 'quiz' && n === Qs.length && n) { const sc = Math.round(100 * Object.entries(quizState).filter(([i, a]) => Qs[i].answer === a).length / n); if (sc > (prog(current).best ?? -1)) setProg(current, { best: sc }); } }
+  const qr = document.getElementById('qReset'); if (qr) qr.onclick = () => { quizState = {}; render(); };
+  const nr = document.getElementById('narr'); if (nr) nr.onchange = () => { narrate = nr.checked; if (!narrate) ttsStop(); };
+  info.querySelectorAll('[data-tour]').forEach(b => b.onclick = () => { const n = +b.dataset.tour; if (tourRun && tourRun.n === n) stopTour(); else playTour(n); });
+}
+let flashT;
+function flash(id) { if (selected) highlight(selected, false); highlight(id, true); clearTimeout(flashT); flashT = setTimeout(() => { highlight(id, false); if (selected) highlight(selected, true); }, 2600); }
+function partOf(o) { while (o && !o.userData.part_id) o = o.parent; return o ? o.userData.part_id : null; }
+function highlight(id, on) { if (!root) return; root.traverse(o => { if (o.isMesh && partOf(o) === id && o.material.name !== 'section') o.material.emissive?.setHex(on ? 0x2a6fd6 : 0); }); }
+function select(id) {
+  if (selected) highlight(selected, false);
+  selected = id; if (!id) { render(); return; }
+  highlight(id, true);
+  const p = meta.parts.find(x => x.id === id), c = meta.components[p.info_ref] || {};
+  info.innerHTML = `<button class="back" id="back">&larr; ${esc(learn.title)}</button>
+    <h2 style="margin-top:10px">${esc(p.name)}</h2><div class="chips"><span class="chip">${esc(p.group.replace(/_/g, ' '))}</span><span class="chip">${esc(p.id)}</span></div>
+    <h3>Function</h3><p>${esc(c.function)}</p><h3>Construction</h3><p>${esc(c.construction)}</p><h3>Typical materials</h3><p>${esc(c.material)}</p>
+    <h3>Operating conditions</h3><p>${esc(c.operating_conditions)}</p><h3>Common failure modes</h3>${list(c.failure_modes)}<h3>Inspection</h3>${list(c.inspection)}
+    ${p.note ? `<p class="disc">${esc(p.note)}</p>` : ''}
+    <p style="margin-top:12px"><button class="tool" id="pIso">Isolate</button> <button class="tool" id="pHide">Hide part</button> <button class="tool" id="pAll">Show all</button> <button class="tool" id="pZoom">Zoom to part</button></p>`;
+  document.getElementById('pIso').onclick = () => { hiddenParts = new Set(meta.parts.map(q => q.id).filter(q => q !== id)); applyState(); framePart(id); };
+  document.getElementById('pHide').onclick = () => { hiddenParts.add(id); applyState(); };
+  document.getElementById('pAll').onclick = () => { hiddenParts.clear(); applyState(); };
+  document.getElementById('pZoom').onclick = () => framePart(id);
+  document.getElementById('back').onclick = () => select(null);
+  info.scrollTop = 0;
+}
+
+// ------------------------------------------------------------- narration: Android TextToSpeech bridge in the app, Web Speech in browsers
+function ttsSpeak(text) {
+  try {
+    if (window.AndroidTTS) { AndroidTTS.speak(text); return false; }   // app: timing follows duration_s
+    if ('speechSynthesis' in window) { const u = new SpeechSynthesisUtterance(text); speechSynthesis.speak(u); return new Promise(r => { u.onend = r; u.onerror = r; }); }
+  } catch (e) {}
+  return false;
+}
+function ttsStop() { try { if (window.AndroidTTS) AndroidTTS.stop(); else speechSynthesis?.cancel(); } catch (e) {} }
+
+// ------------------------------------------------------------- in-app video tours
+function runAction(a) {
+  if (a.cut !== undefined) cut = a.cut;
+  if (a.operate !== undefined) operate = a.operate;
+  if (a.explode !== undefined) explode = a.explode;
+  if (a.overlay !== undefined) setOverlayExclusive(a.overlay);
+  root.traverse(o => { if (o.isMesh) o.material.emissive?.setHex(0); });
+  if (a.highlight && parts[a.highlight]) highlight(a.highlight, true);
+  controls.autoRotate = a.view === 'orbit'; controls.autoRotateSpeed = 1.2;
+  const full = new THREE.Box3().setFromObject(root);
+  if (a.view === 'part' && a.highlight) framePart(a.highlight);
+  else if (a.view === 'front') frame(full, [0, 0.0001, 1]);
+  else if (a.view === 'iso' || a.view === 'orbit') frame(full);
+  applyState();
+}
+function stopTour() {
+  if (!tourRun) return; tourRun.cancel = true; tourRun = 0; cap.hidden = true; controls.autoRotate = false;
+  ttsStop();
+  if (learn && tab === 'tours') render();
+}
+async function playTour(n) {
+  stopTour(); const v = learn.sections.video_tutorials[n], run = { n, cancel: false }; tourRun = run; if (tab === 'tours') render();
+  for (let i = 0; i < v.script.length; i++) {
+    if (run.cancel) return;
+    const l = v.script[i]; runAction(l.action);
+    cap.hidden = false; cap.innerHTML = `<small>${esc(v.title)} &middot; ${i + 1}/${v.script.length}</small>${esc(l.narration)}`;
+    let spoken = false;
+    if (narrate) spoken = ttsSpeak(l.narration);
+    await Promise.all([new Promise(r => setTimeout(r, l.duration_s * 1000)), spoken || Promise.resolve()]);
+  }
+  if (!run.cancel) stopTour();
+}
+
+// ------------------------------------------------------------- picking + controls
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down;
+renderer.domElement.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; controls.autoRotate = false; });
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!root || !down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObject(root, true).find(h => { let o = h.object; while (o) { if (!o.visible) return false; o = o.parent; } return true; });
+  if (measuring) { if (hit) addMeasurePoint(hit.point); return; }
+  select(hit ? partOf(hit.object) : null);
+});
+document.getElementById('bOperate').onclick = () => { operate = !operate; applyState(); };
+document.getElementById('bCut').onclick = () => { cut = !cut; applyState(); };
+document.getElementById('bXray').onclick = () => { xray = !xray; applyState(); };
+document.getElementById('bLive').onclick = () => { live = !live; applyState(); };
+document.getElementById('sExplode').oninput = e => { explode = +e.target.value; applyState(); };
+document.getElementById('bReset').onclick = () => { if (!root) return; controls.autoRotate = false; frame(new THREE.Box3().setFromObject(root)); };
+
+function loop() { requestAnimationFrame(loop); const dt = Math.min(0.05, clock.getDelta()); if (mixer && operate) mixer.update(dt); updateParticles(dt); controls.update(); placeLabels(); renderer.render(scene, camera); }
+resize(); loop();
+const start = new URLSearchParams(location.search).get('m');
+load(MODELS.some(m => m.id === start) ? start : MODELS[0].id);
+</script>

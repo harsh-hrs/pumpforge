@@ -1,0 +1,623 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "foot_valve",
+ "no": 43,
+ "title": "Foot Valve",
+ "model_title": "Foot Valve with Strainer (Spring-Assisted Poppet)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A foot valve is a non-return valve with a strainer fitted at the bottom end of a pump suction pipe. It opens when the pump draws liquid, and closes when the pump stops so the suction line stays full and the pump stays primed. The strainer keeps solids out.",
+   "applications": [
+    "Centrifugal pumps lifting from sumps, wells and tanks",
+    "Fire pumps on open water sources (where permitted)",
+    "Irrigation and dewatering",
+    "Marine bilge suctions"
+   ],
+   "key_points": [
+    "Keeps the pump primed",
+    "Adds suction loss — size generously",
+    "Must stay submerged",
+    "Strainer needs cleaning"
+   ],
+   "classification": {
+    "family": "Check valve",
+    "type": "Spring-assisted poppet foot valve with strainer"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A foot valve is a check valve with a strainer fitted at the bottom of a pump suction pipe. It lets liquid flow up to the pump but closes when the pump stops, so the suction line stays full (primed). The strainer keeps debris out of the pump."
+  },
+  "model_3d": {
+   "asset": "glb/foot_valve.glb",
+   "metadata": "meta/foot_valve.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9590,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "With the pump running, suction lifts the poppet off its seat.",
+    "Liquid passes the strainer basket into the valve.",
+    "Flow rises through the suction pipe to the pump."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "With the pump running, suction lifts the poppet off its seat.",
+     "part": "poppet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid passes the strainer basket into the valve.",
+     "part": "strainer",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flow rises through the suction pipe to the pump.",
+     "part": "suction_pipe",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When the pump stops, the spring and the water column close the poppet.",
+     "part": "guide_spring",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The suction line stays full, so the pump restarts without priming.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pressure loss rises with flow squared; check it in the NPSHa calculation."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "foot_valve_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/foot_valve.json#components",
+   "key_components": "Poppet disc, seat, spring, strainer basket",
+   "parts": [
+    {
+     "id": "sump",
+     "name": "Suction Sump (shown cut away)",
+     "info_ref": "ftv_sump",
+     "function": "Holds the liquid the pump draws from.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "water",
+     "name": "Liquid Level",
+     "info_ref": "ftv_water",
+     "function": "Liquid level above the valve.",
+     "material": "—"
+    },
+    {
+     "id": "body",
+     "name": "Valve Body & Seat Ring",
+     "info_ref": "ftv_body",
+     "function": "Holds the seat and connects to the suction pipe.",
+     "material": "Cast iron, bronze, PVC."
+    },
+    {
+     "id": "strainer",
+     "name": "Strainer Basket",
+     "info_ref": "ftv_strainer",
+     "function": "Keeps debris out of the pump.",
+     "material": "Stainless/galvanised steel, plastic."
+    },
+    {
+     "id": "poppet",
+     "name": "Poppet Disc with Soft Seal & Guide Stem",
+     "info_ref": "ftv_poppet",
+     "function": "Opens with flow and closes on stop to hold the suction column.",
+     "material": "Bronze/stainless + NBR."
+    },
+    {
+     "id": "guide_spring",
+     "name": "Guide Bridge & Closing Spring",
+     "info_ref": "ftv_spring",
+     "function": "Helps the poppet close fast when flow stops.",
+     "material": "Stainless."
+    },
+    {
+     "id": "suction_pipe",
+     "name": "Suction Pipe (to pump)",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 25 – 300",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "up to ~16",
+     "unit": "bar"
+    },
+    "temperature": {
+     "typical_range": "0 to 80 (elastomer seal)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Loss coefficient K ≈ 1 – 4 incl. strainer (design dependent)",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Keep the foot valve at least ~1–1.5 pipe diameters above the sump floor and well below the minimum level (check ANSI/HI 9.8).",
+    "Make the suction pipe airtight and rising to the pump."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pump stays primed after stops.",
+     "part": "poppet",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Lift and clean the strainer.",
+     "part": "strainer",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace seat seal and spring.",
+     "part": "guide_spring"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of prime",
+     "category": "priming",
+     "symptoms": [
+      "Pump runs but no flow after restart"
+     ],
+     "causes": [
+      "Poppet held open by debris, worn seal"
+     ],
+     "remedies": [
+      "Clean/replace seal"
+     ],
+     "part": "poppet"
+    },
+    {
+     "problem": "Cavitation from blocked strainer",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise, low flow"
+     ],
+     "causes": [
+      "Clogged basket"
+     ],
+     "remedies": [
+      "Clean strainer, enlarge open area"
+     ],
+     "part": "strainer"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Foot Valve — Introduction",
+    "type": "in_app_tour",
+    "model": "foot_valve.glb",
+    "duration_s": 53.5,
+    "script": [
+     {
+      "narration": "This module introduces the Foot Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A foot valve is a non-return valve with a strainer fitted at the bottom end of a pump suction pipe.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It opens when the pump draws liquid, and closes when the pump stops so the suction line stays full and the pump stays primed.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The strainer keeps solids out.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include centrifugal pumps lifting from sumps, wells and tanks; fire pumps on open water sources (where permitted); irrigation and dewatering; marine bilge suctions.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Valve Body & Seat Ring.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Foot Valve — Operation",
+    "type": "in_app_tour",
+    "model": "foot_valve.glb",
+    "duration_s": 30.8,
+    "script": [
+     {
+      "narration": "How the Foot Valve works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "With the pump running, suction lifts the poppet off its seat.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "poppet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid passes the strainer basket into the valve.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "strainer",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flow rises through the suction pipe to the pump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_pipe",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When the pump stops, the spring and the water column close the poppet.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "guide_spring",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The suction line stays full, so the pump restarts without priming.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Foot Valve — Maintenance",
+    "type": "in_app_tour",
+    "model": "foot_valve.glb",
+    "duration_s": 36.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Foot Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pump stays primed after stops.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "poppet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift and clean the strainer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "strainer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace seat seal and spring.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "guide_spring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of prime: pump runs but no flow after restart. Common cause: poppet held open by debris, worn seal.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "poppet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation from blocked strainer: noise, low flow. Common cause: clogged basket.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "strainer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Main purpose of a foot valve?",
+     "options": [
+      "Throttle flow",
+      "Keep the suction line full so the pump stays primed",
+      "Raise pressure",
+      "Measure flow"
+     ],
+     "answer": 1,
+     "explanation": "Non-return at the suction end.",
+     "level": "basic"
+    },
+    {
+     "question": "A blocked foot-valve strainer can cause…",
+     "options": [
+      "Higher NPSHa",
+      "Cavitation and low flow",
+      "Overspeed",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "Extra suction loss reduces NPSHa.",
+     "level": "basic"
+    },
+    {
+     "question": "Where is a foot valve installed?",
+     "options": [
+      "On the discharge",
+      "At the bottom of the suction pipe",
+      "At the pump casing",
+      "On the tank roof"
+     ],
+     "answer": 1,
+     "explanation": "Submerged at the inlet.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the liquid the pump draws from.\"",
+     "options": [
+      "Guide Bridge & Closing Spring",
+      "Suction Pipe (to pump)",
+      "Suction Sump (shown cut away)",
+      "Liquid Level"
+     ],
+     "answer": 2,
+     "explanation": "Suction Sump (shown cut away): Holds the liquid the pump draws from.",
+     "level": "basic",
+     "part": "sump",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Liquid level above the valve.\"",
+     "options": [
+      "Suction Pipe (to pump)",
+      "Suction Sump (shown cut away)",
+      "Valve Body & Seat Ring",
+      "Liquid Level"
+     ],
+     "answer": 3,
+     "explanation": "Liquid Level: Liquid level above the valve.",
+     "level": "basic",
+     "part": "water",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds the seat and connects to the suction pipe.\"",
+     "options": [
+      "Poppet Disc with Soft Seal & Guide Stem",
+      "Valve Body & Seat Ring",
+      "Guide Bridge & Closing Spring",
+      "Suction Pipe (to pump)"
+     ],
+     "answer": 1,
+     "explanation": "Valve Body & Seat Ring: Holds the seat and connects to the suction pipe.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,783 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "lubricating_oil_pump",
+ "no": 38,
+ "title": "Lubricating Oil Pump",
+ "model_title": "Lubricating Oil Pump Console (Main + Standby, API 614 Style)",
+ "category": "5 · Industrial Pump Applications",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A lubricating-oil system (console) supplies clean, cooled oil at controlled pressure to the bearings of turbines, compressors and large pumps. Main and standby pumps — here three-screw pumps — draw from a reservoir and deliver through twin coolers, duplex filters and pressure control valves; API 614 governs special-purpose systems.",
+   "applications": [
+    "Steam and gas turbines",
+    "Centrifugal compressors",
+    "Large pumps and gearboxes",
+    "Alumina refinery turbine-generators and blowers"
+   ],
+   "key_points": [
+    "Built from: Three Screw Pump (20) or External Gear Pump (17)",
+    "Main + standby with auto-start on low pressure",
+    "Duplex filters and coolers switchable on-line",
+    "API 614 (verify edition)"
+   ],
+   "classification": {
+    "family": "Package / system",
+    "configuration": "Lube-oil console with main + standby rotary screw pumps",
+    "application": "Turbomachinery bearing lubrication"
+   },
+   "hi_family": "application",
+   "summary": "A lubricating-oil console supplies clean, cool oil at controlled pressure to the bearings (and often seals) of large machines such as turbines, compressors and big pumps. Oil is drawn from a reservoir by a main pump; an identical standby pump starts automatically if header pressure falls. Duplex filters and twin coolers can be switched over while running for maintenance, and a pressure-control valve spills excess oil back to the tank. Positive-displacement screw or gear pumps are used because they give steady flow regardless of oil viscosity."
+  },
+  "model_3d": {
+   "asset": "glb/lubricating_oil_pump.glb",
+   "metadata": "meta/lubricating_oil_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 140300,
+   "parts": 31
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The main pump draws oil from the reservoir.",
+    "The screw rotors deliver smooth, pulsation-free flow.",
+    "Oil passes the cooler and duplex filter."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The main pump draws oil from the reservoir.",
+     "part": "pump_main",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The screw rotors deliver smooth, pulsation-free flow.",
+     "part": "rotor_main",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil passes the cooler and duplex filter.",
+     "part": "duplex_filter",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pressure control valves regulate header pressure; the standby pump auto-starts on low pressure.",
+     "part": "pressure_control",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Screw pump near-constant flow; header pressure by control valve."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "lubricating_oil_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/lubricating_oil_pump.json#components",
+   "key_components": "Gear or screw pump",
+   "parts": [
+    {
+     "id": "skid",
+     "name": "Console Skid (Baseframe with Drip Pan)",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    },
+    {
+     "id": "reservoir",
+     "name": "Oil Reservoir (Stainless/Carbon Steel)",
+     "info_ref": "lo_reservoir",
+     "function": "Stores oil, separates air/water, provides retention time; heater for cold start.",
+     "material": "Stainless steel (often required by API 614)."
+    },
+    {
+     "id": "level_breather",
+     "name": "Level Gauge, Breather & Immersion Heater",
+     "info_ref": "lo_level",
+     "function": "Shows level, breathes air, heats oil for cold start.",
+     "material": "—"
+    },
+    {
+     "id": "pump_main",
+     "name": "Main Lube-Oil Pump (Three-Screw)",
+     "info_ref": "lo_pump",
+     "function": "Delivers oil flow to the header; one runs, one stands by.",
+     "material": "Cast iron/steel, hardened rotors."
+    },
+    {
+     "id": "rotor_main",
+     "name": "Main Pump – Power Rotor",
+     "info_ref": "power_rotor_lo",
+     "function": "Screw rotors that move oil axially without pulsation.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "idler_main_a",
+     "name": "Main Pump – Idler Rotor",
+     "info_ref": "power_rotor_lo",
+     "function": "Screw rotors that move oil axially without pulsation.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "idler_main_b",
+     "name": "Main Pump – Idler Rotor",
+     "info_ref": "power_rotor_lo",
+     "function": "Screw rotors that move oil axially without pulsation.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "coupling_main",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_main_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "mmain_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "mmain_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "mmain_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "mmain_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "mmain_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "mmain_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "pump_standby",
+     "name": "Standby Lube-Oil Pump (Three-Screw)",
+     "info_ref": "lo_pump",
+     "function": "Delivers oil flow to the header; one runs, one stands by.",
+     "material": "Cast iron/steel, hardened rotors."
+    },
+    {
+     "id": "rotor_standby",
+     "name": "Standby Pump – Power Rotor",
+     "info_ref": "power_rotor_lo",
+     "function": "Screw rotors that move oil axially without pulsation.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "idler_standby_a",
+     "name": "Standby Pump – Idler Rotor",
+     "info_ref": "power_rotor_lo",
+     "function": "Screw rotors that move oil axially without pulsation.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "idler_standby_b",
+     "name": "Standby Pump – Idler Rotor",
+     "info_ref": "power_rotor_lo",
+     "function": "Screw rotors that move oil axially without pulsation.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "coupling_standby",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_standby_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "mstandby_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "mstandby_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "mstandby_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "mstandby_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "mstandby_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "mstandby_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "piping",
+     "name": "Suction, Discharge & Header Piping",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "duplex_filter",
+     "name": "Duplex Oil Filter with Transfer Valve",
+     "info_ref": "lo_filter",
+     "function": "Removes particles; one side in service while the other is serviced.",
+     "material": "Carbon/stainless housings."
+    },
+    {
+     "id": "coolers",
+     "name": "Twin Shell-and-Tube Oil Coolers",
+     "info_ref": "lo_cooler",
+     "function": "Removes heat from oil to keep supply temperature constant.",
+     "material": "Steel shell, copper-nickel/stainless tubes."
+    },
+    {
+     "id": "pressure_control",
+     "name": "Pressure-Control Valve & Gauges (Supply Header)",
+     "info_ref": "lo_pcv",
+     "function": "Holds header pressure constant by spilling excess flow back to the tank.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "50 – 3,000",
+     "unit": "L/min"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "pressure": {
+     "typical_range": "header ~1.5 – 3; pump discharge up to ~10–16",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 3,000",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "70 – 85",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "oil_grade": {
+     "typical_range": "ISO VG 32 / 46 typical (turbine oil)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Console skid on level base."
+   ],
+   "alignment": [
+    "Pump/motor alignment."
+   ],
+   "piping": [
+    "Stainless oil piping downstream of filters; flushing to cleanliness before start."
+   ],
+   "commissioning": [
+    "Oil flush; test auto-start of standby pump."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check header pressure and filter ΔP.",
+     "part": "duplex_filter",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Switch filters and change elements.",
+     "part": "duplex_filter",
+     "interval": "per ΔP"
+    },
+    {
+     "task": "Oil analysis.",
+     "part": "reservoir",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect pumps and coolers.",
+     "part": "pump_standby"
+    }
+   ],
+   "lubrication": [
+    "Self-lubricated by oil."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low header pressure trip",
+     "category": "performance",
+     "symptoms": [
+      "Turbine trip"
+     ],
+     "causes": [
+      "Pump wear, filter blockage"
+     ],
+     "remedies": [
+      "Standby auto-start test"
+     ],
+     "part": "pressure_control"
+    },
+    {
+     "problem": "Water in oil",
+     "category": "performance",
+     "symptoms": [
+      "Milky oil"
+     ],
+     "causes": [
+      "Cooler leak"
+     ],
+     "remedies": [
+      "Repair cooler"
+     ],
+     "part": "coolers"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Lubricating Oil Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "lubricating_oil_pump.glb",
+    "duration_s": 54.9,
+    "script": [
+     {
+      "narration": "This module introduces the Lubricating Oil Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A lubricating-oil system (console) supplies clean, cooled oil at controlled pressure to the bearings of turbines, compressors and large pumps.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Main and standby pumps — here three-screw pumps — draw from a reservoir and deliver through twin coolers, duplex filters and pressure control valves; API 614 governs special-purpose systems.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include steam and gas turbines; centrifugal compressors; large pumps and gearboxes; alumina refinery turbine-generators and blowers.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Main Lube-Oil Pump (Three-Screw), Main Pump – Power Rotor, Main Pump – Idler Rotor, Main Pump – Idler Rotor.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Lubricating Oil Pump — Operation",
+    "type": "in_app_tour",
+    "model": "lubricating_oil_pump.glb",
+    "duration_s": 26.0,
+    "script": [
+     {
+      "narration": "How the Lubricating Oil Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The main pump draws oil from the reservoir.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_main",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The screw rotors deliver smooth, pulsation-free flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor_main",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil passes the cooler and duplex filter.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "duplex_filter",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pressure control valves regulate header pressure; the standby pump auto-starts on low pressure.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "pressure_control",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Lubricating Oil Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "lubricating_oil_pump.glb",
+    "duration_s": 36.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Lubricating Oil Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check header pressure and filter ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "duplex_filter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Switch filters and change elements.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "duplex_filter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Oil analysis.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "reservoir",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect pumps and coolers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_standby",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low header pressure trip: turbine trip. Common cause: pump wear, filter blockage.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "pressure_control",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water in oil: milky oil. Common cause: cooler leak.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "coolers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is a standby pump fitted?",
+     "options": [
+      "Double pressure",
+      "Automatically takes over if header pressure falls",
+      "Cools oil",
+      "Filters oil"
+     ],
+     "answer": 1,
+     "explanation": "Protects the machine bearings.",
+     "level": "basic"
+    },
+    {
+     "question": "Why duplex filters?",
+     "options": [
+      "More flow",
+      "Element can be changed without stopping",
+      "Cheaper",
+      "Lower pressure"
+     ],
+     "answer": 1,
+     "explanation": "Switchable.",
+     "level": "basic"
+    },
+    {
+     "question": "Which pump type is used in this model?",
+     "options": [
+      "Three screw",
+      "Axial",
+      "Airlift",
+      "AODD"
+     ],
+     "answer": 0,
+     "explanation": "Module 20.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores oil, separates air/water, provides retention time; heater for cold start.\"",
+     "options": [
+      "Electric Motor – Bearings (DE & NDE)",
+      "Flexible Coupling",
+      "Coupling Guard",
+      "Oil Reservoir (Stainless/Carbon Steel)"
+     ],
+     "answer": 3,
+     "explanation": "Oil Reservoir (Stainless/Carbon Steel): Stores oil, separates air/water, provides retention time; heater for cold start.",
+     "level": "basic",
+     "part": "reservoir",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Shows level, breathes air, heats oil for cold start.\"",
+     "options": [
+      "Level Gauge, Breather & Immersion Heater",
+      "Electric Motor – Frame & End Shields",
+      "Standby Pump – Power Rotor",
+      "Electric Motor – Bearings (DE & NDE)"
+     ],
+     "answer": 0,
+     "explanation": "Level Gauge, Breather & Immersion Heater: Shows level, breathes air, heats oil for cold start.",
+     "level": "basic",
+     "part": "level_breather",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Delivers oil flow to the header; one runs, one stands by.\"",
+     "options": [
+      "Electric Motor – Cooling Fan",
+      "Main Lube-Oil Pump (Three-Screw)",
+      "Duplex Oil Filter with Transfer Valve",
+      "Electric Motor – Frame & End Shields"
+     ],
+     "answer": 1,
+     "explanation": "Main Lube-Oil Pump (Three-Screw): Delivers oil flow to the header; one runs, one stands by.",
+     "level": "basic",
+     "part": "pump_main",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

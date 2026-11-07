@@ -1,0 +1,827 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "firewater_pump_package",
+ "no": 33,
+ "title": "Firewater Pump Package",
+ "model_title": "Firewater Pump Package (Diesel-Driven, NFPA 20 Style)",
+ "category": "5 · Industrial Pump Applications",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A firewater pump package supplies water to sprinklers, hydrants and deluge systems. Typically a listed horizontal split-case pump driven by a diesel engine (or electric motor) is installed with a controller, a jockey pump that maintains system pressure, a relief valve and a test header. NFPA 20 governs the arrangement and performance.",
+   "applications": [
+    "Industrial plants and refineries",
+    "Alumina refineries and mineral processing plants",
+    "Warehouses and high-rise buildings",
+    "Terminals and tank farms"
+   ],
+   "key_points": [
+    "Built from: Horizontal Split Case Pump (module 2) or Vertical Turbine Pump (module 4)",
+    "Listed pumps: ≥150 % rated flow at ≥65 % rated pressure; shut-off ≤140 % (NFPA 20 — verify edition)",
+    "Jockey pump keeps the network pressurised",
+    "Weekly churn tests and annual flow tests"
+   ],
+   "classification": {
+    "family": "Package / system",
+    "configuration": "Horizontal split-case fire pump + diesel engine driver + jockey pump + controllers",
+    "application": "Fire protection (sprinkler, hydrant, deluge systems)"
+   },
+   "hi_family": "application",
+   "summary": "A fire pump package is a complete, listed pumping system that must start automatically and deliver its rated flow and pressure to sprinklers and hydrants whenever system pressure falls. It combines a fire pump (here a horizontal split-case pump), a reliable driver (diesel engine with its own batteries, fuel and cooling from the pump discharge, or an electric motor), a fire pump controller, a small jockey pump that keeps the system pressurised against minor leaks, a main relief valve, a test header for flow testing, and isolation/check valves. Installation and acceptance are governed by fire codes such as NFPA 20."
+  },
+  "model_3d": {
+   "asset": "glb/firewater_pump_package.glb",
+   "metadata": "meta/firewater_pump_package.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 88036,
+   "parts": 33
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The jockey pump keeps the fire main pressurised against small leaks.",
+    "On a pressure drop the controller starts the main fire pump.",
+    "The diesel engine drives the split-case pump through a drive shaft."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The jockey pump keeps the fire main pressurised against small leaks.",
+     "part": "jockey_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On a pressure drop the controller starts the main fire pump.",
+     "part": "controllers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diesel engine drives the split-case pump through a drive shaft.",
+     "part": "diesel_engine",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The split-case pump delivers the fire flow to the network.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The main relief valve and test header allow testing and protect against over-pressure.",
+     "part": "test_header",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Listed fire-pump curve shape per NFPA 20: rated point, ≥65 % pressure at 150 % flow, ≤140 % pressure at shut-off."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "firewater_pump_package_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/firewater_pump_package.json#components",
+   "key_components": "Horizontal split-case or vertical turbine",
+   "parts": [
+    {
+     "id": "lower_casing",
+     "name": "Lower Casing Half (with Nozzles & Feet)",
+     "info_ref": "sc_lower",
+     "function": "Lower half of the axially split casing: carries the suction and discharge nozzles, feet and bearing brackets, so the rotor can be removed without disturbing the piping.",
+     "material": "Cast iron, ductile iron, cast steel, bronze, duplex."
+    },
+    {
+     "id": "upper_casing",
+     "name": "Upper Casing Half (Removable)",
+     "info_ref": "sc_upper",
+     "function": "Removable top half of the casing; lifting it exposes the complete rotor for inspection.",
+     "material": "As lower half."
+    },
+    {
+     "id": "impeller",
+     "name": "Double-Suction Impeller",
+     "info_ref": "impeller_ds",
+     "function": "Double-suction impeller: liquid enters from both sides, halving eye velocity (lower NPSHr) and balancing axial thrust.",
+     "material": "Bronze, cast iron, stainless, duplex."
+    },
+    {
+     "id": "shaft",
+     "name": "Shaft & Sleeves",
+     "info_ref": "pump_shaft",
+     "function": "Transmits torque from the coupling to the impeller(s).",
+     "material": "Carbon steel, 4140 alloy steel, 410/420 or 316 stainless, duplex."
+    },
+    {
+     "id": "seal_inboard",
+     "name": "Mechanical Seal – Inboard",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_housing_inboard",
+     "name": "Bearing Housing – Inboard",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_inboard",
+     "name": "Radial Bearing – Inboard",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "seal_outboard",
+     "name": "Mechanical Seal – Outboard",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_housing_outboard",
+     "name": "Bearing Housing – Outboard",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_outboard",
+     "name": "Thrust Bearing – Outboard",
+     "info_ref": "thrust_bearing",
+     "function": "Carries axial hydraulic thrust and locates the shaft axially.",
+     "material": "Bearing steel; brass or polyamide cages."
+    },
+    {
+     "id": "station_piping",
+     "name": "Suction & Discharge Piping",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "station_valves",
+     "name": "Suction Isolation, Discharge Check & Isolation Valves",
+     "info_ref": "gate_valve",
+     "function": "Isolation valve, fully open or fully closed.",
+     "material": "Cast iron, ductile iron, carbon or stainless steel."
+    },
+    {
+     "id": "pressure_gauges",
+     "name": "Suction & Discharge Pressure Gauges",
+     "info_ref": "pressure_gauge",
+     "function": "Indicates suction or discharge pressure for operation and performance checks.",
+     "material": "Stainless steel case and wetted parts."
+    },
+    {
+     "id": "drive_shaft",
+     "name": "Drive Shaft (Cardan) between Pump and Engine",
+     "info_ref": "fw_driveshaft",
+     "function": "Connects pump and engine while accommodating small misalignment.",
+     "material": "Steel."
+    },
+    {
+     "id": "shaft_guard",
+     "name": "Drive Shaft Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "diesel_engine",
+     "name": "Diesel Engine (Listed Fire-Pump Driver)",
+     "info_ref": "fw_engine",
+     "function": "Independent prime mover that runs even if electrical power fails.",
+     "material": "Cast iron engine."
+    },
+    {
+     "id": "crankshaft_flywheel",
+     "name": "Crankshaft, Crank Throws & Flywheel",
+     "info_ref": "fw_flywheel",
+     "function": "Smooths engine torque and drives the pump.",
+     "material": "Steel/cast iron."
+    },
+    {
+     "id": "pistons",
+     "name": "Pistons (6 Cylinders)",
+     "info_ref": "fw_pistons",
+     "function": "Convert the pressure of the burning fuel–air charge into force on the crankshaft (four-stroke: intake, compression, power, exhaust).",
+     "material": "Aluminium alloy, steel crowns on heavy-duty engines."
+    },
+    {
+     "id": "connecting_rods",
+     "name": "Connecting Rods",
+     "info_ref": "fw_conrods",
+     "function": "Link each piston to its crank throw, turning straight-line motion into rotation.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "engine_auxiliaries",
+     "name": "Heat Exchanger, Exhaust Silencer & Air Cleaner",
+     "info_ref": "fw_aux",
+     "function": "Engine cooling (heat exchanger fed from pump discharge), exhaust silencer and air cleaner.",
+     "material": "Steel/copper."
+    },
+    {
+     "id": "batteries",
+     "name": "Starting Batteries (2 Sets)",
+     "info_ref": "fw_batteries",
+     "function": "Two independent battery sets to start the engine.",
+     "material": "—"
+    },
+    {
+     "id": "fuel_tank",
+     "name": "Diesel Day Tank on Stand",
+     "info_ref": "fw_fuel",
+     "function": "Stores diesel for the required run time.",
+     "material": "Steel."
+    },
+    {
+     "id": "controllers",
+     "name": "Fire Pump Controller & Jockey Pump Controller",
+     "info_ref": "control_panel",
+     "function": "Houses starters, protection and control logic for the pumps.",
+     "material": "Painted or stainless steel enclosure; IP rating per location."
+    },
+    {
+     "id": "jockey_pump",
+     "name": "Jockey (Pressure Maintenance) Pump",
+     "info_ref": "fw_jockey",
+     "function": "Keeps the fire main pressurised against small leaks so the main fire pump starts only on real demand.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "jm_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "jm_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "jm_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "jm_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "jm_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "jm_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "main_relief_valve",
+     "name": "Main Pressure Relief Valve",
+     "info_ref": "fw_relief",
+     "function": "Limits system pressure (required on engine-driven pumps where shut-off pressure could exceed system rating).",
+     "material": "Bronze/ductile iron."
+    },
+    {
+     "id": "test_header",
+     "name": "Test Header with Hose Valves",
+     "info_ref": "fw_test_header",
+     "function": "Allows flow testing of the pump through hose streams or a flow meter.",
+     "material": "Steel/brass valves."
+    },
+    {
+     "id": "skid",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "25 – 5,000",
+     "unit": "US gpm rated (NFPA 20 standard ratings — verify)"
+    },
+    "head": {
+     "typical_range": "40 – 200",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "up to ~20",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,470 – 2,950",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "60 – 85",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "fuel_tank": {
+     "typical_range": "≈ 5 L per kW (1 gal/hp) + allowances — verify NFPA 20",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Dedicated, fire-separated pump room; rigid baseplate."
+   ],
+   "alignment": [
+    "Align pump and motor shafts with dial indicators or laser after grouting and again after connecting the piping (hot alignment check for hot service).",
+    "Target the coupling manufacturer's tolerances; typical practice for 1500–3000 rpm is ≤0.05 mm offset and ≤0.05 mm/100 mm angularity — verify.",
+    "Correct soft foot (< 0.05 mm) before final alignment."
+   ],
+   "piping": [
+    "Suction from a reliable source (tank/reservoir); no throttling on suction.",
+    "Test header or flow meter loop; relief valve per standard."
+   ],
+   "commissioning": [
+    "Acceptance test at churn, 100 % and 150 % flow.",
+    "Controller and engine start tests (both batteries)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Weekly churn test run.",
+     "part": "diesel_engine",
+     "interval": "weekly"
+    },
+    {
+     "task": "Check batteries and fuel level.",
+     "part": "batteries",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Annual flow test at 0, 100, 150 % rated flow.",
+     "part": "test_header",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect split-case pump internals.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Engine oil; pump bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Engine fails to start",
+     "category": "performance",
+     "symptoms": [
+      "Controller alarm"
+     ],
+     "causes": [
+      "Batteries, fuel"
+     ],
+     "remedies": [
+      "Battery maintenance, fuel checks"
+     ],
+     "part": "batteries"
+    },
+    {
+     "problem": "Low flow at test",
+     "category": "performance",
+     "symptoms": [
+      "Below curve"
+     ],
+     "causes": [
+      "Impeller wear, suction blockage"
+     ],
+     "remedies": [
+      "Overhaul; clean suction"
+     ],
+     "part": "impeller"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Firewater Pump Package — Introduction",
+    "type": "in_app_tour",
+    "model": "firewater_pump_package.glb",
+    "duration_s": 57.3,
+    "script": [
+     {
+      "narration": "This module introduces the Firewater Pump Package.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A firewater pump package supplies water to sprinklers, hydrants and deluge systems.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typically a listed horizontal split-case pump driven by a diesel engine (or electric motor) is installed with a controller, a jockey pump that maintains system pressure, a relief valve and a test header.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "NFPA 20 governs the arrangement and performance.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include industrial plants and refineries; alumina refineries and mineral processing plants; warehouses and high-rise buildings; terminals and tank farms.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Lower Casing Half (with Nozzles & Feet), Upper Casing Half (Removable), Double-Suction Impeller, Shaft & Sleeves.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Firewater Pump Package — Operation",
+    "type": "in_app_tour",
+    "model": "firewater_pump_package.glb",
+    "duration_s": 32.8,
+    "script": [
+     {
+      "narration": "How the Firewater Pump Package works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The jockey pump keeps the fire main pressurised against small leaks.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "jockey_pump",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On a pressure drop the controller starts the main fire pump.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "controllers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diesel engine drives the split-case pump through a drive shaft.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "diesel_engine",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The split-case pump delivers the fire flow to the network.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The main relief valve and test header allow testing and protect against over-pressure.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "test_header",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Firewater Pump Package — Maintenance",
+    "type": "in_app_tour",
+    "model": "firewater_pump_package.glb",
+    "duration_s": 37.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Firewater Pump Package.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Weekly churn test run.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diesel_engine",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check batteries and fuel level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "batteries",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Annual flow test at 0, 100, 150 % rated flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "test_header",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect split-case pump internals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for engine fails to start: controller alarm. Common cause: batteries, fuel.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "batteries",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low flow at test: below curve. Common cause: impeller wear, suction blockage.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does the jockey pump do?",
+     "options": [
+      "Supplies fire flow",
+      "Maintains system pressure against small leaks",
+      "Drives the engine",
+      "Tests the relief valve"
+     ],
+     "answer": 1,
+     "explanation": "Prevents nuisance starts of the main pump.",
+     "level": "basic"
+    },
+    {
+     "question": "NFPA 20 requires a listed fire pump at 150 % rated flow to deliver at least…",
+     "options": [
+      "100 % pressure",
+      "65 % rated pressure",
+      "0 %",
+      "140 %"
+     ],
+     "answer": 1,
+     "explanation": "Verify current edition.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which pump design is used here?",
+     "options": [
+      "Horizontal split case",
+      "Gear pump",
+      "Peristaltic",
+      "Airlift"
+     ],
+     "answer": 0,
+     "explanation": "Module 2.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Lower half of the axially split casing: carries the suction and discharge nozzles, feet and bearing brackets, so the rotor can be removed without disturbing the piping.\"",
+     "options": [
+      "Lower Casing Half (with Nozzles & Feet)",
+      "Vertical Motor – Bearings (DE & NDE)",
+      "Mechanical Seal – Inboard",
+      "Crankshaft, Crank Throws & Flywheel"
+     ],
+     "answer": 0,
+     "explanation": "Lower Casing Half (with Nozzles & Feet): Lower half of the axially split casing: carries the suction and discharge nozzles, feet and bearing brackets, so the rotor can be removed without disturbing the piping.",
+     "level": "basic",
+     "part": "lower_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Removable top half of the casing; lifting it exposes the complete rotor for inspection.\"",
+     "options": [
+      "Bearing Housing – Outboard",
+      "Upper Casing Half (Removable)",
+      "Vertical Motor – Bearings (DE & NDE)",
+      "Mechanical Seal – Inboard"
+     ],
+     "answer": 1,
+     "explanation": "Upper Casing Half (Removable): Removable top half of the casing; lifting it exposes the complete rotor for inspection.",
+     "level": "basic",
+     "part": "upper_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Double-suction impeller: liquid enters from both sides, halving eye velocity (lower NPSHr) and balancing axial thrust.\"",
+     "options": [
+      "Suction Isolation, Discharge Check & Isolation Valves",
+      "Starting Batteries (2 Sets)",
+      "Bearing Housing – Outboard",
+      "Double-Suction Impeller"
+     ],
+     "answer": 3,
+     "explanation": "Double-Suction Impeller: Double-suction impeller: liquid enters from both sides, halving eye velocity (lower NPSHr) and balancing axial thrust.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

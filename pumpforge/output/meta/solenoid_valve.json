@@ -1,0 +1,460 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "solenoid_valve",
+  "title": "Solenoid Valve (2/2 NC, Pilot-Operated Diaphragm)",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 44,
+    "phase": 4,
+    "eq_id": "EQ-122",
+    "subcategory": "Automated Valves",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "solenoid_valve_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "magnetic_field": {
+      "file": "solenoid_valve_magnetic_field.glb",
+      "title": "Magnetic field",
+      "description": "When the coil is energised its magnetic field (loops) is concentrated by the plunger and pulls it up, opening the pilot orifice. Cover pressure then bleeds to the outlet, so line pressure lifts the diaphragm and the main orifice opens.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Coil energised → field pulls plunger up",
+          "anchor": [
+            0.12,
+            0.31,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flow",
+      "kind": "flow_suction",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.35,
+          0.145,
+          -0.0
+        ],
+        [
+          -0.03,
+          0.145,
+          -0.0
+        ],
+        [
+          -0.03,
+          0.18,
+          -0.0
+        ],
+        [
+          0.0,
+          0.18,
+          -0.0
+        ],
+        [
+          0.0,
+          0.142,
+          -0.0
+        ],
+        [
+          0.35,
+          0.14,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.1,
+          0.5
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6194,
+    "parts": 6
+  },
+  "summary": "A solenoid valve opens and closes electrically. In this normally-closed, pilot-operated design the coil lifts a small plunger, which opens a pilot orifice; pressure above the diaphragm bleeds away and line pressure lifts the diaphragm off the main seat. De-energising the coil lets the spring push the plunger back and the valve closes. A minimum pressure difference is needed to operate.",
+  "classification": {
+    "family": "Automated on/off valve",
+    "type": "2/2-way normally closed, servo (pilot) operated diaphragm"
+  },
+  "model_configuration": {
+    "coil": "Encapsulated, connector per EN 175301-803",
+    "note": "Direct-acting versions open without pressure difference but only for small orifices"
+  },
+  "standards": [
+    {
+      "id": "IEC 60730 / UL 429",
+      "title": "Electrically operated valves",
+      "relevance": "Safety of solenoid valves.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 175301-803",
+      "title": "Rectangular connectors",
+      "relevance": "Coil connector.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "ASCO / Bürkert technical guides (generic principle)"
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "name": "Valve Body (Brass) with Main Orifice",
+      "group": "body",
+      "section_role": "split",
+      "nodes": [
+        "body__back",
+        "body__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.15,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.08,
+        0.115,
+        -0.05
+      ],
+      "bbox_max": [
+        0.08,
+        0.2,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.1575,
+        0.05
+      ],
+      "center": [
+        0.0,
+        0.1575,
+        -0.0
+      ],
+      "info_ref": "sv_body"
+    },
+    {
+      "id": "diaphragm",
+      "name": "Main Diaphragm with Pilot & Bleed Orifices",
+      "group": "disc",
+      "section_role": "split",
+      "nodes": [
+        "diaphragm__back",
+        "diaphragm__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.05,
+        0.2
+      ],
+      "bbox_min": [
+        -0.036,
+        0.17,
+        -0.036
+      ],
+      "bbox_max": [
+        0.036,
+        0.182,
+        0.036
+      ],
+      "label_anchor": [
+        0.0,
+        0.176,
+        0.036
+      ],
+      "center": [
+        0.0,
+        0.176,
+        -0.0
+      ],
+      "info_ref": "sv_diaphragm"
+    },
+    {
+      "id": "armature_tube",
+      "name": "Bonnet & Armature (Plunger) Tube",
+      "group": "bonnet",
+      "section_role": "split",
+      "nodes": [
+        "armature_tube__back",
+        "armature_tube__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.12,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.05,
+        0.2,
+        -0.05
+      ],
+      "bbox_max": [
+        0.05,
+        0.31,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.255,
+        0.05
+      ],
+      "center": [
+        0.0,
+        0.255,
+        -0.0
+      ],
+      "info_ref": "sv_tube"
+    },
+    {
+      "id": "plunger",
+      "name": "Plunger (Armature), Pilot Seal & Spring",
+      "group": "actuator",
+      "section_role": "split",
+      "nodes": [
+        "plunger__back",
+        "plunger__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.009,
+        0.204,
+        -0.009
+      ],
+      "bbox_max": [
+        0.009,
+        0.30319,
+        0.009
+      ],
+      "label_anchor": [
+        0.0,
+        0.25359,
+        0.009
+      ],
+      "center": [
+        0.0,
+        0.25359,
+        -0.0
+      ],
+      "info_ref": "sv_plunger"
+    },
+    {
+      "id": "coil",
+      "name": "Solenoid Coil (Encapsulated) & Connector",
+      "group": "actuator",
+      "section_role": "split",
+      "nodes": [
+        "coil__back",
+        "coil__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.035,
+        0.2225,
+        -0.035
+      ],
+      "bbox_max": [
+        0.035,
+        0.32,
+        0.07
+      ],
+      "label_anchor": [
+        0.0,
+        0.27125,
+        0.07
+      ],
+      "center": [
+        0.0,
+        0.27125,
+        0.0175
+      ],
+      "info_ref": "sv_coil"
+    },
+    {
+      "id": "pipework",
+      "name": "Threaded Pipework",
+      "group": "system_piping",
+      "section_role": "split",
+      "nodes": [
+        "pipework__back",
+        "pipework__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.25
+      ],
+      "bbox_min": [
+        -0.35,
+        0.126,
+        -0.014
+      ],
+      "bbox_max": [
+        0.35,
+        0.159,
+        0.014
+      ],
+      "label_anchor": [
+        0.0,
+        0.1425,
+        0.014
+      ],
+      "center": [
+        0.0,
+        0.1425,
+        -0.0
+      ],
+      "info_ref": "pipework"
+    }
+  ],
+  "components": {
+    "sv_body": {
+      "function": "Contains inlet, main orifice and outlet.",
+      "construction": "Forged/cast body with central seat.",
+      "material": "Brass, stainless, plastic.",
+      "operating_conditions": "Flow direction arrow must be respected.",
+      "failure_modes": [
+        "Seat damage from debris"
+      ],
+      "inspection": [
+        "Fit strainer upstream"
+      ]
+    },
+    "sv_diaphragm": {
+      "function": "Main closing element moved by pressure difference.",
+      "construction": "Elastomer diaphragm with bleed and pilot holes.",
+      "material": "NBR, EPDM, FKM.",
+      "operating_conditions": "Needs minimum ΔP to open.",
+      "failure_modes": [
+        "Torn diaphragm",
+        "Blocked bleed hole"
+      ],
+      "inspection": [
+        "Inspect/clean"
+      ]
+    },
+    "sv_tube": {
+      "function": "Pressure-tight guide for the plunger through the coil.",
+      "construction": "Non-magnetic tube welded to bonnet.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Leak"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "sv_plunger": {
+      "function": "Moved by the magnetic field to open the pilot orifice.",
+      "construction": "Ferromagnetic plunger with seal and return spring.",
+      "material": "Magnetic stainless.",
+      "operating_conditions": "Shading ring prevents AC hum.",
+      "failure_modes": [
+        "Sticking (dirt, varnish)"
+      ],
+      "inspection": [
+        "Clean plunger and tube"
+      ]
+    },
+    "sv_coil": {
+      "function": "Produces the magnetic field when energised.",
+      "construction": "Copper winding encapsulated in epoxy with connector.",
+      "material": "Copper, epoxy.",
+      "operating_conditions": "Check voltage and duty cycle.",
+      "failure_modes": [
+        "Burn-out (wrong voltage, stuck plunger)"
+      ],
+      "inspection": [
+        "Resistance and insulation check"
+      ]
+    },
+    "pipework": {
+      "function": "Connects the pump to the system.",
+      "construction": "Flanged pipe spools, fittings and supports; suction piping laid out to give uniform flow into the pump (straight run, eccentric reducers flat side up).",
+      "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate.",
+      "operating_conditions": "Piping must be supported independently so nozzle loads stay within limits.",
+      "failure_modes": [
+        "Nozzle overload from unsupported piping",
+        "Air pockets in suction",
+        "Corrosion"
+      ],
+      "inspection": [
+        "Check supports and flange alignment before bolting to pump"
+      ]
+    }
+  }
+}

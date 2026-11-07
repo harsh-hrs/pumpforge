@@ -1,0 +1,598 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flow_nozzle",
+ "no": 57,
+ "title": "Flow Nozzle",
+ "model_title": "Flow Nozzle (ISA 1932 type) between Flanges",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A flow nozzle is a differential-pressure flow element with a smoothly curved inlet and a cylindrical throat, installed between flanges. It is more rugged than an orifice plate, keeps its calibration at high velocities and temperatures, and has a lower permanent loss (ISO 5167-3).",
+   "applications": [
+    "High-pressure steam and boiler feedwater",
+    "Power-plant performance tests (ASME PTC 6)",
+    "Erosive or high-velocity flows",
+    "Gas flows at high Reynolds number"
+   ],
+   "key_points": [
+    "No sharp edge to wear",
+    "Higher cost than orifice, lower than venturi",
+    "Throat tap or corner taps per standard"
+   ],
+   "classification": {
+    "family": "Differential-pressure flowmeter",
+    "type": "ISA 1932 flow nozzle between flanges"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A flow nozzle is a differential-pressure flow element with a smooth, curved inlet leading to a cylindrical throat. It is more robust than an orifice plate and handles high-velocity, high-temperature and erosive flows such as boiler steam and feedwater, with a lower permanent loss than an orifice but higher than a venturi (ISO 5167-3)."
+  },
+  "model_3d": {
+   "asset": "glb/flow_nozzle.glb",
+   "metadata": "meta/flow_nozzle.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6144,
+   "parts": 4
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Flow enters the curved nozzle inlet smoothly.",
+    "Velocity is highest and pressure lowest in the throat.",
+    "The DP transmitter measures upstream and throat pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flow enters the curved nozzle inlet smoothly.",
+     "part": "nozzle",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Velocity is highest and pressure lowest in the throat.",
+     "part": "nozzle",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The DP transmitter measures upstream and throat pressure.",
+     "part": "dp_transmitter",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Downstream the jet expands with partial pressure recovery.",
+     "part": "meter_run",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "ΔP ∝ flow²; discharge coefficient C ≈ 0.98 – 0.99 at high Re."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flow_nozzle_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "flow_nozzle_pressure.glb",
+     "title": "Pressure profile",
+     "description": "The smooth curved inlet accelerates the flow with little loss; pressure is lowest in the throat. Recovery downstream is limited (no diffuser), so permanent loss lies between an orifice and a venturi. Flow nozzles suit high-velocity steam and erosive flows (ISO 5167-3).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Throat: highest velocity, lowest pressure",
+       "anchor": [
+        0.05,
+        0.2,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flow_nozzle.json#components",
+   "key_components": "Nozzle, carrier flanges, taps, DP transmitter",
+   "parts": [
+    {
+     "id": "carrier_flanges",
+     "name": "Carrier Flanges & Bolting",
+     "info_ref": "fn_flanges",
+     "function": "Clamp the nozzle into the line.",
+     "material": "Steel."
+    },
+    {
+     "id": "nozzle",
+     "name": "Flow Nozzle (curved inlet, cylindrical throat)",
+     "info_ref": "fn_nozzle",
+     "function": "Accelerates the flow smoothly to create a measurable ΔP.",
+     "material": "Stainless/alloy steel."
+    },
+    {
+     "id": "meter_run",
+     "name": "Meter Run (upstream & downstream straight pipe)",
+     "info_ref": "fm_run",
+     "function": "Straight pipe for a developed flow profile.",
+     "material": "As line."
+    },
+    {
+     "id": "dp_transmitter",
+     "name": "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+     "info_ref": "fm_dp",
+     "function": "Measures the ΔP.",
+     "material": "Stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 50 – 600",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Per class — common in high-pressure steam",
+     "unit": ""
+    },
+    "temperature": {
+     "typical_range": "Up to ~600 (alloy steel)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "β = 0.3 – 0.8; C ≈ 0.98+",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the meter run; avoid vibration at the transmitter."
+   ],
+   "alignment": [
+    "Centre the element precisely in the pipe bore (eccentricity affects accuracy)."
+   ],
+   "piping": [
+    "Provide straight upstream/downstream lengths per ISO 5167 for the fittings present, or use a flow conditioner.",
+    "Slope impulse lines: liquids — transmitter below taps; gas — transmitter above taps."
+   ],
+   "commissioning": [
+    "Fill/vent impulse lines; zero the transmitter with the equalising valve.",
+    "Check the flow computation (β, density, units)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check transmitter zero.",
+     "part": "dp_transmitter",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect nozzle throat when line is open.",
+     "part": "nozzle",
+     "interval": "at outages"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace gaskets; check nozzle alignment.",
+     "part": "carrier_flanges"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Throat deposits",
+     "category": "performance",
+     "symptoms": [
+      "Reading drift"
+     ],
+     "causes": [
+      "Scaling (feedwater chemistry)"
+     ],
+     "remedies": [
+      "Clean; improve water treatment"
+     ],
+     "part": "nozzle"
+    },
+    {
+     "problem": "Impulse line problems",
+     "category": "performance",
+     "symptoms": [
+      "Erratic reading"
+     ],
+     "causes": [
+      "Steam/condensate imbalance"
+     ],
+     "remedies": [
+      "Condensate pots, fill lines"
+     ],
+     "part": "dp_transmitter"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flow Nozzle — Introduction",
+    "type": "in_app_tour",
+    "model": "flow_nozzle.glb",
+    "duration_s": 50.5,
+    "script": [
+     {
+      "narration": "This module introduces the Flow Nozzle.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A flow nozzle is a differential-pressure flow element with a smoothly curved inlet and a cylindrical throat, installed between flanges.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is more rugged than an orifice plate, keeps its calibration at high velocities and temperatures, and has a lower permanent loss (ISO 5167-3).",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include high-pressure steam and boiler feedwater; power-plant performance tests (ASME PTC 6); erosive or high-velocity flows; gas flows at high Reynolds number.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Carrier Flanges & Bolting.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flow Nozzle — Operation",
+    "type": "in_app_tour",
+    "model": "flow_nozzle.glb",
+    "duration_s": 30.9,
+    "script": [
+     {
+      "narration": "How the Flow Nozzle works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow enters the curved nozzle inlet smoothly.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzle",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Velocity is highest and pressure lowest in the throat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzle",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The DP transmitter measures upstream and throat pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dp_transmitter",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Downstream the jet expands with partial pressure recovery.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "meter_run",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The smooth curved inlet accelerates the flow with little loss; pressure is lowest in the throat.",
+      "duration_s": 6.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flow Nozzle — Maintenance",
+    "type": "in_app_tour",
+    "model": "flow_nozzle.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flow Nozzle.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check transmitter zero.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dp_transmitter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect nozzle throat when line is open.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace gaskets; check nozzle alignment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "carrier_flanges",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for throat deposits: reading drift. Common cause: scaling (feedwater chemistry).",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for impulse line problems: erratic reading. Common cause: steam/condensate imbalance.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "dp_transmitter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why use a flow nozzle instead of an orifice on high-velocity steam?",
+     "options": [
+      "Cheaper",
+      "Rugged curved inlet keeps calibration and has lower loss",
+      "Easier to install",
+      "No transmitter needed"
+     ],
+     "answer": 1,
+     "explanation": "No sharp edge to erode.",
+     "level": "basic"
+    },
+    {
+     "question": "Where is pressure lowest in a flow nozzle?",
+     "options": [
+      "Inlet",
+      "Throat",
+      "Upstream pipe",
+      "Transmitter"
+     ],
+     "answer": 1,
+     "explanation": "Highest velocity.",
+     "level": "basic"
+    },
+    {
+     "question": "Which standard covers nozzles?",
+     "options": [
+      "ISO 5167-3",
+      "API 610",
+      "ISO 2858",
+      "NFPA 20"
+     ],
+     "answer": 0,
+     "explanation": "ISO 5167-3.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Clamp the nozzle into the line.\"",
+     "options": [
+      "Meter Run (upstream & downstream straight pipe)",
+      "Carrier Flanges & Bolting",
+      "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "Flow Nozzle (curved inlet, cylindrical throat)"
+     ],
+     "answer": 1,
+     "explanation": "Carrier Flanges & Bolting: Clamp the nozzle into the line.",
+     "level": "basic",
+     "part": "carrier_flanges",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Accelerates the flow smoothly to create a measurable ΔP.\"",
+     "options": [
+      "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "Flow Nozzle (curved inlet, cylindrical throat)",
+      "Carrier Flanges & Bolting",
+      "Meter Run (upstream & downstream straight pipe)"
+     ],
+     "answer": 1,
+     "explanation": "Flow Nozzle (curved inlet, cylindrical throat): Accelerates the flow smoothly to create a measurable ΔP.",
+     "level": "basic",
+     "part": "nozzle",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Straight pipe for a developed flow profile.\"",
+     "options": [
+      "Carrier Flanges & Bolting",
+      "Flow Nozzle (curved inlet, cylindrical throat)",
+      "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "Meter Run (upstream & downstream straight pipe)"
+     ],
+     "answer": 3,
+     "explanation": "Meter Run (upstream & downstream straight pipe): Straight pipe for a developed flow profile.",
+     "level": "basic",
+     "part": "meter_run",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

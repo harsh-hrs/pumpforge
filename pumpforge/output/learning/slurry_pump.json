@@ -1,0 +1,1003 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "slurry_pump",
+ "no": 13,
+ "title": "Slurry Pump",
+ "model_title": "Slurry Pump (Hard-Metal Lined, V-Belt Driven)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A slurry pump is a heavy-duty centrifugal pump built to move liquids carrying abrasive solids. It uses thick, replaceable wear parts — hard-metal (high-chrome white iron) or rubber liners, a large slow-running impeller with thick vanes and expelling vanes — and is designed so that the parts that wear can be changed quickly. Wear, not efficiency, usually governs its selection and operating speed.",
+   "applications": [
+    "Alumina refineries: bauxite slurry, red mud, digestion and precipitation circuits",
+    "Mineral processing: mill discharge, cyclone feed, tailings",
+    "Dredging and sand/gravel",
+    "Power plants: ash and FGD (limestone/gypsum) slurry",
+    "Coal washing"
+   ],
+   "key_points": [
+    "Wear ∝ (velocity)^~2.5–3 — run as slowly as possible",
+    "Replaceable liners and throatbush",
+    "Expeller + gland seal or mechanical seal",
+    "Head and efficiency derating for solids (ANSI/HI 12.1-12.6)",
+    "Front clearance adjustment extends life"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow",
+    "configuration": "Horizontal, end suction, lined, overhung, belt-driven"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A heavy centrifugal pump built to move abrasive mixtures of liquid and solids (mine tailings, dredge spoil, mineral concentrates). Large, slow-running impellers with thick shrouds and wide passages limit wear; the wetted surfaces are replaceable liners of hard white iron or rubber held in a split outer casing. Pump-out vanes on the impeller and an expeller behind it keep slurry away from the gland. Speed is set by the V-belt ratio, so the duty can be matched without trimming the impeller."
+  },
+  "model_3d": {
+   "asset": "glb/slurry_pump.glb",
+   "metadata": "meta/slurry_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 74320,
+   "parts": 21
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry enters the suction through the throatbush, which is the most heavily worn liner part.",
+    "The large, thick-vaned impeller accelerates the slurry; vane inlet edges and the front shroud wear fastest.",
+    "Pump-out vanes on the impeller shrouds reduce recirculation through the clearances and protect the seal area."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry enters the suction through the throatbush, which is the most heavily worn liner part.",
+     "part": "volute_liner",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The large, thick-vaned impeller accelerates the slurry; vane inlet edges and the front shroud wear fastest.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pump-out vanes on the impeller shrouds reduce recirculation through the clearances and protect the seal area.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The volute liner collects the flow; the cutwater (tongue) suffers severe erosion.",
+     "part": "volute_liner",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The expeller keeps slurry away from the gland while running; gland packing seals at standstill.",
+     "part": "expeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A heavy bearing cartridge on an adjustable pedestal lets the impeller be moved forward to keep the front clearance closed as parts wear.",
+     "part": "bearing_housing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "V-belts let the speed be matched exactly to the duty so the pump runs no faster than necessary.",
+     "part": "v_belts",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flatter curve than a water pump; head and efficiency fall with solids concentration and particle size (derating factors HR, ER)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "slurry_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "wear": {
+     "file": "slurry_pump_wear.glb",
+     "title": "Wear zones",
+     "description": "Typical wear pattern of a centrifugal slurry pump. Purple = most severe: throatbush face and impeller front shroud gap (recirculation gouging), impeller eye / vane inlet edges, and the volute cutwater (tongue). Pink = moderate: volute liner around the impeller tip and vane trailing edges. Yellow = light: frame-plate liner / back shroud. Wear grows steeply with particle size, solids concentration and velocity, so slurry pumps run slow and keep the front clearance closed.",
+     "render": "xray",
+     "annotations": [
+      {
+       "text": "Throatbush & front-shroud gap: recirculation gouging (severe)",
+       "anchor": [
+        -0.08,
+        0.555,
+        -0.0
+       ]
+      },
+      {
+       "text": "Impeller eye / vane inlet edges (severe)",
+       "anchor": [
+        -0.2,
+        0.4005,
+        -0.0
+       ]
+      },
+      {
+       "text": "Volute cutwater / tongue (severe)",
+       "anchor": [
+        0.06075,
+        0.63604,
+        -0.19882
+       ]
+      },
+      {
+       "text": "Volute liner at impeller tip (moderate)",
+       "anchor": [
+        0.06075,
+        0.1592,
+        -0.0
+       ]
+      },
+      {
+       "text": "Frame-plate liner / back shroud (light)",
+       "anchor": [
+        0.20575,
+        0.501,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/slurry_pump.json#components",
+   "key_components": "Heavy-duty impeller, volute, liners, shaft",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Outer Casing (Cover & Frame Plates)",
+     "info_ref": "casing",
+     "function": "Pressure-containing outer casing that supports the liners.",
+     "material": "Ductile or cast iron (not wetted)."
+    },
+    {
+     "id": "volute_liner",
+     "name": "Volute Liner & Throatbush (Hard Metal)",
+     "info_ref": "volute_liner",
+     "function": "Replaceable wear-resistant hydraulic passage (volute) and suction throatbush.",
+     "material": "High-chrome white iron (~27% Cr), natural rubber, polyurethane, ceramics."
+    },
+    {
+     "id": "impeller",
+     "name": "Closed Impeller with Pump-Out Vanes",
+     "info_ref": "impeller_slurry",
+     "function": "Adds energy to the slurry; pump-out vanes reduce recirculation and pressure at the shaft seal.",
+     "material": "High-chrome white iron, rubber-covered steel, polyurethane."
+    },
+    {
+     "id": "frame_plate_liner",
+     "name": "Frame-Plate Liner Insert & Stuffing Box",
+     "info_ref": "frame_plate_liner",
+     "function": "Back liner of the pump chamber and housing for the expeller and gland.",
+     "material": "High-chrome iron or rubber."
+    },
+    {
+     "id": "expeller",
+     "name": "Expeller (Dynamic Seal)",
+     "info_ref": "expeller",
+     "function": "Centrifugal (dynamic) seal: its vanes generate pressure that stops slurry reaching the gland while running.",
+     "material": "High-chrome iron."
+    },
+    {
+     "id": "gland_packing",
+     "name": "Gland Packing, Lantern Ring & Gland Follower",
+     "info_ref": "gland_packing",
+     "function": "Seals the shaft at standstill (with expeller) or continuously (with gland water flush).",
+     "material": "PTFE/aramid/graphite braided packing; bronze lantern ring."
+    },
+    {
+     "id": "bearing_housing",
+     "name": "Bearing Cartridge Housing",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearings",
+     "name": "Roller Bearings (Wet End & Drive End)",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "pedestal_base",
+     "name": "Pedestal Base (with Bearing Adjustment)",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    },
+    {
+     "id": "shaft",
+     "name": "Shaft & Shaft Sleeve",
+     "info_ref": "pump_shaft",
+     "function": "Transmits torque from the coupling to the impeller(s).",
+     "material": "Carbon steel, 4140 alloy steel, 410/420 or 316 stainless, duplex."
+    },
+    {
+     "id": "pump_sheave",
+     "name": "Pump Sheave (V-Belt Pulley)",
+     "info_ref": "pump_sheave",
+     "function": "Driven pulley; sheave ratio sets pump speed.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "motor_sheave",
+     "name": "Motor Sheave",
+     "info_ref": "motor_sheave",
+     "function": "Driving pulley on the motor.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "v_belts",
+     "name": "V-Belts",
+     "info_ref": "v_belts",
+     "function": "Transmit power from motor to pump sheave.",
+     "material": "Rubber with tensile cords."
+    },
+    {
+     "id": "belt_guard",
+     "name": "Belt Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "motor_mount",
+     "name": "Overhead Motor Mount",
+     "info_ref": "motor_mount",
+     "function": "Supports the motor above the pump and allows belt tensioning.",
+     "material": "Steel."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "10 – 5,000+",
+     "unit": "m³/h",
+     "note": "large mill-discharge pumps exceed 10,000"
+    },
+    "head": {
+     "typical_range": "5 – 90",
+     "unit": "m",
+     "note": "per stage; pumps in series for long pipelines"
+    },
+    "pressure": {
+     "typical_range": "up to ~40 (series-rated casings)",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "300 – 1,500",
+     "unit": "rpm",
+     "note": "belt- or gearbox-matched"
+    },
+    "efficiency": {
+     "typical_range": "40 – 80",
+     "unit": "%",
+     "note": "clear water; derate for solids"
+    }
+   },
+   "additional": {
+    "solids_concentration": {
+     "typical_range": "up to ~50–70",
+     "unit": "% by weight"
+    },
+    "particle_size": {
+     "typical_range": "up to ~100",
+     "unit": "mm",
+     "note": "design dependent"
+    },
+    "tip_speed_limit": {
+     "typical_range": "~20–38",
+     "unit": "m/s",
+     "note": "manufacturer wear limits; rubber liners lower — verify"
+    }
+   },
+   "selection_notes": [
+    "Select the largest pump/lowest speed that meets the duty to minimise wear.",
+    "Choose metal for coarse/sharp solids, rubber for fine particles.",
+    "Keep pipeline velocity above the deposition (settling) velocity."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ANSI/HI 12.1–12.6 Rotodynamic (Centrifugal) Slurry Pumps (verify edition)",
+    "Wilson, Addie, Sellgren & Clift — Slurry Transport Using Centrifugal Pumps"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Heavy foundation; slurry pumps see high vibration from solids."
+   ],
+   "alignment": [
+    "Belt drives: sheave alignment and belt tension per manufacturer."
+   ],
+   "piping": [
+    "Short, straight suction with large-radius bends; avoid high points where solids settle or air collects.",
+    "Provide flushing and drain connections."
+   ],
+   "commissioning": [
+    "Start on water, then introduce slurry.",
+    "Set gland water pressure/flow where a flushed gland is used.",
+    "Flush the line before stopping."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check gland leakage and gland water.",
+     "part": "gland_packing",
+     "interval": "daily"
+    },
+    {
+     "task": "Check vibration and bearing temperature.",
+     "part": "bearings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Adjust impeller front clearance by moving the bearing cartridge forward.",
+     "part": "bearing_housing",
+     "interval": "per wear trend, e.g. weekly–monthly"
+    },
+    {
+     "task": "Retension V-belts.",
+     "part": "v_belts",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace throatbush, impeller and volute liner as a set when worn.",
+     "part": "volute_liner"
+    },
+    {
+     "task": "Measure wear thickness to predict the next change-out.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Grease-lubricated roller bearings (some oil); purge with care — slurry contamination kills bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Abrasive wear",
+     "category": "wear",
+     "symptoms": [
+      "Falling head and flow",
+      "Thin liners, holes in casing"
+     ],
+     "causes": [
+      "High velocity",
+      "Coarse/sharp solids"
+     ],
+     "remedies": [
+      "Lower speed; harder material; adjust clearance"
+     ],
+     "part": "volute_liner"
+    },
+    {
+     "problem": "Recirculation gouging at the throatbush",
+     "category": "performance",
+     "symptoms": [
+      "Deep grooves on throatbush face and front shroud"
+     ],
+     "causes": [
+      "Open front clearance"
+     ],
+     "remedies": [
+      "Keep clearance closed; replace throatbush"
+     ],
+     "part": "volute_liner"
+    },
+    {
+     "problem": "Pipeline blockage",
+     "category": "blockage",
+     "symptoms": [
+      "Pressure rise then loss of flow"
+     ],
+     "causes": [
+      "Velocity below settling velocity"
+     ],
+     "remedies": [
+      "Raise flow; flush on stop"
+     ],
+     "part": "casing"
+    },
+    {
+     "problem": "Gland leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Slurry at the gland"
+     ],
+     "causes": [
+      "Worn sleeve/packing",
+      "Low gland water pressure"
+     ],
+     "remedies": [
+      "Repack; restore gland water"
+     ],
+     "part": "gland_packing"
+    },
+    {
+     "problem": "Bearing failure",
+     "category": "bearing",
+     "symptoms": [
+      "Noise, heat"
+     ],
+     "causes": [
+      "Slurry ingress into the bearing housing"
+     ],
+     "remedies": [
+      "Improve seals and purging"
+     ],
+     "part": "bearings"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Slurry Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "slurry_pump.glb",
+    "duration_s": 68.2,
+    "script": [
+     {
+      "narration": "This module introduces the Slurry Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A slurry pump is a heavy-duty centrifugal pump built to move liquids carrying abrasive solids.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It uses thick, replaceable wear parts — hard-metal (high-chrome white iron) or rubber liners, a large slow-running impeller with thick vanes and expelling vanes — and is designed so that the parts that wear can be changed quickly.",
+      "duration_s": 16.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Wear, not efficiency, usually governs its selection and operating speed.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include alumina refineries: bauxite slurry, red mud, digestion and precipitation circuits; mineral processing: mill discharge, cyclone feed, tailings; dredging and sand/gravel; power plants: ash and FGD (limestone/gypsum) slurry.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Outer Casing (Cover & Frame Plates), Volute Liner & Throatbush (Hard Metal), Closed Impeller with Pump-Out Vanes, Frame-Plate Liner Insert & Stuffing Box.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Slurry Pump — Operation",
+    "type": "in_app_tour",
+    "model": "slurry_pump.glb",
+    "duration_s": 61.3,
+    "script": [
+     {
+      "narration": "How the Slurry Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry enters the suction through the throatbush, which is the most heavily worn liner part.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "volute_liner",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The large, thick-vaned impeller accelerates the slurry; vane inlet edges and the front shroud wear fastest.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pump-out vanes on the impeller shrouds reduce recirculation through the clearances and protect the seal area.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The volute liner collects the flow; the cutwater (tongue) suffers severe erosion.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "volute_liner",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The expeller keeps slurry away from the gland while running; gland packing seals at standstill.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "expeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A heavy bearing cartridge on an adjustable pedestal lets the impeller be moved forward to keep the front clearance closed as parts wear.",
+      "duration_s": 9.6,
+      "action": {
+       "highlight": "bearing_housing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "V-belts let the speed be matched exactly to the duty so the pump runs no faster than necessary.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "v_belts",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Typical wear pattern of a centrifugal slurry pump.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "wear",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Slurry Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "slurry_pump.glb",
+    "duration_s": 55.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Slurry Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check gland leakage and gland water.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gland_packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check vibration and bearing temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Adjust impeller front clearance by moving the bearing cartridge forward.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "bearing_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Retension V-belts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "v_belts",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace throatbush, impeller and volute liner as a set when worn.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "volute_liner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure wear thickness to predict the next change-out.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for abrasive wear: falling head and flow. Common cause: high velocity.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "volute_liner",
+       "view": "part",
+       "cut": true,
+       "overlay": "wear"
+      }
+     },
+     {
+      "narration": "Watch for recirculation gouging at the throatbush: deep grooves on throatbush face and front shroud. Common cause: open front clearance.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "volute_liner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pipeline blockage: pressure rise then loss of flow. Common cause: velocity below settling velocity.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why do slurry pumps run at the lowest practical speed?",
+     "options": [
+      "To save power only",
+      "Wear rate rises steeply (≈ velocity^2.5–3)",
+      "To increase head",
+      "To reduce flow"
+     ],
+     "answer": 1,
+     "explanation": "Erosion increases sharply with velocity.",
+     "level": "basic"
+    },
+    {
+     "question": "Which part of a slurry pump typically wears fastest?",
+     "options": [
+      "Bearing housing",
+      "Throatbush and impeller eye/front shroud",
+      "Baseplate",
+      "Belt guard"
+     ],
+     "answer": 1,
+     "explanation": "Recirculation through the front clearance gouges them.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the expeller do?",
+     "options": [
+      "Raises head",
+      "Creates a dynamic seal that keeps slurry away from the gland while running",
+      "Cools bearings",
+      "Drives the belts"
+     ],
+     "answer": 1,
+     "explanation": "It is a small impeller behind the main one.",
+     "level": "basic"
+    },
+    {
+     "question": "How is front clearance restored as parts wear?",
+     "options": [
+      "Change the motor",
+      "Move the bearing cartridge (impeller) forward",
+      "Add gaskets",
+      "Increase speed"
+     ],
+     "answer": 1,
+     "explanation": "Adjustable bearing assembly.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Rubber liners are generally preferred for…",
+     "options": [
+      "Coarse, sharp particles",
+      "Fine particles at moderate velocity",
+      "Hot oils",
+      "Gas"
+     ],
+     "answer": 1,
+     "explanation": "Rubber resists fine-particle erosion by elastic rebound.",
+     "level": "intermediate"
+    },
+    {
+     "question": "What happens if slurry velocity in the pipeline falls below the deposition velocity?",
+     "options": [
+      "Efficiency rises",
+      "Solids settle and the line can block",
+      "Nothing",
+      "Cavitation"
+     ],
+     "answer": 1,
+     "explanation": "Keep above settling velocity.",
+     "level": "basic"
+    },
+    {
+     "question": "Head and efficiency of a slurry pump compared with water are…",
+     "options": [
+      "Higher",
+      "Derated (lower) depending on solids",
+      "Identical",
+      "Doubled"
+     ],
+     "answer": 1,
+     "explanation": "ANSI/HI 12.1–12.6 derating.",
+     "level": "intermediate"
+    },
+    {
+     "question": "In an alumina refinery, which stream is typically pumped by slurry pumps?",
+     "options": [
+      "Steam condensate",
+      "Red mud (residue) and bauxite slurry",
+      "Lube oil",
+      "Instrument air"
+     ],
+     "answer": 1,
+     "explanation": "Abrasive, high-density slurries.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure-containing outer casing that supports the liners.\"",
+     "options": [
+      "Electric Motor – Frame & End Shields",
+      "Closed Impeller with Pump-Out Vanes",
+      "Outer Casing (Cover & Frame Plates)",
+      "Pump Sheave (V-Belt Pulley)"
+     ],
+     "answer": 2,
+     "explanation": "Outer Casing (Cover & Frame Plates): Pressure-containing outer casing that supports the liners.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Replaceable wear-resistant hydraulic passage (volute) and suction throatbush.\"",
+     "options": [
+      "Volute Liner & Throatbush (Hard Metal)",
+      "Electric Motor – Rotor & Shaft",
+      "Expeller (Dynamic Seal)",
+      "V-Belts"
+     ],
+     "answer": 0,
+     "explanation": "Volute Liner & Throatbush (Hard Metal): Replaceable wear-resistant hydraulic passage (volute) and suction throatbush.",
+     "level": "basic",
+     "part": "volute_liner",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the slurry; pump-out vanes reduce recirculation and pressure at the shaft seal.\"",
+     "options": [
+      "Electric Motor – Stator",
+      "Frame-Plate Liner Insert & Stuffing Box",
+      "Motor Sheave",
+      "Closed Impeller with Pump-Out Vanes"
+     ],
+     "answer": 3,
+     "explanation": "Closed Impeller with Pump-Out Vanes: Adds energy to the slurry; pump-out vanes reduce recirculation and pressure at the shaft seal.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

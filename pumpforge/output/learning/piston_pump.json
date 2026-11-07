@@ -1,0 +1,831 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "piston_pump",
+ "no": 25,
+ "title": "Piston Pump",
+ "model_title": "Duplex Double-Acting Piston Pump",
+ "category": "3 · Reciprocating Positive-Displacement Pumps",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A reciprocating piston pump uses a piston with seals moving back and forth in a cylinder liner; suction and discharge check valves make the flow one-way. Double-acting designs pump on both strokes. Flow is proportional to speed and stroke and nearly independent of pressure, but it pulsates.",
+   "applications": [
+    "Mud pumps for drilling",
+    "High-pressure water and process injection",
+    "Pipeline and slurry transport (piston/plunger diaphragm)",
+    "Hydraulic test benches"
+   ],
+   "key_points": [
+    "Double-acting duplex piston pump in the model",
+    "Pulsating flow — use dampeners",
+    "Valves are the main wear part",
+    "Relief valve mandatory"
+   ],
+   "classification": {
+    "family": "Positive displacement – reciprocating",
+    "configuration": "Horizontal, duplex, double-acting piston, crank-driven"
+   },
+   "hi_family": "positive_displacement_reciprocating",
+   "summary": "A piston pump moves liquid with a piston that slides in a cylinder liner, sealed against the bore by elastomer cups on the piston itself. In the double-acting design shown, both faces of the piston work: as it travels one way, the chamber ahead of it discharges while the chamber behind it fills, and the roles reverse on the return stroke. Two cylinders cranked 90° apart (duplex) give four deliveries per revolution. Used for drilling mud, slurries and general high-pressure transfer at moderate pressures."
+  },
+  "model_3d": {
+   "asset": "glb/piston_pump.glb",
+   "metadata": "meta/piston_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 46002,
+   "parts": 31
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The crankshaft turns; connecting rods and crossheads convert rotation into straight-line motion.",
+    "As the piston moves back, the suction valve opens and liquid fills the cylinder.",
+    "On the forward stroke the suction valve closes and the discharge valve opens."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The crankshaft turns; connecting rods and crossheads convert rotation into straight-line motion.",
+     "part": "crankshaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "As the piston moves back, the suction valve opens and liquid fills the cylinder.",
+     "part": "suction_valve_front_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the forward stroke the suction valve closes and the discharge valve opens.",
+     "part": "discharge_valve_front_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Double-acting: the other side of the piston pumps on the return stroke.",
+     "part": "piston_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Rod packing seals the piston rod where it leaves the fluid end.",
+     "part": "rod_packing_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow ∝ speed; nearly vertical flow-pressure line; pressure limited by mechanical rating and relief valve."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "piston_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/piston_pump.json#components",
+   "key_components": "Cylinder, piston, crankshaft, valves",
+   "parts": [
+    {
+     "id": "crankcase",
+     "name": "Crankcase (Power Frame) & Crosshead Guides",
+     "info_ref": "crankcase",
+     "function": "Rigid frame that carries the crankshaft bearings and crosshead guides and contains the lubricating oil.",
+     "material": "Cast iron, ductile iron, fabricated steel."
+    },
+    {
+     "id": "crankshaft",
+     "name": "Crankshaft",
+     "info_ref": "crankshaft",
+     "function": "Converts rotary motion into reciprocating motion of the plungers/pistons.",
+     "material": "Forged alloy steel, ductile iron."
+    },
+    {
+     "id": "conrod_1",
+     "name": "Connecting Rod 1",
+     "info_ref": "conrod",
+     "function": "Links crankpin to crosshead.",
+     "material": "Steel, ductile iron; babbitt/bronze bearings."
+    },
+    {
+     "id": "crosshead_1",
+     "name": "Crosshead & Extension Rod 1",
+     "info_ref": "crosshead",
+     "function": "Guides the reciprocating motion in a straight line so the plunger/piston rod carries no side load; extension (pony) rod passes into the distance piece.",
+     "material": "Cast iron/steel crosshead, steel rod."
+    },
+    {
+     "id": "conrod_2",
+     "name": "Connecting Rod 2",
+     "info_ref": "conrod",
+     "function": "Links crankpin to crosshead.",
+     "material": "Steel, ductile iron; babbitt/bronze bearings."
+    },
+    {
+     "id": "crosshead_2",
+     "name": "Crosshead & Extension Rod 2",
+     "info_ref": "crosshead",
+     "function": "Guides the reciprocating motion in a straight line so the plunger/piston rod carries no side load; extension (pony) rod passes into the distance piece.",
+     "material": "Cast iron/steel crosshead, steel rod."
+    },
+    {
+     "id": "main_bearings",
+     "name": "Crankshaft Main Bearings",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "fluid_end",
+     "name": "Fluid End (Cylinder Body, Valve Pots, Manifolds)",
+     "info_ref": "fluid_end_dp",
+     "function": "Houses the cylinder liners and four valve pots per cylinder (suction and discharge at each end).",
+     "material": "Cast steel, ductile iron, forged steel."
+    },
+    {
+     "id": "liner_1",
+     "name": "Cylinder Liner 1",
+     "info_ref": "liner",
+     "function": "Replaceable wear surface in which the piston slides.",
+     "material": "Hardened steel, chrome-plated, ceramic."
+    },
+    {
+     "id": "suction_valve_front_1",
+     "name": "Suction Valve – front end, cyl. 1",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "discharge_valve_front_1",
+     "name": "Discharge Valve – front end, cyl. 1",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "suction_valve_rear_1",
+     "name": "Suction Valve – rear end, cyl. 1",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "discharge_valve_rear_1",
+     "name": "Discharge Valve – rear end, cyl. 1",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "piston_1",
+     "name": "Piston (Double Cups) & Piston Rod 1",
+     "info_ref": "piston",
+     "function": "Displaces liquid on both strokes; cups seal against the liner.",
+     "material": "Steel hub, NBR/HNBR/urethane cups."
+    },
+    {
+     "id": "rod_packing_1",
+     "name": "Piston Rod Packing 1",
+     "info_ref": "plunger_packing",
+     "function": "Seals the piston rod where it leaves the fluid end.",
+     "material": "PTFE/fabric-reinforced elastomer."
+    },
+    {
+     "id": "liner_2",
+     "name": "Cylinder Liner 2",
+     "info_ref": "liner",
+     "function": "Replaceable wear surface in which the piston slides.",
+     "material": "Hardened steel, chrome-plated, ceramic."
+    },
+    {
+     "id": "suction_valve_front_2",
+     "name": "Suction Valve – front end, cyl. 2",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "discharge_valve_front_2",
+     "name": "Discharge Valve – front end, cyl. 2",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "suction_valve_rear_2",
+     "name": "Suction Valve – rear end, cyl. 2",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "discharge_valve_rear_2",
+     "name": "Discharge Valve – rear end, cyl. 2",
+     "info_ref": "valve_disc_r",
+     "function": "Automatic check valves for each chamber.",
+     "material": "Hardened steel, urethane inserts."
+    },
+    {
+     "id": "piston_2",
+     "name": "Piston (Double Cups) & Piston Rod 2",
+     "info_ref": "piston",
+     "function": "Displaces liquid on both strokes; cups seal against the liner.",
+     "material": "Steel hub, NBR/HNBR/urethane cups."
+    },
+    {
+     "id": "rod_packing_2",
+     "name": "Piston Rod Packing 2",
+     "info_ref": "plunger_packing",
+     "function": "Seals the piston rod where it leaves the fluid end.",
+     "material": "PTFE/fabric-reinforced elastomer."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "gear_reducer",
+     "name": "Gear Reducer",
+     "info_ref": "gear_reducer_r",
+     "function": "Reduces motor speed to crankshaft speed.",
+     "material": "Cast iron, alloy gears."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.1 – 200",
+     "unit": "m³/h"
+    },
+    "pressure": {
+     "typical_range": "up to ~200",
+     "unit": "bar",
+     "note": "higher pressures normally use plungers"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "50 – 300",
+     "unit": "strokes/min"
+    },
+    "efficiency": {
+     "typical_range": "85 – 95",
+     "unit": "% (mechanical × volumetric)"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Massive foundation for reciprocating forces."
+   ],
+   "alignment": [
+    "Gear reducer and motor alignment."
+   ],
+   "piping": [
+    "Pulsation dampeners on suction and discharge.",
+    "Short, large suction; acceleration head must be included in NPSHa.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked."
+   ],
+   "commissioning": [
+    "Never start against a closed discharge valve.",
+    "Fill the pump with liquid (or ensure the suction is flooded) before start — avoid dry running unless the design allows it.",
+    "Check rotation direction.",
+    "Verify the relief-valve set pressure."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check packing leakage and crankcase oil.",
+     "part": "rod_packing_1",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect valves and seats.",
+     "part": "suction_valve_front_1",
+     "interval": "per wear"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace liners and piston seals.",
+     "part": "liner_1"
+    }
+   ],
+   "lubrication": [
+    "Crankcase splash or pressure lubrication."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Valve wear",
+     "category": "wear",
+     "symptoms": [
+      "Loss of flow, knocking"
+     ],
+     "causes": [
+      "Abrasives, cavitation"
+     ],
+     "remedies": [
+      "Replace valves/seats"
+     ],
+     "part": "discharge_valve_front_1"
+    },
+    {
+     "problem": "Pulsation / pipe vibration",
+     "category": "vibration",
+     "symptoms": [
+      "Shaking pipework"
+     ],
+     "causes": [
+      "No/ineffective dampener"
+     ],
+     "remedies": [
+      "Charge dampeners"
+     ],
+     "part": "fluid_end"
+    },
+    {
+     "problem": "Cavitation from acceleration head",
+     "category": "cavitation",
+     "symptoms": [
+      "Knocking on suction"
+     ],
+     "causes": [
+      "Long suction line"
+     ],
+     "remedies": [
+      "Shorten line, suction stabiliser"
+     ],
+     "part": "suction_valve_rear_1"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Piston Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "piston_pump.glb",
+    "duration_s": 51.1,
+    "script": [
+     {
+      "narration": "This module introduces the Piston Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A reciprocating piston pump uses a piston with seals moving back and forth in a cylinder liner; suction and discharge check valves make the flow one-way.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Double-acting designs pump on both strokes.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow is proportional to speed and stroke and nearly independent of pressure, but it pulsates.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include mud pumps for drilling; high-pressure water and process injection; pipeline and slurry transport (piston/plunger diaphragm); hydraulic test benches.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Piston Pump — Operation",
+    "type": "in_app_tour",
+    "model": "piston_pump.glb",
+    "duration_s": 35.2,
+    "script": [
+     {
+      "narration": "How the Piston Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The crankshaft turns; connecting rods and crossheads convert rotation into straight-line motion.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "crankshaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "As the piston moves back, the suction valve opens and liquid fills the cylinder.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "suction_valve_front_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the forward stroke the suction valve closes and the discharge valve opens.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "discharge_valve_front_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Double-acting: the other side of the piston pumps on the return stroke.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "piston_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Rod packing seals the piston rod where it leaves the fluid end.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "rod_packing_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Piston Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "piston_pump.glb",
+    "duration_s": 38.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Piston Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check packing leakage and crankcase oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rod_packing_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect valves and seats.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_valve_front_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace liners and piston seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liner_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for valve wear: loss of flow, knocking. Common cause: abrasives, cavitation.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "discharge_valve_front_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pulsation / pipe vibration: shaking pipework. Common cause: no/ineffective dampener.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "fluid_end",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation from acceleration head: knocking on suction. Common cause: long suction line.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "suction_valve_rear_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What makes the flow one-way in a piston pump?",
+     "options": [
+      "The crankshaft",
+      "Suction and discharge check valves",
+      "The motor",
+      "The packing"
+     ],
+     "answer": 1,
+     "explanation": "Valves.",
+     "level": "basic"
+    },
+    {
+     "question": "\"Double-acting\" means…",
+     "options": [
+      "Two motors",
+      "The piston pumps on both strokes",
+      "Two speeds",
+      "Two seals"
+     ],
+     "answer": 1,
+     "explanation": "Both sides of the piston work.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are pulsation dampeners used?",
+     "options": [
+      "To prime",
+      "To smooth the pulsating flow and reduce pipe vibration",
+      "To cool",
+      "To filter"
+     ],
+     "answer": 1,
+     "explanation": "Reciprocating flow pulsates.",
+     "level": "basic"
+    },
+    {
+     "question": "Acceleration head on the suction side…",
+     "options": [
+      "Is negligible",
+      "Reduces available NPSH and must be included",
+      "Increases flow",
+      "Only affects discharge"
+     ],
+     "answer": 1,
+     "explanation": "Accelerating the suction column costs pressure.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Rigid frame that carries the crankshaft bearings and crosshead guides and contains the lubricating oil.\"",
+     "options": [
+      "Piston (Double Cups) & Piston Rod 1",
+      "Suction Valve – rear end, cyl. 1",
+      "Piston (Double Cups) & Piston Rod 2",
+      "Crankcase (Power Frame) & Crosshead Guides"
+     ],
+     "answer": 3,
+     "explanation": "Crankcase (Power Frame) & Crosshead Guides: Rigid frame that carries the crankshaft bearings and crosshead guides and contains the lubricating oil.",
+     "level": "basic",
+     "part": "crankcase",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts rotary motion into reciprocating motion of the plungers/pistons.\"",
+     "options": [
+      "Crankshaft",
+      "Electric Motor – Rotor & Shaft",
+      "Crankshaft Main Bearings",
+      "Gear Reducer"
+     ],
+     "answer": 0,
+     "explanation": "Crankshaft: Converts rotary motion into reciprocating motion of the plungers/pistons.",
+     "level": "basic",
+     "part": "crankshaft",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Links crankpin to crosshead.\"",
+     "options": [
+      "Cylinder Liner 2",
+      "Connecting Rod 1",
+      "Coupling Guard",
+      "Crankcase (Power Frame) & Crosshead Guides"
+     ],
+     "answer": 1,
+     "explanation": "Connecting Rod 1: Links crankpin to crosshead.",
+     "level": "basic",
+     "part": "conrod_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

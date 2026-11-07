@@ -1,0 +1,669 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "twin_screw_pump",
+ "no": 19,
+ "title": "Twin Screw Pump",
+ "model_title": "Twin Screw Pump (Timed, Double-Flow)",
+ "category": "2 · Rotary Positive-Displacement Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A twin screw pump has two intermeshing screws that do not touch: timing gears outside the pumping chamber transmit the drive and keep the clearances. Cavities formed between the screw flights and the casing move axially from suction to discharge, giving a smooth, non-pulsating flow. External bearings let it handle poor-lubricity and multiphase fluids.",
+   "applications": [
+    "Crude oil and multiphase (oil + gas + water) boosting",
+    "Tank-farm and terminal transfer",
+    "Bitumen, heavy fuel and viscous chemicals",
+    "Food and hygienic products (sanitary designs)"
+   ],
+   "key_points": [
+    "Screws do not touch — timing gears",
+    "Handles high gas fractions and solids better than three-screw",
+    "Double-suction screws balance axial thrust",
+    "Very low pulsation"
+   ],
+   "classification": {
+    "family": "Positive displacement – rotary",
+    "configuration": "Twin screw, timed, double-suction (double-flow), bearings external"
+   },
+   "hi_family": "positive_displacement_rotary",
+   "summary": "Two parallel screws with intermeshing threads turn in opposite directions inside a figure-8 housing. External timing gears drive the second screw, so the threads never touch and can handle non-lubricating, viscous, abrasive or gas-laden liquids. In the double-flow arrangement shown, each screw has a left- and a right-handed section: liquid enters at both ends and is conveyed toward the centre outlet, balancing axial thrust. Used for crude oil, bitumen, multiphase production fluids, polymers and food products."
+  },
+  "model_3d": {
+   "asset": "glb/twin_screw_pump.glb",
+   "metadata": "meta/twin_screw_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 111740,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters at both ends of the double-flow screws.",
+    "Sealed cavities between the flights and casing move towards the centre as the screws rotate.",
+    "The timing gears drive the second screw and keep the flights from touching."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters at both ends of the double-flow screws.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sealed cavities between the flights and casing move towards the centre as the screws rotate.",
+     "part": "rotor_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The timing gears drive the second screw and keep the flights from touching.",
+     "part": "timing_gear_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid leaves at the centre discharge; opposed flows cancel axial thrust.",
+     "part": "rotor_2",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow almost constant vs pressure; slip rises with pressure and falls with viscosity."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "twin_screw_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/twin_screw_pump.json#components",
+   "key_components": "Two intermeshing screws, housing",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Pump Casing (Double-Flow)",
+     "info_ref": "pd_casing",
+     "function": "Contains the pumping elements and forms the suction and discharge ports.",
+     "material": "Cast iron, ductile iron, steel, stainless steel."
+    },
+    {
+     "id": "rotor_1",
+     "name": "Drive Screw Rotor",
+     "info_ref": "twin_rotor",
+     "function": "Conveys liquid axially in the chambers formed between intermeshing threads and the housing.",
+     "material": "Carbon/alloy steel, stainless, duplex; hard-coated for abrasives."
+    },
+    {
+     "id": "rotor_2",
+     "name": "Driven Screw Rotor",
+     "info_ref": "twin_rotor",
+     "function": "Conveys liquid axially in the chambers formed between intermeshing threads and the housing.",
+     "material": "Carbon/alloy steel, stainless, duplex; hard-coated for abrasives."
+    },
+    {
+     "id": "front_bearing_housing",
+     "name": "Front Cover & Bearing Housings",
+     "info_ref": "twin_bearings",
+     "function": "Locate the rotors radially and axially, outside the pumped liquid.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "gearbox",
+     "name": "Timing Gearbox & Rear Bearings",
+     "info_ref": "gearbox",
+     "function": "Holds the timing gears and bearings.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "timing_gear_1",
+     "name": "Timing Gear 1",
+     "info_ref": "timing_gear",
+     "function": "Keep the screws in phase so they never touch.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "timing_gear_2",
+     "name": "Timing Gear 2",
+     "info_ref": "timing_gear",
+     "function": "Keep the screws in phase so they never touch.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "1 – 5,000",
+     "unit": "m³/h"
+    },
+    "pressure": {
+     "typical_range": "up to 40–100",
+     "unit": "bar",
+     "note": "design dependent"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "300 – 3,600",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "50 – 85",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "viscosity": {
+     "typical_range": "1 – 1,000,000+",
+     "unit": "cSt"
+    },
+    "gas_volume_fraction": {
+     "typical_range": "up to ~90–97 (multiphase designs)",
+     "unit": "%"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Baseplate."
+   ],
+   "alignment": [
+    "Coupling alignment."
+   ],
+   "piping": [
+    "Size the suction line for low velocity (viscous liquids need large suction pipes); provide a strainer.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked.",
+    "Support piping independently of the pump."
+   ],
+   "commissioning": [
+    "Never start against a closed discharge valve.",
+    "Fill the pump with liquid (or ensure the suction is flooded) before start — avoid dry running unless the design allows it.",
+    "Check rotation direction.",
+    "Verify the relief-valve set pressure."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check bearing temperature and timing-gear oil.",
+     "part": "gearbox",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change gearbox oil.",
+     "part": "gearbox",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Check screw-to-casing clearances and timing.",
+     "part": "rotor_1"
+    }
+   ],
+   "lubrication": [
+    "External bearings and timing gears oil-lubricated."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Screw rubbing",
+     "category": "performance",
+     "symptoms": [
+      "Noise, scoring"
+     ],
+     "causes": [
+      "Timing gear wear",
+      "Thermal growth"
+     ],
+     "remedies": [
+      "Re-time; replace gears"
+     ],
+     "part": "timing_gear_1"
+    },
+    {
+     "problem": "Wear",
+     "category": "wear",
+     "symptoms": [
+      "Flow loss"
+     ],
+     "causes": [
+      "Abrasives"
+     ],
+     "remedies": [
+      "Hardened screws/liners"
+     ],
+     "part": "rotor_2"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Twin Screw Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "twin_screw_pump.glb",
+    "duration_s": 57.9,
+    "script": [
+     {
+      "narration": "This module introduces the Twin Screw Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A twin screw pump has two intermeshing screws that do not touch: timing gears outside the pumping chamber transmit the drive and keep the clearances.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Cavities formed between the screw flights and the casing move axially from suction to discharge, giving a smooth, non-pulsating flow.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "External bearings let it handle poor-lubricity and multiphase fluids.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include crude oil and multiphase (oil + gas + water) boosting; tank-farm and terminal transfer; bitumen, heavy fuel and viscous chemicals; food and hygienic products (sanitary designs).",
+      "duration_s": 11.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Pump Casing (Double-Flow), Drive Screw Rotor, Driven Screw Rotor.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Twin Screw Pump — Operation",
+    "type": "in_app_tour",
+    "model": "twin_screw_pump.glb",
+    "duration_s": 28.6,
+    "script": [
+     {
+      "narration": "How the Twin Screw Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters at both ends of the double-flow screws.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sealed cavities between the flights and casing move towards the centre as the screws rotate.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "rotor_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The timing gears drive the second screw and keep the flights from touching.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "timing_gear_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid leaves at the centre discharge; opposed flows cancel axial thrust.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotor_2",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Twin Screw Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "twin_screw_pump.glb",
+    "duration_s": 30.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Twin Screw Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check bearing temperature and timing-gear oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gearbox",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change gearbox oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gearbox",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check screw-to-casing clearances and timing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for screw rubbing: noise, scoring. Common cause: timing gear wear.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "timing_gear_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wear: flow loss. Common cause: abrasives.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why don't the screws in a twin screw pump touch?",
+     "options": [
+      "They are magnetic",
+      "Timing gears keep them apart",
+      "They are soft",
+      "They are not meshed"
+     ],
+     "answer": 1,
+     "explanation": "Non-contacting design.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is a twin screw pump good for multiphase flow?",
+     "options": [
+      "It compresses gas in sealed cavities without contact wear",
+      "It has a large impeller",
+      "It cannot run dry",
+      "It has no bearings"
+     ],
+     "answer": 0,
+     "explanation": "External bearings and no contact.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Double-flow screws are used to…",
+     "options": [
+      "Increase pulsation",
+      "Balance axial thrust",
+      "Reduce flow",
+      "Add a seal"
+     ],
+     "answer": 1,
+     "explanation": "Opposed screws cancel thrust.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the pumping elements and forms the suction and discharge ports.\"",
+     "options": [
+      "Electric Motor – Frame & End Shields",
+      "Pump Casing (Double-Flow)",
+      "Drive Screw Rotor",
+      "Coupling Guard"
+     ],
+     "answer": 1,
+     "explanation": "Pump Casing (Double-Flow): Contains the pumping elements and forms the suction and discharge ports.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Locate the rotors radially and axially, outside the pumped liquid.\"",
+     "options": [
+      "Pump Casing (Double-Flow)",
+      "Coupling Guard",
+      "Front Cover & Bearing Housings",
+      "Baseplate"
+     ],
+     "answer": 2,
+     "explanation": "Front Cover & Bearing Housings: Locate the rotors radially and axially, outside the pumped liquid.",
+     "level": "basic",
+     "part": "front_bearing_housing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,709 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "magnetic_drive_pump",
+ "no": 14,
+ "title": "Magnetic Drive Pump",
+ "model_title": "Magnetic Drive Pump (Sealless, Frame-Mounted)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A magnetic drive pump is a sealless centrifugal pump: torque passes from an outer magnet ring on the motor shaft through a stationary containment shell to an inner magnet ring on the impeller shaft. Because no shaft passes through the pressure boundary, there is no seal to leak.",
+   "applications": [
+    "Toxic, hazardous and expensive chemicals",
+    "Acids and alkalis",
+    "Refrigerants and heat-transfer fluids",
+    "Pharmaceutical and fine chemical transfer"
+   ],
+   "key_points": [
+    "Zero-emission design: containment shell is the pressure boundary",
+    "Product-lubricated sleeve bearings (often SiC) — must not run dry",
+    "Metallic shells create eddy-current losses; non-metallic shells avoid them",
+    "Magnet decoupling if overloaded"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow",
+    "configuration": "Overhung, end suction, sealless magnetic drive, frame-mounted",
+    "api_610_type": "OH-type sealless; API 685 covers sealless centrifugal pumps"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A centrifugal pump without a dynamic shaft seal. The motor turns an outer ring of permanent magnets; their field passes through a thin, stationary containment shell and drags an inner magnet ring that is fixed to the impeller. The pumped liquid is fully enclosed by the casing and shell, and it also lubricates the internal sleeve bearings — so the pump suits toxic, flammable or costly liquids where leakage is unacceptable."
+  },
+  "model_3d": {
+   "asset": "glb/magnetic_drive_pump.glb",
+   "metadata": "meta/magnetic_drive_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 58292,
+   "parts": 19
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor turns the outer magnet ring.",
+    "Magnetic field passes through the containment shell and drives the inner magnet ring synchronously.",
+    "The inner magnet turns the impeller, which pumps the liquid as a normal centrifugal pump."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor turns the outer magnet ring.",
+     "part": "outer_magnet",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Magnetic field passes through the containment shell and drives the inner magnet ring synchronously.",
+     "part": "containment_shell",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The inner magnet turns the impeller, which pumps the liquid as a normal centrifugal pump.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Product-lubricated bearings on a stationary shaft support the inner rotor; a small internal flow cools them.",
+     "part": "product_bearings",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "As end suction centrifugal pumps; slightly lower efficiency with metallic containment shells."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "magnetic_drive_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/magnetic_drive_pump.json#components",
+   "key_components": "Magnetic coupling, inner and outer magnets, containment shell",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Volute Casing",
+     "info_ref": "volute_casing",
+     "function": "Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.",
+     "material": "Cast iron, ductile iron, carbon steel, stainless steel (CF8M), duplex."
+    },
+    {
+     "id": "impeller",
+     "name": "Closed Impeller",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "rear_casing",
+     "name": "Rear Casing (Casing Cover)",
+     "info_ref": "casing_cover",
+     "function": "Closes the back of the casing and forms the seal chamber.",
+     "material": "As casing."
+    },
+    {
+     "id": "containment_shell",
+     "name": "Containment Shell",
+     "info_ref": "containment_shell",
+     "function": "Pressure-retaining barrier between the pumped liquid and the atmosphere; the magnetic field passes through it.",
+     "material": "Hastelloy C, titanium or stainless (metallic, with eddy-current heating) or PEEK/ceramic/composite (non-metallic, no eddy losses)."
+    },
+    {
+     "id": "stationary_shaft",
+     "name": "Stationary Shaft",
+     "info_ref": "stationary_shaft",
+     "function": "Fixed journal on which the impeller/inner magnet assembly rotates.",
+     "material": "Silicon carbide, alumina or hard-coated alloy."
+    },
+    {
+     "id": "product_bearings",
+     "name": "Product-Lubricated SiC Sleeve Bearings",
+     "info_ref": "product_bearings",
+     "function": "Radial (and with thrust faces, axial) support of the rotating inner assembly, lubricated by the pumped liquid.",
+     "material": "Silicon carbide (often diamond-coated), carbon-graphite."
+    },
+    {
+     "id": "inner_magnet",
+     "name": "Inner Magnet Carrier",
+     "info_ref": "inner_magnet",
+     "function": "Driven half of the magnetic coupling; turns the impeller.",
+     "material": "NdFeB/SmCo magnets, stainless or ETFE/PFA encapsulation."
+    },
+    {
+     "id": "outer_magnet",
+     "name": "Outer Magnet Ring & Drive Shaft",
+     "info_ref": "outer_magnet",
+     "function": "Driving half of the magnetic coupling, mounted on the motor-driven shaft.",
+     "material": "NdFeB/SmCo magnets, carbon steel carrier."
+    },
+    {
+     "id": "bearing_bracket",
+     "name": "Bearing Bracket (Drive End)",
+     "info_ref": "bearing_bracket",
+     "function": "Supports the drive shaft bearings and encloses the outer magnet ring.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "drive_bearings",
+     "name": "Drive Shaft Bearings",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.5 – 500",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "5 – 150",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "16 – 40",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 2,900",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "40 – 75",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "magnet_material": {
+     "typical_range": "NdFeB / SmCo",
+     "unit": "",
+     "note": "SmCo for higher temperatures"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "As end suction pumps."
+   ],
+   "alignment": [
+    "Shaft alignment as for coupled pumps."
+   ],
+   "piping": [
+    "Support suction and discharge piping independently so nozzle loads stay within the manufacturer's (or API 610/HI 9.6.2) allowable values.",
+    "Provide a straight run of at least 5 pipe diameters ahead of the suction nozzle (ANSI/HI 9.6.6 guidance — verify) and use an eccentric reducer with the flat side up."
+   ],
+   "commissioning": [
+    "Never run dry — use power or temperature monitoring."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor motor power (dry-run/decoupling detection).",
+     "part": "m_stator",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check containment shell temperature.",
+     "part": "containment_shell",
+     "interval": "per plant practice"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect sleeve bearings and thrust washers.",
+     "part": "product_bearings"
+    }
+   ],
+   "lubrication": [
+    "Product-lubricated internal bearings; drive bearings grease/oil."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Dry running bearing failure",
+     "category": "bearing",
+     "symptoms": [
+      "Noise, loss of flow"
+     ],
+     "causes": [
+      "Empty suction tank, closed valve"
+     ],
+     "remedies": [
+      "Dry-run protection"
+     ],
+     "part": "product_bearings"
+    },
+    {
+     "problem": "Magnet decoupling",
+     "category": "performance",
+     "symptoms": [
+      "Motor runs but no flow"
+     ],
+     "causes": [
+      "Overload, viscous start, solids"
+     ],
+     "remedies": [
+      "Stop, restart within design"
+     ],
+     "part": "inner_magnet"
+    },
+    {
+     "problem": "Shell overheating",
+     "category": "thermal",
+     "symptoms": [
+      "High shell temperature"
+     ],
+     "causes": [
+      "Low flow with metallic shell"
+     ],
+     "remedies": [
+      "Maintain minimum flow"
+     ],
+     "part": "containment_shell"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Magnetic Drive Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "magnetic_drive_pump.glb",
+    "duration_s": 50.7,
+    "script": [
+     {
+      "narration": "This module introduces the Magnetic Drive Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A magnetic drive pump is a sealless centrifugal pump: torque passes from an outer magnet ring on the motor shaft through a stationary containment shell to an inner magnet ring on the impeller shaft.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Because no shaft passes through the pressure boundary, there is no seal to leak.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include toxic, hazardous and expensive chemicals; acids and alkalis; refrigerants and heat-transfer fluids; pharmaceutical and fine chemical transfer.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Volute Casing, Closed Impeller, Rear Casing (Casing Cover).",
+      "duration_s": 5.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Magnetic Drive Pump — Operation",
+    "type": "in_app_tour",
+    "model": "magnetic_drive_pump.glb",
+    "duration_s": 31.3,
+    "script": [
+     {
+      "narration": "How the Magnetic Drive Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor turns the outer magnet ring.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outer_magnet",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Magnetic field passes through the containment shell and drives the inner magnet ring synchronously.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "containment_shell",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The inner magnet turns the impeller, which pumps the liquid as a normal centrifugal pump.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Product-lubricated bearings on a stationary shaft support the inner rotor; a small internal flow cools them.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "product_bearings",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Magnetic Drive Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "magnetic_drive_pump.glb",
+    "duration_s": 41.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Magnetic Drive Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor motor power (dry-run/decoupling detection).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "m_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check containment shell temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "containment_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect sleeve bearings and thrust washers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "product_bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dry running bearing failure: noise, loss of flow. Common cause: empty suction tank, closed valve.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "product_bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for magnet decoupling: motor runs but no flow. Common cause: overload, viscous start, solids.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "inner_magnet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for shell overheating: high shell temperature. Common cause: low flow with metallic shell.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "containment_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What forms the pressure boundary instead of a mechanical seal?",
+     "options": [
+      "The coupling",
+      "The containment shell",
+      "The impeller",
+      "The bearing bracket"
+     ],
+     "answer": 1,
+     "explanation": "It separates the liquid from the outer magnets.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must a mag-drive pump not run dry?",
+     "options": [
+      "Magnets demagnetise instantly",
+      "Internal sleeve bearings are lubricated by the pumped liquid",
+      "The motor stops",
+      "It loses prime"
+     ],
+     "answer": 1,
+     "explanation": "Bearings fail quickly without liquid.",
+     "level": "basic"
+    },
+    {
+     "question": "Eddy-current losses occur in…",
+     "options": [
+      "Plastic shells",
+      "Metallic containment shells",
+      "Bearings",
+      "Impellers"
+     ],
+     "answer": 1,
+     "explanation": "Changing magnetic field induces currents in metal.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.\"",
+     "options": [
+      "Electric Motor – Bearings (DE & NDE)",
+      "Stationary Shaft",
+      "Volute Casing",
+      "Coupling Guard"
+     ],
+     "answer": 2,
+     "explanation": "Volute Casing: Collects flow leaving the impeller and converts velocity into pressure in a spiral passage of increasing area, then discharges through a diffuser nozzle.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.\"",
+     "options": [
+      "Containment Shell",
+      "Flexible Coupling",
+      "Closed Impeller",
+      "Electric Motor – Fan Cover"
+     ],
+     "answer": 2,
+     "explanation": "Closed Impeller: Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the back of the casing and forms the seal chamber.\"",
+     "options": [
+      "Electric Motor – Rotor & Shaft",
+      "Rear Casing (Casing Cover)",
+      "Containment Shell",
+      "Flexible Coupling"
+     ],
+     "answer": 1,
+     "explanation": "Rear Casing (Casing Cover): Closes the back of the casing and forms the seal chamber.",
+     "level": "basic",
+     "part": "rear_casing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

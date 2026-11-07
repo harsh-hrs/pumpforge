@@ -1,0 +1,624 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "regenerative_turbine_pump",
+ "no": 16,
+ "title": "Regenerative Turbine Pump",
+ "model_title": "Regenerative Turbine (Peripheral) Pump, Close-Coupled",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A regenerative turbine (peripheral or side-channel) pump uses an impeller with many small vanes on its rim that run in an annular channel. Liquid re-circulates between the vanes and the channel many times as it travels around, gaining energy each time, so a small pump can produce high head at low flow.",
+   "applications": [
+    "Boiler feed for small boilers",
+    "Liquids with entrained gas or vapour (LPG, refrigerants)",
+    "Car wash and spraying",
+    "Low-flow high-head chemical services"
+   ],
+   "key_points": [
+    "High head at low flow",
+    "Tight axial clearances — clean liquids only",
+    "Power highest at shut-off; use a relief valve",
+    "Handles some gas"
+   ],
+   "classification": {
+    "family": "Rotodynamic (peripheral/side-channel)",
+    "configuration": "Close-coupled, single stage, end-top ports"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "In a regenerative turbine pump the liquid enters the side channel and is caught by the small vanes on the impeller rim, flung outward into the channel and returned to the vane roots further round — many times during one trip from suction to discharge. Each pass adds energy, so the pump develops far higher head than a centrifugal pump of the same size at small flows. It can handle some entrained vapour/gas, has a steep, almost linear H-Q curve and power rises toward shut-off, so it needs relief protection."
+  },
+  "model_3d": {
+   "asset": "glb/regenerative_turbine_pump.glb",
+   "metadata": "meta/regenerative_turbine_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 32714,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters the channel at the inlet port.",
+    "The peripheral vanes fling liquid into the side channel; it returns to the vanes repeatedly as it moves around.",
+    "Each regeneration adds energy, so pressure rises steadily around the channel."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters the channel at the inlet port.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The peripheral vanes fling liquid into the side channel; it returns to the vanes repeatedly as it moves around.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Each regeneration adds energy, so pressure rises steadily around the channel.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A stripper section separates outlet from inlet.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Very steep, almost linear head curve; power rises as flow decreases (maximum at shut-off)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "regenerative_turbine_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/regenerative_turbine_pump.json#components",
+   "key_components": "Peripheral impeller, side channel, casing",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Casing with Side Channel & Stripper",
+     "info_ref": "regen_casing",
+     "function": "Forms the annular side channel around the impeller rim and the stripper that separates discharge from suction.",
+     "material": "Cast iron, bronze, stainless steel."
+    },
+    {
+     "id": "impeller",
+     "name": "Peripheral (Regenerative) Impeller — 36 vanes",
+     "info_ref": "regen_impeller",
+     "function": "Imparts energy repeatedly to the liquid circulating between vanes and channel.",
+     "material": "Bronze, stainless steel, engineered polymers."
+    },
+    {
+     "id": "adapter",
+     "name": "Seal Housing / Motor Adapter",
+     "info_ref": "casing_cover",
+     "function": "Closes the back of the casing and forms the seal chamber.",
+     "material": "As casing."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Mechanical Seal",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.1 – 20",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "20 – 250",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "up to ~25",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 3,500",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "20 – 50",
+     "unit": "%"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Small baseplate."
+   ],
+   "alignment": [
+    "Close-coupled or coupled."
+   ],
+   "piping": [
+    "Fit a relief valve or bypass; never throttle to shut-off.",
+    "Fine strainer on suction."
+   ],
+   "commissioning": [
+    "Fill and vent; start with discharge open."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pressure and motor current.",
+     "part": "m_motor_frame",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean suction strainer.",
+     "part": "casing",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Check impeller side clearances.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Motor bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Clearance wear",
+     "category": "wear",
+     "symptoms": [
+      "Rapid loss of head"
+     ],
+     "causes": [
+      "Abrasives"
+     ],
+     "remedies": [
+      "Fine filtration; replace impeller"
+     ],
+     "part": "impeller"
+    },
+    {
+     "problem": "Motor overload",
+     "category": "performance",
+     "symptoms": [
+      "Trips"
+     ],
+     "causes": [
+      "Throttled discharge"
+     ],
+     "remedies": [
+      "Relief/bypass"
+     ],
+     "part": "m_stator"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Regenerative Turbine Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "regenerative_turbine_pump.glb",
+    "duration_s": 57.7,
+    "script": [
+     {
+      "narration": "This module introduces the Regenerative Turbine Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A regenerative turbine (peripheral or side-channel) pump uses an impeller with many small vanes on its rim that run in an annular channel.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid re-circulates between the vanes and the channel many times as it travels around, gaining energy each time, so a small pump can produce high head at low flow.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include boiler feed for small boilers; liquids with entrained gas or vapour (LPG, refrigerants); car wash and spraying; low-flow high-head chemical services.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Casing with Side Channel & Stripper, Peripheral (Regenerative) Impeller — 36 vanes, Seal Housing / Motor Adapter.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Regenerative Turbine Pump — Operation",
+    "type": "in_app_tour",
+    "model": "regenerative_turbine_pump.glb",
+    "duration_s": 28.7,
+    "script": [
+     {
+      "narration": "How the Regenerative Turbine Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters the channel at the inlet port.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The peripheral vanes fling liquid into the side channel; it returns to the vanes repeatedly as it moves around.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Each regeneration adds energy, so pressure rises steadily around the channel.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A stripper section separates outlet from inlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Regenerative Turbine Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "regenerative_turbine_pump.glb",
+    "duration_s": 30.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Regenerative Turbine Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pressure and motor current.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "m_motor_frame",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean suction strainer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check impeller side clearances.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for clearance wear: rapid loss of head. Common cause: abrasives.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for motor overload: trips. Common cause: throttled discharge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "m_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why must a regenerative turbine pump not be throttled to shut-off?",
+     "options": [
+      "It loses prime",
+      "Power is maximum at shut-off",
+      "Head falls to zero",
+      "The seal fails"
+     ],
+     "answer": 1,
+     "explanation": "Power rises as flow falls.",
+     "level": "basic"
+    },
+    {
+     "question": "Regenerative pumps are best for…",
+     "options": [
+      "High flow low head",
+      "Low flow high head",
+      "Slurry",
+      "Very viscous liquids"
+     ],
+     "answer": 1,
+     "explanation": "Many regenerations add head.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are clean liquids required?",
+     "options": [
+      "Tight clearances wear quickly",
+      "Large passages clog",
+      "Corrosion",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "Small axial clearances.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Forms the annular side channel around the impeller rim and the stripper that separates discharge from suction.\"",
+     "options": [
+      "Electric Motor – Cooling Fan",
+      "Electric Motor – Stator",
+      "Seal Housing / Motor Adapter",
+      "Casing with Side Channel & Stripper"
+     ],
+     "answer": 3,
+     "explanation": "Casing with Side Channel & Stripper: Forms the annular side channel around the impeller rim and the stripper that separates discharge from suction.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Imparts energy repeatedly to the liquid circulating between vanes and channel.\"",
+     "options": [
+      "Electric Motor – Stator",
+      "Seal Housing / Motor Adapter",
+      "Peripheral (Regenerative) Impeller — 36 vanes",
+      "Electric Motor – Fan Cover"
+     ],
+     "answer": 2,
+     "explanation": "Peripheral (Regenerative) Impeller — 36 vanes: Imparts energy repeatedly to the liquid circulating between vanes and channel.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the back of the casing and forms the seal chamber.\"",
+     "options": [
+      "Electric Motor – Stator",
+      "Peripheral (Regenerative) Impeller — 36 vanes",
+      "Seal Housing / Motor Adapter",
+      "Electric Motor – Fan Cover"
+     ],
+     "answer": 2,
+     "explanation": "Seal Housing / Motor Adapter: Closes the back of the casing and forms the seal chamber.",
+     "level": "basic",
+     "part": "adapter",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

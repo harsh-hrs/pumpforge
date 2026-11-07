@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PumpForge Model Viewer</title>
+<style>
+  :root { --bg:#eef1f5; --panel:#ffffff; --ink:#14202e; --muted:#5b6878; --accent:#1f6fd1; --nav:#0f1e33; --line:#d6dce4; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  #app { display:grid; grid-template-columns: 1fr 340px; height:100%; }
+  #stage { position:relative; overflow:hidden; background:radial-gradient(circle at 50% 40%, #fbfcfe 0%, #dfe5ec 100%); }
+  canvas { display:block; }
+  header { position:absolute; left:0; right:0; top:0; display:flex; gap:10px; align-items:center; padding:10px 14px; background:var(--nav); color:#fff; z-index:2; }
+  header h1 { font-size:15px; margin:0; font-weight:600; letter-spacing:.2px; }
+  header select { margin-left:auto; padding:5px 8px; border-radius:6px; border:0; }
+  #toolbar { position:absolute; left:14px; bottom:14px; right:14px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; z-index:2; }
+  .btn { background:var(--panel); border:1px solid var(--line); color:var(--ink); padding:7px 12px; border-radius:8px; cursor:pointer; font-weight:500; }
+  .btn.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .slider { display:flex; gap:8px; align-items:center; background:var(--panel); border:1px solid var(--line); padding:5px 10px; border-radius:8px; }
+  aside { background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:16px; }
+  aside h2 { font-size:16px; margin:0 0 4px; }
+  aside h3 { font-size:12px; text-transform:uppercase; letter-spacing:.6px; color:var(--muted); margin:16px 0 4px; }
+  aside p, aside li { margin:0 0 6px; }
+  aside ul { padding-left:18px; margin:0; }
+  .tag { display:inline-block; font-size:11px; padding:2px 7px; border-radius:10px; background:#e7eef9; color:#174e94; margin-right:4px; }
+  .disc { font-size:12px; color:var(--muted); border-top:1px solid var(--line); margin-top:16px; padding-top:10px; }
+  #parts li { cursor:pointer; } #parts li:hover { color:var(--accent); }
+  body.shot aside, body.shot #toolbar, body.shot header { display:none; }
+  body.shot #app { grid-template-columns:1fr; grid-template-rows:1fr; }
+  @media (max-width: 820px) { #app { grid-template-columns:1fr; grid-template-rows: 60% 40%; } aside { border-left:0; border-top:1px solid var(--line);} }
+.olabel{position:absolute;transform:translate(-50%,-50%);background:rgba(14,28,48,.86);color:#fff;font:500 11px system-ui;padding:3px 7px;border-radius:4px;white-space:nowrap;pointer-events:none}
+</style>
+<script type="importmap">
+{ "imports": { "three": "./node_modules/three/build/three.module.js",
+               "three/addons/": "./node_modules/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <header><h1 id="title">PumpForge</h1><select id="pick"></select></header>
+    <div id="toolbar">
+      <button class="btn" id="bOperate">▶ Operate</button>
+      <button class="btn" id="bCut">Cutaway</button>
+      <button class="btn" id="bFlow">Flow path</button>
+      <div class="slider">Explode <input id="sExplode" type="range" min="0" max="1" step="0.01" value="0"></div>
+      <button class="btn" id="bReset">Reset view</button>
+    </div>
+  </div>
+  <aside id="info"><h2>Select a component</h2><p>Tap any part of the model to see its function, construction, materials, failure modes and inspection points.</p></aside>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const Q = new URLSearchParams(location.search);
+if (Q.get('shot')) document.body.classList.add('shot');
+const MODELS = new URLSearchParams(location.search).get('model') ? [new URLSearchParams(location.search).get('model')] : ['vertical_turbine_pump','external_gear_pump','aodd_pump'];
+const stage = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({ antialias:true, preserveDrawingBuffer:true, alpha:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(3,6,4); sun.castShadow = true;
+sun.shadow.mapSize.set(2048,2048); scene.add(sun);
+const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 200);
+const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+const ground = new THREE.Mesh(new THREE.CircleGeometry(30, 64), new THREE.ShadowMaterial({ opacity:0.18 }));
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+
+let root, flow, ovl = {}, labels = [], meta, mixer, actions = {}, parts = {}, selected = null, operate = false, cut = false, explode = 0;
+const clock = new THREE.Clock();
+
+function resize(){ const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w,h); camera.aspect = w/h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize);
+
+const pick = document.getElementById('pick');
+MODELS.forEach(m => pick.add(new Option(m.replace(/_/g,' '), m)));
+pick.onchange = () => load(pick.value);
+
+async function load(id){
+  pick.value = id;
+  if (root) scene.remove(root); if (flow) { scene.remove(flow); flow = null; }
+  for (const k in ovl) scene.remove(ovl[k]); ovl = {}; clearLabels();
+  meta = await (await fetch(`../output/meta/${id}.json`)).json();
+  document.getElementById('title').textContent = meta.title;
+  const gltf = await new GLTFLoader().loadAsync(`../output/glb/${id}.glb`);
+  root = gltf.scene; scene.add(root); parts = {};
+  root.traverse(o => {
+    if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; o.material = o.material.clone(); }
+    if (o.userData.part_id && !o.isMesh && o.userData.explode_offset) {
+      parts[o.userData.part_id] = { node:o, rest:o.position.clone(), off:new THREE.Vector3(...o.userData.explode_offset) };
+    }
+  });
+  mixer = new THREE.AnimationMixer(root); actions = {};
+  gltf.animations.forEach(c => actions[c.name] = mixer.clipAction(c));
+  const box = new THREE.Box3().setFromObject(root); ground.position.y = box.min.y - 0.001;
+  showPump(); applyState(); frame(new THREE.Box3().setFromObject(root));
+}
+
+function frame(box, view = Q.get('view') || 'iso'){
+  const c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3()), s = sz.length();
+  const vf = THREE.MathUtils.degToRad(camera.fov) / 2, hf = Math.atan(Math.tan(vf) * camera.aspect);
+  const vertical = view === 'top' ? Math.max(sz.z, sz.x) : sz.y, horiz = Math.max(sz.x, sz.z);
+  const d = Math.max(vertical / 2 / Math.tan(vf), horiz / 2 / Math.tan(hf)) * 1.12 + Math.max(sz.x, sz.z) / 2;
+  const dirs = { iso:[0.85,0.45,1.1], front:[0,0.0001,1], top:[0,1,0.02], side:[1,0.0001,0] };
+  if (Q.get('zoom')) { const z = Q.get('zoom').split(',').map(Number); c.set(z[0], z[1], z[2]); }
+  const v = new THREE.Vector3(...dirs[view]).normalize();
+  const dd = Q.get('zoom') ? +Q.get('zoom').split(',')[3] : d;
+  camera.position.copy(c).addScaledVector(v, dd); camera.near = d/100; camera.far = d*10; camera.updateProjectionMatrix();
+  controls.target.copy(c); controls.update();
+  sun.shadow.camera.left = sun.shadow.camera.bottom = -s; sun.shadow.camera.right = sun.shadow.camera.top = s;
+  sun.position.copy(c).add(new THREE.Vector3(s*0.6, s*1.2, s*0.8)); sun.target.position.copy(c); scene.add(sun.target);
+}
+
+function applyState(){
+  if (!root) return;
+  root.traverse(o => {
+    const r = o.userData.section_role;
+    if (r === 'front' || r === 'hide') o.visible = !cut;
+    // cut faces are a separate primitive using material "section": show only in cutaway
+    if (o.isMesh && o.material.name === 'section') o.visible = cut;
+  });
+  for (const k in ovl) ovl[k].traverse(o => { const r = o.userData.section_role; if (r === 'front') o.visible = !cut; });
+  for (const k in parts) { const p = parts[k]; p.node.position.copy(p.rest).addScaledVector(p.off, explode); }
+  if (actions.Operate) { if (operate) actions.Operate.play(); actions.Operate.paused = !operate; }
+  document.getElementById('bOperate').classList.toggle('on', operate);
+  document.getElementById('bCut').classList.toggle('on', cut);
+}
+
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const list = a => a && a.length ? `<ul>${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>` : '<p>—</p>';
+function showPump(){
+  const el = document.getElementById('info');
+  el.innerHTML = `<h2>${esc(meta.title)}</h2><span class="tag">${esc(meta.category)}</span><span class="tag">${meta.stats.parts} parts</span>
+    <h3>Operating concept</h3><p>${esc(meta.summary||'')}</p>
+    <h3>Components</h3><ul id="parts">${meta.parts.map(p=>`<li data-id="${p.id}">${esc(p.name)}</li>`).join('')}</ul>
+    <p class="disc">${esc(meta.disclaimer)}</p>`;
+  el.querySelectorAll('#parts li').forEach(li => li.onclick = () => select(li.dataset.id));
+}
+function select(id){
+  if (selected) setHighlight(selected, false);
+  selected = id; if (!id) return showPump();
+  setHighlight(id, true);
+  const p = meta.parts.find(x => x.id === id), c = meta.components[p.info_ref] || {};
+  document.getElementById('info').innerHTML = `<p><a href="#" id="back">← ${esc(meta.title)}</a></p>
+    <h2>${esc(p.name)}</h2><span class="tag">${esc(p.group.replace(/_/g,' '))}</span>
+    <h3>Function</h3><p>${esc(c.function||'—')}</p>
+    <h3>Construction</h3><p>${esc(c.construction||'—')}</p>
+    <h3>Typical materials</h3><p>${esc(c.material||'—')}</p>
+    <h3>Operating conditions</h3><p>${esc(c.operating_conditions||'—')}</p>
+    <h3>Common failure modes</h3>${list(c.failure_modes)}
+    <h3>Inspection</h3>${list(c.inspection)}
+    ${p.note?`<p class="disc">${esc(p.note)}</p>`:''}`;
+  document.getElementById('back').onclick = e => { e.preventDefault(); select(null); };
+}
+function partOf(o){ while (o && !o.userData.part_id) o = o.parent; return o ? o.userData.part_id : null; }
+function setHighlight(id, on){
+  root.traverse(o => { if (o.isMesh && partOf(o) === id && o.material.name !== 'section') o.material.emissive?.setHex(on ? 0x2266cc : 0x000000); });
+}
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down;
+renderer.domElement.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX-down[0], e.clientY-down[1]) > 5) return;
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX-r.left)/r.width*2-1, -(e.clientY-r.top)/r.height*2+1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObject(root, true).find(h => h.object.visible);
+  select(hit ? partOf(hit.object) : null);
+});
+
+document.getElementById('bOperate').onclick = () => { operate = !operate; applyState(); };
+document.getElementById('bCut').onclick = () => { cut = !cut; applyState(); };
+document.getElementById('sExplode').oninput = e => { explode = +e.target.value; applyState(); };
+document.getElementById('bReset').onclick = () => frame(new THREE.Box3().setFromObject(root));
+document.getElementById('bFlow').onclick = async e => {
+  if (flow) { scene.remove(flow); flow = null; e.target.classList.remove('on'); return; }
+  try { flow = (await new GLTFLoader().loadAsync(`../output/glb/${pick.value}_flow.glb`)).scene; scene.add(flow); e.target.classList.add('on'); } catch { }
+};
+
+// ---- teaching overlays (pressure, thrust, wear ...) with annotation labels
+function clearLabels(){ labels.forEach(l => l.el.remove()); labels = []; }
+async function toggleOverlay(kind, on){
+  const info = (meta.overlays || {})[kind]; if (!info) return;
+  if (ovl[kind]) { scene.remove(ovl[kind]); delete ovl[kind]; }
+  labels.filter(l => l.kind === kind).forEach(l => l.el.remove()); labels = labels.filter(l => l.kind !== kind);
+  if (!on) return;
+  ovl[kind] = (await new GLTFLoader().loadAsync(`../output/glb/${info.file}`)).scene; scene.add(ovl[kind]);
+  if (info.render === 'xray') ovl[kind].traverse(o => { if (o.isMesh) { o.material = o.material.clone(); Object.assign(o.material, { depthTest:false, depthWrite:false, transparent:true, opacity:0.9 }); o.renderOrder = 10; } });
+  applyState();
+  for (const a of info.annotations || []) {
+    const el = document.createElement('div'); el.className = 'olabel'; el.textContent = a.text; stage.appendChild(el);
+    labels.push({ kind, el, p: new THREE.Vector3(...a.anchor) });
+  }
+}
+function placeLabels(){
+  const r = stage.getBoundingClientRect();
+  for (const l of labels) { const v = l.p.clone().project(camera); l.el.style.left = ((v.x + 1) / 2 * r.width) + 'px'; l.el.style.top = ((1 - v.y) / 2 * r.height) + 'px'; l.el.style.display = v.z < 1 ? '' : 'none'; }
+}
+function loop(){ requestAnimationFrame(loop); placeLabels(); const dt = clock.getDelta(); if (mixer && operate) mixer.update(dt); controls.update(); renderer.render(scene, camera); }
+resize(); loop();
+cut = Q.get('cut') === '1'; explode = +(Q.get('explode') || 0);
+await load(Q.get('model') || MODELS[0]);
+if (Q.get('t') && actions.Operate) { actions.Operate.reset(); actions.Operate.paused = false; actions.Operate.play(); mixer.setTime(+Q.get('t')); actions.Operate.paused = true; }
+if (Q.get('flow') === '1') document.getElementById('bFlow').click();
+if (Q.get('part')) select(Q.get('part'));
+for (const k of (Q.get('ovl') || '').split(',').filter(Boolean)) await toggleOverlay(k, true);
+window.__ready = true;
+</script>
+</body>
+</html>

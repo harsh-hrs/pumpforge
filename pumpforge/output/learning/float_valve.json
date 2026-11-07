@@ -1,0 +1,614 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "float_valve",
+ "no": 42,
+ "title": "Float Valve",
+ "model_title": "Float Valve (Ball-Float Tank Filling Valve)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A float valve automatically keeps a tank at a set level. A float on a lever arm rises with the liquid; the lever pushes a plunger onto the seat and throttles the inlet until it closes at the full level. When liquid is drawn off, the float drops and the valve reopens.",
+   "applications": [
+    "Water storage and break tanks",
+    "Cooling-tower basins",
+    "Livestock troughs and cisterns",
+    "Make-up to process tanks"
+   ],
+   "key_points": [
+    "Self-acting — no power needed",
+    "Lever multiplies float force",
+    "Throttles progressively near full level",
+    "Fit an overflow in case it fails"
+   ],
+   "classification": {
+    "family": "Self-acting level control valve",
+    "type": "Ball-float valve (side-entry, piston type)"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A float valve keeps a tank at a set level automatically. A float on a lever arm rises with the liquid; the lever pushes a plunger onto the seat and gradually closes the inlet as the tank fills. When the level falls, the float drops and the valve opens again."
+  },
+  "model_3d": {
+   "asset": "glb/float_valve.glb",
+   "metadata": "meta/float_valve.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3724,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water enters through the inlet pipe and seat.",
+    "As the level rises the float lifts.",
+    "The lever pushes the plunger and washer towards the seat, reducing flow."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water enters through the inlet pipe and seat.",
+     "part": "inlet_pipe",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "As the level rises the float lifts.",
+     "part": "float_lever",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The lever pushes the plunger and washer towards the seat, reducing flow.",
+     "part": "plunger",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At full level the washer seals the seat and flow stops.",
+     "part": "valve_body",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When water is used the level falls, the float drops and the valve opens again.",
+     "part": "water_level",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Proportional throttling over the last part of the float travel."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "float_valve_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/float_valve.json#components",
+   "key_components": "Float ball, lever arm, plunger, seat",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Storage Tank (shown cut away)",
+     "info_ref": "fv_tank",
+     "function": "Stores the liquid; the valve maintains its level.",
+     "material": "Steel, concrete, GRP."
+    },
+    {
+     "id": "water_level",
+     "name": "Water Level (animated)",
+     "info_ref": "fv_water",
+     "function": "Liquid surface that the float follows.",
+     "material": "—"
+    },
+    {
+     "id": "inlet_pipe",
+     "name": "Inlet Pipe through Tank Wall",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    },
+    {
+     "id": "valve_body",
+     "name": "Valve Body, Seat & Outlet Nozzle",
+     "info_ref": "fv_body",
+     "function": "Contains the seat and outlet nozzle.",
+     "material": "Brass, bronze, plastic."
+    },
+    {
+     "id": "plunger",
+     "name": "Piston / Plunger with Rubber Washer",
+     "info_ref": "fv_plunger",
+     "function": "Closes against the seat when pushed by the lever.",
+     "material": "Brass + EPDM washer."
+    },
+    {
+     "id": "float_lever",
+     "name": "Float Ball & Lever Arm",
+     "info_ref": "fv_float",
+     "function": "Senses the level and supplies the closing force.",
+     "material": "Copper, plastic, stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "1/2\" – 6\" (larger: pilot float valves)",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "up to ~10 – 16",
+     "unit": "bar supply"
+    },
+    "temperature": {
+     "typical_range": "0 to 60",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Depends on seat size and supply pressure",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Fit an isolating valve upstream and an overflow/warning pipe on the tank.",
+    "Keep the float free of walls and baffles."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level is maintained and no overflow.",
+     "part": "water_level",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace the washer when passing.",
+     "part": "plunger",
+     "interval": "as needed"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Check float for leaks and lever pivot for wear.",
+     "part": "float_lever"
+    }
+   ],
+   "lubrication": [
+    "Pivot pins: no lubrication for potable water service; keep clean."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overflow",
+     "category": "performance",
+     "symptoms": [
+      "Water at overflow"
+     ],
+     "causes": [
+      "Worn washer, punctured float, stuck lever"
+     ],
+     "remedies": [
+      "Replace washer/float; free pivot"
+     ],
+     "part": "float_lever"
+    },
+    {
+     "problem": "Water hammer / noise",
+     "category": "performance",
+     "symptoms": [
+      "Banging on closing"
+     ],
+     "causes": [
+      "High supply pressure, valve too large"
+     ],
+     "remedies": [
+      "Reduce pressure; delayed-action valve"
+     ],
+     "part": "valve_body"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Float Valve — Introduction",
+    "type": "in_app_tour",
+    "model": "float_valve.glb",
+    "duration_s": 50.7,
+    "script": [
+     {
+      "narration": "This module introduces the Float Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A float valve automatically keeps a tank at a set level.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A float on a lever arm rises with the liquid; the lever pushes a plunger onto the seat and throttles the inlet until it closes at the full level.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "When liquid is drawn off, the float drops and the valve reopens.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include water storage and break tanks; cooling-tower basins; livestock troughs and cisterns; make-up to process tanks.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Valve Body, Seat & Outlet Nozzle.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Float Valve — Operation",
+    "type": "in_app_tour",
+    "model": "float_valve.glb",
+    "duration_s": 32.0,
+    "script": [
+     {
+      "narration": "How the Float Valve works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water enters through the inlet pipe and seat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_pipe",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "As the level rises the float lifts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "float_lever",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The lever pushes the plunger and washer towards the seat, reducing flow.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "plunger",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At full level the washer seals the seat and flow stops.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "valve_body",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When water is used the level falls, the float drops and the valve opens again.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "water_level",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Float Valve — Maintenance",
+    "type": "in_app_tour",
+    "model": "float_valve.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Float Valve.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level is maintained and no overflow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water_level",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace the washer when passing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plunger",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check float for leaks and lever pivot for wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "float_lever",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overflow: water at overflow. Common cause: worn washer, punctured float, stuck lever.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "float_lever",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water hammer / noise: banging on closing. Common cause: high supply pressure, valve too large.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "valve_body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What supplies the closing force in a float valve?",
+     "options": [
+      "A motor",
+      "Buoyancy of the float, multiplied by the lever",
+      "A solenoid",
+      "Pump pressure"
+     ],
+     "answer": 1,
+     "explanation": "Lever advantage.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is an overflow pipe still needed?",
+     "options": [
+      "To fill faster",
+      "In case the float valve fails open",
+      "For cooling",
+      "It is not"
+     ],
+     "answer": 1,
+     "explanation": "Safety backup.",
+     "level": "basic"
+    },
+    {
+     "question": "As the level rises the valve…",
+     "options": [
+      "Opens",
+      "Throttles progressively and then closes",
+      "Does nothing",
+      "Reverses"
+     ],
+     "answer": 1,
+     "explanation": "Proportional action.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores the liquid; the valve maintains its level.\"",
+     "options": [
+      "Valve Body, Seat & Outlet Nozzle",
+      "Storage Tank (shown cut away)",
+      "Float Ball & Lever Arm",
+      "Water Level (animated)"
+     ],
+     "answer": 1,
+     "explanation": "Storage Tank (shown cut away): Stores the liquid; the valve maintains its level.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Liquid surface that the float follows.\"",
+     "options": [
+      "Water Level (animated)",
+      "Valve Body, Seat & Outlet Nozzle",
+      "Float Ball & Lever Arm",
+      "Storage Tank (shown cut away)"
+     ],
+     "answer": 0,
+     "explanation": "Water Level (animated): Liquid surface that the float follows.",
+     "level": "basic",
+     "part": "water_level",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Contains the seat and outlet nozzle.\"",
+     "options": [
+      "Piston / Plunger with Rubber Washer",
+      "Inlet Pipe through Tank Wall",
+      "Water Level (animated)",
+      "Valve Body, Seat & Outlet Nozzle"
+     ],
+     "answer": 3,
+     "explanation": "Valve Body, Seat & Outlet Nozzle: Contains the seat and outlet nozzle.",
+     "level": "basic",
+     "part": "valve_body",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

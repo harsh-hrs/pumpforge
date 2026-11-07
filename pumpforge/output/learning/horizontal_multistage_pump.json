@@ -1,0 +1,1211 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "horizontal_multistage_pump",
+ "no": 3,
+ "title": "Horizontal Multistage Pump",
+ "model_title": "Horizontal Multistage Pump (Ring-Section, 6 Stages)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A horizontal multistage pump places several impellers in series on one shaft, so each stage adds roughly the same head and pressure builds up stage by stage. After every impeller a diffuser converts velocity into pressure and return vanes lead the liquid to the next impeller eye. The axial thrust of the impellers is balanced by a balance drum, balance disc or opposed impellers, with a thrust bearing for the residual.",
+   "applications": [
+    "Boiler feedwater",
+    "Reverse-osmosis (RO) feed and high-pressure membrane systems",
+    "High-rise building water supply and pressure boosting",
+    "Mine dewatering",
+    "Pipeline and descaling services",
+    "Snow-making and high-pressure cleaning"
+   ],
+   "key_points": [
+    "Head ≈ number of stages × head per stage",
+    "Ring-section (BB4) stages clamped by tie bolts; barrel (BB5) for the highest pressures",
+    "Axial thrust must be balanced",
+    "First stage sets the NPSH required"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow, multistage",
+    "configuration": "Horizontal, between bearings, radially split ring-section (segmental)",
+    "api_610_type": "BB4 (single casing, radially split, multistage); barrel BB5 and axially split BB3 are alternatives"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A horizontal multistage pump places several impellers in series on one shaft. Each stage — impeller, diffuser and return channel — adds roughly the same head, so the pressure builds up stage by stage from suction to discharge. The impeller flings liquid outward and raises its velocity and pressure; the diffuser vanes slow it down and convert velocity into more pressure; the return vanes guide it back inward, without swirl, to the eye of the next impeller. Because every impeller faces the same way, their axial thrusts add up; a balance drum at the discharge end, with a leak-off line back to suction, cancels most of it, and a thrust bearing takes the rest. Multistage pumps serve high-head duties such as boiler feed, reverse-osmosis feed, high-rise water supply, mine dewatering and pressure boosting."
+  },
+  "model_3d": {
+   "asset": "glb/horizontal_multistage_pump.glb",
+   "metadata": "meta/horizontal_multistage_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 148512,
+   "parts": 34
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters the suction casing at the lowest pressure in the pump.",
+    "The first-stage impeller raises velocity and pressure; this stage sets the pump's NPSH requirement.",
+    "The diffuser vanes around the impeller slow the liquid and convert velocity into pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters the suction casing at the lowest pressure in the pump.",
+     "part": "suction_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The first-stage impeller raises velocity and pressure; this stage sets the pump's NPSH requirement.",
+     "part": "impeller_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diffuser vanes around the impeller slow the liquid and convert velocity into pressure.",
+     "part": "stage_casing_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Return vanes guide the liquid inward, without swirl, to the eye of the next impeller.",
+     "part": "stage_casing_2",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Each further stage adds about the same head, so the pressure rises in equal steps towards discharge.",
+     "part": "stage_casing_6",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "All impellers face the same way, so their axial thrusts add towards suction.",
+     "part": "shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "thrust",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The balance drum has discharge pressure on one side and near-suction pressure on the other; this opposes the impeller thrust.",
+     "part": "balance_drum_bush",
+     "cut": true,
+     "operate": true,
+     "overlay": "thrust",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Leakage past the drum returns to suction through the leak-off line; its flow is a useful wear indicator.",
+     "part": "balance_leakoff_line",
+     "cut": true,
+     "operate": true,
+     "overlay": "thrust",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Tie bolts clamp the stage stack between the suction and discharge casings.",
+     "part": "tie_bolts",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Steep head–flow curve (head is the sum of the stage heads); efficiency peak at BEP; power rises with flow; NPSHr set by the first stage."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "horizontal_multistage_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "horizontal_multistage_pump_pressure.glb",
+     "title": "Stage-by-stage pressure",
+     "description": "Colour rings show static pressure rising from suction (blue) to discharge (red). Each stage adds roughly the same head, so total head ≈ number of stages × head per stage at the same flow.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "+1Δp",
+       "anchor": [
+        0.055,
+        0.79,
+        -0.0
+       ],
+       "value": 1
+      },
+      {
+       "text": "+2Δp",
+       "anchor": [
+        0.165,
+        0.87,
+        -0.0
+       ],
+       "value": 2
+      },
+      {
+       "text": "+3Δp",
+       "anchor": [
+        0.275,
+        0.79,
+        -0.0
+       ],
+       "value": 3
+      },
+      {
+       "text": "+4Δp",
+       "anchor": [
+        0.385,
+        0.87,
+        -0.0
+       ],
+       "value": 4
+      },
+      {
+       "text": "+5Δp",
+       "anchor": [
+        0.495,
+        0.79,
+        -0.0
+       ],
+       "value": 5
+      },
+      {
+       "text": "+6Δp",
+       "anchor": [
+        0.605,
+        0.87,
+        -0.0
+       ],
+       "value": 6
+      },
+      {
+       "text": "Suction p_s (lowest, NPSH-critical)",
+       "anchor": [
+        -0.15,
+        0.14,
+        -0.0
+       ],
+       "value": 0
+      },
+      {
+       "text": "Discharge p_s + 6Δp",
+       "anchor": [
+        0.788,
+        0.2,
+        -0.0
+       ],
+       "value": 6
+      }
+     ]
+    },
+    "thrust": {
+     "file": "horizontal_multistage_pump_thrust.glb",
+     "title": "Axial thrust & balancing",
+     "description": "Each impeller is pushed towards suction (magenta) because its back shroud sees higher pressure than the eye side. The balance drum (green) has full discharge pressure on its inner face and near-suction pressure in the balance chamber behind it (leak-off line), creating an opposing force. A thrust bearing carries the small residual.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Net impeller thrust → towards suction",
+       "anchor": [
+        0.33,
+        0.18,
+        -0.0
+       ]
+      },
+      {
+       "text": "Balance drum force → towards discharge",
+       "anchor": [
+        0.888,
+        0.32,
+        -0.0
+       ]
+      },
+      {
+       "text": "Leak-off returns balance-chamber water to suction",
+       "anchor": [
+        0.798,
+        0.72,
+        0.27
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/horizontal_multistage_pump.json#components",
+   "key_components": "Multiple impellers, diffusers, stage casing",
+   "parts": [
+    {
+     "id": "impeller_1",
+     "name": "Impeller – Stage 1",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "stage_casing_1",
+     "name": "Stage Casing with Diffuser & Return Vanes – Stage 1",
+     "info_ref": "bfp_stage",
+     "function": "One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "material": "Chrome steel (13 % Cr), carbon steel, stainless."
+    },
+    {
+     "id": "impeller_2",
+     "name": "Impeller – Stage 2",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "stage_casing_2",
+     "name": "Stage Casing with Diffuser & Return Vanes – Stage 2",
+     "info_ref": "bfp_stage",
+     "function": "One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "material": "Chrome steel (13 % Cr), carbon steel, stainless."
+    },
+    {
+     "id": "impeller_3",
+     "name": "Impeller – Stage 3",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "stage_casing_3",
+     "name": "Stage Casing with Diffuser & Return Vanes – Stage 3",
+     "info_ref": "bfp_stage",
+     "function": "One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "material": "Chrome steel (13 % Cr), carbon steel, stainless."
+    },
+    {
+     "id": "impeller_4",
+     "name": "Impeller – Stage 4",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "stage_casing_4",
+     "name": "Stage Casing with Diffuser & Return Vanes – Stage 4",
+     "info_ref": "bfp_stage",
+     "function": "One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "material": "Chrome steel (13 % Cr), carbon steel, stainless."
+    },
+    {
+     "id": "impeller_5",
+     "name": "Impeller – Stage 5",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "stage_casing_5",
+     "name": "Stage Casing with Diffuser & Return Vanes – Stage 5",
+     "info_ref": "bfp_stage",
+     "function": "One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "material": "Chrome steel (13 % Cr), carbon steel, stainless."
+    },
+    {
+     "id": "impeller_6",
+     "name": "Impeller – Stage 6",
+     "info_ref": "impeller_closed",
+     "function": "Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "material": "Cast iron, bronze, stainless steel (CF8M, CA6NM), duplex."
+    },
+    {
+     "id": "stage_casing_6",
+     "name": "Stage Casing with Diffuser & Return Vanes – Stage 6",
+     "info_ref": "bfp_stage",
+     "function": "One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "material": "Chrome steel (13 % Cr), carbon steel, stainless."
+    },
+    {
+     "id": "suction_casing",
+     "name": "Suction Casing",
+     "info_ref": "bfp_suction",
+     "function": "Receives feedwater from the deaerator/booster and feeds the first-stage impeller.",
+     "material": "Carbon steel/chrome steel."
+    },
+    {
+     "id": "discharge_casing",
+     "name": "Discharge Casing (with Balance Drum Chamber)",
+     "info_ref": "bfp_discharge",
+     "function": "Collects flow from the last stage, carries the discharge nozzle and the balance drum chamber.",
+     "material": "Carbon/chrome steel."
+    },
+    {
+     "id": "balance_drum_bush",
+     "name": "Balance Drum Bushing",
+     "info_ref": "bfp_balance",
+     "function": "Throttling bush around the balance drum; leak-off returns to suction to balance thrust.",
+     "material": "Bronze/hardened stainless."
+    },
+    {
+     "id": "tie_bolts",
+     "name": "Tie Bolts (Clamp the Stage Stack)",
+     "info_ref": "bfp_tiebolts",
+     "function": "Clamp the stage stack between suction and discharge casings.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "shaft",
+     "name": "Shaft & Balance Drum",
+     "info_ref": "pump_shaft",
+     "function": "Transmits torque from the coupling to the impeller(s).",
+     "material": "Carbon steel, 4140 alloy steel, 410/420 or 316 stainless, duplex."
+    },
+    {
+     "id": "bearing_housing_suction",
+     "name": "Bearing Housing – Suction End",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_suction",
+     "name": "Radial Bearing – Suction End",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "seal_suction",
+     "name": "Mechanical Seal – Suction End",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_housing_discharge",
+     "name": "Bearing Housing – Discharge End",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_discharge",
+     "name": "Thrust Bearing – Discharge End",
+     "info_ref": "thrust_bearing",
+     "function": "Carries axial hydraulic thrust and locates the shaft axially.",
+     "material": "Bearing steel; brass or polyamide cages."
+    },
+    {
+     "id": "seal_discharge",
+     "name": "Mechanical Seal – Discharge End",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    },
+    {
+     "id": "gauges",
+     "name": "Suction & Discharge Pressure Gauges",
+     "info_ref": "pressure_gauge",
+     "function": "Indicates suction or discharge pressure for operation and performance checks.",
+     "material": "Stainless steel case and wetted parts."
+    },
+    {
+     "id": "balance_leakoff_line",
+     "name": "Balance Leak-off Line (to Suction)",
+     "info_ref": "bfp_leakoff",
+     "function": "Returns the controlled leakage past the balance drum from the balance chamber to the suction, keeping that chamber near suction pressure so the drum produces its balancing force.",
+     "material": "Stainless or carbon steel tube."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "5 – 1,000",
+     "unit": "m³/h",
+     "note": "Large boiler-feed and pipeline units exceed this."
+    },
+    "head": {
+     "typical_range": "50 – 1,500",
+     "unit": "m",
+     "note": "Roughly 20–150 m per stage depending on size and speed."
+    },
+    "pressure": {
+     "typical_range": "16 – 100 (ring-section); > 200 for barrel BB5",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 3,600; boiler feed up to ~6,000+ with gear or turbine drive",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "60 – 85",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "stages": {
+     "typical_range": "2 – 15",
+     "unit": ""
+    },
+    "head_per_stage": {
+     "typical_range": "20 – 150",
+     "unit": "m"
+    }
+   },
+   "selection_notes": [
+    "Check minimum continuous flow — multistage pumps overheat quickly at low flow; fit a minimum-flow line where needed.",
+    "Hot water service needs NPSH margin at the first stage (booster pump or elevated deaerator)."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rigid grouted baseplate; check that both bearing housings are fully supported."
+   ],
+   "alignment": [
+    "Align pump and motor shafts with dial indicators or laser after grouting and again after connecting the piping (hot alignment check for hot service).",
+    "Target the coupling manufacturer's tolerances; typical practice for 1500–3000 rpm is ≤0.05 mm offset and ≤0.05 mm/100 mm angularity — verify.",
+    "Correct soft foot (< 0.05 mm) before final alignment.",
+    "Check axial float/rotor position after coupling up."
+   ],
+   "piping": [
+    "Support suction and discharge piping independently so nozzle loads stay within the manufacturer's (or API 610/HI 9.6.2) allowable values.",
+    "Provide a straight run of at least 5 pipe diameters ahead of the suction nozzle (ANSI/HI 9.6.6 guidance — verify) and use an eccentric reducer with the flat side up.",
+    "Fit isolation valves on both sides, a check valve on the discharge, and pressure gauges at suction and discharge.",
+    "Never use the pump as a pipe anchor; use expansion joints with tie rods only when designed for them.",
+    "Route the balance leak-off line back to suction without valves that could be closed.",
+    "Install a minimum-flow recirculation line where low-flow operation is possible."
+   ],
+   "commissioning": [
+    "Fill and vent the casing; never run dry.",
+    "Check rotation direction with the coupling disconnected.",
+    "Start against a partly open discharge valve, then open to the duty point; avoid running at shut-off.",
+    "Record baseline vibration, bearing temperature, suction and discharge pressure, flow and motor current.",
+    "Warm up hot-service pumps uniformly before starting.",
+    "Never start with the discharge and minimum-flow lines both closed."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor thrust-bearing temperature.",
+     "part": "bearing_discharge",
+     "interval": "daily"
+    },
+    {
+     "task": "Check balance leak-off flow/temperature against the baseline.",
+     "part": "balance_leakoff_line",
+     "interval": "daily"
+    },
+    {
+     "task": "Check seal leakage at both ends.",
+     "part": "seal_suction",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check tie-bolt tension per the manual after thermal cycles.",
+     "part": "tie_bolts",
+     "interval": "per manual"
+    },
+    {
+     "task": "Change bearing oil.",
+     "part": "bearing_housing_discharge",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Dismantle the stage stack; measure impeller, diffuser and balance-drum clearances.",
+     "part": "balance_drum_bush"
+    },
+    {
+     "task": "Inspect the first-stage impeller for cavitation damage.",
+     "part": "impeller_1"
+    }
+   ],
+   "lubrication": [
+    "Oil-lubricated bearings (ring oil or forced feed on large units)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Balance drum wear",
+     "category": "wear",
+     "symptoms": [
+      "Rising leak-off flow",
+      "Higher thrust-bearing temperature",
+      "Loss of discharge pressure"
+     ],
+     "causes": [
+      "Abrasives",
+      "Running at low flow / thermal distortion"
+     ],
+     "remedies": [
+      "Restore drum/bush clearance"
+     ],
+     "part": "balance_drum_bush"
+    },
+    {
+     "problem": "First-stage cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise",
+      "Pitting of first impeller"
+     ],
+     "causes": [
+      "Insufficient NPSHa (hot water, low deaerator level)"
+     ],
+     "remedies": [
+      "Booster pump, raise suction head"
+     ],
+     "part": "impeller_1"
+    },
+    {
+     "problem": "Overheating at low flow",
+     "category": "thermal",
+     "symptoms": [
+      "Rising casing temperature",
+      "Seal failures"
+     ],
+     "causes": [
+      "Operation below minimum flow"
+     ],
+     "remedies": [
+      "Install / repair minimum-flow line"
+     ],
+     "part": "stage_casing_3"
+    },
+    {
+     "problem": "Interstage leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Gradual loss of head"
+     ],
+     "causes": [
+      "Worn interstage bushes and wear rings"
+     ],
+     "remedies": [
+      "Restore clearances at overhaul"
+     ],
+     "part": "stage_casing_2"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Horizontal Multistage Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "horizontal_multistage_pump.glb",
+    "duration_s": 67.3,
+    "script": [
+     {
+      "narration": "This module introduces the Horizontal Multistage Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A horizontal multistage pump places several impellers in series on one shaft, so each stage adds roughly the same head and pressure builds up stage by stage.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "After every impeller a diffuser converts velocity into pressure and return vanes lead the liquid to the next impeller eye.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The axial thrust of the impellers is balanced by a balance drum, balance disc or opposed impellers, with a thrust bearing for the residual.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include boiler feedwater; reverse-osmosis (RO) feed and high-pressure membrane systems; high-rise building water supply and pressure boosting; mine dewatering.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Impeller – Stage 1, Stage Casing with Diffuser & Return Vanes – Stage 1, Impeller – Stage 2, Stage Casing with Diffuser & Return Vanes – Stage 2.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Horizontal Multistage Pump — Operation",
+    "type": "in_app_tour",
+    "model": "horizontal_multistage_pump.glb",
+    "duration_s": 78.6,
+    "script": [
+     {
+      "narration": "How the Horizontal Multistage Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters the suction casing at the lowest pressure in the pump.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "suction_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The first-stage impeller raises velocity and pressure; this stage sets the pump's NPSH requirement.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "impeller_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diffuser vanes around the impeller slow the liquid and convert velocity into pressure.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "stage_casing_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Return vanes guide the liquid inward, without swirl, to the eye of the next impeller.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "stage_casing_2",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Each further stage adds about the same head, so the pressure rises in equal steps towards discharge.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "stage_casing_6",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "All impellers face the same way, so their axial thrusts add towards suction.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "thrust",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The balance drum has discharge pressure on one side and near-suction pressure on the other; this opposes the impeller thrust.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "balance_drum_bush",
+       "cut": true,
+       "operate": true,
+       "overlay": "thrust",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Leakage past the drum returns to suction through the leak-off line; its flow is a useful wear indicator.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "balance_leakoff_line",
+       "cut": true,
+       "operate": true,
+       "overlay": "thrust",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Tie bolts clamp the stage stack between the suction and discharge casings.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "tie_bolts",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Colour rings show static pressure rising from suction (blue) to discharge (red).",
+      "duration_s": 5.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Each impeller is pushed towards suction (magenta) because its back shroud sees higher pressure than the eye side.",
+      "duration_s": 7.5,
+      "action": {
+       "overlay": "thrust",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Horizontal Multistage Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "horizontal_multistage_pump.glb",
+    "duration_s": 56.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Horizontal Multistage Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor thrust-bearing temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_discharge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check balance leak-off flow/temperature against the baseline.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "balance_leakoff_line",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check seal leakage at both ends.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "seal_suction",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check tie-bolt tension per the manual after thermal cycles.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tie_bolts",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change bearing oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_housing_discharge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Dismantle the stage stack; measure impeller, diffuser and balance-drum clearances.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "balance_drum_bush",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect the first-stage impeller for cavitation damage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for balance drum wear: rising leak-off flow. Common cause: abrasives.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "balance_drum_bush",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for first-stage cavitation: noise. Common cause: insufficient npsha (hot water, low deaerator level).",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "impeller_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating at low flow: rising casing temperature. Common cause: operation below minimum flow.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "stage_casing_3",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "A pump has 6 identical stages each producing 40 m at the duty flow. What is the approximate total head?",
+     "options": [
+      "40 m",
+      "120 m",
+      "240 m",
+      "6 m"
+     ],
+     "answer": 2,
+     "explanation": "Heads of stages in series add: 6 × 40 m = 240 m (ignoring small internal losses).",
+     "level": "basic"
+    },
+    {
+     "question": "What is the job of the return vanes?",
+     "options": [
+      "Increase speed",
+      "Guide liquid from the diffuser back to the next impeller eye without swirl",
+      "Seal the shaft",
+      "Cool the bearings"
+     ],
+     "answer": 1,
+     "explanation": "They turn the flow inward and remove swirl so the next impeller receives a clean inlet flow.",
+     "level": "basic"
+    },
+    {
+     "question": "Why do the axial thrusts of the impellers add up in this pump?",
+     "options": [
+      "The impellers are back-to-back",
+      "All impellers face the same direction (inline arrangement)",
+      "The shaft is vertical",
+      "The diffusers push them"
+     ],
+     "answer": 1,
+     "explanation": "Each impeller is pushed towards its suction side.",
+     "level": "basic"
+    },
+    {
+     "question": "What keeps the balance chamber behind the drum near suction pressure?",
+     "options": [
+      "The thrust bearing",
+      "The leak-off line back to suction",
+      "The coupling",
+      "The tie bolts"
+     ],
+     "answer": 1,
+     "explanation": "Without the leak-off the chamber would rise to discharge pressure and the drum would not balance anything.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Rising balance leak-off flow usually indicates…",
+     "options": [
+      "A new pump",
+      "Increased drum/bush clearance (wear)",
+      "Lower speed",
+      "Correct operation"
+     ],
+     "answer": 1,
+     "explanation": "Wear opens the clearance.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which stage determines the NPSH required of the whole pump?",
+     "options": [
+      "The last stage",
+      "The first stage",
+      "The middle stage",
+      "All stages equally"
+     ],
+     "answer": 1,
+     "explanation": "Only the first stage sees suction pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is a minimum-flow line important on a multistage pump?",
+     "options": [
+      "To increase head",
+      "To prevent overheating and instability at very low flow",
+      "To lubricate the coupling",
+      "To prime the pump"
+     ],
+     "answer": 1,
+     "explanation": "At low flow most input power heats the liquid inside the pump.",
+     "level": "basic"
+    },
+    {
+     "question": "Which API 610 type is a radially split, multistage barrel pump?",
+     "options": [
+      "BB1",
+      "BB3",
+      "BB5",
+      "OH2"
+     ],
+     "answer": 2,
+     "explanation": "BB5 is the double-casing barrel design; BB4 is single-casing ring-section.",
+     "level": "advanced"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.\"",
+     "options": [
+      "Suction Casing",
+      "Impeller – Stage 1",
+      "Mechanical Seal – Suction End",
+      "Stage Casing with Diffuser & Return Vanes – Stage 5"
+     ],
+     "answer": 1,
+     "explanation": "Impeller – Stage 1: Adds energy to the liquid; blades between hub and shrouds accelerate the liquid outward.",
+     "level": "basic",
+     "part": "impeller_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.\"",
+     "options": [
+      "Stage Casing with Diffuser & Return Vanes – Stage 1",
+      "Impeller – Stage 1",
+      "Radial Bearing – Suction End",
+      "Impeller – Stage 4"
+     ],
+     "answer": 0,
+     "explanation": "Stage Casing with Diffuser & Return Vanes – Stage 1: One pumping stage: diffuser recovers pressure from the impeller discharge; return vanes guide water to the next impeller eye.",
+     "level": "basic",
+     "part": "stage_casing_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Receives feedwater from the deaerator/booster and feeds the first-stage impeller.\"",
+     "options": [
+      "Suction Casing",
+      "Stage Casing with Diffuser & Return Vanes – Stage 1",
+      "Mechanical Seal – Suction End",
+      "Stage Casing with Diffuser & Return Vanes – Stage 3"
+     ],
+     "answer": 0,
+     "explanation": "Suction Casing: Receives feedwater from the deaerator/booster and feeds the first-stage impeller.",
+     "level": "basic",
+     "part": "suction_casing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

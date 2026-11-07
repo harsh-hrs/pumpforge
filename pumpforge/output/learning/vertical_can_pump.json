@@ -1,0 +1,929 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vertical_can_pump",
+ "no": 5,
+ "title": "Vertical Can Pump",
+ "model_title": "Vertical Can Pump (Barrel Type, Multistage)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vertical can pump is a vertical turbine pump installed inside a closed suction vessel (the \"can\"), so the bowl assembly is fed from pressurised or low-NPSH piping instead of an open sump. The extra length of the can adds static head above the first impeller, giving very low NPSH required at the suction flange. It is API 610 type VS6 (diffuser) or VS7 (volute).",
+   "applications": [
+    "Condensate extraction in power plants",
+    "LPG, ammonia and light-hydrocarbon loading",
+    "Pipeline booster service",
+    "Process pumps with very low NPSHa"
+   ],
+   "key_points": [
+    "Suction and discharge both at the head, above ground",
+    "Can length provides NPSH",
+    "Can must be vented",
+    "Multistage bowls in series"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), diffuser type",
+    "configuration": "Vertically suspended, double casing (can), multistage",
+    "api_610_type": "VS6 (double-casing diffuser, vertically suspended)"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A multistage vertical turbine (diffuser) pump installed inside a pressurised suction can (barrel). Suction and discharge both connect to the head at grade; the liquid fills the can, flows down outside the column and bowls and enters the first-stage impeller at the bottom. Because the first stage sits well below grade, the static liquid height in the can adds to NPSH available — the main reason to choose a can pump for liquids near their boiling point."
+  },
+  "model_3d": {
+   "asset": "glb/vertical_can_pump.glb",
+   "metadata": "meta/vertical_can_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 111736,
+   "parts": 40
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters the suction nozzle on the discharge head and flows down the annulus between the can and the column.",
+    "At the bottom it turns up into the suction bell; the height of liquid above the first impeller adds to NPSHa.",
+    "The bowl stages raise the pressure stage by stage."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters the suction nozzle on the discharge head and flows down the annulus between the can and the column.",
+     "part": "suction_can",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the bottom it turns up into the suction bell; the height of liquid above the first impeller adds to NPSHa.",
+     "part": "suction_bell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bowl stages raise the pressure stage by stage.",
+     "part": "impeller_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The column carries the pressurised liquid up to the discharge nozzle.",
+     "part": "column_pipe_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The mechanical seal in the head seals the shaft; the motor thrust bearing carries the down-thrust.",
+     "part": "mechanical_seal",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "As vertical turbine pumps — stage heads add; NPSHr at the flange is low because of the can depth."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vertical_can_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/vertical_can_pump.json#components",
+   "key_components": "Can, bowl assembly, column, discharge head",
+   "parts": [
+    {
+     "id": "discharge_head",
+     "name": "Discharge Head (with Suction Nozzle)",
+     "info_ref": "can_head",
+     "function": "Supports pump and motor, carries both suction and discharge nozzles and separates the suction chamber (can) from the discharge passage.",
+     "material": "Carbon steel (fabricated), cast steel, stainless."
+    },
+    {
+     "id": "motor_stand",
+     "name": "Motor Stand",
+     "info_ref": "motor_stand",
+     "function": "Supports the motor and gives access to the coupling and seal.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Cartridge Mechanical Seal",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "coupling",
+     "name": "Adjustable Spacer Coupling",
+     "info_ref": "coupling_vertical",
+     "function": "Transmits torque and down-thrust to the motor thrust bearing; adjusting nut sets impeller lift.",
+     "material": "Steel."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Vertical Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Vertical Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Vertical Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Vertical Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Vertical Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Vertical Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "suction_can",
+     "name": "Suction Can (Barrel)",
+     "info_ref": "suction_can",
+     "function": "Pressure vessel that contains the bowl assembly in suction liquid and provides extra submergence (NPSHa).",
+     "material": "Carbon steel, stainless steel."
+    },
+    {
+     "id": "column_pipe_1",
+     "name": "Column Pipe – Upper",
+     "info_ref": "column_pipe",
+     "function": "Carries liquid from the bowls to the head and suspends the bowl assembly.",
+     "material": "Carbon, galvanised or stainless steel."
+    },
+    {
+     "id": "column_pipe_2",
+     "name": "Column Pipe – Lower",
+     "info_ref": "column_pipe",
+     "function": "Carries liquid from the bowls to the head and suspends the bowl assembly.",
+     "material": "Carbon, galvanised or stainless steel."
+    },
+    {
+     "id": "bearing_retainer_1",
+     "name": "Bearing Retainer (Spider) 1",
+     "info_ref": "bearing_retainer",
+     "function": "Holds the line-shaft bearing concentric at each column joint.",
+     "material": "Bronze, cast iron, stainless."
+    },
+    {
+     "id": "lineshaft_bearing_1",
+     "name": "Line-Shaft Bearing 1",
+     "info_ref": "lineshaft_bearing",
+     "function": "Supports the line shaft radially between head and bowls.",
+     "material": "Nitrile/neoprene rubber, bronze, polymers."
+    },
+    {
+     "id": "discharge_case",
+     "name": "Discharge Case (Top Bowl)",
+     "info_ref": "discharge_case",
+     "function": "Top bowl: collects flow from the last diffuser and turns it into the column.",
+     "material": "Cast iron, bronze, stainless."
+    },
+    {
+     "id": "discharge_case_bearing",
+     "name": "Discharge Case Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "bowl_1",
+     "name": "Bowl – Stage 1",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts swirl leaving the impeller into pressure and guides flow to the next impeller.",
+     "material": "Cast iron, ductile iron, bronze, stainless or duplex."
+    },
+    {
+     "id": "wear_ring_1",
+     "name": "Bowl Wear Ring – Stage 1",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits recirculation from discharge back to suction.",
+     "material": "Bronze, cast iron, hardened stainless steel; dissimilar hardness to avoid galling."
+    },
+    {
+     "id": "bowl_bearing_1",
+     "name": "Bowl Bearing – Stage 1",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "impeller_1",
+     "name": "Impeller – Stage 1",
+     "info_ref": "impeller_mixed",
+     "function": "Adds energy to the liquid; mixed-flow blades discharge diagonally (between radial and axial).",
+     "material": "Bronze, cast iron, stainless steel, duplex."
+    },
+    {
+     "id": "collet_1",
+     "name": "Taper Lock Collet – Stage 1",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "bowl_2",
+     "name": "Bowl – Stage 2",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts swirl leaving the impeller into pressure and guides flow to the next impeller.",
+     "material": "Cast iron, ductile iron, bronze, stainless or duplex."
+    },
+    {
+     "id": "wear_ring_2",
+     "name": "Bowl Wear Ring – Stage 2",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits recirculation from discharge back to suction.",
+     "material": "Bronze, cast iron, hardened stainless steel; dissimilar hardness to avoid galling."
+    },
+    {
+     "id": "bowl_bearing_2",
+     "name": "Bowl Bearing – Stage 2",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "impeller_2",
+     "name": "Impeller – Stage 2",
+     "info_ref": "impeller_mixed",
+     "function": "Adds energy to the liquid; mixed-flow blades discharge diagonally (between radial and axial).",
+     "material": "Bronze, cast iron, stainless steel, duplex."
+    },
+    {
+     "id": "collet_2",
+     "name": "Taper Lock Collet – Stage 2",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "bowl_3",
+     "name": "Bowl – Stage 3",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts swirl leaving the impeller into pressure and guides flow to the next impeller.",
+     "material": "Cast iron, ductile iron, bronze, stainless or duplex."
+    },
+    {
+     "id": "wear_ring_3",
+     "name": "Bowl Wear Ring – Stage 3",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits recirculation from discharge back to suction.",
+     "material": "Bronze, cast iron, hardened stainless steel; dissimilar hardness to avoid galling."
+    },
+    {
+     "id": "bowl_bearing_3",
+     "name": "Bowl Bearing – Stage 3",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "impeller_3",
+     "name": "Impeller – Stage 3",
+     "info_ref": "impeller_mixed",
+     "function": "Adds energy to the liquid; mixed-flow blades discharge diagonally (between radial and axial).",
+     "material": "Bronze, cast iron, stainless steel, duplex."
+    },
+    {
+     "id": "collet_3",
+     "name": "Taper Lock Collet – Stage 3",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "bowl_4",
+     "name": "Bowl – Stage 4",
+     "info_ref": "bowl",
+     "function": "Diffuser casing for one stage: converts swirl leaving the impeller into pressure and guides flow to the next impeller.",
+     "material": "Cast iron, ductile iron, bronze, stainless or duplex."
+    },
+    {
+     "id": "wear_ring_4",
+     "name": "Bowl Wear Ring – Stage 4",
+     "info_ref": "wear_ring",
+     "function": "Renewable close-clearance ring that limits recirculation from discharge back to suction.",
+     "material": "Bronze, cast iron, hardened stainless steel; dissimilar hardness to avoid galling."
+    },
+    {
+     "id": "bowl_bearing_4",
+     "name": "Bowl Bearing – Stage 4",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "impeller_4",
+     "name": "Impeller – Stage 4",
+     "info_ref": "impeller_mixed",
+     "function": "Adds energy to the liquid; mixed-flow blades discharge diagonally (between radial and axial).",
+     "material": "Bronze, cast iron, stainless steel, duplex."
+    },
+    {
+     "id": "collet_4",
+     "name": "Taper Lock Collet – Stage 4",
+     "info_ref": "collet",
+     "function": "Locks the impeller on the shaft by friction.",
+     "material": "Steel or stainless steel."
+    },
+    {
+     "id": "suction_bell",
+     "name": "Suction Bell",
+     "info_ref": "suction_bell",
+     "function": "Guides liquid smoothly into the first-stage impeller and holds the bottom bearing.",
+     "material": "Cast iron, bronze, stainless."
+    },
+    {
+     "id": "bell_bearing",
+     "name": "Suction Bell Bearing",
+     "info_ref": "bowl_bearing",
+     "function": "Radial support of the pump shaft in each bowl, the discharge case and the suction bell.",
+     "material": "Bronze, rubber, carbon, engineered polymers."
+    },
+    {
+     "id": "pump_shaft",
+     "name": "Pump & Line Shaft",
+     "info_ref": "line_shaft",
+     "function": "Transmits torque from the driver to the bowl shaft.",
+     "material": "Carbon steel, 416/316 stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "10 – 5,000",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "20 – 500",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "up to ~100",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 2,980",
+     "unit": "rpm (50 Hz)"
+    },
+    "efficiency": {
+     "typical_range": "65 – 85",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "stages": {
+     "typical_range": "2 – 15",
+     "unit": ""
+    },
+    "can_depth": {
+     "typical_range": "2 – 15",
+     "unit": "m"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Can is installed in a pit or below grade and grouted/backfilled; head bolted to a sole plate."
+   ],
+   "alignment": [
+    "Plumb and concentric installation of the can and head."
+   ],
+   "piping": [
+    "Vent line from the top of the can back to the suction vessel/condenser.",
+    "Support both nozzles independently."
+   ],
+   "commissioning": [
+    "Fill and vent the can completely.",
+    "Check rotation and impeller lift.",
+    "Verify minimum-flow protection."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check seal leakage and head vibration.",
+     "part": "mechanical_seal",
+     "interval": "daily"
+    },
+    {
+     "task": "Check thrust-bearing temperature.",
+     "part": "m_motor_bearings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Verify that the can vent is open and clear.",
+     "part": "suction_can",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Lift the pump out of the can; inspect bowls, impellers and bearings.",
+     "part": "bowl_2"
+    }
+   ],
+   "lubrication": [
+    "Product-lubricated bowl bearings; motor bearings per manual."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Vapour lock / loss of prime",
+     "category": "priming",
+     "symptoms": [
+      "Pump fails to deliver after start"
+     ],
+     "causes": [
+      "Blocked can vent",
+      "Flashing liquid"
+     ],
+     "remedies": [
+      "Clear vent; check suction conditions"
+     ],
+     "part": "suction_can"
+    },
+    {
+     "problem": "First-stage cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise, falling head"
+     ],
+     "causes": [
+      "Low suction vessel level"
+     ],
+     "remedies": [
+      "Restore level; check can depth/NPSH margin"
+     ],
+     "part": "impeller_1"
+    },
+    {
+     "problem": "Bearing wear",
+     "category": "wear",
+     "symptoms": [
+      "Vibration"
+     ],
+     "causes": [
+      "Dry running or solids"
+     ],
+     "remedies": [
+      "Replace bearings, protect against dry run"
+     ],
+     "part": "bowl_bearing_1"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vertical Can Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "vertical_can_pump.glb",
+    "duration_s": 62.1,
+    "script": [
+     {
+      "narration": "This module introduces the Vertical Can Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vertical can pump is a vertical turbine pump installed inside a closed suction vessel (the \"can\"), so the bowl assembly is fed from pressurised or low-NPSH piping instead of an open sump.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The extra length of the can adds static head above the first impeller, giving very low NPSH required at the suction flange.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is API 610 type VS6 (diffuser) or VS7 (volute).",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include condensate extraction in power plants; LPG, ammonia and light-hydrocarbon loading; pipeline booster service; process pumps with very low NPSHa.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Discharge Case (Top Bowl), Bowl – Stage 1, Bowl Wear Ring – Stage 1, Impeller – Stage 1.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vertical Can Pump — Operation",
+    "type": "in_app_tour",
+    "model": "vertical_can_pump.glb",
+    "duration_s": 41.0,
+    "script": [
+     {
+      "narration": "How the Vertical Can Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters the suction nozzle on the discharge head and flows down the annulus between the can and the column.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "suction_can",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the bottom it turns up into the suction bell; the height of liquid above the first impeller adds to NPSHa.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "suction_bell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bowl stages raise the pressure stage by stage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The column carries the pressurised liquid up to the discharge nozzle.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "column_pipe_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The mechanical seal in the head seals the shaft; the motor thrust bearing carries the down-thrust.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "mechanical_seal",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vertical Can Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "vertical_can_pump.glb",
+    "duration_s": 45.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vertical Can Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check seal leakage and head vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mechanical_seal",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check thrust-bearing temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "m_motor_bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Verify that the can vent is open and clear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_can",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift the pump out of the can; inspect bowls, impellers and bearings.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bowl_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vapour lock / loss of prime: pump fails to deliver after start. Common cause: blocked can vent.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "suction_can",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for first-stage cavitation: noise, falling head. Common cause: low suction vessel level.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "impeller_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bearing wear: vibration. Common cause: dry running or solids.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "bowl_bearing_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What provides the extra NPSH in a can pump?",
+     "options": [
+      "A booster fan",
+      "The depth of the can — liquid height above the first impeller",
+      "The motor",
+      "The discharge valve"
+     ],
+     "answer": 1,
+     "explanation": "The first stage sits low in the can, so static head adds to NPSHa.",
+     "level": "basic"
+    },
+    {
+     "question": "Which API 610 type is a vertical can pump with diffuser bowls?",
+     "options": [
+      "VS1",
+      "VS4",
+      "VS6",
+      "OH3"
+     ],
+     "answer": 2,
+     "explanation": "VS6 = double-casing diffuser; VS7 = double-casing volute.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must the can be vented?",
+     "options": [
+      "To cool the motor",
+      "Trapped vapour/gas can block flow to the first stage",
+      "To reduce noise",
+      "It need not be vented"
+     ],
+     "answer": 1,
+     "explanation": "Vapour accumulates at the top.",
+     "level": "basic"
+    },
+    {
+     "question": "Where are the suction and discharge nozzles?",
+     "options": [
+      "At the bottom of the can",
+      "Both on the discharge head above ground",
+      "Suction at the bell, discharge at the motor",
+      "On the column"
+     ],
+     "answer": 1,
+     "explanation": "Both are on the head.",
+     "level": "basic"
+    },
+    {
+     "question": "A typical power-plant application of can pumps is…",
+     "options": [
+      "Slurry transfer",
+      "Condensate extraction",
+      "Sewage lifting",
+      "Fuel injection"
+     ],
+     "answer": 1,
+     "explanation": "Condenser hotwell NPSHa is very low.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supports pump and motor, carries both suction and discharge nozzles and separates the suction chamber (can) from the discharge passage.\"",
+     "options": [
+      "Taper Lock Collet – Stage 2",
+      "Bowl Wear Ring – Stage 4",
+      "Discharge Head (with Suction Nozzle)",
+      "Adjustable Spacer Coupling"
+     ],
+     "answer": 2,
+     "explanation": "Discharge Head (with Suction Nozzle): Supports pump and motor, carries both suction and discharge nozzles and separates the suction chamber (can) from the discharge passage.",
+     "level": "basic",
+     "part": "discharge_head",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the motor and gives access to the coupling and seal.\"",
+     "options": [
+      "Line-Shaft Bearing 1",
+      "Suction Bell",
+      "Vertical Motor – Fan Cover",
+      "Motor Stand"
+     ],
+     "answer": 3,
+     "explanation": "Motor Stand: Supports the motor and gives access to the coupling and seal.",
+     "level": "basic",
+     "part": "motor_stand",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Seals the rotating shaft where it leaves the pressurised casing.\"",
+     "options": [
+      "Cartridge Mechanical Seal",
+      "Line-Shaft Bearing 1",
+      "Suction Bell",
+      "Vertical Motor – Fan Cover"
+     ],
+     "answer": 0,
+     "explanation": "Cartridge Mechanical Seal: Seals the rotating shaft where it leaves the pressurised casing.",
+     "level": "basic",
+     "part": "mechanical_seal",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

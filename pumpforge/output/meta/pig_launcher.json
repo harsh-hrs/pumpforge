@@ -1,0 +1,469 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "pig_launcher",
+  "title": "Pig Launcher (Pipeline Pig Trap — Launching)",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 59,
+    "phase": 4,
+    "eq_id": "EQ-137",
+    "subcategory": "Pipeline Equipment",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "pig_launcher_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "kicker_flow",
+      "kind": "flow_suction",
+      "radius": 0.008,
+      "points": [
+        [
+          0.7,
+          1.52,
+          -0.0
+        ],
+        [
+          0.7,
+          1.07,
+          -0.0
+        ],
+        [
+          -0.75,
+          1.07,
+          -0.0
+        ],
+        [
+          -0.75,
+          0.6,
+          -0.0
+        ],
+        [
+          1.4,
+          0.6,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "bypass_flow",
+      "kind": "flow_suction",
+      "radius": 0.008,
+      "points": [
+        [
+          0.7,
+          1.52,
+          -0.01
+        ],
+        [
+          0.7,
+          0.6,
+          -0.01
+        ],
+        [
+          1.4,
+          0.6,
+          -0.01
+        ]
+      ],
+      "active": [
+        [
+          0.8,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 11452,
+    "parts": 6
+  },
+  "summary": "A pig launcher is the pipeline trap used to insert a \"pig\" — a cleaning, gauging or inspection device — into a flowing pipeline. The pig is loaded through the closure door into the oversize barrel; after closing and pressurising, the kicker line and valves are lined up so the flow pushes the pig through the reducer into the pipeline.",
+  "classification": {
+    "family": "Pipeline equipment",
+    "type": "Horizontal pig launching trap"
+  },
+  "model_configuration": {
+    "sequence": "Isolate → depressurise & drain → open door → load pig → close → fill & vent → pressurise → open trap valve → open kicker → close mainline valve → pig launched",
+    "safety": "Pressure-warning lock prevents opening the door under pressure"
+  },
+  "standards": [
+    {
+      "id": "ASME B31.4 / B31.8",
+      "title": "Pipeline transportation systems for liquids / gas",
+      "relevance": "Pipeline design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII",
+      "title": "Pressure vessels",
+      "relevance": "Barrel and closure design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "DNV-RP-F116 / operator standards",
+      "title": "Pigging",
+      "relevance": "Pigging practice.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Pipeline Pigging Handbook (Clarion/Tiratsoo)"
+  ],
+  "parts": [
+    {
+      "id": "barrel",
+      "name": "Oversize Barrel (Major Barrel), Reducer, Saddles, Vent & Drain",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "barrel__back",
+        "barrel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.15,
+        0.0,
+        -0.155
+      ],
+      "bbox_max": [
+        0.05,
+        0.84,
+        0.155
+      ],
+      "label_anchor": [
+        -0.55,
+        0.42,
+        0.155
+      ],
+      "center": [
+        -0.55,
+        0.42,
+        -0.0
+      ],
+      "info_ref": "pig_barrel"
+    },
+    {
+      "id": "closure",
+      "name": "Quick-Opening Closure Door (with safety pressure-warning lock)",
+      "group": "closure",
+      "section_role": "split",
+      "nodes": [
+        "closure__back",
+        "closure__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.185,
+        0.44,
+        -0.185
+      ],
+      "bbox_max": [
+        -1.135,
+        0.975,
+        0.2
+      ],
+      "label_anchor": [
+        -1.16,
+        0.7075,
+        0.2
+      ],
+      "center": [
+        -1.16,
+        0.7075,
+        0.0075
+      ],
+      "info_ref": "pig_closure"
+    },
+    {
+      "id": "pipeline_kicker",
+      "name": "Pipeline Tie-in and Kicker / Outlet Line",
+      "group": "system_piping",
+      "section_role": "split",
+      "nodes": [
+        "pipeline_kicker__back",
+        "pipeline_kicker__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.785,
+        0.525,
+        -0.075
+      ],
+      "bbox_max": [
+        1.4,
+        1.52,
+        0.075
+      ],
+      "label_anchor": [
+        0.3075,
+        1.0225,
+        0.075
+      ],
+      "center": [
+        0.3075,
+        1.0225,
+        -0.0
+      ],
+      "info_ref": "pig_lines"
+    },
+    {
+      "id": "valves",
+      "name": "Trap Valve, Kicker Valve & Mainline (bypass) Valve",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "valves.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        0.032,
+        0.4275,
+        -0.1725
+      ],
+      "bbox_max": [
+        0.7965,
+        1.2135,
+        0.1725
+      ],
+      "label_anchor": [
+        0.41425,
+        0.8205,
+        0.1725
+      ],
+      "center": [
+        0.41425,
+        0.8205,
+        -0.0
+      ],
+      "info_ref": "pig_valves"
+    },
+    {
+      "id": "pig_signaller",
+      "name": "Pig Passage Indicator (Signaller)",
+      "group": "instrumentation",
+      "section_role": "keep",
+      "nodes": [
+        "sig"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        1.13,
+        0.685,
+        -0.045
+      ],
+      "bbox_max": [
+        1.17,
+        0.77,
+        0.02
+      ],
+      "label_anchor": [
+        1.15,
+        0.7275,
+        0.02
+      ],
+      "center": [
+        1.15,
+        0.7275,
+        -0.0125
+      ],
+      "info_ref": "pig_signaller"
+    },
+    {
+      "id": "pig",
+      "name": "Cleaning Pig (cup/disc type) — moves with the flow",
+      "group": "pig",
+      "section_role": "keep",
+      "nodes": [
+        "pig"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.12,
+        0.523,
+        -0.077
+      ],
+      "bbox_max": [
+        0.12,
+        0.677,
+        0.077
+      ],
+      "label_anchor": [
+        0.0,
+        0.6,
+        0.077
+      ],
+      "center": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "pig_pig"
+    }
+  ],
+  "components": {
+    "pig_barrel": {
+      "function": "Holds the pig before launching; larger than the pipeline so the pig can be loaded.",
+      "construction": "Major barrel, eccentric/concentric reducer, saddles, vent, drain and pressure gauge.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Rated as pipeline.",
+      "failure_modes": [
+        "Corrosion, sludge build-up"
+      ],
+      "inspection": [
+        "Thickness survey"
+      ]
+    },
+    "pig_closure": {
+      "function": "Gives quick access to the barrel.",
+      "construction": "Quick-opening closure door with davit and safety interlock.",
+      "material": "Forged steel.",
+      "operating_conditions": "Never open under pressure.",
+      "failure_modes": [
+        "Seal damage",
+        "Interlock failure"
+      ],
+      "inspection": [
+        "Check seal and interlock each use"
+      ]
+    },
+    "pig_lines": {
+      "function": "Connects the trap to the pipeline and supplies the kicker flow behind the pig.",
+      "construction": "Pipeline tie-in and kicker (bypass) line.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "pig_valves": {
+      "function": "Isolate the trap and direct flow behind the pig.",
+      "construction": "Full-bore trap valve, kicker valve, mainline valve.",
+      "material": "Steel.",
+      "operating_conditions": "Trap valve must be full-bore for pig passage.",
+      "failure_modes": [
+        "Leakage"
+      ],
+      "inspection": [
+        "Seat tests"
+      ]
+    },
+    "pig_signaller": {
+      "function": "Confirms the pig has passed.",
+      "construction": "Intrusive/non-intrusive pig signaller.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Missed signal"
+      ],
+      "inspection": [
+        "Function test"
+      ]
+    },
+    "pig_pig": {
+      "function": "Cleans, separates products, gauges or inspects the pipeline.",
+      "construction": "Body with polyurethane cups/discs (or foam, smart pigs).",
+      "material": "Steel body, polyurethane.",
+      "operating_conditions": "Driven by differential pressure.",
+      "failure_modes": [
+        "Stuck pig",
+        "Cup wear"
+      ],
+      "inspection": [
+        "Inspect after run"
+      ]
+    }
+  }
+}

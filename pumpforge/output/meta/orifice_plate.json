@@ -1,0 +1,418 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "orifice_plate",
+  "title": "Orifice Plate Flowmeter (Concentric, Flange Taps)",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 56,
+    "phase": 4,
+    "eq_id": "EQ-134",
+    "subcategory": "Flow Measurement",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "orifice_plate_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "orifice_plate_pressure.glb",
+      "title": "Pressure profile",
+      "description": "Static pressure is highest just upstream of the plate, lowest at the vena contracta just downstream (where the jet is narrowest and fastest), then partly recovers. The unrecovered part is the permanent pressure loss (relatively high for orifice plates). Flow ∝ √ΔP (ISO 5167-2).",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "p1 (upstream tap)",
+          "anchor": [
+            -0.1,
+            0.5,
+            -0.0
+          ]
+        },
+        {
+          "text": "p2 at vena contracta — lowest",
+          "anchor": [
+            0.05,
+            0.2,
+            -0.0
+          ]
+        },
+        {
+          "text": "Permanent pressure loss",
+          "anchor": [
+            0.6,
+            0.5,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flow",
+      "kind": "flow_suction",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.7,
+          0.35,
+          -0.0
+        ],
+        [
+          -0.05,
+          0.35,
+          -0.0
+        ],
+        [
+          -0.004,
+          0.35,
+          -0.0
+        ],
+        [
+          0.03,
+          0.35,
+          -0.0
+        ],
+        [
+          0.12,
+          0.35,
+          -0.0
+        ],
+        [
+          0.4,
+          0.35,
+          -0.0
+        ],
+        [
+          0.7,
+          0.35,
+          -0.0
+        ]
+      ],
+      "speed": [
+        1,
+        1,
+        2.8,
+        3.0,
+        2.0,
+        1.1,
+        1
+      ]
+    },
+    {
+      "name": "jet_edge",
+      "kind": "flow_suction",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.2,
+          0.39,
+          -0.0
+        ],
+        [
+          -0.01,
+          0.381,
+          -0.0
+        ],
+        [
+          0.03,
+          0.373,
+          -0.0
+        ],
+        [
+          0.15,
+          0.385,
+          -0.0
+        ],
+        [
+          0.5,
+          0.395,
+          -0.0
+        ]
+      ],
+      "speed": [
+        1,
+        2.8,
+        3.1,
+        2.0,
+        1.1
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6476,
+    "parts": 4
+  },
+  "summary": "An orifice plate flowmeter is a thin plate with a precise sharp-edged hole clamped between two flanges. The restriction speeds the flow up and lowers its pressure; the pressure difference between upstream and downstream taps is measured by a DP transmitter, and the flow rate is proportional to the square root of that difference (ISO 5167-2). Simple, cheap and standardised, but with a high permanent pressure loss.",
+  "classification": {
+    "family": "Differential-pressure flowmeter",
+    "type": "Concentric square-edged orifice, flange taps"
+  },
+  "model_configuration": {
+    "beta_ratio": "≈ 0.6 (d/D)",
+    "equation": "q_m = C/√(1−β⁴) · ε · (π/4)d² · √(2ΔP·ρ1)",
+    "straight_runs": "Required upstream/downstream lengths per ISO 5167-2 tables"
+  },
+  "standards": [
+    {
+      "id": "ISO 5167-1 / -2",
+      "title": "Measurement of fluid flow by pressure differential devices — orifice plates",
+      "relevance": "Geometry, discharge coefficient, uncertainty.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "AGA Report No. 3",
+      "title": "Orifice metering of natural gas",
+      "relevance": "Gas custody transfer.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Miller, Flow Measurement Engineering Handbook",
+    "ISO 5167 (verify current edition)"
+  ],
+  "parts": [
+    {
+      "id": "orifice_flanges",
+      "name": "Orifice Flanges with Tap Holes, Gaskets & Bolting",
+      "group": "body",
+      "section_role": "split",
+      "nodes": [
+        "orifice_flanges__back",
+        "orifice_flanges__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.059,
+        0.22,
+        -0.13
+      ],
+      "bbox_max": [
+        0.065,
+        0.48,
+        0.13
+      ],
+      "label_anchor": [
+        0.003,
+        0.35,
+        0.13
+      ],
+      "center": [
+        0.003,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "op_flanges"
+    },
+    {
+      "id": "plate",
+      "name": "Orifice Plate (sharp square edge, β = d/D ≈ 0.6) with Handle Tab",
+      "group": "element",
+      "section_role": "split",
+      "nodes": [
+        "plate__back",
+        "plate__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.0015,
+        0.26,
+        -0.09
+      ],
+      "bbox_max": [
+        0.0015,
+        0.51,
+        0.09
+      ],
+      "label_anchor": [
+        0.0,
+        0.385,
+        0.09
+      ],
+      "center": [
+        0.0,
+        0.385,
+        -0.0
+      ],
+      "info_ref": "op_plate"
+    },
+    {
+      "id": "meter_run",
+      "name": "Meter Run (upstream & downstream straight pipe)",
+      "group": "system_piping",
+      "section_role": "split",
+      "nodes": [
+        "meter_run__back",
+        "meter_run__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.35
+      ],
+      "bbox_min": [
+        -0.7,
+        0.3,
+        -0.05
+      ],
+      "bbox_max": [
+        0.7,
+        0.4,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.35,
+        0.05
+      ],
+      "center": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "fm_run"
+    },
+    {
+      "id": "dp_transmitter",
+      "name": "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "group": "instrumentation",
+      "section_role": "keep",
+      "nodes": [
+        "dp_transmitter.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.055,
+        0.402,
+        -0.045
+      ],
+      "bbox_max": [
+        0.055,
+        0.84,
+        0.045
+      ],
+      "label_anchor": [
+        0.0,
+        0.621,
+        0.045
+      ],
+      "center": [
+        0.0,
+        0.621,
+        -0.0
+      ],
+      "info_ref": "fm_dp"
+    }
+  ],
+  "components": {
+    "op_flanges": {
+      "function": "Hold the plate and provide the pressure taps.",
+      "construction": "Orifice flanges with drilled taps.",
+      "material": "Carbon/stainless steel.",
+      "operating_conditions": "Tap positions defined by the standard.",
+      "failure_modes": [
+        "Plugged taps"
+      ],
+      "inspection": [
+        "Blow down impulse lines"
+      ]
+    },
+    "op_plate": {
+      "function": "Creates the restriction that produces the differential pressure.",
+      "construction": "Flat plate with sharp square-edged bore and handle tab.",
+      "material": "Stainless steel.",
+      "operating_conditions": "Edge sharpness and flatness affect accuracy; install bevel downstream.",
+      "failure_modes": [
+        "Edge rounding/erosion",
+        "Plate bowing",
+        "Deposits"
+      ],
+      "inspection": [
+        "Pull and inspect plate edge"
+      ]
+    },
+    "fm_run": {
+      "function": "Provides a fully developed velocity profile at the meter.",
+      "construction": "Straight pipe lengths upstream and downstream.",
+      "material": "As line.",
+      "operating_conditions": "Fittings too close cause errors.",
+      "failure_modes": [
+        "Swirl/profile distortion"
+      ],
+      "inspection": [
+        "Check straight lengths"
+      ]
+    },
+    "fm_dp": {
+      "function": "Measures the pressure difference across the element.",
+      "construction": "DP transmitter, impulse lines, root valves and 3-valve manifold.",
+      "material": "Stainless.",
+      "operating_conditions": "Zero check with equalising valve.",
+      "failure_modes": [
+        "Plugged/leaking impulse lines",
+        "Gas in liquid lines"
+      ],
+      "inspection": [
+        "Zero check, line blow-down"
+      ]
+    }
+  }
+}

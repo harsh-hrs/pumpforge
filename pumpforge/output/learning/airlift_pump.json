@@ -1,0 +1,622 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "airlift_pump",
+ "no": 30,
+ "title": "Airlift Pump",
+ "model_title": "Airlift Pump (Compressed-Air Riser)",
+ "category": "4 · Special-Purpose Pumping Systems",
+ "phase": 3,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An airlift pump injects compressed air near the bottom of a submerged riser pipe. The air–water mixture inside the riser is lighter than the surrounding water, so the heavier outside water column pushes it up and out at the top. It has no moving parts in the liquid.",
+   "applications": [
+    "Wastewater treatment: sludge return and scum removal",
+    "Aquaculture water circulation",
+    "Groundwater sampling and well development",
+    "Dredging and sand lifting"
+   ],
+   "key_points": [
+    "Lift depends on submergence ratio",
+    "Gentle, clog-free",
+    "Low efficiency",
+    "Requires compressed air"
+   ],
+   "classification": {
+    "family": "Kinetic / buoyancy (gas-lift)",
+    "configuration": "Airlift riser with foot-piece air injector"
+   },
+   "hi_family": "special",
+   "summary": "An airlift pump has no moving parts in the liquid. Compressed air is released through small holes near the bottom of a vertical riser pipe that stands in the liquid. The air–water mixture inside the riser is lighter than the water outside, so the outside water pressure (submergence) pushes the mixture up and out of the top. The deeper the injection point relative to the lift, the better the efficiency; typical submergence ratios are 50–70 %. Used for well development, aquaculture, wastewater sludge and grit transfer, and pumping corrosive or abrasive liquids."
+  },
+  "model_3d": {
+   "asset": "glb/airlift_pump.glb",
+   "metadata": "meta/airlift_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 33472,
+   "parts": 15
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The blower supplies compressed air to the foot piece at the bottom of the riser.",
+    "Air bubbles mix with water in the riser, lowering its density.",
+    "The denser water outside the riser pushes the mixture upward."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The blower supplies compressed air to the foot piece at the bottom of the riser.",
+     "part": "blower",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Air bubbles mix with water in the riser, lowering its density.",
+     "part": "air_bubbles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The denser water outside the riser pushes the mixture upward.",
+     "part": "riser_pipe",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the top the separator releases the air and the water discharges.",
+     "part": "separator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Water flow rises with air flow to a maximum, then falls; higher submergence ratio gives better efficiency."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "airlift_pump_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/airlift_pump.json#components",
+   "key_components": "Air injector, riser pipe, separator",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Sump / Tank (shown cut away) with Water-Level Mark",
+     "info_ref": "al_tank",
+     "function": "Holds the liquid; its level sets the submergence.",
+     "material": "Steel, concrete."
+    },
+    {
+     "id": "riser_pipe",
+     "name": "Riser (Eductor) Pipe",
+     "info_ref": "al_riser",
+     "function": "Vertical pipe in which the air–water mixture rises.",
+     "material": "Stainless, PVC, HDPE, steel."
+    },
+    {
+     "id": "foot_piece",
+     "name": "Air Injector (Foot Piece) & Inlet Bell",
+     "info_ref": "al_foot",
+     "function": "Injects air uniformly into the riser and admits water through the bell.",
+     "material": "Brass, stainless, plastic."
+    },
+    {
+     "id": "air_line",
+     "name": "Compressed-Air Supply Line",
+     "info_ref": "al_airline",
+     "function": "Carries compressed air from blower to foot piece.",
+     "material": "Steel, PVC."
+    },
+    {
+     "id": "air_controls",
+     "name": "Air Control Valve & Pressure Gauge",
+     "info_ref": "pressure_gauge",
+     "function": "Indicates suction or discharge pressure for operation and performance checks.",
+     "material": "Stainless steel case and wetted parts."
+    },
+    {
+     "id": "blower",
+     "name": "Air Blower / Compressor & Platform",
+     "info_ref": "al_blower",
+     "function": "Supplies low-pressure air.",
+     "material": "Cast iron/aluminium."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "separator",
+     "name": "Air Separator / Discharge Box",
+     "info_ref": "al_separator",
+     "function": "Lets air escape and directs water to the outlet.",
+     "material": "Steel/plastic."
+    },
+    {
+     "id": "air_bubbles",
+     "name": "Air Bubbles (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "water_flow",
+     "name": "Water Flow (Tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "small to large — depends on riser diameter and air flow",
+     "unit": ""
+    },
+    "head": {
+     "typical_range": "lift up to several metres; deep wells more",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "air pressure ≥ submergence head",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "efficiency": {
+     "typical_range": "~20 – 50",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "submergence_ratio": {
+     "typical_range": "~0.4 – 0.7",
+     "unit": "submergence / (submergence + lift)"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Riser fixed in the tank or well."
+   ],
+   "alignment": [
+    "Riser vertical."
+   ],
+   "piping": [
+    "Air line with check valve and control valve."
+   ],
+   "commissioning": [
+    "Adjust air flow for the required water flow."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check air flow and pressure.",
+     "part": "air_controls",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean foot piece/diffuser.",
+     "part": "foot_piece",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Service blower.",
+     "part": "blower"
+    }
+   ],
+   "lubrication": [
+    "Blower per manual."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Reduced flow",
+     "category": "performance",
+     "symptoms": [
+      "Less discharge"
+     ],
+     "causes": [
+      "Clogged foot piece, low submergence"
+     ],
+     "remedies": [
+      "Clean; raise level"
+     ],
+     "part": "foot_piece"
+    },
+    {
+     "problem": "Blower failure",
+     "category": "performance",
+     "symptoms": [
+      "No air"
+     ],
+     "causes": [
+      "Filter blocked"
+     ],
+     "remedies": [
+      "Service blower"
+     ],
+     "part": "blower"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Airlift Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "airlift_pump.glb",
+    "duration_s": 50.3,
+    "script": [
+     {
+      "narration": "This module introduces the Airlift Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An airlift pump injects compressed air near the bottom of a submerged riser pipe.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The air–water mixture inside the riser is lighter than the surrounding water, so the heavier outside water column pushes it up and out at the top.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It has no moving parts in the liquid.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include wastewater treatment: sludge return and scum removal; aquaculture water circulation; groundwater sampling and well development; dredging and sand lifting.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Airlift Pump — Operation",
+    "type": "in_app_tour",
+    "model": "airlift_pump.glb",
+    "duration_s": 28.2,
+    "script": [
+     {
+      "narration": "How the Airlift Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The blower supplies compressed air to the foot piece at the bottom of the riser.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "blower",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Air bubbles mix with water in the riser, lowering its density.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "air_bubbles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The denser water outside the riser pushes the mixture upward.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "riser_pipe",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the top the separator releases the air and the water discharges.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "separator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Airlift Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "airlift_pump.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Airlift Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check air flow and pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_controls",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean foot piece/diffuser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "foot_piece",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Service blower.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for reduced flow: less discharge. Common cause: clogged foot piece, low submergence.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "foot_piece",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for blower failure: no air. Common cause: filter blocked.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does water rise in an airlift riser?",
+     "options": [
+      "A propeller lifts it",
+      "The air–water mixture is lighter than the surrounding water",
+      "Vacuum at the top",
+      "A piston"
+     ],
+     "answer": 1,
+     "explanation": "Density difference.",
+     "level": "basic"
+    },
+    {
+     "question": "Submergence ratio is…",
+     "options": [
+      "Air/water ratio",
+      "Submergence divided by (submergence + lift)",
+      "Riser length/diameter",
+      "Lift/air pressure"
+     ],
+     "answer": 1,
+     "explanation": "Higher ratio → better efficiency.",
+     "level": "basic"
+    },
+    {
+     "question": "Main advantage in wastewater?",
+     "options": [
+      "High head",
+      "No moving parts in sludge; clog-free",
+      "High efficiency",
+      "No air needed"
+     ],
+     "answer": 1,
+     "explanation": "Gentle and robust.",
+     "level": "basic"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

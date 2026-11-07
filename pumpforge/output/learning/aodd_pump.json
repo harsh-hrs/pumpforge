@@ -1,0 +1,814 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "aodd_pump",
+ "no": 28,
+ "title": "Air-Operated Double Diaphragm Pump",
+ "model_title": "Air-Operated Double-Diaphragm (AODD) Pump",
+ "category": "3 · Reciprocating Positive-Displacement Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An air-operated double-diaphragm (AODD) pump uses compressed air to push two diaphragms connected by a shaft. While one diaphragm discharges liquid, the other draws liquid in; an air valve shifts the air at each stroke end, and check balls make the flow one-way. It can run dry, self-primes and stalls safely against a closed valve.",
+   "applications": [
+    "Chemical and solvent transfer",
+    "Slurries, paints, sludge",
+    "Drum and tank emptying",
+    "Mining dewatering",
+    "Hazardous areas (no electric motor)"
+   ],
+   "key_points": [
+    "Discharge pressure cannot exceed the air pressure (1:1 models)",
+    "Dead-heads safely — stalls",
+    "Pulsating flow",
+    "Air consumption makes it less energy-efficient"
+   ],
+   "classification": {
+    "family": "Positive displacement – reciprocating",
+    "configuration": "Double diaphragm, pneumatically driven, mechanically connected diaphragms",
+    "valves": "Ball check valves (flap valves are an alternative for large solids)"
+   },
+   "hi_family": "positive_displacement_reciprocating",
+   "summary": "Compressed air, switched by an air valve, alternately pressurises the air side of two flexible diaphragms joined by a shaft. The pressurised diaphragm pushes liquid out of its chamber through the upper (outlet) ball check, while the other diaphragm is pulled inward, drawing liquid in through its lower (inlet) ball check. At the end of each stroke a pilot shifts the air valve and the cycle reverses. Discharge pressure cannot exceed air supply pressure (1:1 ratio pumps), so the pump simply stalls against a closed valve."
+  },
+  "model_3d": {
+   "asset": "glb/aodd_pump.glb",
+   "metadata": "meta/aodd_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 45832,
+   "parts": 25
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Compressed air enters the chamber behind one diaphragm, pushing it outward and discharging liquid.",
+    "The shaft pulls the other diaphragm inward, drawing liquid through its inlet ball valve.",
+    "At the end of the stroke the pilot valve shifts the air spool, reversing the air flow."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Compressed air enters the chamber behind one diaphragm, pushing it outward and discharging liquid.",
+     "part": "diaphragm_left",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The shaft pulls the other diaphragm inward, drawing liquid through its inlet ball valve.",
+     "part": "diaphragm_right",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the end of the stroke the pilot valve shifts the air spool, reversing the air flow.",
+     "part": "air_valve_spool",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Check balls in the manifolds open and close to keep the flow one-way.",
+     "part": "ball_inlet_left",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Exhaust air leaves through the muffler.",
+     "part": "muffler",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow falls as discharge pressure rises; at a given air pressure the pump stalls when discharge pressure equals air pressure."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "aodd_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/aodd_pump.json#components",
+   "key_components": "Two diaphragms, air distribution valve, check balls",
+   "parts": [
+    {
+     "id": "centre_section",
+     "name": "Centre Section (Air Chamber Block)",
+     "info_ref": "centre_section",
+     "function": "Separates the two air chambers, guides the shaft and pilot, and carries the air valve and muffler.",
+     "material": "Aluminium, polypropylene, acetal or conductive polymers; not wetted by the pumped liquid unless a diaphragm fails."
+    },
+    {
+     "id": "shaft_bushing",
+     "name": "Shaft Bushing",
+     "info_ref": "shaft_bushing",
+     "function": "Guides the diaphragm shaft and limits air leakage between the two air chambers.",
+     "material": "Bronze, acetal, PTFE-based."
+    },
+    {
+     "id": "air_valve",
+     "name": "Air Valve Body",
+     "info_ref": "air_valve",
+     "function": "Directs supply air to one air chamber while venting the other to exhaust; reverses at each stroke end.",
+     "material": "Aluminium, polymer, brass; elastomer seals."
+    },
+    {
+     "id": "air_valve_spool",
+     "name": "Air Valve Spool",
+     "info_ref": "air_valve_spool",
+     "function": "Moves between two positions to switch the air path.",
+     "material": "Stainless steel, aluminium or polymer."
+    },
+    {
+     "id": "pilot_valve",
+     "name": "Pilot Shaft (Pilot Valve)",
+     "info_ref": "pilot_valve",
+     "function": "Senses end of stroke (contacted by the inner diaphragm plates) and sends pilot air to shift the main air valve.",
+     "material": "Stainless steel, polymer sleeves."
+    },
+    {
+     "id": "muffler",
+     "name": "Exhaust Muffler",
+     "info_ref": "muffler",
+     "function": "Reduces exhaust noise.",
+     "material": "Polypropylene, sintered bronze or polymer."
+    },
+    {
+     "id": "diaphragm_shaft",
+     "name": "Diaphragm Shaft (Connecting Rod)",
+     "info_ref": "diaphragm_shaft",
+     "function": "Connects the two diaphragms so one discharges while the other fills.",
+     "material": "Stainless steel or carbon steel."
+    },
+    {
+     "id": "inner_plate_left",
+     "name": "Inner Diaphragm Plate – Left",
+     "info_ref": "inner_plate",
+     "function": "Supports the diaphragm on the air side and contacts the pilot at stroke end.",
+     "material": "Aluminium, polymer or steel."
+    },
+    {
+     "id": "outer_plate_left",
+     "name": "Outer Diaphragm Plate & Nut – Left",
+     "info_ref": "outer_plate",
+     "function": "Clamps the diaphragm centre on the liquid side.",
+     "material": "Matches wetted materials (stainless, aluminium, polymers)."
+    },
+    {
+     "id": "diaphragm_left",
+     "name": "Diaphragm – Left",
+     "info_ref": "diaphragm",
+     "function": "Flexible membrane that separates air from liquid and displaces liquid as it moves.",
+     "material": "Neoprene, Buna-N (NBR), EPDM, Viton (FKM), thermoplastic elastomers (e.g. Santoprene), PTFE; choose by chemical compatibility, temperature and abrasion."
+    },
+    {
+     "id": "chamber_left",
+     "name": "Liquid Chamber – Left",
+     "info_ref": "liquid_chamber",
+     "function": "Contains the liquid on the outside of each diaphragm and carries the check-valve ports.",
+     "material": "Aluminium, cast iron, stainless steel, polypropylene, PVDF, conductive acetal."
+    },
+    {
+     "id": "seat_inlet_left",
+     "name": "Valve Seat – Inlet, Left",
+     "info_ref": "valve_seat",
+     "function": "Sealing surface for the check ball.",
+     "material": "Stainless steel, aluminium, polymers, elastomers."
+    },
+    {
+     "id": "ball_inlet_left",
+     "name": "Check Ball – Inlet, Left",
+     "info_ref": "check_ball",
+     "function": "One-way valve: lifts to admit or discharge liquid, seats to block back-flow.",
+     "material": "PTFE, Neoprene, Buna-N, EPDM, Viton, stainless steel; weighted balls for viscous duties."
+    },
+    {
+     "id": "seat_outlet_left",
+     "name": "Valve Seat – Outlet, Left",
+     "info_ref": "valve_seat",
+     "function": "Sealing surface for the check ball.",
+     "material": "Stainless steel, aluminium, polymers, elastomers."
+    },
+    {
+     "id": "ball_outlet_left",
+     "name": "Check Ball – Outlet, Left",
+     "info_ref": "check_ball",
+     "function": "One-way valve: lifts to admit or discharge liquid, seats to block back-flow.",
+     "material": "PTFE, Neoprene, Buna-N, EPDM, Viton, stainless steel; weighted balls for viscous duties."
+    },
+    {
+     "id": "inner_plate_right",
+     "name": "Inner Diaphragm Plate – Right",
+     "info_ref": "inner_plate",
+     "function": "Supports the diaphragm on the air side and contacts the pilot at stroke end.",
+     "material": "Aluminium, polymer or steel."
+    },
+    {
+     "id": "outer_plate_right",
+     "name": "Outer Diaphragm Plate & Nut – Right",
+     "info_ref": "outer_plate",
+     "function": "Clamps the diaphragm centre on the liquid side.",
+     "material": "Matches wetted materials (stainless, aluminium, polymers)."
+    },
+    {
+     "id": "diaphragm_right",
+     "name": "Diaphragm – Right",
+     "info_ref": "diaphragm",
+     "function": "Flexible membrane that separates air from liquid and displaces liquid as it moves.",
+     "material": "Neoprene, Buna-N (NBR), EPDM, Viton (FKM), thermoplastic elastomers (e.g. Santoprene), PTFE; choose by chemical compatibility, temperature and abrasion."
+    },
+    {
+     "id": "chamber_right",
+     "name": "Liquid Chamber – Right",
+     "info_ref": "liquid_chamber",
+     "function": "Contains the liquid on the outside of each diaphragm and carries the check-valve ports.",
+     "material": "Aluminium, cast iron, stainless steel, polypropylene, PVDF, conductive acetal."
+    },
+    {
+     "id": "seat_inlet_right",
+     "name": "Valve Seat – Inlet, Right",
+     "info_ref": "valve_seat",
+     "function": "Sealing surface for the check ball.",
+     "material": "Stainless steel, aluminium, polymers, elastomers."
+    },
+    {
+     "id": "ball_inlet_right",
+     "name": "Check Ball – Inlet, Right",
+     "info_ref": "check_ball",
+     "function": "One-way valve: lifts to admit or discharge liquid, seats to block back-flow.",
+     "material": "PTFE, Neoprene, Buna-N, EPDM, Viton, stainless steel; weighted balls for viscous duties."
+    },
+    {
+     "id": "seat_outlet_right",
+     "name": "Valve Seat – Outlet, Right",
+     "info_ref": "valve_seat",
+     "function": "Sealing surface for the check ball.",
+     "material": "Stainless steel, aluminium, polymers, elastomers."
+    },
+    {
+     "id": "ball_outlet_right",
+     "name": "Check Ball – Outlet, Right",
+     "info_ref": "check_ball",
+     "function": "One-way valve: lifts to admit or discharge liquid, seats to block back-flow.",
+     "material": "PTFE, Neoprene, Buna-N, EPDM, Viton, stainless steel; weighted balls for viscous duties."
+    },
+    {
+     "id": "inlet_manifold",
+     "name": "Inlet (Suction) Manifold",
+     "info_ref": "inlet_manifold",
+     "function": "Distributes suction flow to both chambers and carries the pump feet.",
+     "material": "As liquid chambers."
+    },
+    {
+     "id": "discharge_manifold",
+     "name": "Discharge Manifold",
+     "info_ref": "discharge_manifold",
+     "function": "Combines discharge from both chambers into one outlet; holds the outlet ball cages.",
+     "material": "As liquid chambers."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "up to ~70",
+     "unit": "m³/h",
+     "note": "largest 3-inch models — verify per manufacturer"
+    },
+    "pressure": {
+     "typical_range": "up to ~8.6 (1:1); ~17 for 2:1 pressure-boosting models",
+     "unit": "bar"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "—",
+     "unit": "",
+     "note": "stroke rate set by air flow"
+    },
+    "efficiency": {
+     "typical_range": "low (compressed-air driven)",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "solids": {
+     "typical_range": "up to ~10",
+     "unit": "mm",
+     "note": "size dependent"
+    },
+    "dry_suction_lift": {
+     "typical_range": "up to ~5–7",
+     "unit": "m"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Free-standing or bolted; vibration isolation pads."
+   ],
+   "alignment": [
+    "None (air-driven)."
+   ],
+   "piping": [
+    "Flexible connections reduce vibration; pulsation dampener on discharge.",
+    "Air supply with filter–regulator; air shut-off valve."
+   ],
+   "commissioning": [
+    "Start with low air pressure; increase gradually.",
+    "Ground the pump for flammable liquids."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for leakage at the muffler (diaphragm failure sign).",
+     "part": "muffler",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace diaphragms.",
+     "part": "diaphragm_left",
+     "interval": "per hours"
+    },
+    {
+     "task": "Inspect balls and seats.",
+     "part": "ball_outlet_left",
+     "interval": "per hours"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Rebuild the air valve.",
+     "part": "air_valve"
+    }
+   ],
+   "lubrication": [
+    "Most modern air valves are lube-free."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Diaphragm rupture",
+     "category": "performance",
+     "symptoms": [
+      "Product out of the exhaust"
+     ],
+     "causes": [
+      "Fatigue, chemical attack"
+     ],
+     "remedies": [
+      "Replace; check material"
+     ],
+     "part": "diaphragm_left"
+    },
+    {
+     "problem": "Air valve stalling / icing",
+     "category": "priming",
+     "symptoms": [
+      "Pump stops"
+     ],
+     "causes": [
+      "Wet air, high air pressure drop"
+     ],
+     "remedies": [
+      "Dry air, de-icing"
+     ],
+     "part": "air_valve"
+    },
+    {
+     "problem": "Check-ball wear",
+     "category": "wear",
+     "symptoms": [
+      "Low flow"
+     ],
+     "causes": [
+      "Abrasives"
+     ],
+     "remedies": [
+      "Replace balls/seats"
+     ],
+     "part": "ball_inlet_right"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Air-Operated Double Diaphragm Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "aodd_pump.glb",
+    "duration_s": 51.4,
+    "script": [
+     {
+      "narration": "This module introduces the Air-Operated Double Diaphragm Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An air-operated double-diaphragm (AODD) pump uses compressed air to push two diaphragms connected by a shaft.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "While one diaphragm discharges liquid, the other draws liquid in; an air valve shifts the air at each stroke end, and check balls make the flow one-way.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It can run dry, self-primes and stalls safely against a closed valve.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include chemical and solvent transfer; slurries, paints, sludge; drum and tank emptying; mining dewatering.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Air-Operated Double Diaphragm Pump — Operation",
+    "type": "in_app_tour",
+    "model": "aodd_pump.glb",
+    "duration_s": 36.7,
+    "script": [
+     {
+      "narration": "How the Air-Operated Double Diaphragm Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Compressed air enters the chamber behind one diaphragm, pushing it outward and discharging liquid.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "diaphragm_left",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The shaft pulls the other diaphragm inward, drawing liquid through its inlet ball valve.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "diaphragm_right",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the end of the stroke the pilot valve shifts the air spool, reversing the air flow.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "air_valve_spool",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Check balls in the manifolds open and close to keep the flow one-way.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "ball_inlet_left",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Exhaust air leaves through the muffler.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "muffler",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Air-Operated Double Diaphragm Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "aodd_pump.glb",
+    "duration_s": 42.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Air-Operated Double Diaphragm Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for leakage at the muffler (diaphragm failure sign).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "muffler",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace diaphragms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragm_left",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect balls and seats.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ball_outlet_left",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rebuild the air valve.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for diaphragm rupture: product out of the exhaust. Common cause: fatigue, chemical attack.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "diaphragm_left",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for air valve stalling / icing: pump stops. Common cause: wet air, high air pressure drop.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "air_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for check-ball wear: low flow. Common cause: abrasives.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "ball_inlet_right",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Maximum discharge pressure of a standard 1:1 AODD pump is about…",
+     "options": [
+      "Twice the air pressure",
+      "Equal to the air supply pressure",
+      "Unlimited",
+      "Half the air pressure"
+     ],
+     "answer": 1,
+     "explanation": "It stalls when pressures balance.",
+     "level": "basic"
+    },
+    {
+     "question": "What happens if the discharge valve is closed?",
+     "options": [
+      "The pump bursts",
+      "The pump stalls safely",
+      "The motor overloads",
+      "It cavitates"
+     ],
+     "answer": 1,
+     "explanation": "Air-driven pumps dead-head.",
+     "level": "basic"
+    },
+    {
+     "question": "Liquid coming out of the exhaust muffler indicates…",
+     "options": [
+      "Normal operation",
+      "A ruptured diaphragm",
+      "Low air pressure",
+      "High flow"
+     ],
+     "answer": 1,
+     "explanation": "Diaphragm failure.",
+     "level": "basic"
+    },
+    {
+     "question": "Which parts make the flow one-way?",
+     "options": [
+      "Diaphragms",
+      "Check balls and seats",
+      "The air valve",
+      "The shaft"
+     ],
+     "answer": 1,
+     "explanation": "Ball valves.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Separates the two air chambers, guides the shaft and pilot, and carries the air valve and muffler.\"",
+     "options": [
+      "Liquid Chamber – Right",
+      "Air Valve Spool",
+      "Liquid Chamber – Left",
+      "Centre Section (Air Chamber Block)"
+     ],
+     "answer": 3,
+     "explanation": "Centre Section (Air Chamber Block): Separates the two air chambers, guides the shaft and pilot, and carries the air valve and muffler.",
+     "level": "basic",
+     "part": "centre_section",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Guides the diaphragm shaft and limits air leakage between the two air chambers.\"",
+     "options": [
+      "Diaphragm – Right",
+      "Air Valve Body",
+      "Shaft Bushing",
+      "Diaphragm – Left"
+     ],
+     "answer": 2,
+     "explanation": "Shaft Bushing: Guides the diaphragm shaft and limits air leakage between the two air chambers.",
+     "level": "basic",
+     "part": "shaft_bushing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Directs supply air to one air chamber while venting the other to exhaust; reverses at each stroke end.\"",
+     "options": [
+      "Valve Seat – Outlet, Left",
+      "Check Ball – Inlet, Right",
+      "Air Valve Body",
+      "Exhaust Muffler"
+     ],
+     "answer": 2,
+     "explanation": "Air Valve Body: Directs supply air to one air chamber while venting the other to exhaust; reverses at each stroke end.",
+     "level": "basic",
+     "part": "air_valve",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

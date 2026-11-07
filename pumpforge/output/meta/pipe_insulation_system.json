@@ -1,0 +1,394 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "pipe_insulation_system",
+  "title": "Pipe Insulation System (Hot Service, Layered Cutaway)",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 61,
+    "phase": 4,
+    "eq_id": "EQ-139",
+    "subcategory": "Piping Systems",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "pipe_insulation_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "heat_loss": {
+      "file": "pipe_insulation_system_heat_loss.glb",
+      "title": "Heat loss",
+      "description": "Bare pipe (left) loses heat strongly by convection and radiation; under the insulation (right) the heat flow is a fraction of that. Heat loss per metre ≈ 2πk(T_pipe − T_surface)/ln(r_out/r_in). Insulation also keeps the surface below touch-safe temperature (personnel protection, typically ≤ 60 °C — verify local regulations).",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Bare pipe: high heat loss",
+          "anchor": [
+            -0.8,
+            0.7,
+            -0.0
+          ]
+        },
+        {
+          "text": "Insulated: small heat loss",
+          "anchor": [
+            0.45,
+            0.7,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "hot",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.9,
+          0.4,
+          -0.0
+        ],
+        [
+          0.9,
+          0.4,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 4468,
+    "parts": 5
+  },
+  "summary": "A pipe insulation system reduces heat loss (or gain) from piping, keeps process temperatures stable, protects personnel from hot surfaces and prevents condensation on cold lines. A typical hot-service system has an anti-corrosion coating on the pipe, one or more insulation layers with staggered joints, and a weatherproof metal cladding held by bands, plus insulated supports.",
+  "classification": {
+    "family": "Piping system",
+    "type": "Hot-service insulation (mineral wool / calcium silicate) with metal cladding"
+  },
+  "model_configuration": {
+    "layers": "Coating → 2 × 50 mm insulation → aluminium/stainless cladding",
+    "hazard": "Corrosion under insulation (CUI) where water gets in"
+  },
+  "standards": [
+    {
+      "id": "ASTM C585 / C547 / C533",
+      "title": "Insulation materials and sizes",
+      "relevance": "Material specifications.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "CINI Manual",
+      "title": "Insulation for industries",
+      "relevance": "Design and installation practice.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API RP 583 / NACE SP0198",
+      "title": "Corrosion under insulation",
+      "relevance": "CUI prevention and inspection.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "US DOE — 3E Plus / insulation guides",
+    "CINI Manual (verify edition)"
+  ],
+  "parts": [
+    {
+      "id": "process_pipe",
+      "name": "Process Pipe",
+      "group": "piping",
+      "section_role": "split",
+      "nodes": [
+        "process_pipe__back",
+        "process_pipe__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9,
+        0.34,
+        -0.06
+      ],
+      "bbox_max": [
+        0.9,
+        0.46,
+        0.06
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.06
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "pi_pipe"
+    },
+    {
+      "id": "coating",
+      "name": "Anti-Corrosion Coating (CUI protection)",
+      "group": "insulation",
+      "section_role": "split",
+      "nodes": [
+        "coating__back",
+        "coating__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.75,
+        0.331,
+        -0.069
+      ],
+      "bbox_max": [
+        0.9,
+        0.469,
+        0.069
+      ],
+      "label_anchor": [
+        0.075,
+        0.4,
+        0.069
+      ],
+      "center": [
+        0.075,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "pi_coating"
+    },
+    {
+      "id": "insulation",
+      "name": "Insulation Layers (2 × 50 mm, staggered joints)",
+      "group": "insulation",
+      "section_role": "split",
+      "nodes": [
+        "insulation__back",
+        "insulation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.25,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.55,
+        0.231,
+        -0.169
+      ],
+      "bbox_max": [
+        0.9,
+        0.569,
+        0.169
+      ],
+      "label_anchor": [
+        0.175,
+        0.4,
+        0.169
+      ],
+      "center": [
+        0.175,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "pi_insulation"
+    },
+    {
+      "id": "cladding",
+      "name": "Metal Cladding (weatherproof jacket) & Banding",
+      "group": "insulation",
+      "section_role": "split",
+      "nodes": [
+        "cladding__back",
+        "cladding__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.15,
+        0.227,
+        -0.173
+      ],
+      "bbox_max": [
+        0.9,
+        0.573,
+        0.173
+      ],
+      "label_anchor": [
+        0.375,
+        0.4,
+        0.173
+      ],
+      "center": [
+        0.375,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "pi_cladding"
+    },
+    {
+      "id": "support",
+      "name": "Insulated Pipe Support (shoe & cradle)",
+      "group": "support",
+      "section_role": "split",
+      "nodes": [
+        "support__back",
+        "support__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        0.625,
+        0.0,
+        -0.15
+      ],
+      "bbox_max": [
+        0.875,
+        0.581,
+        0.181
+      ],
+      "label_anchor": [
+        0.75,
+        0.2905,
+        0.181
+      ],
+      "center": [
+        0.75,
+        0.2905,
+        0.0155
+      ],
+      "info_ref": "pi_support"
+    }
+  ],
+  "components": {
+    "pi_pipe": {
+      "function": "Carries the hot process fluid.",
+      "construction": "Steel pipe.",
+      "material": "Carbon/alloy steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "CUI"
+      ],
+      "inspection": [
+        "CUI inspection"
+      ]
+    },
+    "pi_coating": {
+      "function": "Protects the pipe surface from corrosion under insulation.",
+      "construction": "High-temperature coating system.",
+      "material": "Epoxy phenolic, TSA, silicone.",
+      "operating_conditions": "Must suit operating temperature.",
+      "failure_modes": [
+        "Coating breakdown"
+      ],
+      "inspection": [
+        "Inspect during insulation repairs"
+      ]
+    },
+    "pi_insulation": {
+      "function": "Reduces heat flow through low thermal conductivity material.",
+      "construction": "Pre-formed sections, staggered joints.",
+      "material": "Mineral wool, calcium silicate, cellular glass, aerogel.",
+      "operating_conditions": "Wet insulation loses most of its value.",
+      "failure_modes": [
+        "Wetting",
+        "Mechanical damage"
+      ],
+      "inspection": [
+        "Thermography survey"
+      ]
+    },
+    "pi_cladding": {
+      "function": "Keeps weather and water out and protects the insulation.",
+      "construction": "Overlapped metal jacketing with bands and sealant.",
+      "material": "Aluminium, stainless steel.",
+      "operating_conditions": "Overlaps must shed water.",
+      "failure_modes": [
+        "Damaged/open seams → water ingress"
+      ],
+      "inspection": [
+        "Visual inspection"
+      ]
+    },
+    "pi_support": {
+      "function": "Supports the pipe without crushing the insulation or creating a thermal bridge.",
+      "construction": "Pipe shoe/cradle.",
+      "material": "Steel with insulating blocks.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Corrosion at support"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

@@ -1,0 +1,683 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "orifice_plate",
+ "no": 56,
+ "title": "Orifice Plate",
+ "model_title": "Orifice Plate Flowmeter (Concentric, Flange Taps)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An orifice plate flowmeter is a plate with a precise sharp-edged hole clamped between flanges. The restriction accelerates the flow and lowers its static pressure; a DP transmitter measures the pressure difference across the plate, and flow is calculated from the square root of ΔP (ISO 5167-2). It is simple, inexpensive and standardised, but causes a high permanent pressure loss.",
+   "applications": [
+    "Process flow measurement (liquids, gases, steam)",
+    "Natural gas metering (AGA 3)",
+    "Pump minimum-flow detection",
+    "Restriction orifices (pressure reduction)"
+   ],
+   "key_points": [
+    "Flow ∝ √ΔP — turndown ~3–4:1 per transmitter",
+    "Sharp edge and straight runs govern accuracy",
+    "Bevel faces downstream",
+    "Permanent loss ~40–90 % of ΔP depending on β"
+   ],
+   "classification": {
+    "family": "Differential-pressure flowmeter",
+    "type": "Concentric square-edged orifice, flange taps"
+   },
+   "hi_family": "valves_piping",
+   "summary": "An orifice plate flowmeter is a thin plate with a precise sharp-edged hole clamped between two flanges. The restriction speeds the flow up and lowers its pressure; the pressure difference between upstream and downstream taps is measured by a DP transmitter, and the flow rate is proportional to the square root of that difference (ISO 5167-2). Simple, cheap and standardised, but with a high permanent pressure loss."
+  },
+  "model_3d": {
+   "asset": "glb/orifice_plate.glb",
+   "metadata": "meta/orifice_plate.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6476,
+   "parts": 4
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Flow approaches the plate with a developed velocity profile.",
+    "The bore forces the flow to contract and accelerate.",
+    "Pressure is lowest at the vena contracta just downstream."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flow approaches the plate with a developed velocity profile.",
+     "part": "meter_run",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bore forces the flow to contract and accelerate.",
+     "part": "plate",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pressure is lowest at the vena contracta just downstream.",
+     "part": "plate",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Taps in the orifice flanges transmit p1 and p2 to the DP transmitter.",
+     "part": "dp_transmitter",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Downstream, pressure partly recovers; the rest is permanent loss.",
+     "part": "meter_run",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "ΔP rises with flow²; flow computed as q = K·√ΔP."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "orifice_plate_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "orifice_plate_pressure.glb",
+     "title": "Pressure profile",
+     "description": "Static pressure is highest just upstream of the plate, lowest at the vena contracta just downstream (where the jet is narrowest and fastest), then partly recovers. The unrecovered part is the permanent pressure loss (relatively high for orifice plates). Flow ∝ √ΔP (ISO 5167-2).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "p1 (upstream tap)",
+       "anchor": [
+        -0.1,
+        0.5,
+        -0.0
+       ]
+      },
+      {
+       "text": "p2 at vena contracta — lowest",
+       "anchor": [
+        0.05,
+        0.2,
+        -0.0
+       ]
+      },
+      {
+       "text": "Permanent pressure loss",
+       "anchor": [
+        0.6,
+        0.5,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/orifice_plate.json#components",
+   "key_components": "Plate, orifice flanges, taps, DP transmitter",
+   "parts": [
+    {
+     "id": "orifice_flanges",
+     "name": "Orifice Flanges with Tap Holes, Gaskets & Bolting",
+     "info_ref": "op_flanges",
+     "function": "Hold the plate and provide the pressure taps.",
+     "material": "Carbon/stainless steel."
+    },
+    {
+     "id": "plate",
+     "name": "Orifice Plate (sharp square edge, β = d/D ≈ 0.6) with Handle Tab",
+     "info_ref": "op_plate",
+     "function": "Creates the restriction that produces the differential pressure.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "meter_run",
+     "name": "Meter Run (upstream & downstream straight pipe)",
+     "info_ref": "fm_run",
+     "function": "Provides a fully developed velocity profile at the meter.",
+     "material": "As line."
+    },
+    {
+     "id": "dp_transmitter",
+     "name": "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+     "info_ref": "fm_dp",
+     "function": "Measures the pressure difference across the element.",
+     "material": "Stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 50 – 1,000 (ISO 5167 range)",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Per flange class",
+     "unit": ""
+    },
+    "temperature": {
+     "typical_range": "Per material",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "β = 0.1 – 0.75; uncertainty of C ≈ 0.5 – 1 % (ISO 5167-2)",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "turndown": {
+     "typical_range": "≈ 3 – 4:1 (single DP transmitter)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the meter run; avoid vibration at the transmitter."
+   ],
+   "alignment": [
+    "Centre the element precisely in the pipe bore (eccentricity affects accuracy)."
+   ],
+   "piping": [
+    "Provide straight upstream/downstream lengths per ISO 5167 for the fittings present, or use a flow conditioner.",
+    "Slope impulse lines: liquids — transmitter below taps; gas — transmitter above taps."
+   ],
+   "commissioning": [
+    "Fill/vent impulse lines; zero the transmitter with the equalising valve.",
+    "Check the flow computation (β, density, units)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check transmitter zero.",
+     "part": "dp_transmitter",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Pull and inspect plate edge and flatness.",
+     "part": "plate",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace plate if edge is rounded or plate bowed.",
+     "part": "plate"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Reading low",
+     "category": "performance",
+     "symptoms": [
+      "Under-reads"
+     ],
+     "causes": [
+      "Rounded/worn edge, plate installed backwards"
+     ],
+     "remedies": [
+      "Replace/reinstall plate"
+     ],
+     "part": "plate"
+    },
+    {
+     "problem": "Erratic reading",
+     "category": "performance",
+     "symptoms": [
+      "Noisy ΔP"
+     ],
+     "causes": [
+      "Gas in liquid impulse lines, swirl"
+     ],
+     "remedies": [
+      "Vent lines, add conditioner"
+     ],
+     "part": "dp_transmitter"
+    },
+    {
+     "problem": "Deposits",
+     "category": "performance",
+     "symptoms": [
+      "Drift"
+     ],
+     "causes": [
+      "Fouling upstream face"
+     ],
+     "remedies": [
+      "Clean plate"
+     ],
+     "part": "plate"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Orifice Plate — Introduction",
+    "type": "in_app_tour",
+    "model": "orifice_plate.glb",
+    "duration_s": 56.6,
+    "script": [
+     {
+      "narration": "This module introduces the Orifice Plate.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An orifice plate flowmeter is a plate with a precise sharp-edged hole clamped between flanges.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The restriction accelerates the flow and lowers its static pressure; a DP transmitter measures the pressure difference across the plate, and flow is calculated from the square root of ΔP (ISO 5167-2).",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is simple, inexpensive and standardised, but causes a high permanent pressure loss.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process flow measurement (liquids, gases, steam); natural gas metering (AGA 3); pump minimum-flow detection; restriction orifices (pressure reduction).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Orifice Flanges with Tap Holes, Gaskets & Bolting.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Orifice Plate — Operation",
+    "type": "in_app_tour",
+    "model": "orifice_plate.glb",
+    "duration_s": 40.4,
+    "script": [
+     {
+      "narration": "How the Orifice Plate works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow approaches the plate with a developed velocity profile.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "meter_run",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bore forces the flow to contract and accelerate.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pressure is lowest at the vena contracta just downstream.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Taps in the orifice flanges transmit p1 and p2 to the DP transmitter.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "dp_transmitter",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Downstream, pressure partly recovers; the rest is permanent loss.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "meter_run",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Static pressure is highest just upstream of the plate, lowest at the vena contracta just downstream (where the jet is narrowest and fastest), then partly recovers.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Orifice Plate — Maintenance",
+    "type": "in_app_tour",
+    "model": "orifice_plate.glb",
+    "duration_s": 37.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Orifice Plate.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check transmitter zero.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dp_transmitter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pull and inspect plate edge and flatness.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace plate if edge is rounded or plate bowed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for reading low: under-reads. Common cause: rounded/worn edge, plate installed backwards.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for erratic reading: noisy δp. Common cause: gas in liquid impulse lines, swirl.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "dp_transmitter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for deposits: drift. Common cause: fouling upstream face.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Flow through an orifice plate is proportional to…",
+     "options": [
+      "ΔP",
+      "√ΔP",
+      "ΔP²",
+      "1/ΔP"
+     ],
+     "answer": 1,
+     "explanation": "Bernoulli: v ∝ √ΔP.",
+     "level": "basic"
+    },
+    {
+     "question": "Where is the lowest pressure?",
+     "options": [
+      "Upstream of the plate",
+      "At the vena contracta just downstream",
+      "Far downstream",
+      "In the transmitter"
+     ],
+     "answer": 1,
+     "explanation": "Narrowest jet.",
+     "level": "basic"
+    },
+    {
+     "question": "Which device has the highest permanent pressure loss?",
+     "options": [
+      "Venturi tube",
+      "Orifice plate",
+      "Flow nozzle",
+      "All equal"
+     ],
+     "answer": 1,
+     "explanation": "Abrupt expansion losses.",
+     "level": "basic"
+    },
+    {
+     "question": "Beta ratio is…",
+     "options": [
+      "d/D (bore/pipe diameter)",
+      "ΔP/p1",
+      "Flow/area",
+      "Temperature ratio"
+     ],
+     "answer": 0,
+     "explanation": "Geometry ratio.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Hold the plate and provide the pressure taps.\"",
+     "options": [
+      "Orifice Plate (sharp square edge, β = d/D ≈ 0.6) with Handle Tab",
+      "Orifice Flanges with Tap Holes, Gaskets & Bolting",
+      "Meter Run (upstream & downstream straight pipe)",
+      "DP Transmitter, Impulse Lines & 3-Valve Manifold"
+     ],
+     "answer": 1,
+     "explanation": "Orifice Flanges with Tap Holes, Gaskets & Bolting: Hold the plate and provide the pressure taps.",
+     "level": "basic",
+     "part": "orifice_flanges",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Creates the restriction that produces the differential pressure.\"",
+     "options": [
+      "Meter Run (upstream & downstream straight pipe)",
+      "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "Orifice Flanges with Tap Holes, Gaskets & Bolting",
+      "Orifice Plate (sharp square edge, β = d/D ≈ 0.6) with Handle Tab"
+     ],
+     "answer": 3,
+     "explanation": "Orifice Plate (sharp square edge, β = d/D ≈ 0.6) with Handle Tab: Creates the restriction that produces the differential pressure.",
+     "level": "basic",
+     "part": "plate",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Provides a fully developed velocity profile at the meter.\"",
+     "options": [
+      "Orifice Plate (sharp square edge, β = d/D ≈ 0.6) with Handle Tab",
+      "Meter Run (upstream & downstream straight pipe)",
+      "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "Orifice Flanges with Tap Holes, Gaskets & Bolting"
+     ],
+     "answer": 1,
+     "explanation": "Meter Run (upstream & downstream straight pipe): Provides a fully developed velocity profile at the meter.",
+     "level": "basic",
+     "part": "meter_run",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

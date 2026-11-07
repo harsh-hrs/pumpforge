@@ -1,0 +1,352 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "flow_nozzle",
+  "title": "Flow Nozzle (ISA 1932 type) between Flanges",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 57,
+    "phase": 4,
+    "eq_id": "EQ-135",
+    "subcategory": "Flow Measurement",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "flow_nozzle_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "flow_nozzle_pressure.glb",
+      "title": "Pressure profile",
+      "description": "The smooth curved inlet accelerates the flow with little loss; pressure is lowest in the throat. Recovery downstream is limited (no diffuser), so permanent loss lies between an orifice and a venturi. Flow nozzles suit high-velocity steam and erosive flows (ISO 5167-3).",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Throat: highest velocity, lowest pressure",
+          "anchor": [
+            0.05,
+            0.2,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flow",
+      "kind": "flow_suction",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.7,
+          0.35,
+          -0.0
+        ],
+        [
+          -0.02,
+          0.35,
+          -0.0
+        ],
+        [
+          0.03,
+          0.35,
+          -0.0
+        ],
+        [
+          0.07,
+          0.35,
+          -0.0
+        ],
+        [
+          0.25,
+          0.35,
+          -0.0
+        ],
+        [
+          0.7,
+          0.35,
+          -0.0
+        ]
+      ],
+      "speed": [
+        1,
+        1.3,
+        2.6,
+        2.8,
+        1.4,
+        1
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6144,
+    "parts": 4
+  },
+  "summary": "A flow nozzle is a differential-pressure flow element with a smooth, curved inlet leading to a cylindrical throat. It is more robust than an orifice plate and handles high-velocity, high-temperature and erosive flows such as boiler steam and feedwater, with a lower permanent loss than an orifice but higher than a venturi (ISO 5167-3).",
+  "classification": {
+    "family": "Differential-pressure flowmeter",
+    "type": "ISA 1932 flow nozzle between flanges"
+  },
+  "model_configuration": {
+    "beta_ratio": "≈ 0.6",
+    "taps": "Upstream ~1D, throat/corner tap downstream"
+  },
+  "standards": [
+    {
+      "id": "ISO 5167-3",
+      "title": "Nozzles and Venturi nozzles",
+      "relevance": "Geometry and coefficients.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME PTC 6 / PTC 19.5",
+      "title": "Flow measurement for performance tests",
+      "relevance": "Turbine tests.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Miller, Flow Measurement Engineering Handbook"
+  ],
+  "parts": [
+    {
+      "id": "carrier_flanges",
+      "name": "Carrier Flanges & Bolting",
+      "group": "body",
+      "section_role": "split",
+      "nodes": [
+        "carrier_flanges__back",
+        "carrier_flanges__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.069,
+        0.22,
+        -0.13
+      ],
+      "bbox_max": [
+        0.075,
+        0.48,
+        0.13
+      ],
+      "label_anchor": [
+        0.003,
+        0.35,
+        0.13
+      ],
+      "center": [
+        0.003,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "fn_flanges"
+    },
+    {
+      "id": "nozzle",
+      "name": "Flow Nozzle (curved inlet, cylindrical throat)",
+      "group": "element",
+      "section_role": "split",
+      "nodes": [
+        "nozzle__back",
+        "nozzle__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.004,
+        0.27,
+        -0.08
+      ],
+      "bbox_max": [
+        0.065,
+        0.43,
+        0.08
+      ],
+      "label_anchor": [
+        0.0305,
+        0.35,
+        0.08
+      ],
+      "center": [
+        0.0305,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "fn_nozzle"
+    },
+    {
+      "id": "meter_run",
+      "name": "Meter Run (upstream & downstream straight pipe)",
+      "group": "system_piping",
+      "section_role": "split",
+      "nodes": [
+        "meter_run__back",
+        "meter_run__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.35
+      ],
+      "bbox_min": [
+        -0.7,
+        0.3,
+        -0.05
+      ],
+      "bbox_max": [
+        0.7,
+        0.4,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.35,
+        0.05
+      ],
+      "center": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "fm_run"
+    },
+    {
+      "id": "dp_transmitter",
+      "name": "DP Transmitter, Impulse Lines & 3-Valve Manifold",
+      "group": "instrumentation",
+      "section_role": "keep",
+      "nodes": [
+        "dp_transmitter.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.1296,
+        0.402,
+        -0.045
+      ],
+      "bbox_max": [
+        0.055,
+        0.84,
+        0.045
+      ],
+      "label_anchor": [
+        -0.0373,
+        0.621,
+        0.045
+      ],
+      "center": [
+        -0.0373,
+        0.621,
+        -0.0
+      ],
+      "info_ref": "fm_dp"
+    }
+  ],
+  "components": {
+    "fn_flanges": {
+      "function": "Clamp the nozzle into the line.",
+      "construction": "Carrier flanges and bolting.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Leaks"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fn_nozzle": {
+      "function": "Accelerates the flow smoothly to create a measurable ΔP.",
+      "construction": "Machined nozzle with elliptical inlet and cylindrical throat.",
+      "material": "Stainless/alloy steel.",
+      "operating_conditions": "Throat diameter must be accurate.",
+      "failure_modes": [
+        "Erosion/deposits in throat"
+      ],
+      "inspection": [
+        "Inspect throat"
+      ]
+    },
+    "fm_run": {
+      "function": "Straight pipe for a developed flow profile.",
+      "construction": "Upstream and downstream pipe.",
+      "material": "As line.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "fm_dp": {
+      "function": "Measures the ΔP.",
+      "construction": "DP transmitter with impulse lines.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Plugged lines"
+      ],
+      "inspection": [
+        "Zero check"
+      ]
+    }
+  }
+}

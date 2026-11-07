@@ -1,0 +1,682 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "three_screw_pump",
+ "no": 20,
+ "title": "Three Screw Pump",
+ "model_title": "Three-Screw Pump (Power Rotor + 2 Idlers)",
+ "category": "2 · Rotary Positive-Displacement Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A three screw pump has a central power rotor that drives two idler rotors through the liquid film; the screws are in rolling contact and form sealed chambers that move axially. It produces smooth, quiet, pulsation-free flow at high pressure and needs a clean, lubricating liquid.",
+   "applications": [
+    "Lube and seal oil for turbines and compressors",
+    "Fuel oil and fuel injection supply",
+    "Hydraulic elevators and presses",
+    "Machine-tool coolant/hydraulics"
+   ],
+   "key_points": [
+    "Idlers driven hydraulically by the power rotor — no timing gears",
+    "Low noise and pulsation",
+    "High pressure capability",
+    "Clean lubricating liquids only"
+   ],
+   "classification": {
+    "family": "Positive displacement – rotary",
+    "configuration": "Three-screw, untimed (idlers hydraulically driven), single suction"
+   },
+   "hi_family": "positive_displacement_rotary",
+   "summary": "Three intermeshing screws turn in a closely fitted housing: a centre power rotor driven by the motor and two idler rotors driven by the liquid pressure acting on their threads. The meshing threads create a series of sealed chambers that move steadily from the inlet end to the outlet end as the rotors turn, giving smooth, nearly pulse-free flow and quiet running at high pressures. Suited to clean lubricating liquids — lube and seal oil, fuel oil, hydraulic oil."
+  },
+  "model_3d": {
+   "asset": "glb/three_screw_pump.glb",
+   "metadata": "meta/three_screw_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 81978,
+   "parts": 18
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid enters at the suction end of the rotors.",
+    "The power rotor turns and drives the two idlers through the liquid film.",
+    "Sealed chambers between the flights move axially towards the discharge."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid enters at the suction end of the rotors.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The power rotor turns and drives the two idlers through the liquid film.",
+     "part": "power_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sealed chambers between the flights move axially towards the discharge.",
+     "part": "idler_right",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Hydraulic balancing pistons reduce axial thrust on the rotors.",
+     "part": "housing_insert",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Near-constant flow vs pressure; very low pulsation."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "three_screw_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/three_screw_pump.json#components",
+   "key_components": "Driving screw, two driven screws",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Pump Casing (Inlet & Outlet Chambers)",
+     "info_ref": "pd_casing",
+     "function": "Contains the pumping elements and forms the suction and discharge ports.",
+     "material": "Cast iron, ductile iron, steel, stainless steel."
+    },
+    {
+     "id": "housing_insert",
+     "name": "Housing Insert (Rotor Liner)",
+     "info_ref": "screw_insert",
+     "function": "Close-fitting liner with three intersecting bores that, with the rotors, forms the sealed chambers.",
+     "material": "Cast iron, aluminium alloys, steel."
+    },
+    {
+     "id": "power_rotor",
+     "name": "Power (Drive) Rotor",
+     "info_ref": "power_rotor",
+     "function": "Driven centre rotor; transmits most of the torque and drives the idlers hydraulically.",
+     "material": "Nitrided/hardened steel."
+    },
+    {
+     "id": "idler_right",
+     "name": "Idler Rotor – Right",
+     "info_ref": "idler_rotor",
+     "function": "Seal the chambers; driven by liquid pressure, not by contact torque.",
+     "material": "Hardened steel, cast iron."
+    },
+    {
+     "id": "idler_left",
+     "name": "Idler Rotor – Left",
+     "info_ref": "idler_rotor",
+     "function": "Seal the chambers; driven by liquid pressure, not by contact torque.",
+     "material": "Hardened steel, cast iron."
+    },
+    {
+     "id": "front_cover",
+     "name": "Inlet End Cover",
+     "info_ref": "screw_cover",
+     "function": "Closes the inlet end; carries idler end plates/thrust surfaces.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Mechanical Seal",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_housing",
+     "name": "Bearing Housing",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing",
+     "name": "Ball Bearing",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "0.5 – 500",
+     "unit": "m³/h"
+    },
+    "pressure": {
+     "typical_range": "up to 80 – 160",
+     "unit": "bar"
+    },
+    "head": {
+     "typical_range": "—",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "1,000 – 3,600",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "70 – 90",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "viscosity": {
+     "typical_range": "2 – 5,000+",
+     "unit": "cSt"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Baseplate or vertical tank-top mounting."
+   ],
+   "alignment": [
+    "Coupling alignment."
+   ],
+   "piping": [
+    "Size the suction line for low velocity (viscous liquids need large suction pipes); provide a strainer.",
+    "Fit a pressure-relief valve (integral or in the discharge line) — a positive-displacement pump will build pressure until something breaks if the discharge is blocked.",
+    "Support piping independently of the pump."
+   ],
+   "commissioning": [
+    "Never start against a closed discharge valve.",
+    "Fill the pump with liquid (or ensure the suction is flooded) before start — avoid dry running unless the design allows it.",
+    "Check rotation direction.",
+    "Verify the relief-valve set pressure."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check noise and discharge pressure.",
+     "part": "casing",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check bearing and seal.",
+     "part": "bearing",
+     "interval": "per manual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect rotor flanks for wear.",
+     "part": "power_rotor"
+    }
+   ],
+   "lubrication": [
+    "Pumped oil lubricates the rotors; ball bearing per manual."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wear from contaminants",
+     "category": "wear",
+     "symptoms": [
+      "Flow loss, noise"
+     ],
+     "causes": [
+      "Dirty oil"
+     ],
+     "remedies": [
+      "Improve filtration"
+     ],
+     "part": "idler_left"
+    },
+    {
+     "problem": "Cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise"
+     ],
+     "causes": [
+      "Cold, viscous oil at start"
+     ],
+     "remedies": [
+      "Warm oil; reduce speed"
+     ],
+     "part": "power_rotor"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Three Screw Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "three_screw_pump.glb",
+    "duration_s": 54.9,
+    "script": [
+     {
+      "narration": "This module introduces the Three Screw Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A three screw pump has a central power rotor that drives two idler rotors through the liquid film; the screws are in rolling contact and form sealed chambers that move axially.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It produces smooth, quiet, pulsation-free flow at high pressure and needs a clean, lubricating liquid.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include lube and seal oil for turbines and compressors; fuel oil and fuel injection supply; hydraulic elevators and presses; machine-tool coolant/hydraulics.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Pump Casing (Inlet & Outlet Chambers), Housing Insert (Rotor Liner), Power (Drive) Rotor, Idler Rotor – Right.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Three Screw Pump — Operation",
+    "type": "in_app_tour",
+    "model": "three_screw_pump.glb",
+    "duration_s": 25.8,
+    "script": [
+     {
+      "narration": "How the Three Screw Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid enters at the suction end of the rotors.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The power rotor turns and drives the two idlers through the liquid film.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "power_rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sealed chambers between the flights move axially towards the discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "idler_right",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Hydraulic balancing pistons reduce axial thrust on the rotors.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "housing_insert",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Three Screw Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "three_screw_pump.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Three Screw Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check noise and discharge pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check bearing and seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect rotor flanks for wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "power_rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wear from contaminants: flow loss, noise. Common cause: dirty oil.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "idler_left",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation: noise. Common cause: cold, viscous oil at start.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "power_rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How are the idler rotors driven?",
+     "options": [
+      "Timing gears",
+      "By the power rotor through the liquid film (hydraulic drive)",
+      "Belts",
+      "Separate motors"
+     ],
+     "answer": 1,
+     "explanation": "No timing gears.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is a three screw pump popular for lube-oil systems?",
+     "options": [
+      "It handles slurry",
+      "Quiet, low-pulsation, high-pressure delivery of clean oil",
+      "It has no rotors",
+      "Cheapest"
+     ],
+     "answer": 1,
+     "explanation": "Smooth flow.",
+     "level": "basic"
+    },
+    {
+     "question": "Liquid requirement?",
+     "options": [
+      "Abrasive slurry",
+      "Clean lubricating liquid",
+      "Gas only",
+      "Any"
+     ],
+     "answer": 1,
+     "explanation": "Contact between rotors.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the pumping elements and forms the suction and discharge ports.\"",
+     "options": [
+      "Pump Casing (Inlet & Outlet Chambers)",
+      "Electric Motor – Stator",
+      "Power (Drive) Rotor",
+      "Idler Rotor – Left"
+     ],
+     "answer": 0,
+     "explanation": "Pump Casing (Inlet & Outlet Chambers): Contains the pumping elements and forms the suction and discharge ports.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Close-fitting liner with three intersecting bores that, with the rotors, forms the sealed chambers.\"",
+     "options": [
+      "Housing Insert (Rotor Liner)",
+      "Electric Motor – Stator",
+      "Power (Drive) Rotor",
+      "Idler Rotor – Left"
+     ],
+     "answer": 0,
+     "explanation": "Housing Insert (Rotor Liner): Close-fitting liner with three intersecting bores that, with the rotors, forms the sealed chambers.",
+     "level": "basic",
+     "part": "housing_insert",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Driven centre rotor; transmits most of the torque and drives the idlers hydraulically.\"",
+     "options": [
+      "Bearing Housing",
+      "Power (Drive) Rotor",
+      "Electric Motor – Rotor & Shaft",
+      "Idler Rotor – Right"
+     ],
+     "answer": 1,
+     "explanation": "Power (Drive) Rotor: Driven centre rotor; transmits most of the torque and drives the idlers hydraulically.",
+     "level": "basic",
+     "part": "power_rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

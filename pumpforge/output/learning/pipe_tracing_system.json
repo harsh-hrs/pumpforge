@@ -1,0 +1,640 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pipe_tracing_system",
+ "no": 62,
+ "title": "Pipe Tracing System",
+ "model_title": "Pipe Tracing System (Steam Tracing & Electric Heat Tracing)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pipe tracing system supplies heat to a pipe to replace what it loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature. Steam tracing runs small tubes of steam alongside the pipe, drained by a trap; electric tracing uses a self-regulating heating cable controlled by a thermostat. Both are covered by insulation.",
+   "applications": [
+    "Caustic and liquor lines in alumina refineries",
+    "Heavy fuel oil, bitumen and sulphur",
+    "Water and instrument lines in freezing climates",
+    "Viscous chemicals"
+   ],
+   "key_points": [
+    "Tracing maintains temperature; it does not heat up cold lines quickly",
+    "Steam: trap at each tracer end; electric: earth-leakage protection",
+    "Insulation is part of the system"
+   ],
+   "classification": {
+    "family": "Piping system",
+    "type": "Steam tracing and electric (self-regulating) heat tracing"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A pipe tracing system adds heat to a pipe to replace what it loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature (for example caustic and liquor lines in alumina refineries, heavy fuel oil, sulphur and water lines in winter). Steam tracing uses small tubes carrying steam alongside the pipe, drained by a trap; electric tracing uses a self-regulating heating cable controlled by a thermostat."
+  },
+  "model_3d": {
+   "asset": "glb/pipe_tracing_system.glb",
+   "metadata": "meta/pipe_tracing_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6210,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Product flows in the process pipe.",
+    "Steam flows in the tracer tube and condenses, releasing heat to the pipe.",
+    "The tracer trap drains condensate."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Product flows in the process pipe.",
+     "part": "process_pipe",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam flows in the tracer tube and condenses, releasing heat to the pipe.",
+     "part": "steam_tracer",
+     "cut": true,
+     "operate": true,
+     "overlay": "heat_input",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The tracer trap drains condensate.",
+     "part": "tracer_trap",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Electric cable spiralled on the pipe heats it; its output falls as the pipe warms.",
+     "part": "electric_tracer",
+     "cut": true,
+     "operate": true,
+     "overlay": "heat_input",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Insulation keeps the heat in.",
+     "part": "insulation",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Heat input matched to heat loss at design ambient; self-regulating cable output decreases with temperature."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pipe_tracing_system_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "heat_input": {
+     "file": "pipe_tracing_system_heat_input.glb",
+     "title": "Heat input",
+     "description": "Tracers replace the heat the pipe loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature (e.g. caustic, heavy oil, sulphur, water lines in winter). Steam tracing: heat from condensing steam; electric: a self-regulating polymer cable whose output falls as the pipe warms.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Steam tracer heats the pipe bottom",
+       "anchor": [
+        -0.4,
+        0.2,
+        -0.0
+       ]
+      },
+      {
+       "text": "Electric cable spiral wound",
+       "anchor": [
+        0.5,
+        0.6,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/pipe_tracing_system.json#components",
+   "key_components": "Steam tracer, trap, heating cable, insulation",
+   "parts": [
+    {
+     "id": "process_pipe",
+     "name": "Process Pipe (product kept warm)",
+     "info_ref": "pt_pipe",
+     "function": "Carries the product that must stay warm.",
+     "material": "Steel."
+    },
+    {
+     "id": "steam_tracer",
+     "name": "Steam Tracer Tube (with heat-transfer cement)",
+     "info_ref": "pt_steam_tracer",
+     "function": "Carries steam whose condensing heat warms the pipe.",
+     "material": "Copper, stainless."
+    },
+    {
+     "id": "tracer_trap",
+     "name": "Tracer Steam Trap (thermodynamic)",
+     "info_ref": "pt_trap",
+     "function": "Drains condensate from the tracer while holding steam.",
+     "material": "Stainless."
+    },
+    {
+     "id": "electric_tracer",
+     "name": "Self-Regulating Heating Cable, Power Box & Thermostat",
+     "info_ref": "pt_electric",
+     "function": "Electric heat source whose output self-limits with temperature.",
+     "material": "Polymer core, copper buses."
+    },
+    {
+     "id": "insulation",
+     "name": "Insulation over Pipe and Tracers (shown partly removed)",
+     "info_ref": "pi_insulation",
+     "function": "Keeps the supplied heat in.",
+     "material": "Mineral wool/aluminium."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pipe DN 15 – 600",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Steam 3 – 10 (tracer)",
+     "unit": "bar g"
+    },
+    "temperature": {
+     "typical_range": "Maintain ~5 – 150 (product dependent)",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Electric: ~10 – 60 W/m (cable dependent)",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support pipework at the intervals and on the support types shown on the piping drawings; allow for thermal expansion."
+   ],
+   "alignment": [
+    "Fit up joints within code tolerances; do not force flanges."
+   ],
+   "piping": [
+    "Steam tracers: free-draining, one trap per circuit, no pockets.",
+    "Electric: fix cable with tape/bands, install end seals and power connection per certification."
+   ],
+   "commissioning": [
+    "Flush/blow the line, then hydrotest or pneumatic test to code.",
+    "Reinstate instruments and remove test blinds."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check product temperature / thermostat.",
+     "part": "electric_tracer",
+     "interval": "daily in cold season"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Survey tracer traps.",
+     "part": "tracer_trap",
+     "interval": "before winter"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Insulation-resistance test of heating circuits.",
+     "part": "electric_tracer"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Line freezing / plugging",
+     "category": "performance",
+     "symptoms": [
+      "Product solidifies"
+     ],
+     "causes": [
+      "Failed trap, cable fault, wet insulation"
+     ],
+     "remedies": [
+      "Repair circuit, replace insulation"
+     ],
+     "part": "steam_tracer"
+    },
+    {
+     "problem": "Ground fault trip",
+     "category": "performance",
+     "symptoms": [
+      "Circuit trips"
+     ],
+     "causes": [
+      "Damaged cable or seals"
+     ],
+     "remedies": [
+      "Locate and repair"
+     ],
+     "part": "electric_tracer"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pipe Tracing System — Introduction",
+    "type": "in_app_tour",
+    "model": "pipe_tracing_system.glb",
+    "duration_s": 56.5,
+    "script": [
+     {
+      "narration": "This module introduces the Pipe Tracing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pipe tracing system supplies heat to a pipe to replace what it loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Steam tracing runs small tubes of steam alongside the pipe, drained by a trap; electric tracing uses a self-regulating heating cable controlled by a thermostat.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Both are covered by insulation.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include caustic and liquor lines in alumina refineries; heavy fuel oil, bitumen and sulphur; water and instrument lines in freezing climates; viscous chemicals.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pipe Tracing System — Operation",
+    "type": "in_app_tour",
+    "model": "pipe_tracing_system.glb",
+    "duration_s": 41.0,
+    "script": [
+     {
+      "narration": "How the Pipe Tracing System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Product flows in the process pipe.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "process_pipe",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam flows in the tracer tube and condenses, releasing heat to the pipe.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "steam_tracer",
+       "cut": true,
+       "operate": true,
+       "overlay": "heat_input",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The tracer trap drains condensate.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tracer_trap",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Electric cable spiralled on the pipe heats it; its output falls as the pipe warms.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "electric_tracer",
+       "cut": true,
+       "operate": true,
+       "overlay": "heat_input",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Insulation keeps the heat in.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "insulation",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Tracers replace the heat the pipe loses through its insulation, keeping the product above its freezing, congealing or crystallisation temperature (e.g.",
+      "duration_s": 9.2,
+      "action": {
+       "overlay": "heat_input",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pipe Tracing System — Maintenance",
+    "type": "in_app_tour",
+    "model": "pipe_tracing_system.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pipe Tracing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check product temperature / thermostat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "electric_tracer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Survey tracer traps.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tracer_trap",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Insulation-resistance test of heating circuits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "electric_tracer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for line freezing / plugging: product solidifies. Common cause: failed trap, cable fault, wet insulation.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "steam_tracer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for ground fault trip: circuit trips. Common cause: damaged cable or seals.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "electric_tracer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Purpose of tracing?",
+     "options": [
+      "Increase flow",
+      "Replace heat lost through insulation to keep product warm",
+      "Measure temperature",
+      "Cool the pipe"
+     ],
+     "answer": 1,
+     "explanation": "Temperature maintenance.",
+     "level": "basic"
+    },
+    {
+     "question": "What drains a steam tracer?",
+     "options": [
+      "A pump",
+      "A steam trap at the tracer end",
+      "A vent",
+      "A filter"
+     ],
+     "answer": 1,
+     "explanation": "Trap per circuit.",
+     "level": "basic"
+    },
+    {
+     "question": "Self-regulating cable output…",
+     "options": [
+      "Rises with temperature",
+      "Falls as the pipe warms",
+      "Is constant",
+      "Is zero"
+     ],
+     "answer": 1,
+     "explanation": "Polymer matrix.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries the product that must stay warm.\"",
+     "options": [
+      "Self-Regulating Heating Cable, Power Box & Thermostat",
+      "Tracer Steam Trap (thermodynamic)",
+      "Process Pipe (product kept warm)",
+      "Steam Tracer Tube (with heat-transfer cement)"
+     ],
+     "answer": 2,
+     "explanation": "Process Pipe (product kept warm): Carries the product that must stay warm.",
+     "level": "basic",
+     "part": "process_pipe",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries steam whose condensing heat warms the pipe.\"",
+     "options": [
+      "Steam Tracer Tube (with heat-transfer cement)",
+      "Process Pipe (product kept warm)",
+      "Insulation over Pipe and Tracers (shown partly removed)",
+      "Self-Regulating Heating Cable, Power Box & Thermostat"
+     ],
+     "answer": 0,
+     "explanation": "Steam Tracer Tube (with heat-transfer cement): Carries steam whose condensing heat warms the pipe.",
+     "level": "basic",
+     "part": "steam_tracer",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drains condensate from the tracer while holding steam.\"",
+     "options": [
+      "Self-Regulating Heating Cable, Power Box & Thermostat",
+      "Steam Tracer Tube (with heat-transfer cement)",
+      "Tracer Steam Trap (thermodynamic)",
+      "Process Pipe (product kept warm)"
+     ],
+     "answer": 2,
+     "explanation": "Tracer Steam Trap (thermodynamic): Drains condensate from the tracer while holding steam.",
+     "level": "basic",
+     "part": "tracer_trap",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

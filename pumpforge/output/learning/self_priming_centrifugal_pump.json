@@ -1,0 +1,754 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "self_priming_centrifugal_pump",
+ "no": 10,
+ "title": "Self-Priming Centrifugal Pump",
+ "model_title": "Self-Priming Centrifugal Pump (Priming Chamber, Flap Valve)",
+ "category": "1 · Centrifugal & Rotodynamic Pumps",
+ "phase": 2,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A self-priming centrifugal pump can evacuate air from its suction line by itself once the casing has been filled. A priming chamber above the impeller retains liquid; during priming the impeller mixes it with air, the air separates in the chamber and escapes through the discharge, and the liquid recirculates until the suction line is full.",
+   "applications": [
+    "Construction dewatering",
+    "Pumping from pits and tanks below the pump (suction lift)",
+    "Wastewater and slurry transfer with solids",
+    "Marine bilge and ballast",
+    "Tanker unloading"
+   ],
+   "key_points": [
+    "Needs liquid in the casing for the first start",
+    "Suction lift up to about 7 m (practical 4–7.5 m)",
+    "Flap valve keeps the casing full",
+    "Air must escape from the discharge"
+   ],
+   "classification": {
+    "family": "Rotodynamic (centrifugal), radial flow",
+    "configuration": "End suction, self-priming, frame-mounted",
+    "priming_principle": "Recirculation-type self-priming with separation chamber"
+   },
+   "hi_family": "rotodynamic",
+   "summary": "A centrifugal pump that can re-prime itself from a dry suction line once its casing holds liquid. During priming the impeller whips the retained liquid and the air drawn from the suction line into a froth; in the chamber above the volute the air separates and escapes through the discharge, while the liquid falls back (recirculation port) to be reused. When the suction line is evacuated, the pump runs as a normal centrifugal pump. The flap valve keeps liquid in the casing when the pump stops."
+  },
+  "model_3d": {
+   "asset": "glb/self_priming_centrifugal_pump.glb",
+   "metadata": "meta/self_priming_centrifugal_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 51702,
+   "parts": 19
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The casing is filled with liquid before the first start; the flap valve keeps it there.",
+    "The impeller whips the retained liquid and air from the suction line into a froth.",
+    "In the priming chamber the air separates and leaves through the discharge."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The casing is filled with liquid before the first start; the flap valve keeps it there.",
+     "part": "flap_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The impeller whips the retained liquid and air from the suction line into a froth.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In the priming chamber the air separates and leaves through the discharge.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The separated liquid returns through the recirculation port to the impeller.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When all air is removed the pump runs as a normal centrifugal pump.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Standard centrifugal curve once primed; priming time depends on suction-line volume, lift and speed."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "self_priming_centrifugal_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/self_priming_centrifugal_pump.json#components",
+   "key_components": "Priming chamber, impeller, casing",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Casing with Priming Chamber",
+     "info_ref": "casing",
+     "function": "Volute plus integral priming/separation chamber and elevated suction passage that retain liquid for re-priming.",
+     "material": "Cast iron, ductile iron, stainless steel."
+    },
+    {
+     "id": "impeller",
+     "name": "Semi-Open Impeller (3-vane, solids-handling)",
+     "info_ref": "impeller_open",
+     "function": "Adds energy to the liquid; open/semi-open design tolerates solids and stringy material.",
+     "material": "Cast iron, stainless steel, high-chrome iron, duplex."
+    },
+    {
+     "id": "wear_plate",
+     "name": "Replaceable Wear Plate",
+     "info_ref": "wear_plate",
+     "function": "Renewable surface opposite the open impeller face; sets the front clearance.",
+     "material": "Steel, stainless, hardened alloys."
+    },
+    {
+     "id": "flap_valve",
+     "name": "Suction Flap Check Valve",
+     "info_ref": "flap_valve",
+     "function": "Suction check valve: holds liquid in the casing when the pump stops so it can re-prime.",
+     "material": "Neoprene/nitrile with steel weights."
+    },
+    {
+     "id": "casing_cover",
+     "name": "Casing Cover & Seal Chamber",
+     "info_ref": "casing_cover",
+     "function": "Closes the back of the casing and forms the seal chamber.",
+     "material": "As casing."
+    },
+    {
+     "id": "mechanical_seal",
+     "name": "Cartridge Mechanical Seal",
+     "info_ref": "mechanical_seal",
+     "function": "Seals the rotating shaft where it leaves the pressurised casing.",
+     "material": "Faces: carbon-graphite, silicon carbide, tungsten carbide; metal parts stainless steel; elastomers per fluid."
+    },
+    {
+     "id": "bearing_frame",
+     "name": "Bearing Frame",
+     "info_ref": "bearing_frame",
+     "function": "Holds the shaft bearings and oil or grease, and supports the overhung impeller.",
+     "material": "Cast iron or ductile iron."
+    },
+    {
+     "id": "bearing_frame_radial_bearing",
+     "name": "Radial Bearing (Inboard)",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "bearing_frame_thrust_bearing",
+     "name": "Thrust Bearings (Duplex Angular-Contact, Outboard)",
+     "info_ref": "thrust_bearing",
+     "function": "Carries axial hydraulic thrust and locates the shaft axially.",
+     "material": "Bearing steel; brass or polyamide cages."
+    },
+    {
+     "id": "pump_shaft",
+     "name": "Pump Shaft",
+     "info_ref": "pump_shaft",
+     "function": "Transmits torque from the coupling to the impeller(s).",
+     "material": "Carbon steel, 4140 alloy steel, 410/420 or 316 stainless, duplex."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "flow": {
+     "typical_range": "5 – 1,000",
+     "unit": "m³/h"
+    },
+    "head": {
+     "typical_range": "5 – 80",
+     "unit": "m"
+    },
+    "pressure": {
+     "typical_range": "up to ~10",
+     "unit": "bar"
+    },
+    "speed": {
+     "typical_range": "1,450 – 2,900",
+     "unit": "rpm"
+    },
+    "efficiency": {
+     "typical_range": "40 – 75",
+     "unit": "%"
+    }
+   },
+   "additional": {
+    "suction_lift": {
+     "typical_range": "up to ~7.5",
+     "unit": "m",
+     "note": "reduced at altitude and with warm liquids"
+    },
+    "solids": {
+     "typical_range": "up to ~75",
+     "unit": "mm",
+     "note": "trash-pump designs"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Baseplate on a level foundation or skid."
+   ],
+   "alignment": [
+    "Check alignment of frame-mounted units."
+   ],
+   "piping": [
+    "Keep the suction line short, airtight and rising to the pump.",
+    "Provide an air-release path from the discharge (open discharge or air-release line)."
+   ],
+   "commissioning": [
+    "Fill the casing through the fill plug.",
+    "Check priming time on first start."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check priming liquid level and flap valve.",
+     "part": "flap_valve",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check and reset wear-plate clearance.",
+     "part": "wear_plate",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace impeller, wear plate and seal.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Bearing-frame oil per manual."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Will not prime",
+     "category": "priming",
+     "symptoms": [
+      "Long priming time, no flow"
+     ],
+     "causes": [
+      "Suction air leaks",
+      "Worn wear plate",
+      "Flap valve leaking",
+      "No air escape"
+     ],
+     "remedies": [
+      "Seal suction joints",
+      "Reset clearance",
+      "Repair flap"
+     ],
+     "part": "flap_valve"
+    },
+    {
+     "problem": "Overheating during priming",
+     "category": "thermal",
+     "symptoms": [
+      "Hot casing"
+     ],
+     "causes": [
+      "Long priming with little liquid"
+     ],
+     "remedies": [
+      "Limit priming time; refill casing"
+     ],
+     "part": "casing"
+    },
+    {
+     "problem": "Wear-plate wear",
+     "category": "wear",
+     "symptoms": [
+      "Lower head and longer priming"
+     ],
+     "causes": [
+      "Abrasives"
+     ],
+     "remedies": [
+      "Replace wear plate"
+     ],
+     "part": "wear_plate"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Self-Priming Centrifugal Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "self_priming_centrifugal_pump.glb",
+    "duration_s": 60.2,
+    "script": [
+     {
+      "narration": "This module introduces the Self-Priming Centrifugal Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A self-priming centrifugal pump can evacuate air from its suction line by itself once the casing has been filled.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A priming chamber above the impeller retains liquid; during priming the impeller mixes it with air, the air separates in the chamber and escapes through the discharge, and the liquid recirculates until the suction line is full.",
+      "duration_s": 15.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include construction dewatering; pumping from pits and tanks below the pump (suction lift); wastewater and slurry transfer with solids; marine bilge and ballast.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Casing with Priming Chamber, Semi-Open Impeller (3-vane, solids-handling), Replaceable Wear Plate, Casing Cover & Seal Chamber.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Self-Priming Centrifugal Pump — Operation",
+    "type": "in_app_tour",
+    "model": "self_priming_centrifugal_pump.glb",
+    "duration_s": 36.1,
+    "script": [
+     {
+      "narration": "How the Self-Priming Centrifugal Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The casing is filled with liquid before the first start; the flap valve keeps it there.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "flap_valve",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The impeller whips the retained liquid and air from the suction line into a froth.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In the priming chamber the air separates and leaves through the discharge.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The separated liquid returns through the recirculation port to the impeller.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When all air is removed the pump runs as a normal centrifugal pump.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Self-Priming Centrifugal Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "self_priming_centrifugal_pump.glb",
+    "duration_s": 39.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Self-Priming Centrifugal Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check priming liquid level and flap valve.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flap_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check and reset wear-plate clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wear_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace impeller, wear plate and seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for will not prime: long priming time, no flow. Common cause: suction air leaks.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "flap_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating during priming: hot casing. Common cause: long priming with little liquid.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wear-plate wear: lower head and longer priming. Common cause: abrasives.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "wear_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What must be in the casing before a self-priming pump is first started?",
+     "options": [
+      "Air",
+      "Liquid",
+      "Oil",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "It needs liquid to create the air–liquid mixture.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does the air from the suction line leave the pump?",
+     "options": [
+      "Through the seal",
+      "Through the discharge",
+      "Through the flap valve",
+      "Through the bearing frame"
+     ],
+     "answer": 1,
+     "explanation": "Air separates in the chamber and exits via the discharge.",
+     "level": "basic"
+    },
+    {
+     "question": "A worn wear plate causes…",
+     "options": [
+      "Faster priming",
+      "Slower priming and lower head",
+      "More flow",
+      "No change"
+     ],
+     "answer": 1,
+     "explanation": "Larger clearances reduce the priming ability.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the role of the flap valve?",
+     "options": [
+      "Throttle flow",
+      "Hold liquid in the casing when stopped",
+      "Cool the pump",
+      "Measure flow"
+     ],
+     "answer": 1,
+     "explanation": "So the pump can re-prime.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Volute plus integral priming/separation chamber and elevated suction passage that retain liquid for re-priming.\"",
+     "options": [
+      "Casing with Priming Chamber",
+      "Radial Bearing (Inboard)",
+      "Electric Motor – Rotor & Shaft",
+      "Suction Flap Check Valve"
+     ],
+     "answer": 0,
+     "explanation": "Casing with Priming Chamber: Volute plus integral priming/separation chamber and elevated suction passage that retain liquid for re-priming.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the liquid; open/semi-open design tolerates solids and stringy material.\"",
+     "options": [
+      "Casing Cover & Seal Chamber",
+      "Semi-Open Impeller (3-vane, solids-handling)",
+      "Coupling Guard",
+      "Baseplate"
+     ],
+     "answer": 1,
+     "explanation": "Semi-Open Impeller (3-vane, solids-handling): Adds energy to the liquid; open/semi-open design tolerates solids and stringy material.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Renewable surface opposite the open impeller face; sets the front clearance.\"",
+     "options": [
+      "Replaceable Wear Plate",
+      "Electric Motor – Bearings (DE & NDE)",
+      "Casing Cover & Seal Chamber",
+      "Coupling Guard"
+     ],
+     "answer": 0,
+     "explanation": "Replaceable Wear Plate: Renewable surface opposite the open impeller face; sets the front clearance.",
+     "level": "basic",
+     "part": "wear_plate",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

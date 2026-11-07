@@ -1,0 +1,622 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "steam_trap",
+ "no": 49,
+ "title": "Steam Trap",
+ "model_title": "Steam Trap (Inverted Bucket)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A steam trap is an automatic valve that discharges condensate and air from steam systems while preventing live steam from escaping. In the inverted bucket trap, steam under the bucket makes it float and close the valve; when condensate fills the bucket and the trapped steam escapes through the vent hole, the bucket sinks, opens the valve and system pressure pushes the condensate out.",
+   "applications": [
+    "Steam main drip legs",
+    "Heat exchangers, reboilers and coils",
+    "Steam tracing",
+    "Turbine and plant steam systems (alumina digestion, evaporation)"
+   ],
+   "key_points": [
+    "Mechanical (bucket, float), thermostatic and thermodynamic families",
+    "Failed-open traps waste energy; failed-closed traps waterlog equipment",
+    "Regular trap surveys pay back quickly"
+   ],
+   "classification": {
+    "family": "Steam system automatic valve",
+    "type": "Mechanical trap — inverted bucket"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A steam trap automatically drains condensate (and air) from steam lines and equipment while holding back live steam. In the inverted bucket trap, steam entering under the bucket makes it float and close the valve; when condensate fills the bucket and the steam escapes through the small vent hole, the bucket sinks, opens the valve and condensate is pushed out — an intermittent cycle."
+  },
+  "model_3d": {
+   "asset": "glb/steam_trap.glb",
+   "metadata": "meta/steam_trap.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3868,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Condensate from the steam line enters through the inlet riser.",
+    "Steam entering under the bucket makes it buoyant — the bucket rises.",
+    "The lever presses the valve head onto the seat — no steam escapes."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Condensate from the steam line enters through the inlet riser.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam entering under the bucket makes it buoyant — the bucket rises.",
+     "part": "bucket",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The lever presses the valve head onto the seat — no steam escapes.",
+     "part": "valve_lever",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam condenses / vents through the bucket hole; condensate fills the bucket and it sinks.",
+     "part": "condensate",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The valve opens and condensate is pushed out to the return line.",
+     "part": "pipework",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Intermittent discharge; capacity depends on orifice size and differential pressure."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "steam_trap_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/steam_trap.json#components",
+   "key_components": "Inverted bucket, lever, valve seat, vent hole",
+   "parts": [
+    {
+     "id": "body",
+     "name": "Trap Body, Cap, Inlet Riser & Valve Seat",
+     "info_ref": "stt_body",
+     "function": "Pressure housing with inlet riser and discharge valve seat at the top.",
+     "material": "Cast iron, cast steel, stainless."
+    },
+    {
+     "id": "bucket",
+     "name": "Inverted Bucket (with vent hole)",
+     "info_ref": "stt_bucket",
+     "function": "Floats on trapped steam and sinks when filled with condensate.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "valve_lever",
+     "name": "Lever & Valve Head",
+     "info_ref": "stt_lever",
+     "function": "Links bucket motion to the valve head on the orifice.",
+     "material": "Stainless/chrome steel."
+    },
+    {
+     "id": "condensate",
+     "name": "Condensate (water seal) — animated",
+     "info_ref": "stt_condensate",
+     "function": "Condensate collected in the trap (water seal).",
+     "material": "—"
+    },
+    {
+     "id": "pipework",
+     "name": "Inlet from Steam Main Drip Leg / Outlet to Condensate Return",
+     "info_ref": "pipework",
+     "function": "Connects the pump to the system.",
+     "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "1/2\" – 2\"",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "up to ~17 – 45 (orifice selected for max ΔP)",
+     "unit": "bar"
+    },
+    "temperature": {
+     "typical_range": "up to ~400",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "Condensate capacity ~ 10 – 5,000+",
+     "unit": "kg/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the valve and adjoining pipe so the body does not carry pipe weight or thermal loads; heavy valves need their own supports."
+   ],
+   "alignment": [
+    "Align flanges face-to-face and bore-to-bore before bolting; never pull pipes into place with the bolts.",
+    "Respect the flow-direction arrow on the body."
+   ],
+   "piping": [
+    "Install below the drain point with a strainer and isolation valves; provide a test/sight point.",
+    "Prime (fill) inverted bucket traps before start-up."
+   ],
+   "commissioning": [
+    "Check the valve strokes fully and smoothly.",
+    "Pressure-test the line (shell test) with the valve partly open; do not use the valve to blind a test above its seat rating.",
+    "Record the as-installed position and set points."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Survey traps with ultrasound/temperature.",
+     "part": "body",
+     "interval": "quarterly – annually"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean strainer.",
+     "part": "pipework",
+     "interval": "semi-annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace valve and seat mechanism.",
+     "part": "valve_lever"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Blowing steam (failed open)",
+     "category": "performance",
+     "symptoms": [
+      "Live steam at outlet, high return temperature"
+     ],
+     "causes": [
+      "Lost water seal, worn seat"
+     ],
+     "remedies": [
+      "Re-prime, replace mechanism"
+     ],
+     "part": "valve_lever"
+    },
+    {
+     "problem": "Blocked (failed closed)",
+     "category": "blockage",
+     "symptoms": [
+      "Cold trap, waterlogged equipment"
+     ],
+     "causes": [
+      "Dirt, closed vent"
+     ],
+     "remedies": [
+      "Clean strainer and orifice"
+     ],
+     "part": "bucket"
+    },
+    {
+     "problem": "Water hammer",
+     "category": "performance",
+     "symptoms": [
+      "Banging in steam lines"
+     ],
+     "causes": [
+      "Condensate not drained"
+     ],
+     "remedies": [
+      "Restore trap function, proper drip legs"
+     ],
+     "part": "body"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Steam Trap — Introduction",
+    "type": "in_app_tour",
+    "model": "steam_trap.glb",
+    "duration_s": 57.4,
+    "script": [
+     {
+      "narration": "This module introduces the Steam Trap.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A steam trap is an automatic valve that discharges condensate and air from steam systems while preventing live steam from escaping.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In the inverted bucket trap, steam under the bucket makes it float and close the valve; when condensate fills the bucket and the trapped steam escapes through the vent hole, the bucket sinks, opens the valve and system pressure pushes the condensate out.",
+      "duration_s": 17.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include steam main drip legs; heat exchangers, reboilers and coils; steam tracing; turbine and plant steam systems (alumina digestion, evaporation).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Trap Body, Cap, Inlet Riser & Valve Seat.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Steam Trap — Operation",
+    "type": "in_app_tour",
+    "model": "steam_trap.glb",
+    "duration_s": 32.8,
+    "script": [
+     {
+      "narration": "How the Steam Trap works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Condensate from the steam line enters through the inlet riser.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam entering under the bucket makes it buoyant — the bucket rises.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "bucket",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The lever presses the valve head onto the seat — no steam escapes.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "valve_lever",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam condenses / vents through the bucket hole; condensate fills the bucket and it sinks.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "condensate",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The valve opens and condensate is pushed out to the return line.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "pipework",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Steam Trap — Maintenance",
+    "type": "in_app_tour",
+    "model": "steam_trap.glb",
+    "duration_s": 41.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Steam Trap.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Survey traps with ultrasound/temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean strainer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pipework",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace valve and seat mechanism.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valve_lever",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for blowing steam (failed open): live steam at outlet, high return temperature. Common cause: lost water seal, worn seat.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "valve_lever",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for blocked (failed closed): cold trap, waterlogged equipment. Common cause: dirt, closed vent.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "bucket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water hammer: banging in steam lines. Common cause: condensate not drained.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What makes the inverted bucket float?",
+     "options": [
+      "Condensate",
+      "Steam trapped under the bucket",
+      "A spring",
+      "A motor"
+     ],
+     "answer": 1,
+     "explanation": "Steam buoyancy.",
+     "level": "basic"
+    },
+    {
+     "question": "A trap that has failed open…",
+     "options": [
+      "Waterlogs equipment",
+      "Wastes live steam",
+      "Saves energy",
+      "Stops flow"
+     ],
+     "answer": 1,
+     "explanation": "Energy loss.",
+     "level": "basic"
+    },
+    {
+     "question": "Best routine check for steam traps?",
+     "options": [
+      "Paint them",
+      "Ultrasonic/temperature survey",
+      "Shake them",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "Trap surveys.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure housing with inlet riser and discharge valve seat at the top.\"",
+     "options": [
+      "Trap Body, Cap, Inlet Riser & Valve Seat",
+      "Inverted Bucket (with vent hole)",
+      "Inlet from Steam Main Drip Leg / Outlet to Condensate Return",
+      "Condensate (water seal) — animated"
+     ],
+     "answer": 0,
+     "explanation": "Trap Body, Cap, Inlet Riser & Valve Seat: Pressure housing with inlet riser and discharge valve seat at the top.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Floats on trapped steam and sinks when filled with condensate.\"",
+     "options": [
+      "Inverted Bucket (with vent hole)",
+      "Trap Body, Cap, Inlet Riser & Valve Seat",
+      "Inlet from Steam Main Drip Leg / Outlet to Condensate Return",
+      "Condensate (water seal) — animated"
+     ],
+     "answer": 0,
+     "explanation": "Inverted Bucket (with vent hole): Floats on trapped steam and sinks when filled with condensate.",
+     "level": "basic",
+     "part": "bucket",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Links bucket motion to the valve head on the orifice.\"",
+     "options": [
+      "Inlet from Steam Main Drip Leg / Outlet to Condensate Return",
+      "Condensate (water seal) — animated",
+      "Inverted Bucket (with vent hole)",
+      "Lever & Valve Head"
+     ],
+     "answer": 3,
+     "explanation": "Lever & Valve Head: Links bucket motion to the valve head on the orifice.",
+     "level": "basic",
+     "part": "valve_lever",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

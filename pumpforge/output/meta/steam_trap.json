@@ -1,0 +1,424 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "steam_trap",
+  "title": "Steam Trap (Inverted Bucket)",
+  "category": "6 · Valves & Piping – Additional Equipment",
+  "library": {
+    "no": 49,
+    "phase": 4,
+    "eq_id": "EQ-127",
+    "subcategory": "Steam System",
+    "hi_family": "valves_piping",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "steam_trap_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "condensate",
+      "kind": "water",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.45,
+          0.135,
+          -0.0
+        ],
+        [
+          0.0,
+          0.135,
+          -0.0
+        ],
+        [
+          0.0,
+          0.28,
+          -0.0
+        ],
+        [
+          0.04,
+          0.22,
+          -0.0
+        ],
+        [
+          0.065,
+          0.3,
+          -0.0
+        ],
+        [
+          0.0,
+          0.355,
+          -0.0
+        ],
+        [
+          0.45,
+          0.365,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.62,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.004,
+      "points": [
+        [
+          -0.45,
+          0.135,
+          -0.01
+        ],
+        [
+          0.0,
+          0.135,
+          -0.01
+        ],
+        [
+          0.0,
+          0.29,
+          -0.01
+        ]
+      ],
+      "active": [
+        [
+          0.05,
+          0.55
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 3868,
+    "parts": 5
+  },
+  "summary": "A steam trap automatically drains condensate (and air) from steam lines and equipment while holding back live steam. In the inverted bucket trap, steam entering under the bucket makes it float and close the valve; when condensate fills the bucket and the steam escapes through the small vent hole, the bucket sinks, opens the valve and condensate is pushed out — an intermittent cycle.",
+  "classification": {
+    "family": "Steam system automatic valve",
+    "type": "Mechanical trap — inverted bucket"
+  },
+  "model_configuration": {
+    "animation": "Steam in → bucket floats → valve shut; condensate in → bucket sinks → discharge",
+    "other_types": "Float & thermostatic, thermodynamic disc, thermostatic (bimetal/balanced pressure)"
+  },
+  "standards": [
+    {
+      "id": "ISO 6552 / EN 26552",
+      "title": "Automatic steam traps — definitions",
+      "relevance": "Classification.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 7841",
+      "title": "Steam loss determination",
+      "relevance": "Testing.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Spirax Sarco — Steam and Condensate Loop (generic)",
+    "US DOE — Steam System Sourcebook"
+  ],
+  "parts": [
+    {
+      "id": "body",
+      "name": "Trap Body, Cap, Inlet Riser & Valve Seat",
+      "group": "body",
+      "section_role": "split",
+      "nodes": [
+        "body__back",
+        "body__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.15,
+        0.1,
+        -0.095
+      ],
+      "bbox_max": [
+        0.15,
+        0.39,
+        0.095
+      ],
+      "label_anchor": [
+        0.0,
+        0.245,
+        0.095
+      ],
+      "center": [
+        0.0,
+        0.245,
+        -0.0
+      ],
+      "info_ref": "stt_body"
+    },
+    {
+      "id": "bucket",
+      "name": "Inverted Bucket (with vent hole)",
+      "group": "float",
+      "section_role": "split",
+      "nodes": [
+        "bucket__back",
+        "bucket__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.06,
+        0.14,
+        -0.06
+      ],
+      "bbox_max": [
+        0.06,
+        0.3,
+        0.06
+      ],
+      "label_anchor": [
+        0.0,
+        0.22,
+        0.06
+      ],
+      "center": [
+        0.0,
+        0.22,
+        -0.0
+      ],
+      "info_ref": "stt_bucket"
+    },
+    {
+      "id": "valve_lever",
+      "name": "Lever & Valve Head",
+      "group": "disc",
+      "section_role": "keep",
+      "nodes": [
+        "lev"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.25,
+        0.3
+      ],
+      "bbox_min": [
+        -0.006,
+        0.3,
+        -0.006
+      ],
+      "bbox_max": [
+        0.006,
+        0.349,
+        0.006
+      ],
+      "label_anchor": [
+        0.0,
+        0.3245,
+        0.006
+      ],
+      "center": [
+        0.0,
+        0.3245,
+        -0.0
+      ],
+      "info_ref": "stt_lever"
+    },
+    {
+      "id": "condensate",
+      "name": "Condensate (water seal) — animated",
+      "group": "flow_tracers",
+      "section_role": "split",
+      "nodes": [
+        "condensate__back",
+        "condensate__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.074,
+        0.113,
+        -0.074
+      ],
+      "bbox_max": [
+        0.074,
+        0.13,
+        0.074
+      ],
+      "label_anchor": [
+        0.0,
+        0.1215,
+        0.074
+      ],
+      "center": [
+        0.0,
+        0.1215,
+        -0.0
+      ],
+      "info_ref": "stt_condensate"
+    },
+    {
+      "id": "pipework",
+      "name": "Inlet from Steam Main Drip Leg / Outlet to Condensate Return",
+      "group": "system_piping",
+      "section_role": "split",
+      "nodes": [
+        "pipework__back",
+        "pipework__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.45,
+        0.12,
+        -0.015
+      ],
+      "bbox_max": [
+        0.45,
+        0.377,
+        0.015
+      ],
+      "label_anchor": [
+        0.0,
+        0.2485,
+        0.015
+      ],
+      "center": [
+        0.0,
+        0.2485,
+        -0.0
+      ],
+      "info_ref": "pipework"
+    }
+  ],
+  "components": {
+    "stt_body": {
+      "function": "Pressure housing with inlet riser and discharge valve seat at the top.",
+      "construction": "Cast body and cap.",
+      "material": "Cast iron, cast steel, stainless.",
+      "operating_conditions": "Install below the drain point, upright.",
+      "failure_modes": [
+        "Body erosion",
+        "Freezing damage"
+      ],
+      "inspection": [
+        "Ultrasonic / temperature test"
+      ]
+    },
+    "stt_bucket": {
+      "function": "Floats on trapped steam and sinks when filled with condensate.",
+      "construction": "Inverted cup with small vent hole at the top.",
+      "material": "Stainless steel.",
+      "operating_conditions": "Needs a water seal (prime) to work.",
+      "failure_modes": [
+        "Loss of prime → blows steam"
+      ],
+      "inspection": [
+        "Ensure water seal"
+      ]
+    },
+    "stt_lever": {
+      "function": "Links bucket motion to the valve head on the orifice.",
+      "construction": "Lever and hardened valve ball.",
+      "material": "Stainless/chrome steel.",
+      "operating_conditions": "Orifice size set by ΔP.",
+      "failure_modes": [
+        "Valve wear → steam leak"
+      ],
+      "inspection": [
+        "Test with ultrasound"
+      ]
+    },
+    "stt_condensate": {
+      "function": "Condensate collected in the trap (water seal).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "Level rises until the bucket sinks.",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "pipework": {
+      "function": "Connects the pump to the system.",
+      "construction": "Flanged pipe spools, fittings and supports; suction piping laid out to give uniform flow into the pump (straight run, eccentric reducers flat side up).",
+      "material": "Carbon steel, stainless steel, ductile iron, HDPE/PVC as appropriate.",
+      "operating_conditions": "Piping must be supported independently so nozzle loads stay within limits.",
+      "failure_modes": [
+        "Nozzle overload from unsupported piping",
+        "Air pockets in suction",
+        "Corrosion"
+      ],
+      "inspection": [
+        "Check supports and flange alignment before bolting to pump"
+      ]
+    }
+  }
+}

@@ -1,0 +1,603 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pig_receiver",
+ "no": 60,
+ "title": "Pig Receiver",
+ "model_title": "Pig Receiver (Pipeline Pig Trap — Receiving)",
+ "category": "6 · Valves & Piping – Additional Equipment",
+ "phase": 4,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pig receiver is the trap at the downstream end of a pipeline section that catches the arriving pig and the debris it pushes. Flow is routed through the barrel so the pig is carried in; after it arrives, the trap is isolated, drained and depressurised, and the pig is removed through the closure door.",
+   "applications": [
+    "Oil, gas and product pipelines",
+    "Slurry pipelines",
+    "Pipeline cleaning and inspection campaigns"
+   ],
+   "key_points": [
+    "Barrel long enough for pig trains and debris",
+    "Check for hazardous deposits (pyrophoric iron sulphide, NORM) before opening",
+    "Door interlock"
+   ],
+   "classification": {
+    "family": "Pipeline equipment",
+    "type": "Horizontal pig receiving trap"
+   },
+   "hi_family": "valves_piping",
+   "summary": "A pig receiver is the trap at the downstream end of a pipeline section that catches the arriving pig. Flow is diverted through the barrel so the pig is carried in; once it has arrived the trap is isolated, drained and depressurised, and the pig and collected debris are removed through the closure door."
+  },
+  "model_3d": {
+   "asset": "glb/pig_receiver.glb",
+   "metadata": "meta/pig_receiver.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8608,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The trap valve is opened so flow passes through the barrel.",
+    "The arriving pig is carried through the reducer into the barrel.",
+    "Flow leaves via the outlet line back to the station."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The trap valve is opened so flow passes through the barrel.",
+     "part": "valves",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The arriving pig is carried through the reducer into the barrel.",
+     "part": "pig",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flow leaves via the outlet line back to the station.",
+     "part": "pipeline_kicker",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The signaller confirms arrival; the trap is isolated, drained and vented.",
+     "part": "pig_signaller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The closure is opened and the pig and debris are removed.",
+     "part": "closure",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "—"
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pig_receiver_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/pig_receiver.json#components",
+   "key_components": "Barrel, closure, outlet line, valves, signaller",
+   "parts": [
+    {
+     "id": "barrel",
+     "name": "Oversize Barrel (Major Barrel), Reducer, Saddles, Vent & Drain",
+     "info_ref": "pig_barrel",
+     "function": "Receives and holds the arriving pig and debris.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "closure",
+     "name": "Quick-Opening Closure Door (with safety pressure-warning lock)",
+     "info_ref": "pig_closure",
+     "function": "Access to remove the pig.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "pipeline_kicker",
+     "name": "Pipeline Tie-in and Kicker / Outlet Line",
+     "info_ref": "pig_lines",
+     "function": "Bypass/kicker line around the trap.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "valves",
+     "name": "Trap Valve & Outlet (to station) Valve",
+     "info_ref": "pig_valves",
+     "function": "Isolate and line up the trap.",
+     "material": "Steel."
+    },
+    {
+     "id": "pig_signaller",
+     "name": "Pig Passage Indicator (Signaller)",
+     "info_ref": "pig_signaller",
+     "function": "Shows the pig has arrived/passed.",
+     "material": "Steel."
+    },
+    {
+     "id": "pig",
+     "name": "Cleaning Pig (cup/disc type) — moves with the flow",
+     "info_ref": "pig_pig",
+     "function": "Cleaning or inspection pig arriving with the flow.",
+     "material": "Steel, polyurethane."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pipeline DN 100 – 1,400",
+     "unit": ""
+    },
+    "pressure_rating": {
+     "typical_range": "Per pipeline class",
+     "unit": ""
+    },
+    "temperature": {
+     "typical_range": "Per service",
+     "unit": "°C"
+    },
+    "flow_capacity": {
+     "typical_range": "—",
+     "unit": ""
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "head": null,
+     "speed_rpm": null,
+     "efficiency_pct": null,
+     "npshr": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Barrel on saddles/foundations designed for pig impact and thermal movement."
+   ],
+   "alignment": [
+    "Align barrel, reducer and pipeline so pigs pass freely."
+   ],
+   "piping": [
+    "Trap valve must be full bore; kicker/bypass sized to drive the pig.",
+    "Provide vents, drains, pressure gauge and pig signaller."
+   ],
+   "commissioning": [
+    "Gauge-pig run to prove bore.",
+    "Test door interlock and pressure-warning device."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check closure seal and interlock.",
+     "part": "closure",
+     "interval": "each operation"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean barrel and drains.",
+     "part": "barrel",
+     "interval": "after each run"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect valves for seat damage from debris.",
+     "part": "valves"
+    }
+   ],
+   "lubrication": [
+    "Closure mechanism."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Debris blocking drains",
+     "category": "blockage",
+     "symptoms": [
+      "Cannot drain trap"
+     ],
+     "causes": [
+      "Wax, sludge"
+     ],
+     "remedies": [
+      "Larger drains, flushing"
+     ],
+     "part": "barrel"
+    },
+    {
+     "problem": "Pyrophoric fire on opening",
+     "category": "performance",
+     "symptoms": [
+      "Smouldering debris"
+     ],
+     "causes": [
+      "Iron sulphide exposed to air"
+     ],
+     "remedies": [
+      "Keep wet, inert"
+     ],
+     "part": "closure"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pig Receiver — Introduction",
+    "type": "in_app_tour",
+    "model": "pig_receiver.glb",
+    "duration_s": 49.2,
+    "script": [
+     {
+      "narration": "This module introduces the Pig Receiver.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pig receiver is the trap at the downstream end of a pipeline section that catches the arriving pig and the debris it pushes.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flow is routed through the barrel so the pig is carried in; after it arrives, the trap is isolated, drained and depressurised, and the pig is removed through the closure door.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include oil, gas and product pipelines; slurry pipelines; pipeline cleaning and inspection campaigns.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pig Receiver — Operation",
+    "type": "in_app_tour",
+    "model": "pig_receiver.glb",
+    "duration_s": 30.8,
+    "script": [
+     {
+      "narration": "How the Pig Receiver works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The trap valve is opened so flow passes through the barrel.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "valves",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The arriving pig is carried through the reducer into the barrel.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "pig",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flow leaves via the outlet line back to the station.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "pipeline_kicker",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The signaller confirms arrival; the trap is isolated, drained and vented.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "pig_signaller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The closure is opened and the pig and debris are removed.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "closure",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pig Receiver — Maintenance",
+    "type": "in_app_tour",
+    "model": "pig_receiver.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pig Receiver.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check closure seal and interlock.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "closure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean barrel and drains.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "barrel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect valves for seat damage from debris.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for debris blocking drains: cannot drain trap. Common cause: wax, sludge.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "barrel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pyrophoric fire on opening: smouldering debris. Common cause: iron sulphide exposed to air.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "closure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What must be done before opening a receiver door?",
+     "options": [
+      "Nothing",
+      "Isolate, drain, depressurise and check for hazardous deposits",
+      "Increase flow",
+      "Open the kicker"
+     ],
+     "answer": 1,
+     "explanation": "Safe isolation.",
+     "level": "basic"
+    },
+    {
+     "question": "Why might receiver debris be hazardous?",
+     "options": [
+      "It is cold",
+      "It may contain pyrophoric iron sulphide or NORM",
+      "It is magnetic",
+      "It is never hazardous"
+     ],
+     "answer": 1,
+     "explanation": "Pipeline deposits.",
+     "level": "basic"
+    },
+    {
+     "question": "How does the pig enter the receiver?",
+     "options": [
+      "Pulled by cable",
+      "Carried by the flow through the open trap valve",
+      "Gravity",
+      "Manually"
+     ],
+     "answer": 1,
+     "explanation": "Flow-driven.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Receives and holds the arriving pig and debris.\"",
+     "options": [
+      "Pig Passage Indicator (Signaller)",
+      "Quick-Opening Closure Door (with safety pressure-warning lock)",
+      "Trap Valve & Outlet (to station) Valve",
+      "Oversize Barrel (Major Barrel), Reducer, Saddles, Vent & Drain"
+     ],
+     "answer": 3,
+     "explanation": "Oversize Barrel (Major Barrel), Reducer, Saddles, Vent & Drain: Receives and holds the arriving pig and debris.",
+     "level": "basic",
+     "part": "barrel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Access to remove the pig.\"",
+     "options": [
+      "Quick-Opening Closure Door (with safety pressure-warning lock)",
+      "Pipeline Tie-in and Kicker / Outlet Line",
+      "Pig Passage Indicator (Signaller)",
+      "Oversize Barrel (Major Barrel), Reducer, Saddles, Vent & Drain"
+     ],
+     "answer": 0,
+     "explanation": "Quick-Opening Closure Door (with safety pressure-warning lock): Access to remove the pig.",
+     "level": "basic",
+     "part": "closure",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Bypass/kicker line around the trap.\"",
+     "options": [
+      "Oversize Barrel (Major Barrel), Reducer, Saddles, Vent & Drain",
+      "Pipeline Tie-in and Kicker / Outlet Line",
+      "Trap Valve & Outlet (to station) Valve",
+      "Cleaning Pig (cup/disc type) — moves with the flow"
+     ],
+     "answer": 1,
+     "explanation": "Pipeline Tie-in and Kicker / Outlet Line: Bypass/kicker line around the trap.",
+     "level": "basic",
+     "part": "pipeline_kicker",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}
