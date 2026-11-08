@@ -1,0 +1,649 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vacuum_ejector",
+ "no": 80,
+ "title": "Vacuum Ejector",
+ "model_title": "Steam Jet Vacuum Ejector (Single Stage)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A steam jet vacuum ejector has no moving parts. Motive steam expands in a converging–diverging nozzle to supersonic speed and low pressure, entraining gas from the suction chamber; the diffuser then slows the mixture and recovers its pressure to the discharge.",
+   "applications": [
+    "Refinery vacuum distillation",
+    "Steam-turbine condenser air removal",
+    "Evaporators and crystallisers",
+    "Deodorisers (edible oil)"
+   ],
+   "key_points": [
+    "No moving parts — very reliable",
+    "Uses motive steam (energy cost)",
+    "Multi-stage with condensers for deep vacuum",
+    "Sensitive to steam pressure and discharge pressure"
+   ],
+   "classification": {
+    "family": "Kinetic (jet) vacuum device",
+    "type": "Single-stage steam jet ejector"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A steam jet vacuum ejector has no moving parts. High-pressure motive steam expands through a converging–diverging nozzle to very high (supersonic) velocity and low pressure, which entrains gas from the suction chamber. In the diffuser the mixture slows down and its pressure rises to the discharge pressure. Several ejectors in series with condensers reach deep vacuum."
+  },
+  "model_3d": {
+   "asset": "glb/vacuum_ejector.glb",
+   "metadata": "meta/vacuum_ejector.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11740,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Motive steam enters the steam chest at high pressure.",
+    "The nozzle converts pressure into a supersonic jet.",
+    "The jet entrains gas from the suction chamber."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Motive steam enters the steam chest at high pressure.",
+     "part": "steam_chest",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The nozzle converts pressure into a supersonic jet.",
+     "part": "nozzle",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The jet entrains gas from the suction chamber.",
+     "part": "suction_chamber",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In the diffuser the mixture slows and the pressure recovers.",
+     "part": "diffuser",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Suction pressure vs non-condensable load (ejector curve); breaks if discharge pressure exceeds the design limit."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vacuum_ejector_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "vacuum_ejector_pressure.glb",
+     "title": "Pressure through the ejector",
+     "description": "High-pressure motive steam expands in the nozzle to supersonic speed and very low pressure, entraining gas from the suction chamber. In the diffuser the mixture slows down and its pressure recovers (shock in the throat) to the discharge (condenser) pressure.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Motive steam: high pressure",
+       "anchor": [
+        -0.55,
+        0.68,
+        -0.0
+       ]
+      },
+      {
+       "text": "Suction chamber: lowest pressure (vacuum)",
+       "anchor": [
+        -0.2,
+        0.3,
+        -0.0
+       ]
+      },
+      {
+       "text": "Diffuser: pressure recovery",
+       "anchor": [
+        0.45,
+        0.7,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/vacuum_ejector.json#components",
+   "key_components": "Steam nozzle, suction chamber, diffuser",
+   "parts": [
+    {
+     "id": "steam_chest",
+     "name": "Motive Steam Chest & Inlet Flange",
+     "info_ref": "ej_steam_chest",
+     "function": "Receives motive steam.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "nozzle",
+     "name": "Converging–Diverging Steam Nozzle",
+     "info_ref": "ej_nozzle",
+     "function": "Converts steam pressure into velocity.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "suction_chamber",
+     "name": "Suction Chamber & Suction Flange (load connection)",
+     "info_ref": "ej_suction_chamber",
+     "function": "Where the jet entrains the process gas.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "diffuser",
+     "name": "Diffuser (converging inlet, throat, diverging outlet)",
+     "info_ref": "ej_diffuser",
+     "function": "Recovers pressure as the mixture slows down.",
+     "material": "Carbon/stainless steel."
+    },
+    {
+     "id": "piping",
+     "name": "Motive Steam Line, Suction (process) Line & Discharge to Condenser",
+     "info_ref": "ej_piping",
+     "function": "Motive steam, suction and discharge lines.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "ej_supports",
+     "function": "Support the ejector.",
+     "material": "Steel."
+    },
+    {
+     "id": "steam_jet",
+     "name": "Motive Steam Jet (tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "entrained_gas",
+     "name": "Entrained Gas (tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Suction DN 25 – 1500",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Steam consumption ~ kg/h per kg/h of load (design specific)",
+     "unit": "kg/h"
+    },
+    "speed": {
+     "typical_range": "— (no moving parts)",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Load: kg/h of air/vapour",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "suction_pressure": {
+     "typical_range": "~ 50 mbar per stage; < 1 mbar with 4–6 stages",
+     "unit": "mbar(a)"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Install diffuser outlet to condenser without pipe strain; keep nozzle concentric."
+   ],
+   "piping": [
+    "Supply dry, superheated motive steam at design pressure with a strainer and separator."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check motive steam pressure and suction pressure.",
+     "part": "steam_chest",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect and clean the nozzle throat.",
+     "part": "nozzle",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect diffuser for erosion; replace nozzle.",
+     "part": "diffuser"
+    }
+   ],
+   "lubrication": [
+    "No lubrication required."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of vacuum (\"break\")",
+     "category": "performance",
+     "symptoms": [
+      "Suction pressure jumps up"
+     ],
+     "causes": [
+      "Low steam pressure, high discharge pressure, worn nozzle"
+     ],
+     "remedies": [
+      "Restore steam/condenser; replace nozzle"
+     ],
+     "part": "nozzle"
+    },
+    {
+     "problem": "Air in-leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Higher load, poor vacuum"
+     ],
+     "causes": [
+      "Leaking flanges/process"
+     ],
+     "remedies": [
+      "Leak test"
+     ],
+     "part": "suction_chamber"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vacuum Ejector — Introduction",
+    "type": "in_app_tour",
+    "model": "vacuum_ejector.glb",
+    "duration_s": 52.2,
+    "script": [
+     {
+      "narration": "This module introduces the Vacuum Ejector.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A steam jet vacuum ejector has no moving parts.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Motive steam expands in a converging–diverging nozzle to supersonic speed and low pressure, entraining gas from the suction chamber; the diffuser then slows the mixture and recovers its pressure to the discharge.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include refinery vacuum distillation; steam-turbine condenser air removal; evaporators and crystallisers; deodorisers (edible oil).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Motive Steam Chest & Inlet Flange, Converging–Diverging Steam Nozzle, Suction Chamber & Suction Flange (load connection), Diffuser (converging inlet, throat, diverging outlet).",
+      "duration_s": 11.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vacuum Ejector — Operation",
+    "type": "in_app_tour",
+    "model": "vacuum_ejector.glb",
+    "duration_s": 33.2,
+    "script": [
+     {
+      "narration": "How the Vacuum Ejector works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Motive steam enters the steam chest at high pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "steam_chest",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The nozzle converts pressure into a supersonic jet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzle",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The jet entrains gas from the suction chamber.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "suction_chamber",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In the diffuser the mixture slows and the pressure recovers.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "diffuser",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "High-pressure motive steam expands in the nozzle to supersonic speed and very low pressure, entraining gas from the suction chamber.",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vacuum Ejector — Maintenance",
+    "type": "in_app_tour",
+    "model": "vacuum_ejector.glb",
+    "duration_s": 36.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vacuum Ejector.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check motive steam pressure and suction pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "steam_chest",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect and clean the nozzle throat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect diffuser for erosion; replace nozzle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffuser",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of vacuum (\"break\"): suction pressure jumps up. Common cause: low steam pressure, high discharge pressure, worn nozzle.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "nozzle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for air in-leakage: higher load, poor vacuum. Common cause: leaking flanges/process.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "suction_chamber",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What creates the low pressure in an ejector?",
+     "options": [
+      "A piston",
+      "A high-velocity steam jet from the nozzle",
+      "A fan",
+      "A cold surface"
+     ],
+     "answer": 1,
+     "explanation": "Momentum transfer.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the diffuser do?",
+     "options": [
+      "Accelerates steam",
+      "Slows the mixture and recovers pressure",
+      "Condenses steam",
+      "Filters gas"
+     ],
+     "answer": 1,
+     "explanation": "Pressure recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Why use several stages with condensers?",
+     "options": [
+      "To use less steam for deep vacuum",
+      "For noise",
+      "For appearance",
+      "Not needed"
+     ],
+     "answer": 0,
+     "explanation": "Each stage has a limited compression ratio.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Receives motive steam.\"",
+     "options": [
+      "Diffuser (converging inlet, throat, diverging outlet)",
+      "Converging–Diverging Steam Nozzle",
+      "Motive Steam Chest & Inlet Flange",
+      "Suction Chamber & Suction Flange (load connection)"
+     ],
+     "answer": 2,
+     "explanation": "Motive Steam Chest & Inlet Flange: Receives motive steam.",
+     "level": "basic",
+     "part": "steam_chest",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts steam pressure into velocity.\"",
+     "options": [
+      "Motive Steam Jet (tracers)",
+      "Converging–Diverging Steam Nozzle",
+      "Motive Steam Chest & Inlet Flange",
+      "Suction Chamber & Suction Flange (load connection)"
+     ],
+     "answer": 1,
+     "explanation": "Converging–Diverging Steam Nozzle: Converts steam pressure into velocity.",
+     "level": "basic",
+     "part": "nozzle",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Where the jet entrains the process gas.\"",
+     "options": [
+      "Motive Steam Line, Suction (process) Line & Discharge to Condenser",
+      "Suction Chamber & Suction Flange (load connection)",
+      "Motive Steam Chest & Inlet Flange",
+      "Converging–Diverging Steam Nozzle"
+     ],
+     "answer": 1,
+     "explanation": "Suction Chamber & Suction Flange (load connection): Where the jet entrains the process gas.",
+     "level": "basic",
+     "part": "suction_chamber",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

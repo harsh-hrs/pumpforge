@@ -1,0 +1,644 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "emergency_pressure_relief_system",
+ "no": 268,
+ "title": "Emergency Pressure Relief System",
+ "model_title": "Emergency Pressure Relief System — Twin PSVs on a Change-over Valve, Rupture Disc & Relief Header",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An emergency pressure relief system protects equipment from overpressure. Spring-loaded safety valves (PSVs), often duplicated on an interlocked change-over valve, and/or a rupture disc open automatically at the set pressure and discharge into a closed relief header that drains to the flare knockout drum.",
+   "applications": [
+    "Pressure vessels, columns, exchangers and reactors in process plants",
+    "Compressors, pumps (thermal relief) and storage systems"
+   ],
+   "key_points": [
+    "Last line of defence (not a control device)",
+    "Set ≤ MAWP; accumulation 10/16/21 %",
+    "Inlet loss < 3 %, back pressure within limits",
+    "Never isolate the only PSV"
+   ],
+   "classification": {
+    "family": "Safety",
+    "type": "Twin PSVs + rupture disc + closed relief header"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "An emergency pressure relief system protects a vessel from overpressure. Spring-loaded safety valves on a change-over valve and a rupture disc open at set pressure and discharge into a relief header that drains to the flare knockout drum."
+  },
+  "model_3d": {
+   "asset": "glb/emergency_pressure_relief_system.glb",
+   "metadata": "meta/emergency_pressure_relief_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 15474,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "A fire or upset raises vessel pressure.",
+    "The PSV disc lifts at set pressure.",
+    "Gas flows into the relief header."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "A fire or upset raises vessel pressure.",
+     "part": "contents",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The PSV disc lifts at set pressure.",
+     "part": "psv_disc_spring",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas flows into the relief header.",
+     "part": "relief_header",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The change-over valve keeps one PSV always in service.",
+     "part": "changeover_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rupture disc gives fast full-bore relief if needed.",
+     "part": "rupture_disc",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "PSV lift and flow vs pressure (set, overpressure, blowdown)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "emergency_pressure_relief_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "emergency_pressure_relief_system_pressure.glb",
+     "title": "Relieve before the vessel is overstressed",
+     "description": "Every pressure vessel needs relief for its credible overpressure scenarios (blocked outlet, fire, control-valve failure, runaway reaction). A PSV is set at or below the MAWP and sized for the worst relieving rate; allowable accumulation is typically 10 % (single valve), 16 % (multiple) or 21 % (fire case) above MAWP (ASME VIII / API 520 — verify edition). Inlet pressure loss should stay below ≈ 3 % of set pressure to avoid chatter. The change-over valve allows testing a spare without losing protection.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/emergency_pressure_relief_system.json#components",
+   "key_components": "Twin PSVs, change-over valve, rupture disc, relief header",
+   "parts": [
+    {
+     "id": "protected_vessel",
+     "name": "Protected Pressure Vessel",
+     "info_ref": "epr_vessel",
+     "function": "Protected equipment.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "vessel_supports",
+     "name": "Skirt / Legs",
+     "info_ref": "epr_vessel",
+     "function": "Protected equipment.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "contents",
+     "name": "Process Liquid (fire case: boiling, vapour generation)",
+     "info_ref": "epr_vessel",
+     "function": "Protected equipment.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "vapour",
+     "name": "Vapour generated by external fire",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "changeover_valve",
+     "name": "Three-Way Change-over Valve (one PSV in service, one isolated for testing — never both closed)",
+     "info_ref": "epr_changeover",
+     "function": "Allow spare PSV maintenance.",
+     "material": "Steel."
+    },
+    {
+     "id": "safety_valves",
+     "name": "Twin Spring-Loaded Safety Valves (PSV-A in service, PSV-B spare)",
+     "info_ref": "epr_psv",
+     "function": "Relieve overpressure.",
+     "material": "Steel / stainless trim."
+    },
+    {
+     "id": "psv_disc_spring",
+     "name": "PSV-A Disc & Spring (lifts at set pressure, reseats at blowdown)",
+     "info_ref": "epr_psv",
+     "function": "Relieve overpressure.",
+     "material": "Steel / stainless trim."
+    },
+    {
+     "id": "rupture_disc",
+     "name": "Rupture Disc on a Separate Nozzle (fast, full-bore relief for rapid events)",
+     "info_ref": "epr_disc",
+     "function": "Fast relief / back-up.",
+     "material": "Stainless/nickel alloys."
+    },
+    {
+     "id": "relief_header",
+     "name": "Relief Header (self-draining, sloped to the flare knock-out drum)",
+     "info_ref": "epr_header",
+     "function": "Carry relief to flare.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "PSV orifices D … T (API 526)",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Sized for the worst credible case",
+     "unit": "kg/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Set ≤ MAWP; back pressure per valve type",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Accumulation ≤ 10 % (single), 16 % (multiple), 21 % (fire)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size per API 520 for each scenario (API 521); choose conventional / balanced bellows / pilot by back pressure."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 520",
+    "API 521"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations / supports designed for operating, test, wind/seismic and (for relief) reaction loads."
+   ],
+   "alignment": [
+    "Vessels plumb; headers sloped continuously as specified (no pockets)."
+   ],
+   "piping": [
+    "Relief/drain lines self-draining to the destination; supports for reaction and thermal loads; isolation valves car-sealed / locked as required."
+   ],
+   "commissioning": [
+    "Pressure test; verify set pressures and certificates; function-test instruments and interlocks; record as-built in the safety documentation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check car-seals / change-over position.",
+     "part": "changeover_valve",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Bench-test PSVs per interval (RBI).",
+     "part": "safety_valves",
+     "interval": "per interval"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul PSVs; replace rupture discs per schedule.",
+     "part": "rupture_disc"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication (valve stems / actuators per maker)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "PSV chatter",
+     "category": "performance",
+     "symptoms": [
+      "Rapid opening/closing, damage"
+     ],
+     "causes": [
+      "High inlet loss, oversizing"
+     ],
+     "remedies": [
+      "Fix inlet piping; resize"
+     ],
+     "part": "safety_valves"
+    },
+    {
+     "problem": "Stuck closed",
+     "category": "performance",
+     "symptoms": [
+      "No relief at set"
+     ],
+     "causes": [
+      "Fouling, corrosion"
+     ],
+     "remedies": [
+      "Test & overhaul; rupture disc upstream"
+     ],
+     "part": "safety_valves"
+    }
+   ],
+   "safety": [
+    "Discharge to a safe location; never block relief paths; management of change for any set change."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Emergency Pressure Relief System — Introduction",
+    "type": "in_app_tour",
+    "model": "emergency_pressure_relief_system.glb",
+    "duration_s": 47.8,
+    "script": [
+     {
+      "narration": "This module introduces the Emergency Pressure Relief System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An emergency pressure relief system protects equipment from overpressure.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Spring-loaded safety valves (PSVs), often duplicated on an interlocked change-over valve, and/or a rupture disc open automatically at the set pressure and discharge into a closed relief header that drains to the flare knockout drum.",
+      "duration_s": 15.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include pressure vessels, columns, exchangers and reactors in process plants; compressors, pumps (thermal relief) and storage systems.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Emergency Pressure Relief System — Operation",
+    "type": "in_app_tour",
+    "model": "emergency_pressure_relief_system.glb",
+    "duration_s": 36.1,
+    "script": [
+     {
+      "narration": "How the Emergency Pressure Relief System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "A fire or upset raises vessel pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "contents",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The PSV disc lifts at set pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "psv_disc_spring",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas flows into the relief header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "relief_header",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The change-over valve keeps one PSV always in service.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "changeover_valve",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rupture disc gives fast full-bore relief if needed.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "rupture_disc",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Every pressure vessel needs relief for its credible overpressure scenarios (blocked outlet, fire, control-valve failure, runaway reaction).",
+      "duration_s": 7.5,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Emergency Pressure Relief System — Maintenance",
+    "type": "in_app_tour",
+    "model": "emergency_pressure_relief_system.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Emergency Pressure Relief System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check car-seals / change-over position.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "changeover_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Bench-test PSVs per interval (RBI).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "safety_valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul PSVs; replace rupture discs per schedule.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rupture_disc",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for psv chatter: rapid opening/closing, damage. Common cause: high inlet loss, oversizing.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "safety_valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for stuck closed: no relief at set. Common cause: fouling, corrosion.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "safety_valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Fire-case accumulation allowed (typical)?",
+     "options": [
+      "21 % above MAWP",
+      "0 %",
+      "50 %",
+      "100 %"
+     ],
+     "answer": 0,
+     "explanation": "Fire case.",
+     "level": "basic"
+    },
+    {
+     "question": "Purpose of the change-over valve?",
+     "options": [
+      "Test/maintain one PSV while the other protects",
+      "Increase flow",
+      "Control pressure",
+      "Drain"
+     ],
+     "answer": 0,
+     "explanation": "Spare.",
+     "level": "basic"
+    },
+    {
+     "question": "Maximum PSV inlet pressure loss (rule of thumb)?",
+     "options": [
+      "≈ 3 % of set",
+      "≈ 30 %",
+      "≈ 50 %",
+      "No limit"
+     ],
+     "answer": 0,
+     "explanation": "3 %.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Protected equipment.\"",
+     "options": [
+      "Three-Way Change-over Valve (one PSV in service, one isolated for testing — never both closed)",
+      "Twin Spring-Loaded Safety Valves (PSV-A in service, PSV-B spare)",
+      "Protected Pressure Vessel",
+      "Rupture Disc on a Separate Nozzle (fast, full-bore relief for rapid events)"
+     ],
+     "answer": 2,
+     "explanation": "Protected Pressure Vessel: Protected equipment.",
+     "level": "basic",
+     "part": "protected_vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Allow spare PSV maintenance.\"",
+     "options": [
+      "Vapour generated by external fire",
+      "Process Liquid (fire case: boiling, vapour generation)",
+      "Three-Way Change-over Valve (one PSV in service, one isolated for testing — never both closed)",
+      "Skirt / Legs"
+     ],
+     "answer": 2,
+     "explanation": "Three-Way Change-over Valve (one PSV in service, one isolated for testing — never both closed): Allow spare PSV maintenance.",
+     "level": "basic",
+     "part": "changeover_valve",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Relieve overpressure.\"",
+     "options": [
+      "Twin Spring-Loaded Safety Valves (PSV-A in service, PSV-B spare)",
+      "Skirt / Legs",
+      "Protected Pressure Vessel",
+      "Three-Way Change-over Valve (one PSV in service, one isolated for testing — never both closed)"
+     ],
+     "answer": 0,
+     "explanation": "Twin Spring-Loaded Safety Valves (PSV-A in service, PSV-B spare): Relieve overpressure.",
+     "level": "basic",
+     "part": "safety_valves",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,642 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "process_liquor_clarifier",
+  "title": "Multi-Tray Process Liquor Clarifier (Stacked Settling Trays, Common Rake Shaft)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 216,
+    "phase": 10,
+    "eq_id": "EQ-294",
+    "subcategory": "Liquor Treatment",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "process_liquor_clarifier_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "process_liquor_clarifier_pressure.glb",
+      "title": "More settling area in the same footprint",
+      "description": "Settling capacity depends on area, not depth. Stacking several trays, each with its own feed, overflow and rake, multiplies the effective settling area in one tank. Fine suspended solids in the process liquor settle on the trays and are raked to the central downcomers; the clarified liquor overflows.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed_tray_1",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.7,
+          1.45,
+          -0.3
+        ],
+        [
+          -0.3,
+          1.45,
+          -0.3
+        ],
+        [
+          -0.5,
+          1.4,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "feed_tray_2",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.7,
+          2.05,
+          -0.3
+        ],
+        [
+          -0.3,
+          2.05,
+          -0.3
+        ],
+        [
+          -0.5,
+          2.0,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "feed_tray_3",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.7,
+          2.65,
+          -0.3
+        ],
+        [
+          -0.3,
+          2.65,
+          -0.3
+        ],
+        [
+          -0.5,
+          2.6,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "clear_liquor",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          0.6,
+          2.5,
+          -0.1
+        ],
+        [
+          0.95,
+          2.75,
+          -0.1
+        ],
+        [
+          1.3,
+          2.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "mud",
+      "kind": "sand",
+      "radius": 0.015,
+      "points": [
+        [
+          0.0,
+          2.3,
+          -0.05
+        ],
+        [
+          0.0,
+          0.2,
+          -0.05
+        ],
+        [
+          0.0,
+          -0.2,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 12044,
+    "parts": 9
+  },
+  "summary": "A multi-tray clarifier stacks several conical settling trays in one tank, each with its own feed, overflow and rake. This multiplies settling area to remove fine solids from process liquor in a small footprint.",
+  "classification": {
+    "family": "Liquor treatment",
+    "type": "Multi-tray (stacked) clarifier"
+  },
+  "model_configuration": {
+    "trays": 3,
+    "animation": "Rakes turn; solids settle"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded storage tanks",
+      "relevance": "Atmospheric tanks (practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "TMS Light Metals proceedings — Bayer process practice",
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids"
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "Clarifier Tank & Top Overflow Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "tank__back",
+        "tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.18,
+        0.1,
+        -1.18
+      ],
+      "bbox_max": [
+        1.18,
+        2.9,
+        1.18
+      ],
+      "label_anchor": [
+        0.0,
+        1.5,
+        1.18
+      ],
+      "center": [
+        0.0,
+        1.5,
+        -0.0
+      ],
+      "info_ref": "pl_tank"
+    },
+    {
+      "id": "trays",
+      "name": "Stacked Conical Trays with Central Mud Downcomers (multiply settling area)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "trays__back",
+        "trays__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.7
+      ],
+      "bbox_min": [
+        -0.995,
+        0.65,
+        -0.995
+      ],
+      "bbox_max": [
+        0.995,
+        2.45,
+        0.995
+      ],
+      "label_anchor": [
+        0.0,
+        1.55,
+        0.995
+      ],
+      "center": [
+        0.0,
+        1.55,
+        -0.0
+      ],
+      "info_ref": "pl_trays"
+    },
+    {
+      "id": "liquor",
+      "name": "Process Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.995,
+        0.14,
+        -0.995
+      ],
+      "bbox_max": [
+        0.995,
+        2.74,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.44,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.44,
+        -0.4975
+      ],
+      "info_ref": "pl_tank"
+    },
+    {
+      "id": "mud_layers",
+      "name": "Settled Solids on each Tray & in the Bottom Cone",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "mud_layers.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.5
+      ],
+      "bbox_min": [
+        -0.99,
+        0.14,
+        -0.99
+      ],
+      "bbox_max": [
+        0.99,
+        2.5,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.32,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.32,
+        -0.495
+      ],
+      "info_ref": "pl_trays"
+    },
+    {
+      "id": "rakes",
+      "name": "Rake Arms on the Common Shaft (one set per tray)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "rakes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.9
+      ],
+      "bbox_min": [
+        -0.95716,
+        0.2,
+        -0.05
+      ],
+      "bbox_max": [
+        0.95716,
+        3.3,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        1.75,
+        0.05
+      ],
+      "center": [
+        0.0,
+        1.75,
+        -0.0
+      ],
+      "info_ref": "pl_rakes"
+    },
+    {
+      "id": "drive",
+      "name": "Bridge & Rake Drive",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.25,
+        3.09,
+        -0.25
+      ],
+      "bbox_max": [
+        1.25,
+        3.85,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        3.47,
+        0.25
+      ],
+      "center": [
+        0.0,
+        3.47,
+        -0.0
+      ],
+      "info_ref": "pl_drive"
+    },
+    {
+      "id": "feed_overflow",
+      "name": "Feed Pipes to each Tray, Intermediate Overflows & Underflow",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "feed_overflow.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.6,
+        -0.15,
+        -0.33
+      ],
+      "bbox_max": [
+        1.325,
+        2.8,
+        0.325
+      ],
+      "label_anchor": [
+        -0.1375,
+        1.325,
+        0.325
+      ],
+      "center": [
+        -0.1375,
+        1.325,
+        -0.0025
+      ],
+      "info_ref": "pl_piping"
+    },
+    {
+      "id": "supports",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.84711,
+        0.0,
+        -0.84711
+      ],
+      "bbox_max": [
+        0.84711,
+        0.5,
+        0.84711
+      ],
+      "label_anchor": [
+        0.0,
+        0.25,
+        0.84711
+      ],
+      "center": [
+        0.0,
+        0.25,
+        -0.0
+      ],
+      "info_ref": "pl_tank"
+    },
+    {
+      "id": "settling",
+      "name": "Fine Solids settling onto the Trays",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "settling0",
+        "settling1",
+        "settling2",
+        "settling3",
+        "settling4",
+        "settling5",
+        "settling6",
+        "settling7",
+        "settling8",
+        "settling9",
+        "settling10",
+        "settling11",
+        "settling12",
+        "settling13",
+        "settling14"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.01427
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.01427
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01427
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "pl_tank": {
+      "function": "Holds liquor.",
+      "construction": "Tank with launder.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pl_trays": {
+      "function": "Settling surfaces.",
+      "construction": "Conical trays, downcomers.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pl_rakes": {
+      "function": "Move solids to downcomers.",
+      "construction": "Rakes on common shaft.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pl_drive": {
+      "function": "Turns rakes.",
+      "construction": "Bridge drive.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pl_piping": {
+      "function": "Feeds/overflows/underflow.",
+      "construction": "Pipes.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

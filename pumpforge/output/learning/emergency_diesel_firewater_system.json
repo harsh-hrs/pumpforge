@@ -1,0 +1,695 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "emergency_diesel_firewater_system",
+ "no": 240,
+ "title": "Emergency Diesel Firewater System",
+ "model_title": "Emergency Diesel-Driven Firewater Pump System (Horizontal Split-Case Pump)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An emergency diesel firewater system is a fire pump driven by a dedicated diesel engine so firefighting water is available even if electrical power fails. The listed controller starts it automatically when fire-main pressure falls; it delivers rated flow at rated pressure to hydrants, monitors and sprinklers. A jockey pump keeps the main pressurised.",
+   "applications": [
+    "Refinery, chemical, power and alumina plant fire mains",
+    "Large buildings and tank farms"
+   ],
+   "key_points": [
+    "Independent of electrical supply",
+    "150 % of rated flow at ≥ 65 % of rated pressure (NFPA 20 style)",
+    "Two battery sets; weekly run test",
+    "Jockey pump for leakage make-up"
+   ],
+   "classification": {
+    "family": "Fire protection",
+    "type": "Diesel-driven horizontal split-case fire pump package"
+   },
+   "hi_family": "water_utilities",
+   "summary": "An emergency diesel firewater system is a fire pump driven by a dedicated diesel engine, so firefighting water is available even if electrical power fails. It starts automatically when the fire main pressure falls and delivers rated flow at rated pressure to hydrants, monitors and sprinkler systems."
+  },
+  "model_3d": {
+   "asset": "glb/emergency_diesel_firewater_system.glb",
+   "metadata": "meta/emergency_diesel_firewater_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14628,
+   "parts": 15
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Pressure drops when a hydrant or sprinkler opens.",
+    "The controller starts the diesel engine.",
+    "The engine drives the split-case pump."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Pressure drops when a hydrant or sprinkler opens.",
+     "part": "controller_batteries",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The controller starts the diesel engine.",
+     "part": "diesel_engine",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The engine drives the split-case pump.",
+     "part": "drive_train",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The impeller raises pressure.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water goes to the fire main; the relief valve limits pressure.",
+     "part": "discharge_piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Fire-pump curve: rated point, 150 % point and churn pressure."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "emergency_diesel_firewater_system_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "emergency_diesel_firewater_system_pressure.glb",
+     "title": "Rated flow at rated pressure — guaranteed",
+     "description": "Fire pumps are certified to deliver rated flow at rated pressure, at least 150 % of rated flow at not less than 65 % of rated pressure, with churn (shut-off) pressure not above 140 % of rated (NFPA 20 style rules — verify against the governing edition). The diesel driver gives independence from the electrical supply; it starts automatically on a pressure drop, has two battery sets, and is tested weekly. The jockey pump makes up small leaks so the main pump starts only for a real demand.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/emergency_diesel_firewater_system.json#components",
+   "key_components": "Diesel engine, fire pump, controller, batteries, fuel tank, test header",
+   "parts": [
+    {
+     "id": "skid",
+     "name": "Common Base Frame",
+     "info_ref": "dfw_skid",
+     "function": "Common base.",
+     "material": "Steel."
+    },
+    {
+     "id": "diesel_engine",
+     "name": "Listed Fire-Pump Diesel Engine: Block, Sump, Heads, Turbocharger, Air Filter & Flywheel Housing",
+     "info_ref": "dfw_engine",
+     "function": "Drives the pump independently of mains power.",
+     "material": "—"
+    },
+    {
+     "id": "radiator",
+     "name": "Radiator (or heat exchanger cooled by pump water) & Hoses",
+     "info_ref": "dfw_cooling",
+     "function": "Cools the engine.",
+     "material": "Copper/aluminium."
+    },
+    {
+     "id": "radiator_fan",
+     "name": "Radiator Fan (engine driven)",
+     "info_ref": "dfw_cooling",
+     "function": "Cools the engine.",
+     "material": "Copper/aluminium."
+    },
+    {
+     "id": "drive_train",
+     "name": "Crankshaft Output, Flywheel, Drive Shaft & Flexible Coupling (turning)",
+     "info_ref": "dfw_drive",
+     "function": "Connects engine and pump.",
+     "material": "Steel."
+    },
+    {
+     "id": "exhaust",
+     "name": "Exhaust Pipe, Flexible Bellows & Silencer (piped outside)",
+     "info_ref": "dfw_exhaust",
+     "function": "Removes exhaust safely.",
+     "material": "Steel."
+    },
+    {
+     "id": "fire_pump_casing",
+     "name": "Horizontal Split-Case Fire Pump Casing (axially split; side suction & discharge)",
+     "info_ref": "dfw_pump",
+     "function": "Pressure casing.",
+     "material": "Cast iron/ductile iron."
+    },
+    {
+     "id": "impeller",
+     "name": "Double-Suction Impeller & Pump Shaft (turning)",
+     "info_ref": "dfw_impeller",
+     "function": "Adds energy to the water.",
+     "material": "Bronze."
+    },
+    {
+     "id": "suction_piping",
+     "name": "Suction Pipe from the Firewater Tank, OS&Y Gate Valve & Compound Gauge",
+     "info_ref": "dfw_suction",
+     "function": "Supplies water.",
+     "material": "Steel."
+    },
+    {
+     "id": "discharge_piping",
+     "name": "Discharge: Check & Gate Valves, Main Relief Valve to Waste Cone, Gauge & Test Header with Hose Valves",
+     "info_ref": "dfw_discharge",
+     "function": "Delivers and tests flow.",
+     "material": "Steel/brass."
+    },
+    {
+     "id": "jockey_pump",
+     "name": "Jockey (Pressure-Maintenance) Pump",
+     "info_ref": "dfw_jockey",
+     "function": "Maintains system pressure.",
+     "material": "—"
+    },
+    {
+     "id": "jockey_pump_shaft",
+     "name": "Jockey (Pressure-Maintenance) Pump — Shaft & Coupling (turning)",
+     "info_ref": "dfw_jockey",
+     "function": "Maintains system pressure.",
+     "material": "—"
+    },
+    {
+     "id": "jockey_piping",
+     "name": "Jockey Pump Line (keeps the fire main pressurised so the main pump only starts on a real demand)",
+     "info_ref": "dfw_jockey",
+     "function": "Maintains system pressure.",
+     "material": "—"
+    },
+    {
+     "id": "fuel_system",
+     "name": "Fuel Day Tank (bunded, gauge) with Supply & Return Lines",
+     "info_ref": "dfw_fuel",
+     "function": "Fuel supply.",
+     "material": "Steel."
+    },
+    {
+     "id": "controller_batteries",
+     "name": "Fire-Pump Controller (automatic start on pressure drop) & Two Battery Sets",
+     "info_ref": "dfw_controls",
+     "function": "Automatic start and monitoring.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pumps ≈ 100 – 5000 gpm (≈ 25 – 1100 m³/h)",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 25 – 1100",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "≈ 7 – 15 bar rated",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Engine ≈ 30 – 600",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Rated flow/pressure from fire-water demand study; listed equipment per governing code."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "NFPA 20",
+    "NFPA 25"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth; anchor the skid; bund or drain for chemical / oil spills."
+   ],
+   "alignment": [
+    "Skid level; check pump–motor alignment where not close-coupled; supports so piping loads do not reach equipment nozzles."
+   ],
+   "piping": [
+    "Isolation valves and bypass for maintenance; drains and vents; correct materials for the chemical; label lines and flow direction."
+   ],
+   "commissioning": [
+    "Pressure-test piping; flush; check rotation and interlocks; calibrate instruments; run on water before chemicals."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Weekly no-flow run; check batteries, fuel, oil, coolant.",
+     "part": "diesel_engine",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Annual flow test through the test header.",
+     "part": "discharge_piping",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Engine overhaul per hours; pump wear rings.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Fails to start",
+     "category": "performance",
+     "symptoms": [
+      "Controller alarm"
+     ],
+     "causes": [
+      "Flat batteries, no fuel, starter fault"
+     ],
+     "remedies": [
+      "Second battery set; fuel checks; maintenance"
+     ],
+     "part": "controller_batteries"
+    },
+    {
+     "problem": "Low pressure at rated flow",
+     "category": "performance",
+     "symptoms": [
+      "Test shows low curve"
+     ],
+     "causes": [
+      "Wear rings worn, suction problem"
+     ],
+     "remedies": [
+      "Overhaul pump; check suction"
+     ],
+     "part": "impeller"
+    }
+   ],
+   "safety": [
+    "Exhaust, hot surfaces, rotating parts; never leave in \"off\" without impairment procedure."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Emergency Diesel Firewater System — Introduction",
+    "type": "in_app_tour",
+    "model": "emergency_diesel_firewater_system.glb",
+    "duration_s": 61.4,
+    "script": [
+     {
+      "narration": "This module introduces the Emergency Diesel Firewater System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An emergency diesel firewater system is a fire pump driven by a dedicated diesel engine so firefighting water is available even if electrical power fails.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The listed controller starts it automatically when fire-main pressure falls; it delivers rated flow at rated pressure to hydrants, monitors and sprinklers.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A jockey pump keeps the main pressurised.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include refinery, chemical, power and alumina plant fire mains; large buildings and tank farms.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Radiator Fan (engine driven), Crankshaft Output, Flywheel, Drive Shaft & Flexible Coupling (turning), Horizontal Split-Case Fire Pump Casing (axially split; side suction & discharge), Double-Suction Impeller & Pump Shaft (turning).",
+      "duration_s": 14.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Emergency Diesel Firewater System — Operation",
+    "type": "in_app_tour",
+    "model": "emergency_diesel_firewater_system.glb",
+    "duration_s": 47.1,
+    "script": [
+     {
+      "narration": "How the Emergency Diesel Firewater System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pressure drops when a hydrant or sprinkler opens.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "controller_batteries",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The controller starts the diesel engine.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diesel_engine",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The engine drives the split-case pump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive_train",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The impeller raises pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water goes to the fire main; the relief valve limits pressure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "discharge_piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Fire pumps are certified to deliver rated flow at rated pressure, at least 150 % of rated flow at not less than 65 % of rated pressure, with churn (shut-off) pressure not above 140 % of rated (NFPA 20 style rules — verify against the governing edition).",
+      "duration_s": 18.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Emergency Diesel Firewater System — Maintenance",
+    "type": "in_app_tour",
+    "model": "emergency_diesel_firewater_system.glb",
+    "duration_s": 35.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Emergency Diesel Firewater System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Weekly no-flow run; check batteries, fuel, oil, coolant.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diesel_engine",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Annual flow test through the test header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "discharge_piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Engine overhaul per hours; pump wear rings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fails to start: controller alarm. Common cause: flat batteries, no fuel, starter fault.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "controller_batteries",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low pressure at rated flow: test shows low curve. Common cause: wear rings worn, suction problem.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why diesel drive?",
+     "options": [
+      "Works when electrical power fails",
+      "Cheaper fuel",
+      "Quieter",
+      "No maintenance"
+     ],
+     "answer": 0,
+     "explanation": "Independence.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the jockey pump do?",
+     "options": [
+      "Keeps the main pressurised",
+      "Fights fires",
+      "Cools the engine",
+      "Fuels the engine"
+     ],
+     "answer": 0,
+     "explanation": "Pressure maintenance.",
+     "level": "basic"
+    },
+    {
+     "question": "How is pump performance checked?",
+     "options": [
+      "Flow test through the test header",
+      "By eye",
+      "By noise",
+      "Never"
+     ],
+     "answer": 0,
+     "explanation": "Flow test.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Common base.\"",
+     "options": [
+      "Exhaust Pipe, Flexible Bellows & Silencer (piped outside)",
+      "Common Base Frame",
+      "Fire-Pump Controller (automatic start on pressure drop) & Two Battery Sets",
+      "Listed Fire-Pump Diesel Engine: Block, Sump, Heads, Turbocharger, Air Filter & Flywheel Housing"
+     ],
+     "answer": 1,
+     "explanation": "Common Base Frame: Common base.",
+     "level": "basic",
+     "part": "skid",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drives the pump independently of mains power.\"",
+     "options": [
+      "Discharge: Check & Gate Valves, Main Relief Valve to Waste Cone, Gauge & Test Header with Hose Valves",
+      "Listed Fire-Pump Diesel Engine: Block, Sump, Heads, Turbocharger, Air Filter & Flywheel Housing",
+      "Common Base Frame",
+      "Radiator (or heat exchanger cooled by pump water) & Hoses"
+     ],
+     "answer": 1,
+     "explanation": "Listed Fire-Pump Diesel Engine: Block, Sump, Heads, Turbocharger, Air Filter & Flywheel Housing: Drives the pump independently of mains power.",
+     "level": "basic",
+     "part": "diesel_engine",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Cools the engine.\"",
+     "options": [
+      "Radiator (or heat exchanger cooled by pump water) & Hoses",
+      "Exhaust Pipe, Flexible Bellows & Silencer (piped outside)",
+      "Fire-Pump Controller (automatic start on pressure drop) & Two Battery Sets",
+      "Horizontal Split-Case Fire Pump Casing (axially split; side suction & discharge)"
+     ],
+     "answer": 0,
+     "explanation": "Radiator (or heat exchanger cooled by pump water) & Hoses: Cools the engine.",
+     "level": "basic",
+     "part": "radiator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,611 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "tripper_conveyor",
+ "no": 135,
+ "title": "Tripper Conveyor",
+ "model_title": "Travelling Tripper on a Bunker-Feed Belt Conveyor",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A tripper is a travelling car that runs on rails along a belt conveyor. The belt is led up over the tripper's head pulley and back down around a snub pulley, so the material discharges into a chute on the car. By moving the tripper along the conveyor, one belt can fill a long row of bunkers, silos or a stockpile.",
+   "applications": [
+    "Filling coal bunkers in power plants",
+    "Silo/bin filling in cement and mineral plants",
+    "Stockpile building on yard conveyors"
+   ],
+   "key_points": [
+    "Belt forms an S-loop through the tripper",
+    "Discharges at any point along the conveyor",
+    "Motorised or belt-propelled travel",
+    "Belt must have slack/take-up to allow the loop"
+   ],
+   "classification": {
+    "family": "Conveyor accessory",
+    "type": "Motorised travelling tripper"
+   },
+   "hi_family": "material_handling",
+   "summary": "A tripper is a travelling car on a belt conveyor that lifts the belt over a pulley and discharges material through a chute to either side. Moving the tripper along the rails lets one conveyor fill a row of bunkers or silos."
+  },
+  "model_3d": {
+   "asset": "glb/tripper_conveyor.glb",
+   "metadata": "meta/tripper_conveyor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6544,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material travels along the belt conveyor.",
+    "The belt climbs the tripper ramp to the head pulley.",
+    "Material discharges into the tripper chute, which drops it into the bunker below."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material travels along the belt conveyor.",
+     "part": "cvbelt",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The belt climbs the tripper ramp to the head pulley.",
+     "part": "tripper_car",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Material discharges into the tripper chute, which drops it into the bunker below.",
+     "part": "bunkers",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The tripper travels on its rails to fill the next bunker.",
+     "part": "rails",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Belt tension rises at the tripper (lift + extra pulleys) — included in the conveyor power calculation."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "tripper_conveyor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/tripper_conveyor.json#components",
+   "key_components": "Tripper car, pulleys, chutes, rails",
+   "parts": [
+    {
+     "id": "cvbelt",
+     "name": "Bunker Feed Conveyor",
+     "info_ref": "hk_belt",
+     "function": "Carries material.",
+     "material": "Rubber."
+    },
+    {
+     "id": "cvpulley_1",
+     "name": "Tail Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "cvpulley_2",
+     "name": "Head (Drive) Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "cvframe",
+     "name": "Bunker Feed Conveyor Frame & Idlers (troughing and return)",
+     "info_ref": "hk_idlers",
+     "function": "Idlers/frame.",
+     "material": "Steel."
+    },
+    {
+     "id": "bunkers",
+     "name": "Bunkers / Silos below the Conveyor",
+     "info_ref": "tc_bunkers",
+     "function": "Receive material.",
+     "material": "Steel/concrete."
+    },
+    {
+     "id": "tripper_car",
+     "name": "Tripper Car: Ramp, Head & Snub Pulleys, Discharge Chute, Travel Wheels",
+     "info_ref": "tc_tripper",
+     "function": "Lifts the belt and discharges material.",
+     "material": "Steel."
+    },
+    {
+     "id": "rails",
+     "name": "Tripper Rails along the Conveyor Gallery",
+     "info_ref": "hm_rails",
+     "function": "Rails.",
+     "material": "Steel."
+    },
+    {
+     "id": "coal",
+     "name": "Coal Discharged into the Bunker below the Tripper",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Belt ~ 0.65 – 2 m wide",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Travel drive ~ 2 – 20",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Belt ~ 1.5 – 4 m/s; travel ~ 0.1 – 0.3 m/s",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 5000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Check additional belt tension from the tripper lift; design chutes for material trajectory; specify travel speed."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CEMA — Belt Conveyors for Bulk Materials",
+    "ISO 5048 — Belt conveyors: calculation of operating power and tensile forces"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the conveyor stringers and drive frames on steelwork or plinths designed for belt tension, material load and drive torque."
+   ],
+   "alignment": [
+    "Survey the structure so all pulleys and idlers are square to the centre line; train the belt empty, then loaded."
+   ],
+   "piping": [
+    "Chutes designed for the material trajectory to centre-load the belt; skirts and dust seals at loading points; belt cleaners and plough at the discharge."
+   ],
+   "commissioning": [
+    "Check pull-wire emergency stops, belt-drift and speed switches; run empty and loaded; record take-up position and motor current."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check chute flow and belt tracking at the tripper.",
+     "part": "tripper_car",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check rails, wheels and travel limit switches.",
+     "part": "rails",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace pulley lagging and bearings.",
+     "part": "cvpulley_2"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Belt mistracking at tripper",
+     "category": "performance",
+     "symptoms": [
+      "Spillage, edge damage"
+     ],
+     "causes": [
+      "Pulley misalignment, build-up"
+     ],
+     "remedies": [
+      "Re-align; clean; training idlers"
+     ],
+     "part": "tripper_car"
+    },
+    {
+     "problem": "Chute blockage",
+     "category": "blockage",
+     "symptoms": [
+      "Overflow, motor trips"
+     ],
+     "causes": [
+      "Wet material, full bunker"
+     ],
+     "remedies": [
+      "Level probes; chute design; clear safely"
+     ],
+     "part": "bunkers"
+    }
+   ],
+   "safety": [
+    "Guard pulleys and nip points; pull-wire stops along the gallery; bunker grating to prevent falls."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Tripper Conveyor — Introduction",
+    "type": "in_app_tour",
+    "model": "tripper_conveyor.glb",
+    "duration_s": 55.1,
+    "script": [
+     {
+      "narration": "This module introduces the Tripper Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A tripper is a travelling car that runs on rails along a belt conveyor.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The belt is led up over the tripper's head pulley and back down around a snub pulley, so the material discharges into a chute on the car.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "By moving the tripper along the conveyor, one belt can fill a long row of bunkers, silos or a stockpile.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include filling coal bunkers in power plants; silo/bin filling in cement and mineral plants; stockpile building on yard conveyors.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Tripper Conveyor — Operation",
+    "type": "in_app_tour",
+    "model": "tripper_conveyor.glb",
+    "duration_s": 26.4,
+    "script": [
+     {
+      "narration": "How the Tripper Conveyor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material travels along the belt conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cvbelt",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The belt climbs the tripper ramp to the head pulley.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tripper_car",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Material discharges into the tripper chute, which drops it into the bunker below.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "bunkers",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The tripper travels on its rails to fill the next bunker.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rails",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Tripper Conveyor — Maintenance",
+    "type": "in_app_tour",
+    "model": "tripper_conveyor.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Tripper Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check chute flow and belt tracking at the tripper.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tripper_car",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check rails, wheels and travel limit switches.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rails",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace pulley lagging and bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cvpulley_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for belt mistracking at tripper: spillage, edge damage. Common cause: pulley misalignment, build-up.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "tripper_car",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chute blockage: overflow, motor trips. Common cause: wet material, full bunker.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "bunkers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How does a tripper discharge material?",
+     "options": [
+      "It lifts the belt over a head pulley so material falls into its chute",
+      "It cuts the belt",
+      "It reverses the belt",
+      "It weighs the belt"
+     ],
+     "answer": 0,
+     "explanation": "S-loop over the head pulley.",
+     "level": "basic"
+    },
+    {
+     "question": "Why use a tripper?",
+     "options": [
+      "To fill many bunkers from one conveyor",
+      "To crush coal",
+      "To dry coal",
+      "To drive the belt"
+     ],
+     "answer": 0,
+     "explanation": "Distribution.",
+     "level": "basic"
+    },
+    {
+     "question": "Which pulley wraps the belt back down after the head pulley?",
+     "options": [
+      "Snub pulley",
+      "Tail pulley only",
+      "Bend pulley at the drive",
+      "There is none"
+     ],
+     "answer": 0,
+     "explanation": "Snub pulley.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries material.\"",
+     "options": [
+      "Bunkers / Silos below the Conveyor",
+      "Bunker Feed Conveyor",
+      "Tail Pulley",
+      "Bunker Feed Conveyor Frame & Idlers (troughing and return)"
+     ],
+     "answer": 1,
+     "explanation": "Bunker Feed Conveyor: Carries material.",
+     "level": "basic",
+     "part": "cvbelt",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Pulleys.\"",
+     "options": [
+      "Bunker Feed Conveyor",
+      "Bunker Feed Conveyor Frame & Idlers (troughing and return)",
+      "Tail Pulley",
+      "Bunkers / Silos below the Conveyor"
+     ],
+     "answer": 2,
+     "explanation": "Tail Pulley: Pulleys.",
+     "level": "basic",
+     "part": "cvpulley_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Idlers/frame.\"",
+     "options": [
+      "Coal Discharged into the Bunker below the Tripper",
+      "Bunker Feed Conveyor Frame & Idlers (troughing and return)",
+      "Bunker Feed Conveyor",
+      "Tail Pulley"
+     ],
+     "answer": 1,
+     "explanation": "Bunker Feed Conveyor Frame & Idlers (troughing and return): Idlers/frame.",
+     "level": "basic",
+     "part": "cvframe",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

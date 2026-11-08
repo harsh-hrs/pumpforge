@@ -1,0 +1,738 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "steam_turbine",
+ "no": 73,
+ "title": "Steam Turbine",
+ "model_title": "Multistage Steam Turbine (Condensing, Single Casing)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A steam turbine converts the thermal energy of steam into rotation. Stationary nozzles accelerate the steam, and moving blades on the rotor turn its velocity into torque, stage after stage, while the steam expands to the exhaust (condenser) pressure. A governor valve controls the steam flow to hold speed or load.",
+   "applications": [
+    "Power generation (thermal, nuclear, solar thermal, biomass)",
+    "Driving compressors and pumps (mechanical drive)",
+    "Cogeneration (back-pressure/extraction)",
+    "Marine propulsion"
+   ],
+   "key_points": [
+    "Many stages; blades grow longer toward the exhaust",
+    "Impulse vs reaction stages",
+    "Condensing vs back-pressure",
+    "Overspeed protection is critical"
+   ],
+   "classification": {
+    "family": "Turbine (steam)",
+    "type": "Multistage, condensing, single casing, impulse/reaction stages"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A steam turbine converts the energy of high-pressure steam into shaft power. In each stage, stationary nozzles accelerate the steam and the moving blades on the rotor turn that velocity into torque. The steam expands through many stages to the condenser vacuum, so the blades get longer toward the exhaust. A governor valve controls the steam flow to hold speed or load."
+  },
+  "model_3d": {
+   "asset": "glb/steam_turbine.glb",
+   "metadata": "meta/steam_turbine.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 59496,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "High-pressure steam enters through the steam chest and governor (control) valve.",
+    "Fixed nozzles in each diaphragm accelerate the steam.",
+    "The steam jet pushes the moving blades and turns the rotor."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "High-pressure steam enters through the steam chest and governor (control) valve.",
+     "part": "control_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fixed nozzles in each diaphragm accelerate the steam.",
+     "part": "diaphragms",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The steam jet pushes the moving blades and turns the rotor.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Stage by stage the pressure falls and the volume grows — blades get longer.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Exhaust steam goes down to the condenser; the rotor drives the generator through the coupling.",
+     "part": "generator",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Willans line: steam flow vs power is nearly linear; efficiency depends on stage design and exhaust vacuum."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "steam_turbine_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "steam_turbine_pressure.glb",
+     "title": "Steam pressure through the stages",
+     "description": "Steam expands stage by stage: in each nozzle row pressure falls and velocity rises; the moving blades turn that velocity into torque. Volume grows as pressure falls, so blades get longer toward the exhaust (condenser vacuum).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Inlet: high-pressure steam",
+       "anchor": [
+        -0.55,
+        1.3,
+        -0.0
+       ]
+      },
+      {
+       "text": "Exhaust: condenser vacuum",
+       "anchor": [
+        0.3,
+        0.05,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/steam_turbine.json#components",
+   "key_components": "Rotor with blade stages, nozzles/diaphragms, casing, governor valve, bearings, gland seals",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Turbine Casing (Inlet End, Exhaust Hood) & Steam Chest",
+     "info_ref": "st_casing",
+     "function": "Contains the steam, holds the diaphragms and forms the inlet and exhaust.",
+     "material": "Cr-Mo cast steel (HP); fabricated steel (LP)."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor: Shaft, Wheels (Discs) & Moving Blades (6 stages)",
+     "info_ref": "st_rotor",
+     "function": "Converts steam velocity into torque.",
+     "material": "Cr-Mo-V forged steel; 12 % Cr blades."
+    },
+    {
+     "id": "diaphragms",
+     "name": "Diaphragms & Nozzle (Stationary Blade) Rings",
+     "info_ref": "st_diaphragms",
+     "function": "Hold the stationary nozzles that accelerate the steam into each stage.",
+     "material": "Stainless/Cr steel."
+    },
+    {
+     "id": "governor_actuator",
+     "name": "Governor (Speed Control) Actuator",
+     "info_ref": "st_governor",
+     "function": "Controls speed/load by positioning the control valve.",
+     "material": "Steel/hydraulic."
+    },
+    {
+     "id": "control_valve",
+     "name": "Steam Control (Governor) Valve Plug & Stem",
+     "info_ref": "st_control_valve",
+     "function": "Throttles steam admission.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "bearings",
+     "name": "Journal Bearings (pedestals) & Thrust Bearing",
+     "info_ref": "st_bearings",
+     "function": "Support the rotor and carry axial thrust.",
+     "material": "Babbitt-lined steel."
+    },
+    {
+     "id": "gland_seals",
+     "name": "Labyrinth Gland Seals",
+     "info_ref": "st_glands",
+     "function": "Limit steam leakage (and air in-leakage) where the shaft leaves the casing.",
+     "material": "Bronze/steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "generator",
+     "name": "Driven Generator (shown in part)",
+     "info_ref": "st_generator",
+     "function": "Driven machine (load).",
+     "material": "—"
+    },
+    {
+     "id": "foundation",
+     "name": "Turbine Foundation / Baseplate",
+     "info_ref": "st_foundation",
+     "function": "Supports the turbine-generator train.",
+     "material": "Concrete/steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Small drives ~ 0.1 MW up to ~ 1500 MW sets",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.1 – 1 500 000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "3000/3600 (power gen); up to ~ 15 000 (drives)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Steam flow ~ 1 – 4000 t/h",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "inlet_conditions": {
+     "typical_range": "Up to ~ 300 bar, 600 °C (supercritical)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Table-top concrete or steel foundation with dynamic analysis; turbine–generator alignment includes catenary."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Steam lines drained and warmed before admission; limit piping forces on casing nozzles (NEMA SM 23 / API 612)."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor vibration, bearing temperatures, expansion, eccentricity.",
+     "part": "bearings",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Overspeed trip test; valve stem free-movement test.",
+     "part": "governor_actuator",
+     "interval": "per procedure"
+    },
+    {
+     "task": "Lube-oil analysis.",
+     "part": "bearings",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Open casing: inspect blades, diaphragms, seals; clean deposits.",
+     "part": "rotor",
+     "interval": "4–8 years"
+    }
+   ],
+   "lubrication": [
+    "Forced lube-oil system for journal and thrust bearings; control oil for governor."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Blade erosion / fouling",
+     "category": "wear",
+     "symptoms": [
+      "Efficiency loss",
+      "Stage pressure changes"
+     ],
+     "causes": [
+      "Wet steam, carry-over of silica/salts"
+     ],
+     "remedies": [
+      "Improve steam purity; repair blades"
+     ],
+     "part": "rotor"
+    },
+    {
+     "problem": "High vibration",
+     "category": "vibration",
+     "symptoms": [
+      "Trip on vibration"
+     ],
+     "causes": [
+      "Rub, imbalance, misalignment, bowed rotor"
+     ],
+     "remedies": [
+      "Slow roll, balance, align"
+     ],
+     "part": "bearings"
+    },
+    {
+     "problem": "Sticking control valve",
+     "category": "valves",
+     "symptoms": [
+      "Poor speed control"
+     ],
+     "causes": [
+      "Deposits on stem"
+     ],
+     "remedies": [
+      "Exercise / clean valve"
+     ],
+     "part": "control_valve"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Steam Turbine — Introduction",
+    "type": "in_app_tour",
+    "model": "steam_turbine.glb",
+    "duration_s": 55.8,
+    "script": [
+     {
+      "narration": "This module introduces the Steam Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A steam turbine converts the thermal energy of steam into rotation.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Stationary nozzles accelerate the steam, and moving blades on the rotor turn its velocity into torque, stage after stage, while the steam expands to the exhaust (condenser) pressure.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A governor valve controls the steam flow to hold speed or load.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include power generation (thermal, nuclear, solar thermal, biomass); driving compressors and pumps (mechanical drive); cogeneration (back-pressure/extraction); marine propulsion.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Turbine Casing (Inlet End, Exhaust Hood) & Steam Chest, Rotor: Shaft, Wheels (Discs) & Moving Blades (6 stages).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Steam Turbine — Operation",
+    "type": "in_app_tour",
+    "model": "steam_turbine.glb",
+    "duration_s": 42.6,
+    "script": [
+     {
+      "narration": "How the Steam Turbine works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "High-pressure steam enters through the steam chest and governor (control) valve.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "control_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fixed nozzles in each diaphragm accelerate the steam.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragms",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The steam jet pushes the moving blades and turns the rotor.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Stage by stage the pressure falls and the volume grows — blades get longer.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Exhaust steam goes down to the condenser; the rotor drives the generator through the coupling.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "generator",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Steam expands stage by stage: in each nozzle row pressure falls and velocity rises; the moving blades turn that velocity into torque.",
+      "duration_s": 9.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Steam Turbine — Maintenance",
+    "type": "in_app_tour",
+    "model": "steam_turbine.glb",
+    "duration_s": 44.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Steam Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor vibration, bearing temperatures, expansion, eccentricity.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overspeed trip test; valve stem free-movement test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "governor_actuator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lube-oil analysis.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Open casing: inspect blades, diaphragms, seals; clean deposits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for blade erosion / fouling: efficiency loss. Common cause: wet steam, carry-over of silica/salts.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high vibration: trip on vibration. Common cause: rub, imbalance, misalignment, bowed rotor.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sticking control valve: poor speed control. Common cause: deposits on stem.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "control_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why do turbine blades get longer toward the exhaust?",
+     "options": [
+      "To reduce weight",
+      "Steam volume increases as pressure falls",
+      "For balance only",
+      "They do not"
+     ],
+     "answer": 1,
+     "explanation": "Specific volume grows.",
+     "level": "basic"
+    },
+    {
+     "question": "In an impulse stage the pressure drop happens mainly in…",
+     "options": [
+      "The moving blades",
+      "The fixed nozzles",
+      "The bearings",
+      "The condenser"
+     ],
+     "answer": 1,
+     "explanation": "Reaction stages share the drop.",
+     "level": "basic"
+    },
+    {
+     "question": "What protects the turbine against runaway speed?",
+     "options": [
+      "The coupling",
+      "An independent overspeed trip",
+      "The condenser",
+      "Gland seals"
+     ],
+     "answer": 1,
+     "explanation": "Overspeed trip closes the stop valves.",
+     "level": "basic"
+    },
+    {
+     "question": "Gland seals in a turbine…",
+     "options": [
+      "Lubricate the bearings",
+      "Limit steam leakage/air in-leakage along the shaft",
+      "Cool the blades",
+      "Control speed"
+     ],
+     "answer": 1,
+     "explanation": "Labyrinth glands.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the steam, holds the diaphragms and forms the inlet and exhaust.\"",
+     "options": [
+      "Turbine Foundation / Baseplate",
+      "Labyrinth Gland Seals",
+      "Turbine Casing (Inlet End, Exhaust Hood) & Steam Chest",
+      "Governor (Speed Control) Actuator"
+     ],
+     "answer": 2,
+     "explanation": "Turbine Casing (Inlet End, Exhaust Hood) & Steam Chest: Contains the steam, holds the diaphragms and forms the inlet and exhaust.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts steam velocity into torque.\"",
+     "options": [
+      "Rotor: Shaft, Wheels (Discs) & Moving Blades (6 stages)",
+      "Turbine Casing (Inlet End, Exhaust Hood) & Steam Chest",
+      "Driven Generator (shown in part)",
+      "Journal Bearings (pedestals) & Thrust Bearing"
+     ],
+     "answer": 0,
+     "explanation": "Rotor: Shaft, Wheels (Discs) & Moving Blades (6 stages): Converts steam velocity into torque.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Hold the stationary nozzles that accelerate the steam into each stage.\"",
+     "options": [
+      "Rotor: Shaft, Wheels (Discs) & Moving Blades (6 stages)",
+      "Turbine Foundation / Baseplate",
+      "Labyrinth Gland Seals",
+      "Diaphragms & Nozzle (Stationary Blade) Rings"
+     ],
+     "answer": 3,
+     "explanation": "Diaphragms & Nozzle (Stationary Blade) Rings: Hold the stationary nozzles that accelerate the steam into each stage.",
+     "level": "basic",
+     "part": "diaphragms",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

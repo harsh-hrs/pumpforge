@@ -1,0 +1,653 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "waste_heat_recovery_boiler",
+ "no": 156,
+ "title": "Waste Heat Recovery Boiler",
+ "model_title": "Waste Heat Recovery Boiler (Horizontal HRSG, Single Pressure)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A waste heat recovery boiler (HRSG) makes steam from hot exhaust gas — for example from a gas turbine, engine, kiln or furnace. The gas passes the superheater, evaporator and economizer in turn; water circulates naturally between the steam drum and the evaporator tubes.",
+   "applications": [
+    "Combined-cycle power plants (gas turbine + steam turbine)",
+    "Cogeneration (CHP)",
+    "Cement kilns, glass furnaces, sulphuric acid plants"
+   ],
+   "key_points": [
+    "No fuel needed (unless supplementary firing)",
+    "Pinch and approach temperatures set recovery",
+    "Natural circulation drum design",
+    "Low-temperature end limited by dew point"
+   ],
+   "classification": {
+    "family": "Boiler",
+    "type": "Horizontal natural-circulation HRSG (single pressure)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A waste heat recovery boiler (heat recovery steam generator, HRSG) makes steam from the hot exhaust of a gas turbine, engine, furnace or kiln. The gas passes superheater, evaporator and economizer banks in turn; water/steam circulates naturally between the drum and evaporator."
+  },
+  "model_3d": {
+   "asset": "glb/waste_heat_recovery_boiler.glb",
+   "metadata": "meta/waste_heat_recovery_boiler.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 22404,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot exhaust gas enters through the inlet transition.",
+    "The superheater meets the hottest gas.",
+    "The evaporator boils water; steam–water mixture rises to the drum."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot exhaust gas enters through the inlet transition.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The superheater meets the hottest gas.",
+     "part": "superheater",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The evaporator boils water; steam–water mixture rises to the drum.",
+     "part": "evaporator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drum separates steam; downcomers feed water back.",
+     "part": "steam_drum",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The economizer heats feedwater in the coolest gas before the stack.",
+     "part": "economizer",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "T–Q diagram: gas cooling line vs water/steam heating line — the closest point is the pinch."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "waste_heat_recovery_boiler_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "waste_heat_recovery_boiler_temperature.glb",
+     "title": "Gas temperature profile through the HRSG",
+     "description": "Exhaust gas gives up heat to the superheater, then the evaporator, then the economizer. The smallest gas-to-water temperature difference — the pinch point at the evaporator outlet — and the approach temperature at the economizer outlet set how much heat can be recovered (typical design pinch ~ 8–15 °C).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/waste_heat_recovery_boiler.json#components",
+   "key_components": "Gas duct, superheater, evaporator, economizer coils, steam drum, downcomer, stack",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust)",
+     "info_ref": "hr_casing",
+     "function": "Gas path, transitions and stack.",
+     "material": "Steel."
+    },
+    {
+     "id": "superheater",
+     "name": "Superheater (hottest gas) Tube Bank & Headers",
+     "info_ref": "hr_coils",
+     "function": "Heat transfer banks (SH, EVAP, ECO).",
+     "material": "Carbon/alloy steel."
+    },
+    {
+     "id": "evaporator",
+     "name": "Evaporator (boiling tubes) Tube Bank & Headers",
+     "info_ref": "hr_coils",
+     "function": "Heat transfer banks (SH, EVAP, ECO).",
+     "material": "Carbon/alloy steel."
+    },
+    {
+     "id": "economizer",
+     "name": "Economizer (coolest gas) Tube Bank & Headers",
+     "info_ref": "hr_coils",
+     "function": "Heat transfer banks (SH, EVAP, ECO).",
+     "material": "Carbon/alloy steel."
+    },
+    {
+     "id": "steam_drum",
+     "name": "Steam Drum (separates steam from water)",
+     "info_ref": "hr_drum",
+     "function": "Separates steam from water; holds inventory.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "drum_water",
+     "name": "Drum Water Level",
+     "info_ref": "hr_drum",
+     "function": "Separates steam from water; holds inventory.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "circulation_piping",
+     "name": "Downcomer, Risers, Saturated-Steam & Economizer Links",
+     "info_ref": "hr_piping",
+     "function": "Circulation links.",
+     "material": "Steel."
+    },
+    {
+     "id": "stack",
+     "name": "Outlet Transition & Stack",
+     "info_ref": "hr_casing",
+     "function": "Gas path, transitions and stack.",
+     "material": "Steel."
+    },
+    {
+     "id": "gas_particles",
+     "name": "Exhaust Gas crossing the Banks",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "circulation",
+     "name": "Natural Circulation: Drum → Downcomer → Evaporator → Risers → Drum",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Casing ~ 3 – 25 m tall",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 1 – 300",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Gas inlet ~ 450 – 650 (GT exhaust)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "~ 5 – 400",
+     "unit": "t/h steam"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose pressure levels and pinch/approach from economics; add supplementary firing if more steam is needed."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Ganapathy — Waste Heat Boiler Deskbook",
+    "ASME BPVC Section I"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth/foundation designed for operating weight full of water; allow access for tube cleaning and burner maintenance."
+   ],
+   "alignment": [
+    "Level the boiler; align burner and fan; check expansion allowances on headers and casings."
+   ],
+   "piping": [
+    "Fit safety valves with unobstructed discharge piped to a safe place; feedwater with check and isolation valves; blowdown to a blowdown vessel.",
+    "Flue/stack sized for the draught required; explosion relief where specified."
+   ],
+   "commissioning": [
+    "Boil-out/chemical clean; hydro-test; set and test safety valves; test low-water cut-outs and flame safeguard (purge, ignition, flame failure); tune combustion (O₂, CO)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor drum level, pinch and stack temperature.",
+     "part": "steam_drum",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Water chemistry; FAC inspections.",
+     "part": "circulation_piping",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect tubes and headers; casing liners.",
+     "part": "evaporator"
+    }
+   ],
+   "lubrication": [
+    "No lubrication for the static parts — lubricate valve stems, rotating parts and drives per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Flow-accelerated corrosion",
+     "category": "corrosion",
+     "symptoms": [
+      "Thinning in economizer/evaporator"
+     ],
+     "causes": [
+      "Low pH, low oxygen, high velocity"
+     ],
+     "remedies": [
+      "Chemistry control; Cr-Mo material"
+     ],
+     "part": "economizer"
+    },
+    {
+     "problem": "Thermal fatigue",
+     "category": "performance",
+     "symptoms": [
+      "Header cracks"
+     ],
+     "causes": [
+      "Frequent starts (cycling)"
+     ],
+     "remedies": [
+      "Controlled ramp rates; design for cycling"
+     ],
+     "part": "superheater"
+    }
+   ],
+   "safety": [
+    "Gas bypass/diverter interlocks; drum safety valves; purge before GT start."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Waste Heat Recovery Boiler — Introduction",
+    "type": "in_app_tour",
+    "model": "waste_heat_recovery_boiler.glb",
+    "duration_s": 49.9,
+    "script": [
+     {
+      "narration": "This module introduces the Waste Heat Recovery Boiler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A waste heat recovery boiler (HRSG) makes steam from hot exhaust gas — for example from a gas turbine, engine, kiln or furnace.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The gas passes the superheater, evaporator and economizer in turn; water circulates naturally between the steam drum and the evaporator tubes.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include combined-cycle power plants (gas turbine + steam turbine); cogeneration (CHP); cement kilns, glass furnaces, sulphuric acid plants.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust), Outlet Transition & Stack.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Waste Heat Recovery Boiler — Operation",
+    "type": "in_app_tour",
+    "model": "waste_heat_recovery_boiler.glb",
+    "duration_s": 35.2,
+    "script": [
+     {
+      "narration": "How the Waste Heat Recovery Boiler works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot exhaust gas enters through the inlet transition.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The superheater meets the hottest gas.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "superheater",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The evaporator boils water; steam–water mixture rises to the drum.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "evaporator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drum separates steam; downcomers feed water back.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "steam_drum",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The economizer heats feedwater in the coolest gas before the stack.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "economizer",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Exhaust gas gives up heat to the superheater, then the evaporator, then the economizer.",
+      "duration_s": 5.8,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Waste Heat Recovery Boiler — Maintenance",
+    "type": "in_app_tour",
+    "model": "waste_heat_recovery_boiler.glb",
+    "duration_s": 33.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Waste Heat Recovery Boiler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor drum level, pinch and stack temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "steam_drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Water chemistry; FAC inspections.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "circulation_piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tubes and headers; casing liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "evaporator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for flow-accelerated corrosion: thinning in economizer/evaporator. Common cause: low ph, low oxygen, high velocity.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "economizer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for thermal fatigue: header cracks. Common cause: frequent starts (cycling).",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "superheater",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the \"pinch point\"?",
+     "options": [
+      "Smallest gas-to-water temperature difference at the evaporator",
+      "Stack outlet",
+      "Drum level",
+      "Pump speed"
+     ],
+     "answer": 0,
+     "explanation": "Sets recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Order of sections along the gas path:",
+     "options": [
+      "Superheater → evaporator → economizer",
+      "Economizer first",
+      "Evaporator last",
+      "Random"
+     ],
+     "answer": 0,
+     "explanation": "Hottest to coolest.",
+     "level": "basic"
+    },
+    {
+     "question": "What drives natural circulation?",
+     "options": [
+      "Density difference between downcomer water and riser mixture",
+      "A pump",
+      "Gravity on steam",
+      "Fans"
+     ],
+     "answer": 0,
+     "explanation": "Thermosyphon.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Gas path, transitions and stack.\"",
+     "options": [
+      "Natural Circulation: Drum → Downcomer → Evaporator → Risers → Drum",
+      "Exhaust Gas crossing the Banks",
+      "Drum Water Level",
+      "Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust)"
+     ],
+     "answer": 3,
+     "explanation": "Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust): Gas path, transitions and stack.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Heat transfer banks (SH, EVAP, ECO).\"",
+     "options": [
+      "Natural Circulation: Drum → Downcomer → Evaporator → Risers → Drum",
+      "Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust)",
+      "Superheater (hottest gas) Tube Bank & Headers",
+      "Steam Drum (separates steam from water)"
+     ],
+     "answer": 2,
+     "explanation": "Superheater (hottest gas) Tube Bank & Headers: Heat transfer banks (SH, EVAP, ECO).",
+     "level": "basic",
+     "part": "superheater",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates steam from water; holds inventory.\"",
+     "options": [
+      "Downcomer, Risers, Saturated-Steam & Economizer Links",
+      "Superheater (hottest gas) Tube Bank & Headers",
+      "Steam Drum (separates steam from water)",
+      "Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust)"
+     ],
+     "answer": 2,
+     "explanation": "Steam Drum (separates steam from water): Separates steam from water; holds inventory.",
+     "level": "basic",
+     "part": "steam_drum",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

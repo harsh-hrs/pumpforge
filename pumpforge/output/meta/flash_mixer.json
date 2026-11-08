@@ -1,0 +1,501 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "flash_mixer",
+  "title": "Flash (Rapid) Mixer for Coagulant Dispersion",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 219,
+    "phase": 11,
+    "eq_id": "EQ-297",
+    "subcategory": "Water Treatment",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "flash_mixer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "flash_mixer_pressure.glb",
+      "title": "High velocity gradient, short time",
+      "description": "Coagulants (alum, ferric salts, PACl) react within seconds, so they must be spread through the whole flow almost instantly. Flash mixers use high energy — velocity gradient G ≈ 300–1000 s⁻¹ — with short detention (≈ 10–60 s). Too little mixing wastes chemical; too long or too intense mixing is not useful at this stage.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.5,
+          0.5,
+          -0.0
+        ],
+        [
+          -0.2,
+          0.55,
+          -0.05
+        ],
+        [
+          0.3,
+          1.1,
+          -0.05
+        ],
+        [
+          1.0,
+          1.1,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "coagulant",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.2,
+          0.3,
+          -0.3
+        ],
+        [
+          -1.2,
+          1.8,
+          -0.3
+        ],
+        [
+          -0.1,
+          1.8,
+          -0.3
+        ],
+        [
+          -0.1,
+          0.75,
+          -0.25
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 4090,
+    "parts": 7
+  },
+  "summary": "A flash mixer disperses coagulant through the raw water within seconds using a high-speed impeller, so the chemical reacts uniformly before flocculation.",
+  "classification": {
+    "family": "Water treatment",
+    "type": "Mechanical rapid mixer"
+  },
+  "model_configuration": {
+    "animation": "Fast impeller; coagulant disperses"
+  },
+  "standards": [
+    {
+      "id": "AWWA / Ten States Standards",
+      "title": "Recommended Standards for Water Works",
+      "relevance": "Design criteria.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "WHO Guidelines for Drinking-water Quality",
+      "title": "Water quality",
+      "relevance": "Targets.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "MWH — Water Treatment"
+  ],
+  "parts": [
+    {
+      "id": "fm_tank",
+      "name": "Flash Mixing Tank: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "fm_tank__back",
+        "fm_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.515,
+        0.3,
+        -0.515
+      ],
+      "bbox_max": [
+        0.515,
+        1.3,
+        0.515
+      ],
+      "label_anchor": [
+        0.0,
+        0.8,
+        0.515
+      ],
+      "center": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "fmx_tank"
+    },
+    {
+      "id": "fm_slurry",
+      "name": "Flash Mixing Tank: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "fm_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.495,
+        0.33,
+        -0.495
+      ],
+      "bbox_max": [
+        0.495,
+        1.15,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.74,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.74,
+        -0.2475
+      ],
+      "info_ref": "fmx_slurry"
+    },
+    {
+      "id": "fm_agitator",
+      "name": "Flash Mixing Tank: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "fm_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.225,
+        0.55,
+        -0.225
+      ],
+      "bbox_max": [
+        0.225,
+        1.57,
+        0.225
+      ],
+      "label_anchor": [
+        0.0,
+        1.06,
+        0.225
+      ],
+      "center": [
+        0.0,
+        1.06,
+        -0.0
+      ],
+      "info_ref": "fmx_agitator"
+    },
+    {
+      "id": "fm_drive",
+      "name": "Flash Mixing Tank: Agitator Drive (motor + gearbox, bridge beam)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "fm_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.65,
+        1.32,
+        -0.16
+      ],
+      "bbox_max": [
+        0.65,
+        2.07,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        1.695,
+        0.16
+      ],
+      "center": [
+        0.0,
+        1.695,
+        -0.0
+      ],
+      "info_ref": "fmx_drive"
+    },
+    {
+      "id": "piping",
+      "name": "Raw-Water Inlet (bottom), Coagulant Metering Pump & Dosing Point (at impeller), Outlet to Flocculation",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.4,
+        0.0,
+        -0.44
+      ],
+      "bbox_max": [
+        0.9,
+        1.815,
+        0.133
+      ],
+      "label_anchor": [
+        -0.25,
+        0.9075,
+        0.133
+      ],
+      "center": [
+        -0.25,
+        0.9075,
+        -0.1535
+      ],
+      "info_ref": "fmx_piping"
+    },
+    {
+      "id": "foundation",
+      "name": "Concrete Plinth",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "foundation__back",
+        "foundation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.65,
+        0.0,
+        -0.65
+      ],
+      "bbox_max": [
+        0.65,
+        0.3,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.65
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "fmx_tank"
+    },
+    {
+      "id": "coagulant",
+      "name": "Coagulant dispersed in seconds by the high-speed impeller",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "coagulant0",
+        "coagulant1",
+        "coagulant2",
+        "coagulant3",
+        "coagulant4",
+        "coagulant5",
+        "coagulant6",
+        "coagulant7",
+        "coagulant8",
+        "coagulant9",
+        "coagulant10",
+        "coagulant11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fmx_tank": {
+      "function": "Holds liquid.",
+      "construction": "Tank with baffles.",
+      "material": "Concrete/steel/PE.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fmx_slurry": {
+      "function": "Process liquid.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fmx_agitator": {
+      "function": "Mixes.",
+      "construction": "Shaft and impeller.",
+      "material": "Stainless/coated.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "fmx_drive": {
+      "function": "Drives agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fmx_piping": {
+      "function": "Inlet, dosing, outlet.",
+      "construction": "Pipes.",
+      "material": "DI/PVC.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

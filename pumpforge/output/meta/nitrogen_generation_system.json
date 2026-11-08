@@ -1,0 +1,823 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "nitrogen_generation_system",
+  "title": "Nitrogen Generation System — Pressure Swing Adsorption (Carbon Molecular Sieve)",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 233,
+    "phase": 11,
+    "eq_id": "EQ-311",
+    "subcategory": "Gas Utilities",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "nitrogen_generation_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "nitrogen_generation_system_pressure.glb",
+      "title": "Kinetic separation by pressure swing",
+      "description": "Carbon molecular sieve separates by speed, not equilibrium: O₂ molecules (≈ 0.346 nm) diffuse into the pores much faster than N₂ (≈ 0.364 nm). With feed air at ≈ 7–10 bar(g) the CMS takes up O₂ in the short cycle (≈ 60 s) and N₂ passes through as product (purity typically 95 – 99.999 %). The tower is then depressurised to atmosphere, releasing the O₂-rich gas, while the other tower takes over; a pressure-equalisation step between towers saves air.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed_air",
+      "kind": "air",
+      "radius": 0.016,
+      "points": [
+        [
+          -1.9,
+          0.82,
+          -0.0
+        ],
+        [
+          -1.3,
+          0.82,
+          -0.0
+        ],
+        [
+          -1.3,
+          0.28,
+          -0.0
+        ],
+        [
+          -1.05,
+          0.9,
+          -0.0
+        ],
+        [
+          -0.92,
+          0.25,
+          -0.0
+        ],
+        [
+          -0.45,
+          0.25,
+          -0.0
+        ],
+        [
+          -0.45,
+          0.7,
+          -0.05
+        ],
+        [
+          -0.45,
+          1.9,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "nitrogen",
+      "kind": "flow_discharge",
+      "radius": 0.016,
+      "points": [
+        [
+          -0.45,
+          2.16,
+          -0.0
+        ],
+        [
+          1.25,
+          2.16,
+          -0.0
+        ],
+        [
+          1.25,
+          1.2,
+          -0.05
+        ],
+        [
+          1.57,
+          0.9,
+          -0.0
+        ],
+        [
+          2.1,
+          0.9,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "o2_rich_exhaust",
+      "kind": "exhaust",
+      "radius": 0.014,
+      "points": [
+        [
+          0.15,
+          1.6,
+          -0.05
+        ],
+        [
+          0.15,
+          0.6,
+          -0.05
+        ],
+        [
+          0.15,
+          0.25,
+          -0.0
+        ],
+        [
+          0.75,
+          0.25,
+          -0.0
+        ],
+        [
+          0.75,
+          0.0,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 33556,
+    "parts": 13
+  },
+  "summary": "A PSA nitrogen generator separates nitrogen from compressed air. Two towers filled with carbon molecular sieve take turns: under pressure the sieve takes up oxygen faster than nitrogen, so nitrogen passes to a buffer vessel; the tower is then depressurised to release the oxygen and regenerate.",
+  "classification": {
+    "family": "Gas utilities",
+    "type": "Twin-bed PSA with carbon molecular sieve"
+  },
+  "model_configuration": {
+    "animation": "O₂ front advances; O₂ trapped, N₂ passes; exhaust from regenerating bed"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Receiver / vessel design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "Local pressure-equipment rules (e.g. PED / IBR)",
+      "title": "Registration and inspection",
+      "relevance": "Jurisdictional — to be verified.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EIGA / CGA guidance",
+      "title": "Nitrogen asphyxiation hazards",
+      "relevance": "Oxygen-deficiency safety.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Gas separation by adsorption (Ruthven)"
+  ],
+  "parts": [
+    {
+      "id": "adsorber_a",
+      "name": "Adsorber A (adsorbing at pressure)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "adsorber_a__back",
+        "adsorber_a__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.67,
+        0.49,
+        -0.22
+      ],
+      "bbox_max": [
+        -0.23,
+        2.01,
+        0.22
+      ],
+      "label_anchor": [
+        -0.45,
+        1.25,
+        0.22
+      ],
+      "center": [
+        -0.45,
+        1.25,
+        -0.0
+      ],
+      "info_ref": "n2_adsorber"
+    },
+    {
+      "id": "cms_a",
+      "name": "Carbon Molecular Sieve Bed A",
+      "group": "media",
+      "section_role": "keep",
+      "nodes": [
+        "cm0"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.66,
+        0.65,
+        -0.21
+      ],
+      "bbox_max": [
+        -0.24,
+        1.8,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.45,
+        1.225,
+        -0.0
+      ],
+      "center": [
+        -0.45,
+        1.225,
+        -0.105
+      ],
+      "info_ref": "n2_cms"
+    },
+    {
+      "id": "legs_a",
+      "name": "Adsorber A Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg0"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.7125,
+        0.0,
+        -0.20556
+      ],
+      "bbox_max": [
+        -0.24444,
+        0.6,
+        0.2625
+      ],
+      "label_anchor": [
+        -0.47847,
+        0.3,
+        0.2625
+      ],
+      "center": [
+        -0.47847,
+        0.3,
+        0.02847
+      ],
+      "info_ref": "n2_adsorber"
+    },
+    {
+      "id": "adsorber_b",
+      "name": "Adsorber B (depressurised — regenerating)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "adsorber_b__back",
+        "adsorber_b__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.07,
+        0.49,
+        -0.22
+      ],
+      "bbox_max": [
+        0.37,
+        2.01,
+        0.22
+      ],
+      "label_anchor": [
+        0.15,
+        1.25,
+        0.22
+      ],
+      "center": [
+        0.15,
+        1.25,
+        -0.0
+      ],
+      "info_ref": "n2_adsorber"
+    },
+    {
+      "id": "cms_b",
+      "name": "Carbon Molecular Sieve Bed B",
+      "group": "media",
+      "section_role": "keep",
+      "nodes": [
+        "cm1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.06,
+        0.65,
+        -0.21
+      ],
+      "bbox_max": [
+        0.36,
+        1.8,
+        -0.0
+      ],
+      "label_anchor": [
+        0.15,
+        1.225,
+        -0.0
+      ],
+      "center": [
+        0.15,
+        1.225,
+        -0.105
+      ],
+      "info_ref": "n2_cms"
+    },
+    {
+      "id": "legs_b",
+      "name": "Adsorber B Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.1125,
+        0.0,
+        -0.20556
+      ],
+      "bbox_max": [
+        0.35556,
+        0.6,
+        0.2625
+      ],
+      "label_anchor": [
+        0.12153,
+        0.3,
+        0.2625
+      ],
+      "center": [
+        0.12153,
+        0.3,
+        0.02847
+      ],
+      "info_ref": "n2_adsorber"
+    },
+    {
+      "id": "oxygen_front",
+      "name": "Oxygen Adsorption Front (O₂ held by the CMS; N₂ passes)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "o2f"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.7
+      ],
+      "bbox_min": [
+        -0.662,
+        0.7,
+        -0.212
+      ],
+      "bbox_max": [
+        -0.238,
+        0.8,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.45,
+        0.75,
+        -0.0
+      ],
+      "center": [
+        -0.45,
+        0.75,
+        -0.106
+      ],
+      "info_ref": "n2_cms"
+    },
+    {
+      "id": "valve_manifold",
+      "name": "Pneumatic Valve Manifolds (feed / exhaust / equalise / product) & Exhaust Silencer",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "valve_manifold.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.85,
+        0.0,
+        -0.09
+      ],
+      "bbox_max": [
+        0.84,
+        2.2695,
+        0.09
+      ],
+      "label_anchor": [
+        -0.005,
+        1.13475,
+        0.09
+      ],
+      "center": [
+        -0.005,
+        1.13475,
+        -0.0
+      ],
+      "info_ref": "n2_valves"
+    },
+    {
+      "id": "air_treatment",
+      "name": "Feed-Air Treatment: Coalescing Filter & Activated-Carbon Filter (protect the CMS from oil)",
+      "group": "filters",
+      "section_role": "keep",
+      "nodes": [
+        "air_treatment.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.8,
+        0.0,
+        -0.104
+      ],
+      "bbox_max": [
+        -0.85,
+        0.93,
+        0.104
+      ],
+      "label_anchor": [
+        -1.325,
+        0.465,
+        0.104
+      ],
+      "center": [
+        -1.325,
+        0.465,
+        -0.0
+      ],
+      "info_ref": "n2_filters"
+    },
+    {
+      "id": "nitrogen_buffer",
+      "name": "Nitrogen Buffer Vessel (smooths the cyclic product flow)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "nitrogen_buffer__back",
+        "nitrogen_buffer__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.75,
+        0.0,
+        -0.32
+      ],
+      "bbox_max": [
+        1.57,
+        2.19,
+        0.3591
+      ],
+      "label_anchor": [
+        1.16,
+        1.095,
+        0.3591
+      ],
+      "center": [
+        1.16,
+        1.095,
+        0.01955
+      ],
+      "info_ref": "n2_buffer"
+    },
+    {
+      "id": "product_controls",
+      "name": "Product Flow Control, Oxygen Analyser (ppm / %) & Off-Spec Vent Valve",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "product_controls.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.2,
+        -0.3
+      ],
+      "bbox_min": [
+        1.57,
+        0.0,
+        -0.46
+      ],
+      "bbox_max": [
+        2.0,
+        1.475,
+        0.051
+      ],
+      "label_anchor": [
+        1.785,
+        0.7375,
+        0.051
+      ],
+      "center": [
+        1.785,
+        0.7375,
+        -0.2045
+      ],
+      "info_ref": "n2_controls"
+    },
+    {
+      "id": "oxygen_molecules",
+      "name": "O₂ molecules (small, fast) trapped in the CMS pores",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "oxygen_molecules0",
+        "oxygen_molecules1",
+        "oxygen_molecules2",
+        "oxygen_molecules3",
+        "oxygen_molecules4",
+        "oxygen_molecules5",
+        "oxygen_molecules6",
+        "oxygen_molecules7",
+        "oxygen_molecules8",
+        "oxygen_molecules9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        -0.014,
+        -0.01331
+      ],
+      "bbox_max": [
+        0.014,
+        0.014,
+        0.01331
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01331
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "nitrogen_molecules",
+      "name": "N₂ molecules passing through to the product",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "nitrogen_molecules0",
+        "nitrogen_molecules1",
+        "nitrogen_molecules2",
+        "nitrogen_molecules3",
+        "nitrogen_molecules4",
+        "nitrogen_molecules5",
+        "nitrogen_molecules6",
+        "nitrogen_molecules7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        -0.014,
+        -0.01331
+      ],
+      "bbox_max": [
+        0.014,
+        0.014,
+        0.01331
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01331
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "n2_adsorber": {
+      "function": "Pressure vessels for the CMS.",
+      "construction": "Two towers with diffusers and compaction springs.",
+      "material": "Carbon steel.",
+      "operating_conditions": "≈ 7–10 bar(g), cycling.",
+      "failure_modes": [
+        "Fatigue"
+      ],
+      "inspection": [
+        "Statutory inspection"
+      ]
+    },
+    "n2_cms": {
+      "function": "Separates O₂ from N₂ by diffusion rate.",
+      "construction": "Carbon molecular sieve pellets, tightly packed.",
+      "material": "Carbon.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Dusting if loose",
+        "Oil poisoning"
+      ],
+      "inspection": [
+        "Purity trend"
+      ]
+    },
+    "n2_valves": {
+      "function": "Sequence pressurise / equalise / vent.",
+      "construction": "Pneumatic angle-seat valves, silencer.",
+      "material": "Stainless/brass.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Leaking valve → purity drop"
+      ],
+      "inspection": [
+        "Cycle check"
+      ]
+    },
+    "n2_filters": {
+      "function": "Remove oil and vapour from feed air.",
+      "construction": "Coalescing + activated-carbon filters.",
+      "material": "Aluminium.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Breakthrough of oil"
+      ],
+      "inspection": [
+        "Element change"
+      ]
+    },
+    "n2_buffer": {
+      "function": "Smooths product flow.",
+      "construction": "Vertical vessel.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "n2_controls": {
+      "function": "Checks purity, controls flow.",
+      "construction": "Flow valve, zirconia/electrochemical O₂ analyser, off-spec vent.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Analyser drift"
+      ],
+      "inspection": [
+        "Calibrate with span gas"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

@@ -1,0 +1,645 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "paddle_dryer",
+  "title": "Twin-Shaft Hollow Paddle Dryer (Indirect, Steam-Heated)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 164,
+    "phase": 8,
+    "eq_id": "EQ-242",
+    "subcategory": "Drying",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "paddle_dryer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "paddle_dryer_temperature.glb",
+      "title": "Indirect heating through jacket and paddles",
+      "description": "Steam (or thermal oil) heats the trough jacket and the inside of the hollow shafts and paddles, so the heating surface per unit volume is very large. The material never touches the heating medium, and only a small vapour stream leaves — easy to condense or treat. Used for sludges, pastes and filter cakes.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          -2.15,
+          0.75,
+          -0.27
+        ],
+        [
+          1.3,
+          0.75,
+          -0.27
+        ]
+      ]
+    },
+    {
+      "name": "vapour_out",
+      "kind": "steam",
+      "radius": 0.03,
+      "points": [
+        [
+          0.6,
+          1.25,
+          -0.1
+        ],
+        [
+          0.6,
+          1.75,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "material",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.05,
+          1.7,
+          -0.0
+        ],
+        [
+          -1.05,
+          0.75,
+          -0.0
+        ],
+        [
+          1.15,
+          0.75,
+          -0.0
+        ],
+        [
+          1.25,
+          0.22,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 4060,
+    "parts": 10
+  },
+  "summary": "A paddle dryer is an indirect (contact) dryer. Two hollow shafts with wedge-shaped paddles turn in a jacketed trough; steam inside the jacket, shafts and paddles heats the material, while the paddles mix it and move it towards the outlet. Only a small vapour stream leaves, making it suitable for sludges and pastes.",
+  "classification": {
+    "family": "Dryer",
+    "type": "Twin-shaft hollow paddle (indirect)"
+  },
+  "model_configuration": {
+    "animation": "Shafts counter-rotate; material moves"
+  },
+  "standards": [
+    {
+      "id": "NFPA 61 / 652",
+      "title": "Combustible dust (agricultural/food) and fundamentals",
+      "relevance": "Dust explosion protection.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ATEX 2014/34/EU",
+      "title": "Equipment for explosive atmospheres",
+      "relevance": "Hazardous areas.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Jacket and hollow shafts are pressure parts.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Mujumdar — Handbook of Industrial Drying"
+  ],
+  "parts": [
+    {
+      "id": "jacketed_trough",
+      "name": "Jacketed W-Trough (steam jacket)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "jacketed_trough__back",
+        "jacketed_trough__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.3,
+        0.425,
+        -0.6
+      ],
+      "bbox_max": [
+        1.3,
+        1.175,
+        0.6
+      ],
+      "label_anchor": [
+        0.0,
+        0.8,
+        0.6
+      ],
+      "center": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "pd_trough"
+    },
+    {
+      "id": "paddle_shaft_1",
+      "name": "Hollow Shaft 1 with Wedge Paddles (steam inside)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "paddle_shaft_1.001"
+      ],
+      "pivot": [
+        0.0,
+        0.75,
+        0.27
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.7
+      ],
+      "bbox_min": [
+        -1.7,
+        0.4888,
+        0.00852
+      ],
+      "bbox_max": [
+        1.6,
+        1.0112,
+        0.53148
+      ],
+      "label_anchor": [
+        -0.05,
+        0.75,
+        0.53148
+      ],
+      "center": [
+        -0.05,
+        0.75,
+        0.27
+      ],
+      "info_ref": "pd_shafts"
+    },
+    {
+      "id": "paddle_shaft_2",
+      "name": "Hollow Shaft 2 with Wedge Paddles (steam inside)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "paddle_shaft_2.001"
+      ],
+      "pivot": [
+        0.0,
+        0.75,
+        -0.27
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        1.2
+      ],
+      "bbox_min": [
+        -1.7,
+        0.48852,
+        -0.5312
+      ],
+      "bbox_max": [
+        1.6,
+        1.01148,
+        -0.0088
+      ],
+      "label_anchor": [
+        -0.05,
+        0.75,
+        -0.0088
+      ],
+      "center": [
+        -0.05,
+        0.75,
+        -0.27
+      ],
+      "info_ref": "pd_shafts"
+    },
+    {
+      "id": "vapour_dome",
+      "name": "Cover / Vapour Dome, Vapour Outlet & Feed Inlet",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "vapour_dome__back",
+        "vapour_dome__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.3,
+        1.15,
+        -0.55
+      ],
+      "bbox_max": [
+        1.3,
+        1.7,
+        0.55
+      ],
+      "label_anchor": [
+        0.0,
+        1.425,
+        0.55
+      ],
+      "center": [
+        0.0,
+        1.425,
+        -0.0
+      ],
+      "info_ref": "pd_dome"
+    },
+    {
+      "id": "rotary_joints",
+      "name": "Rotary Joints (steam in, condensate out of the hollow shafts)",
+      "group": "seals",
+      "section_role": "keep",
+      "nodes": [
+        "rotary_joints.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.05,
+        0.68,
+        -0.34
+      ],
+      "bbox_max": [
+        -1.7,
+        0.82,
+        0.34
+      ],
+      "label_anchor": [
+        -1.875,
+        0.75,
+        0.34
+      ],
+      "center": [
+        -1.875,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "pd_joints"
+    },
+    {
+      "id": "drive",
+      "name": "Drive: Motor, Gearbox & Timing Gears (shafts counter-rotate)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "dr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.625,
+        0.575,
+        -0.45
+      ],
+      "bbox_max": [
+        2.4,
+        0.925,
+        0.45
+      ],
+      "label_anchor": [
+        2.0125,
+        0.75,
+        0.45
+      ],
+      "center": [
+        2.0125,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "pd_drive"
+    },
+    {
+      "id": "outlet",
+      "name": "Discharge Weir & Outlet",
+      "group": "casing",
+      "section_role": "keep",
+      "nodes": [
+        "outlet.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        -0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.098,
+        0.24,
+        -0.5
+      ],
+      "bbox_max": [
+        1.402,
+        0.85,
+        0.5
+      ],
+      "label_anchor": [
+        1.25,
+        0.545,
+        0.5
+      ],
+      "center": [
+        1.25,
+        0.545,
+        -0.0
+      ],
+      "info_ref": "pd_trough"
+    },
+    {
+      "id": "supports",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.16,
+        0.0,
+        -0.55
+      ],
+      "bbox_max": [
+        1.16,
+        0.45,
+        0.55
+      ],
+      "label_anchor": [
+        0.0,
+        0.225,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.225,
+        -0.0
+      ],
+      "info_ref": "pd_trough"
+    },
+    {
+      "id": "sludge",
+      "name": "Wet Material Conveyed & Mixed by the Paddles",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "sludge0",
+        "sludge1",
+        "sludge2",
+        "sludge3",
+        "sludge4",
+        "sludge5",
+        "sludge6",
+        "sludge7",
+        "sludge8",
+        "sludge9",
+        "sludge10",
+        "sludge11",
+        "sludge12",
+        "sludge13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.03811,
+        -0.04097,
+        -0.03915
+      ],
+      "bbox_max": [
+        0.03811,
+        0.04097,
+        0.03915
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.03915
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "vapour",
+      "name": "Moisture Evaporating to the Vapour Dome",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "vapour0",
+        "vapour1",
+        "vapour2",
+        "vapour3",
+        "vapour4",
+        "vapour5",
+        "vapour6",
+        "vapour7",
+        "vapour8",
+        "vapour9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.018,
+        -0.018
+      ],
+      "bbox_max": [
+        0.018,
+        0.018,
+        0.018
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.018
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "pd_trough": {
+      "function": "Contains the material; heated jacket.",
+      "construction": "Jacketed W-trough.",
+      "material": "Steel/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pd_shafts": {
+      "function": "Heat, mix and convey.",
+      "construction": "Hollow shafts with wedge paddles.",
+      "material": "Steel/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear, fatigue"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "pd_dome": {
+      "function": "Collects vapour.",
+      "construction": "Cover with vapour outlet.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pd_joints": {
+      "function": "Steam into rotating shafts.",
+      "construction": "Rotary joints with siphons.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Leakage"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "pd_drive": {
+      "function": "Turns the shafts.",
+      "construction": "Motor, gearbox, timing gears.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

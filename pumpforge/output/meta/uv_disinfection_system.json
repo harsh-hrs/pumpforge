@@ -1,0 +1,489 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "uv_disinfection_system",
+  "title": "Closed-Vessel UV Disinfection Reactor",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 223,
+    "phase": 11,
+    "eq_id": "EQ-301",
+    "subcategory": "Disinfection",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "uv_disinfection_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "uv_disinfection_system_pressure.glb",
+      "title": "UV dose damages microbial DNA",
+      "description": "UV-C light near 254 nm damages the DNA/RNA of bacteria, viruses and protozoa (Cryptosporidium, Giardia) so they cannot reproduce. Dose = intensity × exposure time (mJ/cm²; drinking water often ≈ 40 mJ/cm²). UV leaves no residual, so a small chlorine dose is often added for the distribution network; water UV transmittance and sleeve fouling control performance.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -0.7,
+          0.25,
+          -0.0
+        ],
+        [
+          -0.7,
+          0.75,
+          -0.2
+        ],
+        [
+          0.7,
+          1.05,
+          -0.2
+        ],
+        [
+          0.7,
+          1.55,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "power",
+      "kind": "electric",
+      "radius": 0.012,
+      "points": [
+        [
+          1.6,
+          1.3,
+          -0.0
+        ],
+        [
+          0.95,
+          0.9,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 5768,
+    "parts": 7
+  },
+  "summary": "A closed-vessel UV system disinfects water by passing it close to UV lamps housed in quartz sleeves. UV-C light inactivates bacteria, viruses and protozoa; automatic wipers keep sleeves clean and a sensor monitors intensity.",
+  "classification": {
+    "family": "Disinfection",
+    "type": "Closed-vessel UV reactor"
+  },
+  "model_configuration": {
+    "lamps": 5,
+    "animation": "Lamps glow; wiper travels"
+  },
+  "standards": [
+    {
+      "id": "US EPA UVDGM",
+      "title": "UV Disinfection Guidance Manual",
+      "relevance": "Validation.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "DVGW W 294 / ÖNORM M 5873",
+      "title": "UV devices",
+      "relevance": "Certification.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "US EPA UVDGM"
+  ],
+  "parts": [
+    {
+      "id": "chamber",
+      "name": "Stainless Reactor Chamber with Inlet & Outlet",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "chamber__back",
+        "chamber__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.928,
+        0.3,
+        -0.35
+      ],
+      "bbox_max": [
+        0.928,
+        1.5,
+        0.35
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        0.35
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "uv_chamber"
+    },
+    {
+      "id": "quartz_sleeves",
+      "name": "Quartz Sleeves (protect lamps, transmit UV-C)",
+      "group": "lamps",
+      "section_role": "keep",
+      "nodes": [
+        "quartz_sleeves.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.5
+      ],
+      "bbox_min": [
+        -0.87,
+        0.765,
+        -0.185
+      ],
+      "bbox_max": [
+        0.9,
+        1.035,
+        0.185
+      ],
+      "label_anchor": [
+        0.015,
+        0.9,
+        0.185
+      ],
+      "center": [
+        0.015,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "uv_sleeves"
+    },
+    {
+      "id": "uv_lamps",
+      "name": "UV Lamps (low-pressure amalgam or medium-pressure, 254 nm)",
+      "group": "lamps",
+      "section_role": "keep",
+      "nodes": [
+        "uv_lamps.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.8
+      ],
+      "bbox_min": [
+        -0.85,
+        0.785,
+        -0.165
+      ],
+      "bbox_max": [
+        0.88,
+        1.015,
+        0.165
+      ],
+      "label_anchor": [
+        0.015,
+        0.9,
+        0.165
+      ],
+      "center": [
+        0.015,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "uv_lamps"
+    },
+    {
+      "id": "wiper",
+      "name": "Automatic Sleeve Wiper (keeps quartz clean)",
+      "group": "cleaning",
+      "section_role": "keep",
+      "nodes": [
+        "wp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.4
+      ],
+      "bbox_min": [
+        -0.02,
+        0.62,
+        -0.28
+      ],
+      "bbox_max": [
+        0.02,
+        1.18,
+        0.28
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        0.28
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "uv_wiper"
+    },
+    {
+      "id": "control_sensor",
+      "name": "Ballast/Control Panel & UV-Intensity Sensor",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "pn"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.17,
+        0.5,
+        -0.1
+      ],
+      "bbox_max": [
+        1.85,
+        1.3,
+        0.1
+      ],
+      "label_anchor": [
+        1.01,
+        0.9,
+        0.1
+      ],
+      "center": [
+        1.01,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "uv_control"
+    },
+    {
+      "id": "supports",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.56,
+        0.0,
+        -0.25
+      ],
+      "bbox_max": [
+        0.56,
+        0.6,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        0.3,
+        0.25
+      ],
+      "center": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "uv_chamber"
+    },
+    {
+      "id": "microbes",
+      "name": "Microorganisms receiving the UV Dose as they pass the Lamps",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "microbes_0",
+        "microbes_1",
+        "microbes_2",
+        "microbes_3",
+        "microbes_4",
+        "microbes_5",
+        "microbes_6",
+        "microbes_7",
+        "microbes_8",
+        "microbes_9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.715,
+        0.285,
+        -0.16311
+      ],
+      "bbox_max": [
+        0.715,
+        1.27444,
+        -0.085
+      ],
+      "label_anchor": [
+        0.0,
+        0.77972,
+        -0.085
+      ],
+      "center": [
+        0.0,
+        0.77972,
+        -0.12406
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "uv_chamber": {
+      "function": "Reactor.",
+      "construction": "Stainless chamber.",
+      "material": "316L.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "uv_sleeves": {
+      "function": "Protect lamps.",
+      "construction": "Quartz sleeves.",
+      "material": "Quartz.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling"
+      ],
+      "inspection": [
+        "Wiper, cleaning"
+      ]
+    },
+    "uv_lamps": {
+      "function": "Emit UV-C.",
+      "construction": "LP/MP lamps.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Ageing"
+      ],
+      "inspection": [
+        "Hours, sensor"
+      ]
+    },
+    "uv_wiper": {
+      "function": "Cleans sleeves.",
+      "construction": "Wiper.",
+      "material": "EPDM.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "uv_control": {
+      "function": "Power and monitoring.",
+      "construction": "Ballasts, sensor.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

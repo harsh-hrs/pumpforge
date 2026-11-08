@@ -1,0 +1,660 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "microfiltration_system",
+ "no": 177,
+ "title": "Microfiltration System",
+ "model_title": "Submerged Hollow-Fibre Microfiltration System (Membrane Tank, Permeate Pump, Air Scour)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A submerged hollow-fibre microfiltration system immerses cassettes of porous fibres directly in the feed tank. A permeate pump applies gentle suction so clean water passes into the fibres while suspended solids and bacteria stay outside. Air scouring and periodic back-pulsing keep the fibres clean.",
+   "applications": [
+    "Membrane bioreactors (MBR) for wastewater",
+    "Surface-water treatment",
+    "Tertiary filtration"
+   ],
+   "key_points": [
+    "Pores ≈ 0.1–0.4 µm",
+    "Low TMP (≈ 0.1–0.5 bar suction)",
+    "Air scour is the main fouling control",
+    "Replaces clarifiers and sand filters"
+   ],
+   "classification": {
+    "family": "Membrane system",
+    "type": "Submerged hollow-fibre MF (e.g. MBR)"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A submerged hollow-fibre microfiltration system immerses bundles of porous fibres in the feed tank. A permeate pump applies a gentle suction so clean water passes into the fibres while particles and bacteria stay outside. Air bubbles from diffusers scour the fibres to limit fouling."
+  },
+  "model_3d": {
+   "asset": "glb/microfiltration_system.glb",
+   "metadata": "meta/microfiltration_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6168,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed fills the membrane tank.",
+    "The permeate pump draws water into the fibres.",
+    "Solids are retained on the fibre surface."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed fills the membrane tank.",
+     "part": "mixed_liquor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The permeate pump draws water into the fibres.",
+     "part": "permeate_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Solids are retained on the fibre surface.",
+     "part": "membrane_cassette",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The blower supplies air that scours the fibres.",
+     "part": "air_diffuser",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Permeate leaves via the header.",
+     "part": "permeate_line",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "TMP rises over time at constant flux; relax/backpulse and maintenance cleans restore it."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "microfiltration_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "microfiltration_system_pressure.glb",
+     "title": "Suction-driven filtration (low TMP)",
+     "description": "The permeate pump applies a gentle suction inside the fibres (trans-membrane pressure typically only ~ 0.1–0.5 bar), drawing clean water in through the pores while solids stay outside. Air scouring and periodic back-pulsing keep the fibre surfaces clean.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/microfiltration_system.json#components",
+   "key_components": "Submerged hollow-fibre cassette, membrane tank, permeate pump, air-scour blower, backwash",
+   "parts": [
+    {
+     "id": "membrane_tank",
+     "name": "Membrane Tank (open, concrete or steel)",
+     "info_ref": "mfs_tank",
+     "function": "Holds the feed and the cassettes.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "mixed_liquor",
+     "name": "Feed / Mixed Liquor in the Tank",
+     "info_ref": "mfs_tank",
+     "function": "Holds the feed and the cassettes.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "membrane_cassette",
+     "name": "Membrane Cassette: Hollow Fibres (≈ 0.1–0.4 µm pores) between Potted Headers",
+     "info_ref": "mfs_fibres",
+     "function": "Separate solids from water.",
+     "material": "PVDF/PES."
+    },
+    {
+     "id": "air_diffuser",
+     "name": "Air-Scour Diffuser & Air Line",
+     "info_ref": "mfs_air",
+     "function": "Scour fibres.",
+     "material": "—"
+    },
+    {
+     "id": "blower",
+     "name": "Air-Scour Blower Housing",
+     "info_ref": "mfs_air",
+     "function": "Scour fibres.",
+     "material": "—"
+    },
+    {
+     "id": "blower_rotor",
+     "name": "Blower Impeller",
+     "info_ref": "mfs_air",
+     "function": "Scour fibres.",
+     "material": "—"
+    },
+    {
+     "id": "permeate_line",
+     "name": "Permeate Header & Line (under suction)",
+     "info_ref": "mfs_permeate",
+     "function": "Draw permeate.",
+     "material": "Stainless."
+    },
+    {
+     "id": "permeate_pump",
+     "name": "Permeate Pump (reversible for backpulse)",
+     "info_ref": "mfs_permeate",
+     "function": "Draw permeate.",
+     "material": "Stainless."
+    },
+    {
+     "id": "permeate_pump_shaft",
+     "name": "Permeate Pump (reversible for backpulse) — Shaft & Coupling (turning)",
+     "info_ref": "mfs_permeate",
+     "function": "Draw permeate.",
+     "material": "Stainless."
+    },
+    {
+     "id": "air_bubbles",
+     "name": "Coarse Air Bubbles scouring the Fibres",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Cassettes ~ 10 – 2000 m² each",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 100 000",
+     "unit": "m³/d"
+    },
+    "operating_pressure": {
+     "typical_range": "TMP ~ 0.1 – 0.5 (suction)",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "~ 0.1 – 0.4 µm; > 4-log bacteria removal",
+     "unit": "µm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size membrane area from design flux; fine screening (≈ 1–3 mm) upstream."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Judd — The MBR Book"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Skid or tank on level foundation; room for module removal and CIP equipment."
+   ],
+   "alignment": [
+    "Modules/vessels square and supported without strain on ports."
+   ],
+   "piping": [
+    "Pre-treatment (strainer/cartridge filter) ahead of membranes; sampling points for feed, permeate and concentrate; CIP connections."
+   ],
+   "commissioning": [
+    "Flush preservative; integrity test; start at low flux; set recovery; record normalised flux, ΔP and rejection baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor TMP, flux and air flow.",
+     "part": "membrane_cassette",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Maintenance clean (hypochlorite/citric).",
+     "part": "membrane_cassette",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Recovery clean; fibre repair/replacement.",
+     "part": "membrane_cassette"
+    }
+   ],
+   "lubrication": [
+    "Blower and pump bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Sludging of the cassette",
+     "category": "performance",
+     "symptoms": [
+      "Rising TMP, clogged fibres"
+     ],
+     "causes": [
+      "Low air scour, high solids"
+     ],
+     "remedies": [
+      "Restore aeration; clean"
+     ],
+     "part": "membrane_cassette"
+    },
+    {
+     "problem": "Fibre breakage",
+     "category": "performance",
+     "symptoms": [
+      "Turbidity in permeate"
+     ],
+     "causes": [
+      "Abrasive debris, poor screening"
+     ],
+     "remedies": [
+      "Fine screening; repair"
+     ],
+     "part": "membrane_cassette"
+    }
+   ],
+   "safety": [
+    "Chemical cleaning hazards; confined-space entry rules for tanks."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Microfiltration System — Introduction",
+    "type": "in_app_tour",
+    "model": "microfiltration_system.glb",
+    "duration_s": 49.5,
+    "script": [
+     {
+      "narration": "This module introduces the Microfiltration System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A submerged hollow-fibre microfiltration system immerses cassettes of porous fibres directly in the feed tank.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A permeate pump applies gentle suction so clean water passes into the fibres while suspended solids and bacteria stay outside.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Air scouring and periodic back-pulsing keep the fibres clean.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include membrane bioreactors (MBR) for wastewater; surface-water treatment; tertiary filtration.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Blower Impeller, Permeate Pump (reversible for backpulse), Permeate Pump (reversible for backpulse) — Shaft & Coupling (turning).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Microfiltration System — Operation",
+    "type": "in_app_tour",
+    "model": "microfiltration_system.glb",
+    "duration_s": 41.1,
+    "script": [
+     {
+      "narration": "How the Microfiltration System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed fills the membrane tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mixed_liquor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The permeate pump draws water into the fibres.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "permeate_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Solids are retained on the fibre surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "membrane_cassette",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The blower supplies air that scours the fibres.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_diffuser",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Permeate leaves via the header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "permeate_line",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The permeate pump applies a gentle suction inside the fibres (trans-membrane pressure typically only ~ 0.1–0.5 bar), drawing clean water in through the pores while solids stay outside.",
+      "duration_s": 12.9,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Microfiltration System — Maintenance",
+    "type": "in_app_tour",
+    "model": "microfiltration_system.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Microfiltration System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor TMP, flux and air flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "membrane_cassette",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Maintenance clean (hypochlorite/citric).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "membrane_cassette",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Recovery clean; fibre repair/replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "membrane_cassette",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sludging of the cassette: rising tmp, clogged fibres. Common cause: low air scour, high solids.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "membrane_cassette",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fibre breakage: turbidity in permeate. Common cause: abrasive debris, poor screening.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "membrane_cassette",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is water drawn through a submerged membrane?",
+     "options": [
+      "Suction from the permeate pump",
+      "High-pressure feed pump",
+      "Gravity only",
+      "Air pressure"
+     ],
+     "answer": 0,
+     "explanation": "Suction.",
+     "level": "basic"
+    },
+    {
+     "question": "What is air scour for?",
+     "options": [
+      "Keeping fibre surfaces clean",
+      "Aerating permeate",
+      "Cooling",
+      "Lifting the tank"
+     ],
+     "answer": 0,
+     "explanation": "Fouling control.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical MF pore size is…",
+     "options": [
+      "0.1–0.4 µm",
+      "1 mm",
+      "1 nm",
+      "10 µm"
+     ],
+     "answer": 0,
+     "explanation": "Microfiltration.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the feed and the cassettes.\"",
+     "options": [
+      "Coarse Air Bubbles scouring the Fibres",
+      "Permeate Pump (reversible for backpulse) — Shaft & Coupling (turning)",
+      "Permeate Pump (reversible for backpulse)",
+      "Membrane Tank (open, concrete or steel)"
+     ],
+     "answer": 3,
+     "explanation": "Membrane Tank (open, concrete or steel): Holds the feed and the cassettes.",
+     "level": "basic",
+     "part": "membrane_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separate solids from water.\"",
+     "options": [
+      "Membrane Tank (open, concrete or steel)",
+      "Permeate Pump (reversible for backpulse) — Shaft & Coupling (turning)",
+      "Membrane Cassette: Hollow Fibres (≈ 0.1–0.4 µm pores) between Potted Headers",
+      "Blower Impeller"
+     ],
+     "answer": 2,
+     "explanation": "Membrane Cassette: Hollow Fibres (≈ 0.1–0.4 µm pores) between Potted Headers: Separate solids from water.",
+     "level": "basic",
+     "part": "membrane_cassette",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Scour fibres.\"",
+     "options": [
+      "Membrane Cassette: Hollow Fibres (≈ 0.1–0.4 µm pores) between Potted Headers",
+      "Membrane Tank (open, concrete or steel)",
+      "Air-Scour Diffuser & Air Line",
+      "Permeate Header & Line (under suction)"
+     ],
+     "answer": 2,
+     "explanation": "Air-Scour Diffuser & Air Line: Scour fibres.",
+     "level": "basic",
+     "part": "air_diffuser",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

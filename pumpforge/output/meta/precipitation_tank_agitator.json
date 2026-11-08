@@ -1,0 +1,494 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "precipitation_tank_agitator",
+  "title": "Gibbsite Precipitator with Draft-Tube Agitator",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {},
+  "overlays": {
+    "flow": {
+      "file": "precipitation_tank_agitator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "precipitation_tank_agitator_temperature.glb",
+      "title": "Supersaturation drives precipitation",
+      "description": "Cooled, seeded pregnant liquor is supersaturated: NaAl(OH)₄ → Al(OH)₃ + NaOH. Fine seed hydrate gives surface for growth and agglomeration. Precipitation runs for roughly 30–60 h through a train of tanks, cooling from about 75–80 °C to 60–65 °C (interstage cooling raises yield). The draft-tube agitator keeps the hydrate suspended with low shear.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "circulation",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          2.51,
+          -0.05
+        ],
+        [
+          0.0,
+          0.85,
+          -0.05
+        ],
+        [
+          0.5525,
+          0.82,
+          -0.05
+        ],
+        [
+          0.5525,
+          2.51,
+          -0.05
+        ],
+        [
+          0.1,
+          2.64,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "pregnant_liquor",
+      "kind": "flow_suction",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.25,
+          2.75,
+          -0.0
+        ],
+        [
+          -0.65,
+          2.65,
+          -0.1
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 13156,
+    "parts": 7
+  },
+  "summary": "Precipitators are large tanks where cooled, seeded pregnant liquor deposits gibbsite (aluminium hydroxide). A slow draft-tube agitator circulates the slurry to keep hydrate suspended and help crystals grow and agglomerate.",
+  "classification": {
+    "family": "Precipitation",
+    "type": "Draft-tube agitated precipitator"
+  },
+  "model_configuration": {
+    "animation": "Circulation down the draft tube; crystals grow"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "pr_tank",
+      "name": "Precipitator: Tank, Baffles & Draft Tube",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "pr_tank__back",
+        "pr_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.865,
+        0.3,
+        -0.865
+      ],
+      "bbox_max": [
+        0.865,
+        2.9,
+        0.865
+      ],
+      "label_anchor": [
+        0.0,
+        1.6,
+        0.865
+      ],
+      "center": [
+        0.0,
+        1.6,
+        -0.0
+      ],
+      "info_ref": "pt_tank"
+    },
+    {
+      "id": "pr_slurry",
+      "name": "Precipitator: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "pr_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.845,
+        0.33,
+        -0.845
+      ],
+      "bbox_max": [
+        0.845,
+        2.51,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.42,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.42,
+        -0.4225
+      ],
+      "info_ref": "pt_slurry"
+    },
+    {
+      "id": "pr_agitator",
+      "name": "Precipitator: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "pr_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.15547,
+        1.68,
+        -0.25171
+      ],
+      "bbox_max": [
+        0.2805,
+        3.17,
+        0.25171
+      ],
+      "label_anchor": [
+        0.06252,
+        2.425,
+        0.25171
+      ],
+      "center": [
+        0.06252,
+        2.425,
+        0.0
+      ],
+      "info_ref": "pt_agitator"
+    },
+    {
+      "id": "pr_drive",
+      "name": "Precipitator: Agitator Drive (motor + gearbox, bridge beam)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "pr_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        2.92,
+        -0.16
+      ],
+      "bbox_max": [
+        1.0,
+        3.67,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        3.295,
+        0.16
+      ],
+      "center": [
+        0.0,
+        3.295,
+        -0.0
+      ],
+      "info_ref": "pt_drive"
+    },
+    {
+      "id": "interstage_cooling",
+      "name": "Interstage Cooler, Overflow / Transfer & Seed Addition",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "interstage_cooling.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.15,
+        0.64,
+        -0.65
+      ],
+      "bbox_max": [
+        1.5,
+        3.1,
+        0.114
+      ],
+      "label_anchor": [
+        0.175,
+        1.87,
+        0.114
+      ],
+      "center": [
+        0.175,
+        1.87,
+        -0.268
+      ],
+      "info_ref": "pt_cooler"
+    },
+    {
+      "id": "foundation",
+      "name": "Ring-Wall Foundation",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "foundation__back",
+        "foundation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.95,
+        0.0,
+        -0.95
+      ],
+      "bbox_max": [
+        0.95,
+        0.3,
+        0.95
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.95
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "pt_tank"
+    },
+    {
+      "id": "hydrate",
+      "name": "Gibbsite (Al(OH)₃) Crystals growing as the liquor circulates (down the draft tube, up the annulus)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "hydrate0",
+        "hydrate1",
+        "hydrate2",
+        "hydrate3",
+        "hydrate4",
+        "hydrate5",
+        "hydrate6",
+        "hydrate7",
+        "hydrate8",
+        "hydrate9",
+        "hydrate10",
+        "hydrate11",
+        "hydrate12",
+        "hydrate13",
+        "hydrate14",
+        "hydrate15"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.022,
+        -0.022,
+        -0.02092
+      ],
+      "bbox_max": [
+        0.022,
+        0.022,
+        0.02092
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02092
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "pt_tank": {
+      "function": "Holds the slurry.",
+      "construction": "Tank with baffles/draft tube.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pt_slurry": {
+      "function": "Process slurry/liquor.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pt_agitator": {
+      "function": "Mixes and suspends solids.",
+      "construction": "Shaft and impellers.",
+      "material": "Carbon steel (often rubber-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blade wear, scale"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "pt_drive": {
+      "function": "Drives the agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "pt_cooler": {
+      "function": "Cooling, transfer, seed.",
+      "construction": "Interstage cooler and lines.",
+      "material": "Stainless/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

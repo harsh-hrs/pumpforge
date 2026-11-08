@@ -4,6 +4,7 @@ sections are present and populated. Exit code 1 on any problem."""
 import json, os, sys
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 cat = json.load(open(os.path.join(R, 'catalog.json'), encoding='utf-8'))
+FAMILY_KEYS = {'safety_environmental': ['size', 'capacity', 'operating_conditions', 'performance'], 'mechanical_components': ['size', 'speed', 'load_capacity', 'operating_conditions'], 'water_utilities': ['size', 'capacity', 'operating_conditions', 'power_rating'], 'alumina_refinery': ['size', 'capacity', 'operating_conditions', 'power_rating'], 'filtration_separation': ['size', 'capacity', 'operating_pressure', 'separation_performance'], 'thermal_process': ['size', 'heat_duty', 'operating_temperature', 'capacity'], 'material_handling': ['size', 'power_rating', 'speed', 'capacity'], 'static_equipment': ['size', 'design_pressure', 'design_temperature', 'capacity'], 'valves_piping': ['size', 'pressure_rating', 'temperature', 'flow_capacity'], 'rotating_machinery': ['size', 'power_rating', 'speed', 'capacity']}
 PKEYS = ['flow', 'head', 'pressure', 'speed', 'efficiency']
 problems, rows = [], []
 for c in cat['categories']:
@@ -28,7 +29,7 @@ for c in cat['categories']:
         miss = [u for u in {p['info_ref'] for p in meta['parts']} if u not in meta['components']]
         if miss: P(f'components without info {miss}')
         ep = s['engineering_parameters']['parameters']
-        keys = ['size', 'pressure_rating', 'temperature', 'flow_capacity'] if c['hi_family'] == 'valves_piping' else PKEYS
+        keys = FAMILY_KEYS.get(c['hi_family'], PKEYS)
         if any(k not in ep for k in keys): P(f'parameters missing {[k for k in keys if k not in ep]}')
         if 'reference_model' not in s['engineering_parameters']: P('no reference_model slot')
         for k in ('foundation', 'alignment', 'piping', 'commissioning'):

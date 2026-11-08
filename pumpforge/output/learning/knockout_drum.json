@@ -1,0 +1,583 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "knockout_drum",
+ "no": 106,
+ "title": "Knockout Drum",
+ "model_title": "Flare Knockout Drum (Horizontal, Liquid Removal)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A knockout drum removes liquid droplets from a gas stream — typically in flare systems. The gas slows down in the large drum so droplets settle by gravity and collect at the bottom; dry gas leaves for the flare and the liquid is pumped out.",
+   "applications": [
+    "Flare and blowdown systems",
+    "Compressor suction protection",
+    "Fuel gas systems"
+   ],
+   "key_points": [
+    "Low gas velocity lets drops settle",
+    "Sized per API 521 for droplet size",
+    "Liquid hold-up for relief scenarios",
+    "Level alarms and pump-out"
+   ],
+   "classification": {
+    "family": "Separator",
+    "type": "Horizontal flare KO drum"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A flare knockout (KO) drum removes liquid droplets from gas going to a flare. The gas slows down in the large drum so droplets fall out by gravity and collect at the bottom; dry gas goes on to the flare and the liquid is pumped out. It prevents burning liquid \"rain\" from the flare."
+  },
+  "model_3d": {
+   "asset": "glb/knockout_drum.glb",
+   "metadata": "meta/knockout_drum.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10138,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Wet gas enters through the inlet and hits the diverter.",
+    "Gas slows down across the drum; droplets fall out.",
+    "Liquid collects at the bottom; level rises."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Wet gas enters through the inlet and hits the diverter.",
+     "part": "inlet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas slows down across the drum; droplets fall out.",
+     "part": "drops",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid collects at the bottom; level rises.",
+     "part": "liquid",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dry gas leaves for the flare; liquid is pumped out.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Settling velocity vs droplet diameter (Stokes/intermediate laws)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "knockout_drum_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/knockout_drum.json#components",
+   "key_components": "Horizontal drum, inlet device, liquid sump, vapour outlet",
+   "parts": [
+    {
+     "id": "drum",
+     "name": "Knockout Drum Shell",
+     "info_ref": "ko_drum",
+     "function": "Low-velocity space for droplets to settle.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "saddles",
+     "name": "Saddle Supports (one fixed, one sliding)",
+     "info_ref": "sv_saddles",
+     "function": "Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "liquid",
+     "name": "Collected Liquid (hydrocarbon condensate)",
+     "info_ref": "ko_liquid",
+     "function": "Collected liquid.",
+     "material": "—"
+    },
+    {
+     "id": "inlet",
+     "name": "Inlet Nozzle with Impingement / Diverter Plate",
+     "info_ref": "ko_inlet",
+     "function": "Inlet with diverter to spread the flow.",
+     "material": "Steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Vapour Outlet to Flare, Liquid Pump-Out, Level Transmitter & Vortex Breaker",
+     "info_ref": "ko_nozzles",
+     "function": "Outlets, level transmitter, vortex breaker.",
+     "material": "Steel."
+    },
+    {
+     "id": "drops",
+     "name": "Liquid Droplets Settling (tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 1 – 5 m; length 3 – 20 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Low pressure (~ 3.5 bar(g) design typical)",
+     "unit": "bar(g)"
+    },
+    "design_temperature": {
+     "typical_range": "-46 to 300 (flare dependent)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Liquid hold-up",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level and pump-out.",
+     "part": "liquid",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Test level alarms.",
+     "part": "nozzles",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Internal inspection.",
+     "part": "drum"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Liquid carry-over to flare",
+     "category": "performance",
+     "symptoms": [
+      "Burning rain, smoke"
+     ],
+     "causes": [
+      "High level, undersized drum"
+     ],
+     "remedies": [
+      "Pump out; resize"
+     ],
+     "part": "liquid"
+    },
+    {
+     "problem": "Freezing/hydrates",
+     "category": "performance",
+     "symptoms": [
+      "Blockage"
+     ],
+     "causes": [
+      "Cold expansion"
+     ],
+     "remedies": [
+      "Heat tracing"
+     ],
+     "part": "nozzles"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Knockout Drum — Introduction",
+    "type": "in_app_tour",
+    "model": "knockout_drum.glb",
+    "duration_s": 43.8,
+    "script": [
+     {
+      "narration": "This module introduces the Knockout Drum.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A knockout drum removes liquid droplets from a gas stream — typically in flare systems.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The gas slows down in the large drum so droplets settle by gravity and collect at the bottom; dry gas leaves for the flare and the liquid is pumped out.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include flare and blowdown systems; compressor suction protection; fuel gas systems.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Knockout Drum — Operation",
+    "type": "in_app_tour",
+    "model": "knockout_drum.glb",
+    "duration_s": 24.6,
+    "script": [
+     {
+      "narration": "How the Knockout Drum works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Wet gas enters through the inlet and hits the diverter.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "inlet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas slows down across the drum; droplets fall out.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drops",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid collects at the bottom; level rises.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dry gas leaves for the flare; liquid is pumped out.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Knockout Drum — Maintenance",
+    "type": "in_app_tour",
+    "model": "knockout_drum.glb",
+    "duration_s": 32.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Knockout Drum.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level and pump-out.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test level alarms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Internal inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for liquid carry-over to flare: burning rain, smoke. Common cause: high level, undersized drum.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "liquid",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for freezing/hydrates: blockage. Common cause: cold expansion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why must liquid be removed before the flare?",
+     "options": [
+      "Cost",
+      "Burning liquid droplets (\"rain\") are a fire hazard",
+      "Noise",
+      "No reason"
+     ],
+     "answer": 1,
+     "explanation": "Safety.",
+     "level": "basic"
+    },
+    {
+     "question": "Droplets separate mainly by…",
+     "options": [
+      "Filtration",
+      "Gravity settling at low velocity",
+      "Magnetism",
+      "Heating"
+     ],
+     "answer": 1,
+     "explanation": "Settling.",
+     "level": "basic"
+    },
+    {
+     "question": "Which standard covers KO drum sizing?",
+     "options": [
+      "API 650",
+      "API 521",
+      "API 610",
+      "ASME B31.3"
+     ],
+     "answer": 1,
+     "explanation": "Pressure relief systems.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Low-velocity space for droplets to settle.\"",
+     "options": [
+      "Liquid Droplets Settling (tracers)",
+      "Collected Liquid (hydrocarbon condensate)",
+      "Knockout Drum Shell",
+      "Vapour Outlet to Flare, Liquid Pump-Out, Level Transmitter & Vortex Breaker"
+     ],
+     "answer": 2,
+     "explanation": "Knockout Drum Shell: Low-velocity space for droplets to settle.",
+     "level": "basic",
+     "part": "drum",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support a horizontal vessel; one saddle slides to allow thermal expansion.\"",
+     "options": [
+      "Knockout Drum Shell",
+      "Saddle Supports (one fixed, one sliding)",
+      "Inlet Nozzle with Impingement / Diverter Plate",
+      "Liquid Droplets Settling (tracers)"
+     ],
+     "answer": 1,
+     "explanation": "Saddle Supports (one fixed, one sliding): Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "level": "basic",
+     "part": "saddles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Collected liquid.\"",
+     "options": [
+      "Inlet Nozzle with Impingement / Diverter Plate",
+      "Liquid Droplets Settling (tracers)",
+      "Collected Liquid (hydrocarbon condensate)",
+      "Saddle Supports (one fixed, one sliding)"
+     ],
+     "answer": 2,
+     "explanation": "Collected Liquid (hydrocarbon condensate): Collected liquid.",
+     "level": "basic",
+     "part": "liquid",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,672 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "bauxite_stockpile_reclaimer",
+ "no": 193,
+ "title": "Bauxite Stockpile Reclaimer",
+ "model_title": "Bridge-Type Scraper Reclaimer for a Bauxite Blending Stockpile",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A bridge-type scraper reclaimer recovers bauxite from a blending stockpile. A harrow rakes across the whole pile face so material slides down to a chain scraper at the foot of the pile, which drags it to the yard conveyor. Because the pile was stacked in many thin layers, reclaiming the full face gives a well-blended feed to the refinery.",
+   "applications": [
+    "Bauxite blending yards at alumina refineries",
+    "Coal, limestone and ore blending beds"
+   ],
+   "key_points": [
+    "Full-face reclaiming = blending",
+    "Harrow loosens, scraper conveys",
+    "Bridge travels slowly into the pile",
+    "Blending effect depends on number of stacked layers"
+   ],
+   "classification": {
+    "family": "Bulk handling",
+    "type": "Bridge scraper (harrow) reclaimer"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A bridge-type scraper reclaimer recovers bauxite from a blending stockpile across its whole cross-section. A harrow rakes the pile face so material slides down to a chain scraper at the pile foot, which drags it onto the yard conveyor. Reclaiming the full face blends the many stacked layers into a uniform feed."
+  },
+  "model_3d": {
+   "asset": "glb/bauxite_stockpile_reclaimer.glb",
+   "metadata": "meta/bauxite_stockpile_reclaimer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3036,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The pile is stacked in many thin chevron layers.",
+    "The harrow rakes the face so bauxite slides down.",
+    "The chain scraper drags it to the side."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The pile is stacked in many thin chevron layers.",
+     "part": "stockpile",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The harrow rakes the face so bauxite slides down.",
+     "part": "harrow",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The chain scraper drags it to the side.",
+     "part": "scraper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bridge advances into the pile.",
+     "part": "bridge",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The yard conveyor carries it to grinding.",
+     "part": "ycbelt",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Blending effect (standard deviation in / out) improves with number of layers."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "bauxite_stockpile_reclaimer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "bauxite_stockpile_reclaimer_pressure.glb",
+     "title": "Why full-face reclaiming blends the bauxite",
+     "description": "The pile is stacked in many thin layers (chevron) along its length, each layer slightly different in quality. Raking the whole cross-section at once takes a slice of every layer, so the reclaimed bauxite has a much more uniform alumina, silica and moisture content — critical for stable digestion (blending ratio often 5:1 or better).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/bauxite_stockpile_reclaimer.json#components",
+   "key_components": "Portal bridge, harrow, chain scraper, travel bogies, yard conveyor",
+   "parts": [
+    {
+     "id": "stockpile",
+     "name": "Chevron-Stacked Bauxite Blending Pile (reclaimed across the full face)",
+     "info_ref": "br_pile",
+     "function": "Blending pile.",
+     "material": "Bauxite."
+    },
+    {
+     "id": "rails",
+     "name": "Travel Rails",
+     "info_ref": "br_rails",
+     "function": "Travel track.",
+     "material": "Steel."
+    },
+    {
+     "id": "bridge",
+     "name": "Portal Bridge with Travel Bogies & Operator Cab",
+     "info_ref": "br_bridge",
+     "function": "Carries harrow and scraper.",
+     "material": "Steel."
+    },
+    {
+     "id": "harrow",
+     "name": "Harrow (raking frame with tines — loosens the whole pile face)",
+     "info_ref": "br_harrow",
+     "function": "Loosens the face.",
+     "material": "Steel."
+    },
+    {
+     "id": "scraper",
+     "name": "Chain Scraper Flights (drag material to the side conveyor)",
+     "info_ref": "br_scraper",
+     "function": "Moves material to the conveyor.",
+     "material": "Steel."
+    },
+    {
+     "id": "scraper_frame",
+     "name": "Scraper Chain Sprockets & Drive",
+     "info_ref": "br_scraper",
+     "function": "Moves material to the conveyor.",
+     "material": "Steel."
+    },
+    {
+     "id": "ycbelt",
+     "name": "Yard Belt Conveyor (to grinding)",
+     "info_ref": "hk_belt",
+     "function": "Carries reclaimed bauxite.",
+     "material": "Rubber."
+    },
+    {
+     "id": "ycpulley_1",
+     "name": "Tail Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "ycpulley_2",
+     "name": "Head (Drive) Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "ycmarks",
+     "name": "Yard Belt Conveyor (to grinding) Motion Markers",
+     "info_ref": "hk_belt",
+     "function": "Carries reclaimed bauxite.",
+     "material": "Rubber."
+    },
+    {
+     "id": "ycframe",
+     "name": "Yard Belt Conveyor (to grinding) Frame & Idlers (troughing and return)",
+     "info_ref": "hk_idlers",
+     "function": "Frame.",
+     "material": "Steel."
+    },
+    {
+     "id": "bauxite",
+     "name": "Reclaimed Bauxite on the Yard Conveyor",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bridge span ~ 30 – 60 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 500 – 3000",
+     "unit": "t/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Ambient; bauxite moisture ~ 5 – 15 %",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "~ 100 – 600 (total)",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size bridge for pile cross-section; capacity for refinery demand."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 5049-1"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Massive foundation designed for dynamic loads (maker data); grout base plates."
+   ],
+   "alignment": [
+    "Align drive train (motor–gearbox–pinion) and check gear mesh/backlash; level rollers/trunnions."
+   ],
+   "piping": [
+    "Feed and discharge chutes free of the moving machine; water/liquor supplies with isolation; dust or spray containment."
+   ],
+   "commissioning": [
+    "No-load run (rotation, vibration, temperatures); then load gradually; record power and throughput baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check harrow tines and scraper chain.",
+     "part": "harrow",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Chain elongation and sprocket wear.",
+     "part": "scraper_frame",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace chain/flights; structural inspection.",
+     "part": "bridge"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Chain breakage",
+     "category": "performance",
+     "symptoms": [
+      "Stop, spillage"
+     ],
+     "causes": [
+      "Wear, sticky bauxite"
+     ],
+     "remedies": [
+      "Replace links; adjust tension"
+     ],
+     "part": "scraper"
+    },
+    {
+     "problem": "Poor blending",
+     "category": "performance",
+     "symptoms": [
+      "Feed grade swings"
+     ],
+     "causes": [
+      "Too few layers, end effects"
+     ],
+     "remedies": [
+      "Adjust stacking; reclaim full face"
+     ],
+     "part": "stockpile"
+    }
+   ],
+   "safety": [
+    "Exclusion zone at the pile face (slumping); guards on chain."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Bauxite Stockpile Reclaimer — Introduction",
+    "type": "in_app_tour",
+    "model": "bauxite_stockpile_reclaimer.glb",
+    "duration_s": 51.8,
+    "script": [
+     {
+      "narration": "This module introduces the Bauxite Stockpile Reclaimer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A bridge-type scraper reclaimer recovers bauxite from a blending stockpile.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A harrow rakes across the whole pile face so material slides down to a chain scraper at the foot of the pile, which drags it to the yard conveyor.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Because the pile was stacked in many thin layers, reclaiming the full face gives a well-blended feed to the refinery.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include bauxite blending yards at alumina refineries; coal, limestone and ore blending beds.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Bauxite Stockpile Reclaimer — Operation",
+    "type": "in_app_tour",
+    "model": "bauxite_stockpile_reclaimer.glb",
+    "duration_s": 35.7,
+    "script": [
+     {
+      "narration": "How the Bauxite Stockpile Reclaimer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The pile is stacked in many thin chevron layers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stockpile",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The harrow rakes the face so bauxite slides down.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "harrow",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The chain scraper drags it to the side.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "scraper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bridge advances into the pile.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bridge",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The yard conveyor carries it to grinding.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ycbelt",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The pile is stacked in many thin layers (chevron) along its length, each layer slightly different in quality.",
+      "duration_s": 7.5,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Bauxite Stockpile Reclaimer — Maintenance",
+    "type": "in_app_tour",
+    "model": "bauxite_stockpile_reclaimer.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Bauxite Stockpile Reclaimer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check harrow tines and scraper chain.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "harrow",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Chain elongation and sprocket wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "scraper_frame",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace chain/flights; structural inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bridge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chain breakage: stop, spillage. Common cause: wear, sticky bauxite.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "scraper",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor blending: feed grade swings. Common cause: too few layers, end effects.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "stockpile",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why reclaim across the full face?",
+     "options": [
+      "To take a slice of every stacked layer → blending",
+      "It is faster",
+      "Less dust",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Blending.",
+     "level": "basic"
+    },
+    {
+     "question": "What loosens the pile face?",
+     "options": [
+      "The harrow",
+      "The conveyor",
+      "Water",
+      "The rails"
+     ],
+     "answer": 0,
+     "explanation": "Harrow.",
+     "level": "basic"
+    },
+    {
+     "question": "What carries bauxite to the side conveyor?",
+     "options": [
+      "Chain scraper",
+      "Bucket wheel",
+      "Pump",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Scraper.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Blending pile.\"",
+     "options": [
+      "Chevron-Stacked Bauxite Blending Pile (reclaimed across the full face)",
+      "Yard Belt Conveyor (to grinding)",
+      "Travel Rails",
+      "Scraper Chain Sprockets & Drive"
+     ],
+     "answer": 0,
+     "explanation": "Chevron-Stacked Bauxite Blending Pile (reclaimed across the full face): Blending pile.",
+     "level": "basic",
+     "part": "stockpile",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Travel track.\"",
+     "options": [
+      "Portal Bridge with Travel Bogies & Operator Cab",
+      "Travel Rails",
+      "Head (Drive) Pulley",
+      "Yard Belt Conveyor (to grinding)"
+     ],
+     "answer": 1,
+     "explanation": "Travel Rails: Travel track.",
+     "level": "basic",
+     "part": "rails",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries harrow and scraper.\"",
+     "options": [
+      "Yard Belt Conveyor (to grinding)",
+      "Chevron-Stacked Bauxite Blending Pile (reclaimed across the full face)",
+      "Scraper Chain Sprockets & Drive",
+      "Portal Bridge with Travel Bogies & Operator Cab"
+     ],
+     "answer": 3,
+     "explanation": "Portal Bridge with Travel Bogies & Operator Cab: Carries harrow and scraper.",
+     "level": "basic",
+     "part": "bridge",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

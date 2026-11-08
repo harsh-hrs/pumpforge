@@ -1,0 +1,632 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "open_drain_system",
+ "no": 271,
+ "title": "Open Drain System",
+ "model_title": "Open Drain System — Drain Hubs, Sealed Drain Boxes, Trench & Oily-Water Sump with Skimmer & Pump",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An open drain system collects non-pressurised spills, leaks, wash water and rainwater from paved process areas through drain hubs and trenches. Every inlet has a liquid seal so vapour and flame cannot travel through the network; oily water is collected in a sump, oil is skimmed and the water pumped to an oil-water separator.",
+   "applications": [
+    "Process units, pump bays and loading areas",
+    "Tank farms and utility areas with oil contamination"
+   ],
+   "key_points": [
+    "Liquid seals (P-traps) at every inlet",
+    "Keep seals filled",
+    "Separate from closed drains",
+    "Oily water to OWS"
+   ],
+   "classification": {
+    "family": "Drainage",
+    "type": "Open drains with water seals and oily-water sump"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "An open drain system collects spills, leaks and rainwater from paved process areas through drain hubs and trenches with liquid seals, to an oily-water sump where oil is skimmed and the water pumped to treatment."
+  },
+  "model_3d": {
+   "asset": "glb/open_drain_system.glb",
+   "metadata": "meta/open_drain_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3728,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Spills drain into hubs under equipment.",
+    "Seals block vapour and fire paths.",
+    "Water runs along the trench to the sump."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Spills drain into hubs under equipment.",
+     "part": "drain_hubs_seals",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Seals block vapour and fire paths.",
+     "part": "drain_hubs_seals",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water runs along the trench to the sump.",
+     "part": "trench_grating",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil is skimmed; water pumped to the OWS.",
+     "part": "oil_skimmer",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Sump level vs rainfall / spill events."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "open_drain_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "open_drain_system_pressure.glb",
+     "title": "Water seals stop vapour and fire travelling",
+     "description": "Open drains take non-pressurised spills, leaks and rainwater from paved, curbed areas. Each drain hub connects through a liquid seal (P-trap or sealed catch basin) so flammable vapour and flame cannot travel through the drain network from one area to another; seals must be kept topped up. Oily water flows to a sump and on to an oil–water separator; the skimmer removes floating oil.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/open_drain_system.json#components",
+   "key_components": "Drain hubs with P-traps, trench, oily-water sump, skimmer, sump pump",
+   "parts": [
+    {
+     "id": "paved_area",
+     "name": "Paved, Sloped & Curbed Process Area",
+     "info_ref": "od_area",
+     "function": "Contain spills.",
+     "material": "Concrete."
+    },
+    {
+     "id": "trench_grating",
+     "name": "Drain Trench with Grating (collects spills and rainwater)",
+     "info_ref": "od_trench",
+     "function": "Collect flow.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "drain_hubs_seals",
+     "name": "Drain Hubs / Funnels under Equipment with Water-Seal (P-trap) Lines to the Trench",
+     "info_ref": "od_hubs",
+     "function": "Receive drips.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "equipment",
+     "name": "Pumps with Drip Pans (spills / leaks)",
+     "info_ref": "od_hubs",
+     "function": "Receive drips.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "sump",
+     "name": "Oily-Water Sump (gas-sealed inlet, sloped floor)",
+     "info_ref": "od_sump",
+     "function": "Collect oily water.",
+     "material": "Concrete."
+    },
+    {
+     "id": "sump_water",
+     "name": "Collected Water with Floating Oil Layer",
+     "info_ref": "od_sump",
+     "function": "Collect oily water.",
+     "material": "Concrete."
+    },
+    {
+     "id": "oil_skimmer",
+     "name": "Floating Oil Skimmer → Slop Oil",
+     "info_ref": "od_skimmer",
+     "function": "Remove oil.",
+     "material": "—"
+    },
+    {
+     "id": "sump_pump",
+     "name": "Submersible Sump Pump with Float Switch → Oily-Water Separator",
+     "info_ref": "od_pump",
+     "function": "Transfer water.",
+     "material": "—"
+    },
+    {
+     "id": "spill_1",
+     "name": "Spill from pump 1 into the drain hub",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "spill_2",
+     "name": "Spill from pump 2 into the drain hub",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Trenches ≈ 0.3 – 0.6 m wide",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Design rainfall + firewater",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Atmospheric",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Water seal depth ≈ 100–150 mm (typical)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for rainfall, firewater and spills; fire-zone separation."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Plant layout practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations / supports designed for operating, test, wind/seismic and (for relief) reaction loads."
+   ],
+   "alignment": [
+    "Vessels plumb; headers sloped continuously as specified (no pockets)."
+   ],
+   "piping": [
+    "Relief/drain lines self-draining to the destination; supports for reaction and thermal loads; isolation valves car-sealed / locked as required."
+   ],
+   "commissioning": [
+    "Pressure test; verify set pressures and certificates; function-test instruments and interlocks; record as-built in the safety documentation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Top up seals; clear gratings.",
+     "part": "drain_hubs_seals",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Skim oil, desludge sump.",
+     "part": "sump",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect trench and seals.",
+     "part": "trench_grating"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Dry seal",
+     "category": "leakage",
+     "symptoms": [
+      "Hydrocarbon smell in drains"
+     ],
+     "causes": [
+      "Evaporation"
+     ],
+     "remedies": [
+      "Refill; use seal pots"
+     ],
+     "part": "drain_hubs_seals"
+    },
+    {
+     "problem": "Sump overflow",
+     "category": "performance",
+     "symptoms": [
+      "Oil spread"
+     ],
+     "causes": [
+      "Pump failure, heavy rain"
+     ],
+     "remedies": [
+      "Repair; size for rain"
+     ],
+     "part": "sump_pump"
+    }
+   ],
+   "safety": [
+    "Hot work near drains only with gas testing and sealed drains."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Open Drain System — Introduction",
+    "type": "in_app_tour",
+    "model": "open_drain_system.glb",
+    "duration_s": 53.2,
+    "script": [
+     {
+      "narration": "This module introduces the Open Drain System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An open drain system collects non-pressurised spills, leaks, wash water and rainwater from paved process areas through drain hubs and trenches.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Every inlet has a liquid seal so vapour and flame cannot travel through the network; oily water is collected in a sump, oil is skimmed and the water pumped to an oil-water separator.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process units, pump bays and loading areas; tank farms and utility areas with oil contamination.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Submersible Sump Pump with Float Switch → Oily-Water Separator.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Open Drain System — Operation",
+    "type": "in_app_tour",
+    "model": "open_drain_system.glb",
+    "duration_s": 29.6,
+    "script": [
+     {
+      "narration": "How the Open Drain System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Spills drain into hubs under equipment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drain_hubs_seals",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Seals block vapour and fire paths.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drain_hubs_seals",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water runs along the trench to the sump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trench_grating",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil is skimmed; water pumped to the OWS.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_skimmer",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Open drains take non-pressurised spills, leaks and rainwater from paved, curbed areas.",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Open Drain System — Maintenance",
+    "type": "in_app_tour",
+    "model": "open_drain_system.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Open Drain System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Top up seals; clear gratings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drain_hubs_seals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Skim oil, desludge sump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect trench and seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trench_grating",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dry seal: hydrocarbon smell in drains. Common cause: evaporation.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "drain_hubs_seals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sump overflow: oil spread. Common cause: pump failure, heavy rain.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "sump_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why liquid seals?",
+     "options": [
+      "Stop vapour and fire travelling through drains",
+      "Look neat",
+      "Reduce flow",
+      "Add pressure"
+     ],
+     "answer": 0,
+     "explanation": "Seals.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does oily water go?",
+     "options": [
+      "Oil-water separator",
+      "Flare",
+      "River",
+      "Closed drum"
+     ],
+     "answer": 0,
+     "explanation": "OWS.",
+     "level": "basic"
+    },
+    {
+     "question": "What removes floating oil?",
+     "options": [
+      "Skimmer",
+      "Pump",
+      "Grating",
+      "Trench"
+     ],
+     "answer": 0,
+     "explanation": "Skimmer.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contain spills.\"",
+     "options": [
+      "Drain Hubs / Funnels under Equipment with Water-Seal (P-trap) Lines to the Trench",
+      "Spill from pump 2 into the drain hub",
+      "Paved, Sloped & Curbed Process Area",
+      "Collected Water with Floating Oil Layer"
+     ],
+     "answer": 2,
+     "explanation": "Paved, Sloped & Curbed Process Area: Contain spills.",
+     "level": "basic",
+     "part": "paved_area",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Collect flow.\"",
+     "options": [
+      "Drain Trench with Grating (collects spills and rainwater)",
+      "Floating Oil Skimmer → Slop Oil",
+      "Drain Hubs / Funnels under Equipment with Water-Seal (P-trap) Lines to the Trench",
+      "Spill from pump 2 into the drain hub"
+     ],
+     "answer": 0,
+     "explanation": "Drain Trench with Grating (collects spills and rainwater): Collect flow.",
+     "level": "basic",
+     "part": "trench_grating",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Receive drips.\"",
+     "options": [
+      "Spill from pump 2 into the drain hub",
+      "Spill from pump 1 into the drain hub",
+      "Collected Water with Floating Oil Layer",
+      "Drain Hubs / Funnels under Equipment with Water-Seal (P-trap) Lines to the Trench"
+     ],
+     "answer": 3,
+     "explanation": "Drain Hubs / Funnels under Equipment with Water-Seal (P-trap) Lines to the Trench: Receive drips.",
+     "level": "basic",
+     "part": "drain_hubs_seals",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

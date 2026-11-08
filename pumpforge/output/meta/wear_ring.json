@@ -1,0 +1,413 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "wear_ring",
+  "title": "Pump Wear Rings — Impeller (Rotating) & Casing (Stationary) with Running Clearance",
+  "category": "14 · Mechanical Components & Maintenance",
+  "library": {
+    "no": 254,
+    "phase": 12,
+    "eq_id": "EQ-332",
+    "subcategory": "Pump Components",
+    "hi_family": "mechanical_components",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "wear_ring_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "wear_ring_pressure.glb",
+      "title": "Clearance separates high and low pressure",
+      "description": "The impeller discharge pressure acts in the gap between the front shroud and the casing; only the narrow wear-ring clearance separates it from the low-pressure eye. Leakage through the clearance is recirculated inside the pump, wasting energy: as rings wear and clearance doubles, efficiency can fall several points. Typical diametral clearance ≈ 0.25–0.5 mm for 50–150 mm rings (API 610 sets minimums by diameter and material). Replace rings when clearance reaches about twice the new value.",
+      "render": "normal",
+      "annotations": []
+    },
+    "wear": {
+      "file": "wear_ring_wear.glb",
+      "title": "Rubbing surfaces",
+      "description": "Wear rings are the sacrificial surfaces: dissimilar, galling-resistant materials and hardness differences are used.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "leakage",
+      "kind": "flow_discharge",
+      "radius": 0.0025,
+      "points": [
+        [
+          0.165,
+          0.02,
+          -0.004
+        ],
+        [
+          0.165,
+          -0.021,
+          -0.004
+        ],
+        [
+          0.09,
+          -0.021,
+          -0.004
+        ],
+        [
+          0.0721,
+          -0.017,
+          -0.004
+        ],
+        [
+          0.0721,
+          -0.004,
+          -0.004
+        ],
+        [
+          0.0548,
+          0.006,
+          -0.004
+        ]
+      ]
+    },
+    {
+      "name": "main_flow",
+      "kind": "water",
+      "radius": 0.006,
+      "points": [
+        [
+          0.03,
+          -0.24,
+          -0.004
+        ],
+        [
+          0.03,
+          -0.02,
+          -0.004
+        ],
+        [
+          0.08,
+          0.03,
+          -0.004
+        ],
+        [
+          0.17,
+          0.035,
+          -0.004
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 15340,
+    "parts": 5
+  },
+  "summary": "Wear rings are renewable rings on the impeller eye and in the casing that form a small running clearance between high- and low-pressure zones, limiting internal leakage.",
+  "classification": {
+    "family": "Pump components",
+    "type": "Impeller & casing wear rings"
+  },
+  "model_configuration": {
+    "animation": "Impeller turns; leakage recirculates through the clearance"
+  },
+  "standards": [
+    {
+      "id": "API 610",
+      "title": "Centrifugal pumps for petroleum, petrochemical and natural gas industries",
+      "relevance": "Clearances, materials.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 21940-11",
+      "title": "Mechanical vibration — rotor balancing",
+      "relevance": "Balance grades.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 610"
+  ],
+  "parts": [
+    {
+      "id": "impeller",
+      "name": "Closed Impeller (turning)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "impeller_blades",
+        "impeller_hub__back",
+        "impeller_hub__front",
+        "impeller_shroud__back",
+        "impeller_shroud__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.16,
+        -0.021,
+        -0.16
+      ],
+      "bbox_max": [
+        0.16,
+        0.1008,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        0.0399,
+        0.16
+      ],
+      "center": [
+        0.0,
+        0.0399,
+        -0.0
+      ],
+      "info_ref": "wr_impeller"
+    },
+    {
+      "id": "impeller_wear_ring",
+      "name": "Impeller Wear Ring (shrunk on the eye neck, turning)",
+      "group": "wear_rings",
+      "section_role": "keep",
+      "nodes": [
+        "impeller_wear_ring.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.2
+      ],
+      "bbox_min": [
+        -0.0708,
+        -0.019,
+        -0.0738
+      ],
+      "bbox_max": [
+        0.0708,
+        -0.004,
+        0.0708
+      ],
+      "label_anchor": [
+        0.0,
+        -0.0115,
+        0.0708
+      ],
+      "center": [
+        0.0,
+        -0.0115,
+        -0.0015
+      ],
+      "info_ref": "wr_rings"
+    },
+    {
+      "id": "casing_wear_ring",
+      "name": "Casing Wear Ring (stationary; clearance exaggerated)",
+      "group": "wear_rings",
+      "section_role": "split",
+      "nodes": [
+        "casing_wear_ring__back",
+        "casing_wear_ring__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.25,
+        -0.2
+      ],
+      "bbox_min": [
+        -0.0853,
+        -0.027,
+        -0.0853
+      ],
+      "bbox_max": [
+        0.0853,
+        -0.002,
+        0.0853
+      ],
+      "label_anchor": [
+        0.0,
+        -0.0145,
+        0.0853
+      ],
+      "center": [
+        0.0,
+        -0.0145,
+        -0.0
+      ],
+      "info_ref": "wr_rings"
+    },
+    {
+      "id": "casing",
+      "name": "Suction Cover & Casing (section)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "casing__back",
+        "casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.2,
+        -0.25,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        0.09,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        -0.08,
+        0.2
+      ],
+      "center": [
+        0.0,
+        -0.08,
+        -0.0
+      ],
+      "info_ref": "wr_casing"
+    },
+    {
+      "id": "recirculation",
+      "name": "Leakage from the high-pressure side back to the eye through the wear-ring clearance",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "recirculation_0",
+        "recirculation_1",
+        "recirculation_2",
+        "recirculation_3",
+        "recirculation_4",
+        "recirculation_5"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.0691,
+        -0.024,
+        -0.007
+      ],
+      "bbox_max": [
+        0.168,
+        0.023,
+        -0.001
+      ],
+      "label_anchor": [
+        0.11855,
+        -0.0005,
+        -0.001
+      ],
+      "center": [
+        0.11855,
+        -0.0005,
+        -0.004
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "wr_impeller": {
+      "function": "Adds energy.",
+      "construction": "Closed impeller.",
+      "material": "Bronze/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "wr_rings": {
+      "function": "Limit leakage.",
+      "construction": "Impeller and casing wear rings.",
+      "material": "Dissimilar hard materials.",
+      "operating_conditions": "Clearance per API 610 table.",
+      "failure_modes": [
+        "Wear → efficiency loss",
+        "Galling"
+      ],
+      "inspection": [
+        "Measure clearance"
+      ]
+    },
+    "wr_casing": {
+      "function": "Pressure boundary.",
+      "construction": "Suction cover, casing.",
+      "material": "Cast iron/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

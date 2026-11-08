@@ -1,0 +1,561 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "emergency_pressure_relief_system",
+  "title": "Emergency Pressure Relief System — Twin PSVs on a Change-over Valve, Rupture Disc & Relief Header",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 268,
+    "phase": 13,
+    "eq_id": "EQ-346",
+    "subcategory": "Safety",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "emergency_pressure_relief_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "emergency_pressure_relief_system_pressure.glb",
+      "title": "Relieve before the vessel is overstressed",
+      "description": "Every pressure vessel needs relief for its credible overpressure scenarios (blocked outlet, fire, control-valve failure, runaway reaction). A PSV is set at or below the MAWP and sized for the worst relieving rate; allowable accumulation is typically 10 % (single valve), 16 % (multiple) or 21 % (fire case) above MAWP (ASME VIII / API 520 — verify edition). Inlet pressure loss should stay below ≈ 3 % of set pressure to avoid chatter. The change-over valve allows testing a spare without losing protection.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "relief",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          -0.18,
+          3.025,
+          -0.0
+        ],
+        [
+          -0.18,
+          3.495,
+          -0.0
+        ],
+        [
+          0.0,
+          3.495,
+          -0.0
+        ],
+        [
+          0.0,
+          4.025,
+          -0.0
+        ],
+        [
+          2.7,
+          3.865,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 15474,
+    "parts": 9
+  },
+  "summary": "An emergency pressure relief system protects a vessel from overpressure. Spring-loaded safety valves on a change-over valve and a rupture disc open at set pressure and discharge into a relief header that drains to the flare knockout drum.",
+  "classification": {
+    "family": "Safety",
+    "type": "Twin PSVs + rupture disc + closed relief header"
+  },
+  "model_configuration": {
+    "animation": "Vapour generated; PSV disc lifts and reseats"
+  },
+  "standards": [
+    {
+      "id": "API 520 Pt I / II",
+      "title": "Sizing, selection and installation of pressure-relieving devices",
+      "relevance": "PSV sizing and installation.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 521 / ISO 23251",
+      "title": "Pressure-relieving and depressuring systems",
+      "relevance": "Relief, flare and KO drum design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII-1 UG-125…",
+      "title": "Overpressure protection",
+      "relevance": "Accumulation limits.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 520",
+    "API 521"
+  ],
+  "parts": [
+    {
+      "id": "protected_vessel",
+      "name": "Protected Pressure Vessel",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "protected_vessel__back",
+        "protected_vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.45,
+        0.575,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        3.025,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.8,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.8,
+        -0.0
+      ],
+      "info_ref": "epr_vessel"
+    },
+    {
+      "id": "vessel_supports",
+      "name": "Skirt / Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.3812,
+        0.0,
+        -0.3812
+      ],
+      "bbox_max": [
+        0.3812,
+        0.85,
+        0.3812
+      ],
+      "label_anchor": [
+        0.0,
+        0.425,
+        0.3812
+      ],
+      "center": [
+        0.0,
+        0.425,
+        -0.0
+      ],
+      "info_ref": "epr_vessel"
+    },
+    {
+      "id": "contents",
+      "name": "Process Liquid (fire case: boiling, vapour generation)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.438,
+        0.581,
+        -0.438
+      ],
+      "bbox_max": [
+        0.438,
+        1.9,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.2405,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.2405,
+        -0.219
+      ],
+      "info_ref": "epr_vessel"
+    },
+    {
+      "id": "vapour",
+      "name": "Vapour generated by external fire",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "vapour0",
+        "vapour1",
+        "vapour2",
+        "vapour3",
+        "vapour4",
+        "vapour5",
+        "vapour6",
+        "vapour7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "changeover_valve",
+      "name": "Three-Way Change-over Valve (one PSV in service, one isolated for testing — never both closed)",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "changeover_valve.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.25,
+        3.015,
+        -0.09
+      ],
+      "bbox_max": [
+        0.25,
+        3.545,
+        0.09
+      ],
+      "label_anchor": [
+        0.0,
+        3.28,
+        0.09
+      ],
+      "center": [
+        0.0,
+        3.28,
+        -0.0
+      ],
+      "info_ref": "epr_changeover"
+    },
+    {
+      "id": "safety_valves",
+      "name": "Twin Spring-Loaded Safety Valves (PSV-A in service, PSV-B spare)",
+      "group": "relief",
+      "section_role": "keep",
+      "nodes": [
+        "safety_valves.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.3
+      ],
+      "bbox_min": [
+        -0.243,
+        3.408,
+        -0.0855
+      ],
+      "bbox_max": [
+        0.297,
+        3.75,
+        0.0855
+      ],
+      "label_anchor": [
+        0.027,
+        3.579,
+        0.0855
+      ],
+      "center": [
+        0.027,
+        3.579,
+        -0.0
+      ],
+      "info_ref": "epr_psv"
+    },
+    {
+      "id": "psv_disc_spring",
+      "name": "PSV-A Disc & Spring (lifts at set pressure, reseats at blowdown)",
+      "group": "relief",
+      "section_role": "keep",
+      "nodes": [
+        "psv_disc_spring.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.5
+      ],
+      "bbox_min": [
+        -0.23,
+        3.545,
+        -0.05
+      ],
+      "bbox_max": [
+        -0.13,
+        3.69094,
+        0.05
+      ],
+      "label_anchor": [
+        -0.18,
+        3.61797,
+        0.05
+      ],
+      "center": [
+        -0.18,
+        3.61797,
+        -0.0
+      ],
+      "info_ref": "epr_psv"
+    },
+    {
+      "id": "rupture_disc",
+      "name": "Rupture Disc on a Separate Nozzle (fast, full-bore relief for rapid events)",
+      "group": "relief",
+      "section_role": "keep",
+      "nodes": [
+        "rupture_disc.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.095,
+        2.305,
+        -1.0
+      ],
+      "bbox_max": [
+        0.095,
+        4.025,
+        -0.45
+      ],
+      "label_anchor": [
+        0.0,
+        3.165,
+        -0.45
+      ],
+      "center": [
+        0.0,
+        3.165,
+        -0.725
+      ],
+      "info_ref": "epr_disc"
+    },
+    {
+      "id": "relief_header",
+      "name": "Relief Header (self-draining, sloped to the flare knock-out drum)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "relief_header.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.063,
+        0.0,
+        -0.95
+      ],
+      "bbox_max": [
+        2.60346,
+        4.085,
+        0.06
+      ],
+      "label_anchor": [
+        1.27023,
+        2.0425,
+        0.06
+      ],
+      "center": [
+        1.27023,
+        2.0425,
+        -0.445
+      ],
+      "info_ref": "epr_header"
+    }
+  ],
+  "components": {
+    "epr_vessel": {
+      "function": "Protected equipment.",
+      "construction": "Pressure vessel.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    },
+    "epr_changeover": {
+      "function": "Allow spare PSV maintenance.",
+      "construction": "Interlocked change-over valve.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Both PSVs isolated by error"
+      ],
+      "inspection": [
+        "Car-seal / interlock checks"
+      ]
+    },
+    "epr_psv": {
+      "function": "Relieve overpressure.",
+      "construction": "Spring-loaded safety valves.",
+      "material": "Steel / stainless trim.",
+      "operating_conditions": "Set ≤ MAWP.",
+      "failure_modes": [
+        "Simmer, chatter, stuck"
+      ],
+      "inspection": [
+        "Bench test per interval"
+      ]
+    },
+    "epr_disc": {
+      "function": "Fast relief / back-up.",
+      "construction": "Rupture disc in holder.",
+      "material": "Stainless/nickel alloys.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Premature burst (fatigue)"
+      ],
+      "inspection": [
+        "Replace per schedule"
+      ]
+    },
+    "epr_header": {
+      "function": "Carry relief to flare.",
+      "construction": "Self-draining header.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Liquid pockets, back pressure"
+      ],
+      "inspection": [
+        "Isometric review"
+      ]
+    }
+  }
+}

@@ -1,0 +1,686 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "digestion_autoclave",
+ "no": 197,
+ "title": "Digestion Autoclave",
+ "model_title": "Digestion Autoclave Train (Agitated Pressure Vessels in Series, Live-Steam Injection)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "Digestion autoclaves are agitated pressure vessels in series where hot caustic liquor dissolves alumina from bauxite (Al(OH)₃ + NaOH → NaAl(OH)₄). Live steam injection heats the slurry to digestion temperature and the series of vessels provides the residence time.",
+   "applications": [
+    "High-temperature digestion of boehmitic/diasporic bauxite",
+    "Low-temperature (gibbsitic) digesters at atmospheric-to-moderate pressure"
+   ],
+   "key_points": [
+    "Gibbsite ≈ 140–150 °C; boehmite/diaspore ≈ 230–270 °C",
+    "Pressures up to ~ 30–35 bar (high temperature)",
+    "Live steam or indirect heating",
+    "Scaling and erosion are main issues"
+   ],
+   "classification": {
+    "family": "Digestion",
+    "type": "Agitated autoclaves in series (high-temperature digestion)"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "Digestion autoclaves are agitated pressure vessels in series where hot caustic liquor dissolves the alumina from bauxite. Live steam heats the slurry to digestion temperature, and the vessels give the residence time needed."
+  },
+  "model_3d": {
+   "asset": "glb/digestion_autoclave.glb",
+   "metadata": "meta/digestion_autoclave.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 24568,
+   "parts": 15
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Preheated slurry enters autoclave 1.",
+    "Live steam heats it to digestion temperature.",
+    "Agitators keep solids suspended."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Preheated slurry enters autoclave 1.",
+     "part": "transfer_steam",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Live steam heats it to digestion temperature.",
+     "part": "ac1_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Agitators keep solids suspended.",
+     "part": "ac1_agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry overflows through the series.",
+     "part": "ac2_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Digested slurry leaves to flash cooling.",
+     "part": "ac3_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Alumina extraction vs temperature and time; equilibrium A/C ratio limits loading."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "digestion_autoclave_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "digestion_autoclave_pressure.glb",
+     "title": "High temperature and pressure dissolve the alumina",
+     "description": "In digestion hot caustic liquor dissolves the alumina minerals: Al(OH)₃ + NaOH → NaAl(OH)₄. Gibbsitic bauxite digests at about 140–150 °C; boehmitic/diaspore bauxites need ~ 230–270 °C, which means pressures up to roughly 30–35 bar. Vessels in series give the residence time needed while keeping the slurry hot and well mixed.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/digestion_autoclave.json#components",
+   "key_components": "Agitated pressure vessels in series, live-steam injectors, transfer lines, gauges",
+   "parts": [
+    {
+     "id": "ac1_tank",
+     "name": "Autoclave 1: Tank, Baffles",
+     "info_ref": "da_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "ac1_slurry",
+     "name": "Autoclave 1: Slurry / Liquor",
+     "info_ref": "da_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "ac1_agitator",
+     "name": "Autoclave 1: Agitator Shaft & Impellers",
+     "info_ref": "da_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "ac1_drive",
+     "name": "Autoclave 1: Agitator Drive (motor + gearbox, mounting nozzle)",
+     "info_ref": "da_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "ac2_tank",
+     "name": "Autoclave 2: Tank, Baffles",
+     "info_ref": "da_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "ac2_slurry",
+     "name": "Autoclave 2: Slurry / Liquor",
+     "info_ref": "da_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "ac2_agitator",
+     "name": "Autoclave 2: Agitator Shaft & Impellers",
+     "info_ref": "da_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "ac2_drive",
+     "name": "Autoclave 2: Agitator Drive (motor + gearbox, mounting nozzle)",
+     "info_ref": "da_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "ac3_tank",
+     "name": "Autoclave 3: Tank, Baffles",
+     "info_ref": "da_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "ac3_slurry",
+     "name": "Autoclave 3: Slurry / Liquor",
+     "info_ref": "da_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "ac3_agitator",
+     "name": "Autoclave 3: Agitator Shaft & Impellers",
+     "info_ref": "da_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "ac3_drive",
+     "name": "Autoclave 3: Agitator Drive (motor + gearbox, mounting nozzle)",
+     "info_ref": "da_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "transfer_steam",
+     "name": "Slurry Transfer Lines (overflow → bottom of next), Live-Steam Header & Injectors, Gauges",
+     "info_ref": "da_piping",
+     "function": "Transfer and steam lines.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Support Legs",
+     "info_ref": "da_piping",
+     "function": "Transfer and steam lines.",
+     "material": "Steel."
+    },
+    {
+     "id": "steam_bubbles",
+     "name": "Live Steam Condensing in the Slurry",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessels ~ 2 – 4 m diameter, 10 – 20 m tall",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 500 – 3000",
+     "unit": "m³/h slurry"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 140 – 270 °C; up to ~ 35 bar",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Agitators ~ 30 – 150 each",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Temperature set by bauxite mineralogy; volume by residence time."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer process practice (TMS Light Metals)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal expansion."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; let-down valves and lines supported against vibration."
+   ],
+   "piping": [
+    "Relief protection per code; erosion-resistant fittings at let-down points; steam traps/condensate removal; insulation."
+   ],
+   "commissioning": [
+    "Hydro-test; heat up slowly; check relief settings, levels, temperatures and pressures; test interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor temperature, pressure, agitator load.",
+     "part": "ac1_drive",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Thickness checks at erosion points.",
+     "part": "transfer_steam",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Descale vessels; inspect agitators.",
+     "part": "ac2_tank"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Scaling",
+     "category": "performance",
+     "symptoms": [
+      "Lower volume, heat transfer"
+     ],
+     "causes": [
+      "DSP/titanate"
+     ],
+     "remedies": [
+      "Descale; better desilication"
+     ],
+     "part": "ac1_tank"
+    },
+    {
+     "problem": "Erosion leaks",
+     "category": "wear",
+     "symptoms": [
+      "Leaks at transfer lines"
+     ],
+     "causes": [
+      "High velocity slurry"
+     ],
+     "remedies": [
+      "Hardened fittings"
+     ],
+     "part": "transfer_steam"
+    }
+   ],
+   "safety": [
+    "Hot caustic under pressure — relief protection, lock-out, PPE."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Digestion Autoclave — Introduction",
+    "type": "in_app_tour",
+    "model": "digestion_autoclave.glb",
+    "duration_s": 49.9,
+    "script": [
+     {
+      "narration": "This module introduces the Digestion Autoclave.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Digestion autoclaves are agitated pressure vessels in series where hot caustic liquor dissolves alumina from bauxite (Al(OH)₃ + NaOH → NaAl(OH)₄).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Live steam injection heats the slurry to digestion temperature and the series of vessels provides the residence time.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include high-temperature digestion of boehmitic/diasporic bauxite; low-temperature (gibbsitic) digesters at atmospheric-to-moderate pressure.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Autoclave 1: Agitator Shaft & Impellers, Autoclave 2: Agitator Shaft & Impellers, Autoclave 3: Agitator Shaft & Impellers.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Digestion Autoclave — Operation",
+    "type": "in_app_tour",
+    "model": "digestion_autoclave.glb",
+    "duration_s": 34.9,
+    "script": [
+     {
+      "narration": "How the Digestion Autoclave works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Preheated slurry enters autoclave 1.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "transfer_steam",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Live steam heats it to digestion temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ac1_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Agitators keep solids suspended.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ac1_agitator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry overflows through the series.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ac2_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Digested slurry leaves to flash cooling.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ac3_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "In digestion hot caustic liquor dissolves the alumina minerals: Al(OH)₃ + NaOH → NaAl(OH)₄.",
+      "duration_s": 6.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Digestion Autoclave — Maintenance",
+    "type": "in_app_tour",
+    "model": "digestion_autoclave.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Digestion Autoclave.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor temperature, pressure, agitator load.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ac1_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Thickness checks at erosion points.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "transfer_steam",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descale vessels; inspect agitators.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ac2_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling: lower volume, heat transfer. Common cause: dsp/titanate.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "ac1_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for erosion leaks: leaks at transfer lines. Common cause: high velocity slurry.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "transfer_steam",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What dissolves the alumina?",
+     "options": [
+      "Hot caustic soda liquor",
+      "Acid",
+      "Water only",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "NaOH.",
+     "level": "basic"
+    },
+    {
+     "question": "Why higher temperature for boehmite?",
+     "options": [
+      "It is less soluble/reactive than gibbsite",
+      "Cheaper",
+      "Faster pumps",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Mineralogy.",
+     "level": "basic"
+    },
+    {
+     "question": "What heats the slurry here?",
+     "options": [
+      "Live steam injection",
+      "Electric coils only",
+      "Sunlight",
+      "Flames inside"
+     ],
+     "answer": 0,
+     "explanation": "Steam.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the slurry.\"",
+     "options": [
+      "Autoclave 3: Slurry / Liquor",
+      "Autoclave 1: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "Autoclave 3: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "Autoclave 1: Tank, Baffles"
+     ],
+     "answer": 3,
+     "explanation": "Autoclave 1: Tank, Baffles: Holds the slurry.",
+     "level": "basic",
+     "part": "ac1_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process slurry/liquor.\"",
+     "options": [
+      "Autoclave 1: Slurry / Liquor",
+      "Autoclave 2: Tank, Baffles",
+      "Live Steam Condensing in the Slurry",
+      "Autoclave 2: Agitator Drive (motor + gearbox, mounting nozzle)"
+     ],
+     "answer": 0,
+     "explanation": "Autoclave 1: Slurry / Liquor: Process slurry/liquor.",
+     "level": "basic",
+     "part": "ac1_slurry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes and suspends solids.\"",
+     "options": [
+      "Autoclave 1: Agitator Shaft & Impellers",
+      "Autoclave 3: Slurry / Liquor",
+      "Slurry Transfer Lines (overflow → bottom of next), Live-Steam Header & Injectors, Gauges",
+      "Support Legs"
+     ],
+     "answer": 0,
+     "explanation": "Autoclave 1: Agitator Shaft & Impellers: Mixes and suspends solids.",
+     "level": "basic",
+     "part": "ac1_agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

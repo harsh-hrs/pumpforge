@@ -1,0 +1,604 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vibrating_conveyor",
+ "no": 148,
+ "title": "Vibrating Conveyor",
+ "model_title": "Vibrating (Oscillating) Conveyor — Leaf-Spring Rocker Type with Crank Drive",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vibrating (oscillating) conveyor moves material along a trough by repeated small, angled strokes. The trough is supported on inclined leaf springs (rockers) and driven by an eccentric crank. Each stroke moves the trough forward and up, throwing the material slightly forward; on the return stroke the trough slides back underneath it. Many designs run near the natural frequency of the spring system, which keeps drive power low.",
+   "applications": [
+    "Hot castings and foundry sand",
+    "Food products (easy to clean, gentle)",
+    "Chemicals and abrasive granules",
+    "Distribution and spreading"
+   ],
+   "key_points": [
+    "No belt or chain — trough is the only contact part",
+    "Gentle, easy-clean, good for hot/abrasive material",
+    "Spring angle sets the stroke direction",
+    "Conveying speed typically ≈ 0.1 – 0.3 m/s"
+   ],
+   "classification": {
+    "family": "Conveyor",
+    "type": "Leaf-spring rocker conveyor with eccentric drive"
+   },
+   "hi_family": "material_handling",
+   "summary": "A vibrating conveyor moves material along a trough by oscillating it on inclined springs or rockers. Each forward-upward stroke throws particles slightly ahead; they land further along before the trough returns. Used for hot, abrasive or delicate materials and for feeding, screening and cooling."
+  },
+  "model_3d": {
+   "asset": "glb/vibrating_conveyor.glb",
+   "metadata": "meta/vibrating_conveyor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 2348,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material is fed onto the trough.",
+    "The eccentric drive turns and the connecting arm pushes the trough.",
+    "The inclined leaf springs guide the trough forward and up on each stroke."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material is fed onto the trough.",
+     "part": "trough",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The eccentric drive turns and the connecting arm pushes the trough.",
+     "part": "eccentric_drive",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The inclined leaf springs guide the trough forward and up on each stroke.",
+     "part": "rockers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Particles hop forward a little each cycle and discharge at the end.",
+     "part": "parts",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Conveying speed rises with stroke and frequency; above a throw number of ~1, particles leave the trough each cycle."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vibrating_conveyor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/vibrating_conveyor.json#components",
+   "key_components": "Trough, leaf springs/rockers, eccentric drive",
+   "parts": [
+    {
+     "id": "trough",
+     "name": "Conveying Trough with Spring Brackets",
+     "info_ref": "vc_trough",
+     "function": "Carries material.",
+     "material": "Stainless/steel."
+    },
+    {
+     "id": "rockers",
+     "name": "Inclined Leaf-Spring Rockers (guide the trough at 25°)",
+     "info_ref": "vc_springs",
+     "function": "Guide and store energy.",
+     "material": "Spring steel/FRP."
+    },
+    {
+     "id": "base_frame",
+     "name": "Base Frame",
+     "info_ref": "vc_base",
+     "function": "Base frame.",
+     "material": "Steel."
+    },
+    {
+     "id": "eccentric_drive",
+     "name": "Eccentric (crank) Drive & Connecting Arm",
+     "info_ref": "vc_drive",
+     "function": "Creates oscillation.",
+     "material": "—"
+    },
+    {
+     "id": "connecting_arm",
+     "name": "Connecting Arm (with rubber bush)",
+     "info_ref": "vc_drive",
+     "function": "Creates oscillation.",
+     "material": "—"
+    },
+    {
+     "id": "motor",
+     "name": "Motor & V-Belt to Eccentric Shaft",
+     "info_ref": "vc_drive",
+     "function": "Creates oscillation.",
+     "material": "—"
+    },
+    {
+     "id": "parts",
+     "name": "Material Hopping Forward with Each Stroke",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Trough ~ 0.2 – 1.5 m wide, up to ~ 30 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 0.5 – 30",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 5 – 15 Hz (300 – 900 strokes/min)",
+     "unit": "Hz"
+    },
+    "capacity": {
+     "typical_range": "~ 1 – 500",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size trough for rate at the conveying speed; select natural-frequency or brute-force design; balanced design for weak floors."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CEMA — Vibrating conveyors",
+    "Manufacturer data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Anchor the base frame firmly — or use a balanced (counter-oscillating) design to reduce forces transmitted to the floor."
+   ],
+   "alignment": [
+    "Survey the structure so all pulleys and idlers are square to the centre line; train the belt empty, then loaded."
+   ],
+   "piping": [
+    "Chutes designed for the material trajectory to centre-load the belt; skirts and dust seals at loading points; belt cleaners and plough at the discharge."
+   ],
+   "commissioning": [
+    "Check pull-wire emergency stops, belt-drift and speed switches; run empty and loaded; record take-up position and motor current."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check stroke, noise and material flow.",
+     "part": "trough",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect leaf springs and rubber bushes; check bolts.",
+     "part": "rockers",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace springs, connecting-arm bushes and eccentric bearings.",
+     "part": "connecting_arm"
+    }
+   ],
+   "lubrication": [
+    "Eccentric shaft bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Leaf spring cracking",
+     "category": "performance",
+     "symptoms": [
+      "Change in stroke, noise"
+     ],
+     "causes": [
+      "Fatigue, over-stroke"
+     ],
+     "remedies": [
+      "Replace in sets; check tuning"
+     ],
+     "part": "rockers"
+    },
+    {
+     "problem": "Slow conveying",
+     "category": "performance",
+     "symptoms": [
+      "Material piles up"
+     ],
+     "causes": [
+      "Low stroke, worn bushes, sticky material"
+     ],
+     "remedies": [
+      "Adjust drive; replace bushes; clean trough"
+     ],
+     "part": "eccentric_drive"
+    }
+   ],
+   "safety": [
+    "Guard the drive; keep clear of the oscillating trough; lock out before clearing."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vibrating Conveyor — Introduction",
+    "type": "in_app_tour",
+    "model": "vibrating_conveyor.glb",
+    "duration_s": 50.5,
+    "script": [
+     {
+      "narration": "This module introduces the Vibrating Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vibrating (oscillating) conveyor moves material along a trough by repeated small, angled strokes.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The trough is supported on inclined leaf springs (rockers) and driven by an eccentric crank.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Each stroke moves the trough forward and up, throwing the material slightly forward; on the return stroke the trough slides back underneath it.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hot castings and foundry sand; food products (easy to clean, gentle); chemicals and abrasive granules; distribution and spreading.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vibrating Conveyor — Operation",
+    "type": "in_app_tour",
+    "model": "vibrating_conveyor.glb",
+    "duration_s": 27.2,
+    "script": [
+     {
+      "narration": "How the Vibrating Conveyor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material is fed onto the trough.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trough",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The eccentric drive turns and the connecting arm pushes the trough.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "eccentric_drive",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The inclined leaf springs guide the trough forward and up on each stroke.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rockers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Particles hop forward a little each cycle and discharge at the end.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "parts",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vibrating Conveyor — Maintenance",
+    "type": "in_app_tour",
+    "model": "vibrating_conveyor.glb",
+    "duration_s": 34.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vibrating Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check stroke, noise and material flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trough",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect leaf springs and rubber bushes; check bolts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rockers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace springs, connecting-arm bushes and eccentric bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "connecting_arm",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for leaf spring cracking: change in stroke, noise. Common cause: fatigue, over-stroke.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "rockers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for slow conveying: material piles up. Common cause: low stroke, worn bushes, sticky material.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "eccentric_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What sets the direction of trough motion?",
+     "options": [
+      "The angle of the leaf springs",
+      "Trough colour",
+      "Feed rate",
+      "Motor size only"
+     ],
+     "answer": 0,
+     "explanation": "Springs guide the motion.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are vibrating conveyors used for hot castings?",
+     "options": [
+      "Only the steel trough contacts the material — no belt to burn",
+      "They are cold",
+      "They have rubber belts",
+      "They are slow"
+     ],
+     "answer": 0,
+     "explanation": "All-steel contact.",
+     "level": "basic"
+    },
+    {
+     "question": "Running near natural frequency means…",
+     "options": [
+      "Low drive power for a given stroke",
+      "No vibration",
+      "Higher noise only",
+      "No springs"
+     ],
+     "answer": 0,
+     "explanation": "Resonance assists.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries material.\"",
+     "options": [
+      "Connecting Arm (with rubber bush)",
+      "Motor & V-Belt to Eccentric Shaft",
+      "Material Hopping Forward with Each Stroke",
+      "Conveying Trough with Spring Brackets"
+     ],
+     "answer": 3,
+     "explanation": "Conveying Trough with Spring Brackets: Carries material.",
+     "level": "basic",
+     "part": "trough",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Guide and store energy.\"",
+     "options": [
+      "Material Hopping Forward with Each Stroke",
+      "Conveying Trough with Spring Brackets",
+      "Base Frame",
+      "Inclined Leaf-Spring Rockers (guide the trough at 25°)"
+     ],
+     "answer": 3,
+     "explanation": "Inclined Leaf-Spring Rockers (guide the trough at 25°): Guide and store energy.",
+     "level": "basic",
+     "part": "rockers",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Base frame.\"",
+     "options": [
+      "Material Hopping Forward with Each Stroke",
+      "Base Frame",
+      "Conveying Trough with Spring Brackets",
+      "Inclined Leaf-Spring Rockers (guide the trough at 25°)"
+     ],
+     "answer": 1,
+     "explanation": "Base Frame: Base frame.",
+     "level": "basic",
+     "part": "base_frame",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

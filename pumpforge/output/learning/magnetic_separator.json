@@ -1,0 +1,653 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "magnetic_separator",
+ "no": 183,
+ "title": "Magnetic Separator",
+ "model_title": "Wet Drum Magnetic Separator (Concurrent Tank)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A wet drum magnetic separator recovers magnetic particles such as magnetite from a slurry. A non-magnetic stainless drum turns around a stationary permanent-magnet arc. Magnetic particles are attracted to the drum surface, carried out of the slurry and released into the concentrate launder where the field ends; non-magnetic particles flow on to tailings.",
+   "applications": [
+    "Magnetite recovery in iron-ore concentrators",
+    "Dense-medium recovery in coal washing",
+    "Removal of iron from minerals"
+   ],
+   "key_points": [
+    "Stationary magnets, rotating drum",
+    "Field typically ~ 0.1–0.3 T at drum surface (low intensity)",
+    "Concurrent, counter-rotation and counter-current tanks",
+    "Magnetic susceptibility drives separation"
+   ],
+   "classification": {
+    "family": "Magnetic separator",
+    "type": "Wet drum, permanent magnet, concurrent tank"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A wet drum magnetic separator recovers magnetic particles (for example magnetite) from a slurry. A non-magnetic drum rotates around a stationary magnet arc; magnetic particles are attracted to the drum, carried out of the slurry and dropped into the concentrate launder, while non-magnetic material flows to tailings."
+  },
+  "model_3d": {
+   "asset": "glb/magnetic_separator.glb",
+   "metadata": "meta/magnetic_separator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6288,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry enters the feed box.",
+    "The magnet arc creates a field round the lower drum.",
+    "Magnetic particles stick to the turning drum."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry enters the feed box.",
+     "part": "tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The magnet arc creates a field round the lower drum.",
+     "part": "magnet_assembly",
+     "cut": true,
+     "operate": true,
+     "overlay": "magnetic_field",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Magnetic particles stick to the turning drum.",
+     "part": "drum",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "They are released into the concentrate launder.",
+     "part": "outlets",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Non-magnetic particles leave as tailings.",
+     "part": "slurry",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Recovery vs field strength and drum speed; too fast a drum loses magnetics, too slow reduces capacity."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "magnetic_separator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "magnetic_field": {
+     "file": "magnetic_separator_magnetic_field.glb",
+     "title": "Magnetic field round the lower drum",
+     "description": "The stationary magnet arc creates a strong field (typically ~ 0.1–0.3 T at the drum surface for magnetite recovery) only over the lower part of the drum. Magnetic particles are pulled onto the rotating shell, carried out of the slurry and released where the field ends; non-magnetic particles stay in the slurry and leave as tailings.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/magnetic_separator.json#components",
+   "key_components": "Rotating drum, stationary magnet assembly, tank, feed box, concentrate & tailings outlets, drive",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Tank, Feed Box & Concentrate Launder",
+     "info_ref": "ms_tank",
+     "function": "Holds slurry; launder.",
+     "material": "Steel (lined)."
+    },
+    {
+     "id": "slurry",
+     "name": "Slurry in the Tank",
+     "info_ref": "ms_tank",
+     "function": "Holds slurry; launder.",
+     "material": "Steel (lined)."
+    },
+    {
+     "id": "drum",
+     "name": "Rotating Non-Magnetic Stainless Drum",
+     "info_ref": "ms_drum",
+     "function": "Carries magnetic particles.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "drum_strips",
+     "name": "Drum Wear Strips (show the drum rotation)",
+     "info_ref": "ms_drum",
+     "function": "Carries magnetic particles.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "magnet_assembly",
+     "name": "Stationary Permanent-Magnet Arc (alternating poles, ~ 120° wrap)",
+     "info_ref": "ms_magnet",
+     "function": "Creates the field.",
+     "material": "Ferrite/NdFeB."
+    },
+    {
+     "id": "drive",
+     "name": "Drum Drive (gearmotor)",
+     "info_ref": "ms_drive",
+     "function": "Rotates drum.",
+     "material": "—"
+    },
+    {
+     "id": "outlets",
+     "name": "Tailings (non-magnetic) Outlet & Concentrate Outlet",
+     "info_ref": "ms_tank",
+     "function": "Holds slurry; launder.",
+     "material": "Steel (lined)."
+    },
+    {
+     "id": "magnetics",
+     "name": "Magnetic Particles held on the Drum and carried to the Launder",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "non_magnetics",
+     "name": "Non-Magnetic Particles passing to Tailings",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Drum ~ 0.6 – 1.5 m diameter, up to ~ 4 m wide",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 300",
+     "unit": "t/h solids"
+    },
+    "operating_pressure": {
+     "typical_range": "Atmospheric",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "Magnetite recovery typically > 95 %",
+     "unit": "%"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose tank style and field strength for particle size and duty."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Wills' Mineral Processing Technology"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Tanks on level foundations; access walkways for inspection and skimmer maintenance."
+   ],
+   "alignment": [
+    "Weirs and launders set level so flow and overflow are even."
+   ],
+   "piping": [
+    "Inlet distribution to avoid short-circuiting; sludge/float lines sized for thick material; chemical dosing points upstream."
+   ],
+   "commissioning": [
+    "Fill with water and check levels; start air/recycle; optimise chemical dosing with jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check slurry level and drum surface.",
+     "part": "drum",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure field strength; inspect wear liner.",
+     "part": "magnet_assembly",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace drum shell/liners.",
+     "part": "drum"
+    }
+   ],
+   "lubrication": [
+    "Drive bearings and gearbox per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of magnetics to tailings",
+     "category": "performance",
+     "symptoms": [
+      "Low recovery"
+     ],
+     "causes": [
+      "Field weakening, high slurry velocity"
+     ],
+     "remedies": [
+      "Check magnets; adjust feed"
+     ],
+     "part": "magnet_assembly"
+    },
+    {
+     "problem": "Drum wear",
+     "category": "wear",
+     "symptoms": [
+      "Holes in shell"
+     ],
+     "causes": [
+      "Abrasion"
+     ],
+     "remedies": [
+      "Wear liners; replace"
+     ],
+     "part": "drum"
+    }
+   ],
+   "safety": [
+    "Strong magnets — keep tools and pacemakers away; lock out drive."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Magnetic Separator — Introduction",
+    "type": "in_app_tour",
+    "model": "magnetic_separator.glb",
+    "duration_s": 57.3,
+    "script": [
+     {
+      "narration": "This module introduces the Magnetic Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A wet drum magnetic separator recovers magnetic particles such as magnetite from a slurry.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A non-magnetic stainless drum turns around a stationary permanent-magnet arc.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Magnetic particles are attracted to the drum surface, carried out of the slurry and released into the concentrate launder where the field ends; non-magnetic particles flow on to tailings.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include magnetite recovery in iron-ore concentrators; dense-medium recovery in coal washing; removal of iron from minerals.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Tank, Feed Box & Concentrate Launder, Rotating Non-Magnetic Stainless Drum, Drum Wear Strips (show the drum rotation).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Magnetic Separator — Operation",
+    "type": "in_app_tour",
+    "model": "magnetic_separator.glb",
+    "duration_s": 40.5,
+    "script": [
+     {
+      "narration": "How the Magnetic Separator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry enters the feed box.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The magnet arc creates a field round the lower drum.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "magnet_assembly",
+       "cut": true,
+       "operate": true,
+       "overlay": "magnetic_field",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Magnetic particles stick to the turning drum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "They are released into the concentrate launder.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outlets",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Non-magnetic particles leave as tailings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "slurry",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The stationary magnet arc creates a strong field (typically ~ 0.1–0.3 T at the drum surface for magnetite recovery) only over the lower part of the drum.",
+      "duration_s": 12.1,
+      "action": {
+       "overlay": "magnetic_field",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Magnetic Separator — Maintenance",
+    "type": "in_app_tour",
+    "model": "magnetic_separator.glb",
+    "duration_s": 33.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Magnetic Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check slurry level and drum surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure field strength; inspect wear liner.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "magnet_assembly",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace drum shell/liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of magnetics to tailings: low recovery. Common cause: field weakening, high slurry velocity.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "magnet_assembly",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for drum wear: holes in shell. Common cause: abrasion.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which part rotates?",
+     "options": [
+      "The non-magnetic drum",
+      "The magnet arc",
+      "The tank",
+      "The feed box"
+     ],
+     "answer": 0,
+     "explanation": "Drum.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is the drum stainless (non-magnetic)?",
+     "options": [
+      "So the field passes through it",
+      "For colour",
+      "For weight",
+      "To heat"
+     ],
+     "answer": 0,
+     "explanation": "Field penetration.",
+     "level": "basic"
+    },
+    {
+     "question": "Where do non-magnetic particles go?",
+     "options": [
+      "Tailings",
+      "Concentrate",
+      "Drum",
+      "Motor"
+     ],
+     "answer": 0,
+     "explanation": "Tailings.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds slurry; launder.\"",
+     "options": [
+      "Non-Magnetic Particles passing to Tailings",
+      "Tank, Feed Box & Concentrate Launder",
+      "Rotating Non-Magnetic Stainless Drum",
+      "Stationary Permanent-Magnet Arc (alternating poles, ~ 120° wrap)"
+     ],
+     "answer": 1,
+     "explanation": "Tank, Feed Box & Concentrate Launder: Holds slurry; launder.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries magnetic particles.\"",
+     "options": [
+      "Non-Magnetic Particles passing to Tailings",
+      "Tank, Feed Box & Concentrate Launder",
+      "Rotating Non-Magnetic Stainless Drum",
+      "Stationary Permanent-Magnet Arc (alternating poles, ~ 120° wrap)"
+     ],
+     "answer": 2,
+     "explanation": "Rotating Non-Magnetic Stainless Drum: Carries magnetic particles.",
+     "level": "basic",
+     "part": "drum",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Creates the field.\"",
+     "options": [
+      "Drum Drive (gearmotor)",
+      "Rotating Non-Magnetic Stainless Drum",
+      "Stationary Permanent-Magnet Arc (alternating poles, ~ 120° wrap)",
+      "Tank, Feed Box & Concentrate Launder"
+     ],
+     "answer": 2,
+     "explanation": "Stationary Permanent-Magnet Arc (alternating poles, ~ 120° wrap): Creates the field.",
+     "level": "basic",
+     "part": "magnet_assembly",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

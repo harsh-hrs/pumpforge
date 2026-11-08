@@ -1,0 +1,592 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "flash_evaporator",
+  "title": "Flash Evaporator (Heater → Pressure Reduction → Flash Vessel)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 157,
+    "phase": 8,
+    "eq_id": "EQ-235",
+    "subcategory": "Evaporation",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "flash_evaporator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "flash_evaporator_pressure.glb",
+      "title": "Pressure drop causes flashing",
+      "description": "The feed is heated under pressure so it does not boil. Passing the pressure-reducing valve into the lower-pressure vessel, it is suddenly above its boiling point at the new pressure: part of it flashes to vapour, and the latent heat taken by that vapour cools the remaining liquid to the saturation temperature of the vessel. Flash fraction ≈ cp·(T_in − T_sat) / h_fg.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          -2.6,
+          0.55,
+          -0.0
+        ],
+        [
+          -1.3,
+          0.55,
+          -0.0
+        ],
+        [
+          -0.9,
+          0.55,
+          -0.0
+        ],
+        [
+          -0.9,
+          1.4,
+          -0.0
+        ],
+        [
+          -0.2,
+          1.4,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "vapour",
+      "kind": "steam",
+      "radius": 0.03,
+      "points": [
+        [
+          0.0,
+          1.4,
+          -0.1
+        ],
+        [
+          0.0,
+          2.95,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "concentrate",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          0.9,
+          -0.1
+        ],
+        [
+          0.0,
+          0.05,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 20758,
+    "parts": 9
+  },
+  "summary": "A flash evaporator separates vapour from a liquid by sudden pressure reduction. The liquid is heated under pressure, then throttled into a vessel at lower pressure; part of it instantly boils (\"flashes\"), cooling the rest. Vapour leaves through a demister at the top, the concentrated liquid from the bottom.",
+  "classification": {
+    "family": "Evaporator",
+    "type": "Single-stage flash evaporator"
+  },
+  "model_configuration": {
+    "animation": "Vapour flashing; level control"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Shells under pressure/vacuum.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "TEMA",
+      "title": "Tubular exchanger standards",
+      "relevance": "Calandria/heater design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Perry's Chemical Engineers' Handbook — Evaporation"
+  ],
+  "parts": [
+    {
+      "id": "flash_vessel",
+      "name": "Flash Vessel (lower pressure)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "flash_vessel__back",
+        "flash_vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.45,
+        0.575,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        2.425,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.5,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.5,
+        -0.0
+      ],
+      "info_ref": "fe_vessel"
+    },
+    {
+      "id": "demister",
+      "name": "Mesh-Pad Demister (stops droplet carry-over)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "dm"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.3
+      ],
+      "bbox_min": [
+        -0.438,
+        1.948,
+        -0.438
+      ],
+      "bbox_max": [
+        0.438,
+        2.082,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.015,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.015,
+        -0.219
+      ],
+      "info_ref": "fe_demister"
+    },
+    {
+      "id": "concentrate",
+      "name": "Liquid Collecting in the Vessel (concentrate / brine)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.438,
+        0.581,
+        -0.438
+      ],
+      "bbox_max": [
+        0.438,
+        1.15,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.8655,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.8655,
+        -0.219
+      ],
+      "info_ref": "fe_liquid"
+    },
+    {
+      "id": "nozzles",
+      "name": "Nozzles: Hot Feed Inlet (tangential), Vapour Outlet, Concentrate Outlet, Level Gauge",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.7,
+        0.325,
+        -0.19
+      ],
+      "bbox_max": [
+        0.54,
+        2.675,
+        0.19
+      ],
+      "label_anchor": [
+        -0.08,
+        1.5,
+        0.19
+      ],
+      "center": [
+        -0.08,
+        1.5,
+        -0.0
+      ],
+      "info_ref": "fe_vessel"
+    },
+    {
+      "id": "feed_heater",
+      "name": "Feed Heater (raises liquid temperature under pressure)",
+      "group": "exchanger",
+      "section_role": "keep",
+      "nodes": [
+        "hx"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.49,
+        0.37,
+        -0.18
+      ],
+      "bbox_max": [
+        -1.31,
+        0.88,
+        0.18
+      ],
+      "label_anchor": [
+        -1.9,
+        0.625,
+        0.18
+      ],
+      "center": [
+        -1.9,
+        0.625,
+        -0.0
+      ],
+      "info_ref": "fe_heater"
+    },
+    {
+      "id": "feed_line",
+      "name": "Feed Line",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "fp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -1.3,
+        0.51,
+        -0.04
+      ],
+      "bbox_max": [
+        -0.7,
+        1.44,
+        0.04
+      ],
+      "label_anchor": [
+        -1.0,
+        0.975,
+        0.04
+      ],
+      "center": [
+        -1.0,
+        0.975,
+        -0.0
+      ],
+      "info_ref": "fe_valve"
+    },
+    {
+      "id": "flash_valve",
+      "name": "Pressure-Reducing (Flash) Valve — pressure drops, liquid partly flashes to vapour",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "vl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.99,
+        0.98,
+        -0.09
+      ],
+      "bbox_max": [
+        -0.81,
+        1.45,
+        0.09
+      ],
+      "label_anchor": [
+        -0.9,
+        1.215,
+        0.09
+      ],
+      "center": [
+        -0.9,
+        1.215,
+        -0.0
+      ],
+      "info_ref": "fe_valve"
+    },
+    {
+      "id": "supports",
+      "name": "Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.3812,
+        0.0,
+        -0.3812
+      ],
+      "bbox_max": [
+        0.3812,
+        0.8,
+        0.3812
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.3812
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "fe_vessel"
+    },
+    {
+      "id": "flash_vapour",
+      "name": "Vapour Flashing off the Liquid",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "flash_vapour0",
+        "flash_vapour1",
+        "flash_vapour2",
+        "flash_vapour3",
+        "flash_vapour4",
+        "flash_vapour5",
+        "flash_vapour6",
+        "flash_vapour7",
+        "flash_vapour8",
+        "flash_vapour9",
+        "flash_vapour10",
+        "flash_vapour11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fe_vessel": {
+      "function": "Flash vessel: vapour/liquid separation at low pressure.",
+      "construction": "Vertical vessel.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Erosion at inlet, corrosion"
+      ],
+      "inspection": [
+        "Thickness"
+      ]
+    },
+    "fe_demister": {
+      "function": "Removes entrained droplets from the vapour.",
+      "construction": "Wire-mesh pad.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling, ΔP rise"
+      ],
+      "inspection": [
+        "ΔP"
+      ]
+    },
+    "fe_liquid": {
+      "function": "Concentrate.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fe_heater": {
+      "function": "Heats feed under pressure.",
+      "construction": "Shell & tube heater.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fe_valve": {
+      "function": "Drops the pressure to cause flashing.",
+      "construction": "Control valve and feed line.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Erosion, cavitation (trim)"
+      ],
+      "inspection": [
+        "Inspect trim"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

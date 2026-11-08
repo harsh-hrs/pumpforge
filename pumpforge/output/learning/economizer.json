@@ -1,0 +1,632 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "economizer",
+ "no": 152,
+ "title": "Economizer",
+ "model_title": "Boiler Economizer (Serpentine Tube Bank in the Flue-Gas Duct)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An economizer is a heat exchanger in the boiler flue-gas path that preheats the feedwater before it enters the drum, using heat that would otherwise go up the stack. Banks of serpentine (often finned) tubes carry the water upward while the gas flows down across them — counter-flow.",
+   "applications": [
+    "Water-tube and packaged boilers",
+    "HRSGs (economizer section)",
+    "Shell boilers (add-on stack economizers)"
+   ],
+   "key_points": [
+    "Recovers flue-gas heat → higher boiler efficiency",
+    "Rule of thumb: ~ 1 % fuel saving per ~ 20–25 °C stack-temperature reduction",
+    "Gas must stay above acid dew point",
+    "Water must not steam in a non-steaming economizer"
+   ],
+   "classification": {
+    "family": "Boiler heat recovery",
+    "type": "Finned serpentine economizer"
+   },
+   "hi_family": "thermal_process",
+   "summary": "An economizer recovers heat from boiler flue gas to preheat the feedwater before it enters the drum. Banks of (often finned) serpentine tubes sit in the gas duct after the main heating surfaces. Gas flows down while water flows up — counter-flow — so the gas leaves cooler and boiler efficiency rises."
+  },
+  "model_3d": {
+   "asset": "glb/economizer.glb",
+   "metadata": "meta/economizer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11904,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Flue gas enters the top of the duct and flows downward.",
+    "Feedwater enters the bottom header.",
+    "Water rises through the serpentine tubes, absorbing heat."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flue gas enters the top of the duct and flows downward.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Feedwater enters the bottom header.",
+     "part": "headers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water rises through the serpentine tubes, absorbing heat.",
+     "part": "tube_bank",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The soot blower cleans deposits from the fins.",
+     "part": "soot_blower",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Ash falls to the hopper; heated water goes to the drum.",
+     "part": "ash_hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Recovered heat Q = m_gas · cp · (T_gas,in − T_gas,out) = m_w · cp · (T_w,out − T_w,in)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "economizer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "economizer_temperature.glb",
+     "title": "Gas cools as it gives heat to the water",
+     "description": "Flue gas enters at the top hot (orange) and leaves the bottom cooler (blue-green), while feedwater flows upward — counter-flow. Gas outlet temperature must stay above the acid dew point when the fuel contains sulphur, to avoid cold-end corrosion; water must stay below saturation to avoid steaming in the economizer.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/economizer.json#components",
+   "key_components": "Finned tube banks, headers, flue-gas duct casing, soot blower",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Gas Duct Casing (gas flows downward)",
+     "info_ref": "ec_casing",
+     "function": "Encloses the gas path.",
+     "material": "Steel."
+    },
+    {
+     "id": "tube_bank",
+     "name": "Finned Serpentine Tube Bank (water inside)",
+     "info_ref": "ec_tubes",
+     "function": "Transfer heat from gas to water.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "headers",
+     "name": "Inlet (bottom) & Outlet (top) Headers",
+     "info_ref": "ec_headers",
+     "function": "Distribute and collect water.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "soot_blower",
+     "name": "Rotary Soot Blower (steam/air jets clean the fins)",
+     "info_ref": "ec_sootblower",
+     "function": "Removes ash deposits from fins.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "ash_hopper",
+     "name": "Ash Hopper & Support Steel",
+     "info_ref": "ec_casing",
+     "function": "Encloses the gas path.",
+     "material": "Steel."
+    },
+    {
+     "id": "water_tracers",
+     "name": "Feedwater rising through the Serpentine",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "gas_particles",
+     "name": "Flue Gas Flowing Down through the Bank",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bank ~ 1 – 6 m across",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.1 – 50",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Gas ~ 400 → 150; water ~ 105 → 200",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Water ~ 2 – 1500",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Use finned tubes for clean gas (gas firing), bare/wide-spaced tubes for ash-laden gas; check acid dew point."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASME BPVC Section I",
+    "Babcock & Wilcox — Steam: its generation and use"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth/foundation designed for operating weight full of water; allow access for tube cleaning and burner maintenance."
+   ],
+   "alignment": [
+    "Level the boiler; align burner and fan; check expansion allowances on headers and casings."
+   ],
+   "piping": [
+    "Fit safety valves with unobstructed discharge piped to a safe place; feedwater with check and isolation valves; blowdown to a blowdown vessel.",
+    "Flue/stack sized for the draught required; explosion relief where specified."
+   ],
+   "commissioning": [
+    "Boil-out/chemical clean; hydro-test; set and test safety valves; test low-water cut-outs and flame safeguard (purge, ignition, flame failure); tune combustion (O₂, CO)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor gas and water temperatures and ΔP.",
+     "part": "casing",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Operate soot blowers; inspect for erosion.",
+     "part": "soot_blower",
+     "interval": "per shift/daily"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Thickness survey of tubes; replace eroded/corroded sections.",
+     "part": "tube_bank"
+    }
+   ],
+   "lubrication": [
+    "Soot blower drive lubricated per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Cold-end (acid) corrosion",
+     "category": "corrosion",
+     "symptoms": [
+      "Tube leaks at the gas outlet end"
+     ],
+     "causes": [
+      "Gas below acid dew point (sulphur fuels), low feedwater temperature"
+     ],
+     "remedies": [
+      "Raise feedwater temperature; bypass"
+     ],
+     "part": "tube_bank"
+    },
+    {
+     "problem": "Fouling/erosion",
+     "category": "wear",
+     "symptoms": [
+      "Rising ΔP; thinning"
+     ],
+     "causes": [
+      "Ash deposits, high gas velocity"
+     ],
+     "remedies": [
+      "Soot blowing; erosion shields"
+     ],
+     "part": "tube_bank"
+    }
+   ],
+   "safety": [
+    "Relief valve on economizer if it can be isolated; never isolate water flow with gas flowing."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Economizer — Introduction",
+    "type": "in_app_tour",
+    "model": "economizer.glb",
+    "duration_s": 48.6,
+    "script": [
+     {
+      "narration": "This module introduces the Economizer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An economizer is a heat exchanger in the boiler flue-gas path that preheats the feedwater before it enters the drum, using heat that would otherwise go up the stack.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Banks of serpentine (often finned) tubes carry the water upward while the gas flows down across them — counter-flow.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include water-tube and packaged boilers; HRSGs (economizer section); shell boilers (add-on stack economizers).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Gas Duct Casing (gas flows downward).",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Economizer — Operation",
+    "type": "in_app_tour",
+    "model": "economizer.glb",
+    "duration_s": 38.2,
+    "script": [
+     {
+      "narration": "How the Economizer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flue gas enters the top of the duct and flows downward.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Feedwater enters the bottom header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "headers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water rises through the serpentine tubes, absorbing heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tube_bank",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The soot blower cleans deposits from the fins.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "soot_blower",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Ash falls to the hopper; heated water goes to the drum.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "ash_hopper",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Flue gas enters at the top hot (orange) and leaves the bottom cooler (blue-green), while feedwater flows upward — counter-flow.",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Economizer — Maintenance",
+    "type": "in_app_tour",
+    "model": "economizer.glb",
+    "duration_s": 38.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Economizer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor gas and water temperatures and ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Operate soot blowers; inspect for erosion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "soot_blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Thickness survey of tubes; replace eroded/corroded sections.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tube_bank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cold-end (acid) corrosion: tube leaks at the gas outlet end. Common cause: gas below acid dew point (sulphur fuels), low feedwater temperature.",
+      "duration_s": 10.4,
+      "action": {
+       "highlight": "tube_bank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fouling/erosion: rising δp; thinning. Common cause: ash deposits, high gas velocity.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "tube_bank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does an economizer heat?",
+     "options": [
+      "Feedwater",
+      "Combustion air",
+      "Steam",
+      "Fuel"
+     ],
+     "answer": 0,
+     "explanation": "Feedwater.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must flue gas stay above the acid dew point?",
+     "options": [
+      "To avoid sulphuric acid condensation and corrosion",
+      "For draught only",
+      "To heat air",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Cold-end corrosion.",
+     "level": "basic"
+    },
+    {
+     "question": "Gas flows down and water up — this is…",
+     "options": [
+      "Counter-flow",
+      "Parallel flow",
+      "Cross-flow only",
+      "No flow"
+     ],
+     "answer": 0,
+     "explanation": "Better temperature driving force.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the gas path.\"",
+     "options": [
+      "Gas Duct Casing (gas flows downward)",
+      "Inlet (bottom) & Outlet (top) Headers",
+      "Feedwater rising through the Serpentine",
+      "Finned Serpentine Tube Bank (water inside)"
+     ],
+     "answer": 0,
+     "explanation": "Gas Duct Casing (gas flows downward): Encloses the gas path.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transfer heat from gas to water.\"",
+     "options": [
+      "Finned Serpentine Tube Bank (water inside)",
+      "Feedwater rising through the Serpentine",
+      "Flue Gas Flowing Down through the Bank",
+      "Gas Duct Casing (gas flows downward)"
+     ],
+     "answer": 0,
+     "explanation": "Finned Serpentine Tube Bank (water inside): Transfer heat from gas to water.",
+     "level": "basic",
+     "part": "tube_bank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distribute and collect water.\"",
+     "options": [
+      "Inlet (bottom) & Outlet (top) Headers",
+      "Feedwater rising through the Serpentine",
+      "Flue Gas Flowing Down through the Bank",
+      "Gas Duct Casing (gas flows downward)"
+     ],
+     "answer": 0,
+     "explanation": "Inlet (bottom) & Outlet (top) Headers: Distribute and collect water.",
+     "level": "basic",
+     "part": "headers",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

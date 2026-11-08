@@ -1,0 +1,619 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "fire_and_gas_detection_system",
+ "no": 280,
+ "title": "Fire and Gas Detection System",
+ "model_title": "Fire & Gas Detection System on a Process Module — Point & Open-Path Gas, Flame, Heat Detectors, MCP, Alarms & F&G Panel",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A fire and gas (F&G) detection system watches a process area for gas leaks and fires. Point and open-path gas detectors, flame detectors, heat and smoke detectors and manual call points feed a SIL-rated logic panel that raises alarms and starts executive actions such as shutdown, isolation, deluge and ventilation changes.",
+   "applications": [
+    "Process modules, compressor and pump areas",
+    "Offshore platforms, terminals and tank farms"
+   ],
+   "key_points": [
+    "Coverage mapping places detectors",
+    "Alarm at 20 % LEL, action at ≈ 50–60 % LEL",
+    "Voting avoids spurious trips",
+    "Regular bump tests & proof tests"
+   ],
+   "classification": {
+    "family": "Fire protection",
+    "type": "F&G detection with SIL-rated logic"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A fire and gas detection system uses gas, flame, heat and smoke detectors and manual call points around a process area to detect leaks and fires early, raise alarms and trigger shutdown, deluge and ventilation actions."
+  },
+  "model_3d": {
+   "asset": "glb/fire_and_gas_detection_system.glb",
+   "metadata": "meta/fire_and_gas_detection_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 12288,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Gas leaks from a flange.",
+    "Point and open-path detectors sense it.",
+    "Flame detectors watch their cones of vision."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Gas leaks from a flange.",
+     "part": "process_equipment",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Point and open-path detectors sense it.",
+     "part": "point_gas_detectors",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flame detectors watch their cones of vision.",
+     "part": "flame_heat_alarm_devices",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The F&G panel votes and acts.",
+     "part": "fg_panel",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Detection probability vs number / placement of detectors (coverage)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "fire_and_gas_detection_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "fire_and_gas_detection_system_pressure.glb",
+     "title": "Coverage: see the fire, smell the gas — then act",
+     "description": "F&G detectors are placed by coverage mapping: flame detectors have a cone of vision (≈ 90° for UV/IR) and a range for a given fire size; gas detectors are placed where leaks would collect (low for heavier-than-air gas, high for lighter) and open-path detectors guard boundaries. Typical alarm levels: 20 % LEL low, 50–60 % LEL high. The F&G logic uses voting (e.g. 2-out-of-N confirmed) to start executive actions: shutdown and isolation, deluge, ventilation changes and alarms.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/fire_and_gas_detection_system.json#components",
+   "key_components": "Point & open-path gas detectors, flame & heat detectors, MCP, beacon, F&G panel",
+   "parts": [
+    {
+     "id": "module",
+     "name": "Process Module / Skid Deck with Columns & Roof Deck",
+     "info_ref": "fg_module",
+     "function": "Area.",
+     "material": "Steel."
+    },
+    {
+     "id": "process_equipment",
+     "name": "Process Equipment (vessel, piping with flange — the leak source, compressor)",
+     "info_ref": "fg_equipment",
+     "function": "Leak/fire sources.",
+     "material": "—"
+    },
+    {
+     "id": "point_gas_detectors",
+     "name": "Point Gas Detectors (IR hydrocarbon at low / high level by gas density; H₂S electrochemical)",
+     "info_ref": "fg_gas",
+     "function": "Detect gas.",
+     "material": "—"
+    },
+    {
+     "id": "open_path_detector",
+     "name": "Open-Path (Line-of-Sight) Gas Detector: IR Transmitter → Receiver",
+     "info_ref": "fg_gas",
+     "function": "Detect gas.",
+     "material": "—"
+    },
+    {
+     "id": "flame_heat_alarm_devices",
+     "name": "Flame Detectors (UV/IR, multi-IR), Heat Detector, Manual Call Point, Beacon & Horn",
+     "info_ref": "fg_fire",
+     "function": "Detect fire; alarm.",
+     "material": "—"
+    },
+    {
+     "id": "fg_panel",
+     "name": "F&G Logic Panel (SIL-rated): voting, alarms, executive actions (ESD, deluge, ventilation, isolation)",
+     "info_ref": "fg_panel",
+     "function": "Logic and actions.",
+     "material": "—"
+    },
+    {
+     "id": "gas_leak",
+     "name": "Gas leaking from the flange and spreading",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "signals",
+     "name": "Detector signals to the F&G panel",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Areas from single modules to whole plants",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Tens to thousands of detectors",
+     "unit": "—"
+    },
+    "operating_conditions": {
+     "typical_range": "Hazardous area rated devices",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "SIL 1–2 logic typical (by study)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "By hazard study and coverage mapping (ISA TR84.00.07)."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISA TR84.00.07",
+    "IEC 61511"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports per fire code; protected cabling and piping in fire zones."
+   ],
+   "alignment": [
+    "Detectors aimed / monitors oriented per coverage study."
+   ],
+   "piping": [
+    "Fire water / foam lines flushed; drains and test connections provided."
+   ],
+   "commissioning": [
+    "Acceptance tests with witnesses (flow, foam ratio, detector function, cause & effect)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check panel faults / inhibits.",
+     "part": "fg_panel",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Bump-test gas detectors; clean optics.",
+     "part": "point_gas_detectors",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Full cause & effect proof test.",
+     "part": "fg_panel"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication (valve stems / actuators per maker)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Detector blinded",
+     "category": "performance",
+     "symptoms": [
+      "Fault / no response"
+     ],
+     "causes": [
+      "Dirty optics, blocked view"
+     ],
+     "remedies": [
+      "Clean; re-aim"
+     ],
+     "part": "flame_heat_alarm_devices"
+    },
+    {
+     "problem": "Spurious trip",
+     "category": "performance",
+     "symptoms": [
+      "Unplanned shutdown"
+     ],
+     "causes": [
+      "Single-detector logic, interference"
+     ],
+     "remedies": [
+      "Voting; shielding"
+     ],
+     "part": "fg_panel"
+    }
+   ],
+   "safety": [
+    "Manage inhibits strictly; test after maintenance."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Fire and Gas Detection System — Introduction",
+    "type": "in_app_tour",
+    "model": "fire_and_gas_detection_system.glb",
+    "duration_s": 48.8,
+    "script": [
+     {
+      "narration": "This module introduces the Fire and Gas Detection System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A fire and gas (F&G) detection system watches a process area for gas leaks and fires.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Point and open-path gas detectors, flame detectors, heat and smoke detectors and manual call points feed a SIL-rated logic panel that raises alarms and starts executive actions such as shutdown, isolation, deluge and ventilation changes.",
+      "duration_s": 15.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process modules, compressor and pump areas; offshore platforms, terminals and tank farms.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Fire and Gas Detection System — Operation",
+    "type": "in_app_tour",
+    "model": "fire_and_gas_detection_system.glb",
+    "duration_s": 45.0,
+    "script": [
+     {
+      "narration": "How the Fire and Gas Detection System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gas leaks from a flange.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "process_equipment",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Point and open-path detectors sense it.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "point_gas_detectors",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flame detectors watch their cones of vision.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flame_heat_alarm_devices",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The F&G panel votes and acts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fg_panel",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "F&G detectors are placed by coverage mapping: flame detectors have a cone of vision (≈ 90° for UV/IR) and a range for a given fire size; gas detectors are placed where leaks would collect (low for heavier-than-air gas, high for lighter) and open-path detectors guard boundaries.",
+      "duration_s": 20.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Fire and Gas Detection System — Maintenance",
+    "type": "in_app_tour",
+    "model": "fire_and_gas_detection_system.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Fire and Gas Detection System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check panel faults / inhibits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fg_panel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Bump-test gas detectors; clean optics.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "point_gas_detectors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Full cause & effect proof test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fg_panel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for detector blinded: fault / no response. Common cause: dirty optics, blocked view.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "flame_heat_alarm_devices",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for spurious trip: unplanned shutdown. Common cause: single-detector logic, interference.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "fg_panel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Typical first gas alarm?",
+     "options": [
+      "20 % LEL",
+      "100 % LEL",
+      "1 % LEL",
+      "200 % LEL"
+     ],
+     "answer": 0,
+     "explanation": "Low alarm.",
+     "level": "basic"
+    },
+    {
+     "question": "Open-path detectors measure…",
+     "options": [
+      "Gas along a beam between transmitter and receiver",
+      "Temperature",
+      "Flow",
+      "Pressure"
+     ],
+     "answer": 0,
+     "explanation": "Line of sight.",
+     "level": "basic"
+    },
+    {
+     "question": "Why voting logic?",
+     "options": [
+      "Avoid spurious actions",
+      "Faster alarms",
+      "Cheaper",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Reliability.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Area.\"",
+     "options": [
+      "Process Equipment (vessel, piping with flange — the leak source, compressor)",
+      "Process Module / Skid Deck with Columns & Roof Deck",
+      "Point Gas Detectors (IR hydrocarbon at low / high level by gas density; H₂S electrochemical)",
+      "Flame Detectors (UV/IR, multi-IR), Heat Detector, Manual Call Point, Beacon & Horn"
+     ],
+     "answer": 1,
+     "explanation": "Process Module / Skid Deck with Columns & Roof Deck: Area.",
+     "level": "basic",
+     "part": "module",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Leak/fire sources.\"",
+     "options": [
+      "Flame Detectors (UV/IR, multi-IR), Heat Detector, Manual Call Point, Beacon & Horn",
+      "Process Module / Skid Deck with Columns & Roof Deck",
+      "Process Equipment (vessel, piping with flange — the leak source, compressor)",
+      "Point Gas Detectors (IR hydrocarbon at low / high level by gas density; H₂S electrochemical)"
+     ],
+     "answer": 2,
+     "explanation": "Process Equipment (vessel, piping with flange — the leak source, compressor): Leak/fire sources.",
+     "level": "basic",
+     "part": "process_equipment",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Detect gas.\"",
+     "options": [
+      "Point Gas Detectors (IR hydrocarbon at low / high level by gas density; H₂S electrochemical)",
+      "Process Module / Skid Deck with Columns & Roof Deck",
+      "Process Equipment (vessel, piping with flange — the leak source, compressor)",
+      "Flame Detectors (UV/IR, multi-IR), Heat Detector, Manual Call Point, Beacon & Horn"
+     ],
+     "answer": 0,
+     "explanation": "Point Gas Detectors (IR hydrocarbon at low / high level by gas density; H₂S electrochemical): Detect gas.",
+     "level": "basic",
+     "part": "point_gas_detectors",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

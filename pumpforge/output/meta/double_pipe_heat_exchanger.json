@@ -1,0 +1,384 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "double_pipe_heat_exchanger",
+  "title": "Double Pipe (Hairpin) Heat Exchanger — Counter-Current",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 93,
+    "phase": 6,
+    "eq_id": "EQ-171",
+    "subcategory": "Heat Exchangers",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "double_pipe_heat_exchanger_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "double_pipe_heat_exchanger_temperature.glb",
+      "title": "Temperature along the hot stream",
+      "description": "Counter-current flow: the hot fluid (inner tube) cools as it travels while the cold fluid in the annulus flows the opposite way and warms up. Counter-flow keeps a temperature difference along the whole length, so it transfers more heat than parallel flow.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "hot_tube_side",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.25,
+          0.45,
+          -0.0
+        ],
+        [
+          0.8,
+          0.45,
+          -0.0
+        ],
+        [
+          0.9,
+          0.65,
+          -0.0
+        ],
+        [
+          0.8,
+          0.85,
+          -0.0
+        ],
+        [
+          -1.25,
+          0.85,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cold_annulus",
+      "kind": "flow_suction",
+      "radius": 0.009,
+      "points": [
+        [
+          -0.82,
+          1.035,
+          -0.0
+        ],
+        [
+          -0.82,
+          0.898,
+          -0.0
+        ],
+        [
+          0.58,
+          0.898,
+          -0.0
+        ],
+        [
+          0.58,
+          0.802,
+          -0.0
+        ],
+        [
+          0.62,
+          0.498,
+          -0.0
+        ],
+        [
+          -0.78,
+          0.498,
+          -0.0
+        ],
+        [
+          -0.78,
+          0.402,
+          -0.0
+        ],
+        [
+          0.62,
+          0.402,
+          -0.0
+        ],
+        [
+          0.62,
+          0.635,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6152,
+    "parts": 4
+  },
+  "summary": "A double pipe (hairpin) heat exchanger is the simplest exchanger: one fluid flows in an inner tube, the other in the annulus between it and an outer pipe. Running the two fluids in opposite directions (counter-current) gives the best heat transfer. Hairpins are compact, easy to clean and handle high pressure.",
+  "classification": {
+    "family": "Tubular heat exchanger",
+    "type": "Double-pipe hairpin, counter-current"
+  },
+  "model_configuration": {
+    "legs": 2,
+    "return": "U-bend in a return housing",
+    "flow": "Hot fluid in tube, cold fluid in annulus"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "TEMA (where applicable)",
+      "title": "Standards of the Tubular Exchanger Manufacturers Association",
+      "relevance": "Practice.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Kern, Process Heat Transfer",
+    "Kakaç & Liu, Heat Exchangers"
+  ],
+  "parts": [
+    {
+      "id": "shell_pipes",
+      "name": "Outer Pipes (Shell Legs) with End Closures",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell_pipes__back",
+        "shell_pipes__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.35
+      ],
+      "bbox_min": [
+        -0.92,
+        0.373,
+        -0.077
+      ],
+      "bbox_max": [
+        0.72,
+        0.927,
+        0.077
+      ],
+      "label_anchor": [
+        -0.1,
+        0.65,
+        0.077
+      ],
+      "center": [
+        -0.1,
+        0.65,
+        -0.0
+      ],
+      "info_ref": "dp_outer"
+    },
+    {
+      "id": "inner_tube",
+      "name": "Inner Tube with Return Bend (hairpin)",
+      "group": "tubes",
+      "section_role": "split",
+      "nodes": [
+        "inner_tube__back",
+        "inner_tube__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.35
+      ],
+      "bbox_min": [
+        -1.25,
+        0.42,
+        -0.03
+      ],
+      "bbox_max": [
+        0.98,
+        0.88,
+        0.03
+      ],
+      "label_anchor": [
+        -0.135,
+        0.65,
+        0.03
+      ],
+      "center": [
+        -0.135,
+        0.65,
+        -0.0
+      ],
+      "info_ref": "dp_inner"
+    },
+    {
+      "id": "nozzles",
+      "name": "Annulus Nozzles & Return-Bend Housing",
+      "group": "nozzles",
+      "section_role": "split",
+      "nodes": [
+        "nozzles__back",
+        "nozzles__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.8675,
+        0.35,
+        -0.11
+      ],
+      "bbox_max": [
+        1.02,
+        1.035,
+        0.11
+      ],
+      "label_anchor": [
+        0.07625,
+        0.6925,
+        0.11
+      ],
+      "center": [
+        0.07625,
+        0.6925,
+        -0.0
+      ],
+      "info_ref": "dp_nozzles"
+    },
+    {
+      "id": "supports",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.73,
+        0.0,
+        -0.1
+      ],
+      "bbox_max": [
+        0.43,
+        0.93,
+        0.1
+      ],
+      "label_anchor": [
+        -0.15,
+        0.465,
+        0.1
+      ],
+      "center": [
+        -0.15,
+        0.465,
+        -0.0
+      ],
+      "info_ref": "dp_supports"
+    }
+  ],
+  "components": {
+    "dp_outer": {
+      "function": "Contains the annulus fluid around the inner tube.",
+      "construction": "Outer pipe legs with end closures.",
+      "material": "Carbon steel / stainless.",
+      "operating_conditions": "Annulus velocity sets the outer film coefficient.",
+      "failure_modes": [
+        "Fouling, corrosion"
+      ],
+      "inspection": [
+        "ΔP and outlet temperatures"
+      ]
+    },
+    "dp_inner": {
+      "function": "Carries the tube-side fluid; its wall is the heat-transfer surface.",
+      "construction": "Inner tube with U-bend.",
+      "material": "Copper, stainless, carbon steel; finned versions exist.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling, leaks"
+      ],
+      "inspection": [
+        "Hydro-test, cleaning"
+      ]
+    },
+    "dp_nozzles": {
+      "function": "Connect the annulus fluid; return housing protects the bend.",
+      "construction": "Nozzles, return-bend cover.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Leaks"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dp_supports": {
+      "function": "Support the hairpin.",
+      "construction": "Steel supports.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    }
+  }
+}

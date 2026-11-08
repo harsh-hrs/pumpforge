@@ -1,0 +1,604 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "rotary_airlock_feeder",
+ "no": 120,
+ "title": "Rotary Airlock Feeder",
+ "model_title": "Rotary Airlock (Rotary Valve) Feeder — 8 Pockets",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A rotary airlock (rotary valve) feeder has a rotor with pockets turning in a close-fitting housing. Powder enters the top pockets, is carried round and drops out at the bottom. Because the vane tips seal against the housing, it meters the solids while limiting air leakage between two zones at different pressure — for example a hopper and a pneumatic conveying line.",
+   "applications": [
+    "Feeding pneumatic conveying lines",
+    "Discharging dust collectors and cyclones",
+    "Metering powders from silos (cement, flour, plastics, fly ash)",
+    "Explosion isolation (certified designs)"
+   ],
+   "key_points": [
+    "Volumetric — rate ∝ rotor speed × pocket volume × fill",
+    "Seals pressure difference by tight tip clearance",
+    "Leakage air rises with clearance and ΔP",
+    "Speed kept moderate so pockets fill"
+   ],
+   "classification": {
+    "family": "Feeder / airlock",
+    "type": "Drop-through rotary valve, 8 pockets"
+   },
+   "hi_family": "material_handling",
+   "summary": "A rotary airlock feeder (rotary valve) meters powder or granules from a hopper into a pneumatic conveying line or out of a cyclone/filter while sealing the pressure difference. A vaned rotor turns in a close-fitting housing; each pocket fills at the top and empties at the bottom."
+  },
+  "model_3d": {
+   "asset": "glb/rotary_airlock_feeder.glb",
+   "metadata": "meta/rotary_airlock_feeder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 2028,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Powder from above falls into the open rotor pockets.",
+    "The drive turns the rotor; full pockets are carried round inside the housing.",
+    "Close vane-tip and side clearances limit air leakage from the high-pressure side."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Powder from above falls into the open rotor pockets.",
+     "part": "connections",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drive turns the rotor; full pockets are carried round inside the housing.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Close vane-tip and side clearances limit air leakage from the high-pressure side.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the bottom the pockets empty into the outlet or conveying line.",
+     "part": "powder",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Throughput rises linearly with speed, then falls off as pockets no longer fill completely (fill efficiency drops at high tip speed)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "rotary_airlock_feeder_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/rotary_airlock_feeder.json#components",
+   "key_components": "Housing, vaned rotor, end covers, gearmotor",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Housing (inlet top, outlet bottom; close rotor clearance)",
+     "info_ref": "ra_housing",
+     "function": "Encloses the rotor with tight clearance (seal).",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor (8 vanes, closed end discs) & Shaft",
+     "info_ref": "ra_rotor",
+     "function": "Meters and transfers material.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "end_plate",
+     "name": "End Cover with Bearing & Shaft Seal (hidden in cutaway)",
+     "info_ref": "ra_housing",
+     "function": "Encloses the rotor with tight clearance (seal).",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "drive",
+     "name": "Gearmotor (fixed speed or VFD = feed rate)",
+     "info_ref": "ra_drive",
+     "function": "Drives the rotor.",
+     "material": "—"
+    },
+    {
+     "id": "connections",
+     "name": "Silo/Hopper Above & Pneumatic Conveying Line Below",
+     "info_ref": "ra_connections",
+     "function": "Hopper and conveying line.",
+     "material": "—"
+    },
+    {
+     "id": "powder",
+     "name": "Powder in Rotor Pockets",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "~ 150 – 600 mm inlet",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 0.37 – 11",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 5 – 30",
+     "unit": "rpm",
+     "note": "typical"
+    },
+    "capacity": {
+     "typical_range": "~ 0.1 – 100",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size pocket volume and speed for rate at about 60–80 % fill; select clearances, materials and seals for temperature, abrasion and ΔP."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer rotary valve data",
+    "Pneumatic conveying design guides"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on steelwork or a concrete plinth designed for the hopper/bin load on the feeder plus impact and dynamic loads.",
+    "Isolate vibrating machines from the structure with their springs/rubber mounts — never weld or rigidly bolt the vibrating body to the structure."
+   ],
+   "alignment": [
+    "Set the feeder at the designed slope and centre it under the hopper outlet; set skirt boards and the hopper gate to the design bed depth.",
+    "Align drive and driven shafts (laser or dial gauge) or set the exciter motors as the maker specifies."
+   ],
+   "piping": [
+    "Fit a vent on the inlet side of airlocks feeding pressure lines so leakage air does not fluidise or block the incoming powder.",
+    "Bolt flanges without distorting the housing (clearances are small)."
+   ],
+   "commissioning": [
+    "Run empty first: check direction, amplitude/speed, temperatures and noise.",
+    "Load gradually, check the material bed is even and the discharge rate matches the set-point; record motor current as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Watch for falling throughput, noise and leakage.",
+     "part": "rotor",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check tip/side clearances with feeler gauges.",
+     "part": "housing",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Rebuild rotor (re-tip) and housing; replace shaft seals and bearings.",
+     "part": "rotor"
+    }
+   ],
+   "lubrication": [
+    "Drive gearbox and chain: oil/grease to schedule; end-plate bearings greased."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Excessive air leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Reduced capacity, powder bridging above valve"
+     ],
+     "causes": [
+      "Worn tips/housing",
+      "Higher ΔP"
+     ],
+     "remedies": [
+      "Restore clearances; fit vent; consider adjustable tips"
+     ],
+     "part": "housing"
+    },
+    {
+     "problem": "Rotor jam",
+     "category": "performance",
+     "symptoms": [
+      "Motor trip, shear pin broken"
+     ],
+     "causes": [
+      "Foreign object, thermal expansion with hot product"
+     ],
+     "remedies": [
+      "Remove debris; use hot-clearance rotor"
+     ],
+     "part": "rotor"
+    }
+   ],
+   "safety": [
+    "Never put fingers in the inlet or outlet — the rotor shears like a guillotine. Lock out before inspection.",
+    "Use certified flameproof designs for combustible dust zones."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Rotary Airlock Feeder — Introduction",
+    "type": "in_app_tour",
+    "model": "rotary_airlock_feeder.glb",
+    "duration_s": 64.8,
+    "script": [
+     {
+      "narration": "This module introduces the Rotary Airlock Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A rotary airlock (rotary valve) feeder has a rotor with pockets turning in a close-fitting housing.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Powder enters the top pockets, is carried round and drops out at the bottom.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Because the vane tips seal against the housing, it meters the solids while limiting air leakage between two zones at different pressure — for example a hopper and a pneumatic conveying line.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include feeding pneumatic conveying lines; discharging dust collectors and cyclones; metering powders from silos (cement, flour, plastics, fly ash); explosion isolation (certified designs).",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Housing (inlet top, outlet bottom; close rotor clearance), Rotor (8 vanes, closed end discs) & Shaft, End Cover with Bearing & Shaft Seal (hidden in cutaway).",
+      "duration_s": 12.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Rotary Airlock Feeder — Operation",
+    "type": "in_app_tour",
+    "model": "rotary_airlock_feeder.glb",
+    "duration_s": 28.4,
+    "script": [
+     {
+      "narration": "How the Rotary Airlock Feeder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Powder from above falls into the open rotor pockets.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "connections",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drive turns the rotor; full pockets are carried round inside the housing.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Close vane-tip and side clearances limit air leakage from the high-pressure side.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the bottom the pockets empty into the outlet or conveying line.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "powder",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Rotary Airlock Feeder — Maintenance",
+    "type": "in_app_tour",
+    "model": "rotary_airlock_feeder.glb",
+    "duration_s": 37.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Rotary Airlock Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Watch for falling throughput, noise and leakage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check tip/side clearances with feeler gauges.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rebuild rotor (re-tip) and housing; replace shaft seals and bearings.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for excessive air leakage: reduced capacity, powder bridging above valve. Common cause: worn tips/housing.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rotor jam: motor trip, shear pin broken. Common cause: foreign object, thermal expansion with hot product.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What two jobs does a rotary airlock do?",
+     "options": [
+      "Heats and cools powder",
+      "Meters solids and limits air leakage",
+      "Grinds and screens",
+      "Weighs and labels"
+     ],
+     "answer": 1,
+     "explanation": "Feeding and sealing.",
+     "level": "basic"
+    },
+    {
+     "question": "What happens to leakage as the clearance wears?",
+     "options": [
+      "Falls",
+      "Rises",
+      "Stays the same",
+      "Becomes zero"
+     ],
+     "answer": 1,
+     "explanation": "Larger gap → more air.",
+     "level": "basic"
+    },
+    {
+     "question": "Why not run the rotor very fast?",
+     "options": [
+      "Pockets do not fill completely so throughput stops rising",
+      "It becomes silent",
+      "It makes the powder heavier",
+      "Seals improve"
+     ],
+     "answer": 0,
+     "explanation": "Fill efficiency drops.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the rotor with tight clearance (seal).\"",
+     "options": [
+      "Gearmotor (fixed speed or VFD = feed rate)",
+      "Housing (inlet top, outlet bottom; close rotor clearance)",
+      "Rotor (8 vanes, closed end discs) & Shaft",
+      "Powder in Rotor Pockets"
+     ],
+     "answer": 1,
+     "explanation": "Housing (inlet top, outlet bottom; close rotor clearance): Encloses the rotor with tight clearance (seal).",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Meters and transfers material.\"",
+     "options": [
+      "Rotor (8 vanes, closed end discs) & Shaft",
+      "Silo/Hopper Above & Pneumatic Conveying Line Below",
+      "Powder in Rotor Pockets",
+      "Gearmotor (fixed speed or VFD = feed rate)"
+     ],
+     "answer": 0,
+     "explanation": "Rotor (8 vanes, closed end discs) & Shaft: Meters and transfers material.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drives the rotor.\"",
+     "options": [
+      "Silo/Hopper Above & Pneumatic Conveying Line Below",
+      "Powder in Rotor Pockets",
+      "Rotor (8 vanes, closed end discs) & Shaft",
+      "Gearmotor (fixed speed or VFD = feed rate)"
+     ],
+     "answer": 3,
+     "explanation": "Gearmotor (fixed speed or VFD = feed rate): Drives the rotor.",
+     "level": "basic",
+     "part": "drive",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

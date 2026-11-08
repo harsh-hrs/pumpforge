@@ -1,0 +1,603 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "sand_separator",
+ "no": 206,
+ "title": "Sand Separator",
+ "model_title": "Sand Separator — Inclined Screw Classifier (Coarse Sand from Red Mud Slurry)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A sand separator removes coarse sand from red mud slurry. In an inclined screw classifier, sand settles in a pool and a slowly turning screw rakes it up the incline, draining it, while fine mud overflows to the washers.",
+   "applications": [
+    "Sand removal in Bayer residue circuits",
+    "Mineral sand classification"
+   ],
+   "key_points": [
+    "Separates > ~ 100 µm sand",
+    "Protects thickeners and pumps",
+    "Washed sand used for construction",
+    "Screw slowly drags sand"
+   ],
+   "classification": {
+    "family": "Residue separation",
+    "type": "Inclined screw (spiral) classifier"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A sand separator removes coarse sand from the red mud slurry. In an inclined screw classifier the sand settles in a pool and is raked up the incline by a slowly turning screw, draining as it goes, while fine mud overflows to the washers."
+  },
+  "model_3d": {
+   "asset": "glb/sand_separator.glb",
+   "metadata": "meta/sand_separator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3104,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry enters the pool.",
+    "Sand settles; fines stay suspended.",
+    "The screw rakes sand up the incline."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry enters the pool.",
+     "part": "trough_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sand settles; fines stay suspended.",
+     "part": "pool_slurry",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The screw rakes sand up the incline.",
+     "part": "screw",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sand discharges at the top.",
+     "part": "drive_discharge",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Sand recovery vs overflow rate and pool area."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "sand_separator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "sand_separator_pressure.glb",
+     "title": "Sand settles, mud overflows",
+     "description": "Coarse sand (typically > ~ 100 µm) settles quickly in the pool and is raked up the incline, draining and being washed on the way, while fine red mud stays in suspension and overflows the weir to the washers. Removing sand early reduces erosion in thickeners, pumps and pipelines; the washed sand is often used for residue-area construction.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/sand_separator.json#components",
+   "key_components": "Inclined screw classifier, pool tank, overflow weir, drive, sand discharge",
+   "parts": [
+    {
+     "id": "trough_tank",
+     "name": "Inclined Trough & Settling Pool (with overflow weir)",
+     "info_ref": "ss_trough",
+     "function": "Settling pool and incline.",
+     "material": "Steel (wear-lined)."
+    },
+    {
+     "id": "pool_slurry",
+     "name": "Pool of Mud Slurry (fines overflow, sand settles)",
+     "info_ref": "ss_trough",
+     "function": "Settling pool and incline.",
+     "material": "Steel (wear-lined)."
+    },
+    {
+     "id": "screw",
+     "name": "Spiral Screw (rakes settled sand up the incline)",
+     "info_ref": "ss_screw",
+     "function": "Rakes sand up.",
+     "material": "Steel with wear shoes."
+    },
+    {
+     "id": "drive_discharge",
+     "name": "Head Drive (gearmotor) & Sand Discharge Chute",
+     "info_ref": "ss_drive",
+     "function": "Turns screw; discharges sand.",
+     "material": "—"
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "ss_trough",
+     "function": "Settling pool and incline.",
+     "material": "Steel (wear-lined)."
+    },
+    {
+     "id": "sand",
+     "name": "Sand Grains raked up the Incline (drained of liquor)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Screw ~ 0.5 – 2 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 200",
+     "unit": "t/h sand"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 60 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "~ 5 – 50",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size pool for overflow rate; screw for sand load."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Classifier maker data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment and product loads; dust-tight enclosures where needed."
+   ],
+   "alignment": [
+    "Align drives and rollers/belts; level chambers and floors."
+   ],
+   "piping": [
+    "Air, water and dust connections with isolation; chutes free of moving parts."
+   ],
+   "commissioning": [
+    "Run empty; check air/water flows, temperatures and interlocks; then product."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check sand moisture and screw.",
+     "part": "screw",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect wear shoes.",
+     "part": "screw",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace flights.",
+     "part": "screw"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Screw overload",
+     "category": "performance",
+     "symptoms": [
+      "Trip"
+     ],
+     "causes": [
+      "Sand surge"
+     ],
+     "remedies": [
+      "Raise screw; regulate feed"
+     ],
+     "part": "screw"
+    },
+    {
+     "problem": "Fines in sand",
+     "category": "performance",
+     "symptoms": [
+      "Wet, muddy sand"
+     ],
+     "causes": [
+      "High feed rate"
+     ],
+     "remedies": [
+      "Reduce rate; more wash"
+     ],
+     "part": "pool_slurry"
+    }
+   ],
+   "safety": [
+    "Guard screw; lock out."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Sand Separator — Introduction",
+    "type": "in_app_tour",
+    "model": "sand_separator.glb",
+    "duration_s": 46.2,
+    "script": [
+     {
+      "narration": "This module introduces the Sand Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A sand separator removes coarse sand from red mud slurry.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In an inclined screw classifier, sand settles in a pool and a slowly turning screw rakes it up the incline, draining it, while fine mud overflows to the washers.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include sand removal in Bayer residue circuits; mineral sand classification.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Inclined Trough & Settling Pool (with overflow weir), Spiral Screw (rakes settled sand up the incline).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Sand Separator — Operation",
+    "type": "in_app_tour",
+    "model": "sand_separator.glb",
+    "duration_s": 39.6,
+    "script": [
+     {
+      "narration": "How the Sand Separator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry enters the pool.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trough_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sand settles; fines stay suspended.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pool_slurry",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The screw rakes sand up the incline.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sand discharges at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive_discharge",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Coarse sand (typically > ~ 100 µm) settles quickly in the pool and is raked up the incline, draining and being washed on the way, while fine red mud stays in suspension and overflows the weir to the washers.",
+      "duration_s": 15.4,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Sand Separator — Maintenance",
+    "type": "in_app_tour",
+    "model": "sand_separator.glb",
+    "duration_s": 31.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Sand Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check sand moisture and screw.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect wear shoes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace flights.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for screw overload: trip. Common cause: sand surge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fines in sand: wet, muddy sand. Common cause: high feed rate.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "pool_slurry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What overflows the weir?",
+     "options": [
+      "Fine mud slurry",
+      "Sand",
+      "Steam",
+      "Oil"
+     ],
+     "answer": 0,
+     "explanation": "Fines.",
+     "level": "basic"
+    },
+    {
+     "question": "What moves sand up?",
+     "options": [
+      "Spiral screw",
+      "Belt",
+      "Air",
+      "Pump"
+     ],
+     "answer": 0,
+     "explanation": "Screw.",
+     "level": "basic"
+    },
+    {
+     "question": "Why remove sand early?",
+     "options": [
+      "Reduce erosion downstream",
+      "Add heat",
+      "Colour",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Erosion.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Settling pool and incline.\"",
+     "options": [
+      "Head Drive (gearmotor) & Sand Discharge Chute",
+      "Inclined Trough & Settling Pool (with overflow weir)",
+      "Sand Grains raked up the Incline (drained of liquor)",
+      "Spiral Screw (rakes settled sand up the incline)"
+     ],
+     "answer": 1,
+     "explanation": "Inclined Trough & Settling Pool (with overflow weir): Settling pool and incline.",
+     "level": "basic",
+     "part": "trough_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rakes sand up.\"",
+     "options": [
+      "Spiral Screw (rakes settled sand up the incline)",
+      "Pool of Mud Slurry (fines overflow, sand settles)",
+      "Sand Grains raked up the Incline (drained of liquor)",
+      "Head Drive (gearmotor) & Sand Discharge Chute"
+     ],
+     "answer": 0,
+     "explanation": "Spiral Screw (rakes settled sand up the incline): Rakes sand up.",
+     "level": "basic",
+     "part": "screw",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Turns screw; discharges sand.\"",
+     "options": [
+      "Head Drive (gearmotor) & Sand Discharge Chute",
+      "Inclined Trough & Settling Pool (with overflow weir)",
+      "Pool of Mud Slurry (fines overflow, sand settles)",
+      "Sand Grains raked up the Incline (drained of liquor)"
+     ],
+     "answer": 0,
+     "explanation": "Head Drive (gearmotor) & Sand Discharge Chute: Turns screw; discharges sand.",
+     "level": "basic",
+     "part": "drive_discharge",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

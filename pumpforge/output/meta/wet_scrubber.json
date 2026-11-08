@@ -1,0 +1,619 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "wet_scrubber",
+  "title": "Wet Scrubber — Venturi Throat with Cyclonic Separator (Particulate & Mist Removal)",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 275,
+    "phase": 13,
+    "eq_id": "EQ-353",
+    "subcategory": "Environmental",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "wet_scrubber_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "wet_scrubber_pressure.glb",
+      "title": "Energy in the throat buys efficiency",
+      "description": "Gas accelerates to high velocity in the venturi throat and shatters the injected liquid into fine droplets; dust particles impact them because of the large relative velocity. Collection efficiency rises with throat pressure drop (often ≈ 25–100 mbar for fine particulate) — the fan power pays for it. The diffuser recovers part of the pressure, and the cyclonic separator then removes the dirty droplets. Wet scrubbers also cool and saturate the gas and can absorb soluble gases.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "gas",
+      "kind": "flue_gas",
+      "radius": 0.035,
+      "points": [
+        [
+          -1.0,
+          3.6,
+          -0.0
+        ],
+        [
+          -1.0,
+          1.4,
+          -0.0
+        ],
+        [
+          -0.6,
+          1.25,
+          -0.0
+        ],
+        [
+          0.0,
+          1.4,
+          -0.3
+        ],
+        [
+          0.2,
+          2.0,
+          -0.05
+        ],
+        [
+          0.2,
+          3.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "liquid",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          0.6,
+          0.3,
+          -0.6
+        ],
+        [
+          0.6,
+          2.45,
+          -0.6
+        ],
+        [
+          -0.84,
+          2.45,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10708,
+    "parts": 10
+  },
+  "summary": "A venturi wet scrubber removes fine dust and mist from gas by accelerating it through a narrow throat where injected liquid is shattered into droplets that capture the particles; a cyclonic separator then removes the dirty droplets.",
+  "classification": {
+    "family": "Environmental",
+    "type": "Venturi scrubber + cyclonic separator"
+  },
+  "model_configuration": {
+    "animation": "Dust captured in throat; droplets swirl out"
+  },
+  "standards": [
+    {
+      "id": "US EPA Air Pollution Control Cost Manual",
+      "title": "Control device design guidance",
+      "relevance": "Scrubbers & filters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "Local emission limits (e.g. EU IED BREF)",
+      "title": "Emission limits",
+      "relevance": "Site-specific — to be verified.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "EPA Air Pollution Control Cost Manual"
+  ],
+  "parts": [
+    {
+      "id": "venturi",
+      "name": "Venturi: Converging Section, Throat (gas ≈ 40–120 m/s) & Diverging Diffuser",
+      "group": "venturi",
+      "section_role": "split",
+      "nodes": [
+        "venturi__back",
+        "venturi__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -1.34,
+        1.6,
+        -0.34
+      ],
+      "bbox_max": [
+        -0.66,
+        3.5,
+        0.34
+      ],
+      "label_anchor": [
+        -1.0,
+        2.55,
+        0.34
+      ],
+      "center": [
+        -1.0,
+        2.55,
+        -0.0
+      ],
+      "info_ref": "ws_venturi"
+    },
+    {
+      "id": "liquid_injection",
+      "name": "Scrubbing-Liquid Injection Ring at the Throat Inlet",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "liquid_injection.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -1.18,
+        0.27,
+        -0.63
+      ],
+      "bbox_max": [
+        0.63,
+        2.47997,
+        0.18
+      ],
+      "label_anchor": [
+        -0.275,
+        1.37498,
+        0.18
+      ],
+      "center": [
+        -0.275,
+        1.37498,
+        -0.225
+      ],
+      "info_ref": "ws_spray"
+    },
+    {
+      "id": "cyclonic_separator",
+      "name": "Cyclonic Separator (tangential entry; droplets thrown to the wall)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "cyclonic_separator__back",
+        "cyclonic_separator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -1.3,
+        0.0,
+        -0.555
+      ],
+      "bbox_max": [
+        0.755,
+        2.82,
+        0.555
+      ],
+      "label_anchor": [
+        -0.2725,
+        1.41,
+        0.555
+      ],
+      "center": [
+        -0.2725,
+        1.41,
+        -0.0
+      ],
+      "info_ref": "ws_separator"
+    },
+    {
+      "id": "separator_outlet",
+      "name": "Clean-Gas Outlet Pipe & Chevron Mist Eliminator",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "separator_outlet.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.4,
+        0.3
+      ],
+      "bbox_min": [
+        -0.32,
+        1.6,
+        -0.52
+      ],
+      "bbox_max": [
+        0.72,
+        3.4,
+        0.2
+      ],
+      "label_anchor": [
+        0.2,
+        2.5,
+        0.2
+      ],
+      "center": [
+        0.2,
+        2.5,
+        -0.16
+      ],
+      "info_ref": "ws_separator"
+    },
+    {
+      "id": "slurry",
+      "name": "Collected Slurry",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "slq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        -0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.2,
+        0.28,
+        -0.4
+      ],
+      "bbox_max": [
+        0.6,
+        0.5,
+        -0.0
+      ],
+      "label_anchor": [
+        0.2,
+        0.39,
+        -0.0
+      ],
+      "center": [
+        0.2,
+        0.39,
+        -0.2
+      ],
+      "info_ref": "ws_separator"
+    },
+    {
+      "id": "recycle_pump",
+      "name": "Recycle Pump (bleed of slurry to treatment)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recycle_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.45,
+        0.125,
+        -0.15
+      ],
+      "bbox_max": [
+        1.35,
+        0.42,
+        0.15
+      ],
+      "label_anchor": [
+        0.9,
+        0.2725,
+        0.15
+      ],
+      "center": [
+        0.9,
+        0.2725,
+        -0.0
+      ],
+      "info_ref": "ws_pump"
+    },
+    {
+      "id": "recycle_pump_shaft",
+      "name": "Recycle Pump (bleed of slurry to treatment) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recycle_pumpc"
+      ],
+      "pivot": [
+        0.84,
+        0.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.78,
+        0.28,
+        -0.05
+      ],
+      "bbox_max": [
+        0.9,
+        0.32,
+        0.05
+      ],
+      "label_anchor": [
+        0.84,
+        0.3,
+        0.05
+      ],
+      "center": [
+        0.84,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "ws_pump"
+    },
+    {
+      "id": "recycle_line",
+      "name": "Separator Drain to Recycle Pump",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "rd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.16,
+        0.08,
+        -0.04
+      ],
+      "bbox_max": [
+        0.61486,
+        0.25,
+        0.04
+      ],
+      "label_anchor": [
+        0.38743,
+        0.165,
+        0.04
+      ],
+      "center": [
+        0.38743,
+        0.165,
+        -0.0
+      ],
+      "info_ref": "ws_pump"
+    },
+    {
+      "id": "dust",
+      "name": "Dust particles captured by atomised droplets in the throat",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "dust0",
+        "dust1",
+        "dust2",
+        "dust3",
+        "dust4",
+        "dust5",
+        "dust6",
+        "dust7",
+        "dust8",
+        "dust9",
+        "dust10",
+        "dust11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.01902
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.01902
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01902
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "swirl",
+      "name": "Droplets spun to the wall and drained",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "swirl_0",
+        "swirl_1",
+        "swirl_2",
+        "swirl_3",
+        "swirl_4",
+        "swirl_5"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.58,
+        0.78059,
+        -0.44077
+      ],
+      "bbox_max": [
+        0.65099,
+        1.28294,
+        0.47301
+      ],
+      "label_anchor": [
+        0.03549,
+        1.03176,
+        0.47301
+      ],
+      "center": [
+        0.03549,
+        1.03176,
+        0.01612
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ws_venturi": {
+      "function": "Capture particles.",
+      "construction": "Venturi throat.",
+      "material": "Stainless.",
+      "operating_conditions": "ΔP ≈ 25–100 mbar.",
+      "failure_modes": [
+        "Throat erosion"
+      ],
+      "inspection": [
+        "ΔP trend"
+      ]
+    },
+    "ws_spray": {
+      "function": "Inject liquid.",
+      "construction": "Spray ring.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ws_separator": {
+      "function": "Remove droplets.",
+      "construction": "Cyclonic separator, mist eliminator.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ws_pump": {
+      "function": "Recycle liquid.",
+      "construction": "Pump.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

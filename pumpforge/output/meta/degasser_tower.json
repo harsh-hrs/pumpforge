@@ -1,0 +1,618 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "degasser_tower",
+  "title": "Forced-Draught Degasser (Decarbonator) Tower",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 228,
+    "phase": 11,
+    "eq_id": "EQ-306",
+    "subcategory": "Water Treatment",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "degasser_tower_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "degasser_tower_pressure.glb",
+      "title": "CO₂ concentration falls down the tower",
+      "description": "After cation exchange, bicarbonate has turned into dissolved CO₂ (carbonic acid). Air blown up through the packing strips it out (Henry's law: the air has almost no CO₂), typically down to ~ 5 mg/L, which greatly reduces the load — and regenerant use — on the anion exchanger.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.3,
+          3.5,
+          -0.0
+        ],
+        [
+          0.0,
+          3.0,
+          -0.05
+        ],
+        [
+          0.0,
+          0.8,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.02,
+      "points": [
+        [
+          1.4,
+          1.3,
+          -0.0
+        ],
+        [
+          0.0,
+          1.35,
+          -0.15
+        ],
+        [
+          0.0,
+          3.5,
+          -0.15
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6496,
+    "parts": 10
+  },
+  "summary": "A forced-draught degasser removes dissolved CO₂ from water after cation exchange. Water trickles down over packing while a blower sends air up; the CO₂ transfers into the air and is vented.",
+  "classification": {
+    "family": "Water treatment",
+    "type": "Forced-draught packed decarbonator"
+  },
+  "model_configuration": {
+    "animation": "Water trickles; air rises"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "IX vessels.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "VGB-S-010 / EPRI guidelines",
+      "title": "Boiler water quality",
+      "relevance": "Make-up water targets (to be verified).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Ion exchange manuals"
+  ],
+  "parts": [
+    {
+      "id": "tower",
+      "name": "Tower Shell (FRP/PP)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "tower__back",
+        "tower__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.465,
+        1.0,
+        -0.465
+      ],
+      "bbox_max": [
+        0.465,
+        3.23,
+        0.465
+      ],
+      "label_anchor": [
+        0.0,
+        2.115,
+        0.465
+      ],
+      "center": [
+        0.0,
+        2.115,
+        -0.0
+      ],
+      "info_ref": "dg_tower"
+    },
+    {
+      "id": "packing",
+      "name": "Random Packing — PP rings/saddles (high surface area for gas transfer)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "pk"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.449,
+        1.5,
+        -0.449
+      ],
+      "bbox_max": [
+        0.449,
+        2.8,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.15,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.15,
+        -0.2245
+      ],
+      "info_ref": "dg_packing"
+    },
+    {
+      "id": "distributor_eliminator",
+      "name": "Water Distributor Tray & Mist Eliminator",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "distributor_eliminator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.4
+      ],
+      "bbox_min": [
+        -0.44,
+        2.95,
+        -0.44
+      ],
+      "bbox_max": [
+        0.44,
+        3.122,
+        0.43
+      ],
+      "label_anchor": [
+        0.0,
+        3.036,
+        0.43
+      ],
+      "center": [
+        0.0,
+        3.036,
+        -0.005
+      ],
+      "info_ref": "dg_distributor"
+    },
+    {
+      "id": "sump",
+      "name": "Covered Degassed-Water Sump (tower sits on the cover)",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "sump__back",
+        "sump__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.73,
+        0.0,
+        -0.63
+      ],
+      "bbox_max": [
+        0.73,
+        1.0,
+        0.63
+      ],
+      "label_anchor": [
+        0.0,
+        0.5,
+        0.63
+      ],
+      "center": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "info_ref": "dg_sump"
+    },
+    {
+      "id": "sump_water",
+      "name": "Degassed Water",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.695,
+        0.03,
+        -0.595
+      ],
+      "bbox_max": [
+        0.695,
+        0.75,
+        -0.005
+      ],
+      "label_anchor": [
+        0.0,
+        0.39,
+        -0.005
+      ],
+      "center": [
+        0.0,
+        0.39,
+        -0.3
+      ],
+      "info_ref": "dg_sump"
+    },
+    {
+      "id": "blower",
+      "name": "Air Blower & Inlet Duct",
+      "group": "air",
+      "section_role": "keep",
+      "nodes": [
+        "blower.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.45,
+        1.08,
+        -0.12
+      ],
+      "bbox_max": [
+        1.32,
+        1.52,
+        0.12
+      ],
+      "label_anchor": [
+        0.885,
+        1.3,
+        0.12
+      ],
+      "center": [
+        0.885,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dg_blower"
+    },
+    {
+      "id": "blower_rotor",
+      "name": "Blower Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "blower_rotor.001"
+      ],
+      "pivot": [
+        1.1,
+        1.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.948,
+        1.15699,
+        -0.03
+      ],
+      "bbox_max": [
+        1.252,
+        1.44301,
+        0.03
+      ],
+      "label_anchor": [
+        1.1,
+        1.3,
+        0.03
+      ],
+      "center": [
+        1.1,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dg_blower"
+    },
+    {
+      "id": "nozzles",
+      "name": "Water Inlet & Air/CO₂ Vent",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.2,
+        3.0,
+        -0.152
+      ],
+      "bbox_max": [
+        0.152,
+        3.54,
+        0.152
+      ],
+      "label_anchor": [
+        -0.524,
+        3.27,
+        0.152
+      ],
+      "center": [
+        -0.524,
+        3.27,
+        -0.0
+      ],
+      "info_ref": "dg_tower"
+    },
+    {
+      "id": "water_film",
+      "name": "Water trickling down over the Packing",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "water_film0",
+        "water_film1",
+        "water_film2",
+        "water_film3",
+        "water_film4",
+        "water_film5",
+        "water_film6",
+        "water_film7",
+        "water_film8",
+        "water_film9",
+        "water_film10",
+        "water_film11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "air_up",
+      "name": "Air rising and carrying CO₂ out",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "air_up0",
+        "air_up1",
+        "air_up2",
+        "air_up3",
+        "air_up4",
+        "air_up5",
+        "air_up6",
+        "air_up7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.015
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.015
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.015
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "dg_tower": {
+      "function": "Contact column.",
+      "construction": "FRP/PP tower.",
+      "material": "FRP/PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dg_packing": {
+      "function": "Gas transfer area.",
+      "construction": "Random packing.",
+      "material": "PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dg_distributor": {
+      "function": "Even water spread; mist removal.",
+      "construction": "Tray, eliminator.",
+      "material": "PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dg_sump": {
+      "function": "Collects water.",
+      "construction": "Sump.",
+      "material": "PP/lined.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dg_blower": {
+      "function": "Supplies air.",
+      "construction": "Blower and duct.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

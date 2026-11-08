@@ -1,0 +1,589 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pressure_storage_tank",
+ "no": 117,
+ "title": "Pressure Storage Tank",
+ "model_title": "Spherical Pressure Storage Tank (Horton Sphere) for LPG/Butane",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A spherical pressure tank (Horton sphere) stores liquefied gases such as propane and butane under pressure. A sphere carries internal pressure with the least wall thickness for its volume. It stands on columns at the equator with bracing, with relief valves, deluge and level instruments.",
+   "applications": [
+    "LPG and butane storage at refineries/terminals",
+    "Ammonia (refrigerated/pressurised)",
+    "Hydrogen and gas buffers"
+   ],
+   "key_points": [
+    "Uniform membrane stress σ = p·R / (2t)",
+    "Most volume per steel weight",
+    "Fire protection of legs",
+    "Stair access to top platform"
+   ],
+   "classification": {
+    "family": "Pressure storage",
+    "type": "Sphere on equatorial columns"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A spherical pressure tank (Horton sphere) stores liquefied gases such as butane or propane under pressure. A sphere carries pressure with the least wall thickness for its volume. It stands on columns around the equator with bracing, and has relief valves, deluge cooling and level instruments."
+  },
+  "model_3d": {
+   "asset": "glb/pressure_storage_tank.glb",
+   "metadata": "meta/pressure_storage_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6676,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquefied gas is stored with vapour above it.",
+    "Liquid leaves from the bottom nozzle."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquefied gas is stored with vapour above it.",
+     "part": "liquid",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid leaves from the bottom nozzle.",
+     "part": "fittings",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Relief valves at the top protect against overpressure.",
+     "part": "fittings",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Columns and bracing carry the weight; deluge cools in a fire.",
+     "part": "legs",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Shell stress vs pressure: sphere needs half the thickness of a cylinder of the same radius."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pressure_storage_tank_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/pressure_storage_tank.json#components",
+   "key_components": "Sphere, legs & bracing, stairway, PSVs, level instruments",
+   "parts": [
+    {
+     "id": "sphere",
+     "name": "Spherical Shell (welded petals)",
+     "info_ref": "ps_sphere",
+     "function": "Contains the liquefied gas.",
+     "material": "Carbon steel (impact tested)."
+    },
+    {
+     "id": "liquid",
+     "name": "Liquefied Gas (level animated)",
+     "info_ref": "ps_liquid",
+     "function": "Liquid.",
+     "material": "—"
+    },
+    {
+     "id": "legs",
+     "name": "Support Columns (equatorial) & Cross Bracing",
+     "info_ref": "ps_legs",
+     "function": "Support the sphere.",
+     "material": "Steel; fireproofed."
+    },
+    {
+     "id": "fittings",
+     "name": "Safety Valves, Top Platform, Bottom Liquid Nozzle & Level Transmitter",
+     "info_ref": "ps_fittings",
+     "function": "Relief, platform, nozzles, level.",
+     "material": "—"
+    },
+    {
+     "id": "stairway",
+     "name": "Access Ladder & Walkway to Top Platform",
+     "info_ref": "ps_stair",
+     "function": "Access.",
+     "material": "Steel."
+    },
+    {
+     "id": "deluge",
+     "name": "Water Spray (Deluge) Ring",
+     "info_ref": "ps_deluge",
+     "function": "Fire cooling.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 10 – 25 m (up to ~ 6000 m³)",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "~ 5 – 20",
+     "unit": "bar(g)"
+    },
+    "design_temperature": {
+     "typical_range": "-45 to 50",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Water capacity",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Individual column footings with settlement monitoring; fireproof the legs."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level and pressure.",
+     "part": "liquid",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Test relief valves and deluge.",
+     "part": "deluge",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Internal inspection (wet fluorescent MT of welds).",
+     "part": "sphere"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Weld cracking",
+     "category": "performance",
+     "symptoms": [
+      "Indications in NDT"
+     ],
+     "causes": [
+      "Stress corrosion, fatigue"
+     ],
+     "remedies": [
+      "Grind/repair; PWHT"
+     ],
+     "part": "sphere"
+    },
+    {
+     "problem": "Leg fire damage",
+     "category": "performance",
+     "symptoms": [
+      "Collapse risk"
+     ],
+     "causes": [
+      "Missing fireproofing"
+     ],
+     "remedies": [
+      "Fireproof legs"
+     ],
+     "part": "legs"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pressure Storage Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "pressure_storage_tank.glb",
+    "duration_s": 46.0,
+    "script": [
+     {
+      "narration": "This module introduces the Pressure Storage Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A spherical pressure tank (Horton sphere) stores liquefied gases such as propane and butane under pressure.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A sphere carries internal pressure with the least wall thickness for its volume.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It stands on columns at the equator with bracing, with relief valves, deluge and level instruments.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include LPG and butane storage at refineries/terminals; ammonia (refrigerated/pressurised); hydrogen and gas buffers.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pressure Storage Tank — Operation",
+    "type": "in_app_tour",
+    "model": "pressure_storage_tank.glb",
+    "duration_s": 24.8,
+    "script": [
+     {
+      "narration": "How the Pressure Storage Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquefied gas is stored with vapour above it.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid leaves from the bottom nozzle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fittings",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Relief valves at the top protect against overpressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fittings",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Columns and bracing carry the weight; deluge cools in a fire.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "legs",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pressure Storage Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "pressure_storage_tank.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pressure Storage Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level and pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test relief valves and deluge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "deluge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Internal inspection (wet fluorescent MT of welds).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sphere",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for weld cracking: indications in ndt. Common cause: stress corrosion, fatigue.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "sphere",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for leg fire damage: collapse risk. Common cause: missing fireproofing.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "legs",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why a sphere?",
+     "options": [
+      "Easier to build",
+      "Uniform stress → thinnest wall for the volume",
+      "Cheaper legs",
+      "Looks"
+     ],
+     "answer": 1,
+     "explanation": "σ = pR/2t.",
+     "level": "basic"
+    },
+    {
+     "question": "Supports are at the…",
+     "options": [
+      "Bottom point",
+      "Equator (columns)",
+      "Top",
+      "Nowhere"
+     ],
+     "answer": 1,
+     "explanation": "Equatorial columns.",
+     "level": "basic"
+    },
+    {
+     "question": "Why fireproof the legs?",
+     "options": [
+      "Paint",
+      "A collapse in fire would release the contents",
+      "Insulation",
+      "Weight"
+     ],
+     "answer": 1,
+     "explanation": "Safety.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the liquefied gas.\"",
+     "options": [
+      "Spherical Shell (welded petals)",
+      "Safety Valves, Top Platform, Bottom Liquid Nozzle & Level Transmitter",
+      "Water Spray (Deluge) Ring",
+      "Support Columns (equatorial) & Cross Bracing"
+     ],
+     "answer": 0,
+     "explanation": "Spherical Shell (welded petals): Contains the liquefied gas.",
+     "level": "basic",
+     "part": "sphere",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Liquid.\"",
+     "options": [
+      "Spherical Shell (welded petals)",
+      "Safety Valves, Top Platform, Bottom Liquid Nozzle & Level Transmitter",
+      "Water Spray (Deluge) Ring",
+      "Liquefied Gas (level animated)"
+     ],
+     "answer": 3,
+     "explanation": "Liquefied Gas (level animated): Liquid.",
+     "level": "basic",
+     "part": "liquid",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support the sphere.\"",
+     "options": [
+      "Liquefied Gas (level animated)",
+      "Support Columns (equatorial) & Cross Bracing",
+      "Access Ladder & Walkway to Top Platform",
+      "Spherical Shell (welded petals)"
+     ],
+     "answer": 1,
+     "explanation": "Support Columns (equatorial) & Cross Bracing: Support the sphere.",
+     "level": "basic",
+     "part": "legs",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

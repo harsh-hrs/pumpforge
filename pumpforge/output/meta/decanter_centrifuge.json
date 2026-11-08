@@ -1,0 +1,541 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "decanter_centrifuge",
+  "title": "Decanter Centrifuge (Solid-Bowl, Scroll Discharge)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 181,
+    "phase": 9,
+    "eq_id": "EQ-259",
+    "subcategory": "Centrifugal separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "decanter_centrifuge_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "decanter_centrifuge_pressure.glb",
+      "title": "High g-force settles solids against the bowl",
+      "description": "Rotating at a few thousand rpm, the bowl creates ~ 2 000–4 000 g. Solids settle on the bowl wall; the scroll, turning a few rpm slower or faster (differential speed), pushes them up the conical beach out of the liquid and out of the bowl. Clarified liquid overflows the adjustable weir plates at the other end.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          1.4,
+          0.9,
+          -0.0
+        ],
+        [
+          -0.5,
+          0.9,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "centrate",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.6,
+          0.7,
+          -0.06
+        ],
+        [
+          -0.83,
+          0.72,
+          -0.06
+        ],
+        [
+          -0.75,
+          0.15,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cake",
+      "kind": "sand",
+      "radius": 0.015,
+      "points": [
+        [
+          0.85,
+          0.77,
+          -0.06
+        ],
+        [
+          0.95,
+          0.15,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 5388,
+    "parts": 8
+  },
+  "summary": "A decanter centrifuge continuously separates solids from liquid. The solid bowl spins at high speed so solids settle against its wall; a scroll conveyor turning at a slightly different speed pushes the settled solids up the conical beach to the solids outlet, while clarified liquid overflows weirs at the other end.",
+  "classification": {
+    "family": "Centrifuge",
+    "type": "Horizontal solid-bowl scroll decanter"
+  },
+  "model_configuration": {
+    "animation": "Bowl and scroll spin; solids conveyed"
+  },
+  "standards": [
+    {
+      "id": "EN 12547",
+      "title": "Centrifuges — common safety requirements",
+      "relevance": "Machine safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 610 / maker standards",
+      "title": "Rotating equipment practice",
+      "relevance": "Bearings, vibration (to be verified for centrifuges).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Records & Sutherland — Decanter Centrifuge Handbook"
+  ],
+  "parts": [
+    {
+      "id": "casing",
+      "name": "Casing with Solids Chute (cone end) & Centrate Chute (cylinder end)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "casing__back",
+        "casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.05,
+        0.15,
+        -0.4
+      ],
+      "bbox_max": [
+        1.15,
+        1.3,
+        0.4
+      ],
+      "label_anchor": [
+        0.05,
+        0.725,
+        0.4
+      ],
+      "center": [
+        0.05,
+        0.725,
+        -0.0
+      ],
+      "info_ref": "dc_casing"
+    },
+    {
+      "id": "bowl",
+      "name": "Cylindro-Conical Bowl (rotates ≈ 2 000–4 000 rpm)",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "bowl__back",
+        "bowl__front"
+      ],
+      "pivot": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.7
+      ],
+      "bbox_min": [
+        -0.8,
+        0.63,
+        -0.27
+      ],
+      "bbox_max": [
+        0.9,
+        1.17,
+        0.27
+      ],
+      "label_anchor": [
+        0.05,
+        0.9,
+        0.27
+      ],
+      "center": [
+        0.05,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "dc_bowl"
+    },
+    {
+      "id": "bowl_head_weirs",
+      "name": "Bowl Head with Adjustable Weir Plates (turns with the bowl)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "bowl_head_weirs.001"
+      ],
+      "pivot": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.3,
+        0.7
+      ],
+      "bbox_min": [
+        -0.85,
+        0.63,
+        -0.27
+      ],
+      "bbox_max": [
+        -0.8,
+        1.17,
+        0.27
+      ],
+      "label_anchor": [
+        -0.825,
+        0.9,
+        0.27
+      ],
+      "center": [
+        -0.825,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "dc_bowl"
+    },
+    {
+      "id": "scroll",
+      "name": "Scroll Conveyor (turns slightly slower than the bowl — differential speed)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "scroll.001"
+      ],
+      "pivot": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        1.2
+      ],
+      "bbox_min": [
+        -0.78,
+        0.662,
+        -0.23788
+      ],
+      "bbox_max": [
+        0.86522,
+        1.13644,
+        0.23787
+      ],
+      "label_anchor": [
+        0.04261,
+        0.89922,
+        0.23787
+      ],
+      "center": [
+        0.04261,
+        0.89922,
+        -0.0
+      ],
+      "info_ref": "dc_scroll"
+    },
+    {
+      "id": "gearbox_backdrive",
+      "name": "Planetary Gearbox & Back-Drive (sets differential speed)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "gb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.55,
+        0.72,
+        -0.18
+      ],
+      "bbox_max": [
+        -0.95,
+        1.08,
+        0.18
+      ],
+      "label_anchor": [
+        -1.25,
+        0.9,
+        0.18
+      ],
+      "center": [
+        -1.25,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "dc_gearbox"
+    },
+    {
+      "id": "frame_motor",
+      "name": "Base Frame, Main Bearings, Main Motor & Belt Guard",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "fr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.25,
+        0.0,
+        -0.45
+      ],
+      "bbox_max": [
+        1.35,
+        1.05,
+        0.71
+      ],
+      "label_anchor": [
+        0.05,
+        0.525,
+        0.71
+      ],
+      "center": [
+        0.05,
+        0.525,
+        0.13
+      ],
+      "info_ref": "dc_frame"
+    },
+    {
+      "id": "liquid_pool",
+      "name": "Liquid Pool against the Bowl Wall",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.78,
+        0.655,
+        -0.245
+      ],
+      "bbox_max": [
+        0.55,
+        1.145,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.115,
+        0.9,
+        -0.0
+      ],
+      "center": [
+        -0.115,
+        0.9,
+        -0.1225
+      ],
+      "info_ref": "dc_bowl"
+    },
+    {
+      "id": "solids",
+      "name": "Solids Conveyed by the Scroll up the Beach to the Cone Outlet",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "solids0",
+        "solids1",
+        "solids2",
+        "solids3",
+        "solids4",
+        "solids5",
+        "solids6",
+        "solids7",
+        "solids8",
+        "solids9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.02722,
+        -0.02926,
+        -0.02307
+      ],
+      "bbox_max": [
+        0.02722,
+        0.02926,
+        0.02307
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02307
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "dc_casing": {
+      "function": "Encloses the rotor; chutes.",
+      "construction": "Casing.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dc_bowl": {
+      "function": "Settles solids.",
+      "construction": "Cylindro-conical bowl with weirs.",
+      "material": "Duplex stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear, imbalance"
+      ],
+      "inspection": [
+        "Vibration"
+      ]
+    },
+    "dc_scroll": {
+      "function": "Conveys solids.",
+      "construction": "Scroll with hard-faced flights.",
+      "material": "Stainless + tungsten carbide.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Flight wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "dc_gearbox": {
+      "function": "Creates differential speed.",
+      "construction": "Planetary gearbox, back-drive.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dc_frame": {
+      "function": "Supports; drives.",
+      "construction": "Frame, bearings, motor.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

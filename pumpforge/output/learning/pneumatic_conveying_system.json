@@ -1,0 +1,647 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pneumatic_conveying_system",
+ "no": 138,
+ "title": "Pneumatic Conveying System",
+ "model_title": "Dilute-Phase Pneumatic Conveying System (Pressure Type)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pneumatic conveying system transports powders and granules through a closed pipeline using air (or nitrogen). In a dilute-phase pressure system, a blower supplies air, a rotary airlock feeds the solids into the line, and the particles are carried in suspension at high air velocity. At the destination, a receiver with a bag filter separates the solids from the air and drops them into the silo.",
+   "applications": [
+    "Cement, fly ash and flour transfer",
+    "Plastic pellets and powders",
+    "Food and pharmaceutical powders",
+    "Bulk tanker unloading"
+   ],
+   "key_points": [
+    "Dilute phase: high velocity (≈ 15–30 m/s), particles suspended",
+    "Dense phase: low velocity, plugs/dunes — gentler, less wear",
+    "Flexible routing; enclosed and clean",
+    "Bends are the main wear and degradation points"
+   ],
+   "classification": {
+    "family": "Bulk handling system",
+    "type": "Dilute-phase positive-pressure conveying"
+   },
+   "hi_family": "material_handling",
+   "summary": "A pneumatic conveying system moves powders and granules through a pipeline using air. In this dilute-phase pressure system a blower supplies air, a rotary airlock feeds solids into the line, the particles are carried in suspension, and a receiver with bag filter separates them into the silo."
+  },
+  "model_3d": {
+   "asset": "glb/pneumatic_conveying_system.glb",
+   "metadata": "meta/pneumatic_conveying_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11830,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The blower supplies conveying air.",
+    "The rotary airlock feeds solids from the hopper into the air stream.",
+    "Particles are carried along the pipeline and around long-radius bends."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The blower supplies conveying air.",
+     "part": "blower",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotary airlock feeds solids from the hopper into the air stream.",
+     "part": "feed_hopper_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Particles are carried along the pipeline and around long-radius bends.",
+     "part": "pipeline",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The receiver and bag filter separate solids from the air; solids drop into the silo.",
+     "part": "receiver_filter",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The silo stores the delivered material.",
+     "part": "silo",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pressure drop vs air velocity (state diagram): too low velocity → saltation and blockage; too high → wear, degradation and power waste."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pneumatic_conveying_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/pneumatic_conveying_system.json#components",
+   "key_components": "Blower, rotary valve, pipeline, cyclone/filter receiver",
+   "parts": [
+    {
+     "id": "blower",
+     "name": "Positive-Displacement Blower & Inlet Silencer (air mover)",
+     "info_ref": "pc_blower",
+     "function": "Supplies conveying air.",
+     "material": "—"
+    },
+    {
+     "id": "feed_hopper_valve",
+     "name": "Feed Hopper & Rotary Airlock (feeds solids into the line)",
+     "info_ref": "pc_feeder",
+     "function": "Feeds solids into the line against pressure.",
+     "material": "—"
+    },
+    {
+     "id": "pipeline",
+     "name": "Conveying Pipeline with Long-Radius Bends",
+     "info_ref": "pc_pipeline",
+     "function": "Carries the air–solids mixture.",
+     "material": "Stainless/steel."
+    },
+    {
+     "id": "receiver_filter",
+     "name": "Receiver with Bag Filter (separates solids from conveying air)",
+     "info_ref": "pc_receiver",
+     "function": "Separates solids from air.",
+     "material": "—"
+    },
+    {
+     "id": "silo",
+     "name": "Receiving Silo",
+     "info_ref": "pc_silo",
+     "function": "Stores the conveyed material.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Silo Legs & Pipe Supports",
+     "info_ref": "pc_silo",
+     "function": "Stores the conveyed material.",
+     "material": "Steel."
+    },
+    {
+     "id": "particles",
+     "name": "Solids Particles Carried by the Air",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pipeline ~ 50 – 250 mm bore; up to a few hundred m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 5 – 300",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Air velocity ~ 15 – 30 (dilute); < ~ 10 (dense)",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 0.5 – 100+",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose dilute vs dense phase from material friability/abrasion and distance; size air flow for pick-up velocity with margin."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Mills, D. — Pneumatic Conveying Design Guide",
+    "NFPA 652/654 — combustible dust (where applicable)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the conveyor stringers and drive frames on steelwork or plinths designed for belt tension, material load and drive torque."
+   ],
+   "alignment": [
+    "Survey the structure so all pulleys and idlers are square to the centre line; train the belt empty, then loaded."
+   ],
+   "piping": [
+    "Use long-radius or special wear-resistant bends; align flanges perfectly (steps cause wear and blockages).",
+    "Fit pressure transmitters along the line and a pressure relief on the blower; earth the pipeline (static)."
+   ],
+   "commissioning": [
+    "Check pull-wire emergency stops, belt-drift and speed switches; run empty and loaded; record take-up position and motor current."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor line pressure and blower current.",
+     "part": "blower",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check bends for wear (thickness gauging); check filter ΔP.",
+     "part": "pipeline",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace filter bags, bends and airlock rotor.",
+     "part": "receiver_filter"
+    }
+   ],
+   "lubrication": [
+    "Blower: oil level and change interval; airlock bearings greased."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Line blockage",
+     "category": "blockage",
+     "symptoms": [
+      "Rising pressure, no delivery"
+     ],
+     "causes": [
+      "Air velocity too low, overfeeding, moisture"
+     ],
+     "remedies": [
+      "Clear; increase air or reduce feed; dry air"
+     ],
+     "part": "pipeline"
+    },
+    {
+     "problem": "Bend wear-through",
+     "category": "wear",
+     "symptoms": [
+      "Leaks, dust"
+     ],
+     "causes": [
+      "Abrasive material at high velocity"
+     ],
+     "remedies": [
+      "Wear-resistant bends; lower velocity"
+     ],
+     "part": "pipeline"
+    },
+    {
+     "problem": "Filter blinding",
+     "category": "performance",
+     "symptoms": [
+      "High ΔP, back-pressure"
+     ],
+     "causes": [
+      "Moist air, cleaning failure"
+     ],
+     "remedies": [
+      "Check pulse cleaning; replace bags"
+     ],
+     "part": "receiver_filter"
+    }
+   ],
+   "safety": [
+    "Dust explosion risk with combustible dusts — earthing, explosion venting/suppression per ATEX/NFPA; relief valves on pressure sources."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pneumatic Conveying System — Introduction",
+    "type": "in_app_tour",
+    "model": "pneumatic_conveying_system.glb",
+    "duration_s": 56.4,
+    "script": [
+     {
+      "narration": "This module introduces the Pneumatic Conveying System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pneumatic conveying system transports powders and granules through a closed pipeline using air (or nitrogen).",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a dilute-phase pressure system, a blower supplies air, a rotary airlock feeds the solids into the line, and the particles are carried in suspension at high air velocity.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "At the destination, a receiver with a bag filter separates the solids from the air and drops them into the silo.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cement, fly ash and flour transfer; plastic pellets and powders; food and pharmaceutical powders; bulk tanker unloading.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pneumatic Conveying System — Operation",
+    "type": "in_app_tour",
+    "model": "pneumatic_conveying_system.glb",
+    "duration_s": 32.0,
+    "script": [
+     {
+      "narration": "How the Pneumatic Conveying System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The blower supplies conveying air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "blower",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotary airlock feeds solids from the hopper into the air stream.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "feed_hopper_valve",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Particles are carried along the pipeline and around long-radius bends.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "pipeline",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The receiver and bag filter separate solids from the air; solids drop into the silo.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "receiver_filter",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The silo stores the delivered material.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "silo",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pneumatic Conveying System — Maintenance",
+    "type": "in_app_tour",
+    "model": "pneumatic_conveying_system.glb",
+    "duration_s": 40.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pneumatic Conveying System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor line pressure and blower current.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check bends for wear (thickness gauging); check filter ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pipeline",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace filter bags, bends and airlock rotor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "receiver_filter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for line blockage: rising pressure, no delivery. Common cause: air velocity too low, overfeeding, moisture.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "pipeline",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bend wear-through: leaks, dust. Common cause: abrasive material at high velocity.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "pipeline",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for filter blinding: high δp, back-pressure. Common cause: moist air, cleaning failure.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "receiver_filter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "In dilute-phase conveying, particles are…",
+     "options": [
+      "Suspended in high-velocity air",
+      "Pushed as solid plugs",
+      "Carried on a belt",
+      "Pumped as slurry"
+     ],
+     "answer": 0,
+     "explanation": "Suspension flow.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does most wear occur?",
+     "options": [
+      "At bends",
+      "At the silo roof",
+      "In the blower silencer",
+      "In straight lines only"
+     ],
+     "answer": 0,
+     "explanation": "Impact at bends.",
+     "level": "basic"
+    },
+    {
+     "question": "What happens if the air velocity is too low?",
+     "options": [
+      "Particles settle and the line can block",
+      "Wear increases",
+      "Nothing",
+      "The material heats"
+     ],
+     "answer": 0,
+     "explanation": "Saltation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supplies conveying air.\"",
+     "options": [
+      "Silo Legs & Pipe Supports",
+      "Solids Particles Carried by the Air",
+      "Positive-Displacement Blower & Inlet Silencer (air mover)",
+      "Feed Hopper & Rotary Airlock (feeds solids into the line)"
+     ],
+     "answer": 2,
+     "explanation": "Positive-Displacement Blower & Inlet Silencer (air mover): Supplies conveying air.",
+     "level": "basic",
+     "part": "blower",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Feeds solids into the line against pressure.\"",
+     "options": [
+      "Receiver with Bag Filter (separates solids from conveying air)",
+      "Receiving Silo",
+      "Feed Hopper & Rotary Airlock (feeds solids into the line)",
+      "Silo Legs & Pipe Supports"
+     ],
+     "answer": 2,
+     "explanation": "Feed Hopper & Rotary Airlock (feeds solids into the line): Feeds solids into the line against pressure.",
+     "level": "basic",
+     "part": "feed_hopper_valve",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the air–solids mixture.\"",
+     "options": [
+      "Solids Particles Carried by the Air",
+      "Positive-Displacement Blower & Inlet Silencer (air mover)",
+      "Feed Hopper & Rotary Airlock (feeds solids into the line)",
+      "Conveying Pipeline with Long-Radius Bends"
+     ],
+     "answer": 3,
+     "explanation": "Conveying Pipeline with Long-Radius Bends: Carries the air–solids mixture.",
+     "level": "basic",
+     "part": "pipeline",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

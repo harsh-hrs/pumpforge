@@ -1,0 +1,588 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "thermal_oxidizer",
+  "title": "Recuperative Thermal Oxidizer (Burner, Combustion Chamber, Recuperator)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 167,
+    "phase": 8,
+    "eq_id": "EQ-245",
+    "subcategory": "Combustion & emissions",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "thermal_oxidizer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "thermal_oxidizer_temperature.glb",
+      "title": "The 3 T's: temperature, time, turbulence",
+      "description": "VOCs are destroyed by holding the gas at high temperature (typically ~ 760–870 °C, higher for halogenated compounds) for enough residence time (~ 0.5–1 s) with good mixing. The recuperator recovers heat from the hot clean gas to preheat the incoming air, cutting burner fuel (typically ~ 50–70 % heat recovery for recuperative units).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "process_air",
+      "kind": "exhaust",
+      "radius": 0.025,
+      "points": [
+        [
+          2.4,
+          0.35,
+          -0.0
+        ],
+        [
+          2.05,
+          0.35,
+          -0.0
+        ],
+        [
+          2.05,
+          0.25,
+          -0.0
+        ],
+        [
+          2.05,
+          0.8,
+          -0.0
+        ],
+        [
+          1.35,
+          0.8,
+          -0.3
+        ],
+        [
+          1.15,
+          2.1,
+          -0.0
+        ],
+        [
+          -1.1,
+          2.1,
+          -0.0
+        ],
+        [
+          -1.1,
+          1.3,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "hot_clean_gas",
+      "kind": "flue_gas",
+      "radius": 0.03,
+      "points": [
+        [
+          -0.9,
+          1.1,
+          -0.1
+        ],
+        [
+          2.2,
+          1.1,
+          -0.1
+        ],
+        [
+          2.8,
+          1.1,
+          -0.0
+        ],
+        [
+          2.8,
+          4.1,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10092,
+    "parts": 9
+  },
+  "summary": "A thermal oxidizer destroys volatile organic compounds (VOCs) and odours in process exhaust by burning them at high temperature. The contaminated air is preheated in a recuperator by the hot clean gas, then passes the burner and is held in the combustion chamber long enough for complete oxidation to CO₂ and water.",
+  "classification": {
+    "family": "Air pollution control / combustion",
+    "type": "Recuperative thermal oxidizer"
+  },
+  "model_configuration": {
+    "animation": "Flame; fan; flows"
+  },
+  "standards": [
+    {
+      "id": "NFPA 85 / NFPA 86",
+      "title": "Boiler and combustion systems / ovens and furnaces",
+      "relevance": "Combustion safeguards.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 746-2",
+      "title": "Industrial thermoprocessing equipment — combustion and fuel handling",
+      "relevance": "Safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EPA Air Pollution Control Cost Manual",
+      "title": "Incinerators and oxidizers",
+      "relevance": "Design and cost.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "EPA APC Cost Manual"
+  ],
+  "parts": [
+    {
+      "id": "combustion_chamber",
+      "name": "Refractory-Lined Combustion Chamber (residence time)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "combustion_chamber__back",
+        "combustion_chamber__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.45,
+        0.47,
+        -0.63
+      ],
+      "bbox_max": [
+        1.0,
+        1.73,
+        0.63
+      ],
+      "label_anchor": [
+        -0.225,
+        1.1,
+        0.63
+      ],
+      "center": [
+        -0.225,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "to_chamber"
+    },
+    {
+      "id": "burner",
+      "name": "Burner (natural gas, with flame safeguard)",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "bn"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.85,
+        0.92,
+        -0.18
+      ],
+      "bbox_max": [
+        -1.25,
+        1.28,
+        0.18
+      ],
+      "label_anchor": [
+        -1.55,
+        1.1,
+        0.18
+      ],
+      "center": [
+        -1.55,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "to_burner"
+    },
+    {
+      "id": "flame",
+      "name": "Burner Flame",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "flamef"
+      ],
+      "pivot": [
+        -1.25,
+        1.1,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.25,
+        0.9,
+        -0.2
+      ],
+      "bbox_max": [
+        -0.25,
+        1.3,
+        0.2
+      ],
+      "label_anchor": [
+        -0.75,
+        1.1,
+        0.2
+      ],
+      "center": [
+        -0.75,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "to_burner"
+    },
+    {
+      "id": "recuperator",
+      "name": "Shell & Tube Recuperator (preheats the process air with the hot exhaust)",
+      "group": "exchanger",
+      "section_role": "split",
+      "nodes": [
+        "recuperator__back",
+        "recuperator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        1.0,
+        0.5,
+        -0.6
+      ],
+      "bbox_max": [
+        2.2,
+        1.7,
+        0.6
+      ],
+      "label_anchor": [
+        1.6,
+        1.1,
+        0.6
+      ],
+      "center": [
+        1.6,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "to_recuperator"
+    },
+    {
+      "id": "ducts_nozzles",
+      "name": "Process-Air Inlet/Outlet Nozzles, Hot-Air Crossover Duct & Exhaust Outlet",
+      "group": "ducts",
+      "section_role": "keep",
+      "nodes": [
+        "ducts_nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.2,
+        0.25,
+        -0.228
+      ],
+      "bbox_max": [
+        2.5,
+        2.2,
+        0.228
+      ],
+      "label_anchor": [
+        0.65,
+        1.225,
+        0.228
+      ],
+      "center": [
+        0.65,
+        1.225,
+        -0.0
+      ],
+      "info_ref": "to_recuperator"
+    },
+    {
+      "id": "stack",
+      "name": "Stack (clean exhaust)",
+      "group": "casing",
+      "section_role": "keep",
+      "nodes": [
+        "stkj"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        2.5,
+        0.5,
+        -0.15
+      ],
+      "bbox_max": [
+        2.95,
+        4.0,
+        0.15
+      ],
+      "label_anchor": [
+        2.725,
+        2.25,
+        0.15
+      ],
+      "center": [
+        2.725,
+        2.25,
+        -0.0
+      ],
+      "info_ref": "to_stack"
+    },
+    {
+      "id": "fan_housing",
+      "name": "Process Fan Housing (VOC-laden air)",
+      "group": "fan",
+      "section_role": "keep",
+      "nodes": [
+        "fh"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.4
+      ],
+      "bbox_min": [
+        1.7,
+        0.0,
+        -0.15
+      ],
+      "bbox_max": [
+        2.4,
+        0.7,
+        0.15
+      ],
+      "label_anchor": [
+        2.05,
+        0.35,
+        0.15
+      ],
+      "center": [
+        2.05,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "to_fan"
+    },
+    {
+      "id": "fan",
+      "name": "Process Fan Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "fan.001"
+      ],
+      "pivot": [
+        2.05,
+        0.35,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.784,
+        0.10037,
+        -0.03
+      ],
+      "bbox_max": [
+        2.316,
+        0.59963,
+        0.03
+      ],
+      "label_anchor": [
+        2.05,
+        0.35,
+        0.03
+      ],
+      "center": [
+        2.05,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "to_fan"
+    },
+    {
+      "id": "supports",
+      "name": "Saddle Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.1,
+        0.0,
+        -0.45
+      ],
+      "bbox_max": [
+        2.0,
+        0.55,
+        0.45
+      ],
+      "label_anchor": [
+        0.45,
+        0.275,
+        0.45
+      ],
+      "center": [
+        0.45,
+        0.275,
+        -0.0
+      ],
+      "info_ref": "to_chamber"
+    }
+  ],
+  "components": {
+    "to_chamber": {
+      "function": "Gives temperature, time, turbulence.",
+      "construction": "Refractory-lined chamber.",
+      "material": "Steel/refractory.",
+      "operating_conditions": "≈ 760–870 °C, 0.5–1 s.",
+      "failure_modes": [
+        "Refractory damage"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "to_burner": {
+      "function": "Supplies heat.",
+      "construction": "Gas burner with safeguard.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "to_recuperator": {
+      "function": "Recovers heat.",
+      "construction": "Shell & tube recuperator, ducts.",
+      "material": "Stainless/alloy steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Thermal fatigue, leaks"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "to_stack": {
+      "function": "Discharges clean gas.",
+      "construction": "Stack.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "to_fan": {
+      "function": "Moves process air.",
+      "construction": "Centrifugal fan.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

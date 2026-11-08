@@ -1,0 +1,639 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "cooling_tower_gearbox",
+ "no": 239,
+ "title": "Cooling Tower Gearbox",
+ "model_title": "Cooling Tower Gearbox — Right-Angle Spiral-Bevel + Helical Reducer (≈ 10:1)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A cooling tower gearbox is a right-angle reducer between the motor drive shaft and the fan. A spiral-bevel gear set turns the drive through 90° and a helical stage completes about a 10:1 reduction to the vertical output shaft, which carries the fan hub and its thrust. Gears dip in an oil bath that splash-lubricates the bearings.",
+   "applications": [
+    "Cooling tower fans",
+    "Air-cooled condenser and large agitator drives (similar right-angle reducers)"
+   ],
+   "key_points": [
+    "Speed down, torque up",
+    "Spiral-bevel 90° stage + helical stage",
+    "Service factor ≥ ≈ 2.0 for CT duty",
+    "Remote oil gauge and fill outside the stack"
+   ],
+   "classification": {
+    "family": "Cooling utilities",
+    "type": "Two-stage right-angle spiral-bevel / helical reducer"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A cooling tower gearbox is a right-angle speed reducer. A spiral-bevel gear set turns the horizontal drive through 90° and a helical stage completes about a 10:1 reduction to the vertical fan shaft. It is splash-lubricated from an oil bath and designed for a wet, cycling environment."
+  },
+  "model_3d": {
+   "asset": "glb/cooling_tower_gearbox.glb",
+   "metadata": "meta/cooling_tower_gearbox.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 18064,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Input shaft and pinion turn at motor speed.",
+    "The bevel gear turns the drive 90°.",
+    "The helical stage reduces speed further."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Input shaft and pinion turn at motor speed.",
+     "part": "input_pinion",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bevel gear turns the drive 90°.",
+     "part": "intermediate_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The helical stage reduces speed further.",
+     "part": "output_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gears dip in oil that splashes onto bearings.",
+     "part": "oil_bath",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The output shaft carries the fan.",
+     "part": "output_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Gearbox efficiency vs load; oil temperature vs ambient."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "cooling_tower_gearbox_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "cooling_tower_gearbox_pressure.glb",
+     "title": "Speed down, torque up",
+     "description": "Motor speed (≈ 1500 rpm) is reduced about 10:1 to fan speed (≈ 150 rpm): the spiral-bevel set (40/12 ≈ 3.3) turns the drive through 90° and the helical set (45/15 = 3) completes the reduction. Output torque ≈ input torque × ratio × efficiency, so the output shaft and its bearings are much heavier. Gearboxes are selected with a service factor (typically ≥ 2.0 for cooling-tower duty), run in a humid, often icing environment, and depend on correct oil level — hence the remote oil gauge outside the stack.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/cooling_tower_gearbox.json#components",
+   "key_components": "Right-angle spiral bevel/helical reducer, oil sump, vent, shafts",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Gear Housing (cast iron, split in cutaway) with Mounting Flange",
+     "info_ref": "ctg_housing",
+     "function": "Holds gears, bearings and oil.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "oil_bath",
+     "name": "Oil Bath (gears dip and splash-lubricate the bearings)",
+     "info_ref": "ctg_oil",
+     "function": "Lubricates and cools.",
+     "material": "Mineral/synthetic gear oil (ISO VG per maker)."
+    },
+    {
+     "id": "input_pinion",
+     "name": "Input Shaft & Spiral-Bevel Pinion (z = 12) with Coupling Hub",
+     "info_ref": "ctg_input",
+     "function": "Receives motor power.",
+     "material": "Case-hardened alloy steel."
+    },
+    {
+     "id": "intermediate_shaft",
+     "name": "Intermediate Shaft: Spiral-Bevel Gear (z = 40) & Helical Pinion (z = 15)",
+     "info_ref": "ctg_intermediate",
+     "function": "First reduction, 90° turn.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "output_shaft",
+     "name": "Vertical Output Shaft & Helical Gear (z = 45) with Fan-Hub Flange",
+     "info_ref": "ctg_output",
+     "function": "Drives the fan.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "bearings",
+     "name": "Taper-Roller Bearings (carry gear thrust and fan thrust / weight)",
+     "info_ref": "ctg_bearings",
+     "function": "Carry radial and thrust loads.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "accessories",
+     "name": "Oil Sight Glass, Breather, Remote Fill / Drain Line, Vibration Switch & Output Shaft Seal (above oil level)",
+     "info_ref": "ctg_accessories",
+     "function": "Monitor and maintain oil.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Housing ≈ 0.4 – 2 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Ratio ≈ 5 – 20 : 1",
+     "unit": "—"
+    },
+    "operating_conditions": {
+     "typical_range": "Input ≈ 1000 – 1800 rpm; output ≈ 60 – 300 rpm",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 5 – 250",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Select for motor power × service factor, ratio, fan thrust."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CTI STD-111",
+    "AGMA"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rigid foundation or support steel to maker data; grout base plates; check natural frequencies away from running speed."
+   ],
+   "alignment": [
+    "Laser-align drive train; check soft foot; set shaft runout and gear contact per maker."
+   ],
+   "piping": [
+    "Lube/oil lines and vents accessible from outside; vibration switch wiring; guarding."
+   ],
+   "commissioning": [
+    "Bump test rotation; run-in with vibration and temperature monitoring; record baseline spectrum."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check remote oil level and vibration.",
+     "part": "accessories",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Oil analysis (water!).",
+     "part": "oil_bath",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect gear contact; replace bearings/seals.",
+     "part": "bearings"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Water in oil",
+     "category": "performance",
+     "symptoms": [
+      "Milky oil, rust"
+     ],
+     "causes": [
+      "Breather/seal failure"
+     ],
+     "remedies": [
+      "Change oil; fix breather/seal"
+     ],
+     "part": "oil_bath"
+    },
+    {
+     "problem": "Bearing failure",
+     "category": "bearing",
+     "symptoms": [
+      "Noise, heat, vibration"
+     ],
+     "causes": [
+      "Low oil, contamination"
+     ],
+     "remedies": [
+      "Replace; root cause"
+     ],
+     "part": "bearings"
+    }
+   ],
+   "safety": [
+    "Lock out drive; hot oil; access platforms."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Cooling Tower Gearbox — Introduction",
+    "type": "in_app_tour",
+    "model": "cooling_tower_gearbox.glb",
+    "duration_s": 68.7,
+    "script": [
+     {
+      "narration": "This module introduces the Cooling Tower Gearbox.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A cooling tower gearbox is a right-angle reducer between the motor drive shaft and the fan.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A spiral-bevel gear set turns the drive through 90° and a helical stage completes about a 10:1 reduction to the vertical output shaft, which carries the fan hub and its thrust.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gears dip in an oil bath that splash-lubricates the bearings.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cooling tower fans; air-cooled condenser and large agitator drives (similar right-angle reducers).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Gear Housing (cast iron, split in cutaway) with Mounting Flange, Input Shaft & Spiral-Bevel Pinion (z = 12) with Coupling Hub, Intermediate Shaft: Spiral-Bevel Gear (z = 40) & Helical Pinion (z = 15), Vertical Output Shaft & Helical Gear (z = 45) with Fan-Hub Flange.",
+      "duration_s": 20.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Cooling Tower Gearbox — Operation",
+    "type": "in_app_tour",
+    "model": "cooling_tower_gearbox.glb",
+    "duration_s": 43.6,
+    "script": [
+     {
+      "narration": "How the Cooling Tower Gearbox works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Input shaft and pinion turn at motor speed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "input_pinion",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bevel gear turns the drive 90°.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "intermediate_shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The helical stage reduces speed further.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "output_shaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gears dip in oil that splashes onto bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_bath",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The output shaft carries the fan.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "output_shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Motor speed (≈ 1500 rpm) is reduced about 10:1 to fan speed (≈ 150 rpm): the spiral-bevel set (40/12 ≈ 3.3) turns the drive through 90° and the helical set (45/15 = 3) completes the reduction.",
+      "duration_s": 15.4,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Cooling Tower Gearbox — Maintenance",
+    "type": "in_app_tour",
+    "model": "cooling_tower_gearbox.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Cooling Tower Gearbox.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check remote oil level and vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "accessories",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Oil analysis (water!).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_bath",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect gear contact; replace bearings/seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water in oil: milky oil, rust. Common cause: breather/seal failure.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "oil_bath",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bearing failure: noise, heat, vibration. Common cause: low oil, contamination.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why a bevel stage?",
+     "options": [
+      "To turn the drive through 90°",
+      "To increase speed",
+      "For cooling",
+      "For oil"
+     ],
+     "answer": 0,
+     "explanation": "90°.",
+     "level": "basic"
+    },
+    {
+     "question": "Output torque relative to input?",
+     "options": [
+      "≈ ratio × input × efficiency",
+      "Same",
+      "Lower",
+      "Zero"
+     ],
+     "answer": 0,
+     "explanation": "Torque up.",
+     "level": "basic"
+    },
+    {
+     "question": "Main oil contaminant risk?",
+     "options": [
+      "Water from humid air",
+      "Sand only",
+      "Steam",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Water.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds gears, bearings and oil.\"",
+     "options": [
+      "Vertical Output Shaft & Helical Gear (z = 45) with Fan-Hub Flange",
+      "Taper-Roller Bearings (carry gear thrust and fan thrust / weight)",
+      "Oil Sight Glass, Breather, Remote Fill / Drain Line, Vibration Switch & Output Shaft Seal (above oil level)",
+      "Gear Housing (cast iron, split in cutaway) with Mounting Flange"
+     ],
+     "answer": 3,
+     "explanation": "Gear Housing (cast iron, split in cutaway) with Mounting Flange: Holds gears, bearings and oil.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Lubricates and cools.\"",
+     "options": [
+      "Vertical Output Shaft & Helical Gear (z = 45) with Fan-Hub Flange",
+      "Taper-Roller Bearings (carry gear thrust and fan thrust / weight)",
+      "Oil Sight Glass, Breather, Remote Fill / Drain Line, Vibration Switch & Output Shaft Seal (above oil level)",
+      "Oil Bath (gears dip and splash-lubricate the bearings)"
+     ],
+     "answer": 3,
+     "explanation": "Oil Bath (gears dip and splash-lubricate the bearings): Lubricates and cools.",
+     "level": "basic",
+     "part": "oil_bath",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Receives motor power.\"",
+     "options": [
+      "Oil Sight Glass, Breather, Remote Fill / Drain Line, Vibration Switch & Output Shaft Seal (above oil level)",
+      "Input Shaft & Spiral-Bevel Pinion (z = 12) with Coupling Hub",
+      "Gear Housing (cast iron, split in cutaway) with Mounting Flange",
+      "Oil Bath (gears dip and splash-lubricate the bearings)"
+     ],
+     "answer": 1,
+     "explanation": "Input Shaft & Spiral-Bevel Pinion (z = 12) with Coupling Hub: Receives motor power.",
+     "level": "basic",
+     "part": "input_pinion",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

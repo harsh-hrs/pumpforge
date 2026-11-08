@@ -1,0 +1,639 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "grizzly_feeder",
+ "no": 125,
+ "title": "Grizzly Feeder",
+ "model_title": "Vibrating Grizzly Feeder (Feeder Pan + Grizzly Bar Section)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vibrating grizzly feeder is a vibrating feeder with a section of parallel bars (the grizzly) at its discharge end. As the material is fed forward, the fines fall through the gaps between the bars and bypass the crusher, while the oversize continues to the crusher. This scalps the feed and reduces crusher load and wear.",
+   "applications": [
+    "Primary crusher feed in quarries and mines",
+    "Scalping of run-of-mine material",
+    "Removing soil and fines before crushing"
+   ],
+   "key_points": [
+    "Feeds and scalps in one machine",
+    "Bar gap sets the scalping size",
+    "Bars usually tapered to stop pegging",
+    "Fines bypass to save crusher capacity"
+   ],
+   "classification": {
+    "family": "Feeder / scalper",
+    "type": "Vibrating grizzly feeder"
+   },
+   "hi_family": "material_handling",
+   "summary": "A vibrating grizzly feeder combines a feeder pan with a section of tapered grizzly bars. As material vibrates forward, fines fall through the gaps between bars and bypass the crusher; oversize continues to the crusher. This reduces crusher load and wear."
+  },
+  "model_3d": {
+   "asset": "glb/grizzly_feeder.glb",
+   "metadata": "meta/grizzly_feeder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7760,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material from the hopper is fed onto the vibrating pan.",
+    "The exciters move the material forward onto the grizzly bars.",
+    "Fines fall through the bar gaps into the bypass chute."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material from the hopper is fed onto the vibrating pan.",
+     "part": "hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The exciters move the material forward onto the grizzly bars.",
+     "part": "exciters",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fines fall through the bar gaps into the bypass chute.",
+     "part": "bypass_chute",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oversize travels over the bars into the crusher.",
+     "part": "tray",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Scalping efficiency falls with feed rate and bed depth; gap selected so the crusher receives only material it needs to break."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "grizzly_feeder_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/grizzly_feeder.json#components",
+   "key_components": "Feeder pan, grizzly bars, exciters, springs",
+   "parts": [
+    {
+     "id": "tray",
+     "name": "Feeder Tray (pan) with Liners & Grizzly Bars (fines fall through gaps)",
+     "info_ref": "vf_tray",
+     "function": "Pan and grizzly bars.",
+     "material": "Steel, manganese."
+    },
+    {
+     "id": "exciters",
+     "name": "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+     "info_ref": "vf_exciter",
+     "function": "Vibration drive.",
+     "material": "—"
+    },
+    {
+     "id": "springs",
+     "name": "Coil-Spring Isolators",
+     "info_ref": "vf_springs",
+     "function": "Isolation.",
+     "material": "Steel."
+    },
+    {
+     "id": "support",
+     "name": "Support Brackets",
+     "info_ref": "vf_support",
+     "function": "Support.",
+     "material": "Steel."
+    },
+    {
+     "id": "hopper",
+     "name": "Feed Hopper (bin outlet)",
+     "info_ref": "vf_hopper",
+     "function": "Hopper.",
+     "material": "Steel."
+    },
+    {
+     "id": "ore",
+     "name": "Material Moving by Micro-Throws",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "fines",
+     "name": "Fines Falling Through the Grizzly",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "bypass_chute",
+     "name": "Fines Bypass Chute (under the grizzly)",
+     "info_ref": "vf_chute",
+     "function": "Carries fines past the crusher.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Width ~ 0.8 – 2 m; bar gap ~ 50 – 200 mm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 10 – 75",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 750 – 1000 rpm exciters",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 2000+",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose bar gap close to the crusher closed-side setting; allow open area and length for the required scalping efficiency."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer grizzly feeder data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on steelwork or a concrete plinth designed for the hopper/bin load on the feeder plus impact and dynamic loads.",
+    "Isolate vibrating machines from the structure with their springs/rubber mounts — never weld or rigidly bolt the vibrating body to the structure."
+   ],
+   "alignment": [
+    "Set the feeder at the designed slope and centre it under the hopper outlet; set skirt boards and the hopper gate to the design bed depth.",
+    "Align drive and driven shafts (laser or dial gauge) or set the exciter motors as the maker specifies."
+   ],
+   "piping": [
+    "Chutes and skirts: allow a gap that widens in the direction of travel so material does not jam; fit dust seals and connect dust extraction where required.",
+    "Leave clear access for liner change and for the hopper shut-off gate."
+   ],
+   "commissioning": [
+    "Run empty first: check direction, amplitude/speed, temperatures and noise.",
+    "Load gradually, check the material bed is even and the discharge rate matches the set-point; record motor current as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for pegged or blocked bar gaps.",
+     "part": "tray",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure bar wear and gap; inspect springs.",
+     "part": "springs",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace grizzly bars and pan liners.",
+     "part": "tray"
+    }
+   ],
+   "lubrication": [
+    "Bearings: grease or oil to the maker's schedule and quantity — do not over-grease vibrating-machine bearings (heat)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Uneven or reduced feed",
+     "category": "performance",
+     "symptoms": [
+      "Feed rate drops, material builds up"
+     ],
+     "causes": [
+      "Sticky material",
+      "Lost amplitude (exciter fault, loose weights)",
+      "Springs broken"
+     ],
+     "remedies": [
+      "Clean liners; check eccentric weights and spring condition"
+     ],
+     "part": "exciters"
+    },
+    {
+     "problem": "Cracks in tray or body",
+     "category": "performance",
+     "symptoms": [
+      "Visible cracks near stiffeners"
+     ],
+     "causes": [
+      "Fatigue from long running at high amplitude",
+      "Resonance"
+     ],
+     "remedies": [
+      "Repair to maker's procedure; check amplitude and isolators"
+     ],
+     "part": "tray"
+    },
+    {
+     "problem": "Pegging/blinding of bars",
+     "category": "performance",
+     "symptoms": [
+      "Fines carried to the crusher"
+     ],
+     "causes": [
+      "Near-size lumps wedged between bars"
+     ],
+     "remedies": [
+      "Use tapered/stepped bars; clear regularly"
+     ],
+     "part": "tray"
+    }
+   ],
+   "safety": [
+    "Never stand on or clear the grizzly while running; lock out and secure the hopper load."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Grizzly Feeder — Introduction",
+    "type": "in_app_tour",
+    "model": "grizzly_feeder.glb",
+    "duration_s": 52.6,
+    "script": [
+     {
+      "narration": "This module introduces the Grizzly Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vibrating grizzly feeder is a vibrating feeder with a section of parallel bars (the grizzly) at its discharge end.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "As the material is fed forward, the fines fall through the gaps between the bars and bypass the crusher, while the oversize continues to the crusher.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "This scalps the feed and reduces crusher load and wear.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include primary crusher feed in quarries and mines; scalping of run-of-mine material; removing soil and fines before crushing.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Grizzly Feeder — Operation",
+    "type": "in_app_tour",
+    "model": "grizzly_feeder.glb",
+    "duration_s": 24.8,
+    "script": [
+     {
+      "narration": "How the Grizzly Feeder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material from the hopper is fed onto the vibrating pan.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "hopper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The exciters move the material forward onto the grizzly bars.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "exciters",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fines fall through the bar gaps into the bypass chute.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "bypass_chute",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oversize travels over the bars into the crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tray",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Grizzly Feeder — Maintenance",
+    "type": "in_app_tour",
+    "model": "grizzly_feeder.glb",
+    "duration_s": 45.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Grizzly Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for pegged or blocked bar gaps.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tray",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure bar wear and gap; inspect springs.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "springs",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace grizzly bars and pan liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tray",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for uneven or reduced feed: feed rate drops, material builds up. Common cause: sticky material.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "exciters",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cracks in tray or body: visible cracks near stiffeners. Common cause: fatigue from long running at high amplitude.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "tray",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pegging/blinding of bars: fines carried to the crusher. Common cause: near-size lumps wedged between bars.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "tray",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why scalp before the primary crusher?",
+     "options": [
+      "To add fines",
+      "To bypass material already smaller than the crusher setting",
+      "To heat the rock",
+      "To slow the feed"
+     ],
+     "answer": 1,
+     "explanation": "Saves capacity and wear.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets the scalping size?",
+     "options": [
+      "Bar gap",
+      "Motor colour",
+      "Spring length",
+      "Hopper height"
+     ],
+     "answer": 0,
+     "explanation": "Gap between bars.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are grizzly bars often tapered?",
+     "options": [
+      "To look better",
+      "To open the gap downwards so near-size pieces do not wedge",
+      "To make them lighter only",
+      "To reduce noise"
+     ],
+     "answer": 1,
+     "explanation": "Prevents pegging.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pan and grizzly bars.\"",
+     "options": [
+      "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+      "Feeder Tray (pan) with Liners & Grizzly Bars (fines fall through gaps)",
+      "Coil-Spring Isolators",
+      "Support Brackets"
+     ],
+     "answer": 1,
+     "explanation": "Feeder Tray (pan) with Liners & Grizzly Bars (fines fall through gaps): Pan and grizzly bars.",
+     "level": "basic",
+     "part": "tray",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Vibration drive.\"",
+     "options": [
+      "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+      "Fines Falling Through the Grizzly",
+      "Feeder Tray (pan) with Liners & Grizzly Bars (fines fall through gaps)",
+      "Coil-Spring Isolators"
+     ],
+     "answer": 0,
+     "explanation": "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration): Vibration drive.",
+     "level": "basic",
+     "part": "exciters",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Isolation.\"",
+     "options": [
+      "Feed Hopper (bin outlet)",
+      "Feeder Tray (pan) with Liners & Grizzly Bars (fines fall through gaps)",
+      "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+      "Coil-Spring Isolators"
+     ],
+     "answer": 3,
+     "explanation": "Coil-Spring Isolators: Isolation.",
+     "level": "basic",
+     "part": "springs",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

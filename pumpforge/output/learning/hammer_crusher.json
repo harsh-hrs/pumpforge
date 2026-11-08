@@ -1,0 +1,612 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hammer_crusher",
+ "no": 130,
+ "title": "Hammer Crusher",
+ "model_title": "Hammer Mill / Hammer Crusher (Swing Hammers + Grate)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A hammer crusher (hammer mill) has a rotor carrying many pivoted (swing) hammers. At speed the hammers swing out and strike the feed, throwing it against a breaker plate; the material is then broken further until it is small enough to pass through the grate bars at the bottom. The grate opening controls the top size of the product.",
+   "applications": [
+    "Coal crushing for power plants and cement kilns",
+    "Limestone, gypsum and clinker",
+    "Biomass and recycling"
+   ],
+   "key_points": [
+    "Swing hammers fold back on uncrushable objects",
+    "Grate sets the product top size",
+    "High reduction ratio in one pass",
+    "Not for very hard or abrasive rock"
+   ],
+   "classification": {
+    "family": "Crusher (impact)",
+    "type": "Swing-hammer mill with grate"
+   },
+   "hi_family": "material_handling",
+   "summary": "A hammer crusher (hammer mill) uses swinging hammers on a fast rotor to smash material against a breaker plate; it keeps hitting it until it is small enough to pass through the grate bars below. Used for coal, limestone, clinker and softer materials."
+  },
+  "model_3d": {
+   "asset": "glb/hammer_crusher.glb",
+   "metadata": "meta/hammer_crusher.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3404,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed enters at the top.",
+    "The swing hammers on the rotor strike the falling lumps.",
+    "Material is thrown against the breaker plate and broken again."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed enters at the top.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The swing hammers on the rotor strike the falling lumps.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Material is thrown against the breaker plate and broken again.",
+     "part": "grate_breaker",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Crushed product passes the grate bars.",
+     "part": "rocks",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Throughput falls and fines increase with smaller grate openings; moisture causes grate blinding."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hammer_crusher_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "wear": {
+     "file": "hammer_crusher_wear.glb",
+     "title": "Wear on the breaker plate, grate and hammer tips",
+     "description": "The breaker plate takes the direct impact of material thrown by the hammers (purple); the grate bars wear from abrasion as the product is forced through (pink), which widens the openings and coarsens the product. Hammer tips wear too — hammers are turned or reversed to use all four edges before replacement, and replaced in matched-weight sets to keep the rotor balanced.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/hammer_crusher.json#components",
+   "key_components": "Rotor with swing hammers, grate bars, breaker plate",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Housing with Wear Liners",
+     "info_ref": "ic_housing",
+     "function": "Housing.",
+     "material": "Steel."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor with Swing Hammers & Shaft",
+     "info_ref": "ic_rotor",
+     "function": "Rotor with pinned hammers.",
+     "material": "Steel; manganese hammers."
+    },
+    {
+     "id": "grate_breaker",
+     "name": "Grate Bars (sizing screen) & Breaker Plate",
+     "info_ref": "ic_aprons",
+     "function": "Grate (size control) and breaker plate.",
+     "material": "Manganese."
+    },
+    {
+     "id": "drive",
+     "name": "Drive (motor & V-belts)",
+     "info_ref": "ic_drive",
+     "function": "Drive.",
+     "material": "—"
+    },
+    {
+     "id": "rocks",
+     "name": "Feed Thrown Against the Breaker Plate & Forced Through Grate",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Rotor ~ 0.6 – 2 m diameter",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 30 – 1000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 600 – 1500",
+     "unit": "rpm",
+     "note": "size-dependent"
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 1500",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Check feed hardness/abrasion and moisture; size rotor and grate for the required product and capacity."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer hammer mill data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a massive reinforced-concrete foundation or steel structure designed for the crusher's dynamic loads (maker's load data); use anti-vibration mounts where specified.",
+    "Allow crane access and lay-down space for liner and wear-part changes."
+   ],
+   "alignment": [
+    "Align motor and crusher sheaves or coupling; set V-belt tension to the maker's figure.",
+    "Set the closed-side setting (CSS) or gap with the maker's gauge/lead-ball method."
+   ],
+   "piping": [
+    "Feed with a controlled feeder (choke or regulated feed as designed); avoid segregated or one-sided feed.",
+    "Fit a tramp-metal magnet or metal detector ahead of the crusher and dust extraction at transfer points.",
+    "Lubrication system: connect oil supply/return, cooler and filter; check flow and pressure switches."
+   ],
+   "commissioning": [
+    "Check lubrication flows and temperatures before starting; run empty to check direction, vibration and current.",
+    "Introduce feed gradually; measure product size and adjust the setting; record power draw as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vibration and grate blockage.",
+     "part": "grate_breaker",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect hammers and pins for wear; reverse hammers.",
+     "part": "rotor",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace hammers in balanced sets, pins, grate bars and liners.",
+     "part": "rotor"
+    }
+   ],
+   "lubrication": [
+    "Rotor bearings: grease/oil to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Grate blinding",
+     "category": "performance",
+     "symptoms": [
+      "Capacity drops, power rises"
+     ],
+     "causes": [
+      "Wet/sticky feed"
+     ],
+     "remedies": [
+      "Dry feed or use larger openings"
+     ],
+     "part": "grate_breaker"
+    },
+    {
+     "problem": "Imbalance",
+     "category": "performance",
+     "symptoms": [
+      "Vibration"
+     ],
+     "causes": [
+      "Uneven hammer wear, lost hammer"
+     ],
+     "remedies": [
+      "Replace sets; balance"
+     ],
+     "part": "rotor"
+    }
+   ],
+   "safety": [
+    "Lock out and block the rotor; flying debris hazard."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hammer Crusher — Introduction",
+    "type": "in_app_tour",
+    "model": "hammer_crusher.glb",
+    "duration_s": 54.4,
+    "script": [
+     {
+      "narration": "This module introduces the Hammer Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A hammer crusher (hammer mill) has a rotor carrying many pivoted (swing) hammers.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "At speed the hammers swing out and strike the feed, throwing it against a breaker plate; the material is then broken further until it is small enough to pass through the grate bars at the bottom.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The grate opening controls the top size of the product.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include coal crushing for power plants and cement kilns; limestone, gypsum and clinker; biomass and recycling.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Housing with Wear Liners, Rotor with Swing Hammers & Shaft.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hammer Crusher — Operation",
+    "type": "in_app_tour",
+    "model": "hammer_crusher.glb",
+    "duration_s": 39.2,
+    "script": [
+     {
+      "narration": "How the Hammer Crusher works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The swing hammers on the rotor strike the falling lumps.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Material is thrown against the breaker plate and broken again.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "grate_breaker",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Crushed product passes the grate bars.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rocks",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The breaker plate takes the direct impact of material thrown by the hammers (purple); the grate bars wear from abrasion as the product is forced through (pink), which widens the openings and coarsens the product.",
+      "duration_s": 14.6,
+      "action": {
+       "overlay": "wear",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hammer Crusher — Maintenance",
+    "type": "in_app_tour",
+    "model": "hammer_crusher.glb",
+    "duration_s": 32.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hammer Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vibration and grate blockage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "grate_breaker",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect hammers and pins for wear; reverse hammers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace hammers in balanced sets, pins, grate bars and liners.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for grate blinding: capacity drops, power rises. Common cause: wet/sticky feed.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "grate_breaker",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for imbalance: vibration. Common cause: uneven hammer wear, lost hammer.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why are hammers pivoted (swing)?",
+     "options": [
+      "To fold back when they hit something uncrushable",
+      "To save weight only",
+      "For noise",
+      "They are fixed"
+     ],
+     "answer": 0,
+     "explanation": "Reduces damage from tramp.",
+     "level": "basic"
+    },
+    {
+     "question": "What limits product top size in a hammer crusher?",
+     "options": [
+      "Grate bar opening",
+      "Feed chute length",
+      "Motor colour",
+      "Breaker plate colour"
+     ],
+     "answer": 0,
+     "explanation": "Grate.",
+     "level": "basic"
+    },
+    {
+     "question": "Hammer sets are replaced in matched weights to…",
+     "options": [
+      "Keep the rotor balanced",
+      "Look neat",
+      "Reduce price",
+      "Increase noise"
+     ],
+     "answer": 0,
+     "explanation": "Balance.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Housing.\"",
+     "options": [
+      "Grate Bars (sizing screen) & Breaker Plate",
+      "Housing with Wear Liners",
+      "Rotor with Swing Hammers & Shaft",
+      "Feed Thrown Against the Breaker Plate & Forced Through Grate"
+     ],
+     "answer": 1,
+     "explanation": "Housing with Wear Liners: Housing.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotor with pinned hammers.\"",
+     "options": [
+      "Drive (motor & V-belts)",
+      "Grate Bars (sizing screen) & Breaker Plate",
+      "Rotor with Swing Hammers & Shaft",
+      "Housing with Wear Liners"
+     ],
+     "answer": 2,
+     "explanation": "Rotor with Swing Hammers & Shaft: Rotor with pinned hammers.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Grate (size control) and breaker plate.\"",
+     "options": [
+      "Feed Thrown Against the Breaker Plate & Forced Through Grate",
+      "Drive (motor & V-belts)",
+      "Rotor with Swing Hammers & Shaft",
+      "Grate Bars (sizing screen) & Breaker Plate"
+     ],
+     "answer": 3,
+     "explanation": "Grate Bars (sizing screen) & Breaker Plate: Grate (size control) and breaker plate.",
+     "level": "basic",
+     "part": "grate_breaker",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

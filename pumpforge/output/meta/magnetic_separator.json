@@ -1,0 +1,568 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "magnetic_separator",
+  "title": "Wet Drum Magnetic Separator (Concurrent Tank)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 183,
+    "phase": 9,
+    "eq_id": "EQ-261",
+    "subcategory": "Magnetic separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "magnetic_separator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "magnetic_field": {
+      "file": "magnetic_separator_magnetic_field.glb",
+      "title": "Magnetic field round the lower drum",
+      "description": "The stationary magnet arc creates a strong field (typically ~ 0.1–0.3 T at the drum surface for magnetite recovery) only over the lower part of the drum. Magnetic particles are pulled onto the rotating shell, carried out of the slurry and released where the field ends; non-magnetic particles stay in the slurry and leave as tailings.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.75,
+          1.4,
+          -0.0
+        ],
+        [
+          -0.75,
+          0.95,
+          -0.0
+        ],
+        [
+          -0.3,
+          0.49,
+          -0.0
+        ],
+        [
+          0.2,
+          0.48,
+          -0.0
+        ],
+        [
+          0.2,
+          0.0,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "concentrate",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.2,
+          1.37,
+          -0.15
+        ],
+        [
+          0.75,
+          1.15,
+          -0.15
+        ],
+        [
+          1.1,
+          1.05,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6288,
+    "parts": 9
+  },
+  "summary": "A wet drum magnetic separator recovers magnetic particles (for example magnetite) from a slurry. A non-magnetic drum rotates around a stationary magnet arc; magnetic particles are attracted to the drum, carried out of the slurry and dropped into the concentrate launder, while non-magnetic material flows to tailings.",
+  "classification": {
+    "family": "Magnetic separator",
+    "type": "Wet drum, permanent magnet, concurrent tank"
+  },
+  "model_configuration": {
+    "animation": "Drum turns; magnetics carried over"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Magnetic separator design",
+      "relevance": "Field strength and wear liners.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Svoboda — Magnetic Techniques for the Treatment of Materials"
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "Tank, Feed Box & Concentrate Launder",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "tank__back",
+        "tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.925,
+        0.25,
+        -0.5
+      ],
+      "bbox_max": [
+        0.95,
+        1.325,
+        0.5
+      ],
+      "label_anchor": [
+        0.0125,
+        0.7875,
+        0.5
+      ],
+      "center": [
+        0.0125,
+        0.7875,
+        -0.0
+      ],
+      "info_ref": "ms_tank"
+    },
+    {
+      "id": "slurry",
+      "name": "Slurry in the Tank",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.64,
+        0.3,
+        -0.445
+      ],
+      "bbox_max": [
+        0.495,
+        1.05,
+        -0.005
+      ],
+      "label_anchor": [
+        -0.0725,
+        0.675,
+        -0.005
+      ],
+      "center": [
+        -0.0725,
+        0.675,
+        -0.225
+      ],
+      "info_ref": "ms_tank"
+    },
+    {
+      "id": "drum",
+      "name": "Rotating Non-Magnetic Stainless Drum",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "drum__back",
+        "drum__front"
+      ],
+      "pivot": [
+        0.0,
+        0.95,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.7
+      ],
+      "bbox_min": [
+        -0.42,
+        0.53,
+        -0.65
+      ],
+      "bbox_max": [
+        0.42,
+        1.37,
+        0.75
+      ],
+      "label_anchor": [
+        0.0,
+        0.95,
+        0.75
+      ],
+      "center": [
+        0.0,
+        0.95,
+        0.05
+      ],
+      "info_ref": "ms_drum"
+    },
+    {
+      "id": "drum_strips",
+      "name": "Drum Wear Strips (show the drum rotation)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "drum_strips.001"
+      ],
+      "pivot": [
+        0.0,
+        0.95,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.9
+      ],
+      "bbox_min": [
+        -0.432,
+        0.518,
+        -0.44
+      ],
+      "bbox_max": [
+        0.432,
+        1.382,
+        0.44
+      ],
+      "label_anchor": [
+        0.0,
+        0.95,
+        0.44
+      ],
+      "center": [
+        0.0,
+        0.95,
+        -0.0
+      ],
+      "info_ref": "ms_drum"
+    },
+    {
+      "id": "magnet_assembly",
+      "name": "Stationary Permanent-Magnet Arc (alternating poles, ~ 120° wrap)",
+      "group": "magnets",
+      "section_role": "keep",
+      "nodes": [
+        "magnet_assembly.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.34641,
+        0.55,
+        -0.42
+      ],
+      "bbox_max": [
+        0.4,
+        1.13779,
+        0.42
+      ],
+      "label_anchor": [
+        0.02679,
+        0.84389,
+        0.42
+      ],
+      "center": [
+        0.02679,
+        0.84389,
+        0.0
+      ],
+      "info_ref": "ms_magnet"
+    },
+    {
+      "id": "drive",
+      "name": "Drum Drive (gearmotor)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "drv"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.125,
+        0.825,
+        -1.25
+      ],
+      "bbox_max": [
+        0.125,
+        1.075,
+        -0.7
+      ],
+      "label_anchor": [
+        0.0,
+        0.95,
+        -0.7
+      ],
+      "center": [
+        0.0,
+        0.95,
+        -0.975
+      ],
+      "info_ref": "ms_drive"
+    },
+    {
+      "id": "outlets",
+      "name": "Tailings (non-magnetic) Outlet & Concentrate Outlet",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "outlets.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.086,
+        0.05,
+        -0.114
+      ],
+      "bbox_max": [
+        1.1,
+        1.145,
+        0.114
+      ],
+      "label_anchor": [
+        0.593,
+        0.5975,
+        0.114
+      ],
+      "center": [
+        0.593,
+        0.5975,
+        -0.0
+      ],
+      "info_ref": "ms_tank"
+    },
+    {
+      "id": "magnetics",
+      "name": "Magnetic Particles held on the Drum and carried to the Launder",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "mp0",
+        "mp1",
+        "mp2",
+        "mp3",
+        "mp4",
+        "mp5",
+        "mp6",
+        "mp7",
+        "mp8",
+        "mp9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.01427
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.01427
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01427
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "non_magnetics",
+      "name": "Non-Magnetic Particles passing to Tailings",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "non_magnetics0",
+        "non_magnetics1",
+        "non_magnetics2",
+        "non_magnetics3",
+        "non_magnetics4",
+        "non_magnetics5",
+        "non_magnetics6",
+        "non_magnetics7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.01633,
+        -0.01756,
+        -0.01384
+      ],
+      "bbox_max": [
+        0.01633,
+        0.01756,
+        0.01384
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01384
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ms_tank": {
+      "function": "Holds slurry; launder.",
+      "construction": "Tank and feed box.",
+      "material": "Steel (lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ms_drum": {
+      "function": "Carries magnetic particles.",
+      "construction": "Stainless drum.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear of shell"
+      ],
+      "inspection": [
+        "Thickness"
+      ]
+    },
+    "ms_magnet": {
+      "function": "Creates the field.",
+      "construction": "Permanent magnet arc.",
+      "material": "Ferrite/NdFeB.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Demagnetisation (heat)"
+      ],
+      "inspection": [
+        "Gauss check"
+      ]
+    },
+    "ms_drive": {
+      "function": "Rotates drum.",
+      "construction": "Gearmotor.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

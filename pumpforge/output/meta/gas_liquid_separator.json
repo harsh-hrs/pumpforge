@@ -1,0 +1,513 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "gas_liquid_separator",
+  "title": "Vertical Gas–Liquid (Two-Phase) Separator",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 107,
+    "phase": 6,
+    "eq_id": "EQ-185",
+    "subcategory": "Separation Equipment",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "gas_liquid_separator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "gas",
+      "kind": "air",
+      "radius": 0.012,
+      "points": [
+        [
+          0.75,
+          1.9,
+          -0.0
+        ],
+        [
+          0.35,
+          1.9,
+          -0.0
+        ],
+        [
+          0.0,
+          2.2,
+          -0.05
+        ],
+        [
+          0.0,
+          2.8,
+          -0.05
+        ],
+        [
+          0.0,
+          3.425,
+          -0.0
+        ]
+      ],
+      "speed": [
+        1.5,
+        1,
+        0.5,
+        0.5,
+        1.3
+      ]
+    },
+    {
+      "name": "liquid",
+      "kind": "water",
+      "radius": 0.01,
+      "points": [
+        [
+          0.0,
+          1.2,
+          -0.05
+        ],
+        [
+          0.0,
+          0.275,
+          -0.0
+        ],
+        [
+          0.0,
+          0.15,
+          -0.0
+        ],
+        [
+          0.95,
+          0.15,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 12064,
+    "parts": 7
+  },
+  "summary": "A gas–liquid separator splits a mixed stream into gas and liquid. The inlet device breaks the momentum, liquid drops to the bottom by gravity, and a mesh pad near the top catches fine mist before the gas leaves. A level controller and control valve keep the liquid level constant.",
+  "classification": {
+    "family": "Separator",
+    "type": "Vertical two-phase separator with mesh pad"
+  },
+  "model_configuration": {
+    "sections": "Inlet, gravity settling, mist extraction, liquid collection"
+  },
+  "standards": [
+    {
+      "id": "API 12J",
+      "title": "Specification for Oil and Gas Separators",
+      "relevance": "Oilfield separators.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "GPSA Engineering Data Book Section 7"
+  ],
+  "parts": [
+    {
+      "id": "vessel",
+      "name": "Separator Vessel",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "vessel__back",
+        "vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.45,
+        0.475,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        3.125,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.8,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.8,
+        -0.0
+      ],
+      "info_ref": "gl_vessel"
+    },
+    {
+      "id": "skirt",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.34308,
+        0.0,
+        -0.34308
+      ],
+      "bbox_max": [
+        0.34308,
+        0.7,
+        0.34308
+      ],
+      "label_anchor": [
+        0.0,
+        0.35,
+        0.34308
+      ],
+      "center": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "gl_supports"
+    },
+    {
+      "id": "liquid",
+      "name": "Liquid Section (level controlled)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.438,
+        0.481,
+        -0.438
+      ],
+      "bbox_max": [
+        0.438,
+        1.25,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.8655,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.8655,
+        -0.219
+      ],
+      "info_ref": "gl_liquid"
+    },
+    {
+      "id": "inlet_diverter",
+      "name": "Inlet Nozzle & Half-Pipe Diverter (momentum breaker)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "inlet_diverter.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.34348,
+        1.748,
+        -0.152
+      ],
+      "bbox_max": [
+        0.75,
+        2.052,
+        0.152
+      ],
+      "label_anchor": [
+        0.54674,
+        1.9,
+        0.152
+      ],
+      "center": [
+        0.54674,
+        1.9,
+        -0.0
+      ],
+      "info_ref": "gl_inlet"
+    },
+    {
+      "id": "mist_eliminator",
+      "name": "Wire-Mesh Mist Eliminator (demister pad)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "mp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.435,
+        2.648,
+        -0.435
+      ],
+      "bbox_max": [
+        0.435,
+        2.802,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.725,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.725,
+        -0.2175
+      ],
+      "info_ref": "gl_mesh"
+    },
+    {
+      "id": "nozzles",
+      "name": "Gas Outlet, Liquid Outlet, Vortex Breaker, Level Controller & Control Valve",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.62,
+        0.1,
+        -0.133
+      ],
+      "bbox_max": [
+        0.9,
+        3.405,
+        0.133
+      ],
+      "label_anchor": [
+        0.14,
+        1.7525,
+        0.133
+      ],
+      "center": [
+        0.14,
+        1.7525,
+        -0.0
+      ],
+      "info_ref": "gl_nozzles"
+    },
+    {
+      "id": "drops",
+      "name": "Droplets Settling by Gravity (tracers)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "drops0",
+        "drops1",
+        "drops2",
+        "drops3",
+        "drops4",
+        "drops5",
+        "drops6",
+        "drops7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        -0.014,
+        -0.014
+      ],
+      "bbox_max": [
+        0.014,
+        0.014,
+        0.014
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.014
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "gl_vessel": {
+      "function": "Pressure vessel.",
+      "construction": "Vertical vessel.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gl_supports": {
+      "function": "Supports.",
+      "construction": "Legs.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gl_liquid": {
+      "function": "Liquid section.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gl_inlet": {
+      "function": "Reduces inlet momentum and distributes flow.",
+      "construction": "Half-pipe diverter.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gl_mesh": {
+      "function": "Captures fine droplets.",
+      "construction": "Knitted wire mesh pad.",
+      "material": "Stainless wire.",
+      "operating_conditions": "Gas velocity limited by K-factor (Souders–Brown).",
+      "failure_modes": [
+        "Plugging"
+      ],
+      "inspection": [
+        "ΔP check"
+      ]
+    },
+    "gl_nozzles": {
+      "function": "Outlets, vortex breaker, level control loop.",
+      "construction": "Nozzles, LC, CV.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

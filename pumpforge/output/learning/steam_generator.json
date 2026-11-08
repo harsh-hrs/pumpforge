@@ -1,0 +1,676 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "steam_generator",
+ "no": 155,
+ "title": "Steam Generator",
+ "model_title": "Packaged Steam Generator (3-Pass Dry-Back Fire-Tube Boiler)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A packaged steam generator (fire-tube or shell boiler) makes steam for heating and process use. The burner fires into a large furnace tube; the hot gases turn in a reversal chamber and pass back and forth through banks of smoke tubes (2nd and 3rd passes) before leaving through the stack. All these heating surfaces are surrounded by water inside the shell.",
+   "applications": [
+    "Factories, hospitals, food and textile plants",
+    "District and process heating",
+    "Up to roughly 20–30 t/h steam at moderate pressure"
+   ],
+   "key_points": [
+    "Hot gas inside tubes, water outside (fire-tube)",
+    "Three passes improve heat recovery",
+    "Large water content → stable under load swings",
+    "Low-water protection is critical"
+   ],
+   "classification": {
+    "family": "Boiler",
+    "type": "3-pass dry-back fire-tube (shell) boiler"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A packaged steam generator (shell or fire-tube boiler) produces steam for heating and process use. Hot combustion gases from the burner pass through the furnace tube and then through two banks of smoke tubes (three passes), all surrounded by water inside the pressure shell. Steam collects above the water level and leaves via the main steam valve."
+  },
+  "model_3d": {
+   "asset": "glb/steam_generator.glb",
+   "metadata": "meta/steam_generator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8876,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The burner mixes fuel and air and fires into the furnace tube (1st pass).",
+    "The flame radiates heat to the furnace wall and water around it.",
+    "Gases turn in the rear reversal chamber into the 2nd-pass tubes."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The burner mixes fuel and air and fires into the furnace tube (1st pass).",
+     "part": "burner",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The flame radiates heat to the furnace wall and water around it.",
+     "part": "flame",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gases turn in the rear reversal chamber into the 2nd-pass tubes.",
+     "part": "reversal_chamber",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The front smoke box turns them into the 3rd pass and on to the stack.",
+     "part": "smoke_boxes_stack",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water boils around the tubes; steam leaves through the main steam valve.",
+     "part": "fittings",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Efficiency vs load: best near 50–80 % load; stack temperature rises at high load."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "steam_generator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/steam_generator.json#components",
+   "key_components": "Shell, furnace tube, smoke tubes (3-pass), burner, reversal chamber, safety valve, water level",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Pressure Shell & End Plates (water/steam side)",
+     "info_ref": "sg_shell",
+     "function": "Pressure shell containing water and steam.",
+     "material": "Boiler-quality steel."
+    },
+    {
+     "id": "furnace",
+     "name": "Furnace Tube (1st pass, corrugated)",
+     "info_ref": "sg_furnace",
+     "function": "First pass: combustion chamber.",
+     "material": "Boiler steel."
+    },
+    {
+     "id": "reversal_chamber",
+     "name": "Rear Reversal Chamber (refractory-lined door: turns gas from furnace into 2nd pass)",
+     "info_ref": "sg_reversal",
+     "function": "Turns gases from the furnace into the 2nd pass.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "smoke_tubes",
+     "name": "Smoke Tubes: 2nd Pass (lower) & 3rd Pass (upper)",
+     "info_ref": "sg_tubes",
+     "function": "2nd and 3rd pass heat transfer.",
+     "material": "Steel."
+    },
+    {
+     "id": "smoke_boxes_stack",
+     "name": "Front Smoke Box (2nd→3rd pass turn), Rear Smoke Box & Stack",
+     "info_ref": "sg_smokebox",
+     "function": "Gas turning boxes and stack.",
+     "material": "Steel."
+    },
+    {
+     "id": "burner",
+     "name": "Forced-Draught Burner (fan, air register, gas train)",
+     "info_ref": "sg_burner",
+     "function": "Mixes and burns fuel with air.",
+     "material": "—"
+    },
+    {
+     "id": "flame",
+     "name": "Flame in the Furnace",
+     "info_ref": "sg_burner",
+     "function": "Mixes and burns fuel with air.",
+     "material": "—"
+    },
+    {
+     "id": "water",
+     "name": "Boiler Water (level above the top tubes)",
+     "info_ref": "sg_water",
+     "function": "Boiler water (level animated).",
+     "material": "—"
+    },
+    {
+     "id": "fittings",
+     "name": "Main Steam Valve, Safety Valves, Level Gauge, Feed Check, Blowdown, Pressure Gauge",
+     "info_ref": "sg_fittings",
+     "function": "Safety and control fittings.",
+     "material": "—"
+    },
+    {
+     "id": "skid",
+     "name": "Base Skid & Cradles",
+     "info_ref": "sg_shell",
+     "function": "Pressure shell containing water and steam.",
+     "material": "Boiler-quality steel."
+    },
+    {
+     "id": "bubbles",
+     "name": "Steam Bubbles from the Heating Surfaces",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Shell ~ 1.5 – 4 m diameter, 3 – 8 m long",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.3 – 20",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Steam ~ 120 – 230 (≈ 1 – 25 bar g sat.)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "~ 0.5 – 30",
+     "unit": "t/h steam"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Fire-tube for moderate pressure and capacity; water-tube for higher pressure/capacity."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EN 12953 — Shell boilers",
+    "ASME BPVC Section I",
+    "Spirax Sarco — The Steam and Condensate Loop"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth/foundation designed for operating weight full of water; allow access for tube cleaning and burner maintenance."
+   ],
+   "alignment": [
+    "Level the boiler; align burner and fan; check expansion allowances on headers and casings."
+   ],
+   "piping": [
+    "Fit safety valves with unobstructed discharge piped to a safe place; feedwater with check and isolation valves; blowdown to a blowdown vessel.",
+    "Flue/stack sized for the draught required; explosion relief where specified."
+   ],
+   "commissioning": [
+    "Boil-out/chemical clean; hydro-test; set and test safety valves; test low-water cut-outs and flame safeguard (purge, ignition, flame failure); tune combustion (O₂, CO)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check water level gauges, blowdown, low-water alarm test.",
+     "part": "fittings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Combustion check (O₂/CO), clean tubes.",
+     "part": "burner",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Statutory inspection; internal/external examination; safety valve overhaul.",
+     "part": "shell",
+     "interval": "annual"
+    }
+   ],
+   "lubrication": [
+    "Burner fan motor bearings greased; no lubrication for pressure parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low water / overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Furnace deformation, cracks"
+     ],
+     "causes": [
+      "Failed level control, feed pump trip"
+     ],
+     "remedies": [
+      "Test cut-outs; never add cold water to an overheated boiler"
+     ],
+     "part": "furnace"
+    },
+    {
+     "problem": "Scale formation",
+     "category": "performance",
+     "symptoms": [
+      "Rising stack temperature, overheating"
+     ],
+     "causes": [
+      "Poor water treatment"
+     ],
+     "remedies": [
+      "Water treatment; descale"
+     ],
+     "part": "smoke_tubes"
+    },
+    {
+     "problem": "Flame failure",
+     "category": "performance",
+     "symptoms": [
+      "Lockout"
+     ],
+     "causes": [
+      "Fuel supply, ignition, flame sensor"
+     ],
+     "remedies": [
+      "Check BMS; purge; restart"
+     ],
+     "part": "burner"
+    }
+   ],
+   "safety": [
+    "Operate only with tested safety valves, level controls and flame safeguard; blowdown safely."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Steam Generator — Introduction",
+    "type": "in_app_tour",
+    "model": "steam_generator.glb",
+    "duration_s": 67.4,
+    "script": [
+     {
+      "narration": "This module introduces the Steam Generator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A packaged steam generator (fire-tube or shell boiler) makes steam for heating and process use.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The burner fires into a large furnace tube; the hot gases turn in a reversal chamber and pass back and forth through banks of smoke tubes (2nd and 3rd passes) before leaving through the stack.",
+      "duration_s": 14.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "All these heating surfaces are surrounded by water inside the shell.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include factories, hospitals, food and textile plants; district and process heating; up to roughly 20–30 t/h steam at moderate pressure.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Pressure Shell & End Plates (water/steam side), Rear Reversal Chamber (refractory-lined door: turns gas from furnace into 2nd pass), Front Smoke Box (2nd→3rd pass turn), Rear Smoke Box & Stack.",
+      "duration_s": 15.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Steam Generator — Operation",
+    "type": "in_app_tour",
+    "model": "steam_generator.glb",
+    "duration_s": 35.2,
+    "script": [
+     {
+      "narration": "How the Steam Generator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The burner mixes fuel and air and fires into the furnace tube (1st pass).",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "burner",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flame radiates heat to the furnace wall and water around it.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "flame",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gases turn in the rear reversal chamber into the 2nd-pass tubes.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "reversal_chamber",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The front smoke box turns them into the 3rd pass and on to the stack.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "smoke_boxes_stack",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water boils around the tubes; steam leaves through the main steam valve.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "fittings",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Steam Generator — Maintenance",
+    "type": "in_app_tour",
+    "model": "steam_generator.glb",
+    "duration_s": 39.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Steam Generator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check water level gauges, blowdown, low-water alarm test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fittings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Combustion check (O₂/CO), clean tubes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "burner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Statutory inspection; internal/external examination; safety valve overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low water / overheating: furnace deformation, cracks. Common cause: failed level control, feed pump trip.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "furnace",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scale formation: rising stack temperature, overheating. Common cause: poor water treatment.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "smoke_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for flame failure: lockout. Common cause: fuel supply, ignition, flame sensor.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "burner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "In a fire-tube boiler the hot gas flows…",
+     "options": [
+      "Inside the tubes",
+      "Outside the tubes",
+      "Through the water",
+      "Not at all"
+     ],
+     "answer": 0,
+     "explanation": "Fire inside tubes.",
+     "level": "basic"
+    },
+    {
+     "question": "Why three passes?",
+     "options": [
+      "More heat transfer, lower stack temperature",
+      "To reduce pressure",
+      "To store fuel",
+      "For noise"
+     ],
+     "answer": 0,
+     "explanation": "Better heat recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Why test low-water cut-outs regularly?",
+     "options": [
+      "To prevent overheating of exposed surfaces",
+      "To save water",
+      "To clean tubes",
+      "Not needed"
+     ],
+     "answer": 0,
+     "explanation": "Safety.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure shell containing water and steam.\"",
+     "options": [
+      "Rear Reversal Chamber (refractory-lined door: turns gas from furnace into 2nd pass)",
+      "Steam Bubbles from the Heating Surfaces",
+      "Main Steam Valve, Safety Valves, Level Gauge, Feed Check, Blowdown, Pressure Gauge",
+      "Pressure Shell & End Plates (water/steam side)"
+     ],
+     "answer": 3,
+     "explanation": "Pressure Shell & End Plates (water/steam side): Pressure shell containing water and steam.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"First pass: combustion chamber.\"",
+     "options": [
+      "Boiler Water (level above the top tubes)",
+      "Smoke Tubes: 2nd Pass (lower) & 3rd Pass (upper)",
+      "Steam Bubbles from the Heating Surfaces",
+      "Furnace Tube (1st pass, corrugated)"
+     ],
+     "answer": 3,
+     "explanation": "Furnace Tube (1st pass, corrugated): First pass: combustion chamber.",
+     "level": "basic",
+     "part": "furnace",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Turns gases from the furnace into the 2nd pass.\"",
+     "options": [
+      "Front Smoke Box (2nd→3rd pass turn), Rear Smoke Box & Stack",
+      "Pressure Shell & End Plates (water/steam side)",
+      "Flame in the Furnace",
+      "Rear Reversal Chamber (refractory-lined door: turns gas from furnace into 2nd pass)"
+     ],
+     "answer": 3,
+     "explanation": "Rear Reversal Chamber (refractory-lined door: turns gas from furnace into 2nd pass): Turns gases from the furnace into the 2nd pass.",
+     "level": "basic",
+     "part": "reversal_chamber",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

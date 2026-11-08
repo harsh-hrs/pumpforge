@@ -1,0 +1,750 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "diesel_generator_set",
+ "no": 83,
+ "title": "Diesel Generator Set",
+ "model_title": "Diesel Generator Set (Inline-6, Turbocharged, Skid-Mounted)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A diesel generator set is a complete power unit on a skid: a compression-ignition diesel engine drives an alternator through a flywheel, with radiator, base-frame fuel tank, exhaust silencer and a controller. It provides standby, prime or continuous power.",
+   "applications": [
+    "Standby power for hospitals, data centres, plants",
+    "Prime power at remote sites and mines",
+    "Emergency fire-pump and safety systems",
+    "Construction and events (rental)"
+   ],
+   "key_points": [
+    "Ratings: standby / prime / continuous (ISO 8528-1)",
+    "Automatic start on mains failure (with ATS)",
+    "Regular test runs under load",
+    "Fuel quality and storage matter"
+   ],
+   "classification": {
+    "family": "Prime mover + generator",
+    "type": "Diesel genset, inline-6, turbocharged, base-frame fuel tank"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A diesel generator set (genset) is a complete power plant on a skid: a diesel engine (compression ignition — fuel is injected into hot compressed air and ignites by itself) drives an alternator through a flywheel. Radiator, fuel tank in the base frame, exhaust silencer and a controller make it self-contained for prime, continuous or standby (emergency) power."
+  },
+  "model_3d": {
+   "asset": "glb/diesel_generator_set.glb",
+   "metadata": "meta/diesel_generator_set.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 23208,
+   "parts": 17
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Air is compressed in the cylinders; injected diesel ignites from the heat of compression.",
+    "Pistons and connecting rods turn the crankshaft.",
+    "The flywheel drives the alternator, which produces AC power."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Air is compressed in the cylinders; injected diesel ignites from the heat of compression.",
+     "part": "e_head",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pistons and connecting rods turn the crankshaft.",
+     "part": "e_pistons",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The turbocharger uses exhaust energy to push more air in.",
+     "part": "turbocharger",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The flywheel drives the alternator, which produces AC power.",
+     "part": "g_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The radiator cools the engine; the silencer quietens the exhaust.",
+     "part": "radiator",
+     "cut": false,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Fuel consumption (L/h) vs load %; avoid long periods at very low load (wet stacking)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "diesel_generator_set_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/diesel_generator_set.json#components",
+   "key_components": "Diesel engine, alternator, radiator, base-frame fuel tank, control panel, exhaust silencer",
+   "parts": [
+    {
+     "id": "e_block",
+     "name": "Diesel Engine – Cylinder Block & Crankcase",
+     "info_ref": "engine_block",
+     "function": "Holds the cylinders and crankshaft; contains coolant passages and the oil sump.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "e_head",
+     "name": "Diesel Engine – Cylinder Head, Valves & Injectors",
+     "info_ref": "engine_head",
+     "function": "Closes the cylinders and carries valves and injectors/spark plugs.",
+     "material": "Cast iron/aluminium."
+    },
+    {
+     "id": "e_crankshaft",
+     "name": "Diesel Engine – Crankshaft",
+     "info_ref": "engine_crankshaft",
+     "function": "Turns the up-and-down motion of the pistons into rotation.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "e_pistons",
+     "name": "Diesel Engine – Pistons & Rings",
+     "info_ref": "engine_pistons",
+     "function": "Transmit combustion pressure to the connecting rods.",
+     "material": "Aluminium alloy/steel."
+    },
+    {
+     "id": "e_conrods",
+     "name": "Diesel Engine – Connecting Rods",
+     "info_ref": "engine_conrods",
+     "function": "Link the pistons to the crankshaft.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "turbocharger",
+     "name": "Turbocharger (exhaust turbine drives intake compressor)",
+     "info_ref": "dg_turbo",
+     "function": "Uses exhaust energy to compress intake air for more power.",
+     "material": "Ni-alloy turbine, aluminium compressor."
+    },
+    {
+     "id": "flywheel",
+     "name": "Flywheel",
+     "info_ref": "edg_flywheel",
+     "function": "Smooths torque pulses and couples to the alternator.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "g_frame",
+     "name": "Alternator – Frame, End Shields & Terminal Box",
+     "info_ref": "gen_frame",
+     "function": "Supports the stator, holds the bearings and protects the windings.",
+     "material": "Steel."
+    },
+    {
+     "id": "g_stator",
+     "name": "Alternator – Stator Core & 3-Phase Armature Winding",
+     "info_ref": "gen_stator",
+     "function": "Carries the 3-phase armature winding in which the voltage is induced.",
+     "material": "Electrical steel; copper; class F/H insulation."
+    },
+    {
+     "id": "g_rotor",
+     "name": "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+     "info_ref": "gen_rotor",
+     "function": "Produces the magnetic field (DC excited) and is turned by the prime mover.",
+     "material": "Steel; copper."
+    },
+    {
+     "id": "g_exciter",
+     "name": "Alternator – Exciter Stator & Cover",
+     "info_ref": "gen_exciter",
+     "function": "Brushless exciter: supplies the rotor field current via rotating diodes.",
+     "material": "Steel, copper."
+    },
+    {
+     "id": "radiator",
+     "name": "Radiator & Charge-Air Cooler",
+     "info_ref": "edg_radiator",
+     "function": "Cools engine jacket water and charge air.",
+     "material": "Aluminium/copper."
+    },
+    {
+     "id": "cooling_fan",
+     "name": "Radiator Fan (engine-driven)",
+     "info_ref": "edg_fan",
+     "function": "Moves cooling air through the radiator.",
+     "material": "Steel/plastic."
+    },
+    {
+     "id": "base_frame",
+     "name": "Base Frame with Integral Fuel Tank & Anti-Vibration Mounts",
+     "info_ref": "dg_base",
+     "function": "Supports the engine and alternator, holds the fuel and isolates vibration.",
+     "material": "Steel, rubber."
+    },
+    {
+     "id": "engine_mounts",
+     "name": "Engine Feet / Mounting Brackets",
+     "info_ref": "dg_base",
+     "function": "Supports the engine and alternator, holds the fuel and isolates vibration.",
+     "material": "Steel, rubber."
+    },
+    {
+     "id": "exhaust_silencer",
+     "name": "Exhaust Pipe, Flexible Bellows & Silencer",
+     "info_ref": "dg_silencer",
+     "function": "Reduces exhaust noise and carries gas away safely.",
+     "material": "Steel."
+    },
+    {
+     "id": "control_panel",
+     "name": "Genset Controller & Circuit Breaker",
+     "info_ref": "edg_panel",
+     "function": "Starts, stops, protects and synchronises the genset.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "~ 10 kVA – 4 MVA (single sets)",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "8 – 3200",
+     "unit": "kWe"
+    },
+    "speed": {
+     "typical_range": "1500 / 1800",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "400 V – 13.8 kV, 50/60 Hz",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "fuel_consumption": {
+     "typical_range": "~ 0.2 – 0.3 L per kWh at full load",
+     "unit": "L/kWh"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth; anti-vibration mounts between engine/alternator and base."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Exhaust with flexible bellows, silencer and rain cap away from air intakes; radiator air discharge ducted out.",
+    "Fuel supply/return with day tank and bund."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Weekly no-load test run; monthly load test.",
+     "part": "control_panel",
+     "interval": "weekly"
+    },
+    {
+     "task": "Check coolant, oil, fuel, battery.",
+     "part": "radiator",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change engine oil and filters; check belts and battery.",
+     "part": "e_block",
+     "interval": "250–500 h"
+    },
+    {
+     "task": "Measure generator insulation resistance.",
+     "part": "g_stator",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Engine top/major overhaul; alternator bearing replacement.",
+     "part": "e_head"
+    }
+   ],
+   "lubrication": [
+    "Engine oil per maker (API/ACEA class); alternator bearings greased or sealed."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Fails to start",
+     "category": "performance",
+     "symptoms": [
+      "Cranks but no start"
+     ],
+     "causes": [
+      "Fuel air-lock, weak battery, low fuel"
+     ],
+     "remedies": [
+      "Bleed fuel, charge battery"
+     ],
+     "part": "e_head"
+    },
+    {
+     "problem": "Wet stacking",
+     "category": "performance",
+     "symptoms": [
+      "Black oily exhaust"
+     ],
+     "causes": [
+      "Running at very low load"
+     ],
+     "remedies": [
+      "Load bank test"
+     ],
+     "part": "exhaust_silencer"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Shutdown on temperature"
+     ],
+     "causes": [
+      "Blocked radiator, low coolant"
+     ],
+     "remedies": [
+      "Clean, refill"
+     ],
+     "part": "radiator"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Diesel Generator Set — Introduction",
+    "type": "in_app_tour",
+    "model": "diesel_generator_set.glb",
+    "duration_s": 53.4,
+    "script": [
+     {
+      "narration": "This module introduces the Diesel Generator Set.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A diesel generator set is a complete power unit on a skid: a compression-ignition diesel engine drives an alternator through a flywheel, with radiator, base-frame fuel tank, exhaust silencer and a controller.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It provides standby, prime or continuous power.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include standby power for hospitals, data centres, plants; prime power at remote sites and mines; emergency fire-pump and safety systems; construction and events (rental).",
+      "duration_s": 11.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Flywheel, Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Diesel Generator Set — Operation",
+    "type": "in_app_tour",
+    "model": "diesel_generator_set.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "How the Diesel Generator Set works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Air is compressed in the cylinders; injected diesel ignites from the heat of compression.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "e_head",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pistons and connecting rods turn the crankshaft.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "e_pistons",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The turbocharger uses exhaust energy to push more air in.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "turbocharger",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flywheel drives the alternator, which produces AC power.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "g_rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The radiator cools the engine; the silencer quietens the exhaust.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "radiator",
+       "cut": false,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Diesel Generator Set — Maintenance",
+    "type": "in_app_tour",
+    "model": "diesel_generator_set.glb",
+    "duration_s": 48.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Diesel Generator Set.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Weekly no-load test run; monthly load test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_panel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check coolant, oil, fuel, battery.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "radiator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change engine oil and filters; check belts and battery.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "e_block",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure generator insulation resistance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "g_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Engine top/major overhaul; alternator bearing replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "e_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fails to start: cranks but no start. Common cause: fuel air-lock, weak battery, low fuel.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "e_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wet stacking: black oily exhaust. Common cause: running at very low load.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "exhaust_silencer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: shutdown on temperature. Common cause: blocked radiator, low coolant.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "radiator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is diesel fuel ignited?",
+     "options": [
+      "Spark plug",
+      "Heat of compression",
+      "Glow from the exhaust",
+      "Electric heater"
+     ],
+     "answer": 1,
+     "explanation": "Compression ignition.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the turbocharger do?",
+     "options": [
+      "Cools oil",
+      "Compresses intake air using exhaust energy",
+      "Starts the engine",
+      "Regulates voltage"
+     ],
+     "answer": 1,
+     "explanation": "More air → more power.",
+     "level": "basic"
+    },
+    {
+     "question": "\"Standby\" rating means…",
+     "options": [
+      "Unlimited hours at full load",
+      "Emergency use for a limited number of hours per year",
+      "No load",
+      "Base load"
+     ],
+     "answer": 1,
+     "explanation": "Per ISO 8528-1 definitions.",
+     "level": "basic"
+    },
+    {
+     "question": "Wet stacking is caused by…",
+     "options": [
+      "Overloading",
+      "Long running at very light load",
+      "Cold weather only",
+      "Old batteries"
+     ],
+     "answer": 1,
+     "explanation": "Incomplete combustion.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the cylinders and crankshaft; contains coolant passages and the oil sump.\"",
+     "options": [
+      "Diesel Engine – Cylinder Block & Crankcase",
+      "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+      "Engine Feet / Mounting Brackets",
+      "Alternator – Frame, End Shields & Terminal Box"
+     ],
+     "answer": 0,
+     "explanation": "Diesel Engine – Cylinder Block & Crankcase: Holds the cylinders and crankshaft; contains coolant passages and the oil sump.",
+     "level": "basic",
+     "part": "e_block",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the cylinders and carries valves and injectors/spark plugs.\"",
+     "options": [
+      "Genset Controller & Circuit Breaker",
+      "Flywheel",
+      "Diesel Engine – Cylinder Head, Valves & Injectors",
+      "Base Frame with Integral Fuel Tank & Anti-Vibration Mounts"
+     ],
+     "answer": 2,
+     "explanation": "Diesel Engine – Cylinder Head, Valves & Injectors: Closes the cylinders and carries valves and injectors/spark plugs.",
+     "level": "basic",
+     "part": "e_head",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Turns the up-and-down motion of the pistons into rotation.\"",
+     "options": [
+      "Flywheel",
+      "Diesel Engine – Crankshaft",
+      "Base Frame with Integral Fuel Tank & Anti-Vibration Mounts",
+      "Diesel Engine – Connecting Rods"
+     ],
+     "answer": 1,
+     "explanation": "Diesel Engine – Crankshaft: Turns the up-and-down motion of the pistons into rotation.",
+     "level": "basic",
+     "part": "e_crankshaft",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

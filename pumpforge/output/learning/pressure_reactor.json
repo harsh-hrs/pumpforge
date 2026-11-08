@@ -1,0 +1,625 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "pressure_reactor",
+ "no": 98,
+ "title": "Pressure Reactor",
+ "model_title": "High-Pressure Stirred Reactor (Bolted Closure, Magnetic-Drive Agitator)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A high-pressure reactor carries out reactions such as hydrogenation at high pressure and temperature. Its thick forged body and bolted cover with a metal seal contain the pressure; a magnetic drive stirs without a shaft seal, gas is fed through a sparger, and a coil removes heat. Relief valve and rupture disc protect against over-pressure.",
+   "applications": [
+    "Hydrogenation",
+    "Polymerisation and oxidation under pressure",
+    "Catalyst testing and R&D",
+    "Supercritical processes"
+   ],
+   "key_points": [
+    "Design pressure and temperature on nameplate",
+    "Bolted closure torqued in sequence",
+    "Sealless magnetic drive",
+    "Relief for runaway cases"
+   ],
+   "classification": {
+    "family": "Reactor (high pressure)",
+    "type": "Stirred autoclave-type reactor, bolted closure, magnetic drive"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A high-pressure reactor carries out reactions (hydrogenation, polymerisation, oxidation) at high pressure and temperature. A thick forged body with a multi-stud bolted cover and metal seal contains the pressure; a magnetic drive stirs without a shaft seal. Safety valve and rupture disc protect against over-pressure."
+  },
+  "model_3d": {
+   "asset": "glb/pressure_reactor.glb",
+   "metadata": "meta/pressure_reactor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 13652,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Gas is fed through the sparger ring at the bottom.",
+    "The magnetically driven turbines disperse the gas into the liquid.",
+    "The coil removes reaction heat."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid is charged and the cover bolted with a metal seal ring.",
+     "part": "closure",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas is fed through the sparger ring at the bottom.",
+     "part": "internals",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The magnetically driven turbines disperse the gas into the liquid.",
+     "part": "agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The coil removes reaction heat.",
+     "part": "internals",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Safety valve and rupture disc protect against over-pressure.",
+     "part": "safety_instruments",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Gas uptake rate vs pressure and agitation; heat release vs cooling capacity."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "pressure_reactor_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/pressure_reactor.json#components",
+   "key_components": "Forged body, bolted closure, magnetic drive, sparger, coil, safety devices",
+   "parts": [
+    {
+     "id": "body",
+     "name": "Thick-Walled Forged Body with Integral Flange",
+     "info_ref": "pr_body",
+     "function": "Contains the high-pressure reaction.",
+     "material": "Stainless, Hastelloy, titanium."
+    },
+    {
+     "id": "closure",
+     "name": "Bolted Cover (16 studs) & Metal Seal Ring",
+     "info_ref": "pr_closure",
+     "function": "Seals the cover to the body.",
+     "material": "Alloy steel studs."
+    },
+    {
+     "id": "magnetic_drive",
+     "name": "Magnetic Drive (sealless — containment can) & Motor",
+     "info_ref": "pr_magdrive",
+     "function": "Drives the agitator without a dynamic seal.",
+     "material": "—"
+    },
+    {
+     "id": "agitator",
+     "name": "Agitator Shaft with Gas-Dispersion (Rushton) Turbines",
+     "info_ref": "pr_agitator",
+     "function": "Disperses gas and mixes.",
+     "material": "Stainless."
+    },
+    {
+     "id": "internals",
+     "name": "Cooling Coil & Gas Sparger Ring",
+     "info_ref": "pr_internals",
+     "function": "Cooling coil removes reaction heat; sparger introduces gas.",
+     "material": "Stainless."
+    },
+    {
+     "id": "contents",
+     "name": "Reaction Liquid",
+     "info_ref": "pr_contents",
+     "function": "Reaction liquid.",
+     "material": "—"
+    },
+    {
+     "id": "safety_instruments",
+     "name": "Safety Valve, Rupture Disc, Pressure Gauge & Thermowell",
+     "info_ref": "pr_safety",
+     "function": "Protect and monitor.",
+     "material": "—"
+    },
+    {
+     "id": "stand",
+     "name": "Support Stand & Lifting Ring",
+     "info_ref": "pr_stand",
+     "function": "Supports.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "0.05 L – 5 m³",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 350 (lab) / ~ 200 (production)",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 500",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Volume",
+     "unit": "L"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Pressure and leak test; check agitator rotation and seal flush; calibrate temperature/pressure instruments; test interlocks and relief devices."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Leak test closure before each run.",
+     "part": "closure",
+     "interval": "each batch"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace seal ring; check stud threads.",
+     "part": "closure",
+     "interval": "per runs"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Re-certify vessel (hydro-test, NDT).",
+     "part": "body"
+    }
+   ],
+   "lubrication": [
+    "Anti-seize on studs; magnetic-drive bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Closure leak",
+     "category": "leakage",
+     "symptoms": [
+      "Pressure decay"
+     ],
+     "causes": [
+      "Damaged seal, uneven bolt torque"
+     ],
+     "remedies": [
+      "Replace seal; torque in star pattern"
+     ],
+     "part": "closure"
+    },
+    {
+     "problem": "Decoupling of magnetic drive",
+     "category": "performance",
+     "symptoms": [
+      "Agitation stops"
+     ],
+     "causes": [
+      "High viscosity, overheating"
+     ],
+     "remedies": [
+      "Reduce load; check magnets"
+     ],
+     "part": "magnetic_drive"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Pressure Reactor — Introduction",
+    "type": "in_app_tour",
+    "model": "pressure_reactor.glb",
+    "duration_s": 52.2,
+    "script": [
+     {
+      "narration": "This module introduces the Pressure Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A high-pressure reactor carries out reactions such as hydrogenation at high pressure and temperature.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Its thick forged body and bolted cover with a metal seal contain the pressure; a magnetic drive stirs without a shaft seal, gas is fed through a sparger, and a coil removes heat.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Relief valve and rupture disc protect against over-pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hydrogenation; polymerisation and oxidation under pressure; catalyst testing and R&D; supercritical processes.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Agitator Shaft with Gas-Dispersion (Rushton) Turbines.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Pressure Reactor — Operation",
+    "type": "in_app_tour",
+    "model": "pressure_reactor.glb",
+    "duration_s": 29.6,
+    "script": [
+     {
+      "narration": "How the Pressure Reactor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid is charged and the cover bolted with a metal seal ring.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "closure",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas is fed through the sparger ring at the bottom.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "internals",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The magnetically driven turbines disperse the gas into the liquid.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "agitator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The coil removes reaction heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "internals",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Safety valve and rupture disc protect against over-pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "safety_instruments",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Pressure Reactor — Maintenance",
+    "type": "in_app_tour",
+    "model": "pressure_reactor.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Pressure Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Leak test closure before each run.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "closure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace seal ring; check stud threads.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "closure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Re-certify vessel (hydro-test, NDT).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for closure leak: pressure decay. Common cause: damaged seal, uneven bolt torque.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "closure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for decoupling of magnetic drive: agitation stops. Common cause: high viscosity, overheating.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "magnetic_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why use a magnetic drive?",
+     "options": [
+      "Cheaper",
+      "No rotating shaft seal → no leakage path",
+      "Faster",
+      "Quieter only"
+     ],
+     "answer": 1,
+     "explanation": "Sealless.",
+     "level": "basic"
+    },
+    {
+     "question": "Studs of a bolted closure should be tightened…",
+     "options": [
+      "All at once",
+      "In a star/criss-cross pattern in stages",
+      "Randomly",
+      "Only finger tight"
+     ],
+     "answer": 1,
+     "explanation": "Even seal load.",
+     "level": "basic"
+    },
+    {
+     "question": "Why both a safety valve and a rupture disc?",
+     "options": [
+      "Decoration",
+      "Disc protects the valve/gives fast full relief; valve recloses",
+      "Required by colour code",
+      "No reason"
+     ],
+     "answer": 1,
+     "explanation": "Combined protection.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the high-pressure reaction.\"",
+     "options": [
+      "Support Stand & Lifting Ring",
+      "Thick-Walled Forged Body with Integral Flange",
+      "Bolted Cover (16 studs) & Metal Seal Ring",
+      "Magnetic Drive (sealless — containment can) & Motor"
+     ],
+     "answer": 1,
+     "explanation": "Thick-Walled Forged Body with Integral Flange: Contains the high-pressure reaction.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Seals the cover to the body.\"",
+     "options": [
+      "Thick-Walled Forged Body with Integral Flange",
+      "Bolted Cover (16 studs) & Metal Seal Ring",
+      "Magnetic Drive (sealless — containment can) & Motor",
+      "Agitator Shaft with Gas-Dispersion (Rushton) Turbines"
+     ],
+     "answer": 1,
+     "explanation": "Bolted Cover (16 studs) & Metal Seal Ring: Seals the cover to the body.",
+     "level": "basic",
+     "part": "closure",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drives the agitator without a dynamic seal.\"",
+     "options": [
+      "Safety Valve, Rupture Disc, Pressure Gauge & Thermowell",
+      "Thick-Walled Forged Body with Integral Flange",
+      "Magnetic Drive (sealless — containment can) & Motor",
+      "Bolted Cover (16 studs) & Metal Seal Ring"
+     ],
+     "answer": 2,
+     "explanation": "Magnetic Drive (sealless — containment can) & Motor: Drives the agitator without a dynamic seal.",
+     "level": "basic",
+     "part": "magnetic_drive",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

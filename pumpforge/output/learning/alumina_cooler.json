@@ -1,0 +1,610 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "alumina_cooler",
+ "no": 210,
+ "title": "Alumina Cooler",
+ "model_title": "Rotary Alumina Cooler (Indirect, External Water-Spray Cooling)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A rotary alumina cooler is a slowly rotating drum whose outside is sprayed with water. Hot alumina tumbles inside and is cooled through the steel shell, never touching the water.",
+   "applications": [
+    "Cooling calcined alumina (rotary kiln plants)",
+    "Cooling other hot bulk solids"
+   ],
+   "key_points": [
+    "Indirect cooling through the shell",
+    "Lifters improve contact",
+    "No product wetting",
+    "Shell water must not scale"
+   ],
+   "classification": {
+    "family": "Cooling",
+    "type": "Indirect rotary drum cooler"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A rotary alumina cooler is a slowly rotating drum whose outside is sprayed with water. Hot alumina tumbles inside and is cooled through the shell without ever touching the water."
+  },
+  "model_3d": {
+   "asset": "glb/alumina_cooler.glb",
+   "metadata": "meta/alumina_cooler.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7376,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot alumina enters the drum.",
+    "The drum rotates and tumbles it.",
+    "Sprays cool the shell."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot alumina enters the drum.",
+     "part": "hoods",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drum rotates and tumbles it.",
+     "part": "girth_tyres",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sprays cool the shell.",
+     "part": "spray_system",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cooled alumina discharges.",
+     "part": "shell",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet temperature vs drum length, speed and water flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "alumina_cooler_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "alumina_cooler_temperature.glb",
+     "title": "Indirect cooling through the shell",
+     "description": "Hot alumina tumbles inside while water sprays and runs over the outside of the shell, removing heat through the steel wall (no contact between water and product). Lifters improve contact with the cooled wall. Shell temperature differences and scaling of the external surface reduce performance.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/alumina_cooler.json#components",
+   "key_components": "Rotary drum cooler, external water sprays, tyres, girth gear, drive, chutes",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Cooler Drum: Shell with Liners / Lifters (rotates)",
+     "info_ref": "ac_shell",
+     "function": "Cooling drum.",
+     "material": "Steel."
+    },
+    {
+     "id": "girth_tyres",
+     "name": "Cooler Drum: Riding Tyres & Girth Gear (turn with the shell)",
+     "info_ref": "ac_drive",
+     "function": "Rotation.",
+     "material": "Steel."
+    },
+    {
+     "id": "spray_system",
+     "name": "External Water-Spray Header & Collecting Pan",
+     "info_ref": "ac_spray",
+     "function": "External cooling.",
+     "material": "Stainless."
+    },
+    {
+     "id": "hoods",
+     "name": "Inlet Hood (hot alumina feed) & Discharge Hood",
+     "info_ref": "ac_hoods",
+     "function": "Feed and discharge.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports_drive",
+     "name": "Support Rollers & Drive",
+     "info_ref": "ac_drive",
+     "function": "Rotation.",
+     "material": "Steel."
+    },
+    {
+     "id": "alumina",
+     "name": "Alumina tumbling against the Cooled Shell",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "spray",
+     "name": "Cooling Water running over the Shell",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Drum ~ 2 – 4 m diameter, 15 – 40 m long",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 20 – 120",
+     "unit": "t/h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 300 → 80 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "~ 50 – 200",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from duty and residence."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Process cooler literature"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Massive foundation designed for dynamic loads (maker data); grout base plates."
+   ],
+   "alignment": [
+    "Align drive train (motor–gearbox–pinion) and check gear mesh/backlash; level rollers/trunnions."
+   ],
+   "piping": [
+    "Feed and discharge chutes free of the moving machine; water/liquor supplies with isolation; dust or spray containment."
+   ],
+   "commissioning": [
+    "No-load run (rotation, vibration, temperatures); then load gradually; record power and throughput baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check spray pattern and temperatures.",
+     "part": "spray_system",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Roller and tyre inspection.",
+     "part": "supports_drive",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Shell inspection; descale exterior.",
+     "part": "shell"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Shell scaling",
+     "category": "performance",
+     "symptoms": [
+      "Hot product"
+     ],
+     "causes": [
+      "Hard water"
+     ],
+     "remedies": [
+      "Water treatment; clean"
+     ],
+     "part": "spray_system"
+    },
+    {
+     "problem": "Tyre wear",
+     "category": "wear",
+     "symptoms": [
+      "Noise"
+     ],
+     "causes": [
+      "Misalignment"
+     ],
+     "remedies": [
+      "Re-align rollers"
+     ],
+     "part": "girth_tyres"
+    }
+   ],
+   "safety": [
+    "Rotating equipment guards."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Alumina Cooler — Introduction",
+    "type": "in_app_tour",
+    "model": "alumina_cooler.glb",
+    "duration_s": 46.8,
+    "script": [
+     {
+      "narration": "This module introduces the Alumina Cooler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A rotary alumina cooler is a slowly rotating drum whose outside is sprayed with water.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot alumina tumbles inside and is cooled through the steel shell, never touching the water.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cooling calcined alumina (rotary kiln plants); cooling other hot bulk solids.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Cooler Drum: Shell with Liners / Lifters (rotates), Cooler Drum: Riding Tyres & Girth Gear (turn with the shell), Inlet Hood (hot alumina feed) & Discharge Hood.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Alumina Cooler — Operation",
+    "type": "in_app_tour",
+    "model": "alumina_cooler.glb",
+    "duration_s": 35.4,
+    "script": [
+     {
+      "narration": "How the Alumina Cooler works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot alumina enters the drum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hoods",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drum rotates and tumbles it.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "girth_tyres",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sprays cool the shell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spray_system",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cooled alumina discharges.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Hot alumina tumbles inside while water sprays and runs over the outside of the shell, removing heat through the steel wall (no contact between water and product).",
+      "duration_s": 11.2,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Alumina Cooler — Maintenance",
+    "type": "in_app_tour",
+    "model": "alumina_cooler.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Alumina Cooler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check spray pattern and temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spray_system",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Roller and tyre inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supports_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Shell inspection; descale exterior.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for shell scaling: hot product. Common cause: hard water.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "spray_system",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tyre wear: noise. Common cause: misalignment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "girth_tyres",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Does water touch the alumina?",
+     "options": [
+      "No — indirect cooling",
+      "Yes",
+      "Sometimes",
+      "Only at start"
+     ],
+     "answer": 0,
+     "explanation": "Indirect.",
+     "level": "basic"
+    },
+    {
+     "question": "Why lifters?",
+     "options": [
+      "Better contact with cooled wall",
+      "Grinding",
+      "Noise",
+      "Weight"
+     ],
+     "answer": 0,
+     "explanation": "Contact.",
+     "level": "basic"
+    },
+    {
+     "question": "What turns the drum?",
+     "options": [
+      "Girth gear drive",
+      "Water",
+      "Air",
+      "Gravity"
+     ],
+     "answer": 0,
+     "explanation": "Drive.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Cooling drum.\"",
+     "options": [
+      "Inlet Hood (hot alumina feed) & Discharge Hood",
+      "Support Rollers & Drive",
+      "Cooler Drum: Shell with Liners / Lifters (rotates)",
+      "Alumina tumbling against the Cooled Shell"
+     ],
+     "answer": 2,
+     "explanation": "Cooler Drum: Shell with Liners / Lifters (rotates): Cooling drum.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotation.\"",
+     "options": [
+      "Cooling Water running over the Shell",
+      "Cooler Drum: Riding Tyres & Girth Gear (turn with the shell)",
+      "External Water-Spray Header & Collecting Pan",
+      "Alumina tumbling against the Cooled Shell"
+     ],
+     "answer": 1,
+     "explanation": "Cooler Drum: Riding Tyres & Girth Gear (turn with the shell): Rotation.",
+     "level": "basic",
+     "part": "girth_tyres",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"External cooling.\"",
+     "options": [
+      "External Water-Spray Header & Collecting Pan",
+      "Alumina tumbling against the Cooled Shell",
+      "Cooling Water running over the Shell",
+      "Cooler Drum: Shell with Liners / Lifters (rotates)"
+     ],
+     "answer": 0,
+     "explanation": "External Water-Spray Header & Collecting Pan: External cooling.",
+     "level": "basic",
+     "part": "spray_system",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,565 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "alternator",
+  "title": "Brushless Synchronous Alternator (4-Pole, Self-Excited)",
+  "category": "7 · Rotating Equipment – Additional Machinery",
+  "library": {
+    "no": 82,
+    "phase": 5,
+    "eq_id": "EQ-160",
+    "subcategory": "Electrical Machinery",
+    "hi_family": "rotating_machinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "alternator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "magnetic_field": {
+      "file": "alternator_magnetic_field.glb",
+      "title": "Rotating magnetic field",
+      "description": "DC in the field coils makes the rotor poles alternately N and S. As the rotor turns, this field sweeps past the stator conductors and induces a 3-phase AC voltage. Frequency = poles × rpm / 120 (4 poles at 1500 rpm → 50 Hz).",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Flux crosses the air gap pole → stator → next pole",
+          "anchor": [
+            0.0,
+            0.85,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "power",
+      "kind": "power",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.7,
+          0.45,
+          -0.0
+        ],
+        [
+          -0.35,
+          0.45,
+          -0.0
+        ],
+        [
+          0.0,
+          0.57,
+          -0.12
+        ],
+        [
+          0.0,
+          0.73,
+          -0.0
+        ],
+        [
+          0.0,
+          0.87,
+          -0.0
+        ],
+        [
+          0.1,
+          0.95,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "excitation",
+      "kind": "electric",
+      "radius": 0.006,
+      "points": [
+        [
+          0.5,
+          0.62,
+          -0.0
+        ],
+        [
+          0.57,
+          0.52,
+          -0.0
+        ],
+        [
+          0.0,
+          0.55,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cooling_air",
+      "kind": "air",
+      "radius": 0.006,
+      "points": [
+        [
+          0.6,
+          0.65,
+          -0.0
+        ],
+        [
+          0.3,
+          0.65,
+          -0.0
+        ],
+        [
+          -0.3,
+          0.65,
+          -0.0
+        ],
+        [
+          -0.4,
+          0.77,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10318,
+    "parts": 7
+  },
+  "summary": "An alternator (synchronous AC generator) produces alternating current when its rotor field turns inside the stator winding. In a brushless design a small exciter on the same shaft generates AC that rotating diodes rectify to feed the main rotor poles — no brushes or slip rings. The AVR adjusts the exciter field to hold the output voltage constant.",
+  "classification": {
+    "family": "Electrical machine",
+    "type": "Brushless synchronous generator, salient 4-pole rotor"
+  },
+  "model_configuration": {
+    "poles": 4,
+    "frequency_rule": "f = p × n / 120",
+    "excitation": "Brushless exciter + rotating rectifier + AVR"
+  },
+  "standards": [
+    {
+      "id": "IEC 60034-1",
+      "title": "Rotating electrical machines — Rating and performance",
+      "relevance": "Ratings, temperature rise.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "NEMA MG 1",
+      "title": "Motors and Generators",
+      "relevance": "North American practice.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 8528-3",
+      "title": "Generating sets — AC generators",
+      "relevance": "Generator requirements for gensets.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Chapman, Electric Machinery Fundamentals",
+    "Manufacturer alternator technical guides (generic)"
+  ],
+  "parts": [
+    {
+      "id": "a_frame",
+      "name": "Alternator – Frame, End Shields & Terminal Box",
+      "group": "generator",
+      "section_role": "split",
+      "nodes": [
+        "a_frame__back",
+        "a_frame__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.35,
+        0.0,
+        -0.3
+      ],
+      "bbox_max": [
+        0.35,
+        0.8385,
+        0.3
+      ],
+      "label_anchor": [
+        0.0,
+        0.41925,
+        0.3
+      ],
+      "center": [
+        0.0,
+        0.41925,
+        -0.0
+      ],
+      "info_ref": "gen_frame"
+    },
+    {
+      "id": "a_stator",
+      "name": "Alternator – Stator Core & 3-Phase Armature Winding",
+      "group": "generator",
+      "section_role": "split",
+      "nodes": [
+        "a_stator__back",
+        "a_stator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.72,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.33,
+        0.172,
+        -0.278
+      ],
+      "bbox_max": [
+        0.33,
+        0.728,
+        0.278
+      ],
+      "label_anchor": [
+        0.0,
+        0.45,
+        0.278
+      ],
+      "center": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "gen_stator"
+    },
+    {
+      "id": "a_rotor",
+      "name": "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "a_rotor.001"
+      ],
+      "pivot": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.78
+      ],
+      "bbox_min": [
+        -0.6,
+        0.2715,
+        -0.1785
+      ],
+      "bbox_max": [
+        0.67,
+        0.6285,
+        0.1785
+      ],
+      "label_anchor": [
+        0.035,
+        0.45,
+        0.1785
+      ],
+      "center": [
+        0.035,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "gen_rotor"
+    },
+    {
+      "id": "a_exciter",
+      "name": "Alternator – Exciter Stator & Cover",
+      "group": "generator",
+      "section_role": "split",
+      "nodes": [
+        "a_exciter__back",
+        "a_exciter__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.4,
+        0.3,
+        -0.15
+      ],
+      "bbox_max": [
+        0.65,
+        0.6,
+        0.15
+      ],
+      "label_anchor": [
+        0.525,
+        0.45,
+        0.15
+      ],
+      "center": [
+        0.525,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "gen_exciter"
+    },
+    {
+      "id": "bearings",
+      "name": "Bearings (DE & NDE)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "bearings__back",
+        "bearings__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.39,
+        0.39,
+        -0.06
+      ],
+      "bbox_max": [
+        0.39,
+        0.51,
+        0.06
+      ],
+      "label_anchor": [
+        0.0,
+        0.45,
+        0.06
+      ],
+      "center": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "motor_bearings"
+    },
+    {
+      "id": "avr",
+      "name": "Automatic Voltage Regulator (AVR) in Terminal Box",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "avr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.09,
+        0.8,
+        0.05
+      ],
+      "bbox_max": [
+        0.09,
+        0.94,
+        0.11
+      ],
+      "label_anchor": [
+        0.0,
+        0.87,
+        0.11
+      ],
+      "center": [
+        0.0,
+        0.87,
+        0.08
+      ],
+      "info_ref": "alt_avr"
+    },
+    {
+      "id": "drive_hub",
+      "name": "Drive Hub / Coupling Disc (from prime mover)",
+      "group": "power_transmission",
+      "section_role": "keep",
+      "nodes": [
+        "hub"
+      ],
+      "pivot": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.62,
+        0.37,
+        -0.08
+      ],
+      "bbox_max": [
+        -0.58,
+        0.53,
+        0.08
+      ],
+      "label_anchor": [
+        -0.6,
+        0.45,
+        0.08
+      ],
+      "center": [
+        -0.6,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "alt_hub"
+    }
+  ],
+  "components": {
+    "gen_frame": {
+      "function": "Supports the stator, holds the bearings and protects the windings.",
+      "construction": "Fabricated frame with end shields, feet and terminal box.",
+      "material": "Steel.",
+      "operating_conditions": "IP rating per site.",
+      "failure_modes": [
+        "Corrosion",
+        "Loose feet"
+      ],
+      "inspection": [
+        "Visual, soft-foot check"
+      ]
+    },
+    "gen_stator": {
+      "function": "Carries the 3-phase armature winding in which the voltage is induced.",
+      "construction": "Laminated core with slots; insulated copper coils, end windings.",
+      "material": "Electrical steel; copper; class F/H insulation.",
+      "operating_conditions": "Winding temperature limits output.",
+      "failure_modes": [
+        "Insulation breakdown",
+        "Hot spots"
+      ],
+      "inspection": [
+        "Insulation resistance (IR/PI), thermography"
+      ]
+    },
+    "gen_rotor": {
+      "function": "Produces the magnetic field (DC excited) and is turned by the prime mover.",
+      "construction": "Salient poles with field coils; exciter armature and rotating rectifier on the shaft.",
+      "material": "Steel; copper.",
+      "operating_conditions": "Balanced; overspeed tested.",
+      "failure_modes": [
+        "Field winding shorts",
+        "Diode failure"
+      ],
+      "inspection": [
+        "Field resistance, diode test"
+      ]
+    },
+    "gen_exciter": {
+      "function": "Brushless exciter: supplies the rotor field current via rotating diodes.",
+      "construction": "Small AC generator stator.",
+      "material": "Steel, copper.",
+      "operating_conditions": "Controlled by the AVR.",
+      "failure_modes": [
+        "Loss of excitation"
+      ],
+      "inspection": [
+        "AVR checks"
+      ]
+    },
+    "motor_bearings": {
+      "function": "Support the motor rotor at drive and non-drive ends.",
+      "construction": "Deep-groove ball bearings (roller bearing at drive end on larger belt-driven motors); one end locates axially.",
+      "material": "Bearing steel; grease lubricated.",
+      "operating_conditions": "Regrease interval depends on speed, size and temperature; insulated bearings recommended with VFDs to prevent electrical fluting.",
+      "failure_modes": [
+        "Lubrication failure",
+        "Contamination",
+        "Electrical erosion (fluting) with VFDs"
+      ],
+      "inspection": [
+        "Temperature and vibration trend",
+        "Regrease per nameplate",
+        "High-frequency envelope analysis"
+      ]
+    },
+    "alt_avr": {
+      "function": "Measures output voltage and adjusts the exciter field current.",
+      "construction": "Electronic regulator in the terminal box.",
+      "material": "Electronics.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Voltage hunting"
+      ],
+      "inspection": [
+        "Set-point check"
+      ]
+    },
+    "alt_hub": {
+      "function": "Connects the alternator to the prime mover.",
+      "construction": "Coupling disc / hub.",
+      "material": "Steel.",
+      "operating_conditions": "Single-bearing alternators bolt to the engine flywheel.",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Alignment"
+      ]
+    }
+  }
+}

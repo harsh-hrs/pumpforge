@@ -1,0 +1,649 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "screw_feeder",
+ "no": 121,
+ "title": "Screw Feeder",
+ "model_title": "Screw Feeder (Variable-Pitch Flight, U-Trough)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A screw feeder meters bulk solids with a rotating helical screw in a trough or tube under a hopper. The screw flights move material forward like a nut on a thread. Its flights, pitch or shaft diameter usually vary along the inlet so material is drawn evenly from the whole hopper outlet, not just the back.",
+   "applications": [
+    "Metering powders and granules (cement, lime, flour, chemicals)",
+    "Feeding mixers, kilns and dryers",
+    "Withdrawing from bins and bag dump stations"
+   ],
+   "key_points": [
+    "Volumetric feeding — rate ∝ speed",
+    "Variable pitch/diameter gives even draw-down",
+    "Totally enclosed and dust-tight",
+    "Run full (100 %) under the hopper"
+   ],
+   "classification": {
+    "family": "Feeder",
+    "type": "Screw feeder, U-trough"
+   },
+   "hi_family": "material_handling",
+   "summary": "A screw feeder meters bulk solids with a rotating helical flight in a trough. Each turn moves a fixed volume, so feed rate is set by speed. A variable-pitch flight draws material evenly from the whole length of the inlet."
+  },
+  "model_3d": {
+   "asset": "glb/screw_feeder.glb",
+   "metadata": "meta/screw_feeder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 25374,
+   "parts": 13
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material from the inlet hopper fills the screw flights.",
+    "The motor and coupling turn the screw.",
+    "Rotating flights push the material along the trough."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material from the inlet hopper fills the screw flights.",
+     "part": "inlet_hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The motor and coupling turn the screw.",
+     "part": "coupling",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Rotating flights push the material along the trough.",
+     "part": "screw",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Material drops out at the discharge end.",
+     "part": "trough",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Q = 60 · (π/4)(D² − d²) · p · n · φ · ρ (t/h) — linear with speed n; φ = fill (≈1 under the hopper)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "screw_feeder_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/screw_feeder.json#components",
+   "key_components": "Trough, screw flight, hopper, gearmotor",
+   "parts": [
+    {
+     "id": "trough",
+     "name": "U-Trough with Discharge Spout",
+     "info_ref": "sf_trough",
+     "function": "Contains the material.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "screw",
+     "name": "Screw: Flight on Pipe Shaft (pitch sets volume per turn)",
+     "info_ref": "sf_screw",
+     "function": "Conveys material.",
+     "material": "Steel."
+    },
+    {
+     "id": "inlet_hopper",
+     "name": "Inlet Hopper",
+     "info_ref": "sf_hopper",
+     "function": "Inlet.",
+     "material": "Steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Gearmotor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Gearmotor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Gearmotor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Gearmotor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Gearmotor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Gearmotor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "supports",
+     "name": "Supports & Drive Base",
+     "info_ref": "sf_supports",
+     "function": "Supports.",
+     "material": "Steel."
+    },
+    {
+     "id": "bulk",
+     "name": "Bulk Solids Conveyed by the Flight",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Screw ~ 100 – 600 mm diameter",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 0.5 – 50",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 10 – 150",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "~ 0.1 – 200",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose diameter for lump size and rate at a moderate speed; use a variable-pitch screw for even draw-down."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CEMA 350 — Screw conveyors",
+    "Manufacturer screw feeder data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on steelwork or a concrete plinth designed for the hopper/bin load on the feeder plus impact and dynamic loads.",
+    "Isolate vibrating machines from the structure with their springs/rubber mounts — never weld or rigidly bolt the vibrating body to the structure."
+   ],
+   "alignment": [
+    "Set the feeder at the designed slope and centre it under the hopper outlet; set skirt boards and the hopper gate to the design bed depth.",
+    "Align drive and driven shafts (laser or dial gauge) or set the exciter motors as the maker specifies."
+   ],
+   "piping": [
+    "Chutes and skirts: allow a gap that widens in the direction of travel so material does not jam; fit dust seals and connect dust extraction where required.",
+    "Leave clear access for liner change and for the hopper shut-off gate."
+   ],
+   "commissioning": [
+    "Run empty first: check direction, amplitude/speed, temperatures and noise.",
+    "Load gradually, check the material bed is even and the discharge rate matches the set-point; record motor current as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check discharge rate, noise and seal leakage.",
+     "part": "trough",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check flight wear and coupling condition.",
+     "part": "screw",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace screw/hanger bearings and liners.",
+     "part": "screw"
+    }
+   ],
+   "lubrication": [
+    "End bearings and gearmotor: lubricate to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Flooding of fluid powders",
+     "category": "performance",
+     "symptoms": [
+      "Rate higher than expected, product flushes through"
+     ],
+     "causes": [
+      "Aerated powder"
+     ],
+     "remedies": [
+      "Use shorter pitch, longer choke section or rotary valve"
+     ],
+     "part": "screw"
+    },
+    {
+     "problem": "Overload/jamming",
+     "category": "performance",
+     "symptoms": [
+      "High current"
+     ],
+     "causes": [
+      "Lumps, compaction under hopper"
+     ],
+     "remedies": [
+      "Check hopper design; use larger screw/lump breaker"
+     ],
+     "part": "screw"
+    }
+   ],
+   "safety": [
+    "Guard the inlet — screws can draw in hands and clothing. Lock out before opening covers."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Screw Feeder — Introduction",
+    "type": "in_app_tour",
+    "model": "screw_feeder.glb",
+    "duration_s": 57.8,
+    "script": [
+     {
+      "narration": "This module introduces the Screw Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A screw feeder meters bulk solids with a rotating helical screw in a trough or tube under a hopper.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The screw flights move material forward like a nut on a thread.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Its flights, pitch or shaft diameter usually vary along the inlet so material is drawn evenly from the whole hopper outlet, not just the back.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include metering powders and granules (cement, lime, flour, chemicals); feeding mixers, kilns and dryers; withdrawing from bins and bag dump stations.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: U-Trough with Discharge Spout, Screw: Flight on Pipe Shaft (pitch sets volume per turn).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Screw Feeder — Operation",
+    "type": "in_app_tour",
+    "model": "screw_feeder.glb",
+    "duration_s": 24.2,
+    "script": [
+     {
+      "narration": "How the Screw Feeder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material from the inlet hopper fills the screw flights.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_hopper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The motor and coupling turn the screw.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coupling",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Rotating flights push the material along the trough.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Material drops out at the discharge end.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trough",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Screw Feeder — Maintenance",
+    "type": "in_app_tour",
+    "model": "screw_feeder.glb",
+    "duration_s": 34.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Screw Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check discharge rate, noise and seal leakage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trough",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check flight wear and coupling condition.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace screw/hanger bearings and liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for flooding of fluid powders: rate higher than expected, product flushes through. Common cause: aerated powder.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload/jamming: high current. Common cause: lumps, compaction under hopper.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "screw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does a screw feeder often use variable pitch?",
+     "options": [
+      "Decoration",
+      "To draw material from the whole hopper outlet evenly",
+      "To increase noise",
+      "To make it lighter"
+     ],
+     "answer": 1,
+     "explanation": "Prevents dead zones.",
+     "level": "basic"
+    },
+    {
+     "question": "Throughput of a screw feeder is roughly…",
+     "options": [
+      "Proportional to speed",
+      "Independent of speed",
+      "Inversely proportional to speed",
+      "Set by motor colour"
+     ],
+     "answer": 0,
+     "explanation": "Volumetric device.",
+     "level": "basic"
+    },
+    {
+     "question": "A screw feeder normally runs…",
+     "options": [
+      "Empty",
+      "Full under the hopper",
+      "At 10 % fill",
+      "Vertically only"
+     ],
+     "answer": 1,
+     "explanation": "Unlike a screw conveyor which runs part-full.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the material.\"",
+     "options": [
+      "Bulk Solids Conveyed by the Flight",
+      "Gearmotor – Stator",
+      "Inlet Hopper",
+      "U-Trough with Discharge Spout"
+     ],
+     "answer": 3,
+     "explanation": "U-Trough with Discharge Spout: Contains the material.",
+     "level": "basic",
+     "part": "trough",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Conveys material.\"",
+     "options": [
+      "Gearmotor – Cooling Fan",
+      "Screw: Flight on Pipe Shaft (pitch sets volume per turn)",
+      "Coupling Guard",
+      "Bulk Solids Conveyed by the Flight"
+     ],
+     "answer": 1,
+     "explanation": "Screw: Flight on Pipe Shaft (pitch sets volume per turn): Conveys material.",
+     "level": "basic",
+     "part": "screw",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Inlet.\"",
+     "options": [
+      "Bulk Solids Conveyed by the Flight",
+      "Gearmotor – Stator",
+      "Screw: Flight on Pipe Shaft (pitch sets volume per turn)",
+      "Inlet Hopper"
+     ],
+     "answer": 3,
+     "explanation": "Inlet Hopper: Inlet.",
+     "level": "basic",
+     "part": "inlet_hopper",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

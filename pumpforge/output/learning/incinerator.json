@@ -1,0 +1,654 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "incinerator",
+ "no": 168,
+ "title": "Incinerator",
+ "model_title": "Rotary Kiln Incinerator with Secondary Combustion Chamber",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A rotary kiln incinerator burns solid, sludge and liquid wastes. The waste, fed at the upper end, tumbles down the slowly rotating, slightly inclined kiln as it dries, burns and becomes ash. The gases pass to a secondary combustion chamber where an afterburner completes combustion before heat recovery, quenching and gas cleaning.",
+   "applications": [
+    "Hazardous and clinical waste",
+    "Industrial and chemical wastes",
+    "Contaminated soils"
+   ],
+   "key_points": [
+    "Kiln rotation tumbles and mixes waste",
+    "SCC: ≥ 850 °C for ≥ 2 s (EU IED; 1100 °C for > 1 % halogens)",
+    "Ash discharged and quenched",
+    "Extensive gas cleaning follows"
+   ],
+   "classification": {
+    "family": "Combustion / waste treatment",
+    "type": "Rotary kiln incinerator with SCC"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A rotary kiln incinerator burns solid, sludge and liquid wastes. Waste fed at the upper end tumbles down the slowly rotating, slightly inclined kiln while it dries, burns and becomes ash. The gases pass to a secondary combustion chamber where an afterburner ensures complete combustion before heat recovery and gas cleaning."
+  },
+  "model_3d": {
+   "asset": "glb/incinerator.glb",
+   "metadata": "meta/incinerator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7468,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Waste is fed into the kiln at the feed end.",
+    "The rotating kiln tumbles the waste as it burns.",
+    "The kiln burner keeps temperature."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Waste is fed into the kiln at the feed end.",
+     "part": "feed_hood",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotating kiln tumbles the waste as it burns.",
+     "part": "rotary_kiln",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The kiln burner keeps temperature.",
+     "part": "kiln_flame",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gases are completed in the secondary chamber.",
+     "part": "secondary_chamber",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Hot gas leaves to heat recovery and pollution control.",
+     "part": "gas_outlet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Residence time of solids in the kiln depends on slope, speed, diameter and length."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "incinerator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "incinerator_temperature.glb",
+     "title": "Secondary chamber: temperature and residence time",
+     "description": "Solids burn and ash out in the kiln (often ~ 850–1200 °C). Gases are then held in the secondary chamber; EU rules (Industrial Emissions Directive) require at least 850 °C for 2 s (1100 °C if the waste contains more than 1 % halogenated organics as chlorine) to complete combustion of organic compounds. Rapid quenching afterwards limits dioxin re-formation.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/incinerator.json#components",
+   "key_components": "Rotary kiln, feed chute, burner, secondary combustion chamber, ash discharge, stack",
+   "parts": [
+    {
+     "id": "rotary_kiln",
+     "name": "Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating)",
+     "info_ref": "ik_kiln",
+     "function": "Burns waste while turning it.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "supports_drive",
+     "name": "Support Rollers, Piers & Kiln Drive (motor, reducer, pinion)",
+     "info_ref": "ik_supports",
+     "function": "Support and drive.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_hood",
+     "name": "Feed-End Hood, Waste Feed Chute (ram) & Primary Burner",
+     "info_ref": "ik_feed",
+     "function": "Feeds waste; primary firing.",
+     "material": "Steel."
+    },
+    {
+     "id": "kiln_flame",
+     "name": "Kiln Burner Flame",
+     "info_ref": "ik_feed",
+     "function": "Feeds waste; primary firing.",
+     "material": "Steel."
+    },
+    {
+     "id": "secondary_chamber",
+     "name": "Secondary Combustion Chamber (≥ 850 °C, ≥ 2 s) & Ash Quench below",
+     "info_ref": "ik_scc",
+     "function": "Completes gas combustion.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "scc_flame",
+     "name": "Secondary (Afterburner) Flame",
+     "info_ref": "ik_scc",
+     "function": "Completes gas combustion.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "scc_burner",
+     "name": "Afterburner",
+     "info_ref": "ik_scc",
+     "function": "Completes gas combustion.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "gas_outlet",
+     "name": "Hot Gas Outlet to Boiler / Quench & Air Pollution Control",
+     "info_ref": "ik_scc",
+     "function": "Completes gas combustion.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "waste",
+     "name": "Waste Tumbling down the Kiln, Burning to Ash",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Kiln ~ 2 – 5 m diameter, 8 – 20 m long",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 5 – 50",
+     "unit": "MW(th)"
+    },
+    "operating_temperature": {
+     "typical_range": "Kiln ~ 850 – 1200; SCC ≥ 850 / 1100",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Waste ~ 1 – 20",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Rotary kiln for mixed hazardous wastes; grate for MSW; FBC for homogeneous fuels/sludge."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Directive 2010/75/EU (Industrial Emissions)",
+    "Niessen — Combustion and Incineration Processes"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations for weight, thermal growth and dynamic loads; refractory dry-out after installation."
+   ],
+   "alignment": [
+    "Burner and fan alignment; kiln/rotor alignment for rotating equipment."
+   ],
+   "piping": [
+    "Fuel train per burner management standards; air ducts; flue gas path to air-pollution control; emissions monitoring (CEMS)."
+   ],
+   "commissioning": [
+    "Refractory dry-out; purge and light-off; tune combustion; verify residence-time temperature and emissions."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor SCC temperature, CO, O₂ and shell temperatures.",
+     "part": "secondary_chamber",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect tyres, rollers, seals.",
+     "part": "supports_drive",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Reline refractory; replace seals.",
+     "part": "rotary_kiln"
+    }
+   ],
+   "lubrication": [
+    "Roller bearings and girth gear lubricated per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Refractory failure",
+     "category": "performance",
+     "symptoms": [
+      "Shell hot spots"
+     ],
+     "causes": [
+      "Thermal shock, slag attack"
+     ],
+     "remedies": [
+      "Shell scanner; reline"
+     ],
+     "part": "rotary_kiln"
+    },
+    {
+     "problem": "Low SCC temperature",
+     "category": "performance",
+     "symptoms": [
+      "Emission limit breach risk"
+     ],
+     "causes": [
+      "Afterburner fault, wet waste"
+     ],
+     "remedies": [
+      "Auxiliary burner; waste feed interlock"
+     ],
+     "part": "secondary_chamber"
+    }
+   ],
+   "safety": [
+    "Waste acceptance controls; emergency vent stack procedures; hot ash; CEMS."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Incinerator — Introduction",
+    "type": "in_app_tour",
+    "model": "incinerator.glb",
+    "duration_s": 61.5,
+    "script": [
+     {
+      "narration": "This module introduces the Incinerator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A rotary kiln incinerator burns solid, sludge and liquid wastes.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The waste, fed at the upper end, tumbles down the slowly rotating, slightly inclined kiln as it dries, burns and becomes ash.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The gases pass to a secondary combustion chamber where an afterburner completes combustion before heat recovery, quenching and gas cleaning.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hazardous and clinical waste; industrial and chemical wastes; contaminated soils.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating), Feed-End Hood, Waste Feed Chute (ram) & Primary Burner, Secondary Combustion Chamber (≥ 850 °C, ≥ 2 s) & Ash Quench below, Hot Gas Outlet to Boiler / Quench & Air Pollution Control.",
+      "duration_s": 18.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Incinerator — Operation",
+    "type": "in_app_tour",
+    "model": "incinerator.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "How the Incinerator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Waste is fed into the kiln at the feed end.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "feed_hood",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotating kiln tumbles the waste as it burns.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotary_kiln",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The kiln burner keeps temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "kiln_flame",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gases are completed in the secondary chamber.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "secondary_chamber",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Hot gas leaves to heat recovery and pollution control.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gas_outlet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Solids burn and ash out in the kiln (often ~ 850–1200 °C).",
+      "duration_s": 5.0,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Incinerator — Maintenance",
+    "type": "in_app_tour",
+    "model": "incinerator.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Incinerator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor SCC temperature, CO, O₂ and shell temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "secondary_chamber",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tyres, rollers, seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supports_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Reline refractory; replace seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotary_kiln",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for refractory failure: shell hot spots. Common cause: thermal shock, slag attack.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rotary_kiln",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low scc temperature: emission limit breach risk. Common cause: afterburner fault, wet waste.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "secondary_chamber",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does the secondary combustion chamber ensure?",
+     "options": [
+      "Complete burn-out of gases at temperature and residence time",
+      "Ash cooling",
+      "Waste feeding",
+      "Kiln rotation"
+     ],
+     "answer": 0,
+     "explanation": "850 °C / 2 s.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is the kiln inclined and rotating?",
+     "options": [
+      "To move and tumble the waste towards the ash end",
+      "For looks",
+      "To cool it",
+      "To store gas"
+     ],
+     "answer": 0,
+     "explanation": "Transport and mixing.",
+     "level": "basic"
+    },
+    {
+     "question": "EU minimum SCC temperature for wastes > 1 % halogenated organics is…",
+     "options": [
+      "1100 °C",
+      "850 °C",
+      "600 °C",
+      "400 °C"
+     ],
+     "answer": 0,
+     "explanation": "IED requirement.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Burns waste while turning it.\"",
+     "options": [
+      "Afterburner",
+      "Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating)",
+      "Secondary (Afterburner) Flame",
+      "Kiln Burner Flame"
+     ],
+     "answer": 1,
+     "explanation": "Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating): Burns waste while turning it.",
+     "level": "basic",
+     "part": "rotary_kiln",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support and drive.\"",
+     "options": [
+      "Secondary Combustion Chamber (≥ 850 °C, ≥ 2 s) & Ash Quench below",
+      "Feed-End Hood, Waste Feed Chute (ram) & Primary Burner",
+      "Support Rollers, Piers & Kiln Drive (motor, reducer, pinion)",
+      "Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating)"
+     ],
+     "answer": 2,
+     "explanation": "Support Rollers, Piers & Kiln Drive (motor, reducer, pinion): Support and drive.",
+     "level": "basic",
+     "part": "supports_drive",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Feeds waste; primary firing.\"",
+     "options": [
+      "Support Rollers, Piers & Kiln Drive (motor, reducer, pinion)",
+      "Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating)",
+      "Secondary Combustion Chamber (≥ 850 °C, ≥ 2 s) & Ash Quench below",
+      "Feed-End Hood, Waste Feed Chute (ram) & Primary Burner"
+     ],
+     "answer": 3,
+     "explanation": "Feed-End Hood, Waste Feed Chute (ram) & Primary Burner: Feeds waste; primary firing.",
+     "level": "basic",
+     "part": "feed_hood",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

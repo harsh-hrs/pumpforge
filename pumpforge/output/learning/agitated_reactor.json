@@ -1,0 +1,652 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "agitated_reactor",
+ "no": 97,
+ "title": "Agitated Reactor",
+ "model_title": "Agitated (Stirred-Tank) Reactor — Jacketed, Baffled, Dual Impeller",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An agitated reactor is a vessel with a motor-driven agitator in which reactions are carried out. Impellers mix the contents, baffles turn swirl into top-to-bottom circulation, and a jacket and/or internal coil add or remove heat to keep the reaction at the right temperature.",
+   "applications": [
+    "Batch chemical and pharmaceutical synthesis",
+    "Polymerisation",
+    "Fermentation (bioreactors)",
+    "Neutralisation and crystallisation"
+   ],
+   "key_points": [
+    "Mixing + heat transfer + residence time",
+    "Baffles prevent vortexing",
+    "Power ∝ N³·D⁵ (turbulent)",
+    "Seal and temperature control critical"
+   ],
+   "classification": {
+    "family": "Reactor",
+    "type": "Continuous stirred-tank / batch reactor, jacketed, baffled, dual impeller"
+   },
+   "hi_family": "static_equipment",
+   "summary": "An agitated (stirred-tank) reactor mixes reactants in a vessel with a motor-driven agitator. Wall baffles stop the liquid simply swirling and turn the flow into top-to-bottom circulation. A jacket and/or internal coil add or remove the reaction heat. It is the workhorse of batch chemical and pharmaceutical production."
+  },
+  "model_3d": {
+   "asset": "glb/agitated_reactor.glb",
+   "metadata": "meta/agitated_reactor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 15798,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Pitched-blade impellers pump liquid down; it rises at the walls.",
+    "Baffles stop the liquid swirling round as a whole.",
+    "The jacket and coil remove the reaction heat."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The drive turns the agitator shaft.",
+     "part": "agitator_drive",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pitched-blade impellers pump liquid down; it rises at the walls.",
+     "part": "agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Baffles stop the liquid swirling round as a whole.",
+     "part": "baffles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The jacket and coil remove the reaction heat.",
+     "part": "cooling_coil",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Reactants enter through the top nozzles; product leaves at the bottom.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Power number vs Reynolds number for the impeller type; heat-removal capacity vs reaction rate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "agitated_reactor_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/agitated_reactor.json#components",
+   "key_components": "Vessel, jacket, baffles, agitator & drive, cooling coil",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Reactor Vessel (shell & dished heads)",
+     "info_ref": "ar_vessel",
+     "function": "Contains the reaction.",
+     "material": "Stainless / glass-lined / alloy."
+    },
+    {
+     "id": "jacket",
+     "name": "Cooling / Heating Jacket",
+     "info_ref": "ar_jacket",
+     "function": "Heats or cools through the wall.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "baffles",
+     "name": "Four Wall Baffles (stop swirling, improve mixing)",
+     "info_ref": "ar_baffles",
+     "function": "Convert swirl into vertical circulation.",
+     "material": "Stainless."
+    },
+    {
+     "id": "contents",
+     "name": "Reaction Mass",
+     "info_ref": "ar_contents",
+     "function": "Reaction mass.",
+     "material": "—"
+    },
+    {
+     "id": "agitator",
+     "name": "Agitator: Shaft & Two Pitched-Blade Turbines",
+     "info_ref": "ar_agitator",
+     "function": "Mixes, suspends solids and improves heat transfer.",
+     "material": "Stainless."
+    },
+    {
+     "id": "agitator_drive",
+     "name": "Agitator Drive: Motor, Gearbox & Lantern with Mechanical Seal",
+     "info_ref": "ag_drive",
+     "function": "Drives the agitator and seals the shaft.",
+     "material": "Steel."
+    },
+    {
+     "id": "cooling_coil",
+     "name": "Internal Cooling Coil",
+     "info_ref": "ar_coil",
+     "function": "Extra heat-transfer area inside the vessel.",
+     "material": "Stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Feed, Manway, Bottom Outlet, Jacket Nozzles & Thermowell",
+     "info_ref": "ar_nozzles",
+     "function": "Feed, manway, outlet, jacket connections, thermowell.",
+     "material": "Stainless."
+    },
+    {
+     "id": "legs",
+     "name": "Support Legs / Lugs",
+     "info_ref": "ar_supports",
+     "function": "Supports.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "0.05 – 100 m³",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "FV – 10 (typical)",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "-30 to 250",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Working volume",
+     "unit": "m³"
+    }
+   },
+   "additional": {
+    "agitator_power": {
+     "typical_range": "~ 0.1 – 3 kW/m³",
+     "unit": "kW/m³"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Pressure and leak test; check agitator rotation and seal flush; calibrate temperature/pressure instruments; test interlocks and relief devices."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check seal, agitator current, temperatures.",
+     "part": "agitator_drive",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect impellers, baffles, coil.",
+     "part": "agitator",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Seal and gearbox overhaul.",
+     "part": "agitator_drive"
+    }
+   ],
+   "lubrication": [
+    "Gearbox oil and motor bearings; seal support system fluid."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Runaway temperature",
+     "category": "performance",
+     "symptoms": [
+      "Temperature/pressure rise"
+     ],
+     "causes": [
+      "Cooling failure, overcharge"
+     ],
+     "remedies": [
+      "Emergency cooling/quench; relief"
+     ],
+     "part": "cooling_coil"
+    },
+    {
+     "problem": "Seal leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Leak at agitator"
+     ],
+     "causes": [
+      "Seal wear, shaft run-out"
+     ],
+     "remedies": [
+      "Replace seal; check run-out"
+     ],
+     "part": "agitator_drive"
+    },
+    {
+     "problem": "Poor mixing",
+     "category": "performance",
+     "symptoms": [
+      "Hot spots, off-spec"
+     ],
+     "causes": [
+      "Wrong speed/impeller, missing baffles"
+     ],
+     "remedies": [
+      "Review mixing design"
+     ],
+     "part": "agitator"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Agitated Reactor — Introduction",
+    "type": "in_app_tour",
+    "model": "agitated_reactor.glb",
+    "duration_s": 46.9,
+    "script": [
+     {
+      "narration": "This module introduces the Agitated Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An agitated reactor is a vessel with a motor-driven agitator in which reactions are carried out.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Impellers mix the contents, baffles turn swirl into top-to-bottom circulation, and a jacket and/or internal coil add or remove heat to keep the reaction at the right temperature.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include batch chemical and pharmaceutical synthesis; polymerisation; fermentation (bioreactors); neutralisation and crystallisation.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Agitator: Shaft & Two Pitched-Blade Turbines.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Agitated Reactor — Operation",
+    "type": "in_app_tour",
+    "model": "agitated_reactor.glb",
+    "duration_s": 29.4,
+    "script": [
+     {
+      "narration": "How the Agitated Reactor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The drive turns the agitator shaft.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "agitator_drive",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pitched-blade impellers pump liquid down; it rises at the walls.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "agitator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Baffles stop the liquid swirling round as a whole.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "baffles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The jacket and coil remove the reaction heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_coil",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Reactants enter through the top nozzles; product leaves at the bottom.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Agitated Reactor — Maintenance",
+    "type": "in_app_tour",
+    "model": "agitated_reactor.glb",
+    "duration_s": 39.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Agitated Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check seal, agitator current, temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "agitator_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impellers, baffles, coil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Seal and gearbox overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "agitator_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for runaway temperature: temperature/pressure rise. Common cause: cooling failure, overcharge.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "cooling_coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for seal leakage: leak at agitator. Common cause: seal wear, shaft run-out.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "agitator_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor mixing: hot spots, off-spec. Common cause: wrong speed/impeller, missing baffles.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why fit baffles?",
+     "options": [
+      "Strength",
+      "Convert swirl into vertical circulation",
+      "Cooling",
+      "Support the shaft"
+     ],
+     "answer": 1,
+     "explanation": "Better mixing.",
+     "level": "basic"
+    },
+    {
+     "question": "Doubling agitator speed changes power by about…",
+     "options": [
+      "×2",
+      "×4",
+      "×8",
+      "×16"
+     ],
+     "answer": 2,
+     "explanation": "P ∝ N³.",
+     "level": "basic"
+    },
+    {
+     "question": "Reaction heat is removed by…",
+     "options": [
+      "The motor",
+      "Jacket and coil",
+      "Baffles",
+      "Nozzles"
+     ],
+     "answer": 1,
+     "explanation": "Heat transfer surfaces.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the reaction.\"",
+     "options": [
+      "Reaction Mass",
+      "Four Wall Baffles (stop swirling, improve mixing)",
+      "Reactor Vessel (shell & dished heads)",
+      "Cooling / Heating Jacket"
+     ],
+     "answer": 2,
+     "explanation": "Reactor Vessel (shell & dished heads): Contains the reaction.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Heats or cools through the wall.\"",
+     "options": [
+      "Support Legs / Lugs",
+      "Feed, Manway, Bottom Outlet, Jacket Nozzles & Thermowell",
+      "Internal Cooling Coil",
+      "Cooling / Heating Jacket"
+     ],
+     "answer": 3,
+     "explanation": "Cooling / Heating Jacket: Heats or cools through the wall.",
+     "level": "basic",
+     "part": "jacket",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Convert swirl into vertical circulation.\"",
+     "options": [
+      "Reaction Mass",
+      "Cooling / Heating Jacket",
+      "Four Wall Baffles (stop swirling, improve mixing)",
+      "Reactor Vessel (shell & dished heads)"
+     ],
+     "answer": 2,
+     "explanation": "Four Wall Baffles (stop swirling, improve mixing): Convert swirl into vertical circulation.",
+     "level": "basic",
+     "part": "baffles",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

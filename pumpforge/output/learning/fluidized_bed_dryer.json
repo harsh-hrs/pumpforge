@@ -1,0 +1,652 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "fluidized_bed_dryer",
+ "no": 162,
+ "title": "Fluidized Bed Dryer",
+ "model_title": "Continuous Fluidised Bed Dryer (Plenum, Distributor, Bed, Freeboard)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A fluidised bed dryer blows hot air up through a perforated distributor plate at a velocity just high enough to lift the particles, so the bed behaves like a boiling liquid. Every particle is surrounded by hot air, giving fast and even drying. In continuous units the bed flows from the feed point over a weir to the outlet.",
+   "applications": [
+    "Granules, crystals and pellets (salt, sugar, fertiliser, plastics)",
+    "Pharmaceutical granules",
+    "Food powders and agglomerates"
+   ],
+   "key_points": [
+    "Air velocity above minimum fluidisation velocity",
+    "Uniform bed temperature",
+    "Weir height sets residence time",
+    "Particles must be fluidisable (not too fine/sticky)"
+   ],
+   "classification": {
+    "family": "Dryer",
+    "type": "Continuous rectangular fluid-bed dryer"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A fluidised bed dryer blows hot air up through a perforated plate so a bed of particles lifts and behaves like a boiling liquid. Intense contact between air and every particle gives fast, uniform drying; in continuous units the bed flows from the feed point over a weir to the outlet."
+  },
+  "model_3d": {
+   "asset": "glb/fluidized_bed_dryer.glb",
+   "metadata": "meta/fluidized_bed_dryer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9658,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot air from the heater enters the plenum.",
+    "The distributor spreads the air evenly.",
+    "Particles fluidise and dry in the bed."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot air from the heater enters the plenum.",
+     "part": "air_system",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The distributor spreads the air evenly.",
+     "part": "distributor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Particles fluidise and dry in the bed.",
+     "part": "body",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dried product overflows the weir to the outlet.",
+     "part": "weir_feed",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The cyclone captures fines from exhaust air.",
+     "part": "cyclone",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Bed ΔP vs air velocity: rises then levels off at minimum fluidisation; above terminal velocity particles are blown out."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "fluidized_bed_dryer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "fluidized_bed_dryer_temperature.glb",
+     "title": "Intense heat and mass transfer in the bed",
+     "description": "Air blown up through the distributor at just above the minimum fluidisation velocity makes the particles behave like a boiling liquid. Every particle is surrounded by hot air, so drying is fast and the bed temperature is uniform. Bed depth (weir height) and air temperature set residence time and final moisture.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/fluidized_bed_dryer.json#components",
+   "key_components": "Plenum, distributor plate, bed, freeboard, hot-air fan, cyclone, discharge",
+   "parts": [
+    {
+     "id": "body",
+     "name": "Dryer Body: Plenum (below) & Freeboard (above the bed)",
+     "info_ref": "fb_body",
+     "function": "Plenum and freeboard.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "distributor",
+     "name": "Perforated Distributor Plate (spreads air evenly)",
+     "info_ref": "fb_distributor",
+     "function": "Distributes air uniformly.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "weir_feed",
+     "name": "Discharge Weir (sets bed depth) & Feed Chute",
+     "info_ref": "fb_weir",
+     "function": "Sets bed depth; feed chute.",
+     "material": "Steel."
+    },
+    {
+     "id": "bed",
+     "name": "Fluidised Particles (bubbling bed, moving towards the weir)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "air_system",
+     "name": "Hot-Air Heater, Inlet Duct & Exhaust Duct",
+     "info_ref": "fb_air",
+     "function": "Supplies hot air.",
+     "material": "—"
+    },
+    {
+     "id": "cyclone",
+     "name": "Cyclone (captures fines from exhaust air)",
+     "info_ref": "fb_cyclone",
+     "function": "Captures fines.",
+     "material": "Steel."
+    },
+    {
+     "id": "fan",
+     "name": "Supply Air Fan Impeller",
+     "info_ref": "fb_air",
+     "function": "Supplies hot air.",
+     "material": "—"
+    },
+    {
+     "id": "discharge",
+     "name": "Product Discharge (rotary valve)",
+     "info_ref": "fb_weir",
+     "function": "Sets bed depth; feed chute.",
+     "material": "Steel."
+    },
+    {
+     "id": "legs",
+     "name": "Support Legs",
+     "info_ref": "fb_body",
+     "function": "Plenum and freeboard.",
+     "material": "Stainless steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bed area ~ 0.5 – 50 m²",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.05 – 20",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Air ~ 60 – 250",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "~ 0.1 – 100",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Check particle size distribution and stickiness; size bed area for air velocity and residence time."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Mujumdar — Handbook of Industrial Drying"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment, product and dynamic loads; explosion venting directed to a safe area."
+   ],
+   "alignment": [
+    "Align fans, rotary valves and drives; level chambers and beds."
+   ],
+   "piping": [
+    "Air/gas ducts with dampers and expansion joints; dust collection (cyclone, bag filter); explosion isolation where required (ATEX/NFPA)."
+   ],
+   "commissioning": [
+    "Air balance; heat-up curve; water trials then product; check outlet temperature/moisture control and interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check bed ΔP, temperatures and moisture.",
+     "part": "distributor",
+     "interval": "per shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean distributor holes; check cyclone.",
+     "part": "distributor",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect fan and heater.",
+     "part": "fan"
+    }
+   ],
+   "lubrication": [
+    "Fan bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Defluidisation/channelling",
+     "category": "performance",
+     "symptoms": [
+      "Wet lumps, hot spots"
+     ],
+     "causes": [
+      "Sticky feed, blocked distributor"
+     ],
+     "remedies": [
+      "Pre-mix/back-mix feed; clean plate"
+     ],
+     "part": "distributor"
+    },
+    {
+     "problem": "Excess fines carry-over",
+     "category": "performance",
+     "symptoms": [
+      "Cyclone overload"
+     ],
+     "causes": [
+      "Too high air velocity"
+     ],
+     "remedies": [
+      "Reduce air; adjust"
+     ],
+     "part": "cyclone"
+    }
+   ],
+   "safety": [
+    "Dust explosion protection; hot surfaces; lock out fan before entering."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Fluidized Bed Dryer — Introduction",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_dryer.glb",
+    "duration_s": 55.3,
+    "script": [
+     {
+      "narration": "This module introduces the Fluidized Bed Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A fluidised bed dryer blows hot air up through a perforated distributor plate at a velocity just high enough to lift the particles, so the bed behaves like a boiling liquid.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Every particle is surrounded by hot air, giving fast and even drying.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In continuous units the bed flows from the feed point over a weir to the outlet.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include granules, crystals and pellets (salt, sugar, fertiliser, plastics); pharmaceutical granules; food powders and agglomerates.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Dryer Body: Plenum (below) & Freeboard (above the bed), Supply Air Fan Impeller.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Fluidized Bed Dryer — Operation",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_dryer.glb",
+    "duration_s": 37.0,
+    "script": [
+     {
+      "narration": "How the Fluidized Bed Dryer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot air from the heater enters the plenum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_system",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The distributor spreads the air evenly.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Particles fluidise and dry in the bed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dried product overflows the weir to the outlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "weir_feed",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The cyclone captures fines from exhaust air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cyclone",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Air blown up through the distributor at just above the minimum fluidisation velocity makes the particles behave like a boiling liquid.",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Fluidized Bed Dryer — Maintenance",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_dryer.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Fluidized Bed Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check bed ΔP, temperatures and moisture.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean distributor holes; check cyclone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect fan and heater.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for defluidisation/channelling: wet lumps, hot spots. Common cause: sticky feed, blocked distributor.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "distributor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for excess fines carry-over: cyclone overload. Common cause: too high air velocity.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "cyclone",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is minimum fluidisation velocity?",
+     "options": [
+      "Air velocity at which the bed just lifts",
+      "Fan speed",
+      "Weir height",
+      "Feed rate"
+     ],
+     "answer": 0,
+     "explanation": "Onset of fluidisation.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets residence time in a continuous FBD?",
+     "options": [
+      "Weir height and feed rate",
+      "Paint",
+      "Cyclone",
+      "Stack"
+     ],
+     "answer": 0,
+     "explanation": "Bed hold-up.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is bed temperature uniform?",
+     "options": [
+      "Intense mixing of the fluidised particles",
+      "Insulation",
+      "Cold air",
+      "No heat"
+     ],
+     "answer": 0,
+     "explanation": "Mixing.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Plenum and freeboard.\"",
+     "options": [
+      "Discharge Weir (sets bed depth) & Feed Chute",
+      "Perforated Distributor Plate (spreads air evenly)",
+      "Dryer Body: Plenum (below) & Freeboard (above the bed)",
+      "Hot-Air Heater, Inlet Duct & Exhaust Duct"
+     ],
+     "answer": 2,
+     "explanation": "Dryer Body: Plenum (below) & Freeboard (above the bed): Plenum and freeboard.",
+     "level": "basic",
+     "part": "body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distributes air uniformly.\"",
+     "options": [
+      "Perforated Distributor Plate (spreads air evenly)",
+      "Dryer Body: Plenum (below) & Freeboard (above the bed)",
+      "Support Legs",
+      "Product Discharge (rotary valve)"
+     ],
+     "answer": 0,
+     "explanation": "Perforated Distributor Plate (spreads air evenly): Distributes air uniformly.",
+     "level": "basic",
+     "part": "distributor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Sets bed depth; feed chute.\"",
+     "options": [
+      "Hot-Air Heater, Inlet Duct & Exhaust Duct",
+      "Dryer Body: Plenum (below) & Freeboard (above the bed)",
+      "Discharge Weir (sets bed depth) & Feed Chute",
+      "Perforated Distributor Plate (spreads air evenly)"
+     ],
+     "answer": 2,
+     "explanation": "Discharge Weir (sets bed depth) & Feed Chute: Sets bed depth; feed chute.",
+     "level": "basic",
+     "part": "weir_feed",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

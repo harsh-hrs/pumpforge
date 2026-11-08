@@ -1,0 +1,525 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "fluidized_bed_reactor",
+  "title": "Fluidized Bed Reactor (Bubbling Bed, Internal Cyclones)",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 101,
+    "phase": 6,
+    "eq_id": "EQ-179",
+    "subcategory": "Reactors",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "fluidized_bed_reactor_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "fluidizing_gas",
+      "kind": "air",
+      "radius": 0.012,
+      "points": [
+        [
+          0.0,
+          0.05,
+          -0.0
+        ],
+        [
+          0.0,
+          0.7,
+          -0.0
+        ],
+        [
+          0.15,
+          0.84,
+          -0.03
+        ],
+        [
+          0.15,
+          1.9,
+          -0.03
+        ],
+        [
+          0.1025,
+          2.48,
+          -0.05
+        ],
+        [
+          0.2025,
+          2.6,
+          -0.05
+        ],
+        [
+          0.2025,
+          2.88,
+          -0.05
+        ],
+        [
+          0.0,
+          3.225,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "solids_return",
+      "kind": "flow_discharge",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.2025,
+          2.3,
+          -0.05
+        ],
+        [
+          -0.2025,
+          1.2,
+          -0.05
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 13260,
+    "parts": 7
+  },
+  "summary": "In a fluidized bed reactor, gas blown up through a distributor plate lifts a bed of fine particles so they behave like a boiling liquid. Intense mixing gives very uniform temperature and excellent heat and mass transfer. Internal cyclones catch entrained particles and return them through diplegs.",
+  "classification": {
+    "family": "Reactor (gas–solid)",
+    "type": "Bubbling fluidized bed with internal cyclones"
+  },
+  "model_configuration": {
+    "animation": "Bed expands/bubbles; bubbles rise; fines return via diplegs",
+    "distributor": "Bubble-cap plate"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC Section VIII Div. 1",
+      "title": "Rules for Construction of Pressure Vessels",
+      "relevance": "Design, fabrication, inspection.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 13445",
+      "title": "Unfired pressure vessels",
+      "relevance": "European design code.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "PED 2014/68/EU",
+      "title": "Pressure Equipment Directive",
+      "relevance": "EU conformity.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Kunii & Levenspiel, Fluidization Engineering"
+  ],
+  "parts": [
+    {
+      "id": "vessel",
+      "name": "Reactor Vessel (conical bottom, freeboard section)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "vessel__back",
+        "vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.45,
+        0.25,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        2.925,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.5875,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.5875,
+        -0.0
+      ],
+      "info_ref": "fb_vessel"
+    },
+    {
+      "id": "legs",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.42355,
+        0.0,
+        -0.42355
+      ],
+      "bbox_max": [
+        0.42355,
+        1.0,
+        0.42355
+      ],
+      "label_anchor": [
+        0.0,
+        0.5,
+        0.42355
+      ],
+      "center": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "info_ref": "fb_supports"
+    },
+    {
+      "id": "distributor",
+      "name": "Gas Distributor Plate with Bubble Caps (nozzles)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "distributor__back",
+        "distributor__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.438,
+        0.75,
+        -0.438
+      ],
+      "bbox_max": [
+        0.438,
+        0.84,
+        0.438
+      ],
+      "label_anchor": [
+        0.0,
+        0.795,
+        0.438
+      ],
+      "center": [
+        0.0,
+        0.795,
+        -0.0
+      ],
+      "info_ref": "fb_distributor"
+    },
+    {
+      "id": "bed",
+      "name": "Fluidized Particle Bed (expands with gas flow)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "bed"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -0.437,
+        0.77,
+        -0.437
+      ],
+      "bbox_max": [
+        0.437,
+        1.65,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.21,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.21,
+        -0.2185
+      ],
+      "info_ref": "fb_bed"
+    },
+    {
+      "id": "bubbles",
+      "name": "Gas Bubbles Rising through the Bed",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "bb0",
+        "bb1",
+        "bb2",
+        "bb3",
+        "bb4",
+        "bb5",
+        "bb6",
+        "bb7",
+        "bb8",
+        "bb9",
+        "bb10",
+        "bb11",
+        "bb12",
+        "bb13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.06,
+        -0.06,
+        -0.06
+      ],
+      "bbox_max": [
+        0.06,
+        0.06,
+        0.06
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.06
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "cyclones",
+      "name": "Internal Cyclones with Diplegs (return fines to the bed)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "cyclones.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.3105,
+        1.2,
+        -0.158
+      ],
+      "bbox_max": [
+        0.3105,
+        2.88,
+        0.058
+      ],
+      "label_anchor": [
+        0.0,
+        2.04,
+        0.058
+      ],
+      "center": [
+        0.0,
+        2.04,
+        -0.05
+      ],
+      "info_ref": "fb_cyclones"
+    },
+    {
+      "id": "nozzles",
+      "name": "Fluidizing Gas Inlet, Product Gas Outlet, Solids Feed & Solids Draw-off",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.7,
+        0.04,
+        -0.133
+      ],
+      "bbox_max": [
+        0.7,
+        3.205,
+        0.133
+      ],
+      "label_anchor": [
+        0.0,
+        1.6225,
+        0.133
+      ],
+      "center": [
+        0.0,
+        1.6225,
+        -0.0
+      ],
+      "info_ref": "fb_nozzles"
+    }
+  ],
+  "components": {
+    "fb_vessel": {
+      "function": "Contains the bed and the freeboard where particles disengage.",
+      "construction": "Shell with conical bottom.",
+      "material": "Steel, refractory-lined at high T.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Erosion"
+      ],
+      "inspection": [
+        "Thickness survey"
+      ]
+    },
+    "fb_supports": {
+      "function": "Supports.",
+      "construction": "Legs.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "fb_distributor": {
+      "function": "Spreads the fluidizing gas evenly.",
+      "construction": "Plate with bubble caps/nozzles.",
+      "material": "Stainless.",
+      "operating_conditions": "ΔP across plate ensures even distribution.",
+      "failure_modes": [
+        "Plugging, erosion"
+      ],
+      "inspection": [
+        "ΔP check"
+      ]
+    },
+    "fb_bed": {
+      "function": "Fluidized solids (catalyst or reactant).",
+      "construction": "Particles.",
+      "material": "—",
+      "operating_conditions": "Minimum fluidization velocity must be exceeded.",
+      "failure_modes": [
+        "Agglomeration, defluidization"
+      ],
+      "inspection": [
+        "ΔP across bed"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    },
+    "fb_cyclones": {
+      "function": "Separate entrained solids from the gas.",
+      "construction": "Cyclones with diplegs and trickle valves.",
+      "material": "Stainless / hard-faced.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Erosion, dipleg plugging"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "fb_nozzles": {
+      "function": "Gas in/out, solids feed and draw-off.",
+      "construction": "Nozzles.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    }
+  }
+}

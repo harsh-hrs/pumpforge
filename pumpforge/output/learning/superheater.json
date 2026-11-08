@@ -1,0 +1,648 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "superheater",
+ "no": 153,
+ "title": "Superheater",
+ "model_title": "Pendant Superheater (Primary + Secondary with Spray Attemperator)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A superheater raises the temperature of saturated steam from the boiler drum above its saturation temperature. Superheated steam carries more energy per kilogram and stays dry through most of the turbine. Pendant platens hang in the hottest gas path; an attemperator sprays feedwater between stages to hold the final temperature.",
+   "applications": [
+    "Utility and industrial water-tube boilers",
+    "HRSGs",
+    "Process steam where dry steam is required"
+   ],
+   "key_points": [
+    "Highest metal temperatures in the boiler → alloy steels",
+    "Primary + secondary stages",
+    "Spray attemperator controls outlet temperature",
+    "Steam flow cools the tubes — never fire without steam flow"
+   ],
+   "classification": {
+    "family": "Boiler heat transfer",
+    "type": "Two-stage pendant superheater with interstage attemperator"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A superheater heats saturated steam from the boiler drum above its saturation temperature. Dry superheated steam improves turbine efficiency and avoids blade erosion. Pendant tube platens hang in the hot gas path; a spray attemperator between the primary and secondary stages controls the final steam temperature."
+  },
+  "model_3d": {
+   "asset": "glb/superheater.glb",
+   "metadata": "meta/superheater.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9420,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Saturated steam from the drum enters the primary inlet header.",
+    "The primary platens heat the steam in the cooler gas zone.",
+    "The attemperator sprays water to trim the temperature."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Saturated steam from the drum enters the primary inlet header.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The primary platens heat the steam in the cooler gas zone.",
+     "part": "primary_stage",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The attemperator sprays water to trim the temperature.",
+     "part": "link_attemperator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The secondary platens heat the steam to its final temperature.",
+     "part": "secondary_stage",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Superheated steam leaves to the turbine.",
+     "part": "gas_pass",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Convective superheaters: outlet temperature rises with load; radiant: falls with load — designs combine both for a flatter curve."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "superheater_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "superheater_temperature.glb",
+     "title": "Gas temperature falls across the pass",
+     "description": "Flue gas enters at very high temperature and gives heat first to the secondary and then the primary stage. The final steam temperature is held at its set-point by spraying feedwater in the attemperator between the stages; tube metal temperature (not gas temperature) limits the materials used (alloy steels such as T22/T91).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/superheater.json#components",
+   "key_components": "Tube panels/loops, inlet & outlet headers, attemperator, flue-gas pass",
+   "parts": [
+    {
+     "id": "gas_pass",
+     "name": "Horizontal Gas Pass (boiler back-pass casing)",
+     "info_ref": "sh_casing",
+     "function": "Gas pass and supports.",
+     "material": "Steel."
+    },
+    {
+     "id": "primary_stage",
+     "name": "Primary (low-temperature) Superheater Platens & Headers",
+     "info_ref": "sh_tubes",
+     "function": "Superheat the steam.",
+     "material": "Alloy steel (T11/T22/T91, austenitic)."
+    },
+    {
+     "id": "secondary_stage",
+     "name": "Secondary (final) Superheater Platens & Headers",
+     "info_ref": "sh_tubes",
+     "function": "Superheat the steam.",
+     "material": "Alloy steel (T11/T22/T91, austenitic)."
+    },
+    {
+     "id": "link_attemperator",
+     "name": "Link Pipe with Spray Attemperator (controls final steam temperature)",
+     "info_ref": "sh_attemperator",
+     "function": "Controls final steam temperature by spraying feedwater.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Saturated Steam Inlet (from drum) & Main Steam Outlet",
+     "info_ref": "sh_tubes",
+     "function": "Superheat the steam.",
+     "material": "Alloy steel (T11/T22/T91, austenitic)."
+    },
+    {
+     "id": "support_steel",
+     "name": "Hanger Supports (pendants hang and expand downward)",
+     "info_ref": "sh_casing",
+     "function": "Gas pass and supports.",
+     "material": "Steel."
+    },
+    {
+     "id": "steam_tracers",
+     "name": "Steam Flowing through the Platens",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "gas_particles",
+     "name": "Hot Flue Gas Crossing the Platens",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Platens ~ 5 – 30 m long",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 5 – 500",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Steam ~ 400 – 600+",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 2000",
+     "unit": "t/h steam"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Select material by metal temperature (T11/T22/T91, austenitic); arrange stages for the load range."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASME BPVC Section I",
+    "Babcock & Wilcox — Steam"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth/foundation designed for operating weight full of water; allow access for tube cleaning and burner maintenance."
+   ],
+   "alignment": [
+    "Level the boiler; align burner and fan; check expansion allowances on headers and casings."
+   ],
+   "piping": [
+    "Fit safety valves with unobstructed discharge piped to a safe place; feedwater with check and isolation valves; blowdown to a blowdown vessel.",
+    "Flue/stack sized for the draught required; explosion relief where specified."
+   ],
+   "commissioning": [
+    "Boil-out/chemical clean; hydro-test; set and test safety valves; test low-water cut-outs and flame safeguard (purge, ignition, flame failure); tune combustion (O₂, CO)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor steam and tube metal temperatures; spray flow.",
+     "part": "link_attemperator",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect for sagging, erosion and slag.",
+     "part": "primary_stage",
+     "interval": "outages"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Oxide scale and creep assessment; replace aged sections.",
+     "part": "secondary_stage"
+    }
+   ],
+   "lubrication": [
+    "No lubrication for the static parts — lubricate valve stems, rotating parts and drives per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Long-term overheating (creep)",
+     "category": "thermal",
+     "symptoms": [
+      "Bulging, thick-lip ruptures"
+     ],
+     "causes": [
+      "Internal oxide scale, high metal temperature"
+     ],
+     "remedies": [
+      "Material upgrade; temperature control"
+     ],
+     "part": "secondary_stage"
+    },
+    {
+     "problem": "Attemperator liner cracking",
+     "category": "performance",
+     "symptoms": [
+      "Cracks at spray zone"
+     ],
+     "causes": [
+      "Thermal shock"
+     ],
+     "remedies": [
+      "Inspect liner; nozzle maintenance"
+     ],
+     "part": "link_attemperator"
+    }
+   ],
+   "safety": [
+    "Safety valve on superheater outlet set to lift first so steam flows through the superheater."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Superheater — Introduction",
+    "type": "in_app_tour",
+    "model": "superheater.glb",
+    "duration_s": 49.4,
+    "script": [
+     {
+      "narration": "This module introduces the Superheater.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A superheater raises the temperature of saturated steam from the boiler drum above its saturation temperature.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Superheated steam carries more energy per kilogram and stays dry through most of the turbine.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pendant platens hang in the hottest gas path; an attemperator sprays feedwater between stages to hold the final temperature.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include utility and industrial water-tube boilers; HRSGs; process steam where dry steam is required.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Horizontal Gas Pass (boiler back-pass casing).",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Superheater — Operation",
+    "type": "in_app_tour",
+    "model": "superheater.glb",
+    "duration_s": 37.1,
+    "script": [
+     {
+      "narration": "How the Superheater works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Saturated steam from the drum enters the primary inlet header.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The primary platens heat the steam in the cooler gas zone.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "primary_stage",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The attemperator sprays water to trim the temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "link_attemperator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The secondary platens heat the steam to its final temperature.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "secondary_stage",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Superheated steam leaves to the turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gas_pass",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Flue gas enters at very high temperature and gives heat first to the secondary and then the primary stage.",
+      "duration_s": 7.9,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Superheater — Maintenance",
+    "type": "in_app_tour",
+    "model": "superheater.glb",
+    "duration_s": 35.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Superheater.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor steam and tube metal temperatures; spray flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "link_attemperator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect for sagging, erosion and slag.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "primary_stage",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Oxide scale and creep assessment; replace aged sections.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "secondary_stage",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for long-term overheating (creep): bulging, thick-lip ruptures. Common cause: internal oxide scale, high metal temperature.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "secondary_stage",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for attemperator liner cracking: cracks at spray zone. Common cause: thermal shock.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "link_attemperator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why superheat steam?",
+     "options": [
+      "More energy per kg and dry steam in the turbine",
+      "To lower pressure",
+      "To make water",
+      "To cool the boiler"
+     ],
+     "answer": 0,
+     "explanation": "Efficiency and blade protection.",
+     "level": "basic"
+    },
+    {
+     "question": "How is final steam temperature controlled here?",
+     "options": [
+      "Spray attemperator",
+      "By opening windows",
+      "By the condenser",
+      "By the stack"
+     ],
+     "answer": 0,
+     "explanation": "Spray water.",
+     "level": "basic"
+    },
+    {
+     "question": "Superheater tubes are made of…",
+     "options": [
+      "Alloy steels for high temperature",
+      "Copper",
+      "Plastic",
+      "Aluminium"
+     ],
+     "answer": 0,
+     "explanation": "Creep resistance.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Gas pass and supports.\"",
+     "options": [
+      "Link Pipe with Spray Attemperator (controls final steam temperature)",
+      "Horizontal Gas Pass (boiler back-pass casing)",
+      "Secondary (final) Superheater Platens & Headers",
+      "Saturated Steam Inlet (from drum) & Main Steam Outlet"
+     ],
+     "answer": 1,
+     "explanation": "Horizontal Gas Pass (boiler back-pass casing): Gas pass and supports.",
+     "level": "basic",
+     "part": "gas_pass",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Superheat the steam.\"",
+     "options": [
+      "Hanger Supports (pendants hang and expand downward)",
+      "Hot Flue Gas Crossing the Platens",
+      "Primary (low-temperature) Superheater Platens & Headers",
+      "Link Pipe with Spray Attemperator (controls final steam temperature)"
+     ],
+     "answer": 2,
+     "explanation": "Primary (low-temperature) Superheater Platens & Headers: Superheat the steam.",
+     "level": "basic",
+     "part": "primary_stage",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Controls final steam temperature by spraying feedwater.\"",
+     "options": [
+      "Secondary (final) Superheater Platens & Headers",
+      "Horizontal Gas Pass (boiler back-pass casing)",
+      "Primary (low-temperature) Superheater Platens & Headers",
+      "Link Pipe with Spray Attemperator (controls final steam temperature)"
+     ],
+     "answer": 3,
+     "explanation": "Link Pipe with Spray Attemperator (controls final steam temperature): Controls final steam temperature by spraying feedwater.",
+     "level": "basic",
+     "part": "link_attemperator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

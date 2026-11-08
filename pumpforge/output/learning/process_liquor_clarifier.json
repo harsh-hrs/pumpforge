@@ -1,0 +1,643 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "process_liquor_clarifier",
+ "no": 216,
+ "title": "Process Liquor Clarifier",
+ "model_title": "Multi-Tray Process Liquor Clarifier (Stacked Settling Trays, Common Rake Shaft)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A multi-tray clarifier stacks several conical settling trays in one tank, each with its own feed, overflow and rake arms on a common shaft. It multiplies settling area to remove fine solids from process liquor in a small footprint.",
+   "applications": [
+    "Liquor clarification",
+    "Green-liquor/process liquor polishing"
+   ],
+   "key_points": [
+    "Settling depends on area, not depth",
+    "Stacked trays multiply area",
+    "Common rake shaft",
+    "Small footprint"
+   ],
+   "classification": {
+    "family": "Liquor treatment",
+    "type": "Multi-tray (stacked) clarifier"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A multi-tray clarifier stacks several conical settling trays in one tank, each with its own feed, overflow and rake. This multiplies settling area to remove fine solids from process liquor in a small footprint."
+  },
+  "model_3d": {
+   "asset": "glb/process_liquor_clarifier.glb",
+   "metadata": "meta/process_liquor_clarifier.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 12044,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed enters each tray.",
+    "Solids settle on the trays.",
+    "Rakes push solids to downcomers."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed enters each tray.",
+     "part": "feed_overflow",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Solids settle on the trays.",
+     "part": "trays",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Rakes push solids to downcomers.",
+     "part": "rakes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clear liquor overflows.",
+     "part": "tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Solids leave from the bottom.",
+     "part": "mud_layers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Overflow rate per unit area vs clarity."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "process_liquor_clarifier_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "process_liquor_clarifier_pressure.glb",
+     "title": "More settling area in the same footprint",
+     "description": "Settling capacity depends on area, not depth. Stacking several trays, each with its own feed, overflow and rake, multiplies the effective settling area in one tank. Fine suspended solids in the process liquor settle on the trays and are raked to the central downcomers; the clarified liquor overflows.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/process_liquor_clarifier.json#components",
+   "key_components": "Multi-tray clarifier: tank, stacked trays, rakes on common shaft, feeds and overflows",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Clarifier Tank & Top Overflow Launder",
+     "info_ref": "pl_tank",
+     "function": "Holds liquor.",
+     "material": "Steel."
+    },
+    {
+     "id": "trays",
+     "name": "Stacked Conical Trays with Central Mud Downcomers (multiply settling area)",
+     "info_ref": "pl_trays",
+     "function": "Settling surfaces.",
+     "material": "Steel."
+    },
+    {
+     "id": "liquor",
+     "name": "Process Liquor",
+     "info_ref": "pl_tank",
+     "function": "Holds liquor.",
+     "material": "Steel."
+    },
+    {
+     "id": "mud_layers",
+     "name": "Settled Solids on each Tray & in the Bottom Cone",
+     "info_ref": "pl_trays",
+     "function": "Settling surfaces.",
+     "material": "Steel."
+    },
+    {
+     "id": "rakes",
+     "name": "Rake Arms on the Common Shaft (one set per tray)",
+     "info_ref": "pl_rakes",
+     "function": "Move solids to downcomers.",
+     "material": "Steel."
+    },
+    {
+     "id": "drive",
+     "name": "Bridge & Rake Drive",
+     "info_ref": "pl_drive",
+     "function": "Turns rakes.",
+     "material": "—"
+    },
+    {
+     "id": "feed_overflow",
+     "name": "Feed Pipes to each Tray, Intermediate Overflows & Underflow",
+     "info_ref": "pl_piping",
+     "function": "Feeds/overflows/underflow.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Support Legs",
+     "info_ref": "pl_tank",
+     "function": "Holds liquor.",
+     "material": "Steel."
+    },
+    {
+     "id": "settling",
+     "name": "Fine Solids settling onto the Trays",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tank ~ 10 – 30 m diameter, 3 – 5 trays",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 200 – 1500",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 60 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Rake drive ~ 10 – 40",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Total area from settling tests."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Clarifier design references"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Large ring foundation or concrete tank; centre pier carries the rake drive and torque."
+   ],
+   "alignment": [
+    "Level launders so overflow is even all round; centre the drive and shaft."
+   ],
+   "piping": [
+    "Feed to feedwell with flocculant dosing points; underflow pumps with standby and flushing; overflow to downstream."
+   ],
+   "commissioning": [
+    "Fill with water, run rakes and test torque alarms and lift; start feed and flocculant; build mud bed gradually."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check overflow clarity per tray.",
+     "part": "trays",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Torque trend.",
+     "part": "drive",
+     "interval": "continuous"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect trays and rakes.",
+     "part": "rakes"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tray overload",
+     "category": "performance",
+     "symptoms": [
+      "Solids carry-over"
+     ],
+     "causes": [
+      "Uneven feed split"
+     ],
+     "remedies": [
+      "Balance feeds"
+     ],
+     "part": "trays"
+    },
+    {
+     "problem": "Rake torque",
+     "category": "performance",
+     "symptoms": [
+      "Trip"
+     ],
+     "causes": [
+      "Build-up"
+     ],
+     "remedies": [
+      "Increase underflow"
+     ],
+     "part": "rakes"
+    }
+   ],
+   "safety": [
+    "Caustic."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Process Liquor Clarifier — Introduction",
+    "type": "in_app_tour",
+    "model": "process_liquor_clarifier.glb",
+    "duration_s": 43.6,
+    "script": [
+     {
+      "narration": "This module introduces the Process Liquor Clarifier.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A multi-tray clarifier stacks several conical settling trays in one tank, each with its own feed, overflow and rake arms on a common shaft.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It multiplies settling area to remove fine solids from process liquor in a small footprint.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include liquor clarification; green-liquor/process liquor polishing.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rake Arms on the Common Shaft (one set per tray).",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Process Liquor Clarifier — Operation",
+    "type": "in_app_tour",
+    "model": "process_liquor_clarifier.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "How the Process Liquor Clarifier works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters each tray.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_overflow",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Solids settle on the trays.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trays",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Rakes push solids to downcomers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rakes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clear liquor overflows.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Solids leave from the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mud_layers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Settling capacity depends on area, not depth.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Process Liquor Clarifier — Maintenance",
+    "type": "in_app_tour",
+    "model": "process_liquor_clarifier.glb",
+    "duration_s": 31.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Process Liquor Clarifier.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check overflow clarity per tray.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trays",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Torque trend.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect trays and rakes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tray overload: solids carry-over. Common cause: uneven feed split.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "trays",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rake torque: trip. Common cause: build-up.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why stack trays?",
+     "options": [
+      "More settling area in one footprint",
+      "More depth",
+      "Heat",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "Area.",
+     "level": "basic"
+    },
+    {
+     "question": "What do rakes do?",
+     "options": [
+      "Move solids to downcomers",
+      "Mix",
+      "Heat",
+      "Pump"
+     ],
+     "answer": 0,
+     "explanation": "Rakes.",
+     "level": "basic"
+    },
+    {
+     "question": "Settling capacity depends mainly on…",
+     "options": [
+      "Area",
+      "Depth",
+      "Colour",
+      "Shape"
+     ],
+     "answer": 0,
+     "explanation": "Area.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds liquor.\"",
+     "options": [
+      "Feed Pipes to each Tray, Intermediate Overflows & Underflow",
+      "Settled Solids on each Tray & in the Bottom Cone",
+      "Fine Solids settling onto the Trays",
+      "Clarifier Tank & Top Overflow Launder"
+     ],
+     "answer": 3,
+     "explanation": "Clarifier Tank & Top Overflow Launder: Holds liquor.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Settling surfaces.\"",
+     "options": [
+      "Rake Arms on the Common Shaft (one set per tray)",
+      "Clarifier Tank & Top Overflow Launder",
+      "Bridge & Rake Drive",
+      "Stacked Conical Trays with Central Mud Downcomers (multiply settling area)"
+     ],
+     "answer": 3,
+     "explanation": "Stacked Conical Trays with Central Mud Downcomers (multiply settling area): Settling surfaces.",
+     "level": "basic",
+     "part": "trays",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Move solids to downcomers.\"",
+     "options": [
+      "Settled Solids on each Tray & in the Bottom Cone",
+      "Rake Arms on the Common Shaft (one set per tray)",
+      "Process Liquor",
+      "Feed Pipes to each Tray, Intermediate Overflows & Underflow"
+     ],
+     "answer": 1,
+     "explanation": "Rake Arms on the Common Shaft (one set per tray): Move solids to downcomers.",
+     "level": "basic",
+     "part": "rakes",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,522 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "expander_turbine",
+  "title": "Turboexpander–Compressor (Radial-Inflow Expander, Variable Nozzles)",
+  "category": "7 · Rotating Equipment – Additional Machinery",
+  "library": {
+    "no": 76,
+    "phase": 5,
+    "eq_id": "EQ-154",
+    "subcategory": "Turbines",
+    "hi_family": "rotating_machinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "expander_turbine_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "expander_turbine_pressure.glb",
+      "title": "Expander: pressure and temperature drop",
+      "description": "High-pressure gas enters the scroll, accelerates through the nozzles and expands through the wheel, doing work on it. Pressure and temperature fall sharply (refrigeration effect); the power drives the compressor (or a generator) on the same shaft.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Expander inlet: high P, ambient T",
+          "anchor": [
+            -0.27,
+            1.1,
+            -0.0
+          ]
+        },
+        {
+          "text": "Exhaust: low P, very cold",
+          "anchor": [
+            -0.65,
+            0.42,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "expander_gas",
+      "kind": "air",
+      "radius": 0.008,
+      "points": [
+        [
+          -0.27,
+          1.05,
+          -0.0
+        ],
+        [
+          -0.27,
+          0.84,
+          -0.0
+        ],
+        [
+          -0.28,
+          0.8,
+          -0.0
+        ],
+        [
+          -0.28,
+          0.76507,
+          0.11293
+        ],
+        [
+          -0.28,
+          0.67247,
+          0.18641
+        ],
+        [
+          -0.28,
+          0.5962,
+          0.12994
+        ],
+        [
+          -0.37,
+          0.6,
+          -0.06
+        ],
+        [
+          -0.7,
+          0.6,
+          -0.0
+        ]
+      ],
+      "speed": [
+        1,
+        1.3,
+        1.8,
+        2,
+        2,
+        1.6,
+        1.2,
+        1
+      ]
+    },
+    {
+      "name": "compressor_gas",
+      "kind": "flow_discharge",
+      "radius": 0.008,
+      "points": [
+        [
+          0.67,
+          0.62,
+          -0.0
+        ],
+        [
+          0.35,
+          0.65,
+          -0.0
+        ],
+        [
+          0.27,
+          0.74,
+          -0.0
+        ],
+        [
+          0.27,
+          0.73934,
+          -0.14347
+        ],
+        [
+          0.27,
+          0.82,
+          -0.0
+        ],
+        [
+          0.27,
+          1.05,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10128,
+    "parts": 6
+  },
+  "summary": "A turboexpander lets high-pressure gas expand through a radial-inflow turbine wheel. Because the gas does work on the wheel, its temperature drops far more than in a valve — the basis of gas processing, air separation and LNG refrigeration. The recovered power drives a compressor wheel on the same shaft (or a generator). Variable inlet guide vanes control the flow.",
+  "classification": {
+    "family": "Turbine (expander)",
+    "type": "Radial-inflow turboexpander–compressor, overhung wheels"
+  },
+  "model_configuration": {
+    "expander_blades": 14,
+    "compressor_blades": 16,
+    "nozzles": 13,
+    "bearings": "Oil-lubricated (active magnetic bearings also common)"
+  },
+  "standards": [
+    {
+      "id": "API 617 (Ch. 4)",
+      "title": "Axial and Centrifugal Compressors and Expander-compressors",
+      "relevance": "Expander-compressors.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Bloch & Soares, Turboexpanders and Process Applications"
+  ],
+  "parts": [
+    {
+      "id": "rotor",
+      "name": "Rotor: Expander Wheel, Shaft & Compressor Wheel",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "rotor.001"
+      ],
+      "pivot": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.35,
+        0.47,
+        -0.13
+      ],
+      "bbox_max": [
+        0.34,
+        0.73,
+        0.13
+      ],
+      "label_anchor": [
+        -0.005,
+        0.6,
+        0.13
+      ],
+      "center": [
+        -0.005,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "ex_rotor"
+    },
+    {
+      "id": "bearing_housing",
+      "name": "Centre Bearing Housing (oil-lubricated tilting-pad bearings, seals)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "bearing_housing__back",
+        "bearing_housing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.22,
+        0.0,
+        -0.14
+      ],
+      "bbox_max": [
+        0.22,
+        0.72,
+        0.14
+      ],
+      "label_anchor": [
+        0.0,
+        0.36,
+        0.14
+      ],
+      "center": [
+        0.0,
+        0.36,
+        -0.0
+      ],
+      "info_ref": "ex_bearings"
+    },
+    {
+      "id": "expander_casing",
+      "name": "Expander Inlet Scroll & Axial Exhaust (cold gas out)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "expander_casing__back",
+        "expander_casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.67,
+        0.3,
+        -0.3
+      ],
+      "bbox_max": [
+        -0.2,
+        1.05,
+        0.3
+      ],
+      "label_anchor": [
+        -0.435,
+        0.675,
+        0.3
+      ],
+      "center": [
+        -0.435,
+        0.675,
+        -0.0
+      ],
+      "info_ref": "ex_expander_casing"
+    },
+    {
+      "id": "nozzles",
+      "name": "Variable Inlet Guide Vanes (Nozzles) — adjust gas flow",
+      "group": "stator",
+      "section_role": "keep",
+      "nodes": [
+        "nv0",
+        "nv1",
+        "nv2",
+        "nv3",
+        "nv4",
+        "nv5",
+        "nv6",
+        "nv7",
+        "nv8",
+        "nv9",
+        "nv10",
+        "nv11",
+        "nv12"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.25,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.0175,
+        -0.02513,
+        -0.02514
+      ],
+      "bbox_max": [
+        0.0175,
+        0.02513,
+        0.02514
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02514
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "ex_nozzles"
+    },
+    {
+      "id": "compressor_casing",
+      "name": "Compressor (Brake) Casing: Axial Inlet, Diffuser & Volute",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "compressor_casing__back",
+        "compressor_casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.205,
+        0.3,
+        -0.3
+      ],
+      "bbox_max": [
+        0.65,
+        1.05,
+        0.3
+      ],
+      "label_anchor": [
+        0.4275,
+        0.675,
+        0.3
+      ],
+      "center": [
+        0.4275,
+        0.675,
+        -0.0
+      ],
+      "info_ref": "ex_compressor_casing"
+    },
+    {
+      "id": "skid",
+      "name": "Skid / Baseplate",
+      "group": "baseplate",
+      "section_role": "keep",
+      "nodes": [
+        "fnd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.8,
+        -0.08,
+        -0.35
+      ],
+      "bbox_max": [
+        0.8,
+        0.0,
+        0.35
+      ],
+      "label_anchor": [
+        0.0,
+        -0.04,
+        0.35
+      ],
+      "center": [
+        0.0,
+        -0.04,
+        -0.0
+      ],
+      "info_ref": "ex_skid"
+    }
+  ],
+  "components": {
+    "ex_rotor": {
+      "function": "Extracts energy from the expanding gas and drives the compressor.",
+      "construction": "Two overhung wheels on a short shaft.",
+      "material": "Aluminium alloy or titanium wheels; steel shaft.",
+      "operating_conditions": "Very high speed (tens of thousands rpm on small units).",
+      "failure_modes": [
+        "Erosion by liquids/solids",
+        "Imbalance"
+      ],
+      "inspection": [
+        "Vibration, speed"
+      ]
+    },
+    "ex_bearings": {
+      "function": "Support the high-speed shaft and carry thrust.",
+      "construction": "Tilting-pad bearings in a centre housing with seals.",
+      "material": "Steel/babbitt.",
+      "operating_conditions": "Seal gas keeps oil out of the process.",
+      "failure_modes": [
+        "Oil contamination"
+      ],
+      "inspection": [
+        "Temperature, vibration"
+      ]
+    },
+    "ex_expander_casing": {
+      "function": "Leads gas through the inlet scroll to the nozzles and out the axial exhaust.",
+      "construction": "Scroll casing.",
+      "material": "Stainless (cryogenic).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "ex_nozzles": {
+      "function": "Accelerate the gas onto the wheel and control flow.",
+      "construction": "Adjustable nozzle vanes moved by an actuator ring.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Sticking"
+      ],
+      "inspection": [
+        "Stroke test"
+      ]
+    },
+    "ex_compressor_casing": {
+      "function": "Collects compressed gas from the compressor wheel.",
+      "construction": "Axial inlet, diffuser and volute.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "ex_skid": {
+      "function": "Supports the machine.",
+      "construction": "Steel skid.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    }
+  }
+}

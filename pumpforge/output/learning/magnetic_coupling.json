@@ -1,0 +1,642 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "magnetic_coupling",
+ "no": 86,
+ "title": "Magnetic Coupling",
+ "model_title": "Magnetic (Synchronous Permanent-Magnet) Coupling with Containment Shell",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A magnetic coupling transmits torque without contact. Permanent magnets on an outer rotor attract opposite poles on an inner rotor through a thin containment shell, so the load side is hermetically sealed — no dynamic shaft seal is needed.",
+   "applications": [
+    "Sealless (mag-drive) pumps for toxic/flammable liquids",
+    "Mixers and reactors",
+    "Vacuum and pressurised equipment",
+    "Food and pharma (hygienic)"
+   ],
+   "key_points": [
+    "Zero leakage — static seal only",
+    "Torque limited: decouples on overload",
+    "Metal shells generate eddy-current heat",
+    "Magnets are temperature limited"
+   ],
+   "classification": {
+    "family": "Coupling (non-contact)",
+    "type": "Synchronous coaxial permanent-magnet coupling"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A magnetic coupling transmits torque through a sealed wall without any shaft seal. Permanent magnets on an outer rotor (on the motor shaft) attract the opposite poles of magnets on an inner rotor (on the pump or mixer shaft). A thin, non-magnetic containment shell separates the two, so the process fluid is completely sealed — ideal for toxic, flammable or valuable liquids."
+  },
+  "model_3d": {
+   "asset": "glb/magnetic_coupling.glb",
+   "metadata": "meta/magnetic_coupling.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 22720,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor turns the outer magnet rotor.",
+    "Magnetic flux passes through the non-magnetic containment shell.",
+    "The inner magnets follow, turning the load shaft at the same speed."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor turns the outer magnet rotor.",
+     "part": "outer_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Magnetic flux passes through the non-magnetic containment shell.",
+     "part": "containment_shell",
+     "cut": true,
+     "operate": true,
+     "overlay": "magnetic_field",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The inner magnets follow, turning the load shaft at the same speed.",
+     "part": "inner_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "If the load torque exceeds the coupling rating, the rotors slip (decouple).",
+     "part": "inner_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Torque vs angular displacement between rotors: rises to a maximum (breakaway) at about half a pole pitch."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "magnetic_coupling_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "magnetic_field": {
+     "file": "magnetic_coupling_magnetic_field.glb",
+     "title": "Magnetic field through the can",
+     "description": "Each outer magnet attracts the opposite pole on the inner rotor through the thin, non-magnetic containment shell. Torque is transmitted without contact; if the load torque exceeds the coupling rating the rotors slip (\"decouple\").",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Flux passes through the shell — no shaft seal needed",
+       "anchor": [
+        -0.03,
+        0.62,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/magnetic_coupling.json#components",
+   "key_components": "Outer magnet rotor, containment shell, inner magnet rotor",
+   "parts": [
+    {
+     "id": "outer_rotor",
+     "name": "Outer (Driving) Magnet Rotor on Motor Shaft — alternating N/S magnets",
+     "info_ref": "mc_outer",
+     "function": "Carries the driving magnets.",
+     "material": "Steel; NdFeB or SmCo magnets."
+    },
+    {
+     "id": "containment_shell",
+     "name": "Containment Shell (Can) — static seal between atmosphere and process",
+     "info_ref": "mc_can",
+     "function": "Seals the process side from atmosphere.",
+     "material": "Stainless, Hastelloy, PEEK/ceramic."
+    },
+    {
+     "id": "inner_rotor",
+     "name": "Inner (Driven) Magnet Rotor on Pump/Load Shaft",
+     "info_ref": "mc_inner",
+     "function": "Carries the driven magnets on the load shaft.",
+     "material": "Steel/stainless; magnets."
+    },
+    {
+     "id": "bearing_housings",
+     "name": "Bearing Housings (motor side & load side)",
+     "info_ref": "mc_bearings",
+     "function": "Support each shaft.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Torque range ~ 1 Nm – several kNm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.1 – 500",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Up to ~ 3600 (higher on special units)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Rated transmissible torque",
+     "unit": "Nm"
+    }
+   },
+   "additional": {
+    "shell": {
+     "typical_range": "Stainless / Hastelloy / non-metallic",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount driver and driven machines on a rigid common base so centre distances and alignment stay fixed."
+   ],
+   "alignment": [
+    "Centre the outer rotor around the shell with the specified radial clearance; magnetic forces are strong — use assembly fixtures."
+   ],
+   "piping": [
+    "Fit guards that fully enclose moving parts but allow inspection and lubrication."
+   ],
+   "commissioning": [
+    "Check rotation, set tension/slack or torque setting, run in and re-check after the first hours of operation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor bearing temperature and vibration.",
+     "part": "bearing_housings",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check for rubbing marks on the shell.",
+     "part": "containment_shell",
+     "interval": "at overhaul"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bearings; check magnet strength.",
+     "part": "inner_rotor"
+    }
+   ],
+   "lubrication": [
+    "Grease for motor-side bearings; process-lubricated inner bearings on mag-drive pumps."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Decoupling",
+     "category": "performance",
+     "symptoms": [
+      "Motor runs, load stopped"
+     ],
+     "causes": [
+      "Overload, high viscosity, magnet overheating"
+     ],
+     "remedies": [
+      "Stop, find cause, restart"
+     ],
+     "part": "inner_rotor"
+    },
+    {
+     "problem": "Shell rupture",
+     "category": "performance",
+     "symptoms": [
+      "Leak"
+     ],
+     "causes": [
+      "Rubbing from bearing wear, overheating"
+     ],
+     "remedies": [
+      "Replace shell; monitor bearings"
+     ],
+     "part": "containment_shell"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Magnetic Coupling — Introduction",
+    "type": "in_app_tour",
+    "model": "magnetic_coupling.glb",
+    "duration_s": 56.4,
+    "script": [
+     {
+      "narration": "This module introduces the Magnetic Coupling.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A magnetic coupling transmits torque without contact.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Permanent magnets on an outer rotor attract opposite poles on an inner rotor through a thin containment shell, so the load side is hermetically sealed — no dynamic shaft seal is needed.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include sealless (mag-drive) pumps for toxic/flammable liquids; mixers and reactors; vacuum and pressurised equipment; food and pharma (hygienic).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Outer (Driving) Magnet Rotor on Motor Shaft — alternating N/S magnets, Containment Shell (Can) — static seal between atmosphere and process, Inner (Driven) Magnet Rotor on Pump/Load Shaft.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Magnetic Coupling — Operation",
+    "type": "in_app_tour",
+    "model": "magnetic_coupling.glb",
+    "duration_s": 33.7,
+    "script": [
+     {
+      "narration": "How the Magnetic Coupling works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor turns the outer magnet rotor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outer_rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Magnetic flux passes through the non-magnetic containment shell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "containment_shell",
+       "cut": true,
+       "operate": true,
+       "overlay": "magnetic_field",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The inner magnets follow, turning the load shaft at the same speed.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "inner_rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "If the load torque exceeds the coupling rating, the rotors slip (decouple).",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "inner_rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Each outer magnet attracts the opposite pole on the inner rotor through the thin, non-magnetic containment shell.",
+      "duration_s": 7.5,
+      "action": {
+       "overlay": "magnetic_field",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Magnetic Coupling — Maintenance",
+    "type": "in_app_tour",
+    "model": "magnetic_coupling.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Magnetic Coupling.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor bearing temperature and vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_housings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check for rubbing marks on the shell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "containment_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bearings; check magnet strength.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inner_rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for decoupling: motor runs, load stopped. Common cause: overload, high viscosity, magnet overheating.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "inner_rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for shell rupture: leak. Common cause: rubbing from bearing wear, overheating.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "containment_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is a magnetic coupling leak-free?",
+     "options": [
+      "Special packing",
+      "Torque passes through a solid shell — no rotating seal",
+      "Oil film",
+      "It is not"
+     ],
+     "answer": 1,
+     "explanation": "Static containment.",
+     "level": "basic"
+    },
+    {
+     "question": "What happens on overload?",
+     "options": [
+      "The shaft breaks",
+      "The rotors slip/decouple",
+      "Torque increases",
+      "Shell expands"
+     ],
+     "answer": 1,
+     "explanation": "Built-in torque limit.",
+     "level": "basic"
+    },
+    {
+     "question": "A metal containment shell heats up because of…",
+     "options": [
+      "Friction",
+      "Eddy currents",
+      "Sunlight",
+      "Oil"
+     ],
+     "answer": 1,
+     "explanation": "Rotating field induces currents.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries the driving magnets.\"",
+     "options": [
+      "Bearing Housings (motor side & load side)",
+      "Containment Shell (Can) — static seal between atmosphere and process",
+      "Electric Motor – Cooling Fan",
+      "Outer (Driving) Magnet Rotor on Motor Shaft — alternating N/S magnets"
+     ],
+     "answer": 3,
+     "explanation": "Outer (Driving) Magnet Rotor on Motor Shaft — alternating N/S magnets: Carries the driving magnets.",
+     "level": "basic",
+     "part": "outer_rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Seals the process side from atmosphere.\"",
+     "options": [
+      "Electric Motor – Rotor & Shaft",
+      "Electric Motor – Frame & End Shields",
+      "Inner (Driven) Magnet Rotor on Pump/Load Shaft",
+      "Containment Shell (Can) — static seal between atmosphere and process"
+     ],
+     "answer": 3,
+     "explanation": "Containment Shell (Can) — static seal between atmosphere and process: Seals the process side from atmosphere.",
+     "level": "basic",
+     "part": "containment_shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the driven magnets on the load shaft.\"",
+     "options": [
+      "Electric Motor – Bearings (DE & NDE)",
+      "Electric Motor – Stator",
+      "Bearing Housings (motor side & load side)",
+      "Inner (Driven) Magnet Rotor on Pump/Load Shaft"
+     ],
+     "answer": 3,
+     "explanation": "Inner (Driven) Magnet Rotor on Pump/Load Shaft: Carries the driven magnets on the load shaft.",
+     "level": "basic",
+     "part": "inner_rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

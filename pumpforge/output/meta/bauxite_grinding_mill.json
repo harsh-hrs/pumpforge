@@ -1,0 +1,479 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "bauxite_grinding_mill",
+  "title": "Bauxite Ball Mill (Wet Grinding in Spent Liquor, Overflow Discharge)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 195,
+    "phase": 10,
+    "eq_id": "EQ-273",
+    "subcategory": "Grinding",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "bauxite_grinding_mill_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "bauxite_grinding_mill_pressure.glb",
+      "title": "Critical speed and grinding action",
+      "description": "The mill turns at about 65–78 % of critical speed (n_c = 42.3/√D rpm). Balls are lifted up the rising side and cascade/cataract back onto the toe of the charge, breaking bauxite by impact and attrition. Grinding in spent liquor starts the dissolution of gibbsite and produces slurry for digestion; product size is controlled by classification (screens/cyclones).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "sand",
+      "radius": 0.025,
+      "points": [
+        [
+          -1.95,
+          1.7,
+          -0.0
+        ],
+        [
+          -1.6,
+          1.2,
+          -0.0
+        ],
+        [
+          -0.9,
+          1.0,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "slurry",
+      "kind": "flow_discharge",
+      "radius": 0.025,
+      "points": [
+        [
+          0.9,
+          1.05,
+          -0.1
+        ],
+        [
+          1.9,
+          1.2,
+          -0.0
+        ],
+        [
+          2.0,
+          0.5,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8456,
+    "parts": 7
+  },
+  "summary": "A ball mill grinds bauxite in spent caustic liquor. The rotating shell lifts steel balls that cascade onto the charge, crushing and abrading the bauxite into a fine slurry ready for desilication and digestion.",
+  "classification": {
+    "family": "Grinding",
+    "type": "Overflow-discharge ball mill (wet)"
+  },
+  "model_configuration": {
+    "animation": "Balls cascade; girth gear turns"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Mineral processing equipment",
+      "relevance": "Mill/drum design and liners.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Wills' Mineral Processing Technology — grinding mills"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Mill: Shell with Liners / Lifters (rotates)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.0,
+        0.47,
+        -0.73
+      ],
+      "bbox_max": [
+        1.0,
+        1.93,
+        0.73
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        0.73
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "bg_shell"
+    },
+    {
+      "id": "girth_tyres",
+      "name": "Mill: Riding Tyres & Girth Gear (turn with the shell)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "girth_tyres.001"
+      ],
+      "pivot": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.9
+      ],
+      "bbox_min": [
+        -0.05,
+        0.31,
+        -0.89
+      ],
+      "bbox_max": [
+        0.05,
+        2.09,
+        0.89
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        0.89
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "bg_drive"
+    },
+    {
+      "id": "heads_trunnions",
+      "name": "Feed & Discharge Heads with Hollow Trunnions",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "heads_trunnions__back",
+        "heads_trunnions__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.7,
+        0.47,
+        -0.73
+      ],
+      "bbox_max": [
+        1.75,
+        1.93,
+        0.73
+      ],
+      "label_anchor": [
+        0.025,
+        1.2,
+        0.73
+      ],
+      "center": [
+        0.025,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "bg_heads"
+    },
+    {
+      "id": "bearings_drive",
+      "name": "Trunnion Bearings, Pedestals & Drive (motor, gearbox, pinion)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "bearings_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.75,
+        0.0,
+        -2.4
+      ],
+      "bbox_max": [
+        1.75,
+        1.52,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        0.76,
+        0.45
+      ],
+      "center": [
+        0.0,
+        0.76,
+        -0.975
+      ],
+      "info_ref": "bg_drive"
+    },
+    {
+      "id": "feed_discharge",
+      "name": "Feed Spout, Trommel Screen & Discharge Sump",
+      "group": "chutes",
+      "section_role": "keep",
+      "nodes": [
+        "feed_discharge.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.15,
+        0.1,
+        -0.4
+      ],
+      "bbox_max": [
+        2.3,
+        1.65,
+        0.4
+      ],
+      "label_anchor": [
+        0.075,
+        0.875,
+        0.4
+      ],
+      "center": [
+        0.075,
+        0.875,
+        -0.0
+      ],
+      "info_ref": "bg_heads"
+    },
+    {
+      "id": "balls",
+      "name": "Grinding Balls & Charge (cascading / cataracting)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "gb0",
+        "gb1",
+        "gb2",
+        "gb3",
+        "gb4",
+        "gb5",
+        "gb6",
+        "gb7",
+        "gb8",
+        "gb9",
+        "gb10",
+        "gb11",
+        "gb12",
+        "gb13",
+        "gb14",
+        "gb15",
+        "gb16",
+        "gb17"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.05,
+        -0.05,
+        -0.04755
+      ],
+      "bbox_max": [
+        0.05,
+        0.05,
+        0.04755
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.04755
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "charge",
+      "name": "Ball Charge Bed (≈ 30–40 % of mill volume)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "chg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.5
+      ],
+      "bbox_min": [
+        -0.98,
+        0.5892,
+        -0.0
+      ],
+      "bbox_max": [
+        0.98,
+        1.8108,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        0.65
+      ],
+      "center": [
+        0.0,
+        1.2,
+        0.325
+      ],
+      "info_ref": "bg_charge"
+    }
+  ],
+  "components": {
+    "bg_shell": {
+      "function": "Grinding chamber.",
+      "construction": "Shell with liners.",
+      "material": "Steel/Ni-hard or rubber.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Liner wear"
+      ],
+      "inspection": [
+        "Liner profile"
+      ]
+    },
+    "bg_drive": {
+      "function": "Rotation and support.",
+      "construction": "Girth gear, pinion, gearbox, motor, bearings.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Gear wear"
+      ],
+      "inspection": [
+        "Vibration"
+      ]
+    },
+    "bg_heads": {
+      "function": "Feed/discharge and trunnions.",
+      "construction": "Heads, trunnions, trommel.",
+      "material": "Cast steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    },
+    "bg_charge": {
+      "function": "Grinding media.",
+      "construction": "Steel balls (≈ 30–40 % fill).",
+      "material": "Forged steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

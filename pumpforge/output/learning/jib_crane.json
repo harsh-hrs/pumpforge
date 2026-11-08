@@ -1,0 +1,612 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "jib_crane",
+ "no": 141,
+ "title": "Jib Crane",
+ "model_title": "Pillar-Mounted Slewing Jib Crane",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A jib crane has a horizontal arm (jib) fixed to a vertical pillar or wall. The jib slews (rotates) around the pillar, and an electric hoist on a trolley travels along the jib. This covers a circular area around a workstation or machine.",
+   "applications": [
+    "Machine shops and workstations",
+    "Loading bays",
+    "Maintenance of pumps, motors and valves",
+    "Shipboard and dockside use"
+   ],
+   "key_points": [
+    "Slewing arc up to 360° (pillar type)",
+    "Covers a circular working area",
+    "Foundation must take a large overturning moment",
+    "Usually manual or powered slew"
+   ],
+   "classification": {
+    "family": "Crane",
+    "type": "Pillar-mounted slewing jib crane"
+   },
+   "hi_family": "material_handling",
+   "summary": "A jib crane has a horizontal arm (jib) that slews around a pillar or wall bracket, with a trolley and hoist running along it. It serves a circular work area — ideal for a single workstation or machine tool."
+  },
+  "model_3d": {
+   "asset": "glb/jib_crane.glb",
+   "metadata": "meta/jib_crane.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 880,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The pillar and foundation carry the load and overturning moment.",
+    "The jib arm slews around the pillar.",
+    "The hoist trolley travels along the jib to set the radius."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The pillar and foundation carry the load and overturning moment.",
+     "part": "pillar",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The jib arm slews around the pillar.",
+     "part": "jib_arm",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hoist trolley travels along the jib to set the radius.",
+     "part": "hoist_trolley",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hoist lifts the hook and load.",
+     "part": "hook_load",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Overturning moment at the foundation ≈ (load + hoist) × outreach + jib self-weight moment."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "jib_crane_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/jib_crane.json#components",
+   "key_components": "Pillar, slewing jib arm, trolley, hoist",
+   "parts": [
+    {
+     "id": "pillar",
+     "name": "Pillar & Foundation (anchor bolts)",
+     "info_ref": "jc_pillar",
+     "function": "Supports the jib.",
+     "material": "Steel."
+    },
+    {
+     "id": "jib_arm",
+     "name": "Jib Arm with Slewing Bearing & Bracing",
+     "info_ref": "jc_arm",
+     "function": "Carries trolley and load; slews.",
+     "material": "Steel."
+    },
+    {
+     "id": "hoist_trolley",
+     "name": "Trolley & Electric Hoist",
+     "info_ref": "cr_hoist",
+     "function": "Lifts the load.",
+     "material": "—"
+    },
+    {
+     "id": "hook_load",
+     "name": "Hook Block & Load",
+     "info_ref": "cr_hoist",
+     "function": "Lifts the load.",
+     "material": "—"
+    },
+    {
+     "id": "rope",
+     "name": "Hoist Rope / Chain",
+     "info_ref": "cr_hoist",
+     "function": "Lifts the load.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Outreach ~ 2 – 10 m; height ~ 3 – 8 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Hoist ~ 0.5 – 10",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Hoist ~ 2 – 8 m/min; slew manual or ~ 0.5 – 1 rpm",
+     "unit": "m/min"
+    },
+    "capacity": {
+     "typical_range": "SWL ~ 0.25 – 10",
+     "unit": "t"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Specify SWL, outreach, height under jib, slew arc and duty."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASME B30.11 — Monorails and underhung cranes (jib cranes covered in ASME B30.11 / local codes; to be verified)",
+    "ISO 4301-1"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Pillar on a reinforced foundation (or certified anchor system) designed for the overturning moment; check slab thickness and concrete strength."
+   ],
+   "alignment": [
+    "Rails/beams within span, level and straightness tolerances; end stops and buffers fitted."
+   ],
+   "piping": [
+    "Power supply via conductor rails, festoon or cable reel; mainline isolator accessible; pendant or radio control labelled with directions."
+   ],
+   "commissioning": [
+    "Function-test all motions and limit switches (hoist upper/lower, travel); check brakes; proof load test and thorough examination by a competent person before first use, per the applicable standard and local regulations."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Pre-use check of hoist, hook and slew.",
+     "part": "hook_load",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check anchor bolts and slew bearing.",
+     "part": "pillar",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Thorough examination; replace slew bearing/hoist wear parts.",
+     "part": "jib_arm",
+     "interval": "per regulation"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wire rope damage",
+     "category": "performance",
+     "symptoms": [
+      "Broken wires, kinks, corrosion"
+     ],
+     "causes": [
+      "Wear on sheaves/drum, overload, poor spooling"
+     ],
+     "remedies": [
+      "Inspect and discard per criteria (ISO 4309); correct reeving"
+     ],
+     "part": "rope"
+    },
+    {
+     "problem": "Brake failure",
+     "category": "performance",
+     "symptoms": [
+      "Load drift, increased stopping distance"
+     ],
+     "causes": [
+      "Worn linings, contamination, wrong adjustment"
+     ],
+     "remedies": [
+      "Adjust/replace linings; test brake"
+     ],
+     "part": "hoist_trolley"
+    },
+    {
+     "problem": "Overload",
+     "category": "performance",
+     "symptoms": [
+      "Trip of limiter, structural deformation"
+     ],
+     "causes": [
+      "Unknown load weight, side pulling"
+     ],
+     "remedies": [
+      "Use load limiter; train riggers"
+     ],
+     "part": "hoist_trolley"
+    }
+   ],
+   "safety": [
+    "Keep slewing area clear; do not exceed rated load at maximum outreach."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Jib Crane — Introduction",
+    "type": "in_app_tour",
+    "model": "jib_crane.glb",
+    "duration_s": 45.9,
+    "script": [
+     {
+      "narration": "This module introduces the Jib Crane.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A jib crane has a horizontal arm (jib) fixed to a vertical pillar or wall.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The jib slews (rotates) around the pillar, and an electric hoist on a trolley travels along the jib.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "This covers a circular area around a workstation or machine.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include machine shops and workstations; loading bays; maintenance of pumps, motors and valves; shipboard and dockside use.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Jib Crane — Operation",
+    "type": "in_app_tour",
+    "model": "jib_crane.glb",
+    "duration_s": 25.0,
+    "script": [
+     {
+      "narration": "How the Jib Crane works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The pillar and foundation carry the load and overturning moment.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "pillar",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The jib arm slews around the pillar.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "jib_arm",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hoist trolley travels along the jib to set the radius.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "hoist_trolley",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hoist lifts the hook and load.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hook_load",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Jib Crane — Maintenance",
+    "type": "in_app_tour",
+    "model": "jib_crane.glb",
+    "duration_s": 42.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Jib Crane.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Pre-use check of hoist, hook and slew.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hook_load",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check anchor bolts and slew bearing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pillar",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Thorough examination; replace slew bearing/hoist wear parts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "jib_arm",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wire rope damage: broken wires, kinks, corrosion. Common cause: wear on sheaves/drum, overload, poor spooling.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "rope",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for brake failure: load drift, increased stopping distance. Common cause: worn linings, contamination, wrong adjustment.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "hoist_trolley",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload: trip of limiter, structural deformation. Common cause: unknown load weight, side pulling.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "hoist_trolley",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What shape of area does a pillar jib crane cover?",
+     "options": [
+      "Rectangle",
+      "Circle (or sector)",
+      "Line",
+      "Triangle"
+     ],
+     "answer": 1,
+     "explanation": "Slewing.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the key foundation load?",
+     "options": [
+      "Overturning moment",
+      "Torsion only",
+      "Thermal",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Load × outreach.",
+     "level": "basic"
+    },
+    {
+     "question": "The trolley on the jib sets the…",
+     "options": [
+      "Radius (outreach) of the hook",
+      "Lift height",
+      "Slew speed",
+      "Rated load"
+     ],
+     "answer": 0,
+     "explanation": "Radius.",
+     "level": "basic"
+    },
+    {
+     "question": "A 2 t load at 4 m outreach gives an overturning moment (load only) of about…",
+     "options": [
+      "8 kN·m",
+      "78 kN·m",
+      "780 kN·m",
+      "0.8 kN·m"
+     ],
+     "answer": 1,
+     "explanation": "2000 kg × 9.81 × 4 m ≈ 78 kN·m (plus hoist and jib weight).",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supports the jib.\"",
+     "options": [
+      "Hook Block & Load",
+      "Trolley & Electric Hoist",
+      "Pillar & Foundation (anchor bolts)",
+      "Jib Arm with Slewing Bearing & Bracing"
+     ],
+     "answer": 2,
+     "explanation": "Pillar & Foundation (anchor bolts): Supports the jib.",
+     "level": "basic",
+     "part": "pillar",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries trolley and load; slews.\"",
+     "options": [
+      "Jib Arm with Slewing Bearing & Bracing",
+      "Pillar & Foundation (anchor bolts)",
+      "Hoist Rope / Chain",
+      "Hook Block & Load"
+     ],
+     "answer": 0,
+     "explanation": "Jib Arm with Slewing Bearing & Bracing: Carries trolley and load; slews.",
+     "level": "basic",
+     "part": "jib_arm",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

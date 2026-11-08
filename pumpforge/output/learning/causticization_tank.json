@@ -1,0 +1,632 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "causticization_tank",
+ "no": 213,
+ "title": "Causticization Tank",
+ "model_title": "Causticization Reactor with Lime Slaker (Caustic Recovery)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A causticization reactor regenerates caustic soda from sodium carbonate in the liquor by reaction with slaked lime: Na₂CO₃ + Ca(OH)₂ → 2 NaOH + CaCO₃. The calcium carbonate is separated and the recovered caustic returns to the process.",
+   "applications": [
+    "Caustic recovery in Bayer refineries",
+    "Lime causticizing of green liquor in pulp mills"
+   ],
+   "key_points": [
+    "Lime slaker prepares milk of lime",
+    "CaCO₃ precipitates",
+    "Conditions limit alumina loss as calcium aluminate",
+    "Lowers carbonate in liquor"
+   ],
+   "classification": {
+    "family": "Caustic recovery",
+    "type": "Agitated reactor with lime slaker"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A causticization reactor regenerates caustic soda from sodium carbonate in the liquor by reaction with slaked lime. Calcium carbonate precipitates and is separated; the recovered caustic returns to the process."
+  },
+  "model_3d": {
+   "asset": "glb/causticization_tank.glb",
+   "metadata": "meta/causticization_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10802,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Lime is slaked to milk of lime.",
+    "Milk of lime and liquor enter the reactor.",
+    "The agitator mixes; CaCO₃ forms."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Lime is slaked to milk of lime.",
+     "part": "lime_slaker",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Milk of lime and liquor enter the reactor.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The agitator mixes; CaCO₃ forms.",
+     "part": "cz_agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry leaves for separation.",
+     "part": "cz_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Causticization efficiency vs liquor concentration and temperature."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "causticization_tank_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "causticization_tank_pressure.glb",
+     "title": "Recovering caustic from carbonate",
+     "description": "Carbon dioxide picked up by the liquor turns caustic into sodium carbonate, which does nothing useful. Adding slaked lime converts it back: Na₂CO₃ + Ca(OH)₂ → 2 NaOH + CaCO₃↓. The calcium carbonate solids are separated and the regenerated caustic returns to the circuit; conditions (temperature, liquor strength) are chosen to limit alumina losses as calcium aluminates.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/causticization_tank.json#components",
+   "key_components": "Agitated reactor, lime slaker, lime silo, inlet/outlet",
+   "parts": [
+    {
+     "id": "cz_tank",
+     "name": "Causticization Reactor: Tank, Baffles",
+     "info_ref": "ct_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "cz_slurry",
+     "name": "Causticization Reactor: Slurry / Liquor",
+     "info_ref": "ct_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "cz_agitator",
+     "name": "Causticization Reactor: Agitator Shaft & Impeller",
+     "info_ref": "ct_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "cz_drive",
+     "name": "Causticization Reactor: Agitator Drive (motor + gearbox, mounting nozzle)",
+     "info_ref": "ct_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "lime_slaker",
+     "name": "Lime Slaker (CaO + H₂O → Ca(OH)₂ milk of lime)",
+     "info_ref": "ct_slaker",
+     "function": "Prepares lime milk.",
+     "material": "Steel."
+    },
+    {
+     "id": "slaker_paddles",
+     "name": "Slaker Paddle Shaft",
+     "info_ref": "ct_slaker",
+     "function": "Prepares lime milk.",
+     "material": "Steel."
+    },
+    {
+     "id": "lime_silo",
+     "name": "Quicklime Silo & Feeder",
+     "info_ref": "ct_slaker",
+     "function": "Prepares lime milk.",
+     "material": "Steel."
+    },
+    {
+     "id": "piping",
+     "name": "Lime Milk Line, Liquor Inlet & Slurry Outlet (to separation)",
+     "info_ref": "ct_piping",
+     "function": "Feeds and outlet.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Support Legs",
+     "info_ref": "ct_piping",
+     "function": "Feeds and outlet.",
+     "material": "Steel."
+    },
+    {
+     "id": "caco3",
+     "name": "Calcium Carbonate (CaCO₃) particles forming",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Reactor ~ 3 – 8 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 50 – 300",
+     "unit": "m³/h liquor"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 90 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Agitator ~ 15 – 75",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from carbonate removal rate."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Ring-wall or slab foundation designed for full liquid/slurry weight plus agitator dynamic loads; settlement monitoring for large tanks."
+   ],
+   "alignment": [
+    "Tank plumb and level; agitator shaft vertical and concentric; check gearbox mounting."
+   ],
+   "piping": [
+    "Nozzles sized for slurry velocity (avoid settling and erosion); flush connections; scaling-resistant design and descaling access.",
+    "Caustic service: suitable materials, gaskets and spray shields; eyewash/safety showers nearby."
+   ],
+   "commissioning": [
+    "Water trials (agitator run with water, check vibration and power); then caustic/slurry; verify levels, interlocks and spillage containment (bunds)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check lime feed and agitator.",
+     "part": "lime_slaker",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Descale reactor.",
+     "part": "cz_tank",
+     "interval": "shutdown"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Slaker overhaul.",
+     "part": "slaker_paddles"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low efficiency",
+     "category": "performance",
+     "symptoms": [
+      "High carbonate"
+     ],
+     "causes": [
+      "Poor lime quality, wrong conditions"
+     ],
+     "remedies": [
+      "Check lime; adjust temperature"
+     ],
+     "part": "cz_slurry"
+    },
+    {
+     "problem": "Slaker blockage",
+     "category": "blockage",
+     "symptoms": [
+      "Lime build-up"
+     ],
+     "causes": [
+      "Grit, low water"
+     ],
+     "remedies": [
+      "Clean; adjust water"
+     ],
+     "part": "lime_slaker"
+    }
+   ],
+   "safety": [
+    "Lime is caustic and exothermic on slaking."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Causticization Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "causticization_tank.glb",
+    "duration_s": 44.0,
+    "script": [
+     {
+      "narration": "This module introduces the Causticization Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A causticization reactor regenerates caustic soda from sodium carbonate in the liquor by reaction with slaked lime: Na₂CO₃ + Ca(OH)₂ → 2 NaOH + CaCO₃.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The calcium carbonate is separated and the recovered caustic returns to the process.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include caustic recovery in Bayer refineries; lime causticizing of green liquor in pulp mills.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Causticization Reactor: Agitator Shaft & Impeller, Slaker Paddle Shaft.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Causticization Tank — Operation",
+    "type": "in_app_tour",
+    "model": "causticization_tank.glb",
+    "duration_s": 30.9,
+    "script": [
+     {
+      "narration": "How the Causticization Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Lime is slaked to milk of lime.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lime_slaker",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Milk of lime and liquor enter the reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The agitator mixes; CaCO₃ forms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cz_agitator",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry leaves for separation.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cz_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Carbon dioxide picked up by the liquor turns caustic into sodium carbonate, which does nothing useful.",
+      "duration_s": 6.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Causticization Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "causticization_tank.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Causticization Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check lime feed and agitator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lime_slaker",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descale reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cz_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Slaker overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "slaker_paddles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low efficiency: high carbonate. Common cause: poor lime quality, wrong conditions.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "cz_slurry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for slaker blockage: lime build-up. Common cause: grit, low water.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "lime_slaker",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why causticize?",
+     "options": [
+      "Regenerate NaOH from Na₂CO₃",
+      "Make alumina",
+      "Remove iron",
+      "Cool liquor"
+     ],
+     "answer": 0,
+     "explanation": "Caustic recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "What precipitates?",
+     "options": [
+      "Calcium carbonate",
+      "Gibbsite",
+      "Oxalate",
+      "Sodalite"
+     ],
+     "answer": 0,
+     "explanation": "CaCO₃.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the slaker produce?",
+     "options": [
+      "Milk of lime",
+      "Steam",
+      "Acid",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Ca(OH)₂.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the slurry.\"",
+     "options": [
+      "Causticization Reactor: Tank, Baffles",
+      "Lime Milk Line, Liquor Inlet & Slurry Outlet (to separation)",
+      "Causticization Reactor: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "Causticization Reactor: Slurry / Liquor"
+     ],
+     "answer": 0,
+     "explanation": "Causticization Reactor: Tank, Baffles: Holds the slurry.",
+     "level": "basic",
+     "part": "cz_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process slurry/liquor.\"",
+     "options": [
+      "Support Legs",
+      "Slaker Paddle Shaft",
+      "Causticization Reactor: Slurry / Liquor",
+      "Lime Slaker (CaO + H₂O → Ca(OH)₂ milk of lime)"
+     ],
+     "answer": 2,
+     "explanation": "Causticization Reactor: Slurry / Liquor: Process slurry/liquor.",
+     "level": "basic",
+     "part": "cz_slurry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes and suspends solids.\"",
+     "options": [
+      "Causticization Reactor: Tank, Baffles",
+      "Causticization Reactor: Agitator Shaft & Impeller",
+      "Support Legs",
+      "Slaker Paddle Shaft"
+     ],
+     "answer": 1,
+     "explanation": "Causticization Reactor: Agitator Shaft & Impeller: Mixes and suspends solids.",
+     "level": "basic",
+     "part": "cz_agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

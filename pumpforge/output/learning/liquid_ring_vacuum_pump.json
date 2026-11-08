@@ -1,0 +1,669 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "liquid_ring_vacuum_pump",
+ "no": 78,
+ "title": "Liquid Ring Vacuum Pump",
+ "model_title": "Liquid Ring Vacuum Pump (Single Stage, Port Plate)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A liquid ring vacuum pump has an eccentric bladed impeller in a casing partly filled with liquid. The liquid forms a ring; because of the eccentricity the spaces between blades grow (suction) and shrink (compression). It handles wet, dirty and condensable gases.",
+   "applications": [
+    "Paper machine vacuum",
+    "Steam-condenser air removal",
+    "Chemical process vacuum (solvent recovery)",
+    "Vacuum filtration, priming systems"
+   ],
+   "key_points": [
+    "Tolerates liquids and vapours",
+    "Near-isothermal compression (liquid cools)",
+    "Vacuum limited by service-liquid vapour pressure",
+    "Cavitation if run below its limit"
+   ],
+   "classification": {
+    "family": "Positive-displacement vacuum pump / compressor",
+    "type": "Liquid ring, single stage, flat port plate"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A liquid ring vacuum pump has a bladed impeller mounted off-centre in a round casing partly filled with liquid (usually water). As it turns, the liquid is thrown out to form a ring concentric with the casing. Because the impeller is eccentric, the spaces between blades grow (drawing gas in through the suction port) and then shrink (compressing it out through the discharge port). It tolerates wet, dirty and condensable gases."
+  },
+  "model_3d": {
+   "asset": "glb/liquid_ring_vacuum_pump.glb",
+   "metadata": "meta/liquid_ring_vacuum_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 30572,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Rotation throws the service liquid into a ring concentric with the casing.",
+    "On the suction side the liquid recedes from the hub and the cells draw gas in through the port plate.",
+    "On the other side the liquid moves in, compressing the gas."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Rotation throws the service liquid into a ring concentric with the casing.",
+     "part": "liquid_ring",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the suction side the liquid recedes from the hub and the cells draw gas in through the port plate.",
+     "part": "port_plate",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the other side the liquid moves in, compressing the gas.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas and some liquid leave through the discharge port to the separator; liquid is cooled and returned.",
+     "part": "separator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Capacity vs suction pressure; capacity falls as pressure approaches the vapour pressure of the service liquid."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "liquid_ring_vacuum_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/liquid_ring_vacuum_pump.json#components",
+   "key_components": "Eccentric impeller, casing, liquid ring, port plate, separator",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Casing (eccentric to impeller)",
+     "info_ref": "lr_casing",
+     "function": "Holds the liquid ring; its centre is offset from the impeller.",
+     "material": "Cast iron, stainless."
+    },
+    {
+     "id": "liquid_ring",
+     "name": "Liquid Ring (service liquid thrown out by the impeller)",
+     "info_ref": "lr_ring",
+     "function": "Rotating ring of liquid that acts as the pistons and seals.",
+     "material": "Water / process liquid."
+    },
+    {
+     "id": "impeller",
+     "name": "Impeller (12 forward-curved blades) & Shaft — eccentric",
+     "info_ref": "lr_impeller",
+     "function": "Rotates the liquid; its cells change volume.",
+     "material": "Bronze, stainless, ductile iron."
+    },
+    {
+     "id": "port_plate",
+     "name": "Port Plate (suction & discharge ports) & Head",
+     "info_ref": "lr_port_plate",
+     "function": "Controls when cells connect to suction and discharge.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "front_head",
+     "name": "Front Head (hidden in cutaway)",
+     "info_ref": "lr_port_plate",
+     "function": "Controls when cells connect to suction and discharge.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "connections",
+     "name": "Suction & Discharge Nozzles (via head)",
+     "info_ref": "lr_connections",
+     "function": "Suction and discharge nozzles.",
+     "material": "Steel."
+    },
+    {
+     "id": "separator",
+     "name": "Discharge Separator & Service-Liquid Return",
+     "info_ref": "lr_separator",
+     "function": "Separates the service liquid from discharged gas and returns it.",
+     "material": "Steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Inlet DN 25 – 600",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "1 – 1000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "300 – 3600",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "10 – 30 000 m³/h",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "suction_pressure": {
+     "typical_range": "~ 33 – 1013 (single stage ~ 33 mbar with 15 °C water)",
+     "unit": "mbar(a)"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Provide service-liquid supply with flow control and cooling; discharge separator above the pump."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check service-liquid flow and temperature.",
+     "part": "liquid_ring",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Descale casing and port plate.",
+     "part": "port_plate",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect impeller for cavitation erosion; replace seals/bearings.",
+     "part": "impeller"
+    }
+   ],
+   "lubrication": [
+    "Grease-lubricated bearings outside the casing."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Rattling noise, erosion"
+     ],
+     "causes": [
+      "Operating below the minimum suction pressure, hot service liquid"
+     ],
+     "remedies": [
+      "Open anti-cavitation valve; cool the liquid"
+     ],
+     "part": "impeller"
+    },
+    {
+     "problem": "Loss of capacity",
+     "category": "performance",
+     "symptoms": [
+      "Higher suction pressure"
+     ],
+     "causes": [
+      "Hot or too little service liquid, scale"
+     ],
+     "remedies": [
+      "Restore flow/cooling; descale"
+     ],
+     "part": "liquid_ring"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Liquid Ring Vacuum Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "liquid_ring_vacuum_pump.glb",
+    "duration_s": 54.3,
+    "script": [
+     {
+      "narration": "This module introduces the Liquid Ring Vacuum Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A liquid ring vacuum pump has an eccentric bladed impeller in a casing partly filled with liquid.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The liquid forms a ring; because of the eccentricity the spaces between blades grow (suction) and shrink (compression).",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It handles wet, dirty and condensable gases.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include paper machine vacuum; steam-condenser air removal; chemical process vacuum (solvent recovery); vacuum filtration, priming systems.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Casing (eccentric to impeller), Impeller (12 forward-curved blades) & Shaft — eccentric, Port Plate (suction & discharge ports) & Head, Front Head (hidden in cutaway).",
+      "duration_s": 11.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Liquid Ring Vacuum Pump — Operation",
+    "type": "in_app_tour",
+    "model": "liquid_ring_vacuum_pump.glb",
+    "duration_s": 33.2,
+    "script": [
+     {
+      "narration": "How the Liquid Ring Vacuum Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Rotation throws the service liquid into a ring concentric with the casing.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "liquid_ring",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the suction side the liquid recedes from the hub and the cells draw gas in through the port plate.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "port_plate",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the other side the liquid moves in, compressing the gas.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas and some liquid leave through the discharge port to the separator; liquid is cooled and returned.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "separator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Liquid Ring Vacuum Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "liquid_ring_vacuum_pump.glb",
+    "duration_s": 36.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Liquid Ring Vacuum Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check service-liquid flow and temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descale casing and port plate.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "port_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impeller for cavitation erosion; replace seals/bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation: rattling noise, erosion. Common cause: operating below the minimum suction pressure, hot service liquid.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of capacity: higher suction pressure. Common cause: hot or too little service liquid, scale.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "liquid_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is the impeller eccentric?",
+     "options": [
+      "For balance",
+      "So the cells between blades change volume",
+      "To save space",
+      "It is not"
+     ],
+     "answer": 1,
+     "explanation": "Like a vane pump.",
+     "level": "basic"
+    },
+    {
+     "question": "What limits the vacuum?",
+     "options": [
+      "Motor size",
+      "Vapour pressure of the service liquid",
+      "Colour",
+      "Impeller material"
+     ],
+     "answer": 1,
+     "explanation": "Warmer liquid → poorer vacuum.",
+     "level": "basic"
+    },
+    {
+     "question": "Liquid ring pumps are good for wet gases because…",
+     "options": [
+      "They are oil-sealed",
+      "Liquid in the gas just joins the ring",
+      "They are dry",
+      "They run slow"
+     ],
+     "answer": 1,
+     "explanation": "Tolerant of carry-over.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the liquid ring; its centre is offset from the impeller.\"",
+     "options": [
+      "Electric Motor – Bearings (DE & NDE)",
+      "Suction & Discharge Nozzles (via head)",
+      "Electric Motor – Rotor & Shaft",
+      "Casing (eccentric to impeller)"
+     ],
+     "answer": 3,
+     "explanation": "Casing (eccentric to impeller): Holds the liquid ring; its centre is offset from the impeller.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotating ring of liquid that acts as the pistons and seals.\"",
+     "options": [
+      "Casing (eccentric to impeller)",
+      "Coupling Guard",
+      "Baseplate",
+      "Liquid Ring (service liquid thrown out by the impeller)"
+     ],
+     "answer": 3,
+     "explanation": "Liquid Ring (service liquid thrown out by the impeller): Rotating ring of liquid that acts as the pistons and seals.",
+     "level": "basic",
+     "part": "liquid_ring",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotates the liquid; its cells change volume.\"",
+     "options": [
+      "Port Plate (suction & discharge ports) & Head",
+      "Electric Motor – Stator",
+      "Impeller (12 forward-curved blades) & Shaft — eccentric",
+      "Liquid Ring (service liquid thrown out by the impeller)"
+     ],
+     "answer": 2,
+     "explanation": "Impeller (12 forward-curved blades) & Shaft — eccentric: Rotates the liquid; its cells change volume.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

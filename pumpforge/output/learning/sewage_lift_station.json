@@ -1,0 +1,674 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "sewage_lift_station",
+ "no": 241,
+ "title": "Sewage Lift Station",
+ "model_title": "Sewage Lift (Pumping) Station — Wet Well with Twin Submersible Pumps & Valve Chamber",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A sewage lift station collects sewage in a wet well and pumps it up into a rising main or higher sewer. Submersible non-clog pumps sit on duckfoot bends and can be lifted out on guide rails; floats or a level transmitter start and stop them; check and gate valves sit in a separate dry valve chamber.",
+   "applications": [
+    "Municipal and plant sewage networks",
+    "Industrial site drainage and effluent transfer"
+   ],
+   "key_points": [
+    "Wet-well volume limits starts per hour",
+    "Duty/standby alternation",
+    "Non-clog impellers pass solids",
+    "Rising-main velocity ≈ 0.7–2.5 m/s"
+   ],
+   "classification": {
+    "family": "Wastewater",
+    "type": "Wet-well submersible pumping station"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A sewage lift station collects sewage in a wet well and pumps it up to a higher sewer or treatment plant. Submersible pumps on guide rails start and stop on level, and a separate valve chamber holds the check and isolation valves."
+  },
+  "model_3d": {
+   "asset": "glb/sewage_lift_station.glb",
+   "metadata": "meta/sewage_lift_station.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11058,
+   "parts": 13
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Sewage flows in through the inlet screen.",
+    "The level rises in the wet well.",
+    "The duty pump starts on level."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Sewage flows in through the inlet screen.",
+     "part": "inlet_screen",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The level rises in the wet well.",
+     "part": "sewage",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The duty pump starts on level.",
+     "part": "level_controls",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pump lifts sewage up the riser.",
+     "part": "impeller_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Check and gate valves in the chamber lead to the rising main.",
+     "part": "valves_rising_main",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "System curve vs pump curve as the well level changes."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "sewage_lift_station_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "sewage_lift_station_pressure.glb",
+     "title": "Lifting sewage to a higher sewer",
+     "description": "Gravity sewers get deeper downstream; a lift station raises the flow into a rising (force) main or a higher sewer. Pumps start and stop on level so they do not cycle too often (typically ≤ 6–10 starts/h per motor — wet-well volume is sized for it) and the duty alternates. Non-clog impellers pass solids (often ≥ 75–100 mm); rising-main velocity is kept ≈ 0.7–2.5 m/s to avoid settling. Pumps lift out on the guide rails without anyone entering the well — a confined space with H₂S risk.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/sewage_lift_station.json#components",
+   "key_components": "Wet well, submersible pumps, guide rails, bar screen, level controls, valve chamber",
+   "parts": [
+    {
+     "id": "wet_well",
+     "name": "Concrete Wet Well with Benched (sloped) Floor",
+     "info_ref": "sls_well",
+     "function": "Stores incoming sewage.",
+     "material": "Concrete."
+    },
+    {
+     "id": "cover_slab",
+     "name": "Cover Slab with Pump-Access Hatch",
+     "info_ref": "sls_well",
+     "function": "Stores incoming sewage.",
+     "material": "Concrete."
+    },
+    {
+     "id": "hatch",
+     "name": "Hinged Access Hatch (open) & Safety Grid",
+     "info_ref": "sls_well",
+     "function": "Stores incoming sewage.",
+     "material": "Concrete."
+    },
+    {
+     "id": "sewage",
+     "name": "Sewage in the Wet Well (fills, then is pumped down)",
+     "info_ref": "sls_well",
+     "function": "Stores incoming sewage.",
+     "material": "Concrete."
+    },
+    {
+     "id": "inlet_screen",
+     "name": "Incoming Sewer & Inlet Basket Screen on Guide Rails (traps rags / large solids)",
+     "info_ref": "sls_inlet",
+     "function": "Stops large solids reaching pumps.",
+     "material": "Stainless."
+    },
+    {
+     "id": "pump_1",
+     "name": "Submersible Sewage Pump 1 (duty) on Duckfoot Bend, Guide Rails & Discharge Riser",
+     "info_ref": "sls_pumps",
+     "function": "Lift the sewage.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "impeller_1",
+     "name": "Non-Clog (2-channel) Impeller 1",
+     "info_ref": "sls_pumps",
+     "function": "Lift the sewage.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "pump_2",
+     "name": "Submersible Sewage Pump 2 (standby) on Duckfoot Bend, Guide Rails & Discharge Riser",
+     "info_ref": "sls_pumps",
+     "function": "Lift the sewage.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "impeller_2",
+     "name": "Non-Clog (2-channel) Impeller 2",
+     "info_ref": "sls_pumps",
+     "function": "Lift the sewage.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "level_controls",
+     "name": "Float Switches (stop / duty start / high-level alarm) & Ultrasonic Level Transmitter",
+     "info_ref": "sls_controls",
+     "function": "Control pumps and alarms.",
+     "material": "—"
+    },
+    {
+     "id": "valve_chamber",
+     "name": "Valve Chamber (dry, separate from the wet well)",
+     "info_ref": "sls_valves",
+     "function": "Prevent backflow and isolate.",
+     "material": "Ductile iron."
+    },
+    {
+     "id": "valves_rising_main",
+     "name": "Check & Gate Valves on each Pump Line, Common Header & Rising Main",
+     "info_ref": "sls_valves",
+     "function": "Prevent backflow and isolate.",
+     "material": "Ductile iron."
+    },
+    {
+     "id": "vent_kiosk",
+     "name": "Odour-Control Vent (carbon filter) & Control Kiosk",
+     "info_ref": "sls_controls",
+     "function": "Control pumps and alarms.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Wet wells ≈ 1.5 – 6 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 10 – 2000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Static lift ≈ 3 – 30 m",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 2 – 300 per pump",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Pumps for peak flow at duty head; wet-well volume V ≈ T·Q/4 for cycle time T."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EN 752",
+    "HI 9.8",
+    "Metcalf & Eddy"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Reinforced-concrete tank on prepared ground; watertightness test before backfill; allow for buoyancy when empty (groundwater)."
+   ],
+   "alignment": [
+    "Weirs and launders levelled to a few millimetres so overflow is even; drive/bridge centred and level."
+   ],
+   "piping": [
+    "Inlet arranged to spread flow without short-circuiting; sludge lines with flushing points; overflow and drain to a safe place."
+   ],
+   "commissioning": [
+    "Fill with clean water, check for leaks; run mechanisms empty and with water; start chemical dosing and tune by jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check run hours, alarms and basket.",
+     "part": "inlet_screen",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean floats; check pump insulation and seal monitor.",
+     "part": "level_controls",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Lift pumps; replace seals/wear parts.",
+     "part": "pump_1"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Pump ragging",
+     "category": "performance",
+     "symptoms": [
+      "High current, low flow"
+     ],
+     "causes": [
+      "Wipes and rags"
+     ],
+     "remedies": [
+      "Lift and clean; chopper pump/screen"
+     ],
+     "part": "impeller_1"
+    },
+    {
+     "problem": "High-level alarm",
+     "category": "performance",
+     "symptoms": [
+      "Flooding risk"
+     ],
+     "causes": [
+      "Pump failure, power cut"
+     ],
+     "remedies": [
+      "Standby pump; generator; tanker"
+     ],
+     "part": "level_controls"
+    }
+   ],
+   "safety": [
+    "Confined space permits, gas testing; lock-out; vent odour."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Sewage Lift Station — Introduction",
+    "type": "in_app_tour",
+    "model": "sewage_lift_station.glb",
+    "duration_s": 63.2,
+    "script": [
+     {
+      "narration": "This module introduces the Sewage Lift Station.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A sewage lift station collects sewage in a wet well and pumps it up into a rising main or higher sewer.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Submersible non-clog pumps sit on duckfoot bends and can be lifted out on guide rails; floats or a level transmitter start and stop them; check and gate valves sit in a separate dry valve chamber.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include municipal and plant sewage networks; industrial site drainage and effluent transfer.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Submersible Sewage Pump 1 (duty) on Duckfoot Bend, Guide Rails & Discharge Riser, Non-Clog (2-channel) Impeller 1, Submersible Sewage Pump 2 (standby) on Duckfoot Bend, Guide Rails & Discharge Riser, Non-Clog (2-channel) Impeller 2.",
+      "duration_s": 17.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Sewage Lift Station — Operation",
+    "type": "in_app_tour",
+    "model": "sewage_lift_station.glb",
+    "duration_s": 37.5,
+    "script": [
+     {
+      "narration": "How the Sewage Lift Station works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Sewage flows in through the inlet screen.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_screen",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The level rises in the wet well.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sewage",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The duty pump starts on level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "level_controls",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pump lifts sewage up the riser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Check and gate valves in the chamber lead to the rising main.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "valves_rising_main",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Gravity sewers get deeper downstream; a lift station raises the flow into a rising (force) main or a higher sewer.",
+      "duration_s": 8.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Sewage Lift Station — Maintenance",
+    "type": "in_app_tour",
+    "model": "sewage_lift_station.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Sewage Lift Station.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check run hours, alarms and basket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_screen",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean floats; check pump insulation and seal monitor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "level_controls",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Lift pumps; replace seals/wear parts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pump ragging: high current, low flow. Common cause: wipes and rags.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "impeller_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high-level alarm: flooding risk. Common cause: pump failure, power cut.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "level_controls",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why limit pump starts per hour?",
+     "options": [
+      "Motor overheating",
+      "Water quality",
+      "Smell",
+      "Paint"
+     ],
+     "answer": 0,
+     "explanation": "Motor.",
+     "level": "basic"
+    },
+    {
+     "question": "How are pumps removed?",
+     "options": [
+      "Lifted on guide rails without entering the well",
+      "Through the sewer",
+      "By draining",
+      "Never"
+     ],
+     "answer": 0,
+     "explanation": "Guide rails.",
+     "level": "basic"
+    },
+    {
+     "question": "Main hazard entering a wet well?",
+     "options": [
+      "H₂S / oxygen deficiency (confined space)",
+      "Noise",
+      "Cold",
+      "Light"
+     ],
+     "answer": 0,
+     "explanation": "Gas.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores incoming sewage.\"",
+     "options": [
+      "Submersible Sewage Pump 2 (standby) on Duckfoot Bend, Guide Rails & Discharge Riser",
+      "Valve Chamber (dry, separate from the wet well)",
+      "Submersible Sewage Pump 1 (duty) on Duckfoot Bend, Guide Rails & Discharge Riser",
+      "Concrete Wet Well with Benched (sloped) Floor"
+     ],
+     "answer": 3,
+     "explanation": "Concrete Wet Well with Benched (sloped) Floor: Stores incoming sewage.",
+     "level": "basic",
+     "part": "wet_well",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Stops large solids reaching pumps.\"",
+     "options": [
+      "Sewage in the Wet Well (fills, then is pumped down)",
+      "Submersible Sewage Pump 1 (duty) on Duckfoot Bend, Guide Rails & Discharge Riser",
+      "Incoming Sewer & Inlet Basket Screen on Guide Rails (traps rags / large solids)",
+      "Submersible Sewage Pump 2 (standby) on Duckfoot Bend, Guide Rails & Discharge Riser"
+     ],
+     "answer": 2,
+     "explanation": "Incoming Sewer & Inlet Basket Screen on Guide Rails (traps rags / large solids): Stops large solids reaching pumps.",
+     "level": "basic",
+     "part": "inlet_screen",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Lift the sewage.\"",
+     "options": [
+      "Submersible Sewage Pump 1 (duty) on Duckfoot Bend, Guide Rails & Discharge Riser",
+      "Float Switches (stop / duty start / high-level alarm) & Ultrasonic Level Transmitter",
+      "Concrete Wet Well with Benched (sloped) Floor",
+      "Check & Gate Valves on each Pump Line, Common Header & Rising Main"
+     ],
+     "answer": 0,
+     "explanation": "Submersible Sewage Pump 1 (duty) on Duckfoot Bend, Guide Rails & Discharge Riser: Lift the sewage.",
+     "level": "basic",
+     "part": "pump_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

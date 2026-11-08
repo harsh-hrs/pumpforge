@@ -1,0 +1,723 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "air_receiver_dryer_package",
+  "title": "Air Receiver with Refrigerated Dryer & Filtration Package",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 232,
+    "phase": 11,
+    "eq_id": "EQ-310",
+    "subcategory": "Compressed Air",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "air_receiver_dryer_package_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "air_receiver_dryer_package_temperature.glb",
+      "title": "Chill to condense, re-heat to protect",
+      "description": "Warm saturated air is pre-cooled by the outgoing cold air, then chilled in the evaporator to ≈ 3 °C so the water condenses and is drained. The cold dry air is re-heated in the air-to-air exchanger before leaving, which saves refrigeration energy and prevents pipe sweating. Pressure dew point ≈ +3 °C (ISO 8573-1 class 4) — fine for general plant air; instrument air needing −40 °C uses a desiccant dryer. The receiver buffers demand, settles condensate and smooths compressor cycling.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "compressed_air",
+      "kind": "air",
+      "radius": 0.016,
+      "points": [
+        [
+          -0.95,
+          0.85,
+          -0.0
+        ],
+        [
+          -0.1,
+          0.95,
+          -0.05
+        ],
+        [
+          0.0,
+          2.475,
+          -0.05
+        ],
+        [
+          0.0,
+          2.775,
+          -0.0
+        ],
+        [
+          1.25,
+          2.775,
+          -0.0
+        ],
+        [
+          1.25,
+          1.2,
+          -0.1
+        ],
+        [
+          1.75,
+          1.0,
+          -0.1
+        ],
+        [
+          1.75,
+          0.55,
+          -0.1
+        ],
+        [
+          1.33,
+          0.85,
+          -0.1
+        ],
+        [
+          1.1,
+          1.1,
+          -0.2
+        ],
+        [
+          0.95,
+          0.85,
+          -0.55
+        ],
+        [
+          0.95,
+          0.38,
+          -0.55
+        ],
+        [
+          0.75,
+          0.38,
+          -0.55
+        ],
+        [
+          0.75,
+          1.05,
+          -0.55
+        ],
+        [
+          0.75,
+          1.05,
+          -1.2
+        ]
+      ]
+    },
+    {
+      "name": "refrigerant",
+      "kind": "flow_suction",
+      "radius": 0.01,
+      "points": [
+        [
+          1.35,
+          0.3,
+          -0.25
+        ],
+        [
+          2.0,
+          0.3,
+          -0.25
+        ],
+        [
+          2.0,
+          0.78,
+          -0.25
+        ],
+        [
+          1.75,
+          0.98,
+          -0.25
+        ],
+        [
+          1.55,
+          0.98,
+          -0.25
+        ],
+        [
+          1.55,
+          0.4,
+          -0.25
+        ],
+        [
+          1.4,
+          0.4,
+          -0.15
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 14526,
+    "parts": 10
+  },
+  "summary": "An air receiver and refrigerated dryer package stores compressed air to buffer demand and then cools it to about +3 °C so most of the water condenses and drains. Filters remove oil aerosols and dust, giving clean dry plant air.",
+  "classification": {
+    "family": "Compressed air",
+    "type": "Vertical receiver + refrigerated dryer + filters"
+  },
+  "model_configuration": {
+    "animation": "Condensate collects and drains; refrigerant circulates; condenser fan turns"
+  },
+  "standards": [
+    {
+      "id": "ISO 8573-1",
+      "title": "Compressed air — contaminants and purity classes",
+      "relevance": "Dew-point, particle and oil classes.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISA-7.0.01",
+      "title": "Quality standard for instrument air",
+      "relevance": "Instrument-air dew point and quality.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Receiver / vessel design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "Local pressure-equipment rules (e.g. PED / IBR)",
+      "title": "Registration and inspection",
+      "relevance": "Jurisdictional — to be verified.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "ISO 8573-1",
+    "CAGI handbook"
+  ],
+  "parts": [
+    {
+      "id": "receiver",
+      "name": "Vertical Air Receiver (pressure vessel)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "receiver__back",
+        "receiver__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.45,
+        0.325,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        2.575,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.45,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.45,
+        -0.0
+      ],
+      "info_ref": "ard_receiver"
+    },
+    {
+      "id": "receiver_legs",
+      "name": "Receiver Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.49767,
+        0.0,
+        -0.3812
+      ],
+      "bbox_max": [
+        0.3812,
+        0.6,
+        0.49767
+      ],
+      "label_anchor": [
+        -0.05823,
+        0.3,
+        0.49767
+      ],
+      "center": [
+        -0.05823,
+        0.3,
+        0.05823
+      ],
+      "info_ref": "ard_receiver"
+    },
+    {
+      "id": "condensate",
+      "name": "Condensate collecting in the receiver bottom",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cd"
+      ],
+      "pivot": [
+        0.0,
+        0.325,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.25,
+        0.335,
+        -0.25
+      ],
+      "bbox_max": [
+        0.25,
+        0.379,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.357,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.357,
+        -0.125
+      ],
+      "info_ref": "ard_drain"
+    },
+    {
+      "id": "receiver_fittings",
+      "name": "Inlet (low) & Outlet (high), Safety Valve, Pressure Gauge, Inspection Opening & Zero-Loss Auto Drain",
+      "group": "fittings",
+      "section_role": "keep",
+      "nodes": [
+        "receiver_fittings.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.85,
+        0.06,
+        -0.5
+      ],
+      "bbox_max": [
+        1.3,
+        2.825,
+        0.095
+      ],
+      "label_anchor": [
+        0.225,
+        1.4425,
+        0.095
+      ],
+      "center": [
+        0.225,
+        1.4425,
+        -0.2025
+      ],
+      "info_ref": "ard_fittings"
+    },
+    {
+      "id": "dryer_cabinet",
+      "name": "Refrigerated Dryer Cabinet (front panel removed in cutaway)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "dryer_cabinet__back",
+        "dryer_cabinet__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        1.1,
+        0.05,
+        -0.35
+      ],
+      "bbox_max": [
+        2.1,
+        1.35,
+        0.35
+      ],
+      "label_anchor": [
+        1.6,
+        0.7,
+        0.35
+      ],
+      "center": [
+        1.6,
+        0.7,
+        -0.0
+      ],
+      "info_ref": "ard_dryer"
+    },
+    {
+      "id": "heat_exchangers",
+      "name": "Air-to-Air Pre-Cooler/Re-Heater, Evaporator (air-to-refrigerant) & Moisture Separator",
+      "group": "heat_exchange",
+      "section_role": "keep",
+      "nodes": [
+        "heat_exchangers.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.5
+      ],
+      "bbox_min": [
+        1.18,
+        0.35,
+        -0.25
+      ],
+      "bbox_max": [
+        1.9,
+        1.205,
+        0.05
+      ],
+      "label_anchor": [
+        1.54,
+        0.7775,
+        0.05
+      ],
+      "center": [
+        1.54,
+        0.7775,
+        -0.1
+      ],
+      "info_ref": "ard_hx"
+    },
+    {
+      "id": "refrigeration_circuit",
+      "name": "Refrigeration Circuit: Hermetic Compressor, Air-Cooled Condenser, Expansion Valve & Lines",
+      "group": "refrigeration",
+      "section_role": "keep",
+      "nodes": [
+        "refrigeration_circuit.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.3
+      ],
+      "bbox_min": [
+        1.22,
+        0.08,
+        -0.28
+      ],
+      "bbox_max": [
+        2.055,
+        0.994,
+        0.275
+      ],
+      "label_anchor": [
+        1.6375,
+        0.537,
+        0.275
+      ],
+      "center": [
+        1.6375,
+        0.537,
+        -0.0025
+      ],
+      "info_ref": "ard_refrig"
+    },
+    {
+      "id": "condenser_fan",
+      "name": "Condenser Fan",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "condenser_fan.001"
+      ],
+      "pivot": [
+        1.93,
+        0.5,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.9,
+        0.31,
+        -0.17855
+      ],
+      "bbox_max": [
+        1.96,
+        0.69,
+        0.17855
+      ],
+      "label_anchor": [
+        1.93,
+        0.5,
+        0.17855
+      ],
+      "center": [
+        1.93,
+        0.5,
+        -0.0
+      ],
+      "info_ref": "ard_refrig"
+    },
+    {
+      "id": "drain_drops",
+      "name": "Condensed water drained from the separator",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "drain_drops0",
+        "drain_drops1",
+        "drain_drops2",
+        "drain_drops3"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "filters",
+      "name": "Coalescing Filter (oil aerosols ≈ 0.01 mg/m³) & Dust Filter with Auto Drains",
+      "group": "filters",
+      "section_role": "keep",
+      "nodes": [
+        "filters.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.2,
+        0.2,
+        -0.4
+      ],
+      "bbox_min": [
+        0.646,
+        0.35,
+        -1.1
+      ],
+      "bbox_max": [
+        1.1,
+        1.135,
+        -0.165
+      ],
+      "label_anchor": [
+        0.873,
+        0.7425,
+        -0.165
+      ],
+      "center": [
+        0.873,
+        0.7425,
+        -0.6325
+      ],
+      "info_ref": "ard_filters"
+    }
+  ],
+  "components": {
+    "ard_receiver": {
+      "function": "Stores air, damps pulsation, lets condensate settle.",
+      "construction": "Vertical vessel on legs.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Max working pressure per nameplate.",
+      "failure_modes": [
+        "Internal corrosion from standing water"
+      ],
+      "inspection": [
+        "Thickness survey, hydrotest per rules"
+      ]
+    },
+    "ard_drain": {
+      "function": "Collects condensate.",
+      "construction": "Bottom of the receiver.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Overflow if drain fails"
+      ],
+      "inspection": [
+        "Daily check"
+      ]
+    },
+    "ard_fittings": {
+      "function": "Connections and protection.",
+      "construction": "Inlet low, outlet high, safety valve, gauge, inspection opening, auto drain.",
+      "material": "Steel/brass.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Safety valve stuck",
+        "Drain blocked"
+      ],
+      "inspection": [
+        "Lift-test safety valve, test drain"
+      ]
+    },
+    "ard_dryer": {
+      "function": "Houses the dryer.",
+      "construction": "Sheet-metal cabinet.",
+      "material": "Painted steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ard_hx": {
+      "function": "Cool, separate and re-heat the air.",
+      "construction": "Air-to-air and air-to-refrigerant exchangers, separator.",
+      "material": "Aluminium/copper/stainless.",
+      "operating_conditions": "≈ +3 °C dew point.",
+      "failure_modes": [
+        "Fouling",
+        "Freezing if bypass control fails"
+      ],
+      "inspection": [
+        "ΔP, dew point"
+      ]
+    },
+    "ard_refrig": {
+      "function": "Provides cooling.",
+      "construction": "Hermetic compressor, condenser, fan, expansion valve.",
+      "material": "Copper/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Refrigerant leak",
+        "Dirty condenser"
+      ],
+      "inspection": [
+        "Suction pressure, condenser cleaning"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    },
+    "ard_filters": {
+      "function": "Remove oil aerosol and particles.",
+      "construction": "Coalescing and dust filters with drains.",
+      "material": "Aluminium/glass fibre.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blocked element"
+      ],
+      "inspection": [
+        "ΔP, change interval"
+      ]
+    }
+  }
+}

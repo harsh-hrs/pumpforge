@@ -1,0 +1,631 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "coalescer",
+ "no": 187,
+ "title": "Coalescer",
+ "model_title": "Liquid–Liquid Coalescer (Cartridge Coalescer + Vane Pack, Water Boot)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A liquid–liquid coalescer removes fine droplets of one liquid from another — for example water from jet fuel or diesel. The fluid passes through coalescing cartridges whose fibres catch tiny droplets and merge them into large drops; these settle quickly into the water boot, from which an interface controller drains the water.",
+   "applications": [
+    "Aviation fuel and diesel water removal",
+    "Water removal from LPG/condensates",
+    "Oil removal from water (reverse configuration)"
+   ],
+   "key_points": [
+    "Turns small droplets into large drops",
+    "Large drops settle fast (Stokes)",
+    "Surfactants can disarm media",
+    "Interface level control on the boot"
+   ],
+   "classification": {
+    "family": "Liquid–liquid separator",
+    "type": "Horizontal cartridge coalescer with water boot"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A liquid–liquid coalescer removes fine water droplets from hydrocarbons (or oil from water). The fluid passes through coalescing cartridges whose fibres capture small droplets and merge them into large drops; a vane pack catches remaining drops, and the separated water settles into the boot where an interface controller drains it."
+  },
+  "model_3d": {
+   "asset": "glb/coalescer.glb",
+   "metadata": "meta/coalescer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 16754,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Fluid with dispersed water enters the vessel.",
+    "It flows through the coalescing cartridges.",
+    "Droplets grow and fall out of the flow."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Fluid with dispersed water enters the vessel.",
+     "part": "nozzles_instruments",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It flows through the coalescing cartridges.",
+     "part": "coalescing_elements",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Droplets grow and fall out of the flow.",
+     "part": "liquid",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The vane pack catches remaining drops.",
+     "part": "coalescing_elements",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water collects in the boot and is drained.",
+     "part": "boot_water",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet water content vs flow: rises sharply above the rated flux of the elements."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "coalescer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "coalescer_pressure.glb",
+     "title": "Coalescence: small drops become large drops",
+     "description": "Fine dispersed droplets (a few µm to tens of µm) are captured by the fibres of the coalescing media, merge with other captured droplets and leave the outer surface as large drops. Large drops settle quickly (Stokes: velocity ∝ d²) into the water boot. Surfactants can disarm coalescing media, so they are selected for the interfacial tension of the system.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/coalescer.json#components",
+   "key_components": "Horizontal vessel, coalescing cartridges, vane/mesh pack, water boot, interface control",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Horizontal Vessel & Water Boot",
+     "info_ref": "co_vessel",
+     "function": "Pressure envelope.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "coalescing_elements",
+     "name": "Tube Sheet, Coalescing Cartridges (inside-out) & Vane Separator Pack",
+     "info_ref": "co_elements",
+     "function": "Coalesce droplets.",
+     "material": "Glass fibre/PTFE/steel."
+    },
+    {
+     "id": "liquid",
+     "name": "Continuous Hydrocarbon Phase",
+     "info_ref": "co_vessel",
+     "function": "Pressure envelope.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "boot_water",
+     "name": "Separated Water in the Boot (interface controlled)",
+     "info_ref": "co_boot",
+     "function": "Collects water; interface control.",
+     "material": "Steel."
+    },
+    {
+     "id": "nozzles_instruments",
+     "name": "Inlet, Outlet, Water Drain & Interface Level Transmitter",
+     "info_ref": "co_boot",
+     "function": "Collects water; interface control.",
+     "material": "Steel."
+    },
+    {
+     "id": "saddles",
+     "name": "Saddles",
+     "info_ref": "co_vessel",
+     "function": "Pressure envelope.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "drops",
+     "name": "Fine Water Droplets growing into Large Drops",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessel ~ 0.3 – 2 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 1 – 1000",
+     "unit": "m³/h"
+    },
+    "operating_pressure": {
+     "typical_range": "Up to ~ 10 – 100 (rating)",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "Outlet free water typically < 15 ppm (fuel)",
+     "unit": "ppm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose media for interfacial tension; size elements for rated flux."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API/EI 1581 (aviation filter-separators, to be verified)",
+    "Maker data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level foundation/skid for operating (full) weight; access for element/media change and lifting."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; skids level; align pumps/drives."
+   ],
+   "piping": [
+    "Isolation and bypass valves; vents and drains; pressure gauges or ΔP transmitter across the unit; relief protection where the vessel can be over-pressured."
+   ],
+   "commissioning": [
+    "Leak/pressure test; flush lines before installing elements/media; bring flow on gradually; record clean ΔP and performance baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Drain/check boot interface; ΔP.",
+     "part": "boot_water",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Sample outlet water content.",
+     "part": "nozzles_instruments",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace coalescer elements.",
+     "part": "coalescing_elements"
+    }
+   ],
+   "lubrication": [
+    "No lubrication of static parts; lubricate pumps, drives and valve actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Media disarming",
+     "category": "performance",
+     "symptoms": [
+      "Water passes through"
+     ],
+     "causes": [
+      "Surfactants"
+     ],
+     "remedies": [
+      "Change media; remove surfactant source"
+     ],
+     "part": "coalescing_elements"
+    },
+    {
+     "problem": "High ΔP",
+     "category": "performance",
+     "symptoms": [
+      "Flow restriction"
+     ],
+     "causes": [
+      "Particulates"
+     ],
+     "remedies": [
+      "Pre-filter; replace"
+     ],
+     "part": "coalescing_elements"
+    }
+   ],
+   "safety": [
+    "Flammable fluids — earthing, depressurise before opening."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Coalescer — Introduction",
+    "type": "in_app_tour",
+    "model": "coalescer.glb",
+    "duration_s": 50.0,
+    "script": [
+     {
+      "narration": "This module introduces the Coalescer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A liquid–liquid coalescer removes fine droplets of one liquid from another — for example water from jet fuel or diesel.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The fluid passes through coalescing cartridges whose fibres catch tiny droplets and merge them into large drops; these settle quickly into the water boot, from which an interface controller drains the water.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include aviation fuel and diesel water removal; water removal from LPG/condensates; oil removal from water (reverse configuration).",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Coalescer — Operation",
+    "type": "in_app_tour",
+    "model": "coalescer.glb",
+    "duration_s": 41.5,
+    "script": [
+     {
+      "narration": "How the Coalescer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Fluid with dispersed water enters the vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles_instruments",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It flows through the coalescing cartridges.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coalescing_elements",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Droplets grow and fall out of the flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The vane pack catches remaining drops.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coalescing_elements",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water collects in the boot and is drained.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "boot_water",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Fine dispersed droplets (a few µm to tens of µm) are captured by the fibres of the coalescing media, merge with other captured droplets and leave the outer surface as large drops.",
+      "duration_s": 13.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Coalescer — Maintenance",
+    "type": "in_app_tour",
+    "model": "coalescer.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Coalescer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Drain/check boot interface; ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "boot_water",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Sample outlet water content.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles_instruments",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace coalescer elements.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coalescing_elements",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for media disarming: water passes through. Common cause: surfactants.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "coalescing_elements",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high δp: flow restriction. Common cause: particulates.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coalescing_elements",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does a coalescer do to droplets?",
+     "options": [
+      "Merges small droplets into large drops",
+      "Evaporates them",
+      "Heats them",
+      "Charges them"
+     ],
+     "answer": 0,
+     "explanation": "Coalescence.",
+     "level": "basic"
+    },
+    {
+     "question": "Why do large drops separate faster?",
+     "options": [
+      "Settling velocity ∝ d²",
+      "They are lighter",
+      "Magnetism",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Stokes.",
+     "level": "basic"
+    },
+    {
+     "question": "What can disarm coalescer media?",
+     "options": [
+      "Surfactants",
+      "Cold",
+      "Light",
+      "Steel"
+     ],
+     "answer": 0,
+     "explanation": "Lower IFT.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure envelope.\"",
+     "options": [
+      "Fine Water Droplets growing into Large Drops",
+      "Inlet, Outlet, Water Drain & Interface Level Transmitter",
+      "Separated Water in the Boot (interface controlled)",
+      "Horizontal Vessel & Water Boot"
+     ],
+     "answer": 3,
+     "explanation": "Horizontal Vessel & Water Boot: Pressure envelope.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Coalesce droplets.\"",
+     "options": [
+      "Tube Sheet, Coalescing Cartridges (inside-out) & Vane Separator Pack",
+      "Saddles",
+      "Fine Water Droplets growing into Large Drops",
+      "Horizontal Vessel & Water Boot"
+     ],
+     "answer": 0,
+     "explanation": "Tube Sheet, Coalescing Cartridges (inside-out) & Vane Separator Pack: Coalesce droplets.",
+     "level": "basic",
+     "part": "coalescing_elements",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Collects water; interface control.\"",
+     "options": [
+      "Horizontal Vessel & Water Boot",
+      "Continuous Hydrocarbon Phase",
+      "Fine Water Droplets growing into Large Drops",
+      "Separated Water in the Boot (interface controlled)"
+     ],
+     "answer": 3,
+     "explanation": "Separated Water in the Boot (interface controlled): Collects water; interface control.",
+     "level": "basic",
+     "part": "boot_water",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

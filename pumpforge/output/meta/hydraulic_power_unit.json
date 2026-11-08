@@ -1,0 +1,632 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "hydraulic_power_unit",
+  "title": "Hydraulic Power Unit (HPU)",
+  "category": "9 · Material Handling & Heavy Mechanical Equipment",
+  "library": {
+    "no": 144,
+    "phase": 7,
+    "eq_id": "EQ-222",
+    "subcategory": "Hydraulic Equipment",
+    "hi_family": "material_handling",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "hydraulic_power_unit_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "hydraulic_power_unit_pressure.glb",
+      "title": "Pressure levels in the HPU circuit",
+      "description": "Blue = suction (slightly below atmospheric at the pump inlet — keep it short and generous). Red = pressure line, limited by the relief valve setting (system pressure is set by the load; the relief valve caps it). Green-blue = return line, a few bar back-pressure through the return filter.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Pump inlet: ≈ atmospheric or slightly below",
+          "anchor": [
+            -0.2,
+            0.3,
+            0.12
+          ]
+        },
+        {
+          "text": "Pressure line: up to the relief-valve setting",
+          "anchor": [
+            0.5,
+            0.9,
+            0.12
+          ]
+        },
+        {
+          "text": "Return line: low pressure (filter Δp)",
+          "anchor": [
+            0.6,
+            0.75,
+            -0.26
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "suction",
+      "kind": "hydraulic_oil",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.2,
+          0.16,
+          -0.05
+        ],
+        [
+          -0.2,
+          0.5,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "pressure_line",
+      "kind": "flow_discharge",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.2,
+          0.5,
+          -0.05
+        ],
+        [
+          -0.1,
+          0.66,
+          -0.05
+        ],
+        [
+          0.25,
+          0.66,
+          -0.05
+        ],
+        [
+          0.3,
+          0.8,
+          -0.05
+        ],
+        [
+          0.8,
+          0.8,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "return_line",
+      "kind": "flow_suction",
+      "radius": 0.01,
+      "points": [
+        [
+          0.8,
+          0.7,
+          -0.15
+        ],
+        [
+          0.38,
+          0.78,
+          -0.18
+        ],
+        [
+          0.38,
+          0.55,
+          -0.18
+        ],
+        [
+          0.38,
+          0.2,
+          -0.15
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 2976,
+    "parts": 9
+  },
+  "summary": "A hydraulic power unit (HPU) supplies pressurised oil to hydraulic actuators. A motor drives a pump that draws oil from the reservoir; a relief valve limits pressure, filters keep the oil clean, a cooler removes heat, and the oil returns to the tank after doing work.",
+  "classification": {
+    "family": "Hydraulic equipment",
+    "type": "Hydraulic power pack"
+  },
+  "model_configuration": {
+    "animation": "Oil flows suction → pressure → return"
+  },
+  "standards": [
+    {
+      "id": "ISO 4413",
+      "title": "Hydraulic fluid power — General rules and safety requirements",
+      "relevance": "System safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 4406",
+      "title": "Hydraulic fluid power — Fluids — Contamination code",
+      "relevance": "Cleanliness.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Bosch Rexroth hydraulics trainer"
+  ],
+  "parts": [
+    {
+      "id": "reservoir",
+      "name": "Reservoir (tank) with Baffle",
+      "group": "reservoir",
+      "section_role": "split",
+      "nodes": [
+        "reservoir__back",
+        "reservoir__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.5,
+        0.0,
+        -0.3
+      ],
+      "bbox_max": [
+        0.5,
+        0.6,
+        0.3
+      ],
+      "label_anchor": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "center": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "hp_reservoir"
+    },
+    {
+      "id": "oil",
+      "name": "Hydraulic Oil",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "oil"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.475,
+        0.14,
+        -0.27
+      ],
+      "bbox_max": [
+        0.475,
+        0.46,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.3,
+        -0.135
+      ],
+      "info_ref": "hp_oil"
+    },
+    {
+      "id": "motor_pump",
+      "name": "Electric Motor, Lantern Bell Housing & Pump (gear/vane/piston) with Suction Strainer",
+      "group": "pump",
+      "section_role": "keep",
+      "nodes": [
+        "pm"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.33,
+        0.14,
+        -0.13
+      ],
+      "bbox_max": [
+        -0.07,
+        1.1,
+        0.13
+      ],
+      "label_anchor": [
+        -0.2,
+        0.62,
+        0.13
+      ],
+      "center": [
+        -0.2,
+        0.62,
+        -0.0
+      ],
+      "info_ref": "hp_pump"
+    },
+    {
+      "id": "coupling",
+      "name": "Jaw Coupling inside the Bell Housing (motor → pump)",
+      "group": "pump",
+      "section_role": "keep",
+      "nodes": [
+        "cp"
+      ],
+      "pivot": [
+        -0.2,
+        0.67,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.3
+      ],
+      "bbox_min": [
+        -0.245,
+        0.635,
+        -0.04714
+      ],
+      "bbox_max": [
+        -0.15,
+        0.705,
+        0.04714
+      ],
+      "label_anchor": [
+        -0.1975,
+        0.67,
+        0.04714
+      ],
+      "center": [
+        -0.1975,
+        0.67,
+        -0.0
+      ],
+      "info_ref": "hp_pump"
+    },
+    {
+      "id": "valve_block",
+      "name": "Pressure Relief Valve, Check Valve & Gauge on Manifold Block",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "blk"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.14,
+        0.6,
+        -0.075
+      ],
+      "bbox_max": [
+        0.36,
+        0.89,
+        0.0925
+      ],
+      "label_anchor": [
+        0.25,
+        0.745,
+        0.0925
+      ],
+      "center": [
+        0.25,
+        0.745,
+        0.00875
+      ],
+      "info_ref": "hp_relief"
+    },
+    {
+      "id": "filter_breather",
+      "name": "Return Filter, Filler-Breather & Level/Temperature Gauge",
+      "group": "conditioning",
+      "section_role": "keep",
+      "nodes": [
+        "flt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.415,
+        0.28,
+        -0.23
+      ],
+      "bbox_max": [
+        0.465,
+        0.78,
+        0.32
+      ],
+      "label_anchor": [
+        0.025,
+        0.53,
+        0.32
+      ],
+      "center": [
+        0.025,
+        0.53,
+        0.045
+      ],
+      "info_ref": "hp_filter"
+    },
+    {
+      "id": "cooler",
+      "name": "Air-Blast Oil Cooler (core, fan shroud, fan motor)",
+      "group": "conditioning",
+      "section_role": "keep",
+      "nodes": [
+        "cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.58,
+        0.25,
+        -0.15
+      ],
+      "bbox_max": [
+        0.8,
+        0.55,
+        0.15
+      ],
+      "label_anchor": [
+        0.69,
+        0.4,
+        0.15
+      ],
+      "center": [
+        0.69,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "hp_cooler"
+    },
+    {
+      "id": "cooler_fan",
+      "name": "Cooler Fan",
+      "group": "conditioning",
+      "section_role": "keep",
+      "nodes": [
+        "fan"
+      ],
+      "pivot": [
+        0.68,
+        0.4,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.67,
+        0.29668,
+        -0.11478
+      ],
+      "bbox_max": [
+        0.69,
+        0.515,
+        0.11478
+      ],
+      "label_anchor": [
+        0.68,
+        0.40584,
+        0.11478
+      ],
+      "center": [
+        0.68,
+        0.40584,
+        -0.0
+      ],
+      "info_ref": "hp_cooler"
+    },
+    {
+      "id": "accumulator",
+      "name": "Accumulator",
+      "group": "storage",
+      "section_role": "keep",
+      "nodes": [
+        "ac"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.2,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.28,
+        0.6,
+        0.13
+      ],
+      "bbox_max": [
+        0.42,
+        1.1,
+        0.27
+      ],
+      "label_anchor": [
+        0.35,
+        0.85,
+        0.27
+      ],
+      "center": [
+        0.35,
+        0.85,
+        0.2
+      ],
+      "info_ref": "hp_accumulator"
+    }
+  ],
+  "components": {
+    "hp_reservoir": {
+      "function": "Stores oil, lets air and dirt settle, dissipates heat.",
+      "construction": "Tank with baffle.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hp_oil": {
+      "function": "Hydraulic oil.",
+      "construction": "—",
+      "material": "ISO VG 32/46/68.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hp_pump": {
+      "function": "Creates flow.",
+      "construction": "Motor, bell housing, pump.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hp_relief": {
+      "function": "Limits system pressure.",
+      "construction": "Relief, check valve, gauge.",
+      "material": "—",
+      "operating_conditions": "Set above working pressure.",
+      "failure_modes": [
+        "Set point drift"
+      ],
+      "inspection": [
+        "Test"
+      ]
+    },
+    "hp_filter": {
+      "function": "Keeps oil clean.",
+      "construction": "Return filter, breather, gauges.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hp_cooler": {
+      "function": "Removes heat.",
+      "construction": "Air-blast cooler.",
+      "material": "Aluminium.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hp_accumulator": {
+      "function": "Stores energy, damps pulsation.",
+      "construction": "Accumulator.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

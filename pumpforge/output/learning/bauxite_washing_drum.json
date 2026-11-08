@@ -1,0 +1,651 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "bauxite_washing_drum",
+ "no": 194,
+ "title": "Bauxite Washing Drum",
+ "model_title": "Bauxite Washing (Scrubbing) Drum with Trommel Discharge Screen",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A bauxite washing (scrubbing) drum tumbles crushed bauxite with water. Lifters raise the lumps and drop them so they rub against each other and clay is washed off. A trommel screen at the discharge separates washed bauxite from the clay-rich fines, which carry much of the reactive silica.",
+   "applications": [
+    "Beneficiation of lateritic/karstic bauxites with clay",
+    "Removing reactive silica before digestion"
+   ],
+   "key_points": [
+    "Attrition scrubbing in water",
+    "Removes clay and reactive silica",
+    "Trommel splits washed product and fines",
+    "Speed ~ 50–75 % of critical"
+   ],
+   "classification": {
+    "family": "Ore preparation",
+    "type": "Rotary scrubber with trommel"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A bauxite washing (scrubbing) drum tumbles crushed bauxite with water so the lumps rub against each other and clay is washed off. A trommel screen at the discharge separates washed bauxite from the clay-rich fines, lowering reactive silica in the digestion feed."
+  },
+  "model_3d": {
+   "asset": "glb/bauxite_washing_drum.glb",
+   "metadata": "meta/bauxite_washing_drum.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8256,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Bauxite and water enter through the feed chute.",
+    "The drum turns; lifters raise and drop the lumps.",
+    "Sprays add water to carry clay away."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Bauxite and water enter through the feed chute.",
+     "part": "feed_chute",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drum turns; lifters raise and drop the lumps.",
+     "part": "shell",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sprays add water to carry clay away.",
+     "part": "spray_header",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The trommel separates washed lumps from fines.",
+     "part": "trommel",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Products leave via chutes.",
+     "part": "discharge_chutes",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Clay removal vs residence time and water ratio."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "bauxite_washing_drum_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "bauxite_washing_drum_pressure.glb",
+     "title": "Attrition scrubbing removes clay and reactive silica",
+     "description": "Lifters raise the bauxite and drop it, so lumps rub and impact each other in water. Fine clay (often rich in reactive silica, which costs caustic soda in digestion) is washed off and leaves with the trommel undersize. Drum speed is typically ~ 50–75 % of critical speed.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/bauxite_washing_drum.json#components",
+   "key_components": "Rotating shell with liners & lifters, tyres, girth gear, spray header, trommel screen, drive",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Scrubbing Drum: Shell with Liners / Lifters (rotates)",
+     "info_ref": "bw_shell",
+     "function": "Rotating scrubbing chamber.",
+     "material": "Steel/rubber."
+    },
+    {
+     "id": "girth_tyres",
+     "name": "Scrubbing Drum: Riding Tyres & Girth Gear (turn with the shell)",
+     "info_ref": "bw_drive",
+     "function": "Rotation and support.",
+     "material": "Steel."
+    },
+    {
+     "id": "trommel",
+     "name": "Trommel Discharge Screen (separates washed lumps from fines/clay)",
+     "info_ref": "bw_trommel",
+     "function": "Screens discharge.",
+     "material": "Steel/PU."
+    },
+    {
+     "id": "spray_header",
+     "name": "Water Spray Header & Nozzles",
+     "info_ref": "bw_spray",
+     "function": "Adds wash water.",
+     "material": "Stainless."
+    },
+    {
+     "id": "feed_chute",
+     "name": "Feed Chute (crushed bauxite + water)",
+     "info_ref": "bw_chutes",
+     "function": "Feed and discharge.",
+     "material": "Steel."
+    },
+    {
+     "id": "discharge_chutes",
+     "name": "Undersize (slimes) Sump & Oversize (washed bauxite) Chute",
+     "info_ref": "bw_chutes",
+     "function": "Feed and discharge.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports_drive",
+     "name": "Support Rollers, Bases & Drive (motor, reducer, pinion)",
+     "info_ref": "bw_drive",
+     "function": "Rotation and support.",
+     "material": "Steel."
+    },
+    {
+     "id": "lumps",
+     "name": "Bauxite Lumps Tumbling and Scrubbing (clay is washed off)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "spray",
+     "name": "Wash Water Sprays",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Drum ~ 2 – 4 m diameter, 6 – 12 m long",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 1000",
+     "unit": "t/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Ambient; water ~ 1 – 3 m³/t",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "~ 100 – 1000",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by throughput and residence time from washability tests."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Wills' Mineral Processing Technology"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Massive foundation designed for dynamic loads (maker data); grout base plates."
+   ],
+   "alignment": [
+    "Align drive train (motor–gearbox–pinion) and check gear mesh/backlash; level rollers/trunnions."
+   ],
+   "piping": [
+    "Feed and discharge chutes free of the moving machine; water/liquor supplies with isolation; dust or spray containment."
+   ],
+   "commissioning": [
+    "No-load run (rotation, vibration, temperatures); then load gradually; record power and throughput baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check liners, sprays and trommel.",
+     "part": "trommel",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Gear mesh and roller alignment.",
+     "part": "girth_tyres",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Reline drum.",
+     "part": "shell"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Liner wear",
+     "category": "wear",
+     "symptoms": [
+      "Holes, noise"
+     ],
+     "causes": [
+      "Abrasion"
+     ],
+     "remedies": [
+      "Reline"
+     ],
+     "part": "shell"
+    },
+    {
+     "problem": "Screen blinding",
+     "category": "performance",
+     "symptoms": [
+      "Fines in product"
+     ],
+     "causes": [
+      "Sticky clay"
+     ],
+     "remedies": [
+      "More water; screen panel change"
+     ],
+     "part": "trommel"
+    }
+   ],
+   "safety": [
+    "Guard tyres and gears; lock out before entry."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Bauxite Washing Drum — Introduction",
+    "type": "in_app_tour",
+    "model": "bauxite_washing_drum.glb",
+    "duration_s": 52.4,
+    "script": [
+     {
+      "narration": "This module introduces the Bauxite Washing Drum.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A bauxite washing (scrubbing) drum tumbles crushed bauxite with water.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Lifters raise the lumps and drop them so they rub against each other and clay is washed off.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A trommel screen at the discharge separates washed bauxite from the clay-rich fines, which carry much of the reactive silica.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include beneficiation of lateritic/karstic bauxites with clay; removing reactive silica before digestion.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Scrubbing Drum: Shell with Liners / Lifters (rotates), Scrubbing Drum: Riding Tyres & Girth Gear (turn with the shell).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Bauxite Washing Drum — Operation",
+    "type": "in_app_tour",
+    "model": "bauxite_washing_drum.glb",
+    "duration_s": 34.9,
+    "script": [
+     {
+      "narration": "How the Bauxite Washing Drum works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Bauxite and water enter through the feed chute.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_chute",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drum turns; lifters raise and drop the lumps.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sprays add water to carry clay away.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spray_header",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The trommel separates washed lumps from fines.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trommel",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Products leave via chutes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "discharge_chutes",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Lifters raise the bauxite and drop it, so lumps rub and impact each other in water.",
+      "duration_s": 6.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Bauxite Washing Drum — Maintenance",
+    "type": "in_app_tour",
+    "model": "bauxite_washing_drum.glb",
+    "duration_s": 30.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Bauxite Washing Drum.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check liners, sprays and trommel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trommel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Gear mesh and roller alignment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "girth_tyres",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Reline drum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for liner wear: holes, noise. Common cause: abrasion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for screen blinding: fines in product. Common cause: sticky clay.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "trommel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why wash bauxite?",
+     "options": [
+      "Remove clay and reactive silica",
+      "Add moisture",
+      "Cool it",
+      "Dissolve alumina"
+     ],
+     "answer": 0,
+     "explanation": "Lower silica.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the trommel do?",
+     "options": [
+      "Screens washed product from fines",
+      "Grinds",
+      "Heats",
+      "Pumps"
+     ],
+     "answer": 0,
+     "explanation": "Screening.",
+     "level": "basic"
+    },
+    {
+     "question": "Scrubbing works by…",
+     "options": [
+      "Attrition between lumps",
+      "Magnetism",
+      "Flotation",
+      "Heat"
+     ],
+     "answer": 0,
+     "explanation": "Attrition.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Rotating scrubbing chamber.\"",
+     "options": [
+      "Wash Water Sprays",
+      "Bauxite Lumps Tumbling and Scrubbing (clay is washed off)",
+      "Support Rollers, Bases & Drive (motor, reducer, pinion)",
+      "Scrubbing Drum: Shell with Liners / Lifters (rotates)"
+     ],
+     "answer": 3,
+     "explanation": "Scrubbing Drum: Shell with Liners / Lifters (rotates): Rotating scrubbing chamber.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotation and support.\"",
+     "options": [
+      "Feed Chute (crushed bauxite + water)",
+      "Scrubbing Drum: Riding Tyres & Girth Gear (turn with the shell)",
+      "Scrubbing Drum: Shell with Liners / Lifters (rotates)",
+      "Trommel Discharge Screen (separates washed lumps from fines/clay)"
+     ],
+     "answer": 1,
+     "explanation": "Scrubbing Drum: Riding Tyres & Girth Gear (turn with the shell): Rotation and support.",
+     "level": "basic",
+     "part": "girth_tyres",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Screens discharge.\"",
+     "options": [
+      "Water Spray Header & Nozzles",
+      "Scrubbing Drum: Riding Tyres & Girth Gear (turn with the shell)",
+      "Trommel Discharge Screen (separates washed lumps from fines/clay)",
+      "Scrubbing Drum: Shell with Liners / Lifters (rotates)"
+     ],
+     "answer": 2,
+     "explanation": "Trommel Discharge Screen (separates washed lumps from fines/clay): Screens discharge.",
+     "level": "basic",
+     "part": "trommel",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

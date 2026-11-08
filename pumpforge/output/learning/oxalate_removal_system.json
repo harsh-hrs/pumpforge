@@ -1,0 +1,658 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "oxalate_removal_system",
+ "no": 214,
+ "title": "Oxalate Removal System",
+ "model_title": "Sodium Oxalate Removal (Seeded Crystallizer + Hydrocyclone)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An oxalate removal system takes a side-stream of liquor, cools and seeds it so sodium oxalate crystallises in a controlled way, and separates the crystals in hydrocyclones or filters. Clean liquor returns; part of the crystals is recycled as seed.",
+   "applications": [
+    "Liquor purification in Bayer refineries",
+    "Controlling organic impurities to protect hydrate quality"
+   ],
+   "key_points": [
+    "Oxalate comes from organic matter in bauxite",
+    "Uncontrolled oxalate spoils hydrate quality",
+    "Seeded cooling crystallisation",
+    "Crystals destroyed (lime/burning)"
+   ],
+   "classification": {
+    "family": "Liquor treatment",
+    "type": "Seeded oxalate crystallization"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "An oxalate removal system takes a side-stream of liquor, cools and seeds it so sodium oxalate crystallises in a controlled way, and separates the crystals in hydrocyclones. Clean liquor returns; part of the crystals is recycled as seed."
+  },
+  "model_3d": {
+   "asset": "glb/oxalate_removal_system.glb",
+   "metadata": "meta/oxalate_removal_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8516,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Side-stream liquor enters the crystallizer.",
+    "Cooling jacket lowers temperature.",
+    "Oxalate grows on seed crystals."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Side-stream liquor enters the crystallizer.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cooling jacket lowers temperature.",
+     "part": "cooling_jacket",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oxalate grows on seed crystals.",
+     "part": "ox_slurry",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hydrocyclone separates crystals.",
+     "part": "hydrocyclone",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Seed is recycled.",
+     "part": "feed_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Oxalate solubility vs temperature and caustic."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "oxalate_removal_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "oxalate_removal_system_temperature.glb",
+     "title": "Why oxalate must be removed",
+     "description": "Organic matter in bauxite degrades in the hot caustic liquor to sodium oxalate. If it builds up, oxalate co-precipitates with gibbsite, giving fine, weak hydrate and lower yield. A side-stream is cooled and seeded with oxalate crystals so oxalate crystallises in a controlled way; crystals are separated (cyclones/filters) and destroyed (e.g. by lime or burning), and the clean liquor returns.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/oxalate_removal_system.json#components",
+   "key_components": "Oxalate crystallizer (draft tube, cooling jacket), hydrocyclone, seed return",
+   "parts": [
+    {
+     "id": "ox_tank",
+     "name": "Oxalate Crystallizer: Tank, Baffles & Draft Tube",
+     "info_ref": "ox_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "ox_slurry",
+     "name": "Oxalate Crystallizer: Slurry / Liquor",
+     "info_ref": "ox_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "ox_agitator",
+     "name": "Oxalate Crystallizer: Agitator Shaft & Impeller",
+     "info_ref": "ox_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "ox_drive",
+     "name": "Oxalate Crystallizer: Agitator Drive (motor + gearbox, bridge beam)",
+     "info_ref": "ox_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "cooling_jacket",
+     "name": "Cooling Jacket (lowers temperature to drive crystallisation)",
+     "info_ref": "ox_cooling",
+     "function": "Cools liquor.",
+     "material": "Steel."
+    },
+    {
+     "id": "hydrocyclone",
+     "name": "Hydrocyclone (separates oxalate crystals; overflow = de-oxalated liquor)",
+     "info_ref": "ox_cyclone",
+     "function": "Separates crystals; piping; pump.",
+     "material": "Lined steel."
+    },
+    {
+     "id": "piping",
+     "name": "Crystallizer → Cyclone Feed, Seed Return (underflow) & Clean Liquor Overflow",
+     "info_ref": "ox_cyclone",
+     "function": "Separates crystals; piping; pump.",
+     "material": "Lined steel."
+    },
+    {
+     "id": "feed_pump",
+     "name": "Cyclone Feed Pump",
+     "info_ref": "ox_cyclone",
+     "function": "Separates crystals; piping; pump.",
+     "material": "Lined steel."
+    },
+    {
+     "id": "feed_pump_shaft",
+     "name": "Cyclone Feed Pump — Shaft & Coupling (turning)",
+     "info_ref": "ox_cyclone",
+     "function": "Separates crystals; piping; pump.",
+     "material": "Lined steel."
+    },
+    {
+     "id": "foundation",
+     "name": "Ring-Wall Foundation",
+     "info_ref": "ox_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "oxalate",
+     "name": "Needle-like Sodium Oxalate Crystals growing on Seed",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Crystallizer ~ 3 – 8 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 20 – 200",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Cooled to ~ 40 – 60 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "~ 15 – 75",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Side-stream size from oxalate input rate."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Ring-wall or slab foundation designed for full liquid/slurry weight plus agitator dynamic loads; settlement monitoring for large tanks."
+   ],
+   "alignment": [
+    "Tank plumb and level; agitator shaft vertical and concentric; check gearbox mounting."
+   ],
+   "piping": [
+    "Nozzles sized for slurry velocity (avoid settling and erosion); flush connections; scaling-resistant design and descaling access.",
+    "Caustic service: suitable materials, gaskets and spray shields; eyewash/safety showers nearby."
+   ],
+   "commissioning": [
+    "Water trials (agitator run with water, check vibration and power); then caustic/slurry; verify levels, interlocks and spillage containment (bunds)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor oxalate in liquor.",
+     "part": "ox_slurry",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean jacket/cyclone.",
+     "part": "cooling_jacket",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Cyclone liner replacement.",
+     "part": "hydrocyclone"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Oxalate breakthrough",
+     "category": "performance",
+     "symptoms": [
+      "Fine hydrate in precipitation"
+     ],
+     "causes": [
+      "Poor removal"
+     ],
+     "remedies": [
+      "Increase side-stream"
+     ],
+     "part": "ox_tank"
+    },
+    {
+     "problem": "Jacket scaling",
+     "category": "performance",
+     "symptoms": [
+      "Poor cooling"
+     ],
+     "causes": [
+      "Scale"
+     ],
+     "remedies": [
+      "Descale"
+     ],
+     "part": "cooling_jacket"
+    }
+   ],
+   "safety": [
+    "Caustic liquor."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Oxalate Removal System — Introduction",
+    "type": "in_app_tour",
+    "model": "oxalate_removal_system.glb",
+    "duration_s": 47.7,
+    "script": [
+     {
+      "narration": "This module introduces the Oxalate Removal System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An oxalate removal system takes a side-stream of liquor, cools and seeds it so sodium oxalate crystallises in a controlled way, and separates the crystals in hydrocyclones or filters.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Clean liquor returns; part of the crystals is recycled as seed.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include liquor purification in Bayer refineries; controlling organic impurities to protect hydrate quality.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Oxalate Crystallizer: Agitator Shaft & Impeller, Cyclone Feed Pump, Cyclone Feed Pump — Shaft & Coupling (turning).",
+      "duration_s": 8.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Oxalate Removal System — Operation",
+    "type": "in_app_tour",
+    "model": "oxalate_removal_system.glb",
+    "duration_s": 33.6,
+    "script": [
+     {
+      "narration": "How the Oxalate Removal System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Side-stream liquor enters the crystallizer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cooling jacket lowers temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_jacket",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oxalate grows on seed crystals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ox_slurry",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hydrocyclone separates crystals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hydrocyclone",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Seed is recycled.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_pump",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Organic matter in bauxite degrades in the hot caustic liquor to sodium oxalate.",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Oxalate Removal System — Maintenance",
+    "type": "in_app_tour",
+    "model": "oxalate_removal_system.glb",
+    "duration_s": 31.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Oxalate Removal System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor oxalate in liquor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ox_slurry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean jacket/cyclone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_jacket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Cyclone liner replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hydrocyclone",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oxalate breakthrough: fine hydrate in precipitation. Common cause: poor removal.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "ox_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for jacket scaling: poor cooling. Common cause: scale.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_jacket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Where does oxalate come from?",
+     "options": [
+      "Organic matter in bauxite",
+      "Lime",
+      "Steam",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Organics.",
+     "level": "basic"
+    },
+    {
+     "question": "Why remove it?",
+     "options": [
+      "It ruins hydrate quality",
+      "Colour",
+      "Taste",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Quality.",
+     "level": "basic"
+    },
+    {
+     "question": "How is it crystallised?",
+     "options": [
+      "Cooling and seeding",
+      "Heating",
+      "Acid",
+      "Magnet"
+     ],
+     "answer": 0,
+     "explanation": "Seeded cooling.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the slurry.\"",
+     "options": [
+      "Cyclone Feed Pump — Shaft & Coupling (turning)",
+      "Crystallizer → Cyclone Feed, Seed Return (underflow) & Clean Liquor Overflow",
+      "Oxalate Crystallizer: Tank, Baffles & Draft Tube",
+      "Cooling Jacket (lowers temperature to drive crystallisation)"
+     ],
+     "answer": 2,
+     "explanation": "Oxalate Crystallizer: Tank, Baffles & Draft Tube: Holds the slurry.",
+     "level": "basic",
+     "part": "ox_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process slurry/liquor.\"",
+     "options": [
+      "Hydrocyclone (separates oxalate crystals; overflow = de-oxalated liquor)",
+      "Oxalate Crystallizer: Agitator Shaft & Impeller",
+      "Oxalate Crystallizer: Slurry / Liquor",
+      "Ring-Wall Foundation"
+     ],
+     "answer": 2,
+     "explanation": "Oxalate Crystallizer: Slurry / Liquor: Process slurry/liquor.",
+     "level": "basic",
+     "part": "ox_slurry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes and suspends solids.\"",
+     "options": [
+      "Oxalate Crystallizer: Slurry / Liquor",
+      "Oxalate Crystallizer: Agitator Shaft & Impeller",
+      "Ring-Wall Foundation",
+      "Crystallizer → Cyclone Feed, Seed Return (underflow) & Clean Liquor Overflow"
+     ],
+     "answer": 1,
+     "explanation": "Oxalate Crystallizer: Agitator Shaft & Impeller: Mixes and suspends solids.",
+     "level": "basic",
+     "part": "ox_agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

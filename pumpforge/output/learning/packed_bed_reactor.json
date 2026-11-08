@@ -1,0 +1,595 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "packed_bed_reactor",
+ "no": 100,
+ "title": "Packed Bed Reactor",
+ "model_title": "Fixed (Packed) Bed Catalytic Reactor — Two Beds with Interbed Quench",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A packed (fixed) bed reactor passes reactants through a bed of solid catalyst. Feed enters at the top, is spread by a distributor and reacts as it flows down through the beds; cold quench between beds controls temperature in exothermic reactions; product leaves through the outlet collector.",
+   "applications": [
+    "Hydrotreating and hydrocracking",
+    "Ammonia and methanol synthesis",
+    "Reforming and isomerisation",
+    "Catalytic oxidation"
+   ],
+   "key_points": [
+    "Even flow distribution is vital",
+    "Pressure drop grows with fouling",
+    "Quench limits hot spots",
+    "Catalyst changed at turnarounds"
+   ],
+   "classification": {
+    "family": "Reactor (catalytic)",
+    "type": "Down-flow fixed-bed, two beds, interbed quench"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A packed (fixed) bed reactor passes gas or liquid through a bed of solid catalyst particles. Feed enters at the top through a distributor, reacts as it flows down through the catalyst, and leaves through an outlet collector. For exothermic reactions, cold quench between beds controls the temperature."
+  },
+  "model_3d": {
+   "asset": "glb/packed_bed_reactor.glb",
+   "metadata": "meta/packed_bed_reactor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 19692,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed enters through the inlet diffuser and distribution tray.",
+    "It reacts while flowing through the catalyst bed.",
+    "Cold quench gas mixes in between the beds."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed enters through the inlet diffuser and distribution tray.",
+     "part": "distributors",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It reacts while flowing through the catalyst bed.",
+     "part": "catalyst_beds",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cold quench gas mixes in between the beds.",
+     "part": "distributors",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Product leaves through the outlet collector at the bottom.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Temperature rise per bed and ΔP vs time on stream."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "packed_bed_reactor_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "temperature": {
+     "file": "packed_bed_reactor_temperature.glb",
+     "title": "Temperature profile (exothermic reaction)",
+     "description": "Feed enters cool at the top. The reaction releases heat, so temperature rises down each bed; cold quench gas between the beds brings it back down so the catalyst stays within its safe temperature range.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/packed_bed_reactor.json#components",
+   "key_components": "Shell, catalyst beds, support grids, distributor, quench ring, skirt",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Reactor Shell & Heads",
+     "info_ref": "pb_vessel",
+     "function": "Pressure shell.",
+     "material": "Cr-Mo steel (hydroprocessing) / carbon steel."
+    },
+    {
+     "id": "skirt",
+     "name": "Support Skirt",
+     "info_ref": "pb_skirt",
+     "function": "Supports the vessel.",
+     "material": "Steel."
+    },
+    {
+     "id": "catalyst_beds",
+     "name": "Catalyst Beds with Inert Ceramic Ball Layers & Support Grids",
+     "info_ref": "pb_catalyst",
+     "function": "Speeds up the reaction.",
+     "material": "Catalyst pellets; ceramic balls."
+    },
+    {
+     "id": "distributors",
+     "name": "Inlet Diffuser, Distribution Tray & Quench Mixing Zone",
+     "info_ref": "pb_distributor",
+     "function": "Spread flow evenly and mix quench gas.",
+     "material": "Stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Inlet, Outlet Collector, Quench Gas Nozzle & Thermocouples",
+     "info_ref": "pb_nozzles",
+     "function": "Inlet, outlet collector, quench and thermocouples.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 1 – 5 m; height 5 – 30 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 200",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 450 (hydroprocessing)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Catalyst volume",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor bed ΔP and thermocouples.",
+     "part": "catalyst_beds",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Skim/regenerate catalyst as required.",
+     "part": "catalyst_beds",
+     "interval": "per cycle"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Change catalyst; inspect internals.",
+     "part": "distributors"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Hot spots",
+     "category": "performance",
+     "symptoms": [
+      "Local high temperature"
+     ],
+     "causes": [
+      "Maldistribution, quench failure"
+     ],
+     "remedies": [
+      "Improve distribution; restore quench"
+     ],
+     "part": "distributors"
+    },
+    {
+     "problem": "High pressure drop",
+     "category": "performance",
+     "symptoms": [
+      "ΔP rise"
+     ],
+     "causes": [
+      "Fouling/crusting at bed top"
+     ],
+     "remedies": [
+      "Skim top layer"
+     ],
+     "part": "catalyst_beds"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Packed Bed Reactor — Introduction",
+    "type": "in_app_tour",
+    "model": "packed_bed_reactor.glb",
+    "duration_s": 45.9,
+    "script": [
+     {
+      "narration": "This module introduces the Packed Bed Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A packed (fixed) bed reactor passes reactants through a bed of solid catalyst.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters at the top, is spread by a distributor and reacts as it flows down through the beds; cold quench between beds controls temperature in exothermic reactions; product leaves through the outlet collector.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hydrotreating and hydrocracking; ammonia and methanol synthesis; reforming and isomerisation; catalytic oxidation.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Packed Bed Reactor — Operation",
+    "type": "in_app_tour",
+    "model": "packed_bed_reactor.glb",
+    "duration_s": 28.2,
+    "script": [
+     {
+      "narration": "How the Packed Bed Reactor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters through the inlet diffuser and distribution tray.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributors",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It reacts while flowing through the catalyst bed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "catalyst_beds",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cold quench gas mixes in between the beds.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributors",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Product leaves through the outlet collector at the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Feed enters cool at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Packed Bed Reactor — Maintenance",
+    "type": "in_app_tour",
+    "model": "packed_bed_reactor.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Packed Bed Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor bed ΔP and thermocouples.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "catalyst_beds",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Skim/regenerate catalyst as required.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "catalyst_beds",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change catalyst; inspect internals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hot spots: local high temperature. Common cause: maldistribution, quench failure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "distributors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high pressure drop: δp rise. Common cause: fouling/crusting at bed top.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "catalyst_beds",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why inject quench between beds?",
+     "options": [
+      "To add reactant only",
+      "To limit temperature rise in exothermic reactions",
+      "To clean catalyst",
+      "Noise"
+     ],
+     "answer": 1,
+     "explanation": "Temperature control.",
+     "level": "basic"
+    },
+    {
+     "question": "Poor distribution causes…",
+     "options": [
+      "Even reaction",
+      "Channelling and hot spots",
+      "Lower ΔP only",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "Maldistribution.",
+     "level": "basic"
+    },
+    {
+     "question": "Ceramic balls above and below the bed…",
+     "options": [
+      "React",
+      "Support and distribute, and hold the catalyst down",
+      "Cool",
+      "Measure flow"
+     ],
+     "answer": 1,
+     "explanation": "Grading.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure shell.\"",
+     "options": [
+      "Inlet, Outlet Collector, Quench Gas Nozzle & Thermocouples",
+      "Inlet Diffuser, Distribution Tray & Quench Mixing Zone",
+      "Catalyst Beds with Inert Ceramic Ball Layers & Support Grids",
+      "Reactor Shell & Heads"
+     ],
+     "answer": 3,
+     "explanation": "Reactor Shell & Heads: Pressure shell.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the vessel.\"",
+     "options": [
+      "Inlet Diffuser, Distribution Tray & Quench Mixing Zone",
+      "Catalyst Beds with Inert Ceramic Ball Layers & Support Grids",
+      "Support Skirt",
+      "Reactor Shell & Heads"
+     ],
+     "answer": 2,
+     "explanation": "Support Skirt: Supports the vessel.",
+     "level": "basic",
+     "part": "skirt",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Speeds up the reaction.\"",
+     "options": [
+      "Catalyst Beds with Inert Ceramic Ball Layers & Support Grids",
+      "Reactor Shell & Heads",
+      "Inlet, Outlet Collector, Quench Gas Nozzle & Thermocouples",
+      "Inlet Diffuser, Distribution Tray & Quench Mixing Zone"
+     ],
+     "answer": 0,
+     "explanation": "Catalyst Beds with Inert Ceramic Ball Layers & Support Grids: Speeds up the reaction.",
+     "level": "basic",
+     "part": "catalyst_beds",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

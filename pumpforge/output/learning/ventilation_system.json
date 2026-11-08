@@ -1,0 +1,652 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "ventilation_system",
+ "no": 278,
+ "title": "Ventilation System",
+ "model_title": "Industrial Ventilation System — Supply Air Handling Unit, Ductwork & Diffusers, Exhaust Fan, Room Pressure Control",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An industrial ventilation system supplies filtered, conditioned air to a room and exhausts contaminated air, removing heat and diluting gases. Supply slightly exceeding exhaust keeps electrical and control rooms at positive pressure so dust and flammable gas cannot enter; low-level exhaust removes heavy vapours.",
+   "applications": [
+    "Electrical / control rooms, analyser houses, battery rooms",
+    "Process buildings, workshops and compressor houses"
+   ],
+   "key_points": [
+    "Air changes or heat-load based rate",
+    "Positive pressure ≈ 25–50 Pa",
+    "Fire dampers close on alarm",
+    "Filters keep equipment clean"
+   ],
+   "classification": {
+    "family": "Safety",
+    "type": "Supply AHU + exhaust with pressurisation"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "An industrial ventilation system supplies filtered, conditioned air and exhausts contaminated air to keep a room safe, cool and at the right pressure, diluting heat and any gas below hazardous levels."
+  },
+  "model_3d": {
+   "asset": "glb/ventilation_system.glb",
+   "metadata": "meta/ventilation_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6654,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The AHU draws and filters outdoor air.",
+    "The supply fan pushes it through ducts.",
+    "Diffusers spread it across the room."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The AHU draws and filters outdoor air.",
+     "part": "air_handling_unit",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The supply fan pushes it through ducts.",
+     "part": "supply_fan",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Diffusers spread it across the room.",
+     "part": "supply_ductwork",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Exhaust removes heat and contaminants.",
+     "part": "exhaust_fan",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sensors hold room pressure.",
+     "part": "controls_equipment",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Room temperature vs air flow for a given heat load."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "ventilation_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "ventilation_system_pressure.glb",
+     "title": "Air changes, dilution and pressurisation",
+     "description": "Ventilation removes heat and dilutes contaminants: rooms are designed for an air-change rate (e.g. ≈ 6–12 per hour, or by heat load Q = P / (ρ·cp·ΔT)) and, in hazardous areas, enough dilution to keep gas below a fraction of its LEL. Supply slightly exceeding exhaust keeps electrical and control rooms at positive pressure (≈ 25–50 Pa) so dust and flammable gas cannot enter; low-level exhaust removes heavier-than-air vapours. Fire dampers close on fire alarm.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/ventilation_system.json#components",
+   "key_components": "Supply AHU, filters, coils, ducts & diffusers, exhaust fan, ΔP control",
+   "parts": [
+    {
+     "id": "room",
+     "name": "Process / Electrical Room (roof shown, front wall removed in cutaway)",
+     "info_ref": "vs_room",
+     "function": "Ventilated space.",
+     "material": "—"
+    },
+    {
+     "id": "air_handling_unit",
+     "name": "Roof AHU: Intake Louvre, Pre-Filter, Bag Filter, Cooling Coil, Heater, Supply Fan",
+     "info_ref": "vs_ahu",
+     "function": "Supply clean air.",
+     "material": "—"
+    },
+    {
+     "id": "supply_fan",
+     "name": "Supply Fan",
+     "info_ref": "vs_ahu",
+     "function": "Supply clean air.",
+     "material": "—"
+    },
+    {
+     "id": "supply_ductwork",
+     "name": "Supply Ductwork & Ceiling Diffusers",
+     "info_ref": "vs_ducts",
+     "function": "Distribute air.",
+     "material": "Galvanised steel / aluminium."
+    },
+    {
+     "id": "exhaust_system",
+     "name": "Low-Level Exhaust Grille (heavier-than-air vapours) & Roof Exhaust Fan Housing",
+     "info_ref": "vs_exhaust",
+     "function": "Remove air.",
+     "material": "—"
+    },
+    {
+     "id": "exhaust_fan",
+     "name": "Exhaust Fan Impeller",
+     "info_ref": "vs_exhaust",
+     "function": "Remove air.",
+     "material": "—"
+    },
+    {
+     "id": "controls_equipment",
+     "name": "Room ΔP & Temperature Sensors, Fire Damper, Electrical Cabinets (heat load)",
+     "info_ref": "vs_controls",
+     "function": "Monitor and protect.",
+     "material": "—"
+    },
+    {
+     "id": "supply_1",
+     "name": "Supply air from diffuser 1",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "supply_2",
+     "name": "Supply air from diffuser 2",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "supply_3",
+     "name": "Supply air from diffuser 3",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Rooms ≈ 20 – 2000 m²",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1,000 – 200,000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Room ΔP ≈ +25–50 Pa; temperature ≈ 20–30 °C",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "≈ 6–12 air changes/h (typical)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Flow from heat load, dilution and pressurisation needs."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASHRAE",
+    "IEC 60079"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure for equipment, liquid / dust loads and wind; access platforms for maintenance."
+   ],
+   "alignment": [
+    "Fans and pumps aligned; ducts supported to avoid loads on equipment."
+   ],
+   "piping": [
+    "Corrosion-resistant materials for wet acid service; drains at low points; expansion joints on hot ducts."
+   ],
+   "commissioning": [
+    "Run on air/water; check ΔP, flows and controls; then process gas; emission test against permit."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check room ΔP and temperature.",
+     "part": "controls_equipment",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change filters on ΔP.",
+     "part": "air_handling_unit",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Service fans, coils, dampers.",
+     "part": "supply_fan"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of pressurisation",
+     "category": "performance",
+     "symptoms": [
+      "Alarm"
+     ],
+     "causes": [
+      "Fan trip, door open"
+     ],
+     "remedies": [
+      "Restore fan; door closers"
+     ],
+     "part": "supply_fan"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "High room temperature"
+     ],
+     "causes": [
+      "Blocked filter, coil fouled"
+     ],
+     "remedies": [
+      "Clean / replace"
+     ],
+     "part": "air_handling_unit"
+    }
+   ],
+   "safety": [
+    "Hazardous-area rules for equipment; interlocks with gas detection."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Ventilation System — Introduction",
+    "type": "in_app_tour",
+    "model": "ventilation_system.glb",
+    "duration_s": 46.1,
+    "script": [
+     {
+      "narration": "This module introduces the Ventilation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An industrial ventilation system supplies filtered, conditioned air to a room and exhausts contaminated air, removing heat and diluting gases.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Supply slightly exceeding exhaust keeps electrical and control rooms at positive pressure so dust and flammable gas cannot enter; low-level exhaust removes heavy vapours.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include electrical / control rooms, analyser houses, battery rooms; process buildings, workshops and compressor houses.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Supply Fan, Exhaust Fan Impeller.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Ventilation System — Operation",
+    "type": "in_app_tour",
+    "model": "ventilation_system.glb",
+    "duration_s": 34.9,
+    "script": [
+     {
+      "narration": "How the Ventilation System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The AHU draws and filters outdoor air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_handling_unit",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The supply fan pushes it through ducts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supply_fan",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Diffusers spread it across the room.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supply_ductwork",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Exhaust removes heat and contaminants.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "exhaust_fan",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sensors hold room pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "controls_equipment",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Ventilation removes heat and dilutes contaminants: rooms are designed for an air-change rate (e.g.",
+      "duration_s": 6.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Ventilation System — Maintenance",
+    "type": "in_app_tour",
+    "model": "ventilation_system.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Ventilation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check room ΔP and temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "controls_equipment",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change filters on ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_handling_unit",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Service fans, coils, dampers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supply_fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of pressurisation: alarm. Common cause: fan trip, door open.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "supply_fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: high room temperature. Common cause: blocked filter, coil fouled.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "air_handling_unit",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why positive pressure in electrical rooms?",
+     "options": [
+      "Keep dust and flammable gas out",
+      "Cool faster",
+      "Less noise",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Ingress.",
+     "level": "basic"
+    },
+    {
+     "question": "Why low-level exhaust?",
+     "options": [
+      "Remove heavier-than-air vapours",
+      "Look nice",
+      "Save fan",
+      "Heat"
+     ],
+     "answer": 0,
+     "explanation": "Heavy gas.",
+     "level": "basic"
+    },
+    {
+     "question": "What closes on fire alarm?",
+     "options": [
+      "Fire dampers",
+      "Doors only",
+      "Filters",
+      "Coils"
+     ],
+     "answer": 0,
+     "explanation": "Dampers.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Ventilated space.\"",
+     "options": [
+      "Supply Ductwork & Ceiling Diffusers",
+      "Supply air from diffuser 3",
+      "Process / Electrical Room (roof shown, front wall removed in cutaway)",
+      "Supply air from diffuser 1"
+     ],
+     "answer": 2,
+     "explanation": "Process / Electrical Room (roof shown, front wall removed in cutaway): Ventilated space.",
+     "level": "basic",
+     "part": "room",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supply clean air.\"",
+     "options": [
+      "Supply Ductwork & Ceiling Diffusers",
+      "Roof AHU: Intake Louvre, Pre-Filter, Bag Filter, Cooling Coil, Heater, Supply Fan",
+      "Process / Electrical Room (roof shown, front wall removed in cutaway)",
+      "Supply air from diffuser 3"
+     ],
+     "answer": 1,
+     "explanation": "Roof AHU: Intake Louvre, Pre-Filter, Bag Filter, Cooling Coil, Heater, Supply Fan: Supply clean air.",
+     "level": "basic",
+     "part": "air_handling_unit",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distribute air.\"",
+     "options": [
+      "Roof AHU: Intake Louvre, Pre-Filter, Bag Filter, Cooling Coil, Heater, Supply Fan",
+      "Supply Ductwork & Ceiling Diffusers",
+      "Supply air from diffuser 3",
+      "Supply air from diffuser 1"
+     ],
+     "answer": 1,
+     "explanation": "Supply Ductwork & Ceiling Diffusers: Distribute air.",
+     "level": "basic",
+     "part": "supply_ductwork",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,631 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "precipitation_tank_agitator",
+ "no": 201,
+ "title": "Precipitation Tank Agitator",
+ "model_title": "Gibbsite Precipitator with Draft-Tube Agitator",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "Precipitators are large tanks in which cooled, seeded pregnant liquor deposits gibbsite (aluminium hydroxide): NaAl(OH)₄ → Al(OH)₃ + NaOH. A slow draft-tube agitator circulates the slurry, keeping hydrate suspended with low shear so crystals grow and agglomerate.",
+   "applications": [
+    "Gibbsite precipitation trains (often 10–20 tanks)",
+    "Agglomeration stage (fine seed, higher temperature)",
+    "Growth stage (coarse seed, interstage cooling)"
+   ],
+   "key_points": [
+    "Residence ~ 30–60 h",
+    "Cooling ~ 75–80 → 60–65 °C",
+    "Seed charge drives growth",
+    "Low shear protects crystals"
+   ],
+   "classification": {
+    "family": "Precipitation",
+    "type": "Draft-tube agitated precipitator"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "Precipitators are large tanks where cooled, seeded pregnant liquor deposits gibbsite (aluminium hydroxide). A slow draft-tube agitator circulates the slurry to keep hydrate suspended and help crystals grow and agglomerate."
+  },
+  "model_3d": {
+   "asset": "glb/precipitation_tank_agitator.glb",
+   "metadata": "meta/precipitation_tank_agitator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 13156,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Pregnant liquor and seed enter.",
+    "The impeller pushes slurry down the draft tube.",
+    "Slurry rises in the annulus and circulates."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Pregnant liquor and seed enter.",
+     "part": "interstage_cooling",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The impeller pushes slurry down the draft tube.",
+     "part": "pr_agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry rises in the annulus and circulates.",
+     "part": "pr_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Crystals grow as alumina precipitates.",
+     "part": "pr_slurry",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Interstage cooling raises yield.",
+     "part": "interstage_cooling",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Yield vs temperature and A/C ratio; particle size distribution vs seed and temperature."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "precipitation_tank_agitator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "precipitation_tank_agitator_temperature.glb",
+     "title": "Supersaturation drives precipitation",
+     "description": "Cooled, seeded pregnant liquor is supersaturated: NaAl(OH)₄ → Al(OH)₃ + NaOH. Fine seed hydrate gives surface for growth and agglomeration. Precipitation runs for roughly 30–60 h through a train of tanks, cooling from about 75–80 °C to 60–65 °C (interstage cooling raises yield). The draft-tube agitator keeps the hydrate suspended with low shear.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/precipitation_tank_agitator.json#components",
+   "key_components": "Precipitator tank, draft tube, hydrofoil impeller, drive, interstage cooler, seed addition",
+   "parts": [
+    {
+     "id": "pr_tank",
+     "name": "Precipitator: Tank, Baffles & Draft Tube",
+     "info_ref": "pt_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "pr_slurry",
+     "name": "Precipitator: Slurry / Liquor",
+     "info_ref": "pt_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "pr_agitator",
+     "name": "Precipitator: Agitator Shaft & Impeller",
+     "info_ref": "pt_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "pr_drive",
+     "name": "Precipitator: Agitator Drive (motor + gearbox, bridge beam)",
+     "info_ref": "pt_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "interstage_cooling",
+     "name": "Interstage Cooler, Overflow / Transfer & Seed Addition",
+     "info_ref": "pt_cooler",
+     "function": "Cooling, transfer, seed.",
+     "material": "Stainless/steel."
+    },
+    {
+     "id": "foundation",
+     "name": "Ring-Wall Foundation",
+     "info_ref": "pt_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "hydrate",
+     "name": "Gibbsite (Al(OH)₃) Crystals growing as the liquor circulates (down the draft tube, up the annulus)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tanks ~ 10 – 14 m diameter, 30 – 40 m tall",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 1000 – 4000",
+     "unit": "m³/h liquor (train)"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 80 → 60 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Agitator ~ 50 – 150",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Train volume from yield/kinetics; agitator for suspension at low shear."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Ring-wall or slab foundation designed for full liquid/slurry weight plus agitator dynamic loads; settlement monitoring for large tanks."
+   ],
+   "alignment": [
+    "Tank plumb and level; agitator shaft vertical and concentric; check gearbox mounting."
+   ],
+   "piping": [
+    "Nozzles sized for slurry velocity (avoid settling and erosion); flush connections; scaling-resistant design and descaling access.",
+    "Caustic service: suitable materials, gaskets and spray shields; eyewash/safety showers nearby."
+   ],
+   "commissioning": [
+    "Water trials (agitator run with water, check vibration and power); then caustic/slurry; verify levels, interlocks and spillage containment (bunds)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor temperature profile and solids.",
+     "part": "pr_slurry",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Descale tank walls and draft tube.",
+     "part": "pr_tank",
+     "interval": "cycle"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Agitator gearbox overhaul.",
+     "part": "pr_drive"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Scale build-up",
+     "category": "performance",
+     "symptoms": [
+      "Loss of volume"
+     ],
+     "causes": [
+      "Hydrate scale"
+     ],
+     "remedies": [
+      "Descale in rotation"
+     ],
+     "part": "pr_tank"
+    },
+    {
+     "problem": "Fine product",
+     "category": "performance",
+     "symptoms": [
+      "Weak, fine hydrate"
+     ],
+     "causes": [
+      "Oxalate, too much nucleation"
+     ],
+     "remedies": [
+      "Control oxalate; temperature"
+     ],
+     "part": "pr_slurry"
+    }
+   ],
+   "safety": [
+    "Hot caustic; confined space for descaling."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Precipitation Tank Agitator — Introduction",
+    "type": "in_app_tour",
+    "model": "precipitation_tank_agitator.glb",
+    "duration_s": 46.2,
+    "script": [
+     {
+      "narration": "This module introduces the Precipitation Tank Agitator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Precipitators are large tanks in which cooled, seeded pregnant liquor deposits gibbsite (aluminium hydroxide): NaAl(OH)₄ → Al(OH)₃ + NaOH.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A slow draft-tube agitator circulates the slurry, keeping hydrate suspended with low shear so crystals grow and agglomerate.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include gibbsite precipitation trains (often 10–20 tanks); agglomeration stage (fine seed, higher temperature); growth stage (coarse seed, interstage cooling).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Precipitator: Agitator Shaft & Impeller.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Precipitation Tank Agitator — Operation",
+    "type": "in_app_tour",
+    "model": "precipitation_tank_agitator.glb",
+    "duration_s": 33.6,
+    "script": [
+     {
+      "narration": "How the Precipitation Tank Agitator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pregnant liquor and seed enter.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "interstage_cooling",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The impeller pushes slurry down the draft tube.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pr_agitator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry rises in the annulus and circulates.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pr_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Crystals grow as alumina precipitates.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pr_slurry",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Interstage cooling raises yield.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "interstage_cooling",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Cooled, seeded pregnant liquor is supersaturated: NaAl(OH)₄ → Al(OH)₃ + NaOH.",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Precipitation Tank Agitator — Maintenance",
+    "type": "in_app_tour",
+    "model": "precipitation_tank_agitator.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Precipitation Tank Agitator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor temperature profile and solids.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pr_slurry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descale tank walls and draft tube.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pr_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Agitator gearbox overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pr_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scale build-up: loss of volume. Common cause: hydrate scale.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "pr_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fine product: weak, fine hydrate. Common cause: oxalate, too much nucleation.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "pr_slurry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What precipitates?",
+     "options": [
+      "Gibbsite Al(OH)₃",
+      "Sodalite",
+      "Calcium carbonate",
+      "Oxalate"
+     ],
+     "answer": 0,
+     "explanation": "Hydrate.",
+     "level": "basic"
+    },
+    {
+     "question": "Why add seed?",
+     "options": [
+      "Surface for crystal growth",
+      "Colour",
+      "Heat",
+      "Pressure"
+     ],
+     "answer": 0,
+     "explanation": "Growth.",
+     "level": "basic"
+    },
+    {
+     "question": "Why cool between tanks?",
+     "options": [
+      "Increases supersaturation and yield",
+      "Saves power",
+      "Reduces noise",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Yield.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the slurry.\"",
+     "options": [
+      "Interstage Cooler, Overflow / Transfer & Seed Addition",
+      "Precipitator: Tank, Baffles & Draft Tube",
+      "Precipitator: Slurry / Liquor",
+      "Precipitator: Agitator Drive (motor + gearbox, bridge beam)"
+     ],
+     "answer": 1,
+     "explanation": "Precipitator: Tank, Baffles & Draft Tube: Holds the slurry.",
+     "level": "basic",
+     "part": "pr_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process slurry/liquor.\"",
+     "options": [
+      "Gibbsite (Al(OH)₃) Crystals growing as the liquor circulates (down the draft tube, up the annulus)",
+      "Precipitator: Slurry / Liquor",
+      "Precipitator: Tank, Baffles & Draft Tube",
+      "Precipitator: Agitator Shaft & Impeller"
+     ],
+     "answer": 1,
+     "explanation": "Precipitator: Slurry / Liquor: Process slurry/liquor.",
+     "level": "basic",
+     "part": "pr_slurry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes and suspends solids.\"",
+     "options": [
+      "Precipitator: Agitator Shaft & Impeller",
+      "Ring-Wall Foundation",
+      "Gibbsite (Al(OH)₃) Crystals growing as the liquor circulates (down the draft tube, up the annulus)",
+      "Precipitator: Tank, Baffles & Draft Tube"
+     ],
+     "answer": 0,
+     "explanation": "Precipitator: Agitator Shaft & Impeller: Mixes and suspends solids.",
+     "level": "basic",
+     "part": "pr_agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,639 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flare_knockout_drum",
+ "no": 273,
+ "title": "Flare Knockout Drum",
+ "model_title": "Flare Knockout Drum (Horizontal, Split Entry) with Pump-Out Pumps & Heating Coil",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A flare knockout drum removes liquid from relief gas before the flare. The large horizontal drum (split entry, central outlet) slows the gas so droplets settle; liquid is held and pumped out. This prevents a burning liquid rain from the flare tip.",
+   "applications": [
+    "Main flare systems of refineries and gas plants",
+    "Unit flare headers with liquid carry-over"
+   ],
+   "key_points": [
+    "Droplets ≈ 300–600 µm settle",
+    "Hold-up ≈ 20–30 min of largest liquid release",
+    "Low pressure drop",
+    "Heating coil for cold climates"
+   ],
+   "classification": {
+    "family": "Gas disposal",
+    "type": "Horizontal split-entry KO drum"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A flare knockout drum removes liquid from relief gas before it reaches the flare, so burning liquid cannot rain down. The large horizontal drum slows the gas so droplets settle, and pump-out pumps remove the liquid."
+  },
+  "model_3d": {
+   "asset": "glb/flare_knockout_drum.glb",
+   "metadata": "meta/flare_knockout_drum.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 18544,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Relief gas enters at both ends.",
+    "Gas slows across the drum.",
+    "Droplets settle out."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Relief gas enters at both ends.",
+     "part": "nozzles_piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas slows across the drum.",
+     "part": "drum",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Droplets settle out.",
+     "part": "liquid",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pumps remove the liquid on level.",
+     "part": "pump_out_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Droplet settling velocity vs size (drag correlation)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flare_knockout_drum_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "flare_knockout_drum_pressure.glb",
+     "title": "Slow the gas so liquid drops out",
+     "description": "Relief streams often carry liquid; a burning liquid rain from the flare is dangerous. The KO drum is sized (API 521 method) so the vapour velocity is low enough for droplets of ≈ 300–600 µm to settle in the travel time between inlet and outlet, and with hold-up volume for the liquid from the largest relief case for ≈ 20–30 min. It operates near atmospheric pressure, so pressure drop is kept small; pump-out pumps empty it.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flare_knockout_drum.json#components",
+   "key_components": "Horizontal split-entry drum, heating coil, pump-out pumps, level",
+   "parts": [
+    {
+     "id": "drum",
+     "name": "Flare KO Drum (sized so liquid droplets ≥ ≈ 300–600 µm drop out)",
+     "info_ref": "fko_drum",
+     "function": "Separate liquid.",
+     "material": "Carbon steel / LTCS."
+    },
+    {
+     "id": "liquid",
+     "name": "Collected Hydrocarbon Liquid & Water",
+     "info_ref": "fko_drum",
+     "function": "Separate liquid.",
+     "material": "Carbon steel / LTCS."
+    },
+    {
+     "id": "nozzles_piping",
+     "name": "Split-Entry Inlets (both ends) & Central Vapour Outlet to the Flare",
+     "info_ref": "fko_piping",
+     "function": "Inlets and outlet.",
+     "material": "Steel."
+    },
+    {
+     "id": "heating_coil",
+     "name": "Steam Heating Coil (prevents freezing / keeps heavy liquids fluid)",
+     "info_ref": "fko_coil",
+     "function": "Prevent freezing.",
+     "material": "Steel."
+    },
+    {
+     "id": "pump_out_1",
+     "name": "Pump-Out Pump 1 (duty, auto on level)",
+     "info_ref": "fko_pumps",
+     "function": "Empty drum.",
+     "material": "—"
+    },
+    {
+     "id": "pump_out_1_shaft",
+     "name": "Pump-Out Pump 1 (duty, auto on level) — Shaft & Coupling (turning)",
+     "info_ref": "fko_pumps",
+     "function": "Empty drum.",
+     "material": "—"
+    },
+    {
+     "id": "pump_out_2",
+     "name": "Pump-Out Pump 2 (standby, auto on level)",
+     "info_ref": "fko_pumps",
+     "function": "Empty drum.",
+     "material": "—"
+    },
+    {
+     "id": "pump_out_2_shaft",
+     "name": "Pump-Out Pump 2 (standby, auto on level) — Shaft & Coupling (turning)",
+     "info_ref": "fko_pumps",
+     "function": "Empty drum.",
+     "material": "—"
+    },
+    {
+     "id": "pump_lines_level",
+     "name": "Pump Suction Lines & Level Transmitter / Gauge (high-high level alarm)",
+     "info_ref": "fko_level",
+     "function": "Monitor level.",
+     "material": "—"
+    },
+    {
+     "id": "droplets",
+     "name": "Liquid droplets falling out of the slow-moving gas",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Diameter ≈ 2 – 5 m, length ≈ 6 – 20 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Sized for the governing relief load",
+     "unit": "t/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Near atmospheric",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Remove droplets ≥ ≈ 300–600 µm",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size per API 521 for droplet removal and liquid hold-up."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 521"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations / supports designed for operating, test, wind/seismic and (for relief) reaction loads."
+   ],
+   "alignment": [
+    "Vessels plumb; headers sloped continuously as specified (no pockets)."
+   ],
+   "piping": [
+    "Relief/drain lines self-draining to the destination; supports for reaction and thermal loads; isolation valves car-sealed / locked as required."
+   ],
+   "commissioning": [
+    "Pressure test; verify set pressures and certificates; function-test instruments and interlocks; record as-built in the safety documentation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level and pump status.",
+     "part": "pump_lines_level",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Test high-level alarm.",
+     "part": "pump_lines_level",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Internal inspection.",
+     "part": "drum"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Liquid carry-over to flare",
+     "category": "performance",
+     "symptoms": [
+      "Burning rain, smoke"
+     ],
+     "causes": [
+      "High level"
+     ],
+     "remedies": [
+      "Pump out; alarms"
+     ],
+     "part": "liquid"
+    },
+    {
+     "problem": "Frozen drain",
+     "category": "performance",
+     "symptoms": [
+      "No pump-out"
+     ],
+     "causes": [
+      "Coil failure"
+     ],
+     "remedies": [
+      "Repair coil; trace lines"
+     ],
+     "part": "heating_coil"
+    }
+   ],
+   "safety": [
+    "High-high level trips; drum is part of the relief path — never isolate."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flare Knockout Drum — Introduction",
+    "type": "in_app_tour",
+    "model": "flare_knockout_drum.glb",
+    "duration_s": 59.4,
+    "script": [
+     {
+      "narration": "This module introduces the Flare Knockout Drum.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A flare knockout drum removes liquid from relief gas before the flare.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The large horizontal drum (split entry, central outlet) slows the gas so droplets settle; liquid is held and pumped out.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "This prevents a burning liquid rain from the flare tip.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include main flare systems of refineries and gas plants; unit flare headers with liquid carry-over.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Pump-Out Pump 1 (duty, auto on level), Pump-Out Pump 1 (duty, auto on level) — Shaft & Coupling (turning), Pump-Out Pump 2 (standby, auto on level), Pump-Out Pump 2 (standby, auto on level) — Shaft & Coupling (turning).",
+      "duration_s": 18.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flare Knockout Drum — Operation",
+    "type": "in_app_tour",
+    "model": "flare_knockout_drum.glb",
+    "duration_s": 30.0,
+    "script": [
+     {
+      "narration": "How the Flare Knockout Drum works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Relief gas enters at both ends.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles_piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas slows across the drum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Droplets settle out.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pumps remove the liquid on level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_out_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Relief streams often carry liquid; a burning liquid rain from the flare is dangerous.",
+      "duration_s": 5.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flare Knockout Drum — Maintenance",
+    "type": "in_app_tour",
+    "model": "flare_knockout_drum.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flare Knockout Drum.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level and pump status.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_lines_level",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test high-level alarm.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_lines_level",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Internal inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for liquid carry-over to flare: burning rain, smoke. Common cause: high level.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "liquid",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for frozen drain: no pump-out. Common cause: coil failure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "heating_coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Main job?",
+     "options": [
+      "Remove liquid before the flare",
+      "Burn gas",
+      "Store gas",
+      "Cool steam"
+     ],
+     "answer": 0,
+     "explanation": "KO.",
+     "level": "basic"
+    },
+    {
+     "question": "Why split entry?",
+     "options": [
+      "Shares flow, lowers velocity",
+      "Cheaper",
+      "Noise",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Lower velocity.",
+     "level": "basic"
+    },
+    {
+     "question": "Why heating coil?",
+     "options": [
+      "Prevent freezing / waxing",
+      "Raise pressure",
+      "Burn gas",
+      "Dry gas"
+     ],
+     "answer": 0,
+     "explanation": "Freezing.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Separate liquid.\"",
+     "options": [
+      "Flare KO Drum (sized so liquid droplets ≥ ≈ 300–600 µm drop out)",
+      "Pump-Out Pump 1 (duty, auto on level) — Shaft & Coupling (turning)",
+      "Pump Suction Lines & Level Transmitter / Gauge (high-high level alarm)",
+      "Pump-Out Pump 1 (duty, auto on level)"
+     ],
+     "answer": 0,
+     "explanation": "Flare KO Drum (sized so liquid droplets ≥ ≈ 300–600 µm drop out): Separate liquid.",
+     "level": "basic",
+     "part": "drum",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Inlets and outlet.\"",
+     "options": [
+      "Pump-Out Pump 1 (duty, auto on level)",
+      "Flare KO Drum (sized so liquid droplets ≥ ≈ 300–600 µm drop out)",
+      "Split-Entry Inlets (both ends) & Central Vapour Outlet to the Flare",
+      "Pump-Out Pump 2 (standby, auto on level) — Shaft & Coupling (turning)"
+     ],
+     "answer": 2,
+     "explanation": "Split-Entry Inlets (both ends) & Central Vapour Outlet to the Flare: Inlets and outlet.",
+     "level": "basic",
+     "part": "nozzles_piping",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Prevent freezing.\"",
+     "options": [
+      "Pump-Out Pump 2 (standby, auto on level) — Shaft & Coupling (turning)",
+      "Pump-Out Pump 1 (duty, auto on level) — Shaft & Coupling (turning)",
+      "Pump Suction Lines & Level Transmitter / Gauge (high-high level alarm)",
+      "Steam Heating Coil (prevents freezing / keeps heavy liquids fluid)"
+     ],
+     "answer": 3,
+     "explanation": "Steam Heating Coil (prevents freezing / keeps heavy liquids fluid): Prevent freezing.",
+     "level": "basic",
+     "part": "heating_coil",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

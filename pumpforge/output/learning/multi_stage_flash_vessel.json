@@ -1,0 +1,657 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "multi_stage_flash_vessel",
+ "no": 199,
+ "title": "Multi-Stage Flash Vessel",
+ "model_title": "Multi-Stage Flash Train (Blow-Off / Flash Tanks after Digestion)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A multi-stage flash train lowers the pressure of hot digested slurry in steps. In each tank some water flashes to steam and the slurry cools; that vapour is used to heat incoming slurry, recovering heat.",
+   "applications": [
+    "Digestion heat recovery",
+    "Flash cooling before clarification"
+   ],
+   "key_points": [
+    "Stepwise pressure reduction",
+    "Flash vapour → regenerative heaters",
+    "Erosion at let-down points",
+    "Level control per stage"
+   ],
+   "classification": {
+    "family": "Digestion",
+    "type": "Multi-stage flash (blow-off) tanks"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "After digestion the hot slurry passes through a train of flash tanks at falling pressure. In each tank part of the water flashes to steam, cooling the slurry; the vapour heats incoming slurry in the matching heaters."
+  },
+  "model_3d": {
+   "asset": "glb/multi_stage_flash_vessel.glb",
+   "metadata": "meta/multi_stage_flash_vessel.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 22694,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Digested slurry enters tank 1 at high pressure.",
+    "Part of the water flashes to steam.",
+    "Vapour goes to the matching heater."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Digested slurry enters tank 1 at high pressure.",
+     "part": "flash_tank_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Part of the water flashes to steam.",
+     "part": "slurry_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vapour goes to the matching heater.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry passes to the next lower-pressure tank.",
+     "part": "flash_tank_2",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The last tank discharges at near-atmospheric pressure.",
+     "part": "flash_tank_3",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Temperature profile falls stage by stage; heat recovered ∝ flash steam."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "multi_stage_flash_vessel_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "multi_stage_flash_vessel_pressure.glb",
+     "title": "Stepwise pressure reduction recovers heat",
+     "description": "Hot digested slurry is let down in steps to lower pressures; in each tank part of the water flashes to steam and the slurry cools to the saturation temperature of that stage. The flash vapour from each stage heats incoming slurry in the matching heater stage (regenerative heating). Erosion at let-down valves and inlets is a key concern.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/multi_stage_flash_vessel.json#components",
+   "key_components": "Flash tanks, let-down (choke) valves, vapour lines, transfer lines",
+   "parts": [
+    {
+     "id": "flash_tank_1",
+     "name": "Flash Tank 1 (pressure stage 1)",
+     "info_ref": "mf_tanks",
+     "function": "Flash vessels.",
+     "material": "Carbon steel (wear-lined)."
+    },
+    {
+     "id": "slurry_1",
+     "name": "Slurry Level in Tank 1",
+     "info_ref": "mf_slurry",
+     "function": "Slurry.",
+     "material": "—"
+    },
+    {
+     "id": "flash_1",
+     "name": "Vapour Flashing in Tank 1",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "flash_tank_2",
+     "name": "Flash Tank 2 (pressure stage 2)",
+     "info_ref": "mf_tanks",
+     "function": "Flash vessels.",
+     "material": "Carbon steel (wear-lined)."
+    },
+    {
+     "id": "slurry_2",
+     "name": "Slurry Level in Tank 2",
+     "info_ref": "mf_slurry",
+     "function": "Slurry.",
+     "material": "—"
+    },
+    {
+     "id": "flash_2",
+     "name": "Vapour Flashing in Tank 2",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "flash_tank_3",
+     "name": "Flash Tank 3 (pressure stage 3)",
+     "info_ref": "mf_tanks",
+     "function": "Flash vessels.",
+     "material": "Carbon steel (wear-lined)."
+    },
+    {
+     "id": "slurry_3",
+     "name": "Slurry Level in Tank 3",
+     "info_ref": "mf_slurry",
+     "function": "Slurry.",
+     "material": "—"
+    },
+    {
+     "id": "flash_3",
+     "name": "Vapour Flashing in Tank 3",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "piping",
+     "name": "Slurry Transfer Lines with Level-Control (choke) Valves & Vapour Lines to Heaters",
+     "info_ref": "mf_piping",
+     "function": "Transfer/vapour lines and level control.",
+     "material": "Hardened steel trim."
+    },
+    {
+     "id": "supports",
+     "name": "Support Legs",
+     "info_ref": "mf_tanks",
+     "function": "Flash vessels.",
+     "material": "Carbon steel (wear-lined)."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tanks ~ 2 – 5 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 500 – 3000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 250 °C → ~ 105 °C, pressure stepping down",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "— (no drive)",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Number of stages vs heat recovery economics."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal expansion."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; let-down valves and lines supported against vibration."
+   ],
+   "piping": [
+    "Relief protection per code; erosion-resistant fittings at let-down points; steam traps/condensate removal; insulation."
+   ],
+   "commissioning": [
+    "Hydro-test; heat up slowly; check relief settings, levels, temperatures and pressures; test interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check levels and let-down valves.",
+     "part": "piping",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Thickness checks; wear liners.",
+     "part": "flash_tank_1",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Valve trim replacement.",
+     "part": "piping"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Erosion",
+     "category": "wear",
+     "symptoms": [
+      "Leaks, thinning"
+     ],
+     "causes": [
+      "Two-phase high velocity"
+     ],
+     "remedies": [
+      "Wear-resistant liners"
+     ],
+     "part": "flash_tank_1"
+    },
+    {
+     "problem": "Carry-over",
+     "category": "performance",
+     "symptoms": [
+      "Slurry in vapour lines"
+     ],
+     "causes": [
+      "High level"
+     ],
+     "remedies": [
+      "Level control"
+     ],
+     "part": "slurry_2"
+    }
+   ],
+   "safety": [
+    "Hot flashing slurry; relief protection."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Multi-Stage Flash Vessel — Introduction",
+    "type": "in_app_tour",
+    "model": "multi_stage_flash_vessel.glb",
+    "duration_s": 39.3,
+    "script": [
+     {
+      "narration": "This module introduces the Multi-Stage Flash Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A multi-stage flash train lowers the pressure of hot digested slurry in steps.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In each tank some water flashes to steam and the slurry cools; that vapour is used to heat incoming slurry, recovering heat.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include digestion heat recovery; flash cooling before clarification.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Multi-Stage Flash Vessel — Operation",
+    "type": "in_app_tour",
+    "model": "multi_stage_flash_vessel.glb",
+    "duration_s": 41.5,
+    "script": [
+     {
+      "narration": "How the Multi-Stage Flash Vessel works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Digested slurry enters tank 1 at high pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_tank_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Part of the water flashes to steam.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "slurry_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vapour goes to the matching heater.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry passes to the next lower-pressure tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_tank_2",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The last tank discharges at near-atmospheric pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_tank_3",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Hot digested slurry is let down in steps to lower pressures; in each tank part of the water flashes to steam and the slurry cools to the saturation temperature of that stage.",
+      "duration_s": 13.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Multi-Stage Flash Vessel — Maintenance",
+    "type": "in_app_tour",
+    "model": "multi_stage_flash_vessel.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Multi-Stage Flash Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check levels and let-down valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Thickness checks; wear liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_tank_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Valve trim replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for erosion: leaks, thinning. Common cause: two-phase high velocity.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "flash_tank_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for carry-over: slurry in vapour lines. Common cause: high level.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "slurry_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why flash in stages?",
+     "options": [
+      "To recover heat at several pressures",
+      "To add steam",
+      "To grind",
+      "To filter"
+     ],
+     "answer": 0,
+     "explanation": "Regeneration.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does flash vapour go?",
+     "options": [
+      "To slurry heaters",
+      "To atmosphere always",
+      "To pumps",
+      "Nowhere"
+     ],
+     "answer": 0,
+     "explanation": "Heaters.",
+     "level": "basic"
+    },
+    {
+     "question": "Main wear mechanism?",
+     "options": [
+      "Erosion at let-down",
+      "Corrosion only",
+      "Fatigue only",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Erosion.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Flash vessels.\"",
+     "options": [
+      "Slurry Transfer Lines with Level-Control (choke) Valves & Vapour Lines to Heaters",
+      "Slurry Level in Tank 1",
+      "Vapour Flashing in Tank 1",
+      "Flash Tank 1 (pressure stage 1)"
+     ],
+     "answer": 3,
+     "explanation": "Flash Tank 1 (pressure stage 1): Flash vessels.",
+     "level": "basic",
+     "part": "flash_tank_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Slurry.\"",
+     "options": [
+      "Slurry Transfer Lines with Level-Control (choke) Valves & Vapour Lines to Heaters",
+      "Slurry Level in Tank 1",
+      "Flash Tank 1 (pressure stage 1)",
+      "Support Legs"
+     ],
+     "answer": 1,
+     "explanation": "Slurry Level in Tank 1: Slurry.",
+     "level": "basic",
+     "part": "slurry_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transfer/vapour lines and level control.\"",
+     "options": [
+      "Vapour Flashing in Tank 2",
+      "Slurry Transfer Lines with Level-Control (choke) Valves & Vapour Lines to Heaters",
+      "Vapour Flashing in Tank 1",
+      "Support Legs"
+     ],
+     "answer": 1,
+     "explanation": "Slurry Transfer Lines with Level-Control (choke) Valves & Vapour Lines to Heaters: Transfer/vapour lines and level control.",
+     "level": "basic",
+     "part": "piping",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

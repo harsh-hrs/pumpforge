@@ -1,0 +1,673 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "clariflocculator",
+  "title": "Clariflocculator (Central Flocculation Zone + Peripheral Clarifier)",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 218,
+    "phase": 11,
+    "eq_id": "EQ-296",
+    "subcategory": "Water Treatment",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "clariflocculator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "clariflocculator_pressure.glb",
+      "title": "Flocculate, then settle",
+      "description": "Coagulated raw water first passes through the central flocculation zone, where slow paddles (velocity gradient G ≈ 20–70 s⁻¹) let tiny particles collide and grow into flocs. The water then moves outward and upward through the clarifier zone at low surface loading (≈ 1–2 m/h); flocs settle and are raked to the central sludge pit; clear water overflows the peripheral weir.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "coagulant",
+      "kind": "flow_discharge",
+      "radius": 0.012,
+      "points": [
+        [
+          -2.2,
+          0.35,
+          -0.4
+        ],
+        [
+          -2.2,
+          2.1,
+          -0.4
+        ],
+        [
+          -0.2,
+          2.1,
+          -0.4
+        ],
+        [
+          -0.2,
+          1.55,
+          -0.2
+        ]
+      ]
+    },
+    {
+      "name": "raw_water",
+      "kind": "water",
+      "radius": 0.025,
+      "points": [
+        [
+          -2.3,
+          0.1,
+          -0.0
+        ],
+        [
+          0.0,
+          0.1,
+          -0.0
+        ],
+        [
+          0.0,
+          1.5,
+          -0.05
+        ],
+        [
+          0.4,
+          1.0,
+          -0.05
+        ],
+        [
+          1.2,
+          1.45,
+          -0.05
+        ],
+        [
+          1.95,
+          1.45,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "sludge",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          0.2,
+          -0.05
+        ],
+        [
+          0.0,
+          0.05,
+          -0.05
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 7430,
+    "parts": 10
+  },
+  "summary": "A clariflocculator combines flocculation and clarification in one circular tank. Coagulated raw water enters a central compartment where slow paddles grow flocs; the water then flows outward under the skirt into the clarifier zone, where flocs settle and are raked to a central sludge pit while clear water overflows the peripheral weir.",
+  "classification": {
+    "family": "Water treatment",
+    "type": "Circular clariflocculator"
+  },
+  "model_configuration": {
+    "animation": "Paddles and rakes turn; flocs grow and settle"
+  },
+  "standards": [
+    {
+      "id": "AWWA / Ten States Standards",
+      "title": "Recommended Standards for Water Works",
+      "relevance": "Design criteria.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "WHO Guidelines for Drinking-water Quality",
+      "title": "Water quality",
+      "relevance": "Targets.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "MWH — Water Treatment: Principles and Design"
+  ],
+  "parts": [
+    {
+      "id": "cf_tank",
+      "name": "Clariflocculator: Tank with Conical Floor & Overflow Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "cf_tank__back",
+        "cf_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.58,
+        0.1,
+        -1.58
+      ],
+      "bbox_max": [
+        1.58,
+        1.6,
+        1.58
+      ],
+      "label_anchor": [
+        0.0,
+        0.85,
+        1.58
+      ],
+      "center": [
+        0.0,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "cfl_tank"
+    },
+    {
+      "id": "cf_clear",
+      "name": "Clariflocculator: Clear Overflow Zone",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cf_cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -1.395,
+        1.05,
+        -1.395
+      ],
+      "bbox_max": [
+        1.395,
+        1.44,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.245,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.245,
+        -0.6975
+      ],
+      "info_ref": "cfl_zones"
+    },
+    {
+      "id": "cf_mud",
+      "name": "Clariflocculator: Settling / Compression Zone (mud bed)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cf_md"
+      ],
+      "pivot": [
+        0.0,
+        0.14,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.4
+      ],
+      "bbox_min": [
+        -1.395,
+        0.14,
+        -1.395
+      ],
+      "bbox_max": [
+        1.395,
+        1.05,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.595,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.595,
+        -0.6975
+      ],
+      "info_ref": "cfl_zones"
+    },
+    {
+      "id": "cf_feedwell",
+      "name": "Clariflocculator: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "cf_feedwell__back",
+        "cf_feedwell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.3
+      ],
+      "bbox_min": [
+        -0.308,
+        1.05,
+        -0.308
+      ],
+      "bbox_max": [
+        0.308,
+        1.65,
+        0.308
+      ],
+      "label_anchor": [
+        0.0,
+        1.35,
+        0.308
+      ],
+      "center": [
+        0.0,
+        1.35,
+        -0.0
+      ],
+      "info_ref": "cfl_feedwell"
+    },
+    {
+      "id": "cf_rakes",
+      "name": "Clariflocculator: Rake Arms & Blades (move mud to the centre cone)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "cf_rakes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -1.35986,
+        0.24833,
+        -0.05
+      ],
+      "bbox_max": [
+        1.35986,
+        1.95,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        1.09917,
+        0.05
+      ],
+      "center": [
+        0.0,
+        1.09917,
+        -0.0
+      ],
+      "info_ref": "cfl_rake"
+    },
+    {
+      "id": "cf_drive",
+      "name": "Clariflocculator: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "cf_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.65,
+        1.79,
+        -0.25
+      ],
+      "bbox_max": [
+        1.65,
+        2.55,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        2.17,
+        0.25
+      ],
+      "center": [
+        0.0,
+        2.17,
+        -0.0
+      ],
+      "info_ref": "cfl_drive"
+    },
+    {
+      "id": "flocculation_zone",
+      "name": "Central Flocculation Compartment (skirt wall)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "flocculation_zone__back",
+        "flocculation_zone__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.4
+      ],
+      "bbox_min": [
+        -0.62,
+        0.85,
+        -0.62
+      ],
+      "bbox_max": [
+        0.62,
+        1.6,
+        0.62
+      ],
+      "label_anchor": [
+        0.0,
+        1.225,
+        0.62
+      ],
+      "center": [
+        0.0,
+        1.225,
+        -0.0
+      ],
+      "info_ref": "cfl_floc"
+    },
+    {
+      "id": "flocculator_paddles",
+      "name": "Slow-Speed Paddle Flocculator (gentle mixing grows flocs)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "flocculator_paddles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        0.7
+      ],
+      "bbox_min": [
+        -0.52,
+        0.9,
+        -0.52
+      ],
+      "bbox_max": [
+        0.52,
+        2.0,
+        0.52
+      ],
+      "label_anchor": [
+        0.0,
+        1.45,
+        0.52
+      ],
+      "center": [
+        0.0,
+        1.45,
+        -0.0
+      ],
+      "info_ref": "cfl_floc"
+    },
+    {
+      "id": "piping",
+      "name": "Raw-Water Inlet (central riser), Coagulant/Polymer Dosing Pump & Line, Clarified-Water Outlet",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.4,
+        0.0,
+        -0.55
+      ],
+      "bbox_max": [
+        1.95,
+        2.12,
+        0.133
+      ],
+      "label_anchor": [
+        -0.225,
+        1.06,
+        0.133
+      ],
+      "center": [
+        -0.225,
+        1.06,
+        -0.2085
+      ],
+      "info_ref": "cfl_piping"
+    },
+    {
+      "id": "flocs",
+      "name": "Flocs growing in the Flocculation Zone then settling",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "flocs0",
+        "flocs1",
+        "flocs2",
+        "flocs3",
+        "flocs4",
+        "flocs5",
+        "flocs6",
+        "flocs7",
+        "flocs8",
+        "flocs9",
+        "flocs10",
+        "flocs11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "cfl_tank": {
+      "function": "Holds water; launder collects overflow.",
+      "construction": "Concrete tank, floor slope.",
+      "material": "Concrete/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cfl_zones": {
+      "function": "Clear and sludge zones.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cfl_feedwell": {
+      "function": "Calms inflow.",
+      "construction": "Feedwell.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cfl_rake": {
+      "function": "Moves sludge to the pit.",
+      "construction": "Rake arms.",
+      "material": "Steel.",
+      "operating_conditions": "Slow.",
+      "failure_modes": [
+        "Torque overload"
+      ],
+      "inspection": [
+        "Torque"
+      ]
+    },
+    "cfl_drive": {
+      "function": "Turns rakes.",
+      "construction": "Bridge drive.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cfl_floc": {
+      "function": "Grows flocs.",
+      "construction": "Flocculation compartment, paddle flocculator.",
+      "material": "Concrete/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cfl_piping": {
+      "function": "Inlet, dosing, outlet.",
+      "construction": "Pipes.",
+      "material": "DI/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

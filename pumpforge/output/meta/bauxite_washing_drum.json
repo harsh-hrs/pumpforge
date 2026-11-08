@@ -1,0 +1,579 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "bauxite_washing_drum",
+  "title": "Bauxite Washing (Scrubbing) Drum with Trommel Discharge Screen",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 194,
+    "phase": 10,
+    "eq_id": "EQ-272",
+    "subcategory": "Bauxite Preparation",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "bauxite_washing_drum_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "bauxite_washing_drum_pressure.glb",
+      "title": "Attrition scrubbing removes clay and reactive silica",
+      "description": "Lifters raise the bauxite and drop it, so lumps rub and impact each other in water. Fine clay (often rich in reactive silica, which costs caustic soda in digestion) is washed off and leaves with the trommel undersize. Drum speed is typically ~ 50–75 % of critical speed.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "ore",
+      "kind": "sand",
+      "radius": 0.025,
+      "points": [
+        [
+          -1.75,
+          1.9,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.15,
+          -0.0
+        ],
+        [
+          1.1,
+          0.55,
+          -0.05
+        ],
+        [
+          1.8,
+          0.58,
+          -0.05
+        ],
+        [
+          2.05,
+          0.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "slimes",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          1.45,
+          0.49,
+          -0.1
+        ],
+        [
+          1.45,
+          0.3,
+          -0.1
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8256,
+    "parts": 9
+  },
+  "summary": "A bauxite washing (scrubbing) drum tumbles crushed bauxite with water so the lumps rub against each other and clay is washed off. A trommel screen at the discharge separates washed bauxite from the clay-rich fines, lowering reactive silica in the digestion feed.",
+  "classification": {
+    "family": "Ore preparation",
+    "type": "Rotary scrubber with trommel"
+  },
+  "model_configuration": {
+    "animation": "Tyres/gear turn; lumps tumble; sprays"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Mineral processing equipment",
+      "relevance": "Mill/drum design and liners.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Wills' Mineral Processing Technology — scrubbing"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Scrubbing Drum: Shell with Liners / Lifters (rotates)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.3,
+        0.37,
+        -0.63
+      ],
+      "bbox_max": [
+        1.1,
+        1.63,
+        0.63
+      ],
+      "label_anchor": [
+        -0.1,
+        1.0,
+        0.63
+      ],
+      "center": [
+        -0.1,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "bw_shell"
+    },
+    {
+      "id": "girth_tyres",
+      "name": "Scrubbing Drum: Riding Tyres & Girth Gear (turn with the shell)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "girth_tyres.001"
+      ],
+      "pivot": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.9
+      ],
+      "bbox_min": [
+        -1.11,
+        0.21,
+        -0.79
+      ],
+      "bbox_max": [
+        0.91,
+        1.79,
+        0.79
+      ],
+      "label_anchor": [
+        -0.1,
+        1.0,
+        0.79
+      ],
+      "center": [
+        -0.1,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "bw_drive"
+    },
+    {
+      "id": "trommel",
+      "name": "Trommel Discharge Screen (separates washed lumps from fines/clay)",
+      "group": "screen",
+      "section_role": "split",
+      "nodes": [
+        "trommel__back",
+        "trommel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        1.1,
+        0.476,
+        -0.524
+      ],
+      "bbox_max": [
+        1.8,
+        1.524,
+        0.524
+      ],
+      "label_anchor": [
+        1.45,
+        1.0,
+        0.524
+      ],
+      "center": [
+        1.45,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "bw_trommel"
+    },
+    {
+      "id": "spray_header",
+      "name": "Water Spray Header & Nozzles",
+      "group": "water",
+      "section_role": "keep",
+      "nodes": [
+        "spray_header.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.4
+      ],
+      "bbox_min": [
+        -1.7,
+        1.18,
+        -0.035
+      ],
+      "bbox_max": [
+        0.9,
+        1.285,
+        0.035
+      ],
+      "label_anchor": [
+        -0.4,
+        1.2325,
+        0.035
+      ],
+      "center": [
+        -0.4,
+        1.2325,
+        -0.0
+      ],
+      "info_ref": "bw_spray"
+    },
+    {
+      "id": "feed_chute",
+      "name": "Feed Chute (crushed bauxite + water)",
+      "group": "chutes",
+      "section_role": "keep",
+      "nodes": [
+        "fc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.5,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.0,
+        1.11,
+        -0.3
+      ],
+      "bbox_max": [
+        -1.1,
+        1.8,
+        0.3
+      ],
+      "label_anchor": [
+        -1.55,
+        1.455,
+        0.3
+      ],
+      "center": [
+        -1.55,
+        1.455,
+        -0.0
+      ],
+      "info_ref": "bw_chutes"
+    },
+    {
+      "id": "discharge_chutes",
+      "name": "Undersize (slimes) Sump & Oversize (washed bauxite) Chute",
+      "group": "chutes",
+      "section_role": "keep",
+      "nodes": [
+        "discharge_chutes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        1.05,
+        0.0,
+        -0.5
+      ],
+      "bbox_max": [
+        2.25,
+        0.8,
+        0.5
+      ],
+      "label_anchor": [
+        1.65,
+        0.4,
+        0.5
+      ],
+      "center": [
+        1.65,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "bw_chutes"
+    },
+    {
+      "id": "supports_drive",
+      "name": "Support Rollers, Bases & Drive (motor, reducer, pinion)",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.25,
+        0.0,
+        -1.75
+      ],
+      "bbox_max": [
+        1.05,
+        1.0,
+        0.65
+      ],
+      "label_anchor": [
+        -0.1,
+        0.5,
+        0.65
+      ],
+      "center": [
+        -0.1,
+        0.5,
+        -0.55
+      ],
+      "info_ref": "bw_drive"
+    },
+    {
+      "id": "lumps",
+      "name": "Bauxite Lumps Tumbling and Scrubbing (clay is washed off)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "lumps0",
+        "lumps1",
+        "lumps2",
+        "lumps3",
+        "lumps4",
+        "lumps5",
+        "lumps6",
+        "lumps7",
+        "lumps8",
+        "lumps9",
+        "lumps10",
+        "lumps11",
+        "lumps12",
+        "lumps13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.04,
+        -0.04,
+        -0.03804
+      ],
+      "bbox_max": [
+        0.04,
+        0.04,
+        0.03804
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.03804
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "spray",
+      "name": "Wash Water Sprays",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "spray0",
+        "spray1",
+        "spray2",
+        "spray3",
+        "spray4",
+        "spray5",
+        "spray6",
+        "spray7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "bw_shell": {
+      "function": "Rotating scrubbing chamber.",
+      "construction": "Shell with rubber liners and lifters.",
+      "material": "Steel/rubber.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Liner wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "bw_drive": {
+      "function": "Rotation and support.",
+      "construction": "Tyres, girth gear, rollers, motor.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "bw_trommel": {
+      "function": "Screens discharge.",
+      "construction": "Perforated trommel.",
+      "material": "Steel/PU.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "bw_spray": {
+      "function": "Adds wash water.",
+      "construction": "Spray header.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "bw_chutes": {
+      "function": "Feed and discharge.",
+      "construction": "Chutes and sump.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

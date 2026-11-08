@@ -1,0 +1,662 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "steam_distribution_header",
+ "no": 235,
+ "title": "Steam Distribution Header",
+ "model_title": "Steam Distribution Header with Branch Take-offs, Drip Leg Trap Station & PRV Station",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A steam distribution header receives steam from the boilers and distributes it to the plant. Branches leave from the top so they take dry steam; the header slopes to drip legs where steam traps remove condensate; a pressure-reducing station supplies lower-pressure users. Insulation, supports and guides handle heat loss and thermal expansion.",
+   "applications": [
+    "Boiler house main steam headers",
+    "Plant steam distribution to process heaters, turbines and tracing"
+   ],
+   "key_points": [
+    "Take branches from the top",
+    "Drip legs every ≈ 30–50 m and at low points",
+    "Slope ≈ 1:100 toward drip legs",
+    "PRV + downstream safety valve"
+   ],
+   "classification": {
+    "family": "Steam utilities",
+    "type": "Header with branch take-offs, drip leg trap station and PRV station"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A steam distribution header receives steam from the boilers and distributes it to plant users. Branches take steam from the top of the header so it is dry; drip legs and steam traps remove condensate, and a pressure-reducing station supplies lower-pressure users."
+  },
+  "model_3d": {
+   "asset": "glb/steam_distribution_header.glb",
+   "metadata": "meta/steam_distribution_header.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 12100,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Steam enters through the main stop valve.",
+    "The header distributes steam; condensate runs along the bottom.",
+    "Branches take dry steam from the top."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Steam enters through the main stop valve.",
+     "part": "main_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The header distributes steam; condensate runs along the bottom.",
+     "part": "header",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Branches take dry steam from the top.",
+     "part": "branch_takeoffs",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drip leg and trap remove condensate.",
+     "part": "trap_station",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The PRV station reduces pressure for LP users.",
+     "part": "prv_station",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Steam velocity and pressure drop vs flow and pipe size."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "steam_distribution_header_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "steam_distribution_header_pressure.glb",
+     "title": "Dry steam at the right pressure",
+     "description": "The header carries boiler-pressure steam. Branches leave from the top so they take dry steam, not the condensate that runs along the bottom. Drip legs of full header bore every ≈ 30–50 m (and at low points / before risers) collect condensate, which a trap removes; without them slugs of water cause water hammer and erosion. A PRV station drops the pressure for users that need lower pressure; latent heat per kg rises as pressure falls, and a downstream safety valve protects the low-pressure side.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/steam_distribution_header.json#components",
+   "key_components": "Header pipe, branch take-offs, drip legs, steam traps, PRV station, isolation valves",
+   "parts": [
+    {
+     "id": "header",
+     "name": "Steam Header (sloped ≈ 1:100 toward the drip leg) & Full-Bore Drip Leg / Dirt Pocket",
+     "info_ref": "sh_header",
+     "function": "Collects and distributes steam.",
+     "material": "Carbon steel (e.g. ASTM A106 B)."
+    },
+    {
+     "id": "insulation",
+     "name": "Insulation & Aluminium Cladding",
+     "info_ref": "sh_insulation",
+     "function": "Reduces heat loss and protects personnel.",
+     "material": "Mineral wool/aluminium."
+    },
+    {
+     "id": "supports",
+     "name": "Pipe Supports with Shoes & Guides (allow thermal expansion)",
+     "info_ref": "sh_supports",
+     "function": "Carry the pipe and allow expansion.",
+     "material": "Steel."
+    },
+    {
+     "id": "branch_takeoffs",
+     "name": "Branch Take-offs from the TOP of the Header (dry steam) with Isolation Valves",
+     "info_ref": "sh_branches",
+     "function": "Supply users with dry steam.",
+     "material": "Steel."
+    },
+    {
+     "id": "prv_station",
+     "name": "Pressure-Reducing Station: Isolation, Pilot-Operated PRV, Downstream Safety Valve & Gauges",
+     "info_ref": "sh_prv",
+     "function": "Reduces pressure for LP users.",
+     "material": "Cast steel/ductile iron."
+    },
+    {
+     "id": "trap_station",
+     "name": "Drip-Leg Trap Station: Isolation Valve, Strainer, Steam Trap, Test Valve, Check Valve & Blowdown",
+     "info_ref": "sh_trap",
+     "function": "Removes condensate, holds steam.",
+     "material": "Steel/cast iron."
+    },
+    {
+     "id": "main_valve",
+     "name": "Main Steam Stop Valve (from boiler) & End Air Vent",
+     "info_ref": "sh_header",
+     "function": "Collects and distributes steam.",
+     "material": "Carbon steel (e.g. ASTM A106 B)."
+    },
+    {
+     "id": "condensate_film",
+     "name": "Condensate running along the header bottom to the drip leg",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "drip",
+     "name": "Condensate falling into the drip leg",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "trap_discharge",
+     "name": "Condensate discharged by the trap (steam held back)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Headers DN 100 – 600",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1 – 300",
+     "unit": "t/h steam"
+    },
+    "operating_conditions": {
+     "typical_range": "≈ 3 – 100 bar(g); saturated or superheated",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "— (static)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for velocity ≈ 25–40 m/s (saturated) and allowable pressure drop."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASME B31.1",
+    "Spirax Sarco"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal movement of connected piping."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; nozzles and supports loaded within limits."
+   ],
+   "piping": [
+    "Relief protection per code, drains at low points, isolations for inspection; slope lines to drains."
+   ],
+   "commissioning": [
+    "Pressure test; set and seal relief valves; check instruments and drains; register with the authority where required."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pressures and trap discharge.",
+     "part": "trap_station",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Trap survey; inspect insulation.",
+     "part": "trap_station",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul PRV and safety valves.",
+     "part": "prv_station"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Water hammer",
+     "category": "performance",
+     "symptoms": [
+      "Bangs, pipe movement"
+     ],
+     "causes": [
+      "Failed trap, no drip leg, wrong slope"
+     ],
+     "remedies": [
+      "Repair traps; add drip legs; warm up slowly"
+     ],
+     "part": "trap_station"
+    },
+    {
+     "problem": "Steam loss through trap",
+     "category": "performance",
+     "symptoms": [
+      "Live steam at discharge"
+     ],
+     "causes": [
+      "Trap failed open"
+     ],
+     "remedies": [
+      "Replace trap"
+     ],
+     "part": "trap_station"
+    }
+   ],
+   "safety": [
+    "Hot surfaces; isolate and depressurise before work; never open a hot drain into a closed space."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Steam Distribution Header — Introduction",
+    "type": "in_app_tour",
+    "model": "steam_distribution_header.glb",
+    "duration_s": 49.7,
+    "script": [
+     {
+      "narration": "This module introduces the Steam Distribution Header.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A steam distribution header receives steam from the boilers and distributes it to the plant.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Branches leave from the top so they take dry steam; the header slopes to drip legs where steam traps remove condensate; a pressure-reducing station supplies lower-pressure users.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Insulation, supports and guides handle heat loss and thermal expansion.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include boiler house main steam headers; plant steam distribution to process heaters, turbines and tracing.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Steam Distribution Header — Operation",
+    "type": "in_app_tour",
+    "model": "steam_distribution_header.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "How the Steam Distribution Header works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Steam enters through the main stop valve.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "main_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The header distributes steam; condensate runs along the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "header",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Branches take dry steam from the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "branch_takeoffs",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drip leg and trap remove condensate.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trap_station",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The PRV station reduces pressure for LP users.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "prv_station",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The header carries boiler-pressure steam.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Steam Distribution Header — Maintenance",
+    "type": "in_app_tour",
+    "model": "steam_distribution_header.glb",
+    "duration_s": 35.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Steam Distribution Header.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pressures and trap discharge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trap_station",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Trap survey; inspect insulation.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trap_station",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul PRV and safety valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "prv_station",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water hammer: bangs, pipe movement. Common cause: failed trap, no drip leg, wrong slope.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "trap_station",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for steam loss through trap: live steam at discharge. Common cause: trap failed open.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "trap_station",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why take branches from the top?",
+     "options": [
+      "To get dry steam, not condensate",
+      "For looks",
+      "Cheaper",
+      "To avoid air"
+     ],
+     "answer": 0,
+     "explanation": "Dry steam.",
+     "level": "basic"
+    },
+    {
+     "question": "What causes water hammer?",
+     "options": [
+      "Slugs of condensate driven by steam",
+      "Too much insulation",
+      "Superheat",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Condensate slugs.",
+     "level": "basic"
+    },
+    {
+     "question": "What protects the LP side after a PRV?",
+     "options": [
+      "A safety valve",
+      "A trap",
+      "A strainer",
+      "Insulation"
+     ],
+     "answer": 0,
+     "explanation": "Safety valve.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Collects and distributes steam.\"",
+     "options": [
+      "Steam Header (sloped ≈ 1:100 toward the drip leg) & Full-Bore Drip Leg / Dirt Pocket",
+      "Drip-Leg Trap Station: Isolation Valve, Strainer, Steam Trap, Test Valve, Check Valve & Blowdown",
+      "Pressure-Reducing Station: Isolation, Pilot-Operated PRV, Downstream Safety Valve & Gauges",
+      "Branch Take-offs from the TOP of the Header (dry steam) with Isolation Valves"
+     ],
+     "answer": 0,
+     "explanation": "Steam Header (sloped ≈ 1:100 toward the drip leg) & Full-Bore Drip Leg / Dirt Pocket: Collects and distributes steam.",
+     "level": "basic",
+     "part": "header",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Reduces heat loss and protects personnel.\"",
+     "options": [
+      "Pipe Supports with Shoes & Guides (allow thermal expansion)",
+      "Condensate discharged by the trap (steam held back)",
+      "Insulation & Aluminium Cladding",
+      "Condensate running along the header bottom to the drip leg"
+     ],
+     "answer": 2,
+     "explanation": "Insulation & Aluminium Cladding: Reduces heat loss and protects personnel.",
+     "level": "basic",
+     "part": "insulation",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carry the pipe and allow expansion.\"",
+     "options": [
+      "Insulation & Aluminium Cladding",
+      "Condensate discharged by the trap (steam held back)",
+      "Condensate running along the header bottom to the drip leg",
+      "Pipe Supports with Shoes & Guides (allow thermal expansion)"
+     ],
+     "answer": 3,
+     "explanation": "Pipe Supports with Shoes & Guides (allow thermal expansion): Carry the pipe and allow expansion.",
+     "level": "basic",
+     "part": "supports",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,647 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "water_softener",
+ "no": 227,
+ "title": "Water Softener",
+ "model_title": "Twin Water Softener (Sodium-Cycle Ion Exchange) with Brine Tank",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A water softener removes hardness (calcium and magnesium) by exchanging them for sodium on cation resin. Twin vessels alternate: one softens while the other is regenerated with strong brine, so soft water is always available for boilers, cooling and washing.",
+   "applications": [
+    "Low-pressure boiler feed and cooling make-up",
+    "Laundries, food plants and building services"
+   ],
+   "key_points": [
+    "Ca²⁺/Mg²⁺ ↔ Na⁺",
+    "Brine ≈ 10 % NaCl regenerates",
+    "Twin units = continuous supply",
+    "Does not remove dissolved solids (TDS)"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Twin sodium-cycle softener"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A water softener removes hardness by exchanging calcium and magnesium for sodium on cation resin. Twin vessels alternate so one is always in service while the other regenerates with brine."
+  },
+  "model_3d": {
+   "asset": "glb/water_softener.glb",
+   "metadata": "meta/water_softener.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 21218,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hard water flows down through the resin.",
+    "Resin captures Ca²⁺ and Mg²⁺ and releases Na⁺.",
+    "The control valve switches units at exhaustion."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hard water flows down through the resin.",
+     "part": "softener_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Resin captures Ca²⁺ and Mg²⁺ and releases Na⁺.",
+     "part": "softener_1_resin",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The control valve switches units at exhaustion.",
+     "part": "control_valves",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Brine from the brine tank regenerates the exhausted unit.",
+     "part": "brine_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet hardness vs throughput."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "water_softener_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "water_softener_pressure.glb",
+     "title": "Hardness exchanged for sodium",
+     "description": "Hard water passes down through cation resin in the sodium form: Ca²⁺ and Mg²⁺ are held by the resin and Na⁺ is released, so the water no longer forms scale (outlet hardness typically < 1 mg/L as CaCO₃). When the resin is exhausted it is regenerated with strong brine (NaCl ~ 10 %), which pushes the hardness off again; twin units give continuous soft water.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/water_softener.json#components",
+   "key_components": "Twin resin vessels, multiport control valve, brine tank, distributor laterals",
+   "parts": [
+    {
+     "id": "softener_1",
+     "name": "Softener Vessel 1 (in service)",
+     "info_ref": "ws_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "softener_1_resin",
+     "name": "Softener Vessel 1: Gravel / Cation Resin (Na⁺ form)",
+     "info_ref": "ws_resin",
+     "function": "Exchanges ions.",
+     "material": "Polystyrene-DVB resin."
+    },
+    {
+     "id": "softener_1_internals",
+     "name": "Softener Vessel 1: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+     "info_ref": "ws_internals",
+     "function": "Even flow distribution.",
+     "material": "PP/stainless."
+    },
+    {
+     "id": "softener_2",
+     "name": "Softener Vessel 2 (regenerating)",
+     "info_ref": "ws_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "softener_2_resin",
+     "name": "Softener Vessel 2: Gravel / Cation Resin (Na⁺ form)",
+     "info_ref": "ws_resin",
+     "function": "Exchanges ions.",
+     "material": "Polystyrene-DVB resin."
+    },
+    {
+     "id": "softener_2_internals",
+     "name": "Softener Vessel 2: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+     "info_ref": "ws_internals",
+     "function": "Even flow distribution.",
+     "material": "PP/stainless."
+    },
+    {
+     "id": "control_valves",
+     "name": "Multiport Control Valves, Meter-Based Controller & Headers",
+     "info_ref": "ws_valves",
+     "function": "Control regeneration.",
+     "material": "—"
+    },
+    {
+     "id": "brine_tank",
+     "name": "Brine Tank with Salt Bed & Brine Well",
+     "info_ref": "ws_brine",
+     "function": "Brine supply.",
+     "material": "PE."
+    },
+    {
+     "id": "brine",
+     "name": "Saturated Brine & Salt",
+     "info_ref": "ws_brine",
+     "function": "Brine supply.",
+     "material": "PE."
+    },
+    {
+     "id": "brine_line",
+     "name": "Brine Draw Line",
+     "info_ref": "ws_brine",
+     "function": "Brine supply.",
+     "material": "PE."
+    },
+    {
+     "id": "supports_outlet",
+     "name": "Vessel Legs & Soft-Water Outlet Header",
+     "info_ref": "ws_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "hardness",
+     "name": "Ca²⁺/Mg²⁺ captured by the resin (Na⁺ released)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessels ≈ 0.3 – 3 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1 – 200",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Outlet hardness < ≈ 1 mg/L as CaCO₃; salt ≈ 100 – 250 g per L resin",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 0.1 – 5",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Resin volume from flow, hardness and run length; brine system to match."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "NSF/ANSI 44",
+    "Ion exchange manuals"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Vessels on level foundation or legs anchored; space above for resin loading and below for underdrain access."
+   ],
+   "alignment": [
+    "Vessels plumb so the bed and distributors are level (uneven beds channel)."
+   ],
+   "piping": [
+    "Valve nest with service, backwash, regenerant, rinse; sample points before/after; acid/caustic-resistant lines and safety showers."
+   ],
+   "commissioning": [
+    "Load support layers and resin (soaked), backwash to classify; first regeneration; rinse to quality; check conductivity/silica/hardness."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Test hardness and salt level.",
+     "part": "brine_tank",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean brine tank; check injector.",
+     "part": "brine_line",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Resin replacement as capacity falls.",
+     "part": "softener_1_resin"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Hardness leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Scale downstream"
+     ],
+     "causes": [
+      "No salt, brine bridging, valve fault"
+     ],
+     "remedies": [
+      "Refill salt, break bridge, repair valve"
+     ],
+     "part": "brine"
+    },
+    {
+     "problem": "Resin fouling by iron",
+     "category": "performance",
+     "symptoms": [
+      "Short runs"
+     ],
+     "causes": [
+      "Iron in feed"
+     ],
+     "remedies": [
+      "Iron removal; resin cleaner"
+     ],
+     "part": "softener_1_resin"
+    }
+   ],
+   "safety": [
+    "Salt handling; pressure vessels."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Water Softener — Introduction",
+    "type": "in_app_tour",
+    "model": "water_softener.glb",
+    "duration_s": 43.9,
+    "script": [
+     {
+      "narration": "This module introduces the Water Softener.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A water softener removes hardness (calcium and magnesium) by exchanging them for sodium on cation resin.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Twin vessels alternate: one softens while the other is regenerated with strong brine, so soft water is always available for boilers, cooling and washing.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include low-pressure boiler feed and cooling make-up; laundries, food plants and building services.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Water Softener — Operation",
+    "type": "in_app_tour",
+    "model": "water_softener.glb",
+    "duration_s": 40.0,
+    "script": [
+     {
+      "narration": "How the Water Softener works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hard water flows down through the resin.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "softener_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Resin captures Ca²⁺ and Mg²⁺ and releases Na⁺.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "softener_1_resin",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The control valve switches units at exhaustion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_valves",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Brine from the brine tank regenerates the exhausted unit.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "brine_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Hard water passes down through cation resin in the sodium form: Ca²⁺ and Mg²⁺ are held by the resin and Na⁺ is released, so the water no longer forms scale (outlet hardness typically < 1 mg/L as CaCO₃).",
+      "duration_s": 15.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Water Softener — Maintenance",
+    "type": "in_app_tour",
+    "model": "water_softener.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Water Softener.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Test hardness and salt level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "brine_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean brine tank; check injector.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "brine_line",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Resin replacement as capacity falls.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "softener_1_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hardness leakage: scale downstream. Common cause: no salt, brine bridging, valve fault.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "brine",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for resin fouling by iron: short runs. Common cause: iron in feed.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "softener_1_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What ions are removed?",
+     "options": [
+      "Calcium and magnesium",
+      "Chloride",
+      "Silica",
+      "Oxygen"
+     ],
+     "answer": 0,
+     "explanation": "Hardness.",
+     "level": "basic"
+    },
+    {
+     "question": "What regenerates the resin?",
+     "options": [
+      "Brine (NaCl)",
+      "Acid",
+      "Caustic",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Brine.",
+     "level": "basic"
+    },
+    {
+     "question": "Does softening reduce TDS?",
+     "options": [
+      "No — it exchanges ions",
+      "Yes, to zero",
+      "Yes, halves it",
+      "Only at night"
+     ],
+     "answer": 0,
+     "explanation": "No.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure vessel for resin.\"",
+     "options": [
+      "Softener Vessel 1: Gravel / Cation Resin (Na⁺ form)",
+      "Brine Draw Line",
+      "Softener Vessel 2: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "Softener Vessel 1 (in service)"
+     ],
+     "answer": 3,
+     "explanation": "Softener Vessel 1 (in service): Pressure vessel for resin.",
+     "level": "basic",
+     "part": "softener_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Exchanges ions.\"",
+     "options": [
+      "Saturated Brine & Salt",
+      "Brine Tank with Salt Bed & Brine Well",
+      "Softener Vessel 1: Gravel / Cation Resin (Na⁺ form)",
+      "Softener Vessel 1 (in service)"
+     ],
+     "answer": 2,
+     "explanation": "Softener Vessel 1: Gravel / Cation Resin (Na⁺ form): Exchanges ions.",
+     "level": "basic",
+     "part": "softener_1_resin",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Even flow distribution.\"",
+     "options": [
+      "Multiport Control Valves, Meter-Based Controller & Headers",
+      "Ca²⁺/Mg²⁺ captured by the resin (Na⁺ released)",
+      "Softener Vessel 1: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "Saturated Brine & Salt"
+     ],
+     "answer": 2,
+     "explanation": "Softener Vessel 1: Inlet Distributor & Underdrain Collector (laterals with nozzles): Even flow distribution.",
+     "level": "basic",
+     "part": "softener_1_internals",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,612 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "digestion_heater",
+ "no": 198,
+ "title": "Digestion Heater",
+ "model_title": "Digestion Slurry Heater (Vertical Shell & Tube, Flash-Vapour Heated)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "Digestion heaters are shell & tube exchangers that preheat the bauxite slurry before digestion. Slurry passes several times through the tubes while flash vapour from the multi-stage flash tanks condenses on the outside.",
+   "applications": [
+    "Regenerative slurry heating before digestion",
+    "Heating with flash vapour from blow-off tanks",
+    "Final heating with live steam (last heaters)"
+   ],
+   "key_points": [
+    "Uses flash vapour (heat recovery)",
+    "Multi-pass slurry flow",
+    "Scale reduces heat transfer",
+    "Heaters descaled in rotation"
+   ],
+   "classification": {
+    "family": "Heat transfer",
+    "type": "Vertical multi-pass shell & tube slurry heater"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "Digestion heaters preheat the slurry before digestion using flash vapour from the multi-stage flash tanks. The slurry passes several times through the tubes while vapour condenses on the outside."
+  },
+  "model_3d": {
+   "asset": "glb/digestion_heater.glb",
+   "metadata": "meta/digestion_heater.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 15704,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry enters the bottom channel head.",
+    "It makes several passes through the tubes.",
+    "Flash vapour condenses in the shell."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry enters the bottom channel head.",
+     "part": "channel_heads",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It makes several passes through the tubes.",
+     "part": "tubes",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flash vapour condenses in the shell.",
+     "part": "shell",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Condensate and non-condensables are removed.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "U-value vs time: falls as scale builds; cleaning restores it."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "digestion_heater_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "digestion_heater_temperature.glb",
+     "title": "Regenerative heating with flash vapour",
+     "description": "Vapour flashed from the hot digested slurry (multi-stage flash) is condensed in these heaters to preheat the incoming slurry — recovering most of the heat. Desilication product scale (sodalite) and titanate deposits build up inside the tubes and cut heat transfer, so heaters are taken off-line for descaling (hydro-blasting or acid) in rotation.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/digestion_heater.json#components",
+   "key_components": "Vertical shell, multi-pass channel heads, tube bundle, vapour/condensate nozzles",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Shell (vapour side) & Tubesheets",
+     "info_ref": "dh_shell",
+     "function": "Vapour side.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "channel_heads",
+     "name": "Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes)",
+     "info_ref": "dh_heads",
+     "function": "Direct slurry passes.",
+     "material": "Steel."
+    },
+    {
+     "id": "tubes",
+     "name": "Tube Bundle (slurry inside) with Scale Layer shown in Some Tubes",
+     "info_ref": "dh_tubes",
+     "function": "Heat transfer.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Flash-Vapour Inlet, Condensate Outlet, Non-Condensable Vent, Slurry In/Out",
+     "info_ref": "dh_nozzles",
+     "function": "Connections.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Support Lugs & Structure",
+     "info_ref": "dh_shell",
+     "function": "Vapour side.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "condensate",
+     "name": "Vapour Condensing on the Tubes",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "slurry",
+     "name": "Slurry making Passes through the Tubes",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Shell ~ 1 – 2 m diameter, 8 – 15 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 200 – 1500",
+     "unit": "m³/h slurry"
+    },
+    "operating_conditions": {
+     "typical_range": "Up to ~ 250 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Duty ~ 5 – 50",
+     "unit": "MW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Area from duty with fouling factor; spare heaters for descaling rotation."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "TEMA",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal expansion."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; let-down valves and lines supported against vibration."
+   ],
+   "piping": [
+    "Relief protection per code; erosion-resistant fittings at let-down points; steam traps/condensate removal; insulation."
+   ],
+   "commissioning": [
+    "Hydro-test; heat up slowly; check relief settings, levels, temperatures and pressures; test interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor approach temperatures.",
+     "part": "tubes",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Descaling (hydro-blasting/acid).",
+     "part": "tubes",
+     "interval": "per schedule"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Tube replacement.",
+     "part": "tubes"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Scaling",
+     "category": "performance",
+     "symptoms": [
+      "Lower outlet temperature"
+     ],
+     "causes": [
+      "DSP, titanate"
+     ],
+     "remedies": [
+      "Descale; improve desilication"
+     ],
+     "part": "tubes"
+    },
+    {
+     "problem": "Tube leaks",
+     "category": "leakage",
+     "symptoms": [
+      "Slurry in condensate"
+     ],
+     "causes": [
+      "Erosion"
+     ],
+     "remedies": [
+      "Plug/retube"
+     ],
+     "part": "tubes"
+    }
+   ],
+   "safety": [
+    "Isolation and depressurising before descaling."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Digestion Heater — Introduction",
+    "type": "in_app_tour",
+    "model": "digestion_heater.glb",
+    "duration_s": 48.2,
+    "script": [
+     {
+      "narration": "This module introduces the Digestion Heater.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Digestion heaters are shell & tube exchangers that preheat the bauxite slurry before digestion.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry passes several times through the tubes while flash vapour from the multi-stage flash tanks condenses on the outside.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include regenerative slurry heating before digestion; heating with flash vapour from blow-off tanks; final heating with live steam (last heaters).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Shell (vapour side) & Tubesheets, Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Digestion Heater — Operation",
+    "type": "in_app_tour",
+    "model": "digestion_heater.glb",
+    "duration_s": 34.6,
+    "script": [
+     {
+      "narration": "How the Digestion Heater works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry enters the bottom channel head.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "channel_heads",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It makes several passes through the tubes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tubes",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flash vapour condenses in the shell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Condensate and non-condensables are removed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Vapour flashed from the hot digested slurry (multi-stage flash) is condensed in these heaters to preheat the incoming slurry — recovering most of the heat.",
+      "duration_s": 10.4,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Digestion Heater — Maintenance",
+    "type": "in_app_tour",
+    "model": "digestion_heater.glb",
+    "duration_s": 30.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Digestion Heater.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor approach temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descaling (hydro-blasting/acid).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Tube replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling: lower outlet temperature. Common cause: dsp, titanate.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tube leaks: slurry in condensate. Common cause: erosion.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What heats the slurry?",
+     "options": [
+      "Condensing flash vapour",
+      "Electric heaters",
+      "Hot air",
+      "Flame"
+     ],
+     "answer": 0,
+     "explanation": "Regenerative.",
+     "level": "basic"
+    },
+    {
+     "question": "Why descale regularly?",
+     "options": [
+      "Scale cuts heat transfer",
+      "Colour",
+      "Noise",
+      "Weight"
+     ],
+     "answer": 0,
+     "explanation": "Fouling.",
+     "level": "basic"
+    },
+    {
+     "question": "Why vent non-condensables?",
+     "options": [
+      "They blanket the tubes",
+      "For pressure",
+      "Not needed",
+      "Taste"
+     ],
+     "answer": 0,
+     "explanation": "Air blanketing.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Vapour side.\"",
+     "options": [
+      "Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes)",
+      "Shell (vapour side) & Tubesheets",
+      "Flash-Vapour Inlet, Condensate Outlet, Non-Condensable Vent, Slurry In/Out",
+      "Slurry making Passes through the Tubes"
+     ],
+     "answer": 1,
+     "explanation": "Shell (vapour side) & Tubesheets: Vapour side.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Direct slurry passes.\"",
+     "options": [
+      "Slurry making Passes through the Tubes",
+      "Shell (vapour side) & Tubesheets",
+      "Tube Bundle (slurry inside) with Scale Layer shown in Some Tubes",
+      "Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes)"
+     ],
+     "answer": 3,
+     "explanation": "Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes): Direct slurry passes.",
+     "level": "basic",
+     "part": "channel_heads",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Heat transfer.\"",
+     "options": [
+      "Slurry making Passes through the Tubes",
+      "Shell (vapour side) & Tubesheets",
+      "Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes)",
+      "Tube Bundle (slurry inside) with Scale Layer shown in Some Tubes"
+     ],
+     "answer": 3,
+     "explanation": "Tube Bundle (slurry inside) with Scale Layer shown in Some Tubes: Heat transfer.",
+     "level": "basic",
+     "part": "tubes",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

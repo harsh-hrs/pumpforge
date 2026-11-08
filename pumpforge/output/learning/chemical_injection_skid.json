@@ -1,0 +1,632 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "chemical_injection_skid",
+ "no": 230,
+ "title": "Chemical Injection Skid",
+ "model_title": "Chemical Injection Skid (Duty/Standby Diaphragm Metering Pumps)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A chemical injection skid doses a precise flow of chemical into a process line. Diaphragm metering pumps (duty/standby) draw from a day tank and deliver through a pulsation dampener, relief valve and back-pressure valve to an injection quill that places the chemical in the centre of the pipe.",
+   "applications": [
+    "Biocide, inhibitor, coagulant, pH and oxygen-scavenger dosing",
+    "Oil & gas chemical injection (corrosion inhibitor, methanol)"
+   ],
+   "key_points": [
+    "Fixed volume per stroke (API 675)",
+    "Flow = stroke length × frequency",
+    "Back-pressure valve keeps accuracy",
+    "Calibration column verifies output"
+   ],
+   "classification": {
+    "family": "Chemical systems",
+    "type": "Duty/standby metering pump skid"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A chemical injection skid doses a precise flow of chemical into a process line. Diaphragm metering pumps draw from a day tank and deliver through a pulsation dampener and back-pressure valve to an injection quill."
+  },
+  "model_3d": {
+   "asset": "glb/chemical_injection_skid.glb",
+   "metadata": "meta/chemical_injection_skid.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 16806,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Chemical is stored in the day tank.",
+    "The diaphragm pump draws and delivers fixed volumes.",
+    "Dampener smooths pulses; BPV holds pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Chemical is stored in the day tank.",
+     "part": "storage_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diaphragm pump draws and delivers fixed volumes.",
+     "part": "diaphragm_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dampener smooths pulses; BPV holds pressure.",
+     "part": "accessories",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The quill injects into the process main.",
+     "part": "piping_quill",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Delivered flow vs stroke length (linear)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "chemical_injection_skid_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "chemical_injection_skid_pressure.glb",
+     "title": "Accurate, pressure-independent dosing",
+     "description": "A diaphragm metering pump delivers a fixed volume per stroke; flow is set by stroke length and stroke frequency (VFD). The back-pressure valve keeps a steady discharge pressure so dosing stays accurate, the pulsation dampener smooths flow, the relief valve protects against a closed outlet, and the calibration column verifies actual output (draw-down test).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/chemical_injection_skid.json#components",
+   "key_components": "Day tank, metering pumps, pulsation dampener, PRV, back-pressure valve, injection quill",
+   "parts": [
+    {
+     "id": "skid_bund",
+     "name": "Skid Base & Spill Bund",
+     "info_ref": "ci_skid",
+     "function": "Base and bund.",
+     "material": "Steel."
+    },
+    {
+     "id": "storage_tank",
+     "name": "Day Tank (chemical storage) with Level Gauge",
+     "info_ref": "ci_tank",
+     "function": "Day storage.",
+     "material": "PE/PP."
+    },
+    {
+     "id": "chemical",
+     "name": "Chemical in the Day Tank",
+     "info_ref": "ci_tank",
+     "function": "Day storage.",
+     "material": "PE/PP."
+    },
+    {
+     "id": "metering_pump_1",
+     "name": "Diaphragm Metering Pump 1 (duty): gearbox, motor, liquid end, stroke-length knob",
+     "info_ref": "ci_pumps",
+     "function": "Meter chemical.",
+     "material": "PVDF/PTFE/316."
+    },
+    {
+     "id": "diaphragm_1",
+     "name": "Diaphragm 1 (flexes to pump)",
+     "info_ref": "ci_pumps",
+     "function": "Meter chemical.",
+     "material": "PVDF/PTFE/316."
+    },
+    {
+     "id": "metering_pump_2",
+     "name": "Diaphragm Metering Pump 2 (standby): gearbox, motor, liquid end, stroke-length knob",
+     "info_ref": "ci_pumps",
+     "function": "Meter chemical.",
+     "material": "PVDF/PTFE/316."
+    },
+    {
+     "id": "diaphragm_2",
+     "name": "Diaphragm 2 (flexes to pump)",
+     "info_ref": "ci_pumps",
+     "function": "Meter chemical.",
+     "material": "PVDF/PTFE/316."
+    },
+    {
+     "id": "accessories",
+     "name": "Calibration Column, Pulsation Dampener, Pressure Relief, Back-Pressure Valve & Gauge",
+     "info_ref": "ci_accessories",
+     "function": "Accuracy and protection.",
+     "material": "—"
+    },
+    {
+     "id": "piping_quill",
+     "name": "Suction & Discharge Lines and Injection Quill into the Process Main",
+     "info_ref": "ci_quill",
+     "function": "Delivers into process.",
+     "material": "Stainless/PVC."
+    },
+    {
+     "id": "pulses",
+     "name": "Chemical pulses delivered with each stroke",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pumps ≈ 0.1 – 1000 L/h",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 0.1 – 1000",
+     "unit": "L/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Discharge up to ≈ 10 – 300 bar (application)",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 0.1 – 5",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for max dose × max flow with margin; materials compatible with chemical."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 675"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth; anchor the skid; bund or drain for chemical / oil spills."
+   ],
+   "alignment": [
+    "Skid level; check pump–motor alignment where not close-coupled; supports so piping loads do not reach equipment nozzles."
+   ],
+   "piping": [
+    "Isolation valves and bypass for maintenance; drains and vents; correct materials for the chemical; label lines and flow direction."
+   ],
+   "commissioning": [
+    "Pressure-test piping; flush; check rotation and interlocks; calibrate instruments; run on water before chemicals."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check tank level and draw-down calibration.",
+     "part": "accessories",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean check valves and strainers.",
+     "part": "metering_pump_1",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace diaphragm and valves.",
+     "part": "diaphragm_1"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of prime",
+     "category": "priming",
+     "symptoms": [
+      "No flow"
+     ],
+     "causes": [
+      "Air/gas in suction, dirty valves"
+     ],
+     "remedies": [
+      "Prime, clean valves"
+     ],
+     "part": "metering_pump_1"
+    },
+    {
+     "problem": "Diaphragm rupture",
+     "category": "performance",
+     "symptoms": [
+      "Leak detection alarm"
+     ],
+     "causes": [
+      "Fatigue, overpressure"
+     ],
+     "remedies": [
+      "Replace; check PSV"
+     ],
+     "part": "diaphragm_1"
+    }
+   ],
+   "safety": [
+    "Bunds, PPE, safety shower; relief valve on every PD pump discharge."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Chemical Injection Skid — Introduction",
+    "type": "in_app_tour",
+    "model": "chemical_injection_skid.glb",
+    "duration_s": 61.1,
+    "script": [
+     {
+      "narration": "This module introduces the Chemical Injection Skid.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A chemical injection skid doses a precise flow of chemical into a process line.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Diaphragm metering pumps (duty/standby) draw from a day tank and deliver through a pulsation dampener, relief valve and back-pressure valve to an injection quill that places the chemical in the centre of the pipe.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include biocide, inhibitor, coagulant, pH and oxygen-scavenger dosing; oil & gas chemical injection (corrosion inhibitor, methanol).",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Diaphragm Metering Pump 1 (duty): gearbox, motor, liquid end, stroke-length knob, Diaphragm 1 (flexes to pump), Diaphragm Metering Pump 2 (standby): gearbox, motor, liquid end, stroke-length knob, Diaphragm 2 (flexes to pump).",
+      "duration_s": 16.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Chemical Injection Skid — Operation",
+    "type": "in_app_tour",
+    "model": "chemical_injection_skid.glb",
+    "duration_s": 32.5,
+    "script": [
+     {
+      "narration": "How the Chemical Injection Skid works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Chemical is stored in the day tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "storage_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diaphragm pump draws and delivers fixed volumes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragm_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dampener smooths pulses; BPV holds pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "accessories",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The quill injects into the process main.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping_quill",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "A diaphragm metering pump delivers a fixed volume per stroke; flow is set by stroke length and stroke frequency (VFD).",
+      "duration_s": 8.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Chemical Injection Skid — Maintenance",
+    "type": "in_app_tour",
+    "model": "chemical_injection_skid.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Chemical Injection Skid.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check tank level and draw-down calibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "accessories",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean check valves and strainers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "metering_pump_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace diaphragm and valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diaphragm_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of prime: no flow. Common cause: air/gas in suction, dirty valves.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "metering_pump_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for diaphragm rupture: leak detection alarm. Common cause: fatigue, overpressure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "diaphragm_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is flow adjusted?",
+     "options": [
+      "Stroke length and frequency",
+      "Valve throttling only",
+      "Tank size",
+      "Pipe colour"
+     ],
+     "answer": 0,
+     "explanation": "Stroke.",
+     "level": "basic"
+    },
+    {
+     "question": "Why a back-pressure valve?",
+     "options": [
+      "Keeps metering accurate",
+      "Heats chemical",
+      "Filters",
+      "Mixes"
+     ],
+     "answer": 0,
+     "explanation": "Accuracy.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the calibration column do?",
+     "options": [
+      "Measures actual pump output",
+      "Stores spare chemical",
+      "Vents gas",
+      "Cools pump"
+     ],
+     "answer": 0,
+     "explanation": "Calibration.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Base and bund.\"",
+     "options": [
+      "Diaphragm 2 (flexes to pump)",
+      "Diaphragm 1 (flexes to pump)",
+      "Suction & Discharge Lines and Injection Quill into the Process Main",
+      "Skid Base & Spill Bund"
+     ],
+     "answer": 3,
+     "explanation": "Skid Base & Spill Bund: Base and bund.",
+     "level": "basic",
+     "part": "skid_bund",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Day storage.\"",
+     "options": [
+      "Chemical pulses delivered with each stroke",
+      "Diaphragm 2 (flexes to pump)",
+      "Diaphragm Metering Pump 2 (standby): gearbox, motor, liquid end, stroke-length knob",
+      "Day Tank (chemical storage) with Level Gauge"
+     ],
+     "answer": 3,
+     "explanation": "Day Tank (chemical storage) with Level Gauge: Day storage.",
+     "level": "basic",
+     "part": "storage_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Meter chemical.\"",
+     "options": [
+      "Chemical pulses delivered with each stroke",
+      "Skid Base & Spill Bund",
+      "Day Tank (chemical storage) with Level Gauge",
+      "Diaphragm Metering Pump 1 (duty): gearbox, motor, liquid end, stroke-length knob"
+     ],
+     "answer": 3,
+     "explanation": "Diaphragm Metering Pump 1 (duty): gearbox, motor, liquid end, stroke-length knob: Meter chemical.",
+     "level": "basic",
+     "part": "metering_pump_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

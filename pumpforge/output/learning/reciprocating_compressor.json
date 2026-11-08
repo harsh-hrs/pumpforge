@@ -1,0 +1,830 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "reciprocating_compressor",
+ "no": 63,
+ "title": "Reciprocating Compressor",
+ "model_title": "Reciprocating Compressor (Horizontal, Double-Acting, Crosshead Type)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A reciprocating compressor raises gas pressure with a piston moving back and forth in a cylinder. Automatic suction and discharge valves let gas in and out. In a double-acting cylinder both ends compress gas alternately; the crankshaft, connecting rod and crosshead convert the motor's rotation into straight-line piston motion.",
+   "applications": [
+    "Process gas compression in refineries and petrochemical plants",
+    "Hydrogen and natural-gas boosting",
+    "Instrument/plant air at high pressure",
+    "CNG filling stations",
+    "Refrigeration (older/large plants)"
+   ],
+   "key_points": [
+    "Positive displacement — flow nearly independent of pressure",
+    "Best for high pressure ratios and small-to-medium flows",
+    "Valves are the most frequent maintenance item",
+    "Pulsations need damping bottles"
+   ],
+   "classification": {
+    "family": "Positive-displacement compressor (reciprocating)",
+    "type": "Horizontal, single-stage, double-acting, crosshead, lubricated"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A reciprocating compressor squeezes gas with a piston moving in a cylinder. In this double-acting, crosshead-type machine both ends of the cylinder work: while one end draws gas in through its suction valves, the other end compresses gas and pushes it out through its discharge valves. Automatic plate valves open and close only by the pressure difference across them."
+  },
+  "model_3d": {
+   "asset": "glb/reciprocating_compressor.glb",
+   "metadata": "meta/reciprocating_compressor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 40120,
+   "parts": 21
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor turns the crankshaft; the connecting rod drives the crosshead back and forth.",
+    "The piston rod transmits this motion through the packing to the piston.",
+    "As the piston moves away from one end, pressure there falls and the suction valve opens — gas flows in."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor turns the crankshaft; the connecting rod drives the crosshead back and forth.",
+     "part": "crankshaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The piston rod transmits this motion through the packing to the piston.",
+     "part": "piston",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "As the piston moves away from one end, pressure there falls and the suction valve opens — gas flows in.",
+     "part": "valve_he_s",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On the return stroke the trapped gas is compressed; when it exceeds discharge pressure the discharge valve opens.",
+     "part": "valve_he_d",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The other end of the cylinder works the opposite way at the same time (double-acting).",
+     "part": "valve_ce_s",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pulsation bottles smooth the intermittent flow before the piping.",
+     "part": "pulsation_bottles",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Capacity ≈ swept volume × volumetric efficiency; volumetric efficiency falls as the pressure ratio rises (clearance-volume re-expansion)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "reciprocating_compressor_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/reciprocating_compressor.json#components",
+   "key_components": "Cylinder, piston & rings, plate valves, crosshead, crankshaft, distance piece, pulsation bottles",
+   "parts": [
+    {
+     "id": "crankcase",
+     "name": "Crankcase (Power Frame) & Crosshead Guides",
+     "info_ref": "crankcase",
+     "function": "Rigid frame that carries the crankshaft bearings and crosshead guides and contains the lubricating oil.",
+     "material": "Cast iron, ductile iron, fabricated steel."
+    },
+    {
+     "id": "crankshaft",
+     "name": "Crankshaft",
+     "info_ref": "crankshaft",
+     "function": "Converts rotary motion into reciprocating motion of the plungers/pistons.",
+     "material": "Forged alloy steel, ductile iron."
+    },
+    {
+     "id": "conrod_1",
+     "name": "Connecting Rod 1",
+     "info_ref": "conrod",
+     "function": "Links crankpin to crosshead.",
+     "material": "Steel, ductile iron; babbitt/bronze bearings."
+    },
+    {
+     "id": "crosshead_1",
+     "name": "Crosshead & Extension Rod 1",
+     "info_ref": "crosshead",
+     "function": "Guides the reciprocating motion in a straight line so the plunger/piston rod carries no side load; extension (pony) rod passes into the distance piece.",
+     "material": "Cast iron/steel crosshead, steel rod."
+    },
+    {
+     "id": "main_bearings",
+     "name": "Crankshaft Main Bearings",
+     "info_ref": "radial_bearing",
+     "function": "Carries radial load near the impeller end.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "cylinder",
+     "name": "Compressor Cylinder (Water-Jacketed) with Heads",
+     "info_ref": "rc_cylinder",
+     "function": "Contains the piston and forms the compression chambers at both ends; holds the valves.",
+     "material": "Cast iron, ductile iron, cast/forged steel."
+    },
+    {
+     "id": "distance_piece",
+     "name": "Distance Piece & Rod Packing",
+     "info_ref": "rc_distance_piece",
+     "function": "Separates the cylinder from the crankcase and houses the rod packing.",
+     "material": "Steel; PTFE/bronze packing rings."
+    },
+    {
+     "id": "piston",
+     "name": "Piston, Rider/Piston Rings & Piston Rod",
+     "info_ref": "rc_piston",
+     "function": "Compresses the gas on both strokes.",
+     "material": "Aluminium/cast iron; PTFE rings."
+    },
+    {
+     "id": "valve_he_s",
+     "name": "Head-End Suction Valve (Plate Type)",
+     "info_ref": "rc_valve",
+     "function": "Lets gas in and out at the right time automatically.",
+     "material": "Steel, PEEK, stainless springs."
+    },
+    {
+     "id": "valve_he_d",
+     "name": "Head-End Discharge Valve (Plate Type)",
+     "info_ref": "rc_valve",
+     "function": "Lets gas in and out at the right time automatically.",
+     "material": "Steel, PEEK, stainless springs."
+    },
+    {
+     "id": "valve_ce_s",
+     "name": "Crank-End Suction Valve (Plate Type)",
+     "info_ref": "rc_valve",
+     "function": "Lets gas in and out at the right time automatically.",
+     "material": "Steel, PEEK, stainless springs."
+    },
+    {
+     "id": "valve_ce_d",
+     "name": "Crank-End Discharge Valve (Plate Type)",
+     "info_ref": "rc_valve",
+     "function": "Lets gas in and out at the right time automatically.",
+     "material": "Steel, PEEK, stainless springs."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "pulsation_bottles",
+     "name": "Suction & Discharge Pulsation Dampers (Bottles) and Piping",
+     "info_ref": "rc_bottles",
+     "function": "Damp pressure pulsations caused by the intermittent flow.",
+     "material": "Carbon steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bore 50–1000 mm; stroke 75–450 mm",
+     "unit": "mm"
+    },
+    "power_rating": {
+     "typical_range": "5 – 30 000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "250 – 1800 (process) ",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Up to ~ 30 000 m³/h; discharge to 1000 bar(g) and above in multistage",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "pressure_ratio_per_stage": {
+     "typical_range": "Typically ≤ 3–4 (temperature limited)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [
+    "Choose stages so the discharge temperature per stage stays within limits (API 618 guidance).",
+    "Lubricated vs non-lubricated cylinders depending on gas purity."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 618 — Reciprocating compressors"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Use a massive concrete block foundation or skid designed for the unbalanced forces and couples; grout the frame."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Follow the pulsation/acoustic study (API 618): bottle sizes, orifice plates, pipe support spacing.",
+    "Fit suction strainers for start-up."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check frame oil level and pressure, cylinder lubrication rate, cooling water.",
+     "part": "crankcase",
+     "interval": "daily"
+    },
+    {
+     "task": "Monitor valve cover temperatures (a hot valve is leaking).",
+     "part": "valve_he_d",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect and recondition valves.",
+     "part": "valve_he_s",
+     "interval": "4000–8000 h"
+    },
+    {
+     "task": "Check rod run-out and rider band wear (rod drop).",
+     "part": "piston",
+     "interval": "6–12 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace piston rings, rider bands and packing; check liner wear.",
+     "part": "cylinder"
+    },
+    {
+     "task": "Inspect crankshaft, bearings and crosshead clearances.",
+     "part": "crankshaft"
+    }
+   ],
+   "lubrication": [
+    "Frame (crankcase) oil by splash or pressure lubrication; cylinders and packing by a separate lubricator (lubricated machines)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Valve failure",
+     "category": "valves",
+     "symptoms": [
+      "High discharge temperature",
+      "Capacity loss",
+      "Knocking"
+     ],
+     "causes": [
+      "Broken plates/springs",
+      "Liquid or dirt carry-over",
+      "Wrong lift"
+     ],
+     "remedies": [
+      "Replace valve; fix separator/strainer"
+     ],
+     "part": "valve_he_d"
+    },
+    {
+     "problem": "Packing leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Gas at the distance-piece vent"
+     ],
+     "causes": [
+      "Worn rings",
+      "Rod scoring"
+     ],
+     "remedies": [
+      "Replace packing, re-finish rod"
+     ],
+     "part": "distance_piece"
+    },
+    {
+     "problem": "High vibration / pulsation",
+     "category": "vibration",
+     "symptoms": [
+      "Pipe shaking",
+      "Cracked small-bore connections"
+     ],
+     "causes": [
+      "Acoustic resonance",
+      "Poor supports"
+     ],
+     "remedies": [
+      "Add orifice plates/supports; pulsation study"
+     ],
+     "part": "pulsation_bottles"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Reciprocating Compressor — Introduction",
+    "type": "in_app_tour",
+    "model": "reciprocating_compressor.glb",
+    "duration_s": 57.4,
+    "script": [
+     {
+      "narration": "This module introduces the Reciprocating Compressor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A reciprocating compressor raises gas pressure with a piston moving back and forth in a cylinder.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Automatic suction and discharge valves let gas in and out.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a double-acting cylinder both ends compress gas alternately; the crankshaft, connecting rod and crosshead convert the motor's rotation into straight-line piston motion.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process gas compression in refineries and petrochemical plants; hydrogen and natural-gas boosting; instrument/plant air at high pressure; CNG filling stations.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Compressor Cylinder (Water-Jacketed) with Heads, Distance Piece & Rod Packing, Piston, Rider/Piston Rings & Piston Rod.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Reciprocating Compressor — Operation",
+    "type": "in_app_tour",
+    "model": "reciprocating_compressor.glb",
+    "duration_s": 45.1,
+    "script": [
+     {
+      "narration": "How the Reciprocating Compressor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor turns the crankshaft; the connecting rod drives the crosshead back and forth.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "crankshaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The piston rod transmits this motion through the packing to the piston.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "piston",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "As the piston moves away from one end, pressure there falls and the suction valve opens — gas flows in.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "valve_he_s",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On the return stroke the trapped gas is compressed; when it exceeds discharge pressure the discharge valve opens.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "valve_he_d",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The other end of the cylinder works the opposite way at the same time (double-acting).",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "valve_ce_s",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pulsation bottles smooth the intermittent flow before the piping.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pulsation_bottles",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Reciprocating Compressor — Maintenance",
+    "type": "in_app_tour",
+    "model": "reciprocating_compressor.glb",
+    "duration_s": 50.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Reciprocating Compressor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check frame oil level and pressure, cylinder lubrication rate, cooling water.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "crankcase",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Monitor valve cover temperatures (a hot valve is leaking).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valve_he_d",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect and recondition valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valve_he_s",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check rod run-out and rider band wear (rod drop).",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "piston",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace piston rings, rider bands and packing; check liner wear.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "cylinder",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect crankshaft, bearings and crosshead clearances.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "crankshaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for valve failure: high discharge temperature. Common cause: broken plates/springs.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "valve_he_d",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for packing leakage: gas at the distance-piece vent. Common cause: worn rings.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "distance_piece",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high vibration / pulsation: pipe shaking. Common cause: acoustic resonance.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "pulsation_bottles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does a double-acting compressor deliver about twice the flow of a single-acting one of the same size?",
+     "options": [
+      "Higher speed",
+      "Both ends of the cylinder compress gas",
+      "Bigger valves",
+      "It has two crankshafts"
+     ],
+     "answer": 1,
+     "explanation": "Each stroke compresses gas on one side.",
+     "level": "basic"
+    },
+    {
+     "question": "What opens the suction and discharge valves?",
+     "options": [
+      "A camshaft",
+      "The pressure difference across them",
+      "Solenoids",
+      "The crosshead"
+     ],
+     "answer": 1,
+     "explanation": "They are automatic, spring-loaded valves.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the purpose of the crosshead?",
+     "options": [
+      "To cool the gas",
+      "To take the side thrust so the piston rod moves in a straight line",
+      "To seal the cylinder",
+      "To start the motor"
+     ],
+     "answer": 1,
+     "explanation": "Rod packing then seals a purely axial motion.",
+     "level": "basic"
+    },
+    {
+     "question": "A discharge valve cover much hotter than the others usually means…",
+     "options": [
+      "Normal operation",
+      "That valve is leaking (gas recompressed)",
+      "Too much oil",
+      "Low speed"
+     ],
+     "answer": 1,
+     "explanation": "Leaking valves heat up.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Rigid frame that carries the crankshaft bearings and crosshead guides and contains the lubricating oil.\"",
+     "options": [
+      "Crankcase (Power Frame) & Crosshead Guides",
+      "Crankshaft",
+      "Head-End Suction Valve (Plate Type)",
+      "Electric Motor – Frame & End Shields"
+     ],
+     "answer": 0,
+     "explanation": "Crankcase (Power Frame) & Crosshead Guides: Rigid frame that carries the crankshaft bearings and crosshead guides and contains the lubricating oil.",
+     "level": "basic",
+     "part": "crankcase",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts rotary motion into reciprocating motion of the plungers/pistons.\"",
+     "options": [
+      "Suction & Discharge Pulsation Dampers (Bottles) and Piping",
+      "Crankshaft",
+      "Electric Motor – Rotor & Shaft",
+      "Crankshaft Main Bearings"
+     ],
+     "answer": 1,
+     "explanation": "Crankshaft: Converts rotary motion into reciprocating motion of the plungers/pistons.",
+     "level": "basic",
+     "part": "crankshaft",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Links crankpin to crosshead.\"",
+     "options": [
+      "Crank-End Suction Valve (Plate Type)",
+      "Electric Motor – Cooling Fan",
+      "Distance Piece & Rod Packing",
+      "Connecting Rod 1"
+     ],
+     "answer": 3,
+     "explanation": "Connecting Rod 1: Links crankpin to crosshead.",
+     "level": "basic",
+     "part": "conrod_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

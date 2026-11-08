@@ -1,0 +1,704 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydraulic_power_unit",
+ "no": 144,
+ "title": "Hydraulic Power Unit",
+ "model_title": "Hydraulic Power Unit (HPU)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A hydraulic power unit (HPU) supplies pressurised oil to hydraulic actuators. An electric motor drives a pump (gear, vane or piston) through a bell housing and coupling. The pump draws oil from the reservoir and delivers it through a manifold with a pressure relief valve and check valve. Return oil passes through a filter and cooler back to the tank.",
+   "applications": [
+    "Presses, injection moulding and machine tools",
+    "Mobile and marine hydraulics (deck machinery)",
+    "Steel mills and test rigs",
+    "Valve actuators and lifts"
+   ],
+   "key_points": [
+    "Pump makes flow; the load makes pressure",
+    "Relief valve limits maximum pressure",
+    "Cleanliness (ISO 4406) is the key to reliability",
+    "Reservoir typically sized ~ 3–5 × pump flow per minute (industrial rule of thumb)"
+   ],
+   "classification": {
+    "family": "Hydraulic equipment",
+    "type": "Hydraulic power pack"
+   },
+   "hi_family": "material_handling",
+   "summary": "A hydraulic power unit (HPU) supplies pressurised oil to hydraulic actuators. A motor drives a pump that draws oil from the reservoir; a relief valve limits pressure, filters keep the oil clean, a cooler removes heat, and the oil returns to the tank after doing work."
+  },
+  "model_3d": {
+   "asset": "glb/hydraulic_power_unit.glb",
+   "metadata": "meta/hydraulic_power_unit.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 2976,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor drives the pump through the coupling.",
+    "The pump draws oil from the reservoir through the suction strainer.",
+    "Oil goes to the valve block; the relief valve limits the pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor drives the pump through the coupling.",
+     "part": "coupling",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pump draws oil from the reservoir through the suction strainer.",
+     "part": "motor_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil goes to the valve block; the relief valve limits the pressure.",
+     "part": "valve_block",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Return oil passes the return filter and cooler back to the tank.",
+     "part": "filter_breather",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The cooler fan removes heat from the oil.",
+     "part": "cooler_fan",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Hydraulic power P = p · Q / 600 (kW, with p in bar and Q in L/min); input power = P / η_overall."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydraulic_power_unit_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "hydraulic_power_unit_pressure.glb",
+     "title": "Pressure levels in the HPU circuit",
+     "description": "Blue = suction (slightly below atmospheric at the pump inlet — keep it short and generous). Red = pressure line, limited by the relief valve setting (system pressure is set by the load; the relief valve caps it). Green-blue = return line, a few bar back-pressure through the return filter.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Pump inlet: ≈ atmospheric or slightly below",
+       "anchor": [
+        -0.2,
+        0.3,
+        0.12
+       ]
+      },
+      {
+       "text": "Pressure line: up to the relief-valve setting",
+       "anchor": [
+        0.5,
+        0.9,
+        0.12
+       ]
+      },
+      {
+       "text": "Return line: low pressure (filter Δp)",
+       "anchor": [
+        0.6,
+        0.75,
+        -0.26
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/hydraulic_power_unit.json#components",
+   "key_components": "Reservoir, pump, motor, relief valve, filter, cooler",
+   "parts": [
+    {
+     "id": "reservoir",
+     "name": "Reservoir (tank) with Baffle",
+     "info_ref": "hp_reservoir",
+     "function": "Stores oil, lets air and dirt settle, dissipates heat.",
+     "material": "Steel."
+    },
+    {
+     "id": "oil",
+     "name": "Hydraulic Oil",
+     "info_ref": "hp_oil",
+     "function": "Hydraulic oil.",
+     "material": "ISO VG 32/46/68."
+    },
+    {
+     "id": "motor_pump",
+     "name": "Electric Motor, Lantern Bell Housing & Pump (gear/vane/piston) with Suction Strainer",
+     "info_ref": "hp_pump",
+     "function": "Creates flow.",
+     "material": "—"
+    },
+    {
+     "id": "coupling",
+     "name": "Jaw Coupling inside the Bell Housing (motor → pump)",
+     "info_ref": "hp_pump",
+     "function": "Creates flow.",
+     "material": "—"
+    },
+    {
+     "id": "valve_block",
+     "name": "Pressure Relief Valve, Check Valve & Gauge on Manifold Block",
+     "info_ref": "hp_relief",
+     "function": "Limits system pressure.",
+     "material": "—"
+    },
+    {
+     "id": "filter_breather",
+     "name": "Return Filter, Filler-Breather & Level/Temperature Gauge",
+     "info_ref": "hp_filter",
+     "function": "Keeps oil clean.",
+     "material": "—"
+    },
+    {
+     "id": "cooler",
+     "name": "Air-Blast Oil Cooler (core, fan shroud, fan motor)",
+     "info_ref": "hp_cooler",
+     "function": "Removes heat.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "cooler_fan",
+     "name": "Cooler Fan",
+     "info_ref": "hp_cooler",
+     "function": "Removes heat.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "accumulator",
+     "name": "Accumulator",
+     "info_ref": "hp_accumulator",
+     "function": "Stores energy, damps pulsation.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Reservoir ~ 20 – 2000 L",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 1 – 500",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Motor ~ 1500 rpm (50 Hz 4-pole)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Flow ~ 5 – 1000 L/min at ~ 50 – 350 bar",
+     "unit": "L/min"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size pump flow from actuator speeds; pressure from the highest force; add margin; select filtration for the most sensitive component."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 4413 — Hydraulic fluid power: general rules and safety requirements",
+    "ISO 4406 — Hydraulic fluid cleanliness code"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a level, rigid base with access for filters, gauges and fill; drip tray/bund under the reservoir."
+   ],
+   "alignment": [
+    "Align motor and pump with the bell housing and coupling; mount cylinders so the rod is not side-loaded (use spherical bearings/clevises)."
+   ],
+   "piping": [
+    "Clean (pickled/flushed) pipework sized for velocity (typical guide: suction ≲ 1.2 m/s, pressure 3–6 m/s, return ≲ 3 m/s); hoses not twisted or rubbing; correct fittings for pressure.",
+    "Fit pressure gauges/test points, and relief protection on every pressure source."
+   ],
+   "commissioning": [
+    "Fill through a filter with the specified oil; flush the system to the target cleanliness (ISO 4406 code).",
+    "Bleed air; start with relief valves backed off, then set pressures; check for leaks, temperatures and noise."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check oil level, temperature and filter indicators.",
+     "part": "reservoir",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Oil sample (ISO 4406 particle count, water, acidity).",
+     "part": "oil",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace filters, breather and seals; check pump wear (case drain flow for piston pumps).",
+     "part": "motor_pump"
+    }
+   ],
+   "lubrication": [
+    "Motor bearings greased; hydraulic oil changed by condition."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Oil > ~ 60 °C"
+     ],
+     "causes": [
+      "Cooler fouled, relief valve blowing, internal leakage"
+     ],
+     "remedies": [
+      "Clean cooler; check relief setting and pump wear"
+     ],
+     "part": "cooler"
+    },
+    {
+     "problem": "Pump cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise, erosion, low output"
+     ],
+     "causes": [
+      "Blocked strainer, low oil level, cold oil"
+     ],
+     "remedies": [
+      "Clean strainer; correct level; warm up oil"
+     ],
+     "part": "motor_pump"
+    },
+    {
+     "problem": "Contamination",
+     "category": "performance",
+     "symptoms": [
+      "Valve sticking, wear"
+     ],
+     "causes": [
+      "Poor filtration, dirty breather"
+     ],
+     "remedies": [
+      "Improve filtration; flush; replace breather"
+     ],
+     "part": "filter_breather"
+    }
+   ],
+   "safety": [
+    "Release stored pressure (accumulators!) before opening any line; never search for leaks by hand — injection injury risk."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Power Unit — Introduction",
+    "type": "in_app_tour",
+    "model": "hydraulic_power_unit.glb",
+    "duration_s": 50.2,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Power Unit.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A hydraulic power unit (HPU) supplies pressurised oil to hydraulic actuators.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "An electric motor drives a pump (gear, vane or piston) through a bell housing and coupling.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The pump draws oil from the reservoir and delivers it through a manifold with a pressure relief valve and check valve.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include presses, injection moulding and machine tools; mobile and marine hydraulics (deck machinery); steel mills and test rigs; valve actuators and lifts.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Power Unit — Operation",
+    "type": "in_app_tour",
+    "model": "hydraulic_power_unit.glb",
+    "duration_s": 36.6,
+    "script": [
+     {
+      "narration": "How the Hydraulic Power Unit works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor drives the pump through the coupling.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coupling",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pump draws oil from the reservoir through the suction strainer.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "motor_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil goes to the valve block; the relief valve limits the pressure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "valve_block",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Return oil passes the return filter and cooler back to the tank.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "filter_breather",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The cooler fan removes heat from the oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooler_fan",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Blue = suction (slightly below atmospheric at the pump inlet — keep it short and generous).",
+      "duration_s": 5.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Power Unit — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydraulic_power_unit.glb",
+    "duration_s": 42.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Power Unit.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check oil level, temperature and filter indicators.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "reservoir",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Oil sample (ISO 4406 particle count, water, acidity).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace filters, breather and seals; check pump wear (case drain flow for piston pumps).",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "motor_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: oil > ~ 60 °c. Common cause: cooler fouled, relief valve blowing, internal leakage.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "cooler",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pump cavitation: noise, erosion, low output. Common cause: blocked strainer, low oil level, cold oil.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "motor_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for contamination: valve sticking, wear. Common cause: poor filtration, dirty breather.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "filter_breather",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What determines system pressure in a hydraulic circuit?",
+     "options": [
+      "The pump",
+      "The load resistance (limited by the relief valve)",
+      "The tank size",
+      "The oil colour"
+     ],
+     "answer": 1,
+     "explanation": "Pump makes flow; load makes pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Hydraulic power at 200 bar and 60 L/min is…",
+     "options": [
+      "2 kW",
+      "20 kW",
+      "200 kW",
+      "0.2 kW"
+     ],
+     "answer": 1,
+     "explanation": "200 × 60 / 600 = 20 kW.",
+     "level": "basic"
+    },
+    {
+     "question": "Most hydraulic failures are caused by…",
+     "options": [
+      "Contaminated oil",
+      "Paint colour",
+      "Too much cooling",
+      "Low electricity price"
+     ],
+     "answer": 0,
+     "explanation": "Cleanliness.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores oil, lets air and dirt settle, dissipates heat.\"",
+     "options": [
+      "Return Filter, Filler-Breather & Level/Temperature Gauge",
+      "Pressure Relief Valve, Check Valve & Gauge on Manifold Block",
+      "Electric Motor, Lantern Bell Housing & Pump (gear/vane/piston) with Suction Strainer",
+      "Reservoir (tank) with Baffle"
+     ],
+     "answer": 3,
+     "explanation": "Reservoir (tank) with Baffle: Stores oil, lets air and dirt settle, dissipates heat.",
+     "level": "basic",
+     "part": "reservoir",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Hydraulic oil.\"",
+     "options": [
+      "Accumulator",
+      "Hydraulic Oil",
+      "Air-Blast Oil Cooler (core, fan shroud, fan motor)",
+      "Return Filter, Filler-Breather & Level/Temperature Gauge"
+     ],
+     "answer": 1,
+     "explanation": "Hydraulic Oil: Hydraulic oil.",
+     "level": "basic",
+     "part": "oil",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Creates flow.\"",
+     "options": [
+      "Electric Motor, Lantern Bell Housing & Pump (gear/vane/piston) with Suction Strainer",
+      "Pressure Relief Valve, Check Valve & Gauge on Manifold Block",
+      "Reservoir (tank) with Baffle",
+      "Hydraulic Oil"
+     ],
+     "answer": 0,
+     "explanation": "Electric Motor, Lantern Bell Housing & Pump (gear/vane/piston) with Suction Strainer: Creates flow.",
+     "level": "basic",
+     "part": "motor_pump",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

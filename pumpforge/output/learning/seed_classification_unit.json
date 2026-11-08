@@ -1,0 +1,626 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "seed_classification_unit",
+ "no": 202,
+ "title": "Seed Classification Unit",
+ "model_title": "Hydrate Seed Classification Unit (Gravity Classifier Tank)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A seed classification unit splits precipitated hydrate by size. In a gravity classifier, coarse crystals settle against the rising liquor and leave in the underflow as product; fine crystals are carried up with the overflow and returned as seed.",
+   "applications": [
+    "Product/seed split in precipitation circuits",
+    "Fine-seed recovery for agglomeration",
+    "Control of product particle size"
+   ],
+   "key_points": [
+    "Upflow velocity sets the cut size",
+    "Coarse = product; fine = seed",
+    "Controls product size distribution",
+    "Often combined with cyclones"
+   ],
+   "classification": {
+    "family": "Precipitation",
+    "type": "Gravity hydrate classifier"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A seed classification unit splits the precipitated hydrate by size. Coarse crystals settle to the underflow as product; fine crystals rise with the overflow and return to precipitation as seed."
+  },
+  "model_3d": {
+   "asset": "glb/seed_classification_unit.glb",
+   "metadata": "meta/seed_classification_unit.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7006,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hydrate slurry enters the feedwell.",
+    "Coarse crystals settle to the cone.",
+    "Fines rise to the overflow launder."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hydrate slurry enters the feedwell.",
+     "part": "feedwell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Coarse crystals settle to the cone.",
+     "part": "classifier_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fines rise to the overflow launder.",
+     "part": "liquor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The underflow pump takes product.",
+     "part": "underflow_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Partition (Tromp) curve: fraction to underflow vs particle size."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "seed_classification_unit_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "seed_classification_unit_pressure.glb",
+     "title": "Upflow velocity sets the cut size",
+     "description": "Coarse hydrate crystals settle faster than the rising liquor and report to the underflow as product (to filtration and calcination). Fine crystals are carried up with the overflow and returned to precipitation as seed. The cut size is set by the overflow rate per unit area (upflow velocity) and slurry density — the key to controlling product particle size.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/seed_classification_unit.json#components",
+   "key_components": "Classifier tank & cone, feedwell, overflow launder, underflow pump",
+   "parts": [
+    {
+     "id": "classifier_tank",
+     "name": "Classifier Tank (cylinder on steep cone) & Overflow Launder",
+     "info_ref": "sc_tank",
+     "function": "Classification zone.",
+     "material": "Steel."
+    },
+    {
+     "id": "feedwell",
+     "name": "Central Feedwell",
+     "info_ref": "sc_feedwell",
+     "function": "Distributes feed.",
+     "material": "Steel."
+    },
+    {
+     "id": "liquor",
+     "name": "Hydrate Slurry / Liquor",
+     "info_ref": "sc_tank",
+     "function": "Classification zone.",
+     "material": "Steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Feed Pipe, Coarse Underflow Outlet, Fine-Seed Overflow Outlet",
+     "info_ref": "sc_nozzles",
+     "function": "Feed/outlets.",
+     "material": "Steel."
+    },
+    {
+     "id": "underflow_pump",
+     "name": "Underflow Pump (coarse hydrate → product)",
+     "info_ref": "sc_pump",
+     "function": "Pumps coarse product.",
+     "material": "—"
+    },
+    {
+     "id": "underflow_pump_shaft",
+     "name": "Underflow Pump (coarse hydrate → product) — Shaft & Coupling (turning)",
+     "info_ref": "sc_pump",
+     "function": "Pumps coarse product.",
+     "material": "—"
+    },
+    {
+     "id": "structure",
+     "name": "Support Structure",
+     "info_ref": "sc_tank",
+     "function": "Classification zone.",
+     "material": "Steel."
+    },
+    {
+     "id": "coarse",
+     "name": "Coarse Hydrate settling to the Underflow (product)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "fines",
+     "name": "Fine Seed rising with the Liquor to the Overflow (returned as seed)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tank ~ 5 – 15 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 200 – 2000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 60 – 75 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Pumps ~ 30 – 150",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Area from upflow velocity for target cut."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Large ring foundation or concrete tank; centre pier carries the rake drive and torque."
+   ],
+   "alignment": [
+    "Level launders so overflow is even all round; centre the drive and shaft."
+   ],
+   "piping": [
+    "Feed to feedwell with flocculant dosing points; underflow pumps with standby and flushing; overflow to downstream."
+   ],
+   "commissioning": [
+    "Fill with water, run rakes and test torque alarms and lift; start feed and flocculant; build mud bed gradually."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check underflow density and size.",
+     "part": "underflow_pump",
+     "interval": "per shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clear scale in cone.",
+     "part": "classifier_tank",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Pump overhaul.",
+     "part": "underflow_pump"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wrong cut",
+     "category": "performance",
+     "symptoms": [
+      "Product too fine/coarse"
+     ],
+     "causes": [
+      "Flow or density change"
+     ],
+     "remedies": [
+      "Adjust overflow rate"
+     ],
+     "part": "classifier_tank"
+    },
+    {
+     "problem": "Cone blockage",
+     "category": "blockage",
+     "symptoms": [
+      "No underflow"
+     ],
+     "causes": [
+      "Scale, coarse build-up"
+     ],
+     "remedies": [
+      "Flush; descale"
+     ],
+     "part": "classifier_tank"
+    }
+   ],
+   "safety": [
+    "Hot caustic."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Seed Classification Unit — Introduction",
+    "type": "in_app_tour",
+    "model": "seed_classification_unit.glb",
+    "duration_s": 48.4,
+    "script": [
+     {
+      "narration": "This module introduces the Seed Classification Unit.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A seed classification unit splits precipitated hydrate by size.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a gravity classifier, coarse crystals settle against the rising liquor and leave in the underflow as product; fine crystals are carried up with the overflow and returned as seed.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include product/seed split in precipitation circuits; fine-seed recovery for agglomeration; control of product particle size.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Underflow Pump (coarse hydrate → product), Underflow Pump (coarse hydrate → product) — Shaft & Coupling (turning).",
+      "duration_s": 7.9,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Seed Classification Unit — Operation",
+    "type": "in_app_tour",
+    "model": "seed_classification_unit.glb",
+    "duration_s": 32.5,
+    "script": [
+     {
+      "narration": "How the Seed Classification Unit works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hydrate slurry enters the feedwell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feedwell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Coarse crystals settle to the cone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "classifier_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fines rise to the overflow launder.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The underflow pump takes product.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "underflow_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Coarse hydrate crystals settle faster than the rising liquor and report to the underflow as product (to filtration and calcination).",
+      "duration_s": 8.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Seed Classification Unit — Maintenance",
+    "type": "in_app_tour",
+    "model": "seed_classification_unit.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Seed Classification Unit.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check underflow density and size.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "underflow_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clear scale in cone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "classifier_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pump overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "underflow_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wrong cut: product too fine/coarse. Common cause: flow or density change.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "classifier_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cone blockage: no underflow. Common cause: scale, coarse build-up.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "classifier_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What goes to the underflow?",
+     "options": [
+      "Coarse hydrate (product)",
+      "Fines",
+      "Air",
+      "Steam"
+     ],
+     "answer": 0,
+     "explanation": "Product.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets the cut size?",
+     "options": [
+      "Upflow velocity",
+      "Colour",
+      "Motor",
+      "Pipe size"
+     ],
+     "answer": 0,
+     "explanation": "Rise rate.",
+     "level": "basic"
+    },
+    {
+     "question": "Fines are used as…",
+     "options": [
+      "Seed",
+      "Waste",
+      "Fuel",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Seed.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Classification zone.\"",
+     "options": [
+      "Underflow Pump (coarse hydrate → product) — Shaft & Coupling (turning)",
+      "Coarse Hydrate settling to the Underflow (product)",
+      "Fine Seed rising with the Liquor to the Overflow (returned as seed)",
+      "Classifier Tank (cylinder on steep cone) & Overflow Launder"
+     ],
+     "answer": 3,
+     "explanation": "Classifier Tank (cylinder on steep cone) & Overflow Launder: Classification zone.",
+     "level": "basic",
+     "part": "classifier_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distributes feed.\"",
+     "options": [
+      "Support Structure",
+      "Central Feedwell",
+      "Underflow Pump (coarse hydrate → product) — Shaft & Coupling (turning)",
+      "Hydrate Slurry / Liquor"
+     ],
+     "answer": 1,
+     "explanation": "Central Feedwell: Distributes feed.",
+     "level": "basic",
+     "part": "feedwell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Feed/outlets.\"",
+     "options": [
+      "Feed Pipe, Coarse Underflow Outlet, Fine-Seed Overflow Outlet",
+      "Underflow Pump (coarse hydrate → product) — Shaft & Coupling (turning)",
+      "Hydrate Slurry / Liquor",
+      "Underflow Pump (coarse hydrate → product)"
+     ],
+     "answer": 0,
+     "explanation": "Feed Pipe, Coarse Underflow Outlet, Fine-Seed Overflow Outlet: Feed/outlets.",
+     "level": "basic",
+     "part": "nozzles",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,559 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "quench_tower",
+  "title": "Quench Tower (Down-Flow Spray Quench of Hot Gas)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 172,
+    "phase": 8,
+    "eq_id": "EQ-250",
+    "subcategory": "Gas cooling",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "quench_tower_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "quench_tower_temperature.glb",
+      "title": "Gas temperature falls rapidly under the sprays",
+      "description": "Hot gas (e.g. several hundred °C from an incinerator or reactor) is cooled within a short distance to near its adiabatic saturation temperature as the spray water evaporates. Rapid quenching protects downstream equipment and limits the time spent in the temperature window where dioxins/furans can re-form (roughly 200–400 °C) in waste incineration.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "hot_gas",
+      "kind": "flue_gas",
+      "radius": 0.04,
+      "points": [
+        [
+          0.0,
+          3.9,
+          -0.1
+        ],
+        [
+          0.0,
+          1.6,
+          -0.1
+        ],
+        [
+          -0.9,
+          1.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "quench_liquid",
+      "kind": "water",
+      "radius": 0.018,
+      "points": [
+        [
+          0.0,
+          0.3,
+          -0.0
+        ],
+        [
+          0.8,
+          0.25,
+          -0.0
+        ],
+        [
+          0.8,
+          2.7,
+          -0.0
+        ],
+        [
+          0.0,
+          2.68,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 7686,
+    "parts": 9
+  },
+  "summary": "A quench tower rapidly cools a hot gas stream by spraying water (or a recirculated liquid) into it. Evaporation of the droplets absorbs heat so the gas cools to near its saturation temperature within a short distance, protecting downstream scrubbers and filters.",
+  "classification": {
+    "family": "Gas cooling",
+    "type": "Down-flow spray quench"
+  },
+  "model_configuration": {
+    "animation": "Spray droplets; sump level"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Where pressure-rated.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "EPA Air Pollution Control Cost Manual"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Tower Shell (corrosion-resistant)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.5,
+        0.4,
+        -0.5
+      ],
+      "bbox_max": [
+        0.5,
+        3.25,
+        0.5
+      ],
+      "label_anchor": [
+        0.0,
+        1.825,
+        0.5
+      ],
+      "center": [
+        0.0,
+        1.825,
+        -0.0
+      ],
+      "info_ref": "qt_shell"
+    },
+    {
+      "id": "spray_nozzles",
+      "name": "Spray Header & Atomising Nozzles",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "spray_nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.5
+      ],
+      "bbox_min": [
+        -0.03,
+        2.57,
+        -0.45
+      ],
+      "bbox_max": [
+        0.03,
+        2.73,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        2.65,
+        0.45
+      ],
+      "center": [
+        0.0,
+        2.65,
+        -0.0
+      ],
+      "info_ref": "qt_nozzles"
+    },
+    {
+      "id": "sump",
+      "name": "Quench Liquid Sump",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.488,
+        0.412,
+        -0.488
+      ],
+      "bbox_max": [
+        0.488,
+        1.15,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.781,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.781,
+        -0.244
+      ],
+      "info_ref": "qt_sump"
+    },
+    {
+      "id": "nozzles",
+      "name": "Hot Gas Inlet (top), Cooled Gas Outlet (side), Liquid Outlet",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.85,
+        0.25,
+        -0.38
+      ],
+      "bbox_max": [
+        0.38,
+        3.62,
+        0.38
+      ],
+      "label_anchor": [
+        -0.235,
+        1.935,
+        0.38
+      ],
+      "center": [
+        -0.235,
+        1.935,
+        -0.0
+      ],
+      "info_ref": "qt_shell"
+    },
+    {
+      "id": "recirculation",
+      "name": "Recirculation Line",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "rc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.0,
+        0.25,
+        -0.0
+      ],
+      "bbox_max": [
+        0.8,
+        2.7,
+        -0.0
+      ],
+      "label_anchor": [
+        0.4,
+        1.475,
+        -0.0
+      ],
+      "center": [
+        0.4,
+        1.475,
+        -0.0
+      ],
+      "info_ref": "qt_pump"
+    },
+    {
+      "id": "recirc_pump",
+      "name": "Recirculation Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recirc_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.3,
+        0.075,
+        -0.15
+      ],
+      "bbox_max": [
+        1.2,
+        0.37,
+        0.15
+      ],
+      "label_anchor": [
+        0.75,
+        0.2225,
+        0.15
+      ],
+      "center": [
+        0.75,
+        0.2225,
+        -0.0
+      ],
+      "info_ref": "qt_pump"
+    },
+    {
+      "id": "recirc_pump_shaft",
+      "name": "Recirculation Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recirc_pumpc"
+      ],
+      "pivot": [
+        0.69,
+        0.25,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.63,
+        0.23,
+        -0.05
+      ],
+      "bbox_max": [
+        0.75,
+        0.27,
+        0.05
+      ],
+      "label_anchor": [
+        0.69,
+        0.25,
+        0.05
+      ],
+      "center": [
+        0.69,
+        0.25,
+        -0.0
+      ],
+      "info_ref": "qt_pump"
+    },
+    {
+      "id": "skirt",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.42355,
+        0.0,
+        -0.42355
+      ],
+      "bbox_max": [
+        0.42355,
+        0.9,
+        0.42355
+      ],
+      "label_anchor": [
+        0.0,
+        0.45,
+        0.42355
+      ],
+      "center": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "qt_shell"
+    },
+    {
+      "id": "spray",
+      "name": "Spray Droplets Evaporating in the Hot Gas",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "spray0",
+        "spray1",
+        "spray2",
+        "spray3",
+        "spray4",
+        "spray5",
+        "spray6",
+        "spray7",
+        "spray8",
+        "spray9",
+        "spray10",
+        "spray11",
+        "spray12",
+        "spray13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.015
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.015
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.015
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "qt_shell": {
+      "function": "Contains the quench zone.",
+      "construction": "Vertical shell.",
+      "material": "Alloy / FRP-lined steel.",
+      "operating_conditions": "Wet/dry interface is corrosive.",
+      "failure_modes": [
+        "Corrosion at wet-dry line"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "qt_nozzles": {
+      "function": "Atomise the quench liquid.",
+      "construction": "Spray header & nozzles.",
+      "material": "Alloy.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Plugging, erosion"
+      ],
+      "inspection": [
+        "Spray pattern check"
+      ]
+    },
+    "qt_sump": {
+      "function": "Collects liquid.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "qt_pump": {
+      "function": "Recirculates liquid.",
+      "construction": "Pump and line.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

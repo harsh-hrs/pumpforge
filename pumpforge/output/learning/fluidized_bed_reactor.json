@@ -1,0 +1,610 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "fluidized_bed_reactor",
+ "no": 101,
+ "title": "Fluidized Bed Reactor",
+ "model_title": "Fluidized Bed Reactor (Bubbling Bed, Internal Cyclones)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "In a fluidized bed reactor gas blown up through a distributor lifts fine solid particles so the bed behaves like a boiling liquid. Excellent mixing gives uniform temperature; internal cyclones recover entrained particles and return them to the bed.",
+   "applications": [
+    "Fluid catalytic cracking (FCC)",
+    "Polyethylene/polypropylene gas-phase reactors",
+    "Roasting and calcination",
+    "Biomass gasification"
+   ],
+   "key_points": [
+    "Gas velocity above minimum fluidization",
+    "Uniform temperature",
+    "Erosion and attrition",
+    "Cyclones capture fines"
+   ],
+   "classification": {
+    "family": "Reactor (gas–solid)",
+    "type": "Bubbling fluidized bed with internal cyclones"
+   },
+   "hi_family": "static_equipment",
+   "summary": "In a fluidized bed reactor, gas blown up through a distributor plate lifts a bed of fine particles so they behave like a boiling liquid. Intense mixing gives very uniform temperature and excellent heat and mass transfer. Internal cyclones catch entrained particles and return them through diplegs."
+  },
+  "model_3d": {
+   "asset": "glb/fluidized_bed_reactor.glb",
+   "metadata": "meta/fluidized_bed_reactor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 13260,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Fluidizing gas enters the plenum below the distributor.",
+    "Gas through the caps lifts the particles — the bed expands and bubbles.",
+    "Bubbles rise and burst at the surface."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Fluidizing gas enters the plenum below the distributor.",
+     "part": "distributor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas through the caps lifts the particles — the bed expands and bubbles.",
+     "part": "bed",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Bubbles rise and burst at the surface.",
+     "part": "bubbles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cyclones separate entrained particles and return them through diplegs.",
+     "part": "cyclones",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Product gas leaves at the top.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Bed ΔP vs gas velocity: rises, then flat once fluidized (ΔP ≈ bed weight / area)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "fluidized_bed_reactor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/fluidized_bed_reactor.json#components",
+   "key_components": "Distributor plate, fluidized bed, freeboard, internal cyclones",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Reactor Vessel (conical bottom, freeboard section)",
+     "info_ref": "fb_vessel",
+     "function": "Contains the bed and the freeboard where particles disengage.",
+     "material": "Steel, refractory-lined at high T."
+    },
+    {
+     "id": "legs",
+     "name": "Supports",
+     "info_ref": "fb_supports",
+     "function": "Supports.",
+     "material": "Steel."
+    },
+    {
+     "id": "distributor",
+     "name": "Gas Distributor Plate with Bubble Caps (nozzles)",
+     "info_ref": "fb_distributor",
+     "function": "Spreads the fluidizing gas evenly.",
+     "material": "Stainless."
+    },
+    {
+     "id": "bed",
+     "name": "Fluidized Particle Bed (expands with gas flow)",
+     "info_ref": "fb_bed",
+     "function": "Fluidized solids (catalyst or reactant).",
+     "material": "—"
+    },
+    {
+     "id": "bubbles",
+     "name": "Gas Bubbles Rising through the Bed",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "cyclones",
+     "name": "Internal Cyclones with Diplegs (return fines to the bed)",
+     "info_ref": "fb_cyclones",
+     "function": "Separate entrained solids from the gas.",
+     "material": "Stainless / hard-faced."
+    },
+    {
+     "id": "nozzles",
+     "name": "Fluidizing Gas Inlet, Product Gas Outlet, Solids Feed & Solids Draw-off",
+     "info_ref": "fb_nozzles",
+     "function": "Gas in/out, solids feed and draw-off.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 0.3 – 15 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "~ 1 – 40",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 1000",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Bed inventory",
+     "unit": "t"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor bed ΔP and temperatures.",
+     "part": "bed",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect distributor nozzles and cyclones.",
+     "part": "cyclones",
+     "interval": "turnaround"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Refractory and erosion repairs.",
+     "part": "vessel"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Defluidization / agglomeration",
+     "category": "performance",
+     "symptoms": [
+      "ΔP change, hot spots"
+     ],
+     "causes": [
+      "Sticky particles, low gas flow"
+     ],
+     "remedies": [
+      "Restore flow; control temperature"
+     ],
+     "part": "bed"
+    },
+    {
+     "problem": "Cyclone erosion",
+     "category": "wear",
+     "symptoms": [
+      "Catalyst losses"
+     ],
+     "causes": [
+      "High velocity"
+     ],
+     "remedies": [
+      "Repair liners"
+     ],
+     "part": "cyclones"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Fluidized Bed Reactor — Introduction",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_reactor.glb",
+    "duration_s": 43.5,
+    "script": [
+     {
+      "narration": "This module introduces the Fluidized Bed Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "In a fluidized bed reactor gas blown up through a distributor lifts fine solid particles so the bed behaves like a boiling liquid.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Excellent mixing gives uniform temperature; internal cyclones recover entrained particles and return them to the bed.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include fluid catalytic cracking (FCC); polyethylene/polypropylene gas-phase reactors; roasting and calcination; biomass gasification.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Fluidized Bed Reactor — Operation",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_reactor.glb",
+    "duration_s": 29.2,
+    "script": [
+     {
+      "narration": "How the Fluidized Bed Reactor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Fluidizing gas enters the plenum below the distributor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas through the caps lifts the particles — the bed expands and bubbles.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bed",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Bubbles rise and burst at the surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bubbles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cyclones separate entrained particles and return them through diplegs.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cyclones",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Product gas leaves at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Fluidized Bed Reactor — Maintenance",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_reactor.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Fluidized Bed Reactor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor bed ΔP and temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bed",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect distributor nozzles and cyclones.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cyclones",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Refractory and erosion repairs.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for defluidization / agglomeration: δp change, hot spots. Common cause: sticky particles, low gas flow.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "bed",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cyclone erosion: catalyst losses. Common cause: high velocity.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "cyclones",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What keeps the particles suspended?",
+     "options": [
+      "Mechanical stirrer",
+      "Upward gas flow",
+      "Magnets",
+      "Vibration"
+     ],
+     "answer": 1,
+     "explanation": "Drag balances weight.",
+     "level": "basic"
+    },
+    {
+     "question": "Bed pressure drop in the fluidized state is about…",
+     "options": [
+      "Zero",
+      "Weight of the bed per unit area",
+      "Atmospheric",
+      "Infinite"
+     ],
+     "answer": 1,
+     "explanation": "Classic result.",
+     "level": "basic"
+    },
+    {
+     "question": "What do the cyclones do?",
+     "options": [
+      "Heat the gas",
+      "Catch entrained particles and return them",
+      "Add catalyst",
+      "Measure flow"
+     ],
+     "answer": 1,
+     "explanation": "Solids recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the bed and the freeboard where particles disengage.\"",
+     "options": [
+      "Gas Bubbles Rising through the Bed",
+      "Reactor Vessel (conical bottom, freeboard section)",
+      "Supports",
+      "Gas Distributor Plate with Bubble Caps (nozzles)"
+     ],
+     "answer": 1,
+     "explanation": "Reactor Vessel (conical bottom, freeboard section): Contains the bed and the freeboard where particles disengage.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports.\"",
+     "options": [
+      "Gas Distributor Plate with Bubble Caps (nozzles)",
+      "Supports",
+      "Fluidized Particle Bed (expands with gas flow)",
+      "Internal Cyclones with Diplegs (return fines to the bed)"
+     ],
+     "answer": 1,
+     "explanation": "Supports: Supports.",
+     "level": "basic",
+     "part": "legs",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Spreads the fluidizing gas evenly.\"",
+     "options": [
+      "Internal Cyclones with Diplegs (return fines to the bed)",
+      "Gas Distributor Plate with Bubble Caps (nozzles)",
+      "Fluidizing Gas Inlet, Product Gas Outlet, Solids Feed & Solids Draw-off",
+      "Gas Bubbles Rising through the Bed"
+     ],
+     "answer": 1,
+     "explanation": "Gas Distributor Plate with Bubble Caps (nozzles): Spreads the fluidizing gas evenly.",
+     "level": "basic",
+     "part": "distributor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

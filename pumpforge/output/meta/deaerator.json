@@ -1,0 +1,579 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "deaerator",
+  "title": "Deaerator (Spray-Tray Type) on Feedwater Storage Tank",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 102,
+    "phase": 6,
+    "eq_id": "EQ-180",
+    "subcategory": "Steam Systems",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "deaerator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.01,
+      "points": [
+        [
+          -1.12,
+          1.7,
+          -0.0
+        ],
+        [
+          -0.6,
+          1.7,
+          -0.05
+        ],
+        [
+          -0.5,
+          1.95,
+          -0.05
+        ],
+        [
+          -0.5,
+          2.35,
+          -0.05
+        ],
+        [
+          -0.5,
+          2.8,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "feedwater",
+      "kind": "water",
+      "radius": 0.009,
+      "points": [
+        [
+          0.12,
+          2.45,
+          -0.0
+        ],
+        [
+          -0.5,
+          2.43,
+          -0.02
+        ],
+        [
+          -0.45,
+          1.65,
+          -0.02
+        ],
+        [
+          -0.5,
+          0.95,
+          -0.02
+        ],
+        [
+          0.6,
+          0.65,
+          -0.02
+        ],
+        [
+          0.6,
+          0.05,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 34884,
+    "parts": 8
+  },
+  "summary": "A deaerator removes dissolved oxygen and carbon dioxide from boiler feedwater, which would otherwise corrode the boiler. Incoming water is sprayed into steam and trickles over trays, heating it to saturation; the gases are released and vented, and the hot deaerated water collects in the storage tank.",
+  "classification": {
+    "family": "Steam-system vessel",
+    "type": "Spray-tray deaerator with horizontal storage"
+  },
+  "model_configuration": {
+    "trays": 4,
+    "spray_valves": 3,
+    "oxygen_target": "≈ 0.005 cm³/L (7 ppb) — typical guarantee"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC Section VIII Div. 1",
+      "title": "Rules for Construction of Pressure Vessels",
+      "relevance": "Design, fabrication, inspection.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 13445",
+      "title": "Unfired pressure vessels",
+      "relevance": "European design code.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "HEI 2954",
+      "title": "Standards and Typical Specifications for Deaerators",
+      "relevance": "Design and performance.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Spirax Sarco — The Steam and Condensate Loop"
+  ],
+  "parts": [
+    {
+      "id": "storage_tank",
+      "name": "Feedwater Storage Tank",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "storage_tank__back",
+        "storage_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.475,
+        0.3,
+        -0.55
+      ],
+      "bbox_max": [
+        1.475,
+        1.4,
+        0.55
+      ],
+      "label_anchor": [
+        0.0,
+        0.85,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "da_tank"
+    },
+    {
+      "id": "saddles",
+      "name": "Saddle Supports (one fixed, one sliding)",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "storage_tanksd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.83,
+        0.0,
+        -0.55
+      ],
+      "bbox_max": [
+        0.83,
+        0.5695,
+        0.55
+      ],
+      "label_anchor": [
+        0.0,
+        0.28475,
+        0.55
+      ],
+      "center": [
+        0.0,
+        0.28475,
+        -0.0
+      ],
+      "info_ref": "sv_saddles"
+    },
+    {
+      "id": "water",
+      "name": "Deaerated Feedwater",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "waterc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.443,
+        0.31,
+        -0.54
+      ],
+      "bbox_max": [
+        1.443,
+        1.0,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.655,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.655,
+        -0.27
+      ],
+      "info_ref": "da_water"
+    },
+    {
+      "id": "deaerator_head",
+      "name": "Deaerator Head (vertical) & Downcomer Neck",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "deaerator_head__back",
+        "deaerator_head__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.82,
+        1.18,
+        -0.32
+      ],
+      "bbox_max": [
+        -0.18,
+        2.71,
+        0.32
+      ],
+      "label_anchor": [
+        -0.5,
+        1.945,
+        0.32
+      ],
+      "center": [
+        -0.5,
+        1.945,
+        -0.0
+      ],
+      "info_ref": "da_head"
+    },
+    {
+      "id": "trays",
+      "name": "Deaerating Trays",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "trays.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.8,
+        1.796,
+        -0.3
+      ],
+      "bbox_max": [
+        -0.2,
+        2.194,
+        0.3
+      ],
+      "label_anchor": [
+        -0.5,
+        1.995,
+        0.3
+      ],
+      "center": [
+        -0.5,
+        1.995,
+        -0.0
+      ],
+      "info_ref": "da_trays"
+    },
+    {
+      "id": "spray_valves",
+      "name": "Spray Valves (atomise incoming water)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "spray_valves.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.8,
+        0.5
+      ],
+      "bbox_min": [
+        -0.645,
+        2.4,
+        -0.025
+      ],
+      "bbox_max": [
+        -0.355,
+        2.53294,
+        0.025
+      ],
+      "label_anchor": [
+        -0.5,
+        2.46647,
+        0.025
+      ],
+      "center": [
+        -0.5,
+        2.46647,
+        -0.0
+      ],
+      "info_ref": "da_spray"
+    },
+    {
+      "id": "nozzles",
+      "name": "Water Inlet, Steam Inlet, Vent, Feedwater Outlet & Level Gauge",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.12,
+        0.05,
+        -0.114
+      ],
+      "bbox_max": [
+        1.07,
+        2.94,
+        0.65
+      ],
+      "label_anchor": [
+        -0.025,
+        1.495,
+        0.65
+      ],
+      "center": [
+        -0.025,
+        1.495,
+        0.268
+      ],
+      "info_ref": "da_nozzles"
+    },
+    {
+      "id": "spray",
+      "name": "Water Spray & Cascade (tracers)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "spray0",
+        "spray1",
+        "spray2",
+        "spray3",
+        "spray4",
+        "spray5",
+        "spray6",
+        "spray7",
+        "spray8",
+        "spray9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        -0.014,
+        -0.014
+      ],
+      "bbox_max": [
+        0.014,
+        0.014,
+        0.014
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.014
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "da_tank": {
+      "function": "Stores deaerated feedwater for the boiler feed pumps.",
+      "construction": "Horizontal pressure vessel.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Provides NPSH for feed pumps (elevated).",
+      "failure_modes": [
+        "Corrosion"
+      ],
+      "inspection": [
+        "Thickness check"
+      ]
+    },
+    "sv_saddles": {
+      "function": "Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+      "construction": "Welded saddles with wear plates.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Zick analysis for saddle stresses.",
+      "failure_modes": [
+        "Corrosion under wear plate"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "da_water": {
+      "function": "Deaerated water (level animated).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "da_head": {
+      "function": "Contains the deaeration section.",
+      "construction": "Vertical vessel with neck.",
+      "material": "Carbon/stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "da_trays": {
+      "function": "Spread the water into thin films for final gas stripping.",
+      "construction": "Perforated trays.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "da_spray": {
+      "function": "Atomise incoming water into the steam space.",
+      "construction": "Spring-loaded spray valves.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Spring failure"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "da_nozzles": {
+      "function": "Water, steam, vent, outlet and level connections.",
+      "construction": "Nozzles, level gauge.",
+      "material": "Steel.",
+      "operating_conditions": "Vent must be kept open (small steam plume).",
+      "failure_modes": [
+        "Blocked vent"
+      ],
+      "inspection": [
+        "Check plume"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

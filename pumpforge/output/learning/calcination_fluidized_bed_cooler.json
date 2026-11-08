@@ -1,0 +1,596 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "calcination_fluidized_bed_cooler",
+ "no": 209,
+ "title": "Calcination Fluidized Bed Cooler",
+ "model_title": "Calcination Fluidised Bed Cooler (Water-Cooled Tube Bundles, Cascade Chambers)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A fluidised bed cooler cools hot calcined alumina. The alumina flows through fluidised chambers with immersed water-cooled tube bundles; fluidising air keeps it moving and is warmed for reuse in the calciner.",
+   "applications": [
+    "Stationary (gas-suspension / circulating fluid bed) calciner product cooling",
+    "Cooling other hot granular products (e.g. cement raw materials, catalysts)"
+   ],
+   "key_points": [
+    "Indirect water cooling + air",
+    "Counter-flow water",
+    "Product < ~ 80 °C",
+    "Heat recovered to combustion air"
+   ],
+   "classification": {
+    "family": "Calcination",
+    "type": "Fluidised bed cooler with immersed bundles"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A fluidised bed cooler cools hot calcined alumina. The alumina flows through a cascade of fluidised chambers containing water-cooled tube bundles; fluidising air keeps the bed moving and is warmed for reuse as combustion air."
+  },
+  "model_3d": {
+   "asset": "glb/calcination_fluidized_bed_cooler.glb",
+   "metadata": "meta/calcination_fluidized_bed_cooler.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6810,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot alumina enters the first chamber.",
+    "Air fluidises the bed.",
+    "Tube bundles remove heat."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot alumina enters the first chamber.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Air fluidises the bed.",
+     "part": "air_plenum",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Tube bundles remove heat.",
+     "part": "cooling_bundles",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Alumina flows over weirs to the outlet.",
+     "part": "cooler_body",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet temperature vs bed area and water flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "calcination_fluidized_bed_cooler_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "calcination_fluidized_bed_cooler_temperature.glb",
+     "title": "Alumina cools chamber by chamber",
+     "description": "Hot alumina from the calciner/cyclone coolers (several hundred °C) flows through the cascade of fluidised chambers. Fluidising air and the immersed water-cooled bundles remove heat; the water flows counter-current to the alumina. Product leaves at roughly 80 °C or less for safe conveying and storage; the warm air is often used as combustion air.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/calcination_fluidized_bed_cooler.json#components",
+   "key_components": "Fluid-bed chambers, weirs, cooling-water tube bundles, air plenum, discharge",
+   "parts": [
+    {
+     "id": "cooler_body",
+     "name": "Cooler Body, Air Distributor & Chamber Weirs",
+     "info_ref": "fbc_body",
+     "function": "Contains the bed.",
+     "material": "Steel."
+    },
+    {
+     "id": "cooling_bundles",
+     "name": "Cooling-Water Tube Bundles immersed in the Bed (counter-flow to the alumina)",
+     "info_ref": "fbc_tubes",
+     "function": "Remove heat.",
+     "material": "Steel."
+    },
+    {
+     "id": "bed",
+     "name": "Fluidised Alumina flowing from Chamber to Chamber",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "air_plenum",
+     "name": "Fluidising-Air Plenum & Inlet Duct",
+     "info_ref": "fbc_air",
+     "function": "Fluidising air.",
+     "material": "Steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Hot Alumina Inlet (from calciner), Cooled Alumina Outlet, Air Exhaust, Cooling-Water Lines",
+     "info_ref": "fbc_nozzles",
+     "function": "Connections.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bed ~ 10 – 60 m²",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 50 – 250",
+     "unit": "t/h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 250 → 80 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Fluidising blowers ~ 50 – 300",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Area from heat duty."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Calciner literature"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment and product loads; dust-tight enclosures where needed."
+   ],
+   "alignment": [
+    "Align drives and rollers/belts; level chambers and floors."
+   ],
+   "piping": [
+    "Air, water and dust connections with isolation; chutes free of moving parts."
+   ],
+   "commissioning": [
+    "Run empty; check air/water flows, temperatures and interlocks; then product."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check outlet temperature and water flow.",
+     "part": "cooling_bundles",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect nozzles and bundles for erosion.",
+     "part": "cooling_bundles",
+     "interval": "shutdown"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bundles.",
+     "part": "cooling_bundles"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tube leak",
+     "category": "leakage",
+     "symptoms": [
+      "Wet alumina, steam"
+     ],
+     "causes": [
+      "Erosion"
+     ],
+     "remedies": [
+      "Isolate bundle; repair"
+     ],
+     "part": "cooling_bundles"
+    },
+    {
+     "problem": "Defluidisation",
+     "category": "performance",
+     "symptoms": [
+      "Hot spots"
+     ],
+     "causes": [
+      "Blocked distributor"
+     ],
+     "remedies": [
+      "Clean"
+     ],
+     "part": "air_plenum"
+    }
+   ],
+   "safety": [
+    "Hot product; water leak hazard."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Calcination Fluidized Bed Cooler — Introduction",
+    "type": "in_app_tour",
+    "model": "calcination_fluidized_bed_cooler.glb",
+    "duration_s": 45.1,
+    "script": [
+     {
+      "narration": "This module introduces the Calcination Fluidized Bed Cooler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A fluidised bed cooler cools hot calcined alumina.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The alumina flows through fluidised chambers with immersed water-cooled tube bundles; fluidising air keeps it moving and is warmed for reuse in the calciner.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include stationary (gas-suspension / circulating fluid bed) calciner product cooling; cooling other hot granular products (e.g. cement raw materials, catalysts).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Cooler Body, Air Distributor & Chamber Weirs.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Calcination Fluidized Bed Cooler — Operation",
+    "type": "in_app_tour",
+    "model": "calcination_fluidized_bed_cooler.glb",
+    "duration_s": 31.3,
+    "script": [
+     {
+      "narration": "How the Calcination Fluidized Bed Cooler works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot alumina enters the first chamber.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Air fluidises the bed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_plenum",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Tube bundles remove heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_bundles",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Alumina flows over weirs to the outlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooler_body",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Hot alumina from the calciner/cyclone coolers (several hundred °C) flows through the cascade of fluidised chambers.",
+      "duration_s": 7.1,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Calcination Fluidized Bed Cooler — Maintenance",
+    "type": "in_app_tour",
+    "model": "calcination_fluidized_bed_cooler.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Calcination Fluidized Bed Cooler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check outlet temperature and water flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_bundles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect nozzles and bundles for erosion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_bundles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bundles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_bundles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tube leak: wet alumina, steam. Common cause: erosion.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "cooling_bundles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for defluidisation: hot spots. Common cause: blocked distributor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_plenum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is alumina cooled?",
+     "options": [
+      "Water-cooled tubes in a fluid bed",
+      "Direct water spray",
+      "Ice",
+      "Vacuum"
+     ],
+     "answer": 0,
+     "explanation": "Indirect.",
+     "level": "basic"
+    },
+    {
+     "question": "Why fluidise?",
+     "options": [
+      "Good heat transfer and flow",
+      "Colour",
+      "Pressure",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "Mixing.",
+     "level": "basic"
+    },
+    {
+     "question": "Warm air is reused as…",
+     "options": [
+      "Combustion air",
+      "Waste",
+      "Instrument air",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the bed.\"",
+     "options": [
+      "Hot Alumina Inlet (from calciner), Cooled Alumina Outlet, Air Exhaust, Cooling-Water Lines",
+      "Fluidising-Air Plenum & Inlet Duct",
+      "Cooler Body, Air Distributor & Chamber Weirs",
+      "Cooling-Water Tube Bundles immersed in the Bed (counter-flow to the alumina)"
+     ],
+     "answer": 2,
+     "explanation": "Cooler Body, Air Distributor & Chamber Weirs: Contains the bed.",
+     "level": "basic",
+     "part": "cooler_body",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Remove heat.\"",
+     "options": [
+      "Cooling-Water Tube Bundles immersed in the Bed (counter-flow to the alumina)",
+      "Cooler Body, Air Distributor & Chamber Weirs",
+      "Fluidised Alumina flowing from Chamber to Chamber",
+      "Hot Alumina Inlet (from calciner), Cooled Alumina Outlet, Air Exhaust, Cooling-Water Lines"
+     ],
+     "answer": 0,
+     "explanation": "Cooling-Water Tube Bundles immersed in the Bed (counter-flow to the alumina): Remove heat.",
+     "level": "basic",
+     "part": "cooling_bundles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Fluidising air.\"",
+     "options": [
+      "Hot Alumina Inlet (from calciner), Cooled Alumina Outlet, Air Exhaust, Cooling-Water Lines",
+      "Cooling-Water Tube Bundles immersed in the Bed (counter-flow to the alumina)",
+      "Fluidising-Air Plenum & Inlet Duct",
+      "Cooler Body, Air Distributor & Chamber Weirs"
+     ],
+     "answer": 2,
+     "explanation": "Fluidising-Air Plenum & Inlet Duct: Fluidising air.",
+     "level": "basic",
+     "part": "air_plenum",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

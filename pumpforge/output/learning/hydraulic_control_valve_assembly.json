@@ -1,0 +1,655 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydraulic_control_valve_assembly",
+ "no": 147,
+ "title": "Hydraulic Control Valve Assembly",
+ "model_title": "Hydraulic Control Valve Assembly (Manifold with Directional, Pressure & Flow Valves)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A hydraulic control valve assembly mounts several valves on a manifold block. Drilled galleries carry the pump pressure (P) and the tank return (T) to each valve station. Directional valves route oil to the actuator work ports (A and B); a relief valve limits pressure; flow-control valves set actuator speed. Mounting valves on a manifold saves piping and leak points.",
+   "applications": [
+    "Industrial machine hydraulics",
+    "Mobile machinery control",
+    "Test rigs and presses",
+    "Process valve actuation"
+   ],
+   "key_points": [
+    "P = pressure, T = tank, A/B = work ports",
+    "Standard interface patterns (ISO 4401, \"CETOP\")",
+    "Spool position decides the flow path",
+    "Fewer pipes = fewer leaks"
+   ],
+   "classification": {
+    "family": "Hydraulic equipment",
+    "type": "Manifold with CETOP directional valves"
+   },
+   "hi_family": "material_handling",
+   "summary": "A hydraulic control valve assembly mounts several valves on one manifold block. Directional valves route oil to the actuators (P→A, B→T or P→B, A→T), a relief valve limits pressure and a flow control sets actuator speed — compact, with fewer leak points than piped valves."
+  },
+  "model_3d": {
+   "asset": "glb/hydraulic_control_valve_assembly.glb",
+   "metadata": "meta/hydraulic_control_valve_assembly.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 2712,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Pump oil enters the P gallery.",
+    "The solenoid shifts the directional spool.",
+    "P is connected to a work port and the other port returns to T."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Pump oil enters the P gallery.",
+     "part": "manifold",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The solenoid shifts the directional spool.",
+     "part": "spool_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "P is connected to a work port and the other port returns to T.",
+     "part": "work_ports",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The relief valve limits pressure; the flow control sets speed.",
+     "part": "relief_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pressure drop across each valve rises with flow squared (Δp ∝ Q²); valves are sized for an acceptable Δp at rated flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydraulic_control_valve_assembly_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "hydraulic_control_valve_assembly_pressure.glb",
+     "title": "P gallery vs T gallery",
+     "description": "The pressure gallery P (red) carries pump flow at system pressure to every valve station; the tank gallery T (blue) collects return oil at low pressure. Each directional valve connects P and T to its work ports A and B; the relief valve limits the pressure in P.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "P: system pressure",
+       "anchor": [
+        -0.3,
+        0.5,
+        0.05
+       ]
+      },
+      {
+       "text": "T: tank (low) pressure",
+       "anchor": [
+        0.3,
+        0.5,
+        -0.1
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/hydraulic_control_valve_assembly.json#components",
+   "key_components": "Manifold, directional, pressure and flow valves",
+   "parts": [
+    {
+     "id": "manifold",
+     "name": "Manifold Block (P and T galleries drilled through)",
+     "info_ref": "hv_manifold",
+     "function": "Routes oil between valves.",
+     "material": "Aluminium/steel."
+    },
+    {
+     "id": "directional_valve_1",
+     "name": "4/3 Solenoid Directional Valve 1 (CETOP)",
+     "info_ref": "hv_directional",
+     "function": "Select flow direction.",
+     "material": "—"
+    },
+    {
+     "id": "spool_1",
+     "name": "Spool 1",
+     "info_ref": "hv_directional",
+     "function": "Select flow direction.",
+     "material": "—"
+    },
+    {
+     "id": "directional_valve_2",
+     "name": "4/3 Solenoid Directional Valve 2 (CETOP)",
+     "info_ref": "hv_directional",
+     "function": "Select flow direction.",
+     "material": "—"
+    },
+    {
+     "id": "spool_2",
+     "name": "Spool 2",
+     "info_ref": "hv_directional",
+     "function": "Select flow direction.",
+     "material": "—"
+    },
+    {
+     "id": "relief_valve",
+     "name": "Pressure Relief Valve (cartridge, adjustable)",
+     "info_ref": "hv_relief",
+     "function": "Limits pressure.",
+     "material": "—"
+    },
+    {
+     "id": "flow_control",
+     "name": "Flow Control (throttle-check) Valve",
+     "info_ref": "hv_flow",
+     "function": "Controls speed.",
+     "material": "—"
+    },
+    {
+     "id": "gauge",
+     "name": "Pressure Gauge (test point)",
+     "info_ref": "hv_gauge",
+     "function": "Pressure indication.",
+     "material": "—"
+    },
+    {
+     "id": "work_ports",
+     "name": "Work Ports A1 B1 A2 B2 to Actuators",
+     "info_ref": "hv_ports",
+     "function": "Work ports.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Interface sizes NG6 – NG32 (ISO 4401)",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Set by the HPU",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Spool shift ~ 20 – 80 ms (solenoid)",
+     "unit": "ms"
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 1000+ L/min, up to ~ 350 bar",
+     "unit": "L/min"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size valves for flow at acceptable Δp; choose spool centre (closed, tandem, open) for the circuit; specify voltage and connectors."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 4401 — Mounting surfaces for 4-port directional valves",
+    "ISO 1219-1 — Graphic symbols",
+    "ISO 4413"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a level, rigid base with access for filters, gauges and fill; drip tray/bund under the reservoir."
+   ],
+   "alignment": [
+    "Align motor and pump with the bell housing and coupling; mount cylinders so the rod is not side-loaded (use spherical bearings/clevises)."
+   ],
+   "piping": [
+    "Clean (pickled/flushed) pipework sized for velocity (typical guide: suction ≲ 1.2 m/s, pressure 3–6 m/s, return ≲ 3 m/s); hoses not twisted or rubbing; correct fittings for pressure.",
+    "Fit pressure gauges/test points, and relief protection on every pressure source."
+   ],
+   "commissioning": [
+    "Fill through a filter with the specified oil; flush the system to the target cleanliness (ISO 4406 code).",
+    "Bleed air; start with relief valves backed off, then set pressures; check for leaks, temperatures and noise."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for external leaks and solenoid temperatures.",
+     "part": "directional_valve_1",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check relief setting with a test gauge.",
+     "part": "relief_valve",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace seals and solenoid coils; clean spools.",
+     "part": "spool_1"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — oil cleanliness is key."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Spool sticking",
+     "category": "performance",
+     "symptoms": [
+      "Actuator does not move or moves slowly"
+     ],
+     "causes": [
+      "Contamination (silting), varnish"
+     ],
+     "remedies": [
+      "Clean; improve filtration"
+     ],
+     "part": "spool_1"
+    },
+    {
+     "problem": "Relief valve chattering",
+     "category": "valves",
+     "symptoms": [
+      "Noise, pressure oscillation"
+     ],
+     "causes": [
+      "Wrong setting, worn seat"
+     ],
+     "remedies": [
+      "Reset/repair"
+     ],
+     "part": "relief_valve"
+    }
+   ],
+   "safety": [
+    "Lock out and depressurise before removing valves; manual overrides can move actuators unexpectedly."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Control Valve Assembly — Introduction",
+    "type": "in_app_tour",
+    "model": "hydraulic_control_valve_assembly.glb",
+    "duration_s": 48.1,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Control Valve Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A hydraulic control valve assembly mounts several valves on a manifold block.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Drilled galleries carry the pump pressure (P) and the tank return (T) to each valve station.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Directional valves route oil to the actuator work ports (A and B); a relief valve limits pressure; flow-control valves set actuator speed.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include industrial machine hydraulics; mobile machinery control; test rigs and presses; process valve actuation.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Control Valve Assembly — Operation",
+    "type": "in_app_tour",
+    "model": "hydraulic_control_valve_assembly.glb",
+    "duration_s": 37.0,
+    "script": [
+     {
+      "narration": "How the Hydraulic Control Valve Assembly works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pump oil enters the P gallery.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "manifold",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The solenoid shifts the directional spool.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spool_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "P is connected to a work port and the other port returns to T.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "work_ports",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The relief valve limits pressure; the flow control sets speed.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "relief_valve",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The pressure gallery P (red) carries pump flow at system pressure to every valve station; the tank gallery T (blue) collects return oil at low pressure.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Control Valve Assembly — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydraulic_control_valve_assembly.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Control Valve Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for external leaks and solenoid temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "directional_valve_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check relief setting with a test gauge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "relief_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace seals and solenoid coils; clean spools.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spool_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for spool sticking: actuator does not move or moves slowly. Common cause: contamination (silting), varnish.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "spool_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for relief valve chattering: noise, pressure oscillation. Common cause: wrong setting, worn seat.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "relief_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does port \"T\" stand for?",
+     "options": [
+      "Tank (return)",
+      "Temperature",
+      "Torque",
+      "Test"
+     ],
+     "answer": 0,
+     "explanation": "Return to tank.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets actuator speed?",
+     "options": [
+      "Flow control valve (flow rate)",
+      "Relief valve only",
+      "Gauge",
+      "Manifold colour"
+     ],
+     "answer": 0,
+     "explanation": "Speed ∝ flow.",
+     "level": "basic"
+    },
+    {
+     "question": "Why use a manifold?",
+     "options": [
+      "Fewer pipes and leak points; compact",
+      "More noise",
+      "Higher cost always",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Compactness and reliability.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Routes oil between valves.\"",
+     "options": [
+      "Flow Control (throttle-check) Valve",
+      "Pressure Relief Valve (cartridge, adjustable)",
+      "Manifold Block (P and T galleries drilled through)",
+      "4/3 Solenoid Directional Valve 1 (CETOP)"
+     ],
+     "answer": 2,
+     "explanation": "Manifold Block (P and T galleries drilled through): Routes oil between valves.",
+     "level": "basic",
+     "part": "manifold",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Select flow direction.\"",
+     "options": [
+      "Manifold Block (P and T galleries drilled through)",
+      "4/3 Solenoid Directional Valve 1 (CETOP)",
+      "Flow Control (throttle-check) Valve",
+      "Work Ports A1 B1 A2 B2 to Actuators"
+     ],
+     "answer": 1,
+     "explanation": "4/3 Solenoid Directional Valve 1 (CETOP): Select flow direction.",
+     "level": "basic",
+     "part": "directional_valve_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Limits pressure.\"",
+     "options": [
+      "Spool 2",
+      "4/3 Solenoid Directional Valve 2 (CETOP)",
+      "Spool 1",
+      "Pressure Relief Valve (cartridge, adjustable)"
+     ],
+     "answer": 3,
+     "explanation": "Pressure Relief Valve (cartridge, adjustable): Limits pressure.",
+     "level": "basic",
+     "part": "relief_valve",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

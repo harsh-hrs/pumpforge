@@ -1,0 +1,505 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "roller_crusher",
+  "title": "Double Roll Crusher (Toothed Rolls, Spring Relief)",
+  "category": "9 · Material Handling & Heavy Mechanical Equipment",
+  "library": {
+    "no": 131,
+    "phase": 7,
+    "eq_id": "EQ-209",
+    "subcategory": "Crushing",
+    "hi_family": "material_handling",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "roller_crusher_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "wear": {
+      "file": "roller_crusher_wear.glb",
+      "title": "Roll wear pattern",
+      "description": "Feed tends to concentrate at the centre of the rolls, so the teeth wear fastest there (purple) and the rolls become \"hollow\" — the gap opens in the middle and the product coarsens. Spreading the feed across the full width (feeder width, chute design) and rebuilding or re-profiling the teeth keeps the gap even.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "material",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.0,
+          1.55,
+          -0.0
+        ],
+        [
+          0.0,
+          0.7,
+          -0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6084,
+    "parts": 8
+  },
+  "summary": "A roll crusher nips material between two counter-rotating rolls. Teeth grip and break it as it is drawn down through the gap, which sets the product size. One roll is spring-loaded so uncrushable tramp material can pass without damage.",
+  "classification": {
+    "family": "Crusher (compression)",
+    "type": "Double toothed roll crusher"
+  },
+  "model_configuration": {
+    "animation": "Rolls counter-rotate"
+  },
+  "standards": [
+    {
+      "id": "ISO 21873-1",
+      "title": "Building construction machinery — Mobile crushers — Terminology and commercial specifications",
+      "relevance": "Terminology.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 12100",
+      "title": "Safety of machinery — Risk assessment",
+      "relevance": "Guarding and safety.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Coal and mineral crushing notes"
+  ],
+  "parts": [
+    {
+      "id": "roll_1",
+      "name": "Fixed Roll",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "roll_1.001"
+      ],
+      "pivot": [
+        -0.26,
+        0.7,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.5225,
+        0.4375,
+        -0.6
+      ],
+      "bbox_max": [
+        0.0025,
+        0.9625,
+        0.65
+      ],
+      "label_anchor": [
+        -0.26,
+        0.7,
+        0.65
+      ],
+      "center": [
+        -0.26,
+        0.7,
+        0.025
+      ],
+      "info_ref": "rc_roll"
+    },
+    {
+      "id": "roll_2",
+      "name": "Floating Roll (spring-loaded)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "roll_2.001"
+      ],
+      "pivot": [
+        0.26,
+        0.7,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.00233,
+        0.43767,
+        -0.6
+      ],
+      "bbox_max": [
+        0.52233,
+        0.96233,
+        0.65
+      ],
+      "label_anchor": [
+        0.26,
+        0.7,
+        0.65
+      ],
+      "center": [
+        0.26,
+        0.7,
+        0.025
+      ],
+      "info_ref": "rc_roll"
+    },
+    {
+      "id": "frame",
+      "name": "Frame with Bearing Housings",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "frame__back",
+        "frame__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.72,
+        0.3,
+        -0.4
+      ],
+      "bbox_max": [
+        0.72,
+        1.1,
+        0.4
+      ],
+      "label_anchor": [
+        0.0,
+        0.7,
+        0.4
+      ],
+      "center": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "info_ref": "rc_frame"
+    },
+    {
+      "id": "relief_springs",
+      "name": "Relief Springs (let tramp metal pass)",
+      "group": "support",
+      "section_role": "keep",
+      "nodes": [
+        "spj"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.59211,
+        0.652,
+        -0.39791
+      ],
+      "bbox_max": [
+        0.85789,
+        0.74799,
+        0.39799
+      ],
+      "label_anchor": [
+        0.725,
+        0.69999,
+        0.39799
+      ],
+      "center": [
+        0.725,
+        0.69999,
+        4e-05
+      ],
+      "info_ref": "rc_springs"
+    },
+    {
+      "id": "feed_hopper",
+      "name": "Feed Hopper",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "feed_hopper__back",
+        "feed_hopper__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.558,
+        1.05,
+        -0.558
+      ],
+      "bbox_max": [
+        0.558,
+        1.55,
+        0.558
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.558
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "rc_hopper"
+    },
+    {
+      "id": "drive",
+      "name": "Drive (motor, gears/belts)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "drive"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.36,
+        0.6,
+        -1.1
+      ],
+      "bbox_max": [
+        -0.16,
+        0.81,
+        -0.66
+      ],
+      "label_anchor": [
+        -0.26,
+        0.705,
+        -0.66
+      ],
+      "center": [
+        -0.26,
+        0.705,
+        -0.88
+      ],
+      "info_ref": "rc_drive"
+    },
+    {
+      "id": "stand",
+      "name": "Support Stand",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "stand.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.65,
+        0.0,
+        -0.4
+      ],
+      "bbox_max": [
+        0.65,
+        0.3,
+        0.4
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.4
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "rc_frame"
+    },
+    {
+      "id": "rocks",
+      "name": "Material Nipped Between the Rolls",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "rocks0",
+        "rocks1",
+        "rocks2",
+        "rocks3",
+        "rocks4",
+        "rocks5",
+        "rocks6",
+        "rocks7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.04356,
+        -0.04682,
+        -0.03692
+      ],
+      "bbox_max": [
+        0.04356,
+        0.04682,
+        0.03692
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.03692
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "rc_roll": {
+      "function": "Crush material in the nip.",
+      "construction": "Toothed rolls on shafts.",
+      "material": "Manganese/alloy steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Tooth wear"
+      ],
+      "inspection": [
+        "Hard-face"
+      ]
+    },
+    "rc_frame": {
+      "function": "Frame & bearings.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rc_springs": {
+      "function": "Allow the roll to retreat for tramp metal.",
+      "construction": "Springs.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rc_hopper": {
+      "function": "Feed hopper.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rc_drive": {
+      "function": "Drive.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

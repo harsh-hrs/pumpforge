@@ -1,0 +1,647 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "disc_stack_centrifuge",
+ "no": 180,
+ "title": "Disc Stack Centrifuge",
+ "model_title": "Disc Stack Centrifuge (Self-Cleaning Separator)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A disc stack centrifuge (separator) spins a bowl at thousands of rpm. Inside, a stack of conical discs splits the liquid into thin layers so that particles and droplets only need to travel a short distance to separate. Heavier phases move outwards; lighter liquid moves inwards and leaves at the top. Collected solids are ejected periodically.",
+   "applications": [
+    "Milk skimming and clarification",
+    "Fuel and lube-oil purification (ships, power plants)",
+    "Beer, wine and juice clarification",
+    "Biotech and pharma"
+   ],
+   "key_points": [
+    "g-force = ω²r/g (thousands of g)",
+    "Discs give a large equivalent settling area",
+    "Two- or three-phase separation",
+    "Self-cleaning by intermittent ejection"
+   ],
+   "classification": {
+    "family": "Centrifuge",
+    "type": "Self-cleaning disc stack separator"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A disc stack centrifuge separates liquids of different density and fine solids from liquids at very high g-force. A stack of conical discs inside the fast-spinning bowl splits the flow into thin layers, so particles settle a very short distance. Solids collect at the bowl wall and are ejected periodically."
+  },
+  "model_3d": {
+   "asset": "glb/disc_stack_centrifuge.glb",
+   "metadata": "meta/disc_stack_centrifuge.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11052,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed enters down the central pipe into the distributor.",
+    "The bowl and discs spin at high speed.",
+    "Heavy phase and solids move outward along the discs."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed enters down the central pipe into the distributor.",
+     "part": "inlet_outlets",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bowl and discs spin at high speed.",
+     "part": "bowl",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heavy phase and solids move outward along the discs.",
+     "part": "bowl",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Light phase moves inward and is pumped out by the paring disc.",
+     "part": "inlet_outlets",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Solids are ejected through the ports at intervals.",
+     "part": "lock_ring_nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Separation capacity ∝ equivalent clarifying area Σ; throughput falls for finer particles."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "disc_stack_centrifuge_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "disc_stack_centrifuge_pressure.glb",
+     "title": "Centrifugal force: thousands of g",
+     "description": "At a few thousand rpm the bowl generates several thousand times gravity (g-force = ω²r/g). Heavier solids and liquid move outwards to the bowl wall (red, the sludge space); the discs split the flow into thin layers so particles only have a short distance to settle. Accumulated solids are ejected periodically by opening the bowl.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/disc_stack_centrifuge.json#components",
+   "key_components": "Bowl, disc stack, distributor, paring discs, sliding piston (solids ejection), spindle, motor",
+   "parts": [
+    {
+     "id": "frame_hood",
+     "name": "Frame (with solids collector) & Hood",
+     "info_ref": "ds_frame",
+     "function": "Supports and encloses.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "bowl",
+     "name": "Bowl with Disc Stack & Distributor (rotates ≈ 4 000–10 000 rpm)",
+     "info_ref": "ds_bowl",
+     "function": "Separates by centrifugal force.",
+     "material": "Duplex stainless."
+    },
+    {
+     "id": "lock_ring_nozzles",
+     "name": "Bowl Lock Ring & Discharge Ports (turn with the bowl)",
+     "info_ref": "ds_bowl",
+     "function": "Separates by centrifugal force.",
+     "material": "Duplex stainless."
+    },
+    {
+     "id": "spindle",
+     "name": "Vertical Spindle & Bearings (with damping springs)",
+     "info_ref": "ds_spindle",
+     "function": "Carries the bowl.",
+     "material": "Steel."
+    },
+    {
+     "id": "motor",
+     "name": "Drive Motor (flat-belt or direct drive)",
+     "info_ref": "ds_drive",
+     "function": "Drives the spindle.",
+     "material": "—"
+    },
+    {
+     "id": "inlet_outlets",
+     "name": "Feed Pipe, Light-Phase & Heavy-Phase Outlets (paring discs)",
+     "info_ref": "ds_outlets",
+     "function": "Feed and outlets.",
+     "material": "Stainless."
+    },
+    {
+     "id": "solids_ejection",
+     "name": "Solids Ejected Intermittently from the Bowl Periphery",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "liquid",
+     "name": "Light Phase rising inward through the Discs",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bowl ~ 0.2 – 1 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 0.1 – 100",
+     "unit": "m³/h"
+    },
+    "operating_pressure": {
+     "typical_range": "Atmospheric to ~ 6 bar outlet",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "Particles down to ~ 0.5 – 1 µm",
+     "unit": "µm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from Σ and settling velocity; choose 2- or 3-phase and discharge type."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EN 12547"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Massive foundation or inertia block on anti-vibration mounts designed for dynamic loads (maker data)."
+   ],
+   "alignment": [
+    "Level the machine; align motor and belt/coupling; check bowl run-out."
+   ],
+   "piping": [
+    "Flexible connections to feed and outlets so no pipe loads reach the machine; vent the casing."
+   ],
+   "commissioning": [
+    "Check rotation, lubrication and vibration empty; introduce feed gradually; set differential speed/ejection interval; verify interlocks (cover, vibration, speed)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor vibration, speed, outlet pressure.",
+     "part": "spindle",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect and clean disc stack.",
+     "part": "bowl",
+     "interval": "periodic"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Bowl overhaul and balancing; spindle bearings.",
+     "part": "bowl",
+     "interval": "≈ 8 000 h (maker)"
+    }
+   ],
+   "lubrication": [
+    "Spindle bearings: oil bath/mist per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Vibration",
+     "category": "vibration",
+     "symptoms": [
+      "High vibration trip"
+     ],
+     "causes": [
+      "Unbalanced bowl (uneven solids), worn bearings"
+     ],
+     "remedies": [
+      "Clean/balance; replace bearings"
+     ],
+     "part": "bowl"
+    },
+    {
+     "problem": "Poor separation",
+     "category": "performance",
+     "symptoms": [
+      "Cloudy light phase"
+     ],
+     "causes": [
+      "Too high flow, wrong gravity disc"
+     ],
+     "remedies": [
+      "Reduce flow; correct disc/temperature"
+     ],
+     "part": "inlet_outlets"
+    }
+   ],
+   "safety": [
+    "Never open before full stop; interlocks; vibration trips."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Disc Stack Centrifuge — Introduction",
+    "type": "in_app_tour",
+    "model": "disc_stack_centrifuge.glb",
+    "duration_s": 62.3,
+    "script": [
+     {
+      "narration": "This module introduces the Disc Stack Centrifuge.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A disc stack centrifuge (separator) spins a bowl at thousands of rpm.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Inside, a stack of conical discs splits the liquid into thin layers so that particles and droplets only need to travel a short distance to separate.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Heavier phases move outwards; lighter liquid moves inwards and leaves at the top.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include milk skimming and clarification; fuel and lube-oil purification (ships, power plants); beer, wine and juice clarification; biotech and pharma.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Frame (with solids collector) & Hood, Bowl with Disc Stack & Distributor (rotates ≈ 4 000–10 000 rpm), Bowl Lock Ring & Discharge Ports (turn with the bowl), Vertical Spindle & Bearings (with damping springs).",
+      "duration_s": 15.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Disc Stack Centrifuge — Operation",
+    "type": "in_app_tour",
+    "model": "disc_stack_centrifuge.glb",
+    "duration_s": 35.9,
+    "script": [
+     {
+      "narration": "How the Disc Stack Centrifuge works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters down the central pipe into the distributor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_outlets",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bowl and discs spin at high speed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bowl",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heavy phase and solids move outward along the discs.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bowl",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Light phase moves inward and is pumped out by the paring disc.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "inlet_outlets",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Solids are ejected through the ports at intervals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lock_ring_nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "At a few thousand rpm the bowl generates several thousand times gravity (g-force = ω²r/g).",
+      "duration_s": 6.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Disc Stack Centrifuge — Maintenance",
+    "type": "in_app_tour",
+    "model": "disc_stack_centrifuge.glb",
+    "duration_s": 34.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Disc Stack Centrifuge.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor vibration, speed, outlet pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spindle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect and clean disc stack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bowl",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Bowl overhaul and balancing; spindle bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bowl",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vibration: high vibration trip. Common cause: unbalanced bowl (uneven solids), worn bearings.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "bowl",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor separation: cloudy light phase. Common cause: too high flow, wrong gravity disc.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "inlet_outlets",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why use a disc stack?",
+     "options": [
+      "Short settling distance and large settling area",
+      "For weight",
+      "To heat",
+      "To pump"
+     ],
+     "answer": 0,
+     "explanation": "Σ-area.",
+     "level": "basic"
+    },
+    {
+     "question": "g-force depends on…",
+     "options": [
+      "Speed squared and radius",
+      "Colour",
+      "Feed temperature only",
+      "Disc count only"
+     ],
+     "answer": 0,
+     "explanation": "ω²r.",
+     "level": "basic"
+    },
+    {
+     "question": "Where do heavy solids collect?",
+     "options": [
+      "Bowl periphery",
+      "Centre",
+      "Top",
+      "Feed pipe"
+     ],
+     "answer": 0,
+     "explanation": "Outward.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supports and encloses.\"",
+     "options": [
+      "Frame (with solids collector) & Hood",
+      "Bowl Lock Ring & Discharge Ports (turn with the bowl)",
+      "Bowl with Disc Stack & Distributor (rotates ≈ 4 000–10 000 rpm)",
+      "Vertical Spindle & Bearings (with damping springs)"
+     ],
+     "answer": 0,
+     "explanation": "Frame (with solids collector) & Hood: Supports and encloses.",
+     "level": "basic",
+     "part": "frame_hood",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates by centrifugal force.\"",
+     "options": [
+      "Drive Motor (flat-belt or direct drive)",
+      "Feed Pipe, Light-Phase & Heavy-Phase Outlets (paring discs)",
+      "Bowl with Disc Stack & Distributor (rotates ≈ 4 000–10 000 rpm)",
+      "Solids Ejected Intermittently from the Bowl Periphery"
+     ],
+     "answer": 2,
+     "explanation": "Bowl with Disc Stack & Distributor (rotates ≈ 4 000–10 000 rpm): Separates by centrifugal force.",
+     "level": "basic",
+     "part": "bowl",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the bowl.\"",
+     "options": [
+      "Light Phase rising inward through the Discs",
+      "Frame (with solids collector) & Hood",
+      "Vertical Spindle & Bearings (with damping springs)",
+      "Bowl with Disc Stack & Distributor (rotates ≈ 4 000–10 000 rpm)"
+     ],
+     "answer": 2,
+     "explanation": "Vertical Spindle & Bearings (with damping springs): Carries the bowl.",
+     "level": "basic",
+     "part": "spindle",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

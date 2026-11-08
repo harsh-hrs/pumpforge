@@ -1,0 +1,645 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "heat_recovery_system",
+ "no": 171,
+ "title": "Heat Recovery System",
+ "model_title": "Run-Around Coil Heat Recovery System (Exhaust → Supply Air)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A run-around coil heat recovery system recovers heat from exhaust air to preheat the incoming supply air. A finned coil in the exhaust duct heats a pumped water–glycol loop, which carries the heat to a second coil in the supply duct. The two airstreams never meet.",
+   "applications": [
+    "Hospitals, laboratories and clean rooms (no cross-contamination)",
+    "Retrofits where ducts are far apart",
+    "Industrial process exhaust heat recovery"
+   ],
+   "key_points": [
+    "Airstreams stay separate",
+    "Ducts can be far apart",
+    "Effectiveness typically ~ 45–65 %",
+    "Glycol protects against freezing"
+   ],
+   "classification": {
+    "family": "Heat recovery",
+    "type": "Run-around coil loop"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A run-around coil heat recovery system recovers heat from building or process exhaust air. A finned coil in the exhaust duct heats a water–glycol loop; a pump carries it to a second coil in the supply duct, which preheats the incoming fresh air. The airstreams never mix."
+  },
+  "model_3d": {
+   "asset": "glb/heat_recovery_system.glb",
+   "metadata": "meta/heat_recovery_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 12856,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Warm exhaust air passes the exhaust coil.",
+    "The glycol loop absorbs that heat.",
+    "The pump circulates glycol to the supply coil."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Warm exhaust air passes the exhaust coil.",
+     "part": "exhaust_coil",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The glycol loop absorbs that heat.",
+     "part": "glycol_loop",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pump circulates glycol to the supply coil.",
+     "part": "loop_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cold supply air is warmed by the supply coil.",
+     "part": "supply_coil",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fans move both airstreams.",
+     "part": "supply_fan",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Effectiveness ε = (T_supply,out − T_supply,in) / (T_exhaust,in − T_supply,in)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "heat_recovery_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "heat_recovery_system_temperature.glb",
+     "title": "Air temperatures across the coils",
+     "description": "Warm exhaust air (orange) is cooled by the exhaust coil (blue after the coil), the glycol loop carries that heat to the supply coil, where cold fresh air is warmed. The two airstreams never mix — useful where cross-contamination is not allowed (labs, hospitals). Typical sensible effectiveness is about 45–65 %.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/heat_recovery_system.json#components",
+   "key_components": "Exhaust coil, supply coil, glycol loop pump, expansion tank, ducts, fans",
+   "parts": [
+    {
+     "id": "ducts",
+     "name": "Exhaust Air Duct (top) & Supply Air Duct (bottom)",
+     "info_ref": "hx_ducts",
+     "function": "Air paths.",
+     "material": "Galvanised steel."
+    },
+    {
+     "id": "exhaust_coil",
+     "name": "Exhaust-Air Coil (picks up heat) — finned tubes",
+     "info_ref": "hx_coils",
+     "function": "Exchange heat between air and glycol.",
+     "material": "Cu/Al."
+    },
+    {
+     "id": "supply_coil",
+     "name": "Supply-Air Coil (releases heat) — finned tubes",
+     "info_ref": "hx_coils",
+     "function": "Exchange heat between air and glycol.",
+     "material": "Cu/Al."
+    },
+    {
+     "id": "glycol_loop",
+     "name": "Glycol Loop Piping & Expansion Tank",
+     "info_ref": "hx_loop",
+     "function": "Carries glycol.",
+     "material": "Steel."
+    },
+    {
+     "id": "loop_pump",
+     "name": "Circulating Pump (in-line)",
+     "info_ref": "hx_pump",
+     "function": "Circulates glycol.",
+     "material": "—"
+    },
+    {
+     "id": "exhaust_fan",
+     "name": "Exhaust Fan Impeller",
+     "info_ref": "hx_fans",
+     "function": "Move the air.",
+     "material": "Aluminium/steel."
+    },
+    {
+     "id": "supply_fan",
+     "name": "Supply Fan Impeller",
+     "info_ref": "hx_fans",
+     "function": "Move the air.",
+     "material": "Aluminium/steel."
+    },
+    {
+     "id": "glycol",
+     "name": "Glycol circulating (dots)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Coil face ~ 0.5 – 10 m²",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 10 – 2000",
+     "unit": "kW"
+    },
+    "operating_temperature": {
+     "typical_range": "Air ~ −20 → 35",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Air ~ 1 – 100",
+     "unit": "m³/s"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Optimise coil rows and glycol flow; check frost protection and pump energy vs recovered heat."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASHRAE Handbook — Air-to-air energy recovery equipment"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount AHU/coil sections level on a plinth or frame so the drain pan drains fully."
+   ],
+   "alignment": [
+    "Seal sections air-tight; install coils in the correct air-flow direction (counter-flow to water)."
+   ],
+   "piping": [
+    "Pipe with isolation valves, strainer, control valve and balancing valve; trap the condensate drain with a water seal deeper than the fan static pressure."
+   ],
+   "commissioning": [
+    "Vent coils, check flow and ΔT, verify valve stroke and control; check that condensate drains; balance air flow."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pump and loop temperatures.",
+     "part": "loop_pump",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check glycol concentration and coil cleanliness.",
+     "part": "glycol_loop",
+     "interval": "seasonal"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Clean coils; replace pump seals.",
+     "part": "exhaust_coil"
+    }
+   ],
+   "lubrication": [
+    "Pump/fan motor bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Frost on exhaust coil",
+     "category": "performance",
+     "symptoms": [
+      "Rising ΔP, falling recovery"
+     ],
+     "causes": [
+      "Very cold supply air, low glycol temperature"
+     ],
+     "remedies": [
+      "Three-way valve frost control"
+     ],
+     "part": "exhaust_coil"
+    },
+    {
+     "problem": "Low effectiveness",
+     "category": "performance",
+     "symptoms": [
+      "Small temperature rise"
+     ],
+     "causes": [
+      "Fouled coils, low glycol flow, air in loop"
+     ],
+     "remedies": [
+      "Clean; vent; check pump"
+     ],
+     "part": "glycol_loop"
+    }
+   ],
+   "safety": [
+    "Glycol handling; isolate electrical supply before maintenance."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Heat Recovery System — Introduction",
+    "type": "in_app_tour",
+    "model": "heat_recovery_system.glb",
+    "duration_s": 53.9,
+    "script": [
+     {
+      "narration": "This module introduces the Heat Recovery System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A run-around coil heat recovery system recovers heat from exhaust air to preheat the incoming supply air.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A finned coil in the exhaust duct heats a pumped water–glycol loop, which carries the heat to a second coil in the supply duct.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The two airstreams never meet.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hospitals, laboratories and clean rooms (no cross-contamination); retrofits where ducts are far apart; industrial process exhaust heat recovery.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Circulating Pump (in-line), Exhaust Fan Impeller, Supply Fan Impeller.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Heat Recovery System — Operation",
+    "type": "in_app_tour",
+    "model": "heat_recovery_system.glb",
+    "duration_s": 40.7,
+    "script": [
+     {
+      "narration": "How the Heat Recovery System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Warm exhaust air passes the exhaust coil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "exhaust_coil",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The glycol loop absorbs that heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "glycol_loop",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pump circulates glycol to the supply coil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "loop_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cold supply air is warmed by the supply coil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supply_coil",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fans move both airstreams.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "supply_fan",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Warm exhaust air (orange) is cooled by the exhaust coil (blue after the coil), the glycol loop carries that heat to the supply coil, where cold fresh air is warmed.",
+      "duration_s": 12.5,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Heat Recovery System — Maintenance",
+    "type": "in_app_tour",
+    "model": "heat_recovery_system.glb",
+    "duration_s": 37.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Heat Recovery System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pump and loop temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "loop_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check glycol concentration and coil cleanliness.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "glycol_loop",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean coils; replace pump seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "exhaust_coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for frost on exhaust coil: rising δp, falling recovery. Common cause: very cold supply air, low glycol temperature.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "exhaust_coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low effectiveness: small temperature rise. Common cause: fouled coils, low glycol flow, air in loop.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "glycol_loop",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why use a run-around coil instead of a plate exchanger?",
+     "options": [
+      "Airstreams stay fully separate and ducts can be apart",
+      "It is always more efficient",
+      "No pump needed",
+      "No coils"
+     ],
+     "answer": 0,
+     "explanation": "Separation and flexibility.",
+     "level": "basic"
+    },
+    {
+     "question": "What carries the heat between coils?",
+     "options": [
+      "Water–glycol loop",
+      "Air",
+      "Refrigerant only",
+      "Steam"
+     ],
+     "answer": 0,
+     "explanation": "Glycol loop.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical effectiveness is about…",
+     "options": [
+      "45–65 %",
+      "99 %",
+      "5 %",
+      "200 %"
+     ],
+     "answer": 0,
+     "explanation": "Moderate.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Air paths.\"",
+     "options": [
+      "Exhaust Air Duct (top) & Supply Air Duct (bottom)",
+      "Glycol Loop Piping & Expansion Tank",
+      "Exhaust-Air Coil (picks up heat) — finned tubes",
+      "Circulating Pump (in-line)"
+     ],
+     "answer": 0,
+     "explanation": "Exhaust Air Duct (top) & Supply Air Duct (bottom): Air paths.",
+     "level": "basic",
+     "part": "ducts",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Exchange heat between air and glycol.\"",
+     "options": [
+      "Glycol Loop Piping & Expansion Tank",
+      "Exhaust-Air Coil (picks up heat) — finned tubes",
+      "Circulating Pump (in-line)",
+      "Exhaust Fan Impeller"
+     ],
+     "answer": 1,
+     "explanation": "Exhaust-Air Coil (picks up heat) — finned tubes: Exchange heat between air and glycol.",
+     "level": "basic",
+     "part": "exhaust_coil",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries glycol.\"",
+     "options": [
+      "Glycol Loop Piping & Expansion Tank",
+      "Exhaust Air Duct (top) & Supply Air Duct (bottom)",
+      "Exhaust-Air Coil (picks up heat) — finned tubes",
+      "Circulating Pump (in-line)"
+     ],
+     "answer": 0,
+     "explanation": "Glycol Loop Piping & Expansion Tank: Carries glycol.",
+     "level": "basic",
+     "part": "glycol_loop",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

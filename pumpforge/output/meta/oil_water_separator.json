@@ -1,0 +1,547 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "oil_water_separator",
+  "title": "Oil–Water Separator (Corrugated Plate Interceptor, CPI)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 186,
+    "phase": 9,
+    "eq_id": "EQ-264",
+    "subcategory": "Gravity separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "oil_water_separator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "oil_water_separator_pressure.glb",
+      "title": "Stokes' law sets the rise velocity",
+      "description": "An oil droplet rises at v = g·d²·(ρw − ρo)/(18·μ) (Stokes). Small droplets rise very slowly, so the inclined plates give each droplet only a short distance to rise before it meets a plate surface, coalesces and slides up to the oil layer. CPI separators typically remove free oil droplets down to roughly 50–60 µm; API separators ~ 150 µm.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "oily_water",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.85,
+          0.75,
+          -0.0
+        ],
+        [
+          -1.1,
+          0.75,
+          -0.1
+        ],
+        [
+          -1.1,
+          0.3,
+          -0.1
+        ],
+        [
+          -0.5,
+          0.35,
+          -0.1
+        ],
+        [
+          0.3,
+          0.8,
+          -0.1
+        ],
+        [
+          1.0,
+          0.3,
+          -0.1
+        ],
+        [
+          1.12,
+          0.78,
+          -0.1
+        ],
+        [
+          1.85,
+          0.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "oil",
+      "kind": "hydraulic_oil",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.3,
+          0.92,
+          -0.1
+        ],
+        [
+          0.9,
+          0.95,
+          -0.1
+        ],
+        [
+          0.9,
+          0.93,
+          0.75
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 2480,
+    "parts": 8
+  },
+  "summary": "An oil–water separator removes free oil and settleable solids from wastewater by gravity. In a corrugated plate interceptor (CPI), inclined plates give oil droplets a short distance to rise; they coalesce on the plates, rise to the surface layer and are skimmed off, while solids slide into a hopper.",
+  "classification": {
+    "family": "Gravity separator",
+    "type": "Corrugated plate interceptor"
+  },
+  "model_configuration": {
+    "animation": "Oil droplets rise; skimmer tilts"
+  },
+  "standards": [
+    {
+      "id": "API Publication 421",
+      "title": "Design and operation of oil–water separators",
+      "relevance": "Design basis.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 421"
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "Separator Tank: Inlet Baffle, Oil-Retention Baffle, Outlet Weir & Sludge Hopper",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "tank__back",
+        "tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.53,
+        0.0,
+        -0.48
+      ],
+      "bbox_max": [
+        1.53,
+        1.1,
+        0.48
+      ],
+      "label_anchor": [
+        0.0,
+        0.55,
+        0.48
+      ],
+      "center": [
+        0.0,
+        0.55,
+        -0.0
+      ],
+      "info_ref": "ows_tank"
+    },
+    {
+      "id": "plate_pack",
+      "name": "Corrugated Plate Pack (45°) — short rise distance for oil droplets",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "plate_pack__back",
+        "plate_pack__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.7
+      ],
+      "bbox_min": [
+        -0.5,
+        -0.00103,
+        -0.44
+      ],
+      "bbox_max": [
+        0.3,
+        1.13603,
+        0.44
+      ],
+      "label_anchor": [
+        -0.1,
+        0.5675,
+        0.44
+      ],
+      "center": [
+        -0.1,
+        0.5675,
+        -0.0
+      ],
+      "info_ref": "ows_plates"
+    },
+    {
+      "id": "water",
+      "name": "Water Phase",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "wt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.45,
+        0.035,
+        -0.445
+      ],
+      "bbox_max": [
+        1.15,
+        0.885,
+        -0.005
+      ],
+      "label_anchor": [
+        -0.15,
+        0.46,
+        -0.005
+      ],
+      "center": [
+        -0.15,
+        0.46,
+        -0.225
+      ],
+      "info_ref": "ows_tank"
+    },
+    {
+      "id": "oil_layer",
+      "name": "Separated Oil Layer",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ol"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -1.375,
+        0.885,
+        -0.445
+      ],
+      "bbox_max": [
+        0.675,
+        0.955,
+        -0.005
+      ],
+      "label_anchor": [
+        -0.35,
+        0.92,
+        -0.005
+      ],
+      "center": [
+        -0.35,
+        0.92,
+        -0.225
+      ],
+      "info_ref": "ows_oil"
+    },
+    {
+      "id": "oil_skimmer",
+      "name": "Rotatable Slotted-Pipe Oil Skimmer",
+      "group": "skimmer",
+      "section_role": "keep",
+      "nodes": [
+        "oil_skimmer.001"
+      ],
+      "pivot": [
+        0.9,
+        0.93,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.4
+      ],
+      "bbox_min": [
+        0.824,
+        0.854,
+        -0.6
+      ],
+      "bbox_max": [
+        0.976,
+        1.006,
+        0.7
+      ],
+      "label_anchor": [
+        0.9,
+        0.93,
+        0.7
+      ],
+      "center": [
+        0.9,
+        0.93,
+        0.05
+      ],
+      "info_ref": "ows_skimmer"
+    },
+    {
+      "id": "nozzles",
+      "name": "Inlet, Clean-Water Outlet & Sludge Drain",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.8,
+        -0.15,
+        -0.133
+      ],
+      "bbox_max": [
+        1.8,
+        0.883,
+        0.133
+      ],
+      "label_anchor": [
+        0.0,
+        0.3665,
+        0.133
+      ],
+      "center": [
+        0.0,
+        0.3665,
+        -0.0
+      ],
+      "info_ref": "ows_tank"
+    },
+    {
+      "id": "oil_droplets",
+      "name": "Oil Droplets rising to the Plates and Surface",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "oil_droplets0",
+        "oil_droplets1",
+        "oil_droplets2",
+        "oil_droplets3",
+        "oil_droplets4",
+        "oil_droplets5",
+        "oil_droplets6",
+        "oil_droplets7",
+        "oil_droplets8",
+        "oil_droplets9",
+        "oil_droplets10",
+        "oil_droplets11",
+        "oil_droplets12",
+        "oil_droplets13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "sludge",
+      "name": "Solids settling into the Hopper",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "sludge0",
+        "sludge1",
+        "sludge2",
+        "sludge3",
+        "sludge4",
+        "sludge5",
+        "sludge6",
+        "sludge7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ows_tank": {
+      "function": "Holds the flow; baffles and weir.",
+      "construction": "Concrete/steel tank with hopper.",
+      "material": "Steel/concrete.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ows_plates": {
+      "function": "Short rise distance; coalescence.",
+      "construction": "Corrugated plate pack.",
+      "material": "PP/FRP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling"
+      ],
+      "inspection": [
+        "Clean"
+      ]
+    },
+    "ows_oil": {
+      "function": "Separated oil.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ows_skimmer": {
+      "function": "Removes oil.",
+      "construction": "Slotted pipe skimmer.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

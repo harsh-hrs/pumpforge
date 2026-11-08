@@ -1,0 +1,438 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "alumina_storage_silo",
+  "title": "Alumina Storage Silo (Aerated Floor, Bin-Vent Filter, Truck/Rail Loading)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 211,
+    "phase": 10,
+    "eq_id": "EQ-289",
+    "subcategory": "Storage",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "alumina_storage_silo_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "alumina_storage_silo_pressure.glb",
+      "title": "Aeration makes alumina flow",
+      "description": "Low-pressure air (typically a few hundred mbar) blown through porous air-slide pads fluidises the alumina above the floor so it flows to the discharge without bridging or rat-holing. The bin-vent filter releases displaced air during filling while retaining dust.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "fill",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          -2.1,
+          4.1,
+          -0.0
+        ],
+        [
+          -0.2,
+          4.1,
+          -0.0
+        ],
+        [
+          -0.2,
+          2.8,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "aeration_air",
+      "kind": "air",
+      "radius": 0.012,
+      "points": [
+        [
+          0.9,
+          1.4,
+          -0.1
+        ],
+        [
+          0.1,
+          1.4,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "discharge",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          1.4,
+          -0.0
+        ],
+        [
+          0.0,
+          0.7,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8808,
+    "parts": 6
+  },
+  "summary": "An alumina storage silo holds finished smelter-grade alumina. An aerated floor fluidises the alumina so it flows to the discharge; a bin-vent filter on the roof vents air during filling, and trucks or rail cars are loaded beneath.",
+  "classification": {
+    "family": "Storage",
+    "type": "Aerated-floor concrete/steel silo"
+  },
+  "model_configuration": {
+    "animation": "Level changes; loading"
+  },
+  "standards": [
+    {
+      "id": "EN 1991-4",
+      "title": "Actions on silos and tanks",
+      "relevance": "Structural loads.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Bulk solids storage design (Jenike)"
+  ],
+  "parts": [
+    {
+      "id": "silo_shell",
+      "name": "Silo Shell, Roof & Concrete Skirt (with truck drive-through)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "silo_shell__back",
+        "silo_shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.15,
+        0.0,
+        -1.15
+      ],
+      "bbox_max": [
+        1.15,
+        3.75,
+        1.15
+      ],
+      "label_anchor": [
+        0.0,
+        1.875,
+        1.15
+      ],
+      "center": [
+        0.0,
+        1.875,
+        -0.0
+      ],
+      "info_ref": "as_shell"
+    },
+    {
+      "id": "aeration_discharge",
+      "name": "Aerated Floor (air-slide pads), Discharge Gate & Telescopic Loading Spout",
+      "group": "discharge",
+      "section_role": "keep",
+      "nodes": [
+        "aeration_discharge.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.6
+      ],
+      "bbox_min": [
+        -1.02,
+        0.6,
+        -1.02
+      ],
+      "bbox_max": [
+        1.02,
+        1.4,
+        1.02
+      ],
+      "label_anchor": [
+        0.0,
+        1.0,
+        1.02
+      ],
+      "center": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "as_aeration"
+    },
+    {
+      "id": "alumina",
+      "name": "Stored Alumina (level animated)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "al"
+      ],
+      "pivot": [
+        0.0,
+        1.39,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -1.09,
+        1.39,
+        -1.09
+      ],
+      "bbox_max": [
+        1.09,
+        3.2,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.295,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.295,
+        -0.545
+      ],
+      "info_ref": "as_product"
+    },
+    {
+      "id": "roof_equipment",
+      "name": "Bin-Vent Filter, Radar Level Transmitter, Fill Pipe & Pressure/Vacuum Relief",
+      "group": "roof",
+      "section_role": "keep",
+      "nodes": [
+        "roof_equipment.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.0,
+        3.6,
+        -0.575
+      ],
+      "bbox_max": [
+        0.75,
+        4.275,
+        0.07
+      ],
+      "label_anchor": [
+        -0.625,
+        3.9375,
+        0.07
+      ],
+      "center": [
+        -0.625,
+        3.9375,
+        -0.2525
+      ],
+      "info_ref": "as_roof"
+    },
+    {
+      "id": "tanker",
+      "name": "Bulk Road Tanker being Loaded",
+      "group": "vehicle",
+      "section_role": "keep",
+      "nodes": [
+        "tr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.8
+      ],
+      "bbox_min": [
+        -0.8,
+        0.0,
+        -0.38
+      ],
+      "bbox_max": [
+        0.8,
+        0.7,
+        0.38
+      ],
+      "label_anchor": [
+        0.0,
+        0.35,
+        0.38
+      ],
+      "center": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "as_aeration"
+    },
+    {
+      "id": "loading",
+      "name": "Alumina flowing through the Loading Spout",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "loading0",
+        "loading1",
+        "loading2",
+        "loading3",
+        "loading4",
+        "loading5"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.03,
+        -0.03,
+        -0.03
+      ],
+      "bbox_max": [
+        0.03,
+        0.03,
+        0.03
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.03
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "as_shell": {
+      "function": "Holds product.",
+      "construction": "Shell, roof, skirt.",
+      "material": "Steel/concrete.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "as_aeration": {
+      "function": "Fluidise and discharge.",
+      "construction": "Air-slide pads, gate, spout.",
+      "material": "Fabric/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Pad blinding"
+      ],
+      "inspection": [
+        "ΔP check"
+      ]
+    },
+    "as_product": {
+      "function": "Stored alumina.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "as_roof": {
+      "function": "Venting, level, fill.",
+      "construction": "Bin-vent filter, radar, relief.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

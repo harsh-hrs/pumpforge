@@ -1,0 +1,906 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "variable_frequency_drive",
+  "title": "Variable Frequency Drive (VFD) — 6-Pulse Rectifier, DC Link, IGBT Inverter",
+  "category": "7 · Rotating Equipment – Additional Machinery",
+  "library": {
+    "no": 84,
+    "phase": 5,
+    "eq_id": "EQ-162",
+    "subcategory": "Motor Drives",
+    "hi_family": "rotating_machinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "variable_frequency_drive_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "waveforms": {
+      "file": "variable_frequency_drive_waveforms.glb",
+      "title": "Waveforms: AC → DC → PWM → motor",
+      "description": "The rectifier turns fixed-frequency AC into DC; the capacitors smooth it. The IGBTs switch the DC on and off thousands of times per second (PWM) so the average voltage follows a sine wave of any chosen frequency. Motor speed ≈ 120 × f / poles, so changing f changes speed.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Mains AC: fixed 50/60 Hz",
+          "anchor": [
+            -0.45,
+            2.21,
+            0.25
+          ]
+        },
+        {
+          "text": "DC link (smoothed)",
+          "anchor": [
+            -0.45,
+            2.03,
+            0.25
+          ]
+        },
+        {
+          "text": "PWM pulses",
+          "anchor": [
+            -0.45,
+            1.85,
+            0.25
+          ]
+        },
+        {
+          "text": "Motor current at set frequency",
+          "anchor": [
+            -0.45,
+            1.67,
+            0.25
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "power",
+      "kind": "electric",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.25,
+          1.6,
+          -0.12
+        ],
+        [
+          -0.25,
+          1.3,
+          -0.12
+        ],
+        [
+          0.12,
+          1.3,
+          -0.12
+        ],
+        [
+          0.0,
+          1.0,
+          -0.12
+        ],
+        [
+          0.0,
+          0.6,
+          -0.12
+        ],
+        [
+          0.15,
+          0.36,
+          -0.12
+        ],
+        [
+          0.15,
+          0.1,
+          -0.12
+        ],
+        [
+          0.75,
+          0.1,
+          -0.0
+        ],
+        [
+          0.75,
+          0.3,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cooling_air",
+      "kind": "air",
+      "radius": 0.008,
+      "points": [
+        [
+          0.0,
+          0.32,
+          -0.18
+        ],
+        [
+          0.0,
+          0.6,
+          -0.2
+        ],
+        [
+          0.0,
+          1.55,
+          -0.2
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6278,
+    "parts": 14
+  },
+  "summary": "A variable frequency drive (VFD, inverter) controls the speed of an AC motor by changing the frequency and voltage it supplies. The rectifier turns mains AC into DC, the DC link capacitors smooth it, and the IGBT inverter switches the DC rapidly (PWM) to build a new AC waveform of any frequency. Running pumps and fans at reduced speed instead of throttling saves a lot of energy (affinity laws: power ∝ speed³).",
+  "classification": {
+    "family": "Power electronic motor drive",
+    "type": "Voltage-source inverter, 6-pulse diode front end, IGBT PWM"
+  },
+  "model_configuration": {
+    "animation": "Motor speed ramps up, runs, and ramps down as the output frequency changes",
+    "overlay": "Waveforms through the drive"
+  },
+  "standards": [
+    {
+      "id": "IEC 61800-2 / -3 / -5-1",
+      "title": "Adjustable speed electrical power drive systems",
+      "relevance": "Ratings, EMC, safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "IEEE 519",
+      "title": "Harmonic control in electric power systems",
+      "relevance": "Line harmonics.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "IEC 60034-25",
+      "title": "AC motors designed for converter supply",
+      "relevance": "Motor insulation for PWM.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "ABB / Siemens drive technical guides (generic principles)"
+  ],
+  "parts": [
+    {
+      "id": "enclosure",
+      "name": "Drive Enclosure (IP-rated cabinet)",
+      "group": "enclosure",
+      "section_role": "split",
+      "nodes": [
+        "enclosure__back",
+        "enclosure__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.35,
+        0.3,
+        -0.2
+      ],
+      "bbox_max": [
+        0.35,
+        1.5,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        0.2
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "vfd_enclosure"
+    },
+    {
+      "id": "door",
+      "name": "Front Door (hidden in cutaway)",
+      "group": "enclosure",
+      "section_role": "hide",
+      "nodes": [
+        "door"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.345,
+        0.305,
+        0.2005
+      ],
+      "bbox_max": [
+        0.345,
+        1.495,
+        0.2155
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        0.2155
+      ],
+      "center": [
+        0.0,
+        0.9,
+        0.208
+      ],
+      "info_ref": "vfd_enclosure"
+    },
+    {
+      "id": "line_reactor",
+      "name": "Input Line Reactor (choke) — limits harmonics & inrush",
+      "group": "power_input",
+      "section_role": "keep",
+      "nodes": [
+        "rx"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.29,
+        1.22,
+        -0.16
+      ],
+      "bbox_max": [
+        -0.07,
+        1.38,
+        -0.08
+      ],
+      "label_anchor": [
+        -0.18,
+        1.3,
+        -0.08
+      ],
+      "center": [
+        -0.18,
+        1.3,
+        -0.12
+      ],
+      "info_ref": "vfd_reactor"
+    },
+    {
+      "id": "rectifier",
+      "name": "Rectifier Module (6 diodes: AC → DC)",
+      "group": "power_section",
+      "section_role": "keep",
+      "nodes": [
+        "rect"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.1,
+        0.45
+      ],
+      "bbox_min": [
+        0.04,
+        1.23,
+        -0.15
+      ],
+      "bbox_max": [
+        0.2,
+        1.345,
+        -0.09
+      ],
+      "label_anchor": [
+        0.12,
+        1.2875,
+        -0.09
+      ],
+      "center": [
+        0.12,
+        1.2875,
+        -0.12
+      ],
+      "info_ref": "vfd_rectifier"
+    },
+    {
+      "id": "dc_bus",
+      "name": "DC Link: Capacitor Bank & Bus Bars",
+      "group": "power_section",
+      "section_role": "keep",
+      "nodes": [
+        "dc_bus.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.28,
+        0.88,
+        -0.16
+      ],
+      "bbox_max": [
+        0.28,
+        1.115,
+        -0.07
+      ],
+      "label_anchor": [
+        0.0,
+        0.9975,
+        -0.07
+      ],
+      "center": [
+        0.0,
+        0.9975,
+        -0.115
+      ],
+      "info_ref": "vfd_dc_link"
+    },
+    {
+      "id": "inverter",
+      "name": "IGBT Inverter Modules (DC → variable-frequency AC) on Heatsink",
+      "group": "power_section",
+      "section_role": "keep",
+      "nodes": [
+        "inverter.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.55
+      ],
+      "bbox_min": [
+        -0.25,
+        0.46,
+        -0.23
+      ],
+      "bbox_max": [
+        0.25,
+        0.74,
+        -0.1
+      ],
+      "label_anchor": [
+        0.0,
+        0.6,
+        -0.1
+      ],
+      "center": [
+        0.0,
+        0.6,
+        -0.165
+      ],
+      "info_ref": "vfd_inverter"
+    },
+    {
+      "id": "cooling_fan",
+      "name": "Heatsink Cooling Fan",
+      "group": "cooling",
+      "section_role": "keep",
+      "nodes": [
+        "cf"
+      ],
+      "pivot": [
+        0.0,
+        0.435,
+        -0.15
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.08092,
+        0.42,
+        -0.23509
+      ],
+      "bbox_max": [
+        0.085,
+        0.45,
+        -0.06491
+      ],
+      "label_anchor": [
+        0.00204,
+        0.435,
+        -0.06491
+      ],
+      "center": [
+        0.00204,
+        0.435,
+        -0.15
+      ],
+      "info_ref": "vfd_fan"
+    },
+    {
+      "id": "control",
+      "name": "Control Board (PWM modulator, protection) & Keypad",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "control.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.7
+      ],
+      "bbox_min": [
+        0.05,
+        0.78,
+        -0.106
+      ],
+      "bbox_max": [
+        0.31,
+        1.27,
+        0.2325
+      ],
+      "label_anchor": [
+        0.18,
+        1.025,
+        0.2325
+      ],
+      "center": [
+        0.18,
+        1.025,
+        0.06325
+      ],
+      "info_ref": "vfd_control"
+    },
+    {
+      "id": "terminals",
+      "name": "Line (L1–L3) & Motor (U–V–W) Terminals",
+      "group": "power_input",
+      "section_role": "keep",
+      "nodes": [
+        "terminals.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.12,
+        0.335,
+        -0.135
+      ],
+      "bbox_max": [
+        0.27,
+        0.385,
+        -0.105
+      ],
+      "label_anchor": [
+        0.075,
+        0.36,
+        -0.105
+      ],
+      "center": [
+        0.075,
+        0.36,
+        -0.12
+      ],
+      "info_ref": "vfd_terminals"
+    },
+    {
+      "id": "motor_cable",
+      "name": "Screened Motor Cable",
+      "group": "power_input",
+      "section_role": "keep",
+      "nodes": [
+        "mc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.2,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.132,
+        0.08223,
+        -0.138
+      ],
+      "bbox_max": [
+        0.76765,
+        0.3,
+        0.01765
+      ],
+      "label_anchor": [
+        0.44983,
+        0.19112,
+        0.01765
+      ],
+      "center": [
+        0.44983,
+        0.19112,
+        -0.06017
+      ],
+      "info_ref": "vfd_terminals"
+    },
+    {
+      "id": "motor_frame",
+      "name": "Motor (speed follows the VFD) – Frame",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "motor_frame__back",
+        "motor_frame__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.62,
+        0.25,
+        -0.142
+      ],
+      "bbox_max": [
+        0.98,
+        0.562,
+        0.142
+      ],
+      "label_anchor": [
+        0.8,
+        0.406,
+        0.142
+      ],
+      "center": [
+        0.8,
+        0.406,
+        -0.0
+      ],
+      "info_ref": "motor_frame_h"
+    },
+    {
+      "id": "motor_stator",
+      "name": "Motor (speed follows the VFD) – Stator & Windings",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "motor_stator__back",
+        "motor_stator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.312,
+        -0.0
+      ],
+      "bbox_min": [
+        0.66,
+        0.304,
+        -0.116
+      ],
+      "bbox_max": [
+        0.94,
+        0.536,
+        0.116
+      ],
+      "label_anchor": [
+        0.8,
+        0.42,
+        0.116
+      ],
+      "center": [
+        0.8,
+        0.42,
+        -0.0
+      ],
+      "info_ref": "stator"
+    },
+    {
+      "id": "motor_rotor",
+      "name": "Motor (speed follows the VFD) – Rotor, Shaft & Speed Marker Disc",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "mr"
+      ],
+      "pivot": [
+        0.0,
+        0.42,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.338
+      ],
+      "bbox_min": [
+        0.405,
+        0.303,
+        -0.117
+      ],
+      "bbox_max": [
+        1.03,
+        0.537,
+        0.117
+      ],
+      "label_anchor": [
+        0.7175,
+        0.42,
+        0.117
+      ],
+      "center": [
+        0.7175,
+        0.42,
+        -0.0
+      ],
+      "info_ref": "rotor"
+    },
+    {
+      "id": "plinth",
+      "name": "Plinth",
+      "group": "baseplate",
+      "section_role": "keep",
+      "nodes": [
+        "pl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.8,
+        0.0,
+        -0.4
+      ],
+      "bbox_max": [
+        1.2,
+        0.05,
+        0.4
+      ],
+      "label_anchor": [
+        0.2,
+        0.025,
+        0.4
+      ],
+      "center": [
+        0.2,
+        0.025,
+        -0.0
+      ],
+      "info_ref": "vfd_enclosure"
+    }
+  ],
+  "components": {
+    "vfd_enclosure": {
+      "function": "Protects the electronics and guides cooling air.",
+      "construction": "Steel cabinet with filtered vents.",
+      "material": "Steel.",
+      "operating_conditions": "Ambient temperature derating.",
+      "failure_modes": [
+        "Dust build-up"
+      ],
+      "inspection": [
+        "Clean filters"
+      ]
+    },
+    "vfd_reactor": {
+      "function": "Reduces line harmonics and protects against surges.",
+      "construction": "Three-phase iron-core choke.",
+      "material": "Steel laminations, copper.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Overheating"
+      ],
+      "inspection": [
+        "Thermography"
+      ]
+    },
+    "vfd_rectifier": {
+      "function": "Converts AC to DC.",
+      "construction": "Six-diode bridge module.",
+      "material": "Silicon on ceramic.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Diode failure"
+      ],
+      "inspection": [
+        "Diode test"
+      ]
+    },
+    "vfd_dc_link": {
+      "function": "Stores energy and smooths the DC voltage.",
+      "construction": "Electrolytic/film capacitors on bus bars.",
+      "material": "Aluminium electrolytic, copper.",
+      "operating_conditions": "Capacitors age with heat.",
+      "failure_modes": [
+        "Capacitor ageing, bulging"
+      ],
+      "inspection": [
+        "Capacitance/ripple check, reform if stored"
+      ]
+    },
+    "vfd_inverter": {
+      "function": "Switches DC to make variable-frequency AC.",
+      "construction": "IGBT modules on a finned heatsink.",
+      "material": "Silicon, copper, aluminium.",
+      "operating_conditions": "Switching frequency ~2–16 kHz.",
+      "failure_modes": [
+        "IGBT failure (overheat, short)"
+      ],
+      "inspection": [
+        "Heatsink temperature, fault log"
+      ]
+    },
+    "vfd_fan": {
+      "function": "Cools the heatsink.",
+      "construction": "Axial fan.",
+      "material": "Plastic.",
+      "operating_conditions": "Wear item.",
+      "failure_modes": [
+        "Bearing failure"
+      ],
+      "inspection": [
+        "Replace on schedule"
+      ]
+    },
+    "vfd_control": {
+      "function": "Generates PWM, controls speed/torque, protects motor and drive.",
+      "construction": "Microcontroller board and keypad.",
+      "material": "Electronics.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Parameter errors"
+      ],
+      "inspection": [
+        "Backup parameters"
+      ]
+    },
+    "vfd_terminals": {
+      "function": "Connect mains and motor.",
+      "construction": "Terminals and screened cable.",
+      "material": "Copper.",
+      "operating_conditions": "Screened cable reduces EMC.",
+      "failure_modes": [
+        "Loose terminals"
+      ],
+      "inspection": [
+        "Torque check"
+      ]
+    },
+    "motor_frame_h": {
+      "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+      "construction": "Totally enclosed fan-cooled (TEFC) frame with external cooling fins, drive-end and non-drive-end end shields, terminal box and lifting eye.",
+      "material": "Cast iron or aluminium frame; steel fasteners.",
+      "operating_conditions": "Frame size, enclosure (IP rating), efficiency class (e.g. IEC 60034-30-1 IE3/IE4) and insulation class per motor data sheet.",
+      "failure_modes": [
+        "Overheating from blocked fins or fan cover",
+        "Soft foot causing frame distortion and vibration",
+        "Moisture ingress at terminal box"
+      ],
+      "inspection": [
+        "Clean fins and fan cover",
+        "Check foot shims for soft foot",
+        "Insulation resistance before start-up"
+      ]
+    },
+    "stator": {
+      "function": "Produces the rotating magnetic field.",
+      "construction": "Laminated electrical-steel core with insulated copper windings; end turns project at each end.",
+      "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical).",
+      "operating_conditions": "Rated voltage and frequency; temperature rise within insulation class.",
+      "failure_modes": [
+        "Winding insulation failure",
+        "Single phasing",
+        "Overload overheating"
+      ],
+      "inspection": [
+        "Insulation resistance / polarisation index",
+        "Phase current balance",
+        "Winding temperature where RTDs fitted"
+      ]
+    },
+    "rotor": {
+      "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+      "construction": "Laminated core with aluminium or copper bars and end rings, shrunk on the shaft and dynamically balanced.",
+      "material": "Electrical steel, die-cast aluminium or copper.",
+      "operating_conditions": "Runs slightly below synchronous speed (slip).",
+      "failure_modes": [
+        "Broken rotor bars",
+        "Imbalance",
+        "Rotor-stator rub after bearing failure"
+      ],
+      "inspection": [
+        "Motor current signature analysis",
+        "Vibration at 1x and pole-pass sidebands"
+      ]
+    }
+  }
+}

@@ -1,0 +1,924 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "demineralization_plant",
+  "title": "Demineralization Plant (Strong-Acid Cation → Degasser → Strong-Base Anion)",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 225,
+    "phase": 11,
+    "eq_id": "EQ-303",
+    "subcategory": "Water Treatment",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "demineralization_plant_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "demineralization_plant_pressure.glb",
+      "title": "Ion exchange swaps salts for H⁺ and OH⁻",
+      "description": "The cation resin exchanges Ca²⁺, Mg²⁺, Na⁺ for H⁺ (water becomes acidic); the degasser blows out the CO₂ formed from bicarbonate; the anion resin exchanges Cl⁻, SO₄²⁻, silica for OH⁻; H⁺ + OH⁻ → H₂O. Resins are regenerated with acid and caustic when exhausted (rising conductivity/silica or sodium slip). Typical outlet < 5–10 µS/cm, silica < ~ 0.1 mg/L.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.012,
+      "points": [
+        [
+          0.45,
+          0.75,
+          -0.4
+        ],
+        [
+          0.25,
+          0.75,
+          -0.05
+        ],
+        [
+          0.0,
+          1.0,
+          -0.1
+        ],
+        [
+          0.0,
+          2.8,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.018,
+      "points": [
+        [
+          -2.5,
+          2.21,
+          -0.0
+        ],
+        [
+          -1.6,
+          2.0,
+          -0.05
+        ],
+        [
+          -1.6,
+          0.6,
+          -0.05
+        ],
+        [
+          -1.6,
+          0.3,
+          -0.0
+        ],
+        [
+          -1.0,
+          0.3,
+          -0.0
+        ],
+        [
+          -1.0,
+          2.8,
+          -0.0
+        ],
+        [
+          0.0,
+          2.6,
+          -0.05
+        ],
+        [
+          0.0,
+          0.4,
+          -0.05
+        ],
+        [
+          1.0,
+          0.3,
+          -0.0
+        ],
+        [
+          1.0,
+          2.21,
+          -0.0
+        ],
+        [
+          1.6,
+          2.0,
+          -0.05
+        ],
+        [
+          1.6,
+          0.6,
+          -0.05
+        ],
+        [
+          1.6,
+          0.125,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 35166,
+    "parts": 16
+  },
+  "summary": "A demineralization plant removes dissolved salts by ion exchange. A strong-acid cation unit exchanges cations for H⁺, a degasser strips CO₂, and a strong-base anion unit exchanges anions for OH⁻, producing water for boilers and processes.",
+  "classification": {
+    "family": "Water treatment",
+    "type": "Two-bed demineraliser with degasser"
+  },
+  "model_configuration": {
+    "animation": "Ions captured; CO₂ stripped"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "IX vessels.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "VGB-S-010 / EPRI guidelines",
+      "title": "Boiler water quality",
+      "relevance": "Make-up water targets (to be verified).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Dow/DuPont ion exchange manuals"
+  ],
+  "parts": [
+    {
+      "id": "cation",
+      "name": "Cation Exchanger (H⁺ form)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "cation__back",
+        "cation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.95,
+        0.425,
+        -0.35
+      ],
+      "bbox_max": [
+        -1.25,
+        2.175,
+        0.35
+      ],
+      "label_anchor": [
+        -1.6,
+        1.3,
+        0.35
+      ],
+      "center": [
+        -1.6,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dm_vessel"
+    },
+    {
+      "id": "cation_resin",
+      "name": "Cation Exchanger: Support Gravel / Strong-Acid Cation Resin",
+      "group": "media",
+      "section_role": "keep",
+      "nodes": [
+        "cation_resin.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -1.938,
+        0.65,
+        -0.338
+      ],
+      "bbox_max": [
+        -1.262,
+        1.55,
+        -0.0
+      ],
+      "label_anchor": [
+        -1.6,
+        1.1,
+        -0.0
+      ],
+      "center": [
+        -1.6,
+        1.1,
+        -0.169
+      ],
+      "info_ref": "dm_resin"
+    },
+    {
+      "id": "cation_internals",
+      "name": "Cation Exchanger: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "cation_internals.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -1.88,
+        0.425,
+        -0.21
+      ],
+      "bbox_max": [
+        -1.32,
+        2.175,
+        0.21
+      ],
+      "label_anchor": [
+        -1.6,
+        1.3,
+        0.21
+      ],
+      "center": [
+        -1.6,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dm_internals"
+    },
+    {
+      "id": "anion",
+      "name": "Anion Exchanger (OH⁻ form)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "anion__back",
+        "anion__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        1.25,
+        0.425,
+        -0.35
+      ],
+      "bbox_max": [
+        1.95,
+        2.175,
+        0.35
+      ],
+      "label_anchor": [
+        1.6,
+        1.3,
+        0.35
+      ],
+      "center": [
+        1.6,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dm_vessel"
+    },
+    {
+      "id": "anion_resin",
+      "name": "Anion Exchanger: Support Gravel / Strong-Base Anion Resin",
+      "group": "media",
+      "section_role": "keep",
+      "nodes": [
+        "anion_resin.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        1.262,
+        0.65,
+        -0.338
+      ],
+      "bbox_max": [
+        1.938,
+        1.55,
+        -0.0
+      ],
+      "label_anchor": [
+        1.6,
+        1.1,
+        -0.0
+      ],
+      "center": [
+        1.6,
+        1.1,
+        -0.169
+      ],
+      "info_ref": "dm_resin"
+    },
+    {
+      "id": "anion_internals",
+      "name": "Anion Exchanger: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "anion_internals.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.32,
+        0.425,
+        -0.21
+      ],
+      "bbox_max": [
+        1.88,
+        2.175,
+        0.21
+      ],
+      "label_anchor": [
+        1.6,
+        1.3,
+        0.21
+      ],
+      "center": [
+        1.6,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dm_internals"
+    },
+    {
+      "id": "degasser",
+      "name": "Degasser Tower (removes CO₂ formed after the cation unit) & Degassed-Water Sump",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "degasser__back",
+        "degasser__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.38,
+        0.0,
+        -0.38
+      ],
+      "bbox_max": [
+        0.38,
+        2.6,
+        0.38
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.38
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "dm_degasser"
+    },
+    {
+      "id": "degasser_packing",
+      "name": "Degasser Packing",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "dgp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.5
+      ],
+      "bbox_min": [
+        -0.244,
+        1.3,
+        -0.244
+      ],
+      "bbox_max": [
+        0.244,
+        2.2,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.75,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.75,
+        -0.122
+      ],
+      "info_ref": "dm_degasser"
+    },
+    {
+      "id": "degasser_blower",
+      "name": "Degasser Air Blower",
+      "group": "air",
+      "section_role": "keep",
+      "nodes": [
+        "degasser_blower.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        0.25,
+        0.63,
+        -0.5
+      ],
+      "bbox_max": [
+        0.57,
+        0.87,
+        0.05
+      ],
+      "label_anchor": [
+        0.41,
+        0.75,
+        0.05
+      ],
+      "center": [
+        0.41,
+        0.75,
+        -0.225
+      ],
+      "info_ref": "dm_degasser"
+    },
+    {
+      "id": "piping",
+      "name": "Process Piping & Conductivity / Silica Analyser",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.4,
+        0.105,
+        -0.076
+      ],
+      "bbox_max": [
+        2.04,
+        2.84,
+        0.076
+      ],
+      "label_anchor": [
+        -0.18,
+        1.4725,
+        0.076
+      ],
+      "center": [
+        -0.18,
+        1.4725,
+        -0.0
+      ],
+      "info_ref": "dm_piping"
+    },
+    {
+      "id": "regenerant_tanks",
+      "name": "Regenerant Tanks: Acid (HCl/H₂SO₄) & Caustic (NaOH) with Dosing",
+      "group": "chemicals",
+      "section_role": "keep",
+      "nodes": [
+        "regenerant_tanks.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -2.85,
+        0.05,
+        -1.15
+      ],
+      "bbox_max": [
+        2.85,
+        0.875,
+        -0.65
+      ],
+      "label_anchor": [
+        0.0,
+        0.4625,
+        -0.65
+      ],
+      "center": [
+        0.0,
+        0.4625,
+        -0.9
+      ],
+      "info_ref": "dm_regen"
+    },
+    {
+      "id": "transfer_pump",
+      "name": "Degassed-Water Transfer Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "transfer_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.3,
+        0.075,
+        0.45
+      ],
+      "bbox_max": [
+        1.2,
+        0.37,
+        0.75
+      ],
+      "label_anchor": [
+        0.75,
+        0.2225,
+        0.75
+      ],
+      "center": [
+        0.75,
+        0.2225,
+        0.6
+      ],
+      "info_ref": "dm_piping"
+    },
+    {
+      "id": "transfer_pump_shaft",
+      "name": "Degassed-Water Transfer Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "transfer_pumpc"
+      ],
+      "pivot": [
+        0.69,
+        0.25,
+        0.6
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.63,
+        0.23,
+        0.55
+      ],
+      "bbox_max": [
+        0.75,
+        0.27,
+        0.65
+      ],
+      "label_anchor": [
+        0.69,
+        0.25,
+        0.65
+      ],
+      "center": [
+        0.69,
+        0.25,
+        0.6
+      ],
+      "info_ref": "dm_piping"
+    },
+    {
+      "id": "supports",
+      "name": "Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.89749,
+        0.0,
+        -0.29749
+      ],
+      "bbox_max": [
+        1.89749,
+        0.6,
+        0.29749
+      ],
+      "label_anchor": [
+        0.0,
+        0.3,
+        0.29749
+      ],
+      "center": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "dm_vessel"
+    },
+    {
+      "id": "ions",
+      "name": "Cations captured in the cation bed; anions in the anion bed",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "ions0",
+        "ions1",
+        "ions2",
+        "ions3",
+        "ions4",
+        "ions5",
+        "ions6",
+        "ions7",
+        "ions8",
+        "ions9",
+        "ions10",
+        "ions11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "co2",
+      "name": "CO₂ stripped in the degasser",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "co20",
+        "co21",
+        "co22",
+        "co23",
+        "co24",
+        "co25"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.015
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.015
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.015
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "dm_vessel": {
+      "function": "Pressure vessel for resin.",
+      "construction": "Lined steel/FRP vessel.",
+      "material": "Rubber-lined steel / FRP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dm_resin": {
+      "function": "Exchanges ions.",
+      "construction": "Resin beads on support layer.",
+      "material": "Polystyrene-DVB resin.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling, attrition, oxidation"
+      ],
+      "inspection": [
+        "Capacity test, analysis"
+      ]
+    },
+    "dm_internals": {
+      "function": "Even flow distribution.",
+      "construction": "Distributor and underdrain laterals.",
+      "material": "PP/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Broken nozzles → resin loss"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "dm_degasser": {
+      "function": "Removes CO₂.",
+      "construction": "Degasser tower, sump, blower.",
+      "material": "PP/FRP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dm_piping": {
+      "function": "Interconnections and analysis.",
+      "construction": "Pipes, analysers.",
+      "material": "PP/lined steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dm_regen": {
+      "function": "Regenerants.",
+      "construction": "Acid and caustic tanks.",
+      "material": "PE/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

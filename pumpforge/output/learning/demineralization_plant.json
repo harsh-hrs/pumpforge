@@ -1,0 +1,702 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "demineralization_plant",
+ "no": 225,
+ "title": "Demineralization Plant",
+ "model_title": "Demineralization Plant (Strong-Acid Cation → Degasser → Strong-Base Anion)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A two-bed demineralization (DM) plant removes dissolved salts by ion exchange. A strong-acid cation exchanger replaces Ca²⁺, Mg²⁺ and Na⁺ with H⁺; a degasser blows out the CO₂ formed from bicarbonate; a strong-base anion exchanger replaces Cl⁻, SO₄²⁻ and silica with OH⁻. H⁺ and OH⁻ combine to water, giving low-conductivity water for boilers and processes.",
+   "applications": [
+    "Boiler feed make-up for medium/high-pressure boilers",
+    "Process water for chemicals, pharmaceuticals and power"
+   ],
+   "key_points": [
+    "Cation (H⁺) → degasser → anion (OH⁻)",
+    "Degasser saves anion capacity",
+    "Regenerate with acid and caustic",
+    "Monitor conductivity, silica, sodium slip"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Two-bed demineraliser with degasser"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A demineralization plant removes dissolved salts by ion exchange. A strong-acid cation unit exchanges cations for H⁺, a degasser strips CO₂, and a strong-base anion unit exchanges anions for OH⁻, producing water for boilers and processes."
+  },
+  "model_3d": {
+   "asset": "glb/demineralization_plant.glb",
+   "metadata": "meta/demineralization_plant.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 35166,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Filtered water enters the cation exchanger.",
+    "Cation resin captures metal ions and releases H⁺.",
+    "The degasser strips CO₂."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Filtered water enters the cation exchanger.",
+     "part": "cation",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cation resin captures metal ions and releases H⁺.",
+     "part": "cation_resin",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The degasser strips CO₂.",
+     "part": "degasser",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The anion resin captures anions and releases OH⁻.",
+     "part": "anion_resin",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Acid and caustic regenerate the beds when exhausted.",
+     "part": "regenerant_tanks",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet conductivity vs throughput — flat then rising at exhaustion."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "demineralization_plant_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "demineralization_plant_pressure.glb",
+     "title": "Ion exchange swaps salts for H⁺ and OH⁻",
+     "description": "The cation resin exchanges Ca²⁺, Mg²⁺, Na⁺ for H⁺ (water becomes acidic); the degasser blows out the CO₂ formed from bicarbonate; the anion resin exchanges Cl⁻, SO₄²⁻, silica for OH⁻; H⁺ + OH⁻ → H₂O. Resins are regenerated with acid and caustic when exhausted (rising conductivity/silica or sodium slip). Typical outlet < 5–10 µS/cm, silica < ~ 0.1 mg/L.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/demineralization_plant.json#components",
+   "key_components": "Strong-acid cation unit, degasser, strong-base anion unit, regeneration system",
+   "parts": [
+    {
+     "id": "cation",
+     "name": "Cation Exchanger (H⁺ form)",
+     "info_ref": "dm_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "cation_resin",
+     "name": "Cation Exchanger: Support Gravel / Strong-Acid Cation Resin",
+     "info_ref": "dm_resin",
+     "function": "Exchanges ions.",
+     "material": "Polystyrene-DVB resin."
+    },
+    {
+     "id": "cation_internals",
+     "name": "Cation Exchanger: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+     "info_ref": "dm_internals",
+     "function": "Even flow distribution.",
+     "material": "PP/stainless."
+    },
+    {
+     "id": "anion",
+     "name": "Anion Exchanger (OH⁻ form)",
+     "info_ref": "dm_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "anion_resin",
+     "name": "Anion Exchanger: Support Gravel / Strong-Base Anion Resin",
+     "info_ref": "dm_resin",
+     "function": "Exchanges ions.",
+     "material": "Polystyrene-DVB resin."
+    },
+    {
+     "id": "anion_internals",
+     "name": "Anion Exchanger: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+     "info_ref": "dm_internals",
+     "function": "Even flow distribution.",
+     "material": "PP/stainless."
+    },
+    {
+     "id": "degasser",
+     "name": "Degasser Tower (removes CO₂ formed after the cation unit) & Degassed-Water Sump",
+     "info_ref": "dm_degasser",
+     "function": "Removes CO₂.",
+     "material": "PP/FRP."
+    },
+    {
+     "id": "degasser_packing",
+     "name": "Degasser Packing",
+     "info_ref": "dm_degasser",
+     "function": "Removes CO₂.",
+     "material": "PP/FRP."
+    },
+    {
+     "id": "degasser_blower",
+     "name": "Degasser Air Blower",
+     "info_ref": "dm_degasser",
+     "function": "Removes CO₂.",
+     "material": "PP/FRP."
+    },
+    {
+     "id": "piping",
+     "name": "Process Piping & Conductivity / Silica Analyser",
+     "info_ref": "dm_piping",
+     "function": "Interconnections and analysis.",
+     "material": "PP/lined steel."
+    },
+    {
+     "id": "regenerant_tanks",
+     "name": "Regenerant Tanks: Acid (HCl/H₂SO₄) & Caustic (NaOH) with Dosing",
+     "info_ref": "dm_regen",
+     "function": "Regenerants.",
+     "material": "PE/steel."
+    },
+    {
+     "id": "transfer_pump",
+     "name": "Degassed-Water Transfer Pump",
+     "info_ref": "dm_piping",
+     "function": "Interconnections and analysis.",
+     "material": "PP/lined steel."
+    },
+    {
+     "id": "transfer_pump_shaft",
+     "name": "Degassed-Water Transfer Pump — Shaft & Coupling (turning)",
+     "info_ref": "dm_piping",
+     "function": "Interconnections and analysis.",
+     "material": "PP/lined steel."
+    },
+    {
+     "id": "supports",
+     "name": "Legs",
+     "info_ref": "dm_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "ions",
+     "name": "Cations captured in the cation bed; anions in the anion bed",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "co2",
+     "name": "CO₂ stripped in the degasser",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessels ≈ 0.5 – 4 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 5 – 500",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Outlet < ≈ 5 – 10 µS/cm; silica < ≈ 0.1 mg/L",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Pumps/blower ≈ 5 – 100",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "From water analysis, flow and run length; consider RO + mixed bed for high TDS."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Ion exchange manuals (DuPont/Purolite)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Vessels on level foundation or legs anchored; space above for resin loading and below for underdrain access."
+   ],
+   "alignment": [
+    "Vessels plumb so the bed and distributors are level (uneven beds channel)."
+   ],
+   "piping": [
+    "Valve nest with service, backwash, regenerant, rinse; sample points before/after; acid/caustic-resistant lines and safety showers."
+   ],
+   "commissioning": [
+    "Load support layers and resin (soaked), backwash to classify; first regeneration; rinse to quality; check conductivity/silica/hardness."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Log throughput, conductivity and silica.",
+     "part": "piping",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Resin sample and capacity test.",
+     "part": "cation_resin",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect laterals/distributors; top up resin.",
+     "part": "cation_internals"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Early exhaustion",
+     "category": "performance",
+     "symptoms": [
+      "Short runs"
+     ],
+     "causes": [
+      "Resin fouling",
+      "Poor regeneration"
+     ],
+     "remedies": [
+      "Clean resin; check regenerant dose/concentration"
+     ],
+     "part": "anion_resin"
+    },
+    {
+     "problem": "Silica slip",
+     "category": "performance",
+     "symptoms": [
+      "High silica"
+     ],
+     "causes": [
+      "Anion exhausted, warm caustic not used"
+     ],
+     "remedies": [
+      "Regenerate; use warm caustic"
+     ],
+     "part": "anion_resin"
+    }
+   ],
+   "safety": [
+    "Acid and caustic: PPE, safety showers, bunded storage; hydrogen release from some regenerations — ventilate."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Demineralization Plant — Introduction",
+    "type": "in_app_tour",
+    "model": "demineralization_plant.glb",
+    "duration_s": 55.7,
+    "script": [
+     {
+      "narration": "This module introduces the Demineralization Plant.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A two-bed demineralization (DM) plant removes dissolved salts by ion exchange.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A strong-acid cation exchanger replaces Ca²⁺, Mg²⁺ and Na⁺ with H⁺; a degasser blows out the CO₂ formed from bicarbonate; a strong-base anion exchanger replaces Cl⁻, SO₄²⁻ and silica with OH⁻.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "H⁺ and OH⁻ combine to water, giving low-conductivity water for boilers and processes.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include boiler feed make-up for medium/high-pressure boilers; process water for chemicals, pharmaceuticals and power.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Degassed-Water Transfer Pump, Degassed-Water Transfer Pump — Shaft & Coupling (turning).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Demineralization Plant — Operation",
+    "type": "in_app_tour",
+    "model": "demineralization_plant.glb",
+    "duration_s": 42.0,
+    "script": [
+     {
+      "narration": "How the Demineralization Plant works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Filtered water enters the cation exchanger.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cation",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cation resin captures metal ions and releases H⁺.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cation_resin",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The degasser strips CO₂.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "degasser",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The anion resin captures anions and releases OH⁻.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "anion_resin",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Acid and caustic regenerate the beds when exhausted.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "regenerant_tanks",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The cation resin exchanges Ca²⁺, Mg²⁺, Na⁺ for H⁺ (water becomes acidic); the degasser blows out the CO₂ formed from bicarbonate; the anion resin exchanges Cl⁻, SO₄²⁻, silica for OH⁻; H⁺ + OH⁻ → H₂O.",
+      "duration_s": 13.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Demineralization Plant — Maintenance",
+    "type": "in_app_tour",
+    "model": "demineralization_plant.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Demineralization Plant.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Log throughput, conductivity and silica.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Resin sample and capacity test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cation_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect laterals/distributors; top up resin.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cation_internals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for early exhaustion: short runs. Common cause: resin fouling.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "anion_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for silica slip: high silica. Common cause: anion exhausted, warm caustic not used.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "anion_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which unit removes CO₂?",
+     "options": [
+      "Degasser",
+      "Cation",
+      "Anion",
+      "Acid tank"
+     ],
+     "answer": 0,
+     "explanation": "Degasser.",
+     "level": "basic"
+    },
+    {
+     "question": "What regenerates the cation resin?",
+     "options": [
+      "Acid",
+      "Caustic",
+      "Brine",
+      "Water"
+     ],
+     "answer": 0,
+     "explanation": "Acid.",
+     "level": "basic"
+    },
+    {
+     "question": "Why use a degasser?",
+     "options": [
+      "Removes CO₂ cheaply, reducing anion load",
+      "Adds oxygen",
+      "Heats water",
+      "Filters solids"
+     ],
+     "answer": 0,
+     "explanation": "Saves anion capacity.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure vessel for resin.\"",
+     "options": [
+      "Cation Exchanger (H⁺ form)",
+      "Degassed-Water Transfer Pump",
+      "Process Piping & Conductivity / Silica Analyser",
+      "Degassed-Water Transfer Pump — Shaft & Coupling (turning)"
+     ],
+     "answer": 0,
+     "explanation": "Cation Exchanger (H⁺ form): Pressure vessel for resin.",
+     "level": "basic",
+     "part": "cation",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Exchanges ions.\"",
+     "options": [
+      "Cation Exchanger: Support Gravel / Strong-Acid Cation Resin",
+      "Regenerant Tanks: Acid (HCl/H₂SO₄) & Caustic (NaOH) with Dosing",
+      "Legs",
+      "Cation Exchanger (H⁺ form)"
+     ],
+     "answer": 0,
+     "explanation": "Cation Exchanger: Support Gravel / Strong-Acid Cation Resin: Exchanges ions.",
+     "level": "basic",
+     "part": "cation_resin",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Even flow distribution.\"",
+     "options": [
+      "Process Piping & Conductivity / Silica Analyser",
+      "Cation Exchanger: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "Degassed-Water Transfer Pump — Shaft & Coupling (turning)",
+      "Cation Exchanger (H⁺ form)"
+     ],
+     "answer": 1,
+     "explanation": "Cation Exchanger: Inlet Distributor & Underdrain Collector (laterals with nozzles): Even flow distribution.",
+     "level": "basic",
+     "part": "cation_internals",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

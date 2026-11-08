@@ -1,0 +1,653 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "air_receiver_dryer_package",
+ "no": 232,
+ "title": "Air Receiver Dryer Package",
+ "model_title": "Air Receiver with Refrigerated Dryer & Filtration Package",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An air receiver and refrigerated dryer package stores compressed air and conditions it for plant use. The receiver buffers demand, smooths compressor cycling and lets condensate settle; the refrigerated dryer pre-cools the air, chills it to about +3 °C so water condenses and drains, then re-heats it; filters remove oil aerosols and dust.",
+   "applications": [
+    "General plant (service) air for tools and machines",
+    "Pre-drying ahead of desiccant instrument-air dryers"
+   ],
+   "key_points": [
+    "Receiver: storage + condensate separation",
+    "Refrigerated dryer PDP ≈ +3 °C",
+    "Air-to-air exchanger saves energy and prevents sweating",
+    "Zero-loss drains save air"
+   ],
+   "classification": {
+    "family": "Compressed air",
+    "type": "Vertical receiver + refrigerated dryer + filters"
+   },
+   "hi_family": "water_utilities",
+   "summary": "An air receiver and refrigerated dryer package stores compressed air to buffer demand and then cools it to about +3 °C so most of the water condenses and drains. Filters remove oil aerosols and dust, giving clean dry plant air."
+  },
+  "model_3d": {
+   "asset": "glb/air_receiver_dryer_package.glb",
+   "metadata": "meta/air_receiver_dryer_package.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14526,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Compressed air enters the receiver low and leaves high.",
+    "Condensate collects and the auto-drain removes it.",
+    "The air-to-air exchanger pre-cools the air."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Compressed air enters the receiver low and leaves high.",
+     "part": "receiver",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Condensate collects and the auto-drain removes it.",
+     "part": "condensate",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The air-to-air exchanger pre-cools the air.",
+     "part": "heat_exchangers",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The evaporator chills it; the separator drains water.",
+     "part": "refrigeration_circuit",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Filters remove oil aerosols and particles.",
+     "part": "filters",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Dryer capacity correction vs inlet temperature and pressure."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "air_receiver_dryer_package_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "air_receiver_dryer_package_temperature.glb",
+     "title": "Chill to condense, re-heat to protect",
+     "description": "Warm saturated air is pre-cooled by the outgoing cold air, then chilled in the evaporator to ≈ 3 °C so the water condenses and is drained. The cold dry air is re-heated in the air-to-air exchanger before leaving, which saves refrigeration energy and prevents pipe sweating. Pressure dew point ≈ +3 °C (ISO 8573-1 class 4) — fine for general plant air; instrument air needing −40 °C uses a desiccant dryer. The receiver buffers demand, settles condensate and smooths compressor cycling.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/air_receiver_dryer_package.json#components",
+   "key_components": "Air receiver, refrigerated dryer, filters, auto drain, safety valve",
+   "parts": [
+    {
+     "id": "receiver",
+     "name": "Vertical Air Receiver (pressure vessel)",
+     "info_ref": "ard_receiver",
+     "function": "Stores air, damps pulsation, lets condensate settle.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "receiver_legs",
+     "name": "Receiver Legs",
+     "info_ref": "ard_receiver",
+     "function": "Stores air, damps pulsation, lets condensate settle.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "condensate",
+     "name": "Condensate collecting in the receiver bottom",
+     "info_ref": "ard_drain",
+     "function": "Collects condensate.",
+     "material": "—"
+    },
+    {
+     "id": "receiver_fittings",
+     "name": "Inlet (low) & Outlet (high), Safety Valve, Pressure Gauge, Inspection Opening & Zero-Loss Auto Drain",
+     "info_ref": "ard_fittings",
+     "function": "Connections and protection.",
+     "material": "Steel/brass."
+    },
+    {
+     "id": "dryer_cabinet",
+     "name": "Refrigerated Dryer Cabinet (front panel removed in cutaway)",
+     "info_ref": "ard_dryer",
+     "function": "Houses the dryer.",
+     "material": "Painted steel."
+    },
+    {
+     "id": "heat_exchangers",
+     "name": "Air-to-Air Pre-Cooler/Re-Heater, Evaporator (air-to-refrigerant) & Moisture Separator",
+     "info_ref": "ard_hx",
+     "function": "Cool, separate and re-heat the air.",
+     "material": "Aluminium/copper/stainless."
+    },
+    {
+     "id": "refrigeration_circuit",
+     "name": "Refrigeration Circuit: Hermetic Compressor, Air-Cooled Condenser, Expansion Valve & Lines",
+     "info_ref": "ard_refrig",
+     "function": "Provides cooling.",
+     "material": "Copper/steel."
+    },
+    {
+     "id": "condenser_fan",
+     "name": "Condenser Fan",
+     "info_ref": "ard_refrig",
+     "function": "Provides cooling.",
+     "material": "Copper/steel."
+    },
+    {
+     "id": "drain_drops",
+     "name": "Condensed water drained from the separator",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "filters",
+     "name": "Coalescing Filter (oil aerosols ≈ 0.01 mg/m³) & Dust Filter with Auto Drains",
+     "info_ref": "ard_filters",
+     "function": "Remove oil aerosol and particles.",
+     "material": "Aluminium/glass fibre."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Receivers ≈ 0.5 – 30 m³",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 50 – 10,000",
+     "unit": "Nm³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "≈ 7 – 13 bar(g); PDP ≈ +3 °C",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Dryer ≈ 0.5 – 50",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Receiver V ≈ t·Q·p₀/(p₁ − p₂) for a demand event; dryer by corrected flow."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 8573-1",
+    "CAGI"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal movement of connected piping."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; nozzles and supports loaded within limits."
+   ],
+   "piping": [
+    "Relief protection per code, drains at low points, isolations for inspection; slope lines to drains."
+   ],
+   "commissioning": [
+    "Pressure test; set and seal relief valves; check instruments and drains; register with the authority where required."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check drains and dryer dew point/temperature.",
+     "part": "receiver_fittings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean condenser; change filters.",
+     "part": "refrigeration_circuit",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Receiver internal inspection / thickness check.",
+     "part": "receiver"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Water in air lines",
+     "category": "priming",
+     "symptoms": [
+      "Wet tools/instruments"
+     ],
+     "causes": [
+      "Drain stuck, dirty condenser, overloaded dryer"
+     ],
+     "remedies": [
+      "Repair drain, clean condenser, check sizing"
+     ],
+     "part": "heat_exchangers"
+    },
+    {
+     "problem": "Receiver corrosion",
+     "category": "corrosion",
+     "symptoms": [
+      "Wall thinning"
+     ],
+     "causes": [
+      "Standing water"
+     ],
+     "remedies": [
+      "Keep drains working; inspect"
+     ],
+     "part": "receiver"
+    }
+   ],
+   "safety": [
+    "Statutory inspection of receivers; safety valve sized for full compressor flow."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Air Receiver Dryer Package — Introduction",
+    "type": "in_app_tour",
+    "model": "air_receiver_dryer_package.glb",
+    "duration_s": 53.6,
+    "script": [
+     {
+      "narration": "This module introduces the Air Receiver Dryer Package.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An air receiver and refrigerated dryer package stores compressed air and conditions it for plant use.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The receiver buffers demand, smooths compressor cycling and lets condensate settle; the refrigerated dryer pre-cools the air, chills it to about +3 °C so water condenses and drains, then re-heats it; filters remove oil aerosols and dust.",
+      "duration_s": 16.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include general plant (service) air for tools and machines; pre-drying ahead of desiccant instrument-air dryers.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Refrigerated Dryer Cabinet (front panel removed in cutaway), Condenser Fan.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Air Receiver Dryer Package — Operation",
+    "type": "in_app_tour",
+    "model": "air_receiver_dryer_package.glb",
+    "duration_s": 39.0,
+    "script": [
+     {
+      "narration": "How the Air Receiver Dryer Package works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Compressed air enters the receiver low and leaves high.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "receiver",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Condensate collects and the auto-drain removes it.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "condensate",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The air-to-air exchanger pre-cools the air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "heat_exchangers",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The evaporator chills it; the separator drains water.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "refrigeration_circuit",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Filters remove oil aerosols and particles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filters",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Warm saturated air is pre-cooled by the outgoing cold air, then chilled in the evaporator to ≈ 3 °C so the water condenses and is drained.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Air Receiver Dryer Package — Maintenance",
+    "type": "in_app_tour",
+    "model": "air_receiver_dryer_package.glb",
+    "duration_s": 33.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Air Receiver Dryer Package.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check drains and dryer dew point/temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "receiver_fittings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean condenser; change filters.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "refrigeration_circuit",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Receiver internal inspection / thickness check.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "receiver",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water in air lines: wet tools/instruments. Common cause: drain stuck, dirty condenser, overloaded dryer.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "heat_exchangers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for receiver corrosion: wall thinning. Common cause: standing water.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "receiver",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does air enter the receiver low and leave high?",
+     "options": [
+      "Lets water drop out before the outlet",
+      "For looks",
+      "Cheaper",
+      "To heat it"
+     ],
+     "answer": 0,
+     "explanation": "Separation.",
+     "level": "basic"
+    },
+    {
+     "question": "Refrigerated dryer dew point?",
+     "options": [
+      "≈ +3 °C",
+      "≈ −70 °C",
+      "≈ −40 °C",
+      "≈ 50 °C"
+     ],
+     "answer": 0,
+     "explanation": "+3 °C.",
+     "level": "basic"
+    },
+    {
+     "question": "Why re-heat the air?",
+     "options": [
+      "Saves energy and stops pipe sweating",
+      "Kills bacteria",
+      "Raises pressure",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Re-heat.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores air, damps pulsation, lets condensate settle.\"",
+     "options": [
+      "Inlet (low) & Outlet (high), Safety Valve, Pressure Gauge, Inspection Opening & Zero-Loss Auto Drain",
+      "Vertical Air Receiver (pressure vessel)",
+      "Condensate collecting in the receiver bottom",
+      "Condensed water drained from the separator"
+     ],
+     "answer": 1,
+     "explanation": "Vertical Air Receiver (pressure vessel): Stores air, damps pulsation, lets condensate settle.",
+     "level": "basic",
+     "part": "receiver",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Collects condensate.\"",
+     "options": [
+      "Refrigeration Circuit: Hermetic Compressor, Air-Cooled Condenser, Expansion Valve & Lines",
+      "Condensate collecting in the receiver bottom",
+      "Refrigerated Dryer Cabinet (front panel removed in cutaway)",
+      "Vertical Air Receiver (pressure vessel)"
+     ],
+     "answer": 1,
+     "explanation": "Condensate collecting in the receiver bottom: Collects condensate.",
+     "level": "basic",
+     "part": "condensate",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Connections and protection.\"",
+     "options": [
+      "Vertical Air Receiver (pressure vessel)",
+      "Inlet (low) & Outlet (high), Safety Valve, Pressure Gauge, Inspection Opening & Zero-Loss Auto Drain",
+      "Condenser Fan",
+      "Coalescing Filter (oil aerosols ≈ 0.01 mg/m³) & Dust Filter with Auto Drains"
+     ],
+     "answer": 1,
+     "explanation": "Inlet (low) & Outlet (high), Safety Valve, Pressure Gauge, Inspection Opening & Zero-Loss Auto Drain: Connections and protection.",
+     "level": "basic",
+     "part": "receiver_fittings",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

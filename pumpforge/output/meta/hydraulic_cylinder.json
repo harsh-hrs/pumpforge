@@ -1,0 +1,469 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "hydraulic_cylinder",
+  "title": "Double-Acting Hydraulic Cylinder (Tie-Rod / Welded)",
+  "category": "9 · Material Handling & Heavy Mechanical Equipment",
+  "library": {
+    "no": 145,
+    "phase": 7,
+    "eq_id": "EQ-223",
+    "subcategory": "Hydraulic Equipment",
+    "hi_family": "material_handling",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "hydraulic_cylinder_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "hydraulic_cylinder_pressure.glb",
+      "title": "Pressure while extending",
+      "description": "Extending: port A feeds the cap end (red, system pressure) and port B returns oil from the rod end (blue, low). Push force F = p × A_bore. Retracting reverses the ports: the pull force is p × (A_bore − A_rod), smaller, but the rod moves faster for the same pump flow because the annulus volume is smaller.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Cap end: F_extend = p · π D²/4",
+          "anchor": [
+            -0.45,
+            0.12,
+            -0.0
+          ]
+        },
+        {
+          "text": "Rod end (annulus): F_retract = p · π (D² − d²)/4",
+          "anchor": [
+            0.35,
+            0.5,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "extend",
+      "kind": "hydraulic_oil",
+      "radius": 0.008,
+      "points": [
+        [
+          -0.47,
+          0.46,
+          -0.0
+        ],
+        [
+          -0.47,
+          0.32,
+          -0.0
+        ],
+        [
+          -0.48,
+          0.3,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.35
+        ]
+      ]
+    },
+    {
+      "name": "retract",
+      "kind": "hydraulic_oil",
+      "radius": 0.008,
+      "points": [
+        [
+          0.37,
+          0.46,
+          -0.0
+        ],
+        [
+          0.37,
+          0.34,
+          -0.0
+        ],
+        [
+          0.35,
+          0.34,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.5,
+          0.85
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 3060,
+    "parts": 6
+  },
+  "summary": "A double-acting hydraulic cylinder turns oil pressure into straight-line force. Oil into port A pushes the piston and extends the rod; oil into port B retracts it. Force = pressure × area (the rod side has less area, so retract force is lower).",
+  "classification": {
+    "family": "Hydraulic actuator",
+    "type": "Double-acting cylinder"
+  },
+  "model_configuration": {
+    "animation": "Extends then retracts"
+  },
+  "standards": [
+    {
+      "id": "ISO 4413",
+      "title": "Hydraulic fluid power — General rules and safety requirements",
+      "relevance": "System safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 4406",
+      "title": "Hydraulic fluid power — Fluids — Contamination code",
+      "relevance": "Cleanliness.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 6020/6022",
+      "title": "Hydraulic cylinders — mounting dimensions",
+      "relevance": "Dimensions.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Cylinder manufacturer guides"
+  ],
+  "parts": [
+    {
+      "id": "barrel",
+      "name": "Barrel (honed tube)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "barrel__back",
+        "barrel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.5,
+        0.228,
+        -0.072
+      ],
+      "bbox_max": [
+        0.4,
+        0.372,
+        0.072
+      ],
+      "label_anchor": [
+        -0.05,
+        0.3,
+        0.072
+      ],
+      "center": [
+        -0.05,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "hc_barrel"
+    },
+    {
+      "id": "end_caps",
+      "name": "Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "end_caps__back",
+        "end_caps__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.635,
+        0.21,
+        -0.09
+      ],
+      "bbox_max": [
+        0.47,
+        0.39,
+        0.09
+      ],
+      "label_anchor": [
+        -0.0825,
+        0.3,
+        0.09
+      ],
+      "center": [
+        -0.0825,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "hc_caps"
+    },
+    {
+      "id": "piston_rod",
+      "name": "Piston (with seals) & Chrome-Plated Rod",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "piston_rod__back",
+        "piston_rod__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.48,
+        0.24,
+        -0.06
+      ],
+      "bbox_max": [
+        0.8,
+        0.36,
+        0.06
+      ],
+      "label_anchor": [
+        0.16,
+        0.3,
+        0.06
+      ],
+      "center": [
+        0.16,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "hc_piston"
+    },
+    {
+      "id": "ports",
+      "name": "Ports A (cap end) & B (rod end)",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "ports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.4928,
+        0.372,
+        -0.0228
+      ],
+      "bbox_max": [
+        0.3928,
+        0.432,
+        0.0228
+      ],
+      "label_anchor": [
+        -0.05,
+        0.402,
+        0.0228
+      ],
+      "center": [
+        -0.05,
+        0.402,
+        -0.0
+      ],
+      "info_ref": "hc_ports"
+    },
+    {
+      "id": "oil_cap_side",
+      "name": "Oil in Cap-End Chamber (fills on extend)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "oa"
+      ],
+      "pivot": [
+        -0.5,
+        0.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.5,
+        0.241,
+        -0.059
+      ],
+      "bbox_max": [
+        -0.48,
+        0.359,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.49,
+        0.3,
+        -0.0
+      ],
+      "center": [
+        -0.49,
+        0.3,
+        -0.0295
+      ],
+      "info_ref": "hc_oil"
+    },
+    {
+      "id": "oil_rod_side",
+      "name": "Oil in Rod-End (annulus) Chamber (fills on retract)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ob"
+      ],
+      "pivot": [
+        0.4,
+        0.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.3
+      ],
+      "bbox_min": [
+        -0.42,
+        0.241,
+        -0.059
+      ],
+      "bbox_max": [
+        0.4,
+        0.359,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.01,
+        0.3,
+        -0.0
+      ],
+      "center": [
+        -0.01,
+        0.3,
+        -0.0295
+      ],
+      "info_ref": "hc_oil"
+    }
+  ],
+  "components": {
+    "hc_barrel": {
+      "function": "Contains the oil and piston.",
+      "construction": "Honed tube.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hc_caps": {
+      "function": "Close the ends; mount; seal the rod.",
+      "construction": "Caps, gland, seals, wiper.",
+      "material": "Steel, PU/NBR.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hc_piston": {
+      "function": "Separates chambers and transmits force.",
+      "construction": "Piston with seals and chrome rod.",
+      "material": "Steel, chrome.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Seal leakage",
+        "Rod scoring"
+      ],
+      "inspection": [
+        "Drift test"
+      ]
+    },
+    "hc_ports": {
+      "function": "Oil connections.",
+      "construction": "Ports.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hc_oil": {
+      "function": "Oil.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

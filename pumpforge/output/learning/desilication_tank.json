@@ -1,0 +1,639 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "desilication_tank",
+ "no": 200,
+ "title": "Desilication Tank",
+ "model_title": "Pre-Desilication Tank (Agitated, Long Residence, Steam-Heated)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "Pre-desilication tanks hold the bauxite slurry at about 95–100 °C for several hours so the reactive silica that dissolves re-precipitates as sodalite (desilication product, DSP) before digestion. This protects heaters from scale and keeps silica out of the product.",
+   "applications": [
+    "Bauxites with reactive silica (kaolinite)",
+    "Protecting digestion heaters from DSP scale",
+    "Controlling silica in pregnant liquor and product"
+   ],
+   "key_points": [
+    "~ 95–100 °C for ~ 6–10 h",
+    "Forms sodalite (DSP)",
+    "DSP locks up caustic and alumina",
+    "Reduces heater scaling"
+   ],
+   "classification": {
+    "family": "Desilication",
+    "type": "Agitated heated holding tank"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "Pre-desilication tanks hold the bauxite slurry hot for several hours so dissolved reactive silica re-precipitates as sodalite (desilication product) before digestion. This protects heaters from scale and the product from silica."
+  },
+  "model_3d": {
+   "asset": "glb/desilication_tank.glb",
+   "metadata": "meta/desilication_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9282,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry enters the top.",
+    "The coil holds temperature.",
+    "The agitator keeps it mixed."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry enters the top.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The coil holds temperature.",
+     "part": "heating_coil",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The agitator keeps it mixed.",
+     "part": "ds_agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "DSP crystals form over hours.",
+     "part": "ds_slurry",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry leaves to digestion.",
+     "part": "ds_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Silica in liquor vs time — falls towards DSP equilibrium."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "desilication_tank_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "desilication_tank_temperature.glb",
+     "title": "Removing reactive silica before digestion",
+     "description": "Kaolinite and other reactive silica dissolve in caustic liquor and would later precipitate as scale or contaminate the product. Holding the slurry at about 95–100 °C for several hours (often ~ 6–10 h) lets the silica re-precipitate as sodalite (desilication product, DSP), which leaves with the red mud. Each kg of reactive silica locks up caustic soda and alumina in DSP.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/desilication_tank.json#components",
+   "key_components": "Agitated tank, steam heating coil, slurry inlet/outlet, foundation",
+   "parts": [
+    {
+     "id": "ds_tank",
+     "name": "Desilication Tank: Tank, Baffles",
+     "info_ref": "dsl_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "ds_slurry",
+     "name": "Desilication Tank: Slurry / Liquor",
+     "info_ref": "dsl_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "ds_agitator",
+     "name": "Desilication Tank: Agitator Shaft & Impeller",
+     "info_ref": "dsl_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "ds_drive",
+     "name": "Desilication Tank: Agitator Drive (motor + gearbox, mounting nozzle)",
+     "info_ref": "dsl_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "heating_coil",
+     "name": "Steam Heating Coil (holds ~ 95–100 °C)",
+     "info_ref": "dsl_coil",
+     "function": "Heating and connections.",
+     "material": "Stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Slurry Inlet (top), Outlet (bottom), Steam Inlet",
+     "info_ref": "dsl_coil",
+     "function": "Heating and connections.",
+     "material": "Stainless."
+    },
+    {
+     "id": "foundation",
+     "name": "Ring-Wall Foundation",
+     "info_ref": "dsl_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "dsp",
+     "name": "Desilication Product (sodalite) Crystals forming and growing",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tanks ~ 10 – 20 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Residence ~ 6 – 10 h",
+     "unit": "h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 95 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Agitator ~ 50 – 200",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Residence from silica kinetics tests."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Ring-wall or slab foundation designed for full liquid/slurry weight plus agitator dynamic loads; settlement monitoring for large tanks."
+   ],
+   "alignment": [
+    "Tank plumb and level; agitator shaft vertical and concentric; check gearbox mounting."
+   ],
+   "piping": [
+    "Nozzles sized for slurry velocity (avoid settling and erosion); flush connections; scaling-resistant design and descaling access.",
+    "Caustic service: suitable materials, gaskets and spray shields; eyewash/safety showers nearby."
+   ],
+   "commissioning": [
+    "Water trials (agitator run with water, check vibration and power); then caustic/slurry; verify levels, interlocks and spillage containment (bunds)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check temperature and agitator.",
+     "part": "ds_drive",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Descale coils and tank.",
+     "part": "heating_coil",
+     "interval": "shutdown"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Agitator overhaul.",
+     "part": "ds_agitator"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Incomplete desilication",
+     "category": "performance",
+     "symptoms": [
+      "Heater scaling downstream"
+     ],
+     "causes": [
+      "Short residence, low temperature"
+     ],
+     "remedies": [
+      "Increase time/temperature"
+     ],
+     "part": "ds_tank"
+    },
+    {
+     "problem": "Coil fouling",
+     "category": "performance",
+     "symptoms": [
+      "Low temperature"
+     ],
+     "causes": [
+      "Scale"
+     ],
+     "remedies": [
+      "Descale"
+     ],
+     "part": "heating_coil"
+    }
+   ],
+   "safety": [
+    "Hot caustic slurry."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Desilication Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "desilication_tank.glb",
+    "duration_s": 47.0,
+    "script": [
+     {
+      "narration": "This module introduces the Desilication Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Pre-desilication tanks hold the bauxite slurry at about 95–100 °C for several hours so the reactive silica that dissolves re-precipitates as sodalite (desilication product, DSP) before digestion.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "This protects heaters from scale and keeps silica out of the product.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include bauxites with reactive silica (kaolinite); protecting digestion heaters from DSP scale; controlling silica in pregnant liquor and product.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Desilication Tank: Agitator Shaft & Impeller.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Desilication Tank — Operation",
+    "type": "in_app_tour",
+    "model": "desilication_tank.glb",
+    "duration_s": 36.1,
+    "script": [
+     {
+      "narration": "How the Desilication Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry enters the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The coil holds temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "heating_coil",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The agitator keeps it mixed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ds_agitator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "DSP crystals form over hours.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ds_slurry",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry leaves to digestion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ds_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Kaolinite and other reactive silica dissolve in caustic liquor and would later precipitate as scale or contaminate the product.",
+      "duration_s": 7.9,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Desilication Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "desilication_tank.glb",
+    "duration_s": 31.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Desilication Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check temperature and agitator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ds_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descale coils and tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "heating_coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Agitator overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ds_agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for incomplete desilication: heater scaling downstream. Common cause: short residence, low temperature.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "ds_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for coil fouling: low temperature. Common cause: scale.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "heating_coil",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What forms in desilication?",
+     "options": [
+      "Sodalite (DSP)",
+      "Gibbsite",
+      "Oxalate",
+      "Lime"
+     ],
+     "answer": 0,
+     "explanation": "DSP.",
+     "level": "basic"
+    },
+    {
+     "question": "Why remove silica early?",
+     "options": [
+      "Prevents scaling and product contamination",
+      "Adds caustic",
+      "Colour",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "Scale.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical temperature?",
+     "options": [
+      "~ 95–100 °C",
+      "~ 250 °C",
+      "~ 20 °C",
+      "~ 500 °C"
+     ],
+     "answer": 0,
+     "explanation": "Atmospheric.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the slurry.\"",
+     "options": [
+      "Steam Heating Coil (holds ~ 95–100 °C)",
+      "Desilication Tank: Tank, Baffles",
+      "Slurry Inlet (top), Outlet (bottom), Steam Inlet",
+      "Desilication Product (sodalite) Crystals forming and growing"
+     ],
+     "answer": 1,
+     "explanation": "Desilication Tank: Tank, Baffles: Holds the slurry.",
+     "level": "basic",
+     "part": "ds_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process slurry/liquor.\"",
+     "options": [
+      "Desilication Tank: Slurry / Liquor",
+      "Desilication Tank: Agitator Shaft & Impeller",
+      "Desilication Tank: Tank, Baffles",
+      "Desilication Tank: Agitator Drive (motor + gearbox, mounting nozzle)"
+     ],
+     "answer": 0,
+     "explanation": "Desilication Tank: Slurry / Liquor: Process slurry/liquor.",
+     "level": "basic",
+     "part": "ds_slurry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes and suspends solids.\"",
+     "options": [
+      "Desilication Tank: Agitator Shaft & Impeller",
+      "Ring-Wall Foundation",
+      "Desilication Tank: Tank, Baffles",
+      "Desilication Tank: Slurry / Liquor"
+     ],
+     "answer": 0,
+     "explanation": "Desilication Tank: Agitator Shaft & Impeller: Mixes and suspends solids.",
+     "level": "basic",
+     "part": "ds_agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

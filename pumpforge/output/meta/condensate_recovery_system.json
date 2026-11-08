@@ -1,0 +1,872 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "condensate_recovery_system",
+  "title": "Condensate Recovery System: Flash Vessel, Vented Receiver & Condensate Pump Set",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 236,
+    "phase": 11,
+    "eq_id": "EQ-314",
+    "subcategory": "Steam Utilities",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "condensate_recovery_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "condensate_recovery_system_pressure.glb",
+      "title": "Recover heat, water and chemicals",
+      "description": "High-pressure condensate entering a lower pressure partly flashes to steam: flash fraction = (h_f,high − h_f,low) / h_fg,low (≈ 10–15 % from ~10 bar to atmosphere). The flash vessel sends this steam to the LP header; the remaining hot condensate (already treated water, ≈ 90–100 °C) returns to the boiler, saving fuel, make-up water and treatment chemicals. Pumps handling near-boiling water need generous NPSH, which is why the receiver is raised above them.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "hp_condensate",
+      "kind": "water",
+      "radius": 0.016,
+      "points": [
+        [
+          -2.2,
+          1.9,
+          -0.1
+        ],
+        [
+          -1.48,
+          1.9,
+          -0.1
+        ],
+        [
+          -1.3,
+          1.6,
+          -0.05
+        ],
+        [
+          -1.3,
+          1.3,
+          -0.0
+        ],
+        [
+          -1.3,
+          1.05,
+          -0.0
+        ],
+        [
+          -0.8,
+          1.3,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "flash_steam_out",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.3,
+          2.0,
+          -0.0
+        ],
+        [
+          -1.3,
+          2.6,
+          -0.0
+        ],
+        [
+          -2.2,
+          2.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "returns",
+      "kind": "water",
+      "radius": 0.014,
+      "points": [
+        [
+          -2.2,
+          1.4,
+          0.25
+        ],
+        [
+          -0.6,
+          1.4,
+          0.25
+        ],
+        [
+          -0.3,
+          1.25,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "pumped_return",
+      "kind": "water",
+      "radius": 0.016,
+      "points": [
+        [
+          -0.3,
+          0.8,
+          -0.3
+        ],
+        [
+          -0.3,
+          0.62,
+          -0.3
+        ],
+        [
+          -0.3,
+          0.42,
+          -0.3
+        ],
+        [
+          -0.3,
+          0.1,
+          -0.3
+        ],
+        [
+          0.75,
+          0.1,
+          -0.3
+        ],
+        [
+          0.75,
+          0.55,
+          -0.3
+        ],
+        [
+          1.2,
+          0.55,
+          -0.3
+        ],
+        [
+          1.2,
+          1.0,
+          -0.3
+        ],
+        [
+          1.9,
+          1.0,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "vent",
+      "kind": "steam",
+      "radius": 0.012,
+      "points": [
+        [
+          0.2,
+          1.5,
+          -0.0
+        ],
+        [
+          0.2,
+          2.65,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 25168,
+    "parts": 14
+  },
+  "summary": "A condensate recovery system collects hot condensate from steam users and returns it to the boiler. A flash vessel releases low-pressure flash steam for reuse; the remaining condensate drains to a vented receiver and condensate pumps send it back to the boiler feed tank.",
+  "classification": {
+    "family": "Steam utilities",
+    "type": "Flash vessel + vented receiver + duplex pump set"
+  },
+  "model_configuration": {
+    "animation": "Receiver level rises and falls with the float; pumps run; flash steam rises"
+  },
+  "standards": [
+    {
+      "id": "ASME B31.1",
+      "title": "Power piping",
+      "relevance": "Steam & condensate piping.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "Spirax Sarco — The Steam & Condensate Loop",
+      "title": "Steam system practice",
+      "relevance": "Design guidance.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Spirax Sarco — The Steam & Condensate Loop"
+  ],
+  "parts": [
+    {
+      "id": "receiver",
+      "name": "Vented Condensate Receiver (horizontal)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "receiver__back",
+        "receiver__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.875,
+        0.8,
+        -0.35
+      ],
+      "bbox_max": [
+        0.875,
+        1.5,
+        0.35
+      ],
+      "label_anchor": [
+        0.0,
+        1.15,
+        0.35
+      ],
+      "center": [
+        0.0,
+        1.15,
+        -0.0
+      ],
+      "info_ref": "cr_receiver"
+    },
+    {
+      "id": "receiver_supports",
+      "name": "Receiver Stand (raised to give the pumps NPSH)",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "receiver_supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.7,
+        0.0,
+        -0.65
+      ],
+      "bbox_max": [
+        0.9,
+        0.85,
+        0.65
+      ],
+      "label_anchor": [
+        0.1,
+        0.425,
+        0.65
+      ],
+      "center": [
+        0.1,
+        0.425,
+        -0.0
+      ],
+      "info_ref": "cr_receiver"
+    },
+    {
+      "id": "condensate",
+      "name": "Hot Condensate (≈ 95–100 °C)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.7,
+        0.808,
+        -0.33819
+      ],
+      "bbox_max": [
+        0.7,
+        1.1,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.954,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.954,
+        -0.16909
+      ],
+      "info_ref": "cr_receiver"
+    },
+    {
+      "id": "level_switch_rod",
+      "name": "Float-Switch Guide Rod (pump start/stop)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "fsr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.3
+      ],
+      "bbox_min": [
+        0.342,
+        0.9,
+        -0.158
+      ],
+      "bbox_max": [
+        0.358,
+        1.6,
+        -0.142
+      ],
+      "label_anchor": [
+        0.35,
+        1.25,
+        -0.142
+      ],
+      "center": [
+        0.35,
+        1.25,
+        -0.15
+      ],
+      "info_ref": "cr_controls"
+    },
+    {
+      "id": "level_float",
+      "name": "Level Float (rises → pump starts; falls → pump stops)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "flt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.3
+      ],
+      "bbox_min": [
+        0.305,
+        1.005,
+        -0.1928
+      ],
+      "bbox_max": [
+        0.395,
+        1.095,
+        -0.1072
+      ],
+      "label_anchor": [
+        0.35,
+        1.05,
+        -0.1072
+      ],
+      "center": [
+        0.35,
+        1.05,
+        -0.15
+      ],
+      "info_ref": "cr_controls"
+    },
+    {
+      "id": "flash_vessel",
+      "name": "Flash Vessel (releases flash steam from high-pressure condensate)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "flash_vessel__back",
+        "flash_vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -1.54319,
+        0.0,
+        -0.2
+      ],
+      "bbox_max": [
+        -1.1,
+        2.2,
+        0.24319
+      ],
+      "label_anchor": [
+        -1.32159,
+        1.1,
+        0.24319
+      ],
+      "center": [
+        -1.32159,
+        1.1,
+        0.02159
+      ],
+      "info_ref": "cr_flash"
+    },
+    {
+      "id": "piping",
+      "name": "HP Condensate Inlet, Flash-Steam Outlet (to LP header), LP Condensate Returns, Atmospheric Vent, Overflow & Gauge Glass",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.1,
+        0.3,
+        -0.135
+      ],
+      "bbox_max": [
+        1.14,
+        2.66,
+        0.395
+      ],
+      "label_anchor": [
+        -0.48,
+        1.48,
+        0.395
+      ],
+      "center": [
+        -0.48,
+        1.48,
+        0.13
+      ],
+      "info_ref": "cr_piping"
+    },
+    {
+      "id": "pump_1",
+      "name": "Condensate Pump 1 (duty)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_1b"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.45,
+        0.125,
+        0.15
+      ],
+      "bbox_max": [
+        0.45,
+        0.42,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        0.2725,
+        0.45
+      ],
+      "center": [
+        0.0,
+        0.2725,
+        0.3
+      ],
+      "info_ref": "cr_pumps"
+    },
+    {
+      "id": "pump_1_shaft",
+      "name": "Condensate Pump 1 (duty) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_1c"
+      ],
+      "pivot": [
+        -0.06,
+        0.3,
+        0.3
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.12,
+        0.28,
+        0.25
+      ],
+      "bbox_max": [
+        0.0,
+        0.32,
+        0.35
+      ],
+      "label_anchor": [
+        -0.06,
+        0.3,
+        0.35
+      ],
+      "center": [
+        -0.06,
+        0.3,
+        0.3
+      ],
+      "info_ref": "cr_pumps"
+    },
+    {
+      "id": "pump_2",
+      "name": "Condensate Pump 2 (standby)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_2b"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.45,
+        0.125,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        0.42,
+        -0.15
+      ],
+      "label_anchor": [
+        0.0,
+        0.2725,
+        -0.15
+      ],
+      "center": [
+        0.0,
+        0.2725,
+        -0.3
+      ],
+      "info_ref": "cr_pumps"
+    },
+    {
+      "id": "pump_2_shaft",
+      "name": "Condensate Pump 2 (standby) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_2c"
+      ],
+      "pivot": [
+        -0.06,
+        0.3,
+        -0.3
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.12,
+        0.28,
+        -0.35
+      ],
+      "bbox_max": [
+        0.0,
+        0.32,
+        -0.25
+      ],
+      "label_anchor": [
+        -0.06,
+        0.3,
+        -0.25
+      ],
+      "center": [
+        -0.06,
+        0.3,
+        -0.3
+      ],
+      "info_ref": "cr_pumps"
+    },
+    {
+      "id": "pump_piping",
+      "name": "Pump Suction Lines, Discharge Check Valves & Return Main to the Boiler Feed Tank",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "pump_piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.33,
+        0.075,
+        -0.33625
+      ],
+      "bbox_max": [
+        1.8,
+        1.03,
+        0.33625
+      ],
+      "label_anchor": [
+        0.735,
+        0.5525,
+        0.33625
+      ],
+      "center": [
+        0.735,
+        0.5525,
+        -0.0
+      ],
+      "info_ref": "cr_piping"
+    },
+    {
+      "id": "control_panel",
+      "name": "Pump Control Panel (alternating duty, high-level alarm)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "control_panel.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.825,
+        0.06,
+        0.525
+      ],
+      "bbox_max": [
+        1.175,
+        1.45,
+        0.675
+      ],
+      "label_anchor": [
+        1.0,
+        0.755,
+        0.675
+      ],
+      "center": [
+        1.0,
+        0.755,
+        0.6
+      ],
+      "info_ref": "cr_controls"
+    },
+    {
+      "id": "flash_steam",
+      "name": "Flash steam released as pressure drops",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "flash_steam0",
+        "flash_steam1",
+        "flash_steam2",
+        "flash_steam3",
+        "flash_steam4"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "cr_receiver": {
+      "function": "Collects condensate at atmospheric pressure.",
+      "construction": "Horizontal vented vessel on a raised stand.",
+      "material": "Stainless/carbon steel.",
+      "operating_conditions": "≈ 90–100 °C.",
+      "failure_modes": [
+        "Corrosion",
+        "Overflow"
+      ],
+      "inspection": [
+        "Level checks"
+      ]
+    },
+    "cr_controls": {
+      "function": "Start/stop pumps.",
+      "construction": "Float switches / level probes, control panel.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Float sticking"
+      ],
+      "inspection": [
+        "Function test"
+      ]
+    },
+    "cr_flash": {
+      "function": "Separates flash steam.",
+      "construction": "Vertical vessel with tangential inlet.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cr_piping": {
+      "function": "Inlets, vent, overflow, returns.",
+      "construction": "Pipes, check valves, gauge glass.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Vent blocked → pressurised receiver"
+      ],
+      "inspection": [
+        "Inspect vent"
+      ]
+    },
+    "cr_pumps": {
+      "function": "Return condensate.",
+      "construction": "Duty/standby centrifugal pumps.",
+      "material": "Cast iron/stainless.",
+      "operating_conditions": "Low NPSH available.",
+      "failure_modes": [
+        "Cavitation",
+        "Seal wear"
+      ],
+      "inspection": [
+        "Noise, seal leakage"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

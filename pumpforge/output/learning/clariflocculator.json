@@ -1,0 +1,665 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "clariflocculator",
+ "no": 218,
+ "title": "Clariflocculator",
+ "model_title": "Clariflocculator (Central Flocculation Zone + Peripheral Clarifier)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A clariflocculator combines flocculation and clarification in one circular tank. Coagulated raw water rises into a central flocculation compartment where slow paddles let tiny particles collide and grow into flocs. The water passes under the compartment skirt into the outer clarifier zone, where flocs settle to the floor and are raked to a central sludge pit, while clear water overflows the peripheral weir.",
+   "applications": [
+    "Surface-water treatment for drinking and process water",
+    "Clarification of cooling-tower make-up and industrial raw water"
+   ],
+   "key_points": [
+    "Coagulate → flocculate → settle in one unit",
+    "Gentle paddles (G ≈ 20–70 s⁻¹) grow flocs",
+    "Low surface loading (≈ 1–2 m/h) lets flocs settle",
+    "Rakes move sludge to the central pit"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Circular clariflocculator"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A clariflocculator combines flocculation and clarification in one circular tank. Coagulated raw water enters a central compartment where slow paddles grow flocs; the water then flows outward under the skirt into the clarifier zone, where flocs settle and are raked to a central sludge pit while clear water overflows the peripheral weir."
+  },
+  "model_3d": {
+   "asset": "glb/clariflocculator.glb",
+   "metadata": "meta/clariflocculator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7430,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Coagulated raw water rises through the central riser into the flocculation zone.",
+    "Slow paddles turn so particles collide and grow into flocs.",
+    "Water flows under the skirt into the clarifier zone."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Coagulated raw water rises through the central riser into the flocculation zone.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slow paddles turn so particles collide and grow into flocs.",
+     "part": "flocculator_paddles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water flows under the skirt into the clarifier zone.",
+     "part": "flocculation_zone",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flocs settle onto the floor; the rakes move them to the sludge pit.",
+     "part": "cf_rakes",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clear water overflows the peripheral weir to the filters.",
+     "part": "cf_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Effluent turbidity vs surface loading rate — rises sharply above the design overflow rate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "clariflocculator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "clariflocculator_pressure.glb",
+     "title": "Flocculate, then settle",
+     "description": "Coagulated raw water first passes through the central flocculation zone, where slow paddles (velocity gradient G ≈ 20–70 s⁻¹) let tiny particles collide and grow into flocs. The water then moves outward and upward through the clarifier zone at low surface loading (≈ 1–2 m/h); flocs settle and are raked to the central sludge pit; clear water overflows the peripheral weir.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/clariflocculator.json#components",
+   "key_components": "Central flocculator with paddles, peripheral clarifier, rake bridge, sludge pit, overflow launder",
+   "parts": [
+    {
+     "id": "cf_tank",
+     "name": "Clariflocculator: Tank with Conical Floor & Overflow Launder",
+     "info_ref": "cfl_tank",
+     "function": "Holds water; launder collects overflow.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "cf_clear",
+     "name": "Clariflocculator: Clear Overflow Zone",
+     "info_ref": "cfl_zones",
+     "function": "Clear and sludge zones.",
+     "material": "—"
+    },
+    {
+     "id": "cf_mud",
+     "name": "Clariflocculator: Settling / Compression Zone (mud bed)",
+     "info_ref": "cfl_zones",
+     "function": "Clear and sludge zones.",
+     "material": "—"
+    },
+    {
+     "id": "cf_feedwell",
+     "name": "Clariflocculator: Central Feedwell (dissipates feed energy, mixes flocculant)",
+     "info_ref": "cfl_feedwell",
+     "function": "Calms inflow.",
+     "material": "Steel."
+    },
+    {
+     "id": "cf_rakes",
+     "name": "Clariflocculator: Rake Arms & Blades (move mud to the centre cone)",
+     "info_ref": "cfl_rake",
+     "function": "Moves sludge to the pit.",
+     "material": "Steel."
+    },
+    {
+     "id": "cf_drive",
+     "name": "Clariflocculator: Bridge & Rake Drive (slow, high torque, overload protection)",
+     "info_ref": "cfl_drive",
+     "function": "Turns rakes.",
+     "material": "—"
+    },
+    {
+     "id": "flocculation_zone",
+     "name": "Central Flocculation Compartment (skirt wall)",
+     "info_ref": "cfl_floc",
+     "function": "Grows flocs.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "flocculator_paddles",
+     "name": "Slow-Speed Paddle Flocculator (gentle mixing grows flocs)",
+     "info_ref": "cfl_floc",
+     "function": "Grows flocs.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "piping",
+     "name": "Raw-Water Inlet (central riser), Coagulant/Polymer Dosing Pump & Line, Clarified-Water Outlet",
+     "info_ref": "cfl_piping",
+     "function": "Inlet, dosing, outlet.",
+     "material": "DI/steel."
+    },
+    {
+     "id": "flocs",
+     "name": "Flocs growing in the Flocculation Zone then settling",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Diameter ≈ 10 – 50 m; depth ≈ 3.5 – 5 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 500 – 10,000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Surface loading ≈ 1 – 2 m/h; flocculation time ≈ 15 – 30 min",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Rake drive ≈ 0.5 – 5; paddles ≈ 1 – 10",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size area from design flow ÷ surface loading; flocculation volume from detention time; check with jar tests."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "AWWA / Ten States Standards",
+    "MWH Water Treatment"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Reinforced-concrete tank on prepared ground; watertightness test before backfill; allow for buoyancy when empty (groundwater)."
+   ],
+   "alignment": [
+    "Weirs and launders levelled to a few millimetres so overflow is even; drive/bridge centred and level."
+   ],
+   "piping": [
+    "Inlet arranged to spread flow without short-circuiting; sludge lines with flushing points; overflow and drain to a safe place."
+   ],
+   "commissioning": [
+    "Fill with clean water, check for leaks; run mechanisms empty and with water; start chemical dosing and tune by jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check effluent turbidity, sludge blanket level and rake torque.",
+     "part": "cf_rakes",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean weirs/launders (algae); check paddle bearings.",
+     "part": "cf_tank",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Drain, inspect rakes, scrapers and drive gear; repair concrete.",
+     "part": "cf_drive"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Floc carry-over",
+     "category": "performance",
+     "symptoms": [
+      "High outlet turbidity",
+      "Flocs over the weir"
+     ],
+     "causes": [
+      "Overloading",
+      "Wrong coagulant dose",
+      "Rising sludge blanket"
+     ],
+     "remedies": [
+      "Jar test, adjust dose; desludge more often; reduce flow"
+     ],
+     "part": "cf_clear"
+    },
+    {
+     "problem": "Rake overload trip",
+     "category": "performance",
+     "symptoms": [
+      "Torque alarm, drive stops"
+     ],
+     "causes": [
+      "Heavy sludge accumulation",
+      "Debris"
+     ],
+     "remedies": [
+      "Increase sludge withdrawal; lift rakes; clear obstruction"
+     ],
+     "part": "cf_rakes"
+    }
+   ],
+   "safety": [
+    "Guard bridge drives; life-rings and handrails at open water; chemical handling PPE."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Clariflocculator — Introduction",
+    "type": "in_app_tour",
+    "model": "clariflocculator.glb",
+    "duration_s": 61.2,
+    "script": [
+     {
+      "narration": "This module introduces the Clariflocculator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A clariflocculator combines flocculation and clarification in one circular tank.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Coagulated raw water rises into a central flocculation compartment where slow paddles let tiny particles collide and grow into flocs.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The water passes under the compartment skirt into the outer clarifier zone, where flocs settle to the floor and are raked to a central sludge pit, while clear water overflows the peripheral weir.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include surface-water treatment for drinking and process water; clarification of cooling-tower make-up and industrial raw water.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Clariflocculator: Rake Arms & Blades (move mud to the centre cone), Slow-Speed Paddle Flocculator (gentle mixing grows flocs).",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Clariflocculator — Operation",
+    "type": "in_app_tour",
+    "model": "clariflocculator.glb",
+    "duration_s": 42.5,
+    "script": [
+     {
+      "narration": "How the Clariflocculator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Coagulated raw water rises through the central riser into the flocculation zone.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slow paddles turn so particles collide and grow into flocs.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "flocculator_paddles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water flows under the skirt into the clarifier zone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flocculation_zone",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flocs settle onto the floor; the rakes move them to the sludge pit.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "cf_rakes",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clear water overflows the peripheral weir to the filters.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cf_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Coagulated raw water first passes through the central flocculation zone, where slow paddles (velocity gradient G ≈ 20–70 s⁻¹) let tiny particles collide and grow into flocs.",
+      "duration_s": 11.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Clariflocculator — Maintenance",
+    "type": "in_app_tour",
+    "model": "clariflocculator.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Clariflocculator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check effluent turbidity, sludge blanket level and rake torque.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cf_rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean weirs/launders (algae); check paddle bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cf_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Drain, inspect rakes, scrapers and drive gear; repair concrete.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cf_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for floc carry-over: high outlet turbidity. Common cause: overloading.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "cf_clear",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rake overload trip: torque alarm, drive stops. Common cause: heavy sludge accumulation.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "cf_rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why are the flocculator paddles slow?",
+     "options": [
+      "Large flocs are fragile; gentle mixing grows them without breaking them",
+      "To save power only",
+      "To heat the water",
+      "To add chemical"
+     ],
+     "answer": 0,
+     "explanation": "Gentle mixing.",
+     "level": "basic"
+    },
+    {
+     "question": "Which design number controls clarifier size?",
+     "options": [
+      "Surface loading (overflow) rate, m/h",
+      "Pipe diameter",
+      "Motor speed",
+      "Weir colour"
+     ],
+     "answer": 0,
+     "explanation": "Overflow rate.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does the sludge go?",
+     "options": [
+      "Raked to the central pit and withdrawn",
+      "Over the weir",
+      "Into the flocculator",
+      "It dissolves"
+     ],
+     "answer": 0,
+     "explanation": "Sludge pit.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds water; launder collects overflow.\"",
+     "options": [
+      "Clariflocculator: Tank with Conical Floor & Overflow Launder",
+      "Clariflocculator: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "Flocs growing in the Flocculation Zone then settling",
+      "Clariflocculator: Settling / Compression Zone (mud bed)"
+     ],
+     "answer": 0,
+     "explanation": "Clariflocculator: Tank with Conical Floor & Overflow Launder: Holds water; launder collects overflow.",
+     "level": "basic",
+     "part": "cf_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Clear and sludge zones.\"",
+     "options": [
+      "Clariflocculator: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "Clariflocculator: Rake Arms & Blades (move mud to the centre cone)",
+      "Clariflocculator: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "Clariflocculator: Clear Overflow Zone"
+     ],
+     "answer": 3,
+     "explanation": "Clariflocculator: Clear Overflow Zone: Clear and sludge zones.",
+     "level": "basic",
+     "part": "cf_clear",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Calms inflow.\"",
+     "options": [
+      "Clariflocculator: Clear Overflow Zone",
+      "Flocs growing in the Flocculation Zone then settling",
+      "Clariflocculator: Settling / Compression Zone (mud bed)",
+      "Clariflocculator: Central Feedwell (dissipates feed energy, mixes flocculant)"
+     ],
+     "answer": 3,
+     "explanation": "Clariflocculator: Central Feedwell (dissipates feed energy, mixes flocculant): Calms inflow.",
+     "level": "basic",
+     "part": "cf_feedwell",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

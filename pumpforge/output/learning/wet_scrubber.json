@@ -1,0 +1,658 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "wet_scrubber",
+ "no": 275,
+ "title": "Wet Scrubber",
+ "model_title": "Wet Scrubber — Venturi Throat with Cyclonic Separator (Particulate & Mist Removal)",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A venturi wet scrubber removes fine dust and mist from gas. The gas accelerates through a narrow throat where injected liquid is shattered into fine droplets; particles impact the droplets, and a cyclonic separator then spins the dirty droplets out. It can also cool the gas and absorb soluble gases.",
+   "applications": [
+    "Dust from kilns, dryers, furnaces and incinerators",
+    "Sticky / wet or explosive dusts unsuitable for bag filters"
+   ],
+   "key_points": [
+    "Efficiency rises with throat ΔP",
+    "High fan power",
+    "Produces slurry to treat",
+    "Handles hot, wet, sticky gases"
+   ],
+   "classification": {
+    "family": "Environmental",
+    "type": "Venturi scrubber + cyclonic separator"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A venturi wet scrubber removes fine dust and mist from gas by accelerating it through a narrow throat where injected liquid is shattered into droplets that capture the particles; a cyclonic separator then removes the dirty droplets."
+  },
+  "model_3d": {
+   "asset": "glb/wet_scrubber.glb",
+   "metadata": "meta/wet_scrubber.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10708,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Dusty gas enters the converging section.",
+    "Liquid is injected at the throat.",
+    "Droplets capture particles."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Dusty gas enters the converging section.",
+     "part": "venturi",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid is injected at the throat.",
+     "part": "liquid_injection",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Droplets capture particles.",
+     "part": "venturi",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The separator removes droplets.",
+     "part": "cyclonic_separator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry is recycled / bled.",
+     "part": "recycle_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Collection efficiency vs particle size for different throat ΔP."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "wet_scrubber_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "wet_scrubber_pressure.glb",
+     "title": "Energy in the throat buys efficiency",
+     "description": "Gas accelerates to high velocity in the venturi throat and shatters the injected liquid into fine droplets; dust particles impact them because of the large relative velocity. Collection efficiency rises with throat pressure drop (often ≈ 25–100 mbar for fine particulate) — the fan power pays for it. The diffuser recovers part of the pressure, and the cyclonic separator then removes the dirty droplets. Wet scrubbers also cool and saturate the gas and can absorb soluble gases.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/wet_scrubber.json#components",
+   "key_components": "Venturi throat, injection ring, cyclonic separator, mist eliminator, recycle pump",
+   "parts": [
+    {
+     "id": "venturi",
+     "name": "Venturi: Converging Section, Throat (gas ≈ 40–120 m/s) & Diverging Diffuser",
+     "info_ref": "ws_venturi",
+     "function": "Capture particles.",
+     "material": "Stainless."
+    },
+    {
+     "id": "liquid_injection",
+     "name": "Scrubbing-Liquid Injection Ring at the Throat Inlet",
+     "info_ref": "ws_spray",
+     "function": "Inject liquid.",
+     "material": "Steel."
+    },
+    {
+     "id": "cyclonic_separator",
+     "name": "Cyclonic Separator (tangential entry; droplets thrown to the wall)",
+     "info_ref": "ws_separator",
+     "function": "Remove droplets.",
+     "material": "Stainless."
+    },
+    {
+     "id": "separator_outlet",
+     "name": "Clean-Gas Outlet Pipe & Chevron Mist Eliminator",
+     "info_ref": "ws_separator",
+     "function": "Remove droplets.",
+     "material": "Stainless."
+    },
+    {
+     "id": "slurry",
+     "name": "Collected Slurry",
+     "info_ref": "ws_separator",
+     "function": "Remove droplets.",
+     "material": "Stainless."
+    },
+    {
+     "id": "recycle_pump",
+     "name": "Recycle Pump (bleed of slurry to treatment)",
+     "info_ref": "ws_pump",
+     "function": "Recycle liquid.",
+     "material": "—"
+    },
+    {
+     "id": "recycle_pump_shaft",
+     "name": "Recycle Pump (bleed of slurry to treatment) — Shaft & Coupling (turning)",
+     "info_ref": "ws_pump",
+     "function": "Recycle liquid.",
+     "material": "—"
+    },
+    {
+     "id": "recycle_line",
+     "name": "Separator Drain to Recycle Pump",
+     "info_ref": "ws_pump",
+     "function": "Recycle liquid.",
+     "material": "—"
+    },
+    {
+     "id": "dust",
+     "name": "Dust particles captured by atomised droplets in the throat",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "swirl",
+     "name": "Droplets spun to the wall and drained",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Throats ≈ 0.1 – 1 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1,000 – 200,000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Throat ΔP ≈ 25 – 100 mbar",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "> 95–99 % for ≥ 1 µm (ΔP dependent)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Throat ΔP from particle size and required efficiency."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EPA Cost Manual"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure for equipment, liquid / dust loads and wind; access platforms for maintenance."
+   ],
+   "alignment": [
+    "Fans and pumps aligned; ducts supported to avoid loads on equipment."
+   ],
+   "piping": [
+    "Corrosion-resistant materials for wet acid service; drains at low points; expansion joints on hot ducts."
+   ],
+   "commissioning": [
+    "Run on air/water; check ΔP, flows and controls; then process gas; emission test against permit."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check ΔP, liquid flow and pH.",
+     "part": "liquid_injection",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect throat / nozzles for erosion.",
+     "part": "venturi",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Reline throat; pump overhaul.",
+     "part": "venturi"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low efficiency",
+     "category": "performance",
+     "symptoms": [
+      "Visible emission"
+     ],
+     "causes": [
+      "Low ΔP / liquid flow"
+     ],
+     "remedies": [
+      "Restore flow; adjust throat"
+     ],
+     "part": "venturi"
+    },
+    {
+     "problem": "Mist carry-over",
+     "category": "performance",
+     "symptoms": [
+      "Wet stack"
+     ],
+     "causes": [
+      "Separator overloaded"
+     ],
+     "remedies": [
+      "Clean eliminator"
+     ],
+     "part": "separator_outlet"
+    }
+   ],
+   "safety": [
+    "Corrosive slurry; confined spaces."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Wet Scrubber — Introduction",
+    "type": "in_app_tour",
+    "model": "wet_scrubber.glb",
+    "duration_s": 54.5,
+    "script": [
+     {
+      "narration": "This module introduces the Wet Scrubber.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A venturi wet scrubber removes fine dust and mist from gas.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The gas accelerates through a narrow throat where injected liquid is shattered into fine droplets; particles impact the droplets, and a cyclonic separator then spins the dirty droplets out.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It can also cool the gas and absorb soluble gases.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include dust from kilns, dryers, furnaces and incinerators; sticky / wet or explosive dusts unsuitable for bag filters.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Recycle Pump (bleed of slurry to treatment), Recycle Pump (bleed of slurry to treatment) — Shaft & Coupling (turning).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Wet Scrubber — Operation",
+    "type": "in_app_tour",
+    "model": "wet_scrubber.glb",
+    "duration_s": 39.4,
+    "script": [
+     {
+      "narration": "How the Wet Scrubber works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Dusty gas enters the converging section.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid is injected at the throat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid_injection",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Droplets capture particles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The separator removes droplets.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cyclonic_separator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry is recycled / bled.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "recycle_pump",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Gas accelerates to high velocity in the venturi throat and shatters the injected liquid into fine droplets; dust particles impact them because of the large relative velocity.",
+      "duration_s": 11.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Wet Scrubber — Maintenance",
+    "type": "in_app_tour",
+    "model": "wet_scrubber.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Wet Scrubber.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check ΔP, liquid flow and pH.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid_injection",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect throat / nozzles for erosion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Reline throat; pump overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low efficiency: visible emission. Common cause: low δp / liquid flow.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "venturi",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for mist carry-over: wet stack. Common cause: separator overloaded.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "separator_outlet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What drives venturi efficiency?",
+     "options": [
+      "Throat pressure drop",
+      "Colour",
+      "Stack height",
+      "Pump speed"
+     ],
+     "answer": 0,
+     "explanation": "ΔP.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the cyclonic separator do?",
+     "options": [
+      "Removes the dirty droplets",
+      "Adds water",
+      "Heats gas",
+      "Measures"
+     ],
+     "answer": 0,
+     "explanation": "Droplets.",
+     "level": "basic"
+    },
+    {
+     "question": "A drawback?",
+     "options": [
+      "High fan power & slurry treatment",
+      "No efficiency",
+      "Cannot handle hot gas",
+      "Silent"
+     ],
+     "answer": 0,
+     "explanation": "Energy & slurry.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Capture particles.\"",
+     "options": [
+      "Separator Drain to Recycle Pump",
+      "Collected Slurry",
+      "Recycle Pump (bleed of slurry to treatment)",
+      "Venturi: Converging Section, Throat (gas ≈ 40–120 m/s) & Diverging Diffuser"
+     ],
+     "answer": 3,
+     "explanation": "Venturi: Converging Section, Throat (gas ≈ 40–120 m/s) & Diverging Diffuser: Capture particles.",
+     "level": "basic",
+     "part": "venturi",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Inject liquid.\"",
+     "options": [
+      "Recycle Pump (bleed of slurry to treatment)",
+      "Scrubbing-Liquid Injection Ring at the Throat Inlet",
+      "Venturi: Converging Section, Throat (gas ≈ 40–120 m/s) & Diverging Diffuser",
+      "Dust particles captured by atomised droplets in the throat"
+     ],
+     "answer": 1,
+     "explanation": "Scrubbing-Liquid Injection Ring at the Throat Inlet: Inject liquid.",
+     "level": "basic",
+     "part": "liquid_injection",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Remove droplets.\"",
+     "options": [
+      "Scrubbing-Liquid Injection Ring at the Throat Inlet",
+      "Venturi: Converging Section, Throat (gas ≈ 40–120 m/s) & Diverging Diffuser",
+      "Recycle Pump (bleed of slurry to treatment)",
+      "Cyclonic Separator (tangential entry; droplets thrown to the wall)"
+     ],
+     "answer": 3,
+     "explanation": "Cyclonic Separator (tangential entry; droplets thrown to the wall): Remove droplets.",
+     "level": "basic",
+     "part": "cyclonic_separator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

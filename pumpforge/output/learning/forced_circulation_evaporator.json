@@ -1,0 +1,668 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "forced_circulation_evaporator",
+ "no": 159,
+ "title": "Forced Circulation Evaporator",
+ "model_title": "Forced Circulation Evaporator (Heater + Flash Separator + Circulation Pump)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A forced circulation evaporator pumps the liquid at high velocity through a heat exchanger and back to a separator. Because of the static head above the exchanger the liquid is only heated, not boiled, in the tubes; it flashes when it reaches the lower-pressure separator. This prevents scale and crystal deposits on the heating surface.",
+   "applications": [
+    "Crystallisation (salts, sodium sulphate)",
+    "Scaling and viscous liquids",
+    "Wastewater zero-liquid-discharge concentrators"
+   ],
+   "key_points": [
+    "Suppressed boiling in the heater",
+    "High tube velocity (≈ 1.5–3 m/s)",
+    "Large circulation pump (high flow, low head)",
+    "Handles solids and high viscosity"
+   ],
+   "classification": {
+    "family": "Evaporator",
+    "type": "Forced circulation (suppressed boiling)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A forced circulation evaporator pumps liquid at high velocity through a heat exchanger and then into a separator. Static head keeps the liquid from boiling in the tubes; it flashes in the separator. This prevents scaling and suits crystallising or viscous liquids."
+  },
+  "model_3d": {
+   "asset": "glb/forced_circulation_evaporator.glb",
+   "metadata": "meta/forced_circulation_evaporator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 16404,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The circulation pump drives liquid through the heater tubes.",
+    "Steam heats the liquid a few degrees in the heater.",
+    "Static head keeps the liquid from boiling in the tubes."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The circulation pump drives liquid through the heater tubes.",
+     "part": "circulation_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam heats the liquid a few degrees in the heater.",
+     "part": "heater",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Static head keeps the liquid from boiling in the tubes.",
+     "part": "heater_tubes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In the separator the liquid flashes and vapour leaves.",
+     "part": "separator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid returns down the loop to the pump.",
+     "part": "circulation_loop",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Temperature rise per pass ~ 2–5 °C; circulation rate ≫ evaporation rate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "forced_circulation_evaporator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "forced_circulation_evaporator_temperature.glb",
+     "title": "Hydrostatic head suppresses boiling in the tubes",
+     "description": "The circulation pump drives liquid through the tubes at high velocity (typically ~ 1.5–3 m/s). The static head above the tubes keeps the liquid under enough pressure that it is only heated (a few °C) without boiling; it flashes when it reaches the separator. Suppressing boiling at the wall prevents scaling and crystal deposition — ideal for crystallising, scaling or viscous liquids.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/forced_circulation_evaporator.json#components",
+   "key_components": "Circulation pump, heat exchanger, flash separator, recirculation loop, vapour outlet",
+   "parts": [
+    {
+     "id": "heater",
+     "name": "Heat Exchanger Shell (steam side)",
+     "info_ref": "fc_heater",
+     "function": "Heats the circulating liquid.",
+     "material": "Stainless/titanium."
+    },
+    {
+     "id": "heater_tubes",
+     "name": "Heater Tubes (liquid pumped through at high velocity — no boiling in the tubes)",
+     "info_ref": "fc_heater",
+     "function": "Heats the circulating liquid.",
+     "material": "Stainless/titanium."
+    },
+    {
+     "id": "heads",
+     "name": "Inlet & Outlet Heads",
+     "info_ref": "fc_heater",
+     "function": "Heats the circulating liquid.",
+     "material": "Stainless/titanium."
+    },
+    {
+     "id": "separator",
+     "name": "Flash Separator (liquid boils here as pressure falls)",
+     "info_ref": "fc_separator",
+     "function": "Liquid flashes and vapour separates.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "separator_liquid",
+     "name": "Circulating Liquid in the Separator",
+     "info_ref": "fc_separator",
+     "function": "Liquid flashes and vapour separates.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "circulation_loop",
+     "name": "Circulation Loop: Heater Outlet → Separator → Downcomer → Pump",
+     "info_ref": "fc_loop",
+     "function": "Circulation piping.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "circulation_pump",
+     "name": "Axial/Mixed-Flow Circulation Pump & Motor (high flow, low head)",
+     "info_ref": "fc_pump",
+     "function": "Circulates large flow at low head.",
+     "material": "Duplex/stainless."
+    },
+    {
+     "id": "pump_impeller",
+     "name": "Pump Impeller",
+     "info_ref": "fc_pump",
+     "function": "Circulates large flow at low head.",
+     "material": "Duplex/stainless."
+    },
+    {
+     "id": "structure",
+     "name": "Support Steel",
+     "info_ref": "fc_separator",
+     "function": "Liquid flashes and vapour separates.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "circulating",
+     "name": "Liquid Circulating round the Loop",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "flash_vapour",
+     "name": "Vapour Flashing in the Separator",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Heater ~ 0.5 – 2 m; separator ~ 1 – 6 m diameter",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.5 – 50",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "~ 50 – 120",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Evaporation ~ 1 – 100",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose for scaling, crystallising or viscous duties; size pump for circulation ratio and velocity."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Perry's Handbook — Crystallisation/evaporation"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support vessels on structure/legs designed for operating and flooded weights; allow thermal growth of calandrias and vapour lines."
+   ],
+   "alignment": [
+    "Vertical calandrias plumb (falling-film distribution depends on it); slope liquor lines for drainage."
+   ],
+   "piping": [
+    "Vapour lines sized for low ΔP; condensate drained by traps or level control; vents for non-condensables on each steam chest.",
+    "Vacuum system (condenser + vacuum pump/ejector) for the last effect."
+   ],
+   "commissioning": [
+    "Leak/vacuum test; water trials (wetting, levels); bring steam on slowly; set levels and densities; CIP routine."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor pump amps, ΔT and slurry density.",
+     "part": "circulation_pump",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check tube velocity and scaling; flush.",
+     "part": "heater_tubes",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect pump impeller and tubes for erosion.",
+     "part": "pump_impeller"
+    }
+   ],
+   "lubrication": [
+    "Pump bearings and gearbox oil per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Erosion by crystals",
+     "category": "wear",
+     "symptoms": [
+      "Thinning tubes, impeller wear"
+     ],
+     "causes": [
+      "High velocity slurry"
+     ],
+     "remedies": [
+      "Wear-resistant materials"
+     ],
+     "part": "pump_impeller"
+    },
+    {
+     "problem": "Boiling in tubes (scaling)",
+     "category": "performance",
+     "symptoms": [
+      "Rapid fouling"
+     ],
+     "causes": [
+      "Low static head or high ΔT"
+     ],
+     "remedies": [
+      "Raise head/back-pressure; reduce ΔT"
+     ],
+     "part": "heater_tubes"
+    }
+   ],
+   "safety": [
+    "Hot, pressurised slurry; lock out pump before opening loop."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Forced Circulation Evaporator — Introduction",
+    "type": "in_app_tour",
+    "model": "forced_circulation_evaporator.glb",
+    "duration_s": 56.9,
+    "script": [
+     {
+      "narration": "This module introduces the Forced Circulation Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A forced circulation evaporator pumps the liquid at high velocity through a heat exchanger and back to a separator.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Because of the static head above the exchanger the liquid is only heated, not boiled, in the tubes; it flashes when it reaches the lower-pressure separator.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "This prevents scale and crystal deposits on the heating surface.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include crystallisation (salts, sodium sulphate); scaling and viscous liquids; wastewater zero-liquid-discharge concentrators.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Heat Exchanger Shell (steam side), Inlet & Outlet Heads, Axial/Mixed-Flow Circulation Pump & Motor (high flow, low head), Pump Impeller.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Forced Circulation Evaporator — Operation",
+    "type": "in_app_tour",
+    "model": "forced_circulation_evaporator.glb",
+    "duration_s": 35.7,
+    "script": [
+     {
+      "narration": "How the Forced Circulation Evaporator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The circulation pump drives liquid through the heater tubes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "circulation_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam heats the liquid a few degrees in the heater.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "heater",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Static head keeps the liquid from boiling in the tubes.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "heater_tubes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In the separator the liquid flashes and vapour leaves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "separator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid returns down the loop to the pump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "circulation_loop",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The circulation pump drives liquid through the tubes at high velocity (typically ~ 1.5–3 m/s).",
+      "duration_s": 7.1,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Forced Circulation Evaporator — Maintenance",
+    "type": "in_app_tour",
+    "model": "forced_circulation_evaporator.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Forced Circulation Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor pump amps, ΔT and slurry density.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "circulation_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check tube velocity and scaling; flush.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "heater_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect pump impeller and tubes for erosion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for erosion by crystals: thinning tubes, impeller wear. Common cause: high velocity slurry.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "pump_impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for boiling in tubes (scaling): rapid fouling. Common cause: low static head or high δt.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "heater_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does the liquid not boil in the heater tubes?",
+     "options": [
+      "Static head raises its pressure",
+      "It is too cold",
+      "There is no steam",
+      "Pump cools it"
+     ],
+     "answer": 0,
+     "explanation": "Suppressed boiling.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does evaporation happen?",
+     "options": [
+      "In the separator (flashing)",
+      "In the pump",
+      "In the tubes",
+      "In the condenser"
+     ],
+     "answer": 0,
+     "explanation": "Flash.",
+     "level": "basic"
+    },
+    {
+     "question": "Why high velocity?",
+     "options": [
+      "Reduce fouling and keep solids suspended",
+      "Reduce power",
+      "Make noise",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Scour.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Heats the circulating liquid.\"",
+     "options": [
+      "Axial/Mixed-Flow Circulation Pump & Motor (high flow, low head)",
+      "Circulation Loop: Heater Outlet → Separator → Downcomer → Pump",
+      "Heat Exchanger Shell (steam side)",
+      "Flash Separator (liquid boils here as pressure falls)"
+     ],
+     "answer": 2,
+     "explanation": "Heat Exchanger Shell (steam side): Heats the circulating liquid.",
+     "level": "basic",
+     "part": "heater",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Liquid flashes and vapour separates.\"",
+     "options": [
+      "Vapour Flashing in the Separator",
+      "Liquid Circulating round the Loop",
+      "Pump Impeller",
+      "Flash Separator (liquid boils here as pressure falls)"
+     ],
+     "answer": 3,
+     "explanation": "Flash Separator (liquid boils here as pressure falls): Liquid flashes and vapour separates.",
+     "level": "basic",
+     "part": "separator",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Circulation piping.\"",
+     "options": [
+      "Circulation Loop: Heater Outlet → Separator → Downcomer → Pump",
+      "Liquid Circulating round the Loop",
+      "Circulating Liquid in the Separator",
+      "Axial/Mixed-Flow Circulation Pump & Motor (high flow, low head)"
+     ],
+     "answer": 0,
+     "explanation": "Circulation Loop: Heater Outlet → Separator → Downcomer → Pump: Circulation piping.",
+     "level": "basic",
+     "part": "circulation_loop",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

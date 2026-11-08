@@ -1,0 +1,714 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "red_mud_washer",
+ "no": 204,
+ "title": "Red Mud Washer",
+ "model_title": "Red Mud Washer Train (Counter-Current Decantation, 3 Thickeners)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "Red mud washers are thickeners arranged in a counter-current decantation (CCD) train. Mud is pumped forward from washer to washer while wash water flows backward; each stage dilutes and recovers the dissolved caustic soda and alumina in the mud.",
+   "applications": [
+    "Residue washing in Bayer refineries",
+    "Counter-current decantation in hydrometallurgy (e.g. copper, uranium)"
+   ],
+   "key_points": [
+    "Counter-current flow",
+    "Typically 4–7 washers",
+    "Flocculant aids settling",
+    "Soda recovery ↑ with stages and underflow density"
+   ],
+   "classification": {
+    "family": "Residue washing",
+    "type": "CCD thickener train"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "Red mud washers are thickeners in a counter-current decantation (CCD) train. Mud moves forward from washer to washer while wash water flows backward, recovering dissolved caustic soda and alumina from the mud."
+  },
+  "model_3d": {
+   "asset": "glb/red_mud_washer.glb",
+   "metadata": "meta/red_mud_washer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 16722,
+   "parts": 19
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Mud from the settler enters washer 1.",
+    "Mud settles and rakes move it to the cone.",
+    "Underflow goes forward to the next washer."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Mud from the settler enters washer 1.",
+     "part": "w1_feedwell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Mud settles and rakes move it to the cone.",
+     "part": "w1_rakes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Underflow goes forward to the next washer.",
+     "part": "interstage_piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Overflow liquor goes backward.",
+     "part": "w2_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Washed mud leaves the last washer.",
+     "part": "w3_mud",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Soluble loss vs number of stages and wash ratio."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "red_mud_washer_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "red_mud_washer_pressure.glb",
+     "title": "Counter-current washing recovers caustic",
+     "description": "Mud moves forward (left → right) while wash water moves backward (right → left). Each stage dilutes the soluble soda and alumina left in the mud, so the liquor strength falls from red (first washer) to blue (last). Recovered liquor returns to the circuit; washed mud goes to residue storage. Typically 4–7 washers are used, with flocculant to speed settling.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/red_mud_washer.json#components",
+   "key_components": "CCD thickeners, rakes, feedwells, drives, mud & wash-liquor lines",
+   "parts": [
+    {
+     "id": "w1_tank",
+     "name": "Washer 1: Tank with Conical Floor & Overflow Launder",
+     "info_ref": "rw_tank",
+     "function": "Holds slurry; launder collects overflow.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "w1_clear",
+     "name": "Washer 1: Clear Overflow Zone",
+     "info_ref": "rw_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "w1_mud",
+     "name": "Washer 1: Settling / Compression Zone (mud bed)",
+     "info_ref": "rw_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "w1_feedwell",
+     "name": "Washer 1: Central Feedwell (dissipates feed energy, mixes flocculant)",
+     "info_ref": "rw_feedwell",
+     "function": "Calms feed; mixes flocculant.",
+     "material": "Steel."
+    },
+    {
+     "id": "w1_rakes",
+     "name": "Washer 1: Rake Arms & Blades (move mud to the centre cone)",
+     "info_ref": "rw_rake",
+     "function": "Moves settled mud to the cone; keeps it from setting.",
+     "material": "Steel."
+    },
+    {
+     "id": "w1_drive",
+     "name": "Washer 1: Bridge & Rake Drive (slow, high torque, overload protection)",
+     "info_ref": "rw_drive",
+     "function": "Turns the rakes.",
+     "material": "—"
+    },
+    {
+     "id": "w2_tank",
+     "name": "Washer 2: Tank with Conical Floor & Overflow Launder",
+     "info_ref": "rw_tank",
+     "function": "Holds slurry; launder collects overflow.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "w2_clear",
+     "name": "Washer 2: Clear Overflow Zone",
+     "info_ref": "rw_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "w2_mud",
+     "name": "Washer 2: Settling / Compression Zone (mud bed)",
+     "info_ref": "rw_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "w2_feedwell",
+     "name": "Washer 2: Central Feedwell (dissipates feed energy, mixes flocculant)",
+     "info_ref": "rw_feedwell",
+     "function": "Calms feed; mixes flocculant.",
+     "material": "Steel."
+    },
+    {
+     "id": "w2_rakes",
+     "name": "Washer 2: Rake Arms & Blades (move mud to the centre cone)",
+     "info_ref": "rw_rake",
+     "function": "Moves settled mud to the cone; keeps it from setting.",
+     "material": "Steel."
+    },
+    {
+     "id": "w2_drive",
+     "name": "Washer 2: Bridge & Rake Drive (slow, high torque, overload protection)",
+     "info_ref": "rw_drive",
+     "function": "Turns the rakes.",
+     "material": "—"
+    },
+    {
+     "id": "w3_tank",
+     "name": "Washer 3: Tank with Conical Floor & Overflow Launder",
+     "info_ref": "rw_tank",
+     "function": "Holds slurry; launder collects overflow.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "w3_clear",
+     "name": "Washer 3: Clear Overflow Zone",
+     "info_ref": "rw_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "w3_mud",
+     "name": "Washer 3: Settling / Compression Zone (mud bed)",
+     "info_ref": "rw_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "w3_feedwell",
+     "name": "Washer 3: Central Feedwell (dissipates feed energy, mixes flocculant)",
+     "info_ref": "rw_feedwell",
+     "function": "Calms feed; mixes flocculant.",
+     "material": "Steel."
+    },
+    {
+     "id": "w3_rakes",
+     "name": "Washer 3: Rake Arms & Blades (move mud to the centre cone)",
+     "info_ref": "rw_rake",
+     "function": "Moves settled mud to the cone; keeps it from setting.",
+     "material": "Steel."
+    },
+    {
+     "id": "w3_drive",
+     "name": "Washer 3: Bridge & Rake Drive (slow, high torque, overload protection)",
+     "info_ref": "rw_drive",
+     "function": "Turns the rakes.",
+     "material": "—"
+    },
+    {
+     "id": "interstage_piping",
+     "name": "Underflow (mud) Lines Forward & Overflow (wash liquor) Lines Backward",
+     "info_ref": "rw_piping",
+     "function": "Interstage lines.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Washers ~ 20 – 50 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 400",
+     "unit": "t/h mud"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 60 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Rake drives ~ 10 – 40 each",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Stage count and wash ratio from soda-loss economics."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Large ring foundation or concrete tank; centre pier carries the rake drive and torque."
+   ],
+   "alignment": [
+    "Level launders so overflow is even all round; centre the drive and shaft."
+   ],
+   "piping": [
+    "Feed to feedwell with flocculant dosing points; underflow pumps with standby and flushing; overflow to downstream."
+   ],
+   "commissioning": [
+    "Fill with water, run rakes and test torque alarms and lift; start feed and flocculant; build mud bed gradually."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor torque, bed level, overflow clarity.",
+     "part": "w1_drive",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check flocculant system.",
+     "part": "interstage_piping",
+     "interval": "daily"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Rake and drive inspection.",
+     "part": "w2_rakes"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Rake bogging",
+     "category": "performance",
+     "symptoms": [
+      "High torque trip"
+     ],
+     "causes": [
+      "Mud bed too high"
+     ],
+     "remedies": [
+      "Increase underflow; lift rakes"
+     ],
+     "part": "w1_rakes"
+    },
+    {
+     "problem": "Dirty overflow",
+     "category": "performance",
+     "symptoms": [
+      "Solids in liquor"
+     ],
+     "causes": [
+      "Poor flocculation"
+     ],
+     "remedies": [
+      "Adjust flocculant"
+     ],
+     "part": "w1_clear"
+    }
+   ],
+   "safety": [
+    "Caustic; rake torque protection."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Red Mud Washer — Introduction",
+    "type": "in_app_tour",
+    "model": "red_mud_washer.glb",
+    "duration_s": 56.0,
+    "script": [
+     {
+      "narration": "This module introduces the Red Mud Washer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Red mud washers are thickeners arranged in a counter-current decantation (CCD) train.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Mud is pumped forward from washer to washer while wash water flows backward; each stage dilutes and recovers the dissolved caustic soda and alumina in the mud.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include residue washing in Bayer refineries; counter-current decantation in hydrometallurgy (e.g. copper, uranium).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Washer 1: Rake Arms & Blades (move mud to the centre cone), Washer 2: Rake Arms & Blades (move mud to the centre cone), Washer 3: Rake Arms & Blades (move mud to the centre cone).",
+      "duration_s": 16.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Red Mud Washer — Operation",
+    "type": "in_app_tour",
+    "model": "red_mud_washer.glb",
+    "duration_s": 33.2,
+    "script": [
+     {
+      "narration": "How the Red Mud Washer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Mud from the settler enters washer 1.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "w1_feedwell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Mud settles and rakes move it to the cone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "w1_rakes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Underflow goes forward to the next washer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "interstage_piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Overflow liquor goes backward.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "w2_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Washed mud leaves the last washer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "w3_mud",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Mud moves forward (left → right) while wash water moves backward (right → left).",
+      "duration_s": 5.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Red Mud Washer — Maintenance",
+    "type": "in_app_tour",
+    "model": "red_mud_washer.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Red Mud Washer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor torque, bed level, overflow clarity.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "w1_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check flocculant system.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "interstage_piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rake and drive inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "w2_rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rake bogging: high torque trip. Common cause: mud bed too high.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "w1_rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dirty overflow: solids in liquor. Common cause: poor flocculation.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "w1_clear",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "In CCD, wash water flows…",
+     "options": [
+      "Opposite to the mud",
+      "With the mud",
+      "Not at all",
+      "Upward only"
+     ],
+     "answer": 0,
+     "explanation": "Counter-current.",
+     "level": "basic"
+    },
+    {
+     "question": "What is recovered?",
+     "options": [
+      "Caustic soda and alumina",
+      "Iron",
+      "Silica",
+      "Water only"
+     ],
+     "answer": 0,
+     "explanation": "Soda.",
+     "level": "basic"
+    },
+    {
+     "question": "Why flocculant?",
+     "options": [
+      "Faster settling",
+      "Colour",
+      "Heat",
+      "Foam"
+     ],
+     "answer": 0,
+     "explanation": "Settling.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds slurry; launder collects overflow.\"",
+     "options": [
+      "Washer 3: Rake Arms & Blades (move mud to the centre cone)",
+      "Washer 1: Settling / Compression Zone (mud bed)",
+      "Washer 1: Tank with Conical Floor & Overflow Launder",
+      "Washer 3: Settling / Compression Zone (mud bed)"
+     ],
+     "answer": 2,
+     "explanation": "Washer 1: Tank with Conical Floor & Overflow Launder: Holds slurry; launder collects overflow.",
+     "level": "basic",
+     "part": "w1_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Clear and mud zones.\"",
+     "options": [
+      "Washer 1: Tank with Conical Floor & Overflow Launder",
+      "Washer 2: Rake Arms & Blades (move mud to the centre cone)",
+      "Washer 1: Clear Overflow Zone",
+      "Washer 1: Central Feedwell (dissipates feed energy, mixes flocculant)"
+     ],
+     "answer": 2,
+     "explanation": "Washer 1: Clear Overflow Zone: Clear and mud zones.",
+     "level": "basic",
+     "part": "w1_clear",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Calms feed; mixes flocculant.\"",
+     "options": [
+      "Washer 1: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "Washer 2: Settling / Compression Zone (mud bed)",
+      "Washer 3: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "Washer 2: Tank with Conical Floor & Overflow Launder"
+     ],
+     "answer": 0,
+     "explanation": "Washer 1: Central Feedwell (dissipates feed energy, mixes flocculant): Calms feed; mixes flocculant.",
+     "level": "basic",
+     "part": "w1_feedwell",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,659 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "paddle_dryer",
+ "no": 164,
+ "title": "Paddle Dryer",
+ "model_title": "Twin-Shaft Hollow Paddle Dryer (Indirect, Steam-Heated)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A paddle dryer is an indirect (conduction) dryer: two hollow shafts carrying wedge-shaped paddles turn inside a steam-jacketed trough. Steam or thermal oil inside the jacket, shafts and paddles heats the material, while the paddles mix and convey it towards the outlet weir. Only a small vapour stream leaves.",
+   "applications": [
+    "Sewage and industrial sludge drying",
+    "Pastes and filter cakes",
+    "Chemicals needing closed, solvent-recovery drying"
+   ],
+   "key_points": [
+    "Large heated surface per volume (shafts + paddles + jacket)",
+    "Material never touches the heating medium",
+    "Small vapour flow — easy treatment/recovery",
+    "Self-cleaning wedge paddles"
+   ],
+   "classification": {
+    "family": "Dryer",
+    "type": "Twin-shaft hollow paddle (indirect)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A paddle dryer is an indirect (contact) dryer. Two hollow shafts with wedge-shaped paddles turn in a jacketed trough; steam inside the jacket, shafts and paddles heats the material, while the paddles mix it and move it towards the outlet. Only a small vapour stream leaves, making it suitable for sludges and pastes."
+  },
+  "model_3d": {
+   "asset": "glb/paddle_dryer.glb",
+   "metadata": "meta/paddle_dryer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4060,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Wet feed enters at one end.",
+    "Steam heats the jacketed trough.",
+    "The hollow paddle shafts, also steam-heated, mix and convey the material."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Wet feed enters at one end.",
+     "part": "vapour_dome",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam heats the jacketed trough.",
+     "part": "jacketed_trough",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hollow paddle shafts, also steam-heated, mix and convey the material.",
+     "part": "paddle_shaft_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Rotary joints feed steam into the turning shafts.",
+     "part": "rotary_joints",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dried product leaves over the outlet weir; vapour leaves the dome.",
+     "part": "outlet",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Drying rate falls as material passes the sticky phase and the falling-rate period; residence time set by weir and fill."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "paddle_dryer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "paddle_dryer_temperature.glb",
+     "title": "Indirect heating through jacket and paddles",
+     "description": "Steam (or thermal oil) heats the trough jacket and the inside of the hollow shafts and paddles, so the heating surface per unit volume is very large. The material never touches the heating medium, and only a small vapour stream leaves — easy to condense or treat. Used for sludges, pastes and filter cakes.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/paddle_dryer.json#components",
+   "key_components": "Jacketed trough, twin hollow paddle shafts, steam rotary joints, vapour dome, drive",
+   "parts": [
+    {
+     "id": "jacketed_trough",
+     "name": "Jacketed W-Trough (steam jacket)",
+     "info_ref": "pd_trough",
+     "function": "Contains the material; heated jacket.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "paddle_shaft_1",
+     "name": "Hollow Shaft 1 with Wedge Paddles (steam inside)",
+     "info_ref": "pd_shafts",
+     "function": "Heat, mix and convey.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "paddle_shaft_2",
+     "name": "Hollow Shaft 2 with Wedge Paddles (steam inside)",
+     "info_ref": "pd_shafts",
+     "function": "Heat, mix and convey.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "vapour_dome",
+     "name": "Cover / Vapour Dome, Vapour Outlet & Feed Inlet",
+     "info_ref": "pd_dome",
+     "function": "Collects vapour.",
+     "material": "Steel."
+    },
+    {
+     "id": "rotary_joints",
+     "name": "Rotary Joints (steam in, condensate out of the hollow shafts)",
+     "info_ref": "pd_joints",
+     "function": "Steam into rotating shafts.",
+     "material": "—"
+    },
+    {
+     "id": "drive",
+     "name": "Drive: Motor, Gearbox & Timing Gears (shafts counter-rotate)",
+     "info_ref": "pd_drive",
+     "function": "Turns the shafts.",
+     "material": "—"
+    },
+    {
+     "id": "outlet",
+     "name": "Discharge Weir & Outlet",
+     "info_ref": "pd_trough",
+     "function": "Contains the material; heated jacket.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "pd_trough",
+     "function": "Contains the material; heated jacket.",
+     "material": "Steel/stainless."
+    },
+    {
+     "id": "sludge",
+     "name": "Wet Material Conveyed & Mixed by the Paddles",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "vapour",
+     "name": "Moisture Evaporating to the Vapour Dome",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Heating area ~ 5 – 400 m²",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.1 – 10",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Steam ~ 150 – 200",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Evaporation ~ 0.1 – 10",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size heating area from evaporation and specific evaporation rate; check sticky-phase torque."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Mujumdar — Handbook of Industrial Drying"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment, product and dynamic loads; explosion venting directed to a safe area."
+   ],
+   "alignment": [
+    "Align fans, rotary valves and drives; level chambers and beds."
+   ],
+   "piping": [
+    "Air/gas ducts with dampers and expansion joints; dust collection (cyclone, bag filter); explosion isolation where required (ATEX/NFPA)."
+   ],
+   "commissioning": [
+    "Air balance; heat-up curve; water trials then product; check outlet temperature/moisture control and interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check drive current, steam pressure and condensate removal.",
+     "part": "drive",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect rotary joints and seals.",
+     "part": "rotary_joints",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect paddles for wear; repair hard-facing.",
+     "part": "paddle_shaft_2"
+    }
+   ],
+   "lubrication": [
+    "Gearbox oil; shaft bearings greased per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overload in sticky phase",
+     "category": "performance",
+     "symptoms": [
+      "High torque, trips"
+     ],
+     "causes": [
+      "Wet feed concentration"
+     ],
+     "remedies": [
+      "Back-mix dry product; control feed"
+     ],
+     "part": "drive"
+    },
+    {
+     "problem": "Rotary joint leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Steam leaks"
+     ],
+     "causes": [
+      "Seal wear"
+     ],
+     "remedies": [
+      "Replace seals"
+     ],
+     "part": "rotary_joints"
+    }
+   ],
+   "safety": [
+    "Hot surfaces; rotating paddles — lock out before opening covers."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Paddle Dryer — Introduction",
+    "type": "in_app_tour",
+    "model": "paddle_dryer.glb",
+    "duration_s": 60.6,
+    "script": [
+     {
+      "narration": "This module introduces the Paddle Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A paddle dryer is an indirect (conduction) dryer: two hollow shafts carrying wedge-shaped paddles turn inside a steam-jacketed trough.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Steam or thermal oil inside the jacket, shafts and paddles heats the material, while the paddles mix and convey it towards the outlet weir.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Only a small vapour stream leaves.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include sewage and industrial sludge drying; pastes and filter cakes; chemicals needing closed, solvent-recovery drying.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Jacketed W-Trough (steam jacket), Hollow Shaft 1 with Wedge Paddles (steam inside), Hollow Shaft 2 with Wedge Paddles (steam inside), Cover / Vapour Dome, Vapour Outlet & Feed Inlet.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Paddle Dryer — Operation",
+    "type": "in_app_tour",
+    "model": "paddle_dryer.glb",
+    "duration_s": 41.0,
+    "script": [
+     {
+      "narration": "How the Paddle Dryer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Wet feed enters at one end.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vapour_dome",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam heats the jacketed trough.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "jacketed_trough",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hollow paddle shafts, also steam-heated, mix and convey the material.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "paddle_shaft_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Rotary joints feed steam into the turning shafts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotary_joints",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dried product leaves over the outlet weir; vapour leaves the dome.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "outlet",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Steam (or thermal oil) heats the trough jacket and the inside of the hollow shafts and paddles, so the heating surface per unit volume is very large.",
+      "duration_s": 11.2,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Paddle Dryer — Maintenance",
+    "type": "in_app_tour",
+    "model": "paddle_dryer.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Paddle Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check drive current, steam pressure and condensate removal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect rotary joints and seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotary_joints",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect paddles for wear; repair hard-facing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "paddle_shaft_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload in sticky phase: high torque, trips. Common cause: wet feed concentration.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rotary joint leakage: steam leaks. Common cause: seal wear.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotary_joints",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "A paddle dryer heats the material by…",
+     "options": [
+      "Conduction from heated surfaces (indirect)",
+      "Hot air blown through it",
+      "Microwaves",
+      "Flames"
+     ],
+     "answer": 0,
+     "explanation": "Indirect.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is the vapour stream small?",
+     "options": [
+      "No drying air is used",
+      "It is cold",
+      "No water",
+      "Fans are off"
+     ],
+     "answer": 0,
+     "explanation": "Only evaporated moisture.",
+     "level": "basic"
+    },
+    {
+     "question": "How does steam reach the rotating shafts?",
+     "options": [
+      "Through rotary joints",
+      "Through bearings",
+      "Through the weir",
+      "It does not"
+     ],
+     "answer": 0,
+     "explanation": "Rotary joints.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the material; heated jacket.\"",
+     "options": [
+      "Drive: Motor, Gearbox & Timing Gears (shafts counter-rotate)",
+      "Jacketed W-Trough (steam jacket)",
+      "Hollow Shaft 1 with Wedge Paddles (steam inside)",
+      "Cover / Vapour Dome, Vapour Outlet & Feed Inlet"
+     ],
+     "answer": 1,
+     "explanation": "Jacketed W-Trough (steam jacket): Contains the material; heated jacket.",
+     "level": "basic",
+     "part": "jacketed_trough",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Heat, mix and convey.\"",
+     "options": [
+      "Hollow Shaft 1 with Wedge Paddles (steam inside)",
+      "Discharge Weir & Outlet",
+      "Drive: Motor, Gearbox & Timing Gears (shafts counter-rotate)",
+      "Rotary Joints (steam in, condensate out of the hollow shafts)"
+     ],
+     "answer": 0,
+     "explanation": "Hollow Shaft 1 with Wedge Paddles (steam inside): Heat, mix and convey.",
+     "level": "basic",
+     "part": "paddle_shaft_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Collects vapour.\"",
+     "options": [
+      "Moisture Evaporating to the Vapour Dome",
+      "Cover / Vapour Dome, Vapour Outlet & Feed Inlet",
+      "Supports",
+      "Hollow Shaft 2 with Wedge Paddles (steam inside)"
+     ],
+     "answer": 1,
+     "explanation": "Cover / Vapour Dome, Vapour Outlet & Feed Inlet: Collects vapour.",
+     "level": "basic",
+     "part": "vapour_dome",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

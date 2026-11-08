@@ -1,0 +1,646 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "thermal_oxidizer",
+ "no": 167,
+ "title": "Thermal Oxidizer",
+ "model_title": "Recuperative Thermal Oxidizer (Burner, Combustion Chamber, Recuperator)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A thermal oxidizer destroys volatile organic compounds (VOCs), odours and hazardous air pollutants by burning them. Contaminated air is preheated in a recuperator, heated by a burner and held in a refractory-lined chamber at high temperature for long enough to oxidise the pollutants to CO₂ and water.",
+   "applications": [
+    "Paint, coating and printing exhausts",
+    "Chemical and pharmaceutical vents",
+    "Odour control"
+   ],
+   "key_points": [
+    "3 T's: temperature, time, turbulence",
+    "Destruction efficiency typically ≥ 98–99 %",
+    "Recuperator cuts fuel use",
+    "LEL monitoring of inlet stream"
+   ],
+   "classification": {
+    "family": "Air pollution control / combustion",
+    "type": "Recuperative thermal oxidizer"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A thermal oxidizer destroys volatile organic compounds (VOCs) and odours in process exhaust by burning them at high temperature. The contaminated air is preheated in a recuperator by the hot clean gas, then passes the burner and is held in the combustion chamber long enough for complete oxidation to CO₂ and water."
+  },
+  "model_3d": {
+   "asset": "glb/thermal_oxidizer.glb",
+   "metadata": "meta/thermal_oxidizer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10092,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The fan draws VOC-laden air into the system.",
+    "The recuperator preheats it with hot clean gas.",
+    "The burner raises it to oxidation temperature."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The fan draws VOC-laden air into the system.",
+     "part": "fan",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The recuperator preheats it with hot clean gas.",
+     "part": "recuperator",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The burner raises it to oxidation temperature.",
+     "part": "burner",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The chamber holds the gas for the required residence time.",
+     "part": "combustion_chamber",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clean gas gives up heat and leaves the stack.",
+     "part": "stack",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Destruction efficiency rises with temperature and residence time."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "thermal_oxidizer_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "temperature": {
+     "file": "thermal_oxidizer_temperature.glb",
+     "title": "The 3 T's: temperature, time, turbulence",
+     "description": "VOCs are destroyed by holding the gas at high temperature (typically ~ 760–870 °C, higher for halogenated compounds) for enough residence time (~ 0.5–1 s) with good mixing. The recuperator recovers heat from the hot clean gas to preheat the incoming air, cutting burner fuel (typically ~ 50–70 % heat recovery for recuperative units).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/thermal_oxidizer.json#components",
+   "key_components": "Burner, combustion chamber (refractory), recuperator, fan, stack",
+   "parts": [
+    {
+     "id": "combustion_chamber",
+     "name": "Refractory-Lined Combustion Chamber (residence time)",
+     "info_ref": "to_chamber",
+     "function": "Gives temperature, time, turbulence.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "burner",
+     "name": "Burner (natural gas, with flame safeguard)",
+     "info_ref": "to_burner",
+     "function": "Supplies heat.",
+     "material": "—"
+    },
+    {
+     "id": "flame",
+     "name": "Burner Flame",
+     "info_ref": "to_burner",
+     "function": "Supplies heat.",
+     "material": "—"
+    },
+    {
+     "id": "recuperator",
+     "name": "Shell & Tube Recuperator (preheats the process air with the hot exhaust)",
+     "info_ref": "to_recuperator",
+     "function": "Recovers heat.",
+     "material": "Stainless/alloy steel."
+    },
+    {
+     "id": "ducts_nozzles",
+     "name": "Process-Air Inlet/Outlet Nozzles, Hot-Air Crossover Duct & Exhaust Outlet",
+     "info_ref": "to_recuperator",
+     "function": "Recovers heat.",
+     "material": "Stainless/alloy steel."
+    },
+    {
+     "id": "stack",
+     "name": "Stack (clean exhaust)",
+     "info_ref": "to_stack",
+     "function": "Discharges clean gas.",
+     "material": "Steel."
+    },
+    {
+     "id": "fan_housing",
+     "name": "Process Fan Housing (VOC-laden air)",
+     "info_ref": "to_fan",
+     "function": "Moves process air.",
+     "material": "Steel."
+    },
+    {
+     "id": "fan",
+     "name": "Process Fan Impeller",
+     "info_ref": "to_fan",
+     "function": "Moves process air.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Saddle Supports",
+     "info_ref": "to_chamber",
+     "function": "Gives temperature, time, turbulence.",
+     "material": "Steel/refractory."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Chamber ~ 1 – 4 m diameter",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "Burner ~ 0.1 – 10",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "~ 760 – 870 (higher for halogenated)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Air ~ 1 000 – 100 000",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Recuperative vs regenerative (RTO, ~ 95 % heat recovery) vs catalytic, depending on VOC concentration and flow."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EPA Air Pollution Control Cost Manual",
+    "NFPA 86"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations for weight, thermal growth and dynamic loads; refractory dry-out after installation."
+   ],
+   "alignment": [
+    "Burner and fan alignment; kiln/rotor alignment for rotating equipment."
+   ],
+   "piping": [
+    "Fuel train per burner management standards; air ducts; flue gas path to air-pollution control; emissions monitoring (CEMS)."
+   ],
+   "commissioning": [
+    "Refractory dry-out; purge and light-off; tune combustion; verify residence-time temperature and emissions."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check chamber temperature, LEL and emissions.",
+     "part": "combustion_chamber",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect burner and flame sensor.",
+     "part": "burner",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect recuperator for leaks and refractory.",
+     "part": "recuperator"
+    }
+   ],
+   "lubrication": [
+    "Fan bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Recuperator leak",
+     "category": "leakage",
+     "symptoms": [
+      "Lower destruction efficiency"
+     ],
+     "causes": [
+      "Thermal fatigue"
+     ],
+     "remedies": [
+      "Repair; temperature-ramp limits"
+     ],
+     "part": "recuperator"
+    },
+    {
+     "problem": "High LEL at inlet",
+     "category": "performance",
+     "symptoms": [
+      "Trip"
+     ],
+     "causes": [
+      "Process upset"
+     ],
+     "remedies": [
+      "Dilution air; interlocks"
+     ],
+     "part": "fan"
+    }
+   ],
+   "safety": [
+    "LEL monitoring; flame arrestors on vent inlets; BMS."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Thermal Oxidizer — Introduction",
+    "type": "in_app_tour",
+    "model": "thermal_oxidizer.glb",
+    "duration_s": 49.4,
+    "script": [
+     {
+      "narration": "This module introduces the Thermal Oxidizer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A thermal oxidizer destroys volatile organic compounds (VOCs), odours and hazardous air pollutants by burning them.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Contaminated air is preheated in a recuperator, heated by a burner and held in a refractory-lined chamber at high temperature for long enough to oxidise the pollutants to CO₂ and water.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include paint, coating and printing exhausts; chemical and pharmaceutical vents; odour control.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Refractory-Lined Combustion Chamber (residence time), Stack (clean exhaust), Process Fan Impeller.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Thermal Oxidizer — Operation",
+    "type": "in_app_tour",
+    "model": "thermal_oxidizer.glb",
+    "duration_s": 40.5,
+    "script": [
+     {
+      "narration": "How the Thermal Oxidizer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The fan draws VOC-laden air into the system.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The recuperator preheats it with hot clean gas.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "recuperator",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The burner raises it to oxidation temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "burner",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The chamber holds the gas for the required residence time.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "combustion_chamber",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clean gas gives up heat and leaves the stack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stack",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "VOCs are destroyed by holding the gas at high temperature (typically ~ 760–870 °C, higher for halogenated compounds) for enough residence time (~ 0.5–1 s) with good mixing.",
+      "duration_s": 12.1,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Thermal Oxidizer — Maintenance",
+    "type": "in_app_tour",
+    "model": "thermal_oxidizer.glb",
+    "duration_s": 31.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Thermal Oxidizer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check chamber temperature, LEL and emissions.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "combustion_chamber",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect burner and flame sensor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "burner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect recuperator for leaks and refractory.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "recuperator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for recuperator leak: lower destruction efficiency. Common cause: thermal fatigue.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "recuperator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high lel at inlet: trip. Common cause: process upset.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What are the \"3 T's\"?",
+     "options": [
+      "Temperature, time, turbulence",
+      "Tubes, tanks, towers",
+      "Torque, thrust, tension",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Combustion fundamentals.",
+     "level": "basic"
+    },
+    {
+     "question": "Why a recuperator?",
+     "options": [
+      "Preheat incoming air to save fuel",
+      "Cool the stack",
+      "Add VOC",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Heat recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical oxidation temperature?",
+     "options": [
+      "~ 760–870 °C",
+      "~ 100 °C",
+      "~ 2000 °C",
+      "~ 30 °C"
+     ],
+     "answer": 0,
+     "explanation": "VOC destruction.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Gives temperature, time, turbulence.\"",
+     "options": [
+      "Stack (clean exhaust)",
+      "Refractory-Lined Combustion Chamber (residence time)",
+      "Burner (natural gas, with flame safeguard)",
+      "Shell & Tube Recuperator (preheats the process air with the hot exhaust)"
+     ],
+     "answer": 1,
+     "explanation": "Refractory-Lined Combustion Chamber (residence time): Gives temperature, time, turbulence.",
+     "level": "basic",
+     "part": "combustion_chamber",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supplies heat.\"",
+     "options": [
+      "Burner (natural gas, with flame safeguard)",
+      "Process Fan Impeller",
+      "Refractory-Lined Combustion Chamber (residence time)",
+      "Shell & Tube Recuperator (preheats the process air with the hot exhaust)"
+     ],
+     "answer": 0,
+     "explanation": "Burner (natural gas, with flame safeguard): Supplies heat.",
+     "level": "basic",
+     "part": "burner",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Recovers heat.\"",
+     "options": [
+      "Process Fan Impeller",
+      "Refractory-Lined Combustion Chamber (residence time)",
+      "Shell & Tube Recuperator (preheats the process air with the hot exhaust)",
+      "Burner (natural gas, with flame safeguard)"
+     ],
+     "answer": 2,
+     "explanation": "Shell & Tube Recuperator (preheats the process air with the hot exhaust): Recovers heat.",
+     "level": "basic",
+     "part": "recuperator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

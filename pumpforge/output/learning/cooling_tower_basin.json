@@ -1,0 +1,660 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "cooling_tower_basin",
+ "no": 237,
+ "title": "Cooling Tower Basin",
+ "model_title": "Cooling Tower Cold-Water Basin with Sump, Screens, Make-up, Blowdown & Overflow",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The cold-water basin collects water falling from a cooling tower's fill and supplies the circulating-water pumps through a sump and screens. Make-up water replaces evaporation, drift and blowdown; blowdown limits the build-up of dissolved solids; an overflow protects the tower; chemical dosing points add inhibitor and biocide.",
+   "applications": [
+    "Process and power-plant cooling-water systems",
+    "HVAC chiller condenser water"
+   ],
+   "key_points": [
+    "Make-up = evaporation + drift + blowdown",
+    "Cycles of concentration ≈ 3 – 6",
+    "Evaporation ≈ 0.15 % of flow per °C range",
+    "Sump depth gives pump submergence"
+   ],
+   "classification": {
+    "family": "Cooling utilities",
+    "type": "Concrete basin with pump sump"
+   },
+   "hi_family": "water_utilities",
+   "summary": "The cold-water basin collects the cooled water falling from a cooling tower's fill and feeds the circulating-water pumps through a sump and screens. Make-up water replaces evaporation, drift and blowdown; blowdown controls the dissolved-solids concentration; an overflow protects against flooding."
+  },
+  "model_3d": {
+   "asset": "glb/cooling_tower_basin.glb",
+   "metadata": "meta/cooling_tower_basin.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6028,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot water is sprayed over the fill.",
+    "Air and water exchange heat in the fill and rain zone.",
+    "Cooled water collects in the basin."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot water is sprayed over the fill.",
+     "part": "hot_water_distribution",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Air and water exchange heat in the fill and rain zone.",
+     "part": "fill_eliminators",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cooled water collects in the basin.",
+     "part": "water",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Screens protect the pumps at the sump.",
+     "part": "sump_screens",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The float valve adds make-up; blowdown limits concentration.",
+     "part": "float_arm",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Cold-water temperature vs wet-bulb temperature at constant range."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "cooling_tower_basin_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "cooling_tower_basin_temperature.glb",
+     "title": "The basin holds the coldest water in the loop",
+     "description": "Hot return water (e.g. 40 °C) is cooled mainly by evaporation in the fill and rain zone and collects in the basin at the cold-water temperature (e.g. 30 °C; range 10 °C, approach to wet-bulb ≈ 3–5 °C). Evaporation (≈ 0.15 % of flow per °C of range) concentrates the dissolved solids, so blowdown keeps cycles of concentration ≈ 3–6, and make-up = evaporation + drift + blowdown. The sump depth gives the pumps submergence against vortices.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/cooling_tower_basin.json#components",
+   "key_components": "Concrete basin, sump, screens, make-up valve, blowdown, overflow",
+   "parts": [
+    {
+     "id": "basin",
+     "name": "Concrete Cold-Water Basin with Sloped Floor to the Pump Sump",
+     "info_ref": "ctb_basin",
+     "function": "Holds cold water; feeds the pumps.",
+     "material": "Reinforced concrete."
+    },
+    {
+     "id": "water",
+     "name": "Cooled Water (level held by the make-up valve)",
+     "info_ref": "ctb_basin",
+     "function": "Holds cold water; feeds the pumps.",
+     "material": "Reinforced concrete."
+    },
+    {
+     "id": "sump_screens",
+     "name": "Removable Sump Screens (protect the circulating-water pumps)",
+     "info_ref": "ctb_screens",
+     "function": "Keep debris from the pumps.",
+     "material": "Stainless."
+    },
+    {
+     "id": "structure",
+     "name": "Tower Columns & Beams (fan deck above — see Cooling Tower Fan)",
+     "info_ref": "ctb_structure",
+     "function": "Support the tower.",
+     "material": "Concrete/FRP/timber."
+    },
+    {
+     "id": "fill_eliminators",
+     "name": "Film Fill Pack & Drift Eliminators",
+     "info_ref": "ctb_fill",
+     "function": "Spread water for heat transfer; stop drift.",
+     "material": "PVC/PP."
+    },
+    {
+     "id": "hot_water_distribution",
+     "name": "Hot-Water Header, Laterals & Spray Nozzles",
+     "info_ref": "ctb_distribution",
+     "function": "Spread hot water over the fill.",
+     "material": "PVC/FRP."
+    },
+    {
+     "id": "air_inlet_louvres",
+     "name": "Air-Inlet Louvres (keep water in, let air in)",
+     "info_ref": "ctb_structure",
+     "function": "Support the tower.",
+     "material": "Concrete/FRP/timber."
+    },
+    {
+     "id": "makeup_valve",
+     "name": "Make-up Water Line & Float Valve",
+     "info_ref": "ctb_makeup",
+     "function": "Replace water losses.",
+     "material": "Brass/PVC."
+    },
+    {
+     "id": "float_arm",
+     "name": "Float & Arm (opens the valve as the level falls)",
+     "info_ref": "ctb_makeup",
+     "function": "Replace water losses.",
+     "material": "Brass/PVC."
+    },
+    {
+     "id": "outlets_blowdown",
+     "name": "Cold-Water Outlet to CW Pumps, Blowdown Valve, Overflow Standpipe & Chemical Dosing Points",
+     "info_ref": "ctb_outlets",
+     "function": "Outlet, blowdown, overflow, dosing.",
+     "material": "Steel/PVC."
+    },
+    {
+     "id": "rain_zone",
+     "name": "Water raining from the fill into the basin",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Basins ≈ 5 – 100 m per cell side; depth ≈ 0.5 – 2 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 100 – 50,000",
+     "unit": "m³/h circulation"
+    },
+    "operating_conditions": {
+     "typical_range": "Cold water ≈ 25 – 32 °C; approach ≈ 3 – 5 °C",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "— (static; pumps separate)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Basin storage for system volume and pump submergence; sump to HI 9.8."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CTI",
+    "HI 9.8"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Reinforced-concrete tank on prepared ground; watertightness test before backfill; allow for buoyancy when empty (groundwater)."
+   ],
+   "alignment": [
+    "Weirs and launders levelled to a few millimetres so overflow is even; drive/bridge centred and level."
+   ],
+   "piping": [
+    "Inlet arranged to spread flow without short-circuiting; sludge lines with flushing points; overflow and drain to a safe place."
+   ],
+   "commissioning": [
+    "Fill with clean water, check for leaks; run mechanisms empty and with water; start chemical dosing and tune by jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level, conductivity and chemical dosing.",
+     "part": "outlets_blowdown",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean screens; check make-up valve.",
+     "part": "sump_screens",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Drain and clean silt; repair concrete; inspect fill.",
+     "part": "basin"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Scaling",
+     "category": "performance",
+     "symptoms": [
+      "Deposits on exchangers"
+     ],
+     "causes": [
+      "Too many cycles, no blowdown"
+     ],
+     "remedies": [
+      "Increase blowdown; inhibitor"
+     ],
+     "part": "outlets_blowdown"
+    },
+    {
+     "problem": "Biological growth / Legionella risk",
+     "category": "performance",
+     "symptoms": [
+      "Slime, high counts"
+     ],
+     "causes": [
+      "Poor biocide control"
+     ],
+     "remedies": [
+      "Biocide programme; cleaning; risk assessment"
+     ],
+     "part": "water"
+    }
+   ],
+   "safety": [
+    "Legionella control; confined space in sumps; slippery surfaces."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Cooling Tower Basin — Introduction",
+    "type": "in_app_tour",
+    "model": "cooling_tower_basin.glb",
+    "duration_s": 47.6,
+    "script": [
+     {
+      "narration": "This module introduces the Cooling Tower Basin.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The cold-water basin collects water falling from a cooling tower's fill and supplies the circulating-water pumps through a sump and screens.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Make-up water replaces evaporation, drift and blowdown; blowdown limits the build-up of dissolved solids; an overflow protects the tower; chemical dosing points add inhibitor and biocide.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process and power-plant cooling-water systems; HVAC chiller condenser water.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Cooling Tower Basin — Operation",
+    "type": "in_app_tour",
+    "model": "cooling_tower_basin.glb",
+    "duration_s": 32.8,
+    "script": [
+     {
+      "narration": "How the Cooling Tower Basin works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot water is sprayed over the fill.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hot_water_distribution",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Air and water exchange heat in the fill and rain zone.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "fill_eliminators",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cooled water collects in the basin.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Screens protect the pumps at the sump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sump_screens",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The float valve adds make-up; blowdown limits concentration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "float_arm",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Hot return water (e.g.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Cooling Tower Basin — Maintenance",
+    "type": "in_app_tour",
+    "model": "cooling_tower_basin.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Cooling Tower Basin.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level, conductivity and chemical dosing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outlets_blowdown",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean screens; check make-up valve.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sump_screens",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Drain and clean silt; repair concrete; inspect fill.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "basin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling: deposits on exchangers. Common cause: too many cycles, no blowdown.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "outlets_blowdown",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for biological growth / legionella risk: slime, high counts. Common cause: poor biocide control.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "water",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Make-up water equals…",
+     "options": [
+      "Evaporation + drift + blowdown",
+      "Evaporation only",
+      "Flow rate",
+      "Zero"
+     ],
+     "answer": 0,
+     "explanation": "Balance.",
+     "level": "basic"
+    },
+    {
+     "question": "Why blowdown?",
+     "options": [
+      "Limit dissolved-solids concentration",
+      "Cool water",
+      "Add oxygen",
+      "Lower level"
+     ],
+     "answer": 0,
+     "explanation": "Concentration.",
+     "level": "basic"
+    },
+    {
+     "question": "What protects the pumps?",
+     "options": [
+      "Sump screens",
+      "Louvres",
+      "Fill",
+      "Fan"
+     ],
+     "answer": 0,
+     "explanation": "Screens.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds cold water; feeds the pumps.\"",
+     "options": [
+      "Concrete Cold-Water Basin with Sloped Floor to the Pump Sump",
+      "Film Fill Pack & Drift Eliminators",
+      "Removable Sump Screens (protect the circulating-water pumps)",
+      "Float & Arm (opens the valve as the level falls)"
+     ],
+     "answer": 0,
+     "explanation": "Concrete Cold-Water Basin with Sloped Floor to the Pump Sump: Holds cold water; feeds the pumps.",
+     "level": "basic",
+     "part": "basin",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Keep debris from the pumps.\"",
+     "options": [
+      "Removable Sump Screens (protect the circulating-water pumps)",
+      "Concrete Cold-Water Basin with Sloped Floor to the Pump Sump",
+      "Air-Inlet Louvres (keep water in, let air in)",
+      "Make-up Water Line & Float Valve"
+     ],
+     "answer": 0,
+     "explanation": "Removable Sump Screens (protect the circulating-water pumps): Keep debris from the pumps.",
+     "level": "basic",
+     "part": "sump_screens",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support the tower.\"",
+     "options": [
+      "Hot-Water Header, Laterals & Spray Nozzles",
+      "Removable Sump Screens (protect the circulating-water pumps)",
+      "Water raining from the fill into the basin",
+      "Tower Columns & Beams (fan deck above — see Cooling Tower Fan)"
+     ],
+     "answer": 3,
+     "explanation": "Tower Columns & Beams (fan deck above — see Cooling Tower Fan): Support the tower.",
+     "level": "basic",
+     "part": "structure",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

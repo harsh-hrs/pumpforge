@@ -1,0 +1,534 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "fire_and_gas_detection_system",
+  "title": "Fire & Gas Detection System on a Process Module — Point & Open-Path Gas, Flame, Heat Detectors, MCP, Alarms & F&G Panel",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 280,
+    "phase": 13,
+    "eq_id": "EQ-358",
+    "subcategory": "Fire Protection",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "fire_and_gas_detection_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "fire_and_gas_detection_system_pressure.glb",
+      "title": "Coverage: see the fire, smell the gas — then act",
+      "description": "F&G detectors are placed by coverage mapping: flame detectors have a cone of vision (≈ 90° for UV/IR) and a range for a given fire size; gas detectors are placed where leaks would collect (low for heavier-than-air gas, high for lighter) and open-path detectors guard boundaries. Typical alarm levels: 20 % LEL low, 50–60 % LEL high. The F&G logic uses voting (e.g. 2-out-of-N confirmed) to start executive actions: shutdown and isolation, deluge, ventilation changes and alarms.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "signal_bus",
+      "kind": "electric",
+      "radius": 0.015,
+      "points": [
+        [
+          -2.2,
+          0.45,
+          1.2
+        ],
+        [
+          -2.2,
+          0.15,
+          -1.5
+        ],
+        [
+          0.0,
+          0.15,
+          -1.5
+        ],
+        [
+          0.0,
+          0.9,
+          -2.4
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 12288,
+    "parts": 8
+  },
+  "summary": "A fire and gas detection system uses gas, flame, heat and smoke detectors and manual call points around a process area to detect leaks and fires early, raise alarms and trigger shutdown, deluge and ventilation actions.",
+  "classification": {
+    "family": "Fire protection",
+    "type": "F&G detection with SIL-rated logic"
+  },
+  "model_configuration": {
+    "animation": "Gas leak spreads; signals travel to the panel"
+  },
+  "standards": [
+    {
+      "id": "NFPA 11",
+      "title": "Low-, medium- and high-expansion foam",
+      "relevance": "Foam systems.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "NFPA 72 / IEC 61511",
+      "title": "Fire alarm / safety instrumented systems",
+      "relevance": "F&G systems.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "NFPA 24",
+      "title": "Private fire service mains",
+      "relevance": "Hydrants & monitors.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISA TR84.00.07",
+      "title": "Guidance on F&G system effectiveness",
+      "relevance": "Coverage mapping.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "ISA TR84.00.07"
+  ],
+  "parts": [
+    {
+      "id": "module",
+      "name": "Process Module / Skid Deck with Columns & Roof Deck",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "module.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.5,
+        0.0,
+        -1.5
+      ],
+      "bbox_max": [
+        2.5,
+        3.12,
+        1.5
+      ],
+      "label_anchor": [
+        0.0,
+        1.56,
+        1.5
+      ],
+      "center": [
+        0.0,
+        1.56,
+        -0.0
+      ],
+      "info_ref": "fg_module"
+    },
+    {
+      "id": "process_equipment",
+      "name": "Process Equipment (vessel, piping with flange — the leak source, compressor)",
+      "group": "equipment",
+      "section_role": "keep",
+      "nodes": [
+        "process_equipment.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -1.69767,
+        0.1,
+        -0.85
+      ],
+      "bbox_max": [
+        1.75,
+        1.925,
+        0.09767
+      ],
+      "label_anchor": [
+        0.02617,
+        1.0125,
+        0.09767
+      ],
+      "center": [
+        0.02617,
+        1.0125,
+        -0.37617
+      ],
+      "info_ref": "fg_equipment"
+    },
+    {
+      "id": "point_gas_detectors",
+      "name": "Point Gas Detectors (IR hydrocarbon at low / high level by gas density; H₂S electrochemical)",
+      "group": "detectors",
+      "section_role": "keep",
+      "nodes": [
+        "point_gas_detectors.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -2.23,
+        0.412,
+        -1.23
+      ],
+      "bbox_max": [
+        2.23,
+        2.8,
+        1.23
+      ],
+      "label_anchor": [
+        0.0,
+        1.606,
+        1.23
+      ],
+      "center": [
+        0.0,
+        1.606,
+        -0.0
+      ],
+      "info_ref": "fg_gas"
+    },
+    {
+      "id": "open_path_detector",
+      "name": "Open-Path (Line-of-Sight) Gas Detector: IR Transmitter → Receiver",
+      "group": "detectors",
+      "section_role": "keep",
+      "nodes": [
+        "open_path_detector.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -2.375,
+        1.5,
+        1.225
+      ],
+      "bbox_max": [
+        2.375,
+        1.7,
+        1.375
+      ],
+      "label_anchor": [
+        0.0,
+        1.6,
+        1.375
+      ],
+      "center": [
+        0.0,
+        1.6,
+        1.3
+      ],
+      "info_ref": "fg_gas"
+    },
+    {
+      "id": "flame_heat_alarm_devices",
+      "name": "Flame Detectors (UV/IR, multi-IR), Heat Detector, Manual Call Point, Beacon & Horn",
+      "group": "detectors",
+      "section_role": "keep",
+      "nodes": [
+        "flame_heat_alarm_devices.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.4
+      ],
+      "bbox_min": [
+        -2.38,
+        1.34,
+        -1.32469
+      ],
+      "bbox_max": [
+        2.37,
+        3.04,
+        1.32469
+      ],
+      "label_anchor": [
+        -0.005,
+        2.19,
+        1.32469
+      ],
+      "center": [
+        -0.005,
+        2.19,
+        -0.0
+      ],
+      "info_ref": "fg_fire"
+    },
+    {
+      "id": "fg_panel",
+      "name": "F&G Logic Panel (SIL-rated): voting, alarms, executive actions (ESD, deluge, ventilation, isolation)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "fg_panel.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.4,
+        0.0,
+        -2.8
+      ],
+      "bbox_max": [
+        0.4,
+        1.8,
+        -2.385
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        -2.385
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -2.5925
+      ],
+      "info_ref": "fg_panel"
+    },
+    {
+      "id": "gas_leak",
+      "name": "Gas leaking from the flange and spreading",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "gas_leak0",
+        "gas_leak1",
+        "gas_leak2",
+        "gas_leak3",
+        "gas_leak4",
+        "gas_leak5",
+        "gas_leak6",
+        "gas_leak7",
+        "gas_leak8",
+        "gas_leak9",
+        "gas_leak10",
+        "gas_leak11",
+        "gas_leak12",
+        "gas_leak13",
+        "gas_leak14",
+        "gas_leak15",
+        "gas_leak16",
+        "gas_leak17"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.05,
+        -0.05,
+        -0.04755
+      ],
+      "bbox_max": [
+        0.05,
+        0.05,
+        0.04755
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.04755
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "signals",
+      "name": "Detector signals to the F&G panel",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "signals_0",
+        "signals_1",
+        "signals_2",
+        "signals_3"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.03,
+        0.17,
+        -1.84716
+      ],
+      "bbox_max": [
+        0.03,
+        0.63,
+        0.43
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.43
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.70858
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fg_module": {
+      "function": "Area.",
+      "construction": "Module deck.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fg_equipment": {
+      "function": "Leak/fire sources.",
+      "construction": "Process equipment.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fg_gas": {
+      "function": "Detect gas.",
+      "construction": "Point IR, open-path detectors.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Optics dirty",
+        "Drift"
+      ],
+      "inspection": [
+        "Bump / calibration test"
+      ]
+    },
+    "fg_fire": {
+      "function": "Detect fire; alarm.",
+      "construction": "Flame, heat, MCP, beacon, horn.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blocked view"
+      ],
+      "inspection": [
+        "Functional test"
+      ]
+    },
+    "fg_panel": {
+      "function": "Logic and actions.",
+      "construction": "F&G panel.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Bypass left on"
+      ],
+      "inspection": [
+        "Proof test"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

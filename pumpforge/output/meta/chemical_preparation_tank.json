@@ -1,0 +1,556 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "chemical_preparation_tank",
+  "title": "Chemical (Polymer / Lime / Coagulant) Preparation Tank with Powder Feeder",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 229,
+    "phase": 11,
+    "eq_id": "EQ-307",
+    "subcategory": "Chemical Systems",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "chemical_preparation_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "chemical_preparation_tank_pressure.glb",
+      "title": "Make-down: wetting, dissolving, ageing",
+      "description": "Dry chemicals must be wetted evenly and dissolved without lumps (\"fish-eyes\" with polymer). The feeder doses powder in proportion to the dilution water to reach the target strength (polymer often ~ 0.1–0.5 %, lime milk ~ 5–10 %). Polymer solutions need gentle mixing and ageing time (~ 30–60 min) to fully uncoil before use.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "powder",
+      "kind": "sand",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.9,
+          2.7,
+          -0.0
+        ],
+        [
+          -0.9,
+          2.3,
+          -0.0
+        ],
+        [
+          -0.3,
+          2.3,
+          -0.0
+        ],
+        [
+          -0.3,
+          1.7,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.6,
+          2.1,
+          -0.35
+        ],
+        [
+          -0.2,
+          2.1,
+          -0.35
+        ],
+        [
+          -0.2,
+          1.6,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "solution",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.45,
+          0.45,
+          -0.0
+        ],
+        [
+          1.05,
+          0.45,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8058,
+    "parts": 8
+  },
+  "summary": "A chemical preparation tank makes up solutions such as polymer, lime milk or coagulant from dry powder and water. A screw feeder doses powder, the agitator dissolves it, and the solution is held for ageing before dosing.",
+  "classification": {
+    "family": "Chemical systems",
+    "type": "Make-down / preparation tank"
+  },
+  "model_configuration": {
+    "animation": "Powder dissolves"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Polymer make-down systems",
+      "relevance": "Design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Water chemical handling guides"
+  ],
+  "parts": [
+    {
+      "id": "cp_tank",
+      "name": "Preparation Tank: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "cp_tank__back",
+        "cp_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.55,
+        0.3,
+        -0.55
+      ],
+      "bbox_max": [
+        0.55,
+        1.875,
+        0.55
+      ],
+      "label_anchor": [
+        0.0,
+        1.0875,
+        0.55
+      ],
+      "center": [
+        0.0,
+        1.0875,
+        -0.0
+      ],
+      "info_ref": "cpt_tank"
+    },
+    {
+      "id": "cp_slurry",
+      "name": "Preparation Tank: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cp_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.545,
+        0.33,
+        -0.545
+      ],
+      "bbox_max": [
+        0.545,
+        1.405,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.8675,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.8675,
+        -0.2725
+      ],
+      "info_ref": "cpt_slurry"
+    },
+    {
+      "id": "cp_agitator",
+      "name": "Preparation Tank: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "cp_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.2475,
+        0.64,
+        -0.2475
+      ],
+      "bbox_max": [
+        0.2475,
+        2.125,
+        0.2475
+      ],
+      "label_anchor": [
+        0.0,
+        1.3825,
+        0.2475
+      ],
+      "center": [
+        0.0,
+        1.3825,
+        -0.0
+      ],
+      "info_ref": "cpt_agitator"
+    },
+    {
+      "id": "cp_drive",
+      "name": "Preparation Tank: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "cp_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2,
+        1.825,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        2.625,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        2.225,
+        0.2
+      ],
+      "center": [
+        0.0,
+        2.225,
+        -0.0
+      ],
+      "info_ref": "cpt_drive"
+    },
+    {
+      "id": "powder_feeder",
+      "name": "Bag-Tip Hopper & Volumetric Screw Feeder (dry chemical)",
+      "group": "feeder",
+      "section_role": "keep",
+      "nodes": [
+        "powder_feeder.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.15,
+        2.0,
+        -0.25
+      ],
+      "bbox_max": [
+        -0.26,
+        2.85,
+        0.25
+      ],
+      "label_anchor": [
+        -0.705,
+        2.425,
+        0.25
+      ],
+      "center": [
+        -0.705,
+        2.425,
+        -0.0
+      ],
+      "info_ref": "cpt_feeder"
+    },
+    {
+      "id": "water_instruments",
+      "name": "Dilution-Water Line with Flowmeter, Level Transmitter & Outlet to Dosing Pumps",
+      "group": "control",
+      "section_role": "keep",
+      "nodes": [
+        "water_instruments.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.3
+      ],
+      "bbox_min": [
+        -1.5,
+        0.374,
+        -0.39
+      ],
+      "bbox_max": [
+        0.85,
+        2.15,
+        0.076
+      ],
+      "label_anchor": [
+        -0.325,
+        1.262,
+        0.076
+      ],
+      "center": [
+        -0.325,
+        1.262,
+        -0.157
+      ],
+      "info_ref": "cpt_control"
+    },
+    {
+      "id": "supports",
+      "name": "Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.46591,
+        0.0,
+        -0.46591
+      ],
+      "bbox_max": [
+        0.46591,
+        0.3,
+        0.46591
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.46591
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "cpt_tank"
+    },
+    {
+      "id": "powder",
+      "name": "Powder wetted and dissolved",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "powder0",
+        "powder1",
+        "powder2",
+        "powder3",
+        "powder4",
+        "powder5",
+        "powder6",
+        "powder7",
+        "powder8",
+        "powder9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "cpt_tank": {
+      "function": "Holds liquid.",
+      "construction": "Tank with baffles.",
+      "material": "Concrete/steel/PE.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cpt_slurry": {
+      "function": "Process liquid.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cpt_agitator": {
+      "function": "Mixes.",
+      "construction": "Shaft and impeller.",
+      "material": "Stainless/coated.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "cpt_drive": {
+      "function": "Drives agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cpt_feeder": {
+      "function": "Doses powder.",
+      "construction": "Hopper, screw feeder.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cpt_control": {
+      "function": "Water, level, outlet.",
+      "construction": "Flowmeter, LT.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

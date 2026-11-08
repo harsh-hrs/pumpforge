@@ -1,0 +1,635 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "thrust_bearing_assembly",
+ "no": 246,
+ "title": "Thrust Bearing Assembly",
+ "model_title": "Tilting-Pad Thrust Bearing Assembly (Double-Acting)",
+ "category": "14 · Mechanical Components & Maintenance",
+ "phase": 12,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A tilting-pad thrust bearing carries the axial thrust of a rotor on hydrodynamic oil films. Pads arranged around a thrust collar each tilt on a pivot so a converging oil wedge forms; the pressure in the wedges carries the load without metal contact. Double-acting bearings have active and inactive pad sets for thrust in both directions.",
+   "applications": [
+    "Centrifugal compressors, steam and gas turbines",
+    "Large pumps, gearboxes and hydro generators"
+   ],
+   "key_points": [
+    "Pads tilt to form oil wedges",
+    "Load carried on ≈ 10–50 µm film",
+    "Pad RTD temperature = health",
+    "Inactive side takes reverse thrust"
+   ],
+   "classification": {
+    "family": "Bearings",
+    "type": "Double-acting tilting-pad (Kingsbury/Michell) thrust bearing"
+   },
+   "hi_family": "mechanical_components",
+   "summary": "A tilting-pad thrust bearing carries a rotor's axial load on hydrodynamic oil films. Each pad pivots so an oil wedge forms against the thrust collar; double-acting units carry thrust in both directions."
+  },
+  "model_3d": {
+   "asset": "glb/thrust_bearing_assembly.glb",
+   "metadata": "meta/thrust_bearing_assembly.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10568,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The rotor pushes the collar axially.",
+    "Oil is dragged into the wedge between collar and pad.",
+    "Film pressure builds toward the trailing edge."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The rotor pushes the collar axially.",
+     "part": "thrust_collar",
+     "cut": true,
+     "operate": true,
+     "overlay": "thrust",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil is dragged into the wedge between collar and pad.",
+     "part": "active_pads",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Film pressure builds toward the trailing edge.",
+     "part": "active_pads",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Carrier rings hold the pads; the housing holds oil.",
+     "part": "carrier_rings",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pad temperature and film thickness vs thrust load."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "thrust_bearing_assembly_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "thrust_bearing_assembly_pressure.glb",
+     "title": "Oil-film pressure builds toward the trailing edge",
+     "description": "Each pad tilts freely on its pivot so a converging oil wedge forms between the rotating collar and the pad face. Oil dragged into the narrowing gap builds hydrodynamic pressure, highest toward the trailing edge, which carries the axial thrust without metal contact (film typically ≈ 10–50 µm). Pad temperature (RTD in the babbitt) is the main health indicator; the inactive pads take reverse thrust during start-up or surge.",
+     "render": "normal",
+     "annotations": []
+    },
+    "thrust": {
+     "file": "thrust_bearing_assembly_thrust.glb",
+     "title": "Axial thrust",
+     "description": "Rotor thrust pushes the collar against the active pads.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/thrust_bearing_assembly.json#components",
+   "key_components": "Thrust collar, tilting pads (active/inactive), pivots, carrier rings, housing",
+   "parts": [
+    {
+     "id": "shaft",
+     "name": "Rotor Shaft (turning)",
+     "info_ref": "tb_shaft",
+     "function": "Rotor.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "thrust_collar",
+     "name": "Thrust Collar (shrunk / integral on the shaft)",
+     "info_ref": "tb_collar",
+     "function": "Transfers thrust.",
+     "material": "Steel."
+    },
+    {
+     "id": "active_pads",
+     "name": "Active (Loaded) Pads: steel shoes, babbitt faces & spherical pivots",
+     "info_ref": "tb_pads",
+     "function": "Carry thrust on oil film.",
+     "material": "Steel + tin babbitt."
+    },
+    {
+     "id": "inactive_pads",
+     "name": "Inactive (Counter-Thrust) Pads: steel shoes, babbitt faces & spherical pivots",
+     "info_ref": "tb_pads",
+     "function": "Carry thrust on oil film.",
+     "material": "Steel + tin babbitt."
+    },
+    {
+     "id": "carrier_rings",
+     "name": "Carrier / Base Rings (with levelling links in self-equalising designs)",
+     "info_ref": "tb_carrier",
+     "function": "Locates pads.",
+     "material": "Steel."
+    },
+    {
+     "id": "housing",
+     "name": "Bearing Housing with End Seals",
+     "info_ref": "tb_housing",
+     "function": "Contains oil.",
+     "material": "Steel/cast iron."
+    },
+    {
+     "id": "oil",
+     "name": "Oil dragged into the converging wedge between collar and pads",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Collar ≈ 100 – 600 mm",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "Up to ≈ 15,000",
+     "unit": "rpm"
+    },
+    "load_capacity": {
+     "typical_range": "Unit load ≈ 1.5 – 4 MPa (design dependent)",
+     "unit": "—"
+    },
+    "operating_conditions": {
+     "typical_range": "Oil ≈ 40–50 °C supply; babbitt ≤ ≈ 120–130 °C",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from maximum thrust, speed and allowable pad temperature (maker programs)."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "part_number": null,
+    "datasheet": null,
+    "rated_point": {
+     "speed_rpm": null,
+     "load_or_torque": null,
+     "temperature": null,
+     "pressure": null
+    },
+    "status": "empty — fill from the component datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 617 / 612"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Component is installed in its machine: housing bores, shaft fits and shoulders to drawing tolerances; clean, burr-free surfaces."
+   ],
+   "alignment": [
+    "Concentricity and squareness checked with dial indicators (runout, face run-out) to maker limits."
+   ],
+   "piping": [
+    "Lubrication / flush / buffer connections clean and flushed before first run; correct orientation of ports."
+   ],
+   "commissioning": [
+    "Hand-turn first; run at low speed, check temperature, leakage and vibration; record baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Trend pad temperatures and axial position.",
+     "part": "active_pads",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check axial float and oil quality.",
+     "part": "housing",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect pads; replace wiped pads.",
+     "part": "active_pads"
+    }
+   ],
+   "lubrication": [
+    "Oil or grease to maker specification; change on condition (oil analysis) or interval."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wiped babbitt",
+     "category": "performance",
+     "symptoms": [
+      "High pad temperature, axial shift"
+     ],
+     "causes": [
+      "Overload, oil loss, surge"
+     ],
+     "remedies": [
+      "Replace pads; fix cause"
+     ],
+     "part": "active_pads"
+    },
+    {
+     "problem": "Collar damage",
+     "category": "performance",
+     "symptoms": [
+      "Scoring"
+     ],
+     "causes": [
+      "Dirty oil"
+     ],
+     "remedies": [
+      "Recondition; filter oil"
+     ],
+     "part": "thrust_collar"
+    }
+   ],
+   "safety": [
+    "Axial-position trips protect the machine; never bypass."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Thrust Bearing Assembly — Introduction",
+    "type": "in_app_tour",
+    "model": "thrust_bearing_assembly.glb",
+    "duration_s": 55.3,
+    "script": [
+     {
+      "narration": "This module introduces the Thrust Bearing Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A tilting-pad thrust bearing carries the axial thrust of a rotor on hydrodynamic oil films.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pads arranged around a thrust collar each tilt on a pivot so a converging oil wedge forms; the pressure in the wedges carries the load without metal contact.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Double-acting bearings have active and inactive pad sets for thrust in both directions.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include centrifugal compressors, steam and gas turbines; large pumps, gearboxes and hydro generators.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rotor Shaft (turning), Thrust Collar (shrunk / integral on the shaft), Bearing Housing with End Seals.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Thrust Bearing Assembly — Operation",
+    "type": "in_app_tour",
+    "model": "thrust_bearing_assembly.glb",
+    "duration_s": 37.2,
+    "script": [
+     {
+      "narration": "How the Thrust Bearing Assembly works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The rotor pushes the collar axially.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "thrust_collar",
+       "cut": true,
+       "operate": true,
+       "overlay": "thrust",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil is dragged into the wedge between collar and pad.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "active_pads",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Film pressure builds toward the trailing edge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "active_pads",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Carrier rings hold the pads; the housing holds oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "carrier_rings",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Each pad tilts freely on its pivot so a converging oil wedge forms between the rotating collar and the pad face.",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rotor thrust pushes the collar against the active pads.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "thrust",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Thrust Bearing Assembly — Maintenance",
+    "type": "in_app_tour",
+    "model": "thrust_bearing_assembly.glb",
+    "duration_s": 32.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Thrust Bearing Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Trend pad temperatures and axial position.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "active_pads",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check axial float and oil quality.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect pads; replace wiped pads.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "active_pads",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wiped babbitt: high pad temperature, axial shift. Common cause: overload, oil loss, surge.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "active_pads",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for collar damage: scoring. Common cause: dirty oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "thrust_collar",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What makes the oil wedge?",
+     "options": [
+      "Pads tilting on pivots",
+      "Grooves only",
+      "Pumps",
+      "Magnets"
+     ],
+     "answer": 0,
+     "explanation": "Tilting pads.",
+     "level": "basic"
+    },
+    {
+     "question": "Best health indicator?",
+     "options": [
+      "Pad (babbitt) temperature",
+      "Colour",
+      "Noise only",
+      "Oil level only"
+     ],
+     "answer": 0,
+     "explanation": "RTD.",
+     "level": "basic"
+    },
+    {
+     "question": "Why inactive pads?",
+     "options": [
+      "Reverse thrust in transients",
+      "Spare pads",
+      "Cooling",
+      "Weight"
+     ],
+     "answer": 0,
+     "explanation": "Reverse thrust.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Rotor.\"",
+     "options": [
+      "Active (Loaded) Pads: steel shoes, babbitt faces & spherical pivots",
+      "Rotor Shaft (turning)",
+      "Carrier / Base Rings (with levelling links in self-equalising designs)",
+      "Bearing Housing with End Seals"
+     ],
+     "answer": 1,
+     "explanation": "Rotor Shaft (turning): Rotor.",
+     "level": "basic",
+     "part": "shaft",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transfers thrust.\"",
+     "options": [
+      "Inactive (Counter-Thrust) Pads: steel shoes, babbitt faces & spherical pivots",
+      "Oil dragged into the converging wedge between collar and pads",
+      "Thrust Collar (shrunk / integral on the shaft)",
+      "Rotor Shaft (turning)"
+     ],
+     "answer": 2,
+     "explanation": "Thrust Collar (shrunk / integral on the shaft): Transfers thrust.",
+     "level": "basic",
+     "part": "thrust_collar",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carry thrust on oil film.\"",
+     "options": [
+      "Thrust Collar (shrunk / integral on the shaft)",
+      "Bearing Housing with End Seals",
+      "Rotor Shaft (turning)",
+      "Active (Loaded) Pads: steel shoes, babbitt faces & spherical pivots"
+     ],
+     "answer": 3,
+     "explanation": "Active (Loaded) Pads: steel shoes, babbitt faces & spherical pivots: Carry thrust on oil film.",
+     "level": "basic",
+     "part": "active_pads",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

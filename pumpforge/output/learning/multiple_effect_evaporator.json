@@ -1,0 +1,716 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "multiple_effect_evaporator",
+ "no": 160,
+ "title": "Multiple Effect Evaporator",
+ "model_title": "Triple-Effect Evaporator (Forward Feed, Short-Tube Calandrias)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A multiple effect evaporator uses the vapour produced in one effect as the heating steam for the next, which works at a lower pressure so its liquid boils at a lower temperature. Only the first effect takes live steam, so each kilogram of steam evaporates several kilograms of water.",
+   "applications": [
+    "Sugar, pulp & paper (black liquor), dairy",
+    "Caustic soda and chemical concentration",
+    "Desalination (MED)"
+   ],
+   "key_points": [
+    "Steam economy ≈ N × (0.8–1) for N effects",
+    "Pressure and boiling point fall from effect to effect",
+    "Total ΔT is shared between effects → more area",
+    "Forward, backward or mixed feed arrangements"
+   ],
+   "classification": {
+    "family": "Evaporator",
+    "type": "Triple-effect, forward feed"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A multiple effect evaporator uses the vapour from one evaporator body (effect) as the heating steam of the next, which runs at lower pressure and boiling point. Only the first effect uses live steam, so steam consumption per kilogram of water evaporated falls roughly in proportion to the number of effects."
+  },
+  "model_3d": {
+   "asset": "glb/multiple_effect_evaporator.glb",
+   "metadata": "meta/multiple_effect_evaporator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 44272,
+   "parts": 19
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Live steam heats effect 1.",
+    "Vapour from effect 1 heats effect 2 at lower pressure.",
+    "Effect 3 works under vacuum, heated by effect 2 vapour."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Live steam heats effect 1.",
+     "part": "effect_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vapour from effect 1 heats effect 2 at lower pressure.",
+     "part": "vapour_lines",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Effect 3 works under vacuum, heated by effect 2 vapour.",
+     "part": "effect_3",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquor flows forward from effect to effect.",
+     "part": "liquor_lines",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The last vapour is condensed in the condenser.",
+     "part": "condenser",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Steam economy vs number of effects (diminishing returns as area and capital rise)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "multiple_effect_evaporator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "multiple_effect_evaporator_pressure.glb",
+     "title": "Pressure and boiling point fall from effect to effect",
+     "description": "Effect 1 operates at the highest pressure and temperature, heated by live steam. Its vapour is hot enough to boil the liquor in effect 2, which runs at a lower pressure (lower boiling point), and so on to the last effect under vacuum. Each kilogram of steam evaporates roughly N × 0.8–1 kg of water in N effects (steam economy), at the cost of more heating surface.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/multiple_effect_evaporator.json#components",
+   "key_components": "Three effects (calandria + separator), vapour lines, condenser, feed/concentrate lines",
+   "parts": [
+    {
+     "id": "effect_1",
+     "name": "Effect 1: Calandria (steam chest)",
+     "info_ref": "me_effect",
+     "function": "Calandria of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "effect_1_tubes",
+     "name": "Effect 1: Tubes",
+     "info_ref": "me_effect",
+     "function": "Calandria of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "body_1",
+     "name": "Effect 1: Vapour Body & Bottom Cone",
+     "info_ref": "me_body",
+     "function": "Vapour body of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "liquor_1",
+     "name": "Effect 1: Boiling Liquor",
+     "info_ref": "me_liquor",
+     "function": "Boiling liquor and transfer lines.",
+     "material": "—"
+    },
+    {
+     "id": "vapour_1",
+     "name": "Effect 1: Vapour Bubbles",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "effect_2",
+     "name": "Effect 2: Calandria (steam chest)",
+     "info_ref": "me_effect",
+     "function": "Calandria of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "effect_2_tubes",
+     "name": "Effect 2: Tubes",
+     "info_ref": "me_effect",
+     "function": "Calandria of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "body_2",
+     "name": "Effect 2: Vapour Body & Bottom Cone",
+     "info_ref": "me_body",
+     "function": "Vapour body of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "liquor_2",
+     "name": "Effect 2: Boiling Liquor",
+     "info_ref": "me_liquor",
+     "function": "Boiling liquor and transfer lines.",
+     "material": "—"
+    },
+    {
+     "id": "vapour_2",
+     "name": "Effect 2: Vapour Bubbles",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "effect_3",
+     "name": "Effect 3: Calandria (steam chest)",
+     "info_ref": "me_effect",
+     "function": "Calandria of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "effect_3_tubes",
+     "name": "Effect 3: Tubes",
+     "info_ref": "me_effect",
+     "function": "Calandria of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "body_3",
+     "name": "Effect 3: Vapour Body & Bottom Cone",
+     "info_ref": "me_body",
+     "function": "Vapour body of each effect.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "liquor_3",
+     "name": "Effect 3: Boiling Liquor",
+     "info_ref": "me_liquor",
+     "function": "Boiling liquor and transfer lines.",
+     "material": "—"
+    },
+    {
+     "id": "vapour_3",
+     "name": "Effect 3: Vapour Bubbles",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "vapour_lines",
+     "name": "Vapour Lines: vapour of each effect heats the next",
+     "info_ref": "me_vapour",
+     "function": "Vapour lines between effects.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "liquor_lines",
+     "name": "Liquor Transfer Lines (forward feed: pressure difference moves liquor to the next effect)",
+     "info_ref": "me_liquor",
+     "function": "Boiling liquor and transfer lines.",
+     "material": "—"
+    },
+    {
+     "id": "condenser",
+     "name": "Final Condenser & Vacuum Connection (lowest pressure)",
+     "info_ref": "me_condenser",
+     "function": "Condenses last-effect vapour; vacuum.",
+     "material": "Steel."
+    },
+    {
+     "id": "structure",
+     "name": "Support Legs",
+     "info_ref": "me_body",
+     "function": "Vapour body of each effect.",
+     "material": "Stainless steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Effects ~ 2 – 7",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 1 – 100",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Effect 1 ~ 100 – 130; last ~ 50 – 60",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Evaporation ~ 5 – 500",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Optimise number of effects vs capital; consider MVR/TVR for further savings."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "McCabe, Smith & Harriott — Unit Operations of Chemical Engineering"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support vessels on structure/legs designed for operating and flooded weights; allow thermal growth of calandrias and vapour lines."
+   ],
+   "alignment": [
+    "Vertical calandrias plumb (falling-film distribution depends on it); slope liquor lines for drainage."
+   ],
+   "piping": [
+    "Vapour lines sized for low ΔP; condensate drained by traps or level control; vents for non-condensables on each steam chest.",
+    "Vacuum system (condenser + vacuum pump/ejector) for the last effect."
+   ],
+   "commissioning": [
+    "Leak/vacuum test; water trials (wetting, levels); bring steam on slowly; set levels and densities; CIP routine."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor pressures, levels and densities of each effect.",
+     "part": "body_1",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean effects in rotation; check vacuum system.",
+     "part": "condenser",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect tubes and vapour lines.",
+     "part": "effect_2_tubes"
+    }
+   ],
+   "lubrication": [
+    "No lubrication for the static parts — lubricate valve stems, rotating parts and drives per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of vacuum",
+     "category": "performance",
+     "symptoms": [
+      "Falling capacity, rising last-effect temperature"
+     ],
+     "causes": [
+      "Air leaks, condenser fouling"
+     ],
+     "remedies": [
+      "Leak test; clean condenser"
+     ],
+     "part": "condenser"
+    },
+    {
+     "problem": "Scaling in later effects",
+     "category": "performance",
+     "symptoms": [
+      "Falling ΔT, capacity"
+     ],
+     "causes": [
+      "Concentration and solubility"
+     ],
+     "remedies": [
+      "Cleaning schedule; antiscalant"
+     ],
+     "part": "effect_3"
+    }
+   ],
+   "safety": [
+    "Vacuum and pressure ratings; hot liquor; isolate steam before entry."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Multiple Effect Evaporator — Introduction",
+    "type": "in_app_tour",
+    "model": "multiple_effect_evaporator.glb",
+    "duration_s": 52.0,
+    "script": [
+     {
+      "narration": "This module introduces the Multiple Effect Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A multiple effect evaporator uses the vapour produced in one effect as the heating steam for the next, which works at a lower pressure so its liquid boils at a lower temperature.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Only the first effect takes live steam, so each kilogram of steam evaporates several kilograms of water.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include sugar, pulp & paper (black liquor), dairy; caustic soda and chemical concentration; desalination (MED).",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Effect 1: Calandria (steam chest), Effect 2: Calandria (steam chest), Effect 3: Calandria (steam chest).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Multiple Effect Evaporator — Operation",
+    "type": "in_app_tour",
+    "model": "multiple_effect_evaporator.glb",
+    "duration_s": 34.0,
+    "script": [
+     {
+      "narration": "How the Multiple Effect Evaporator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Live steam heats effect 1.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "effect_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vapour from effect 1 heats effect 2 at lower pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "vapour_lines",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Effect 3 works under vacuum, heated by effect 2 vapour.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "effect_3",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquor flows forward from effect to effect.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquor_lines",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The last vapour is condensed in the condenser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "condenser",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Effect 1 operates at the highest pressure and temperature, heated by live steam.",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Multiple Effect Evaporator — Maintenance",
+    "type": "in_app_tour",
+    "model": "multiple_effect_evaporator.glb",
+    "duration_s": 35.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Multiple Effect Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor pressures, levels and densities of each effect.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "body_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean effects in rotation; check vacuum system.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "condenser",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tubes and vapour lines.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "effect_2_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of vacuum: falling capacity, rising last-effect temperature. Common cause: air leaks, condenser fouling.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "condenser",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling in later effects: falling δt, capacity. Common cause: concentration and solubility.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "effect_3",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does effect 2 run at lower pressure than effect 1?",
+     "options": [
+      "So its liquid boils at a lower temperature than effect 1 vapour",
+      "For safety",
+      "Random",
+      "To save pumps"
+     ],
+     "answer": 0,
+     "explanation": "Temperature driving force.",
+     "level": "basic"
+    },
+    {
+     "question": "Steam economy of a 3-effect evaporator is roughly…",
+     "options": [
+      "~2.5–3 kg water per kg steam",
+      "0.1",
+      "10",
+      "100"
+     ],
+     "answer": 0,
+     "explanation": "N × 0.8–1.",
+     "level": "basic"
+    },
+    {
+     "question": "Where is the condenser?",
+     "options": [
+      "After the last effect",
+      "Before effect 1",
+      "In effect 2",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Last vapour.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Calandria of each effect.\"",
+     "options": [
+      "Liquor Transfer Lines (forward feed: pressure difference moves liquor to the next effect)",
+      "Effect 1: Calandria (steam chest)",
+      "Effect 2: Vapour Body & Bottom Cone",
+      "Support Legs"
+     ],
+     "answer": 1,
+     "explanation": "Effect 1: Calandria (steam chest): Calandria of each effect.",
+     "level": "basic",
+     "part": "effect_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Vapour body of each effect.\"",
+     "options": [
+      "Effect 1: Boiling Liquor",
+      "Effect 2: Boiling Liquor",
+      "Effect 1: Calandria (steam chest)",
+      "Effect 1: Vapour Body & Bottom Cone"
+     ],
+     "answer": 3,
+     "explanation": "Effect 1: Vapour Body & Bottom Cone: Vapour body of each effect.",
+     "level": "basic",
+     "part": "body_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Boiling liquor and transfer lines.\"",
+     "options": [
+      "Effect 1: Boiling Liquor",
+      "Final Condenser & Vacuum Connection (lowest pressure)",
+      "Effect 3: Calandria (steam chest)",
+      "Vapour Lines: vapour of each effect heats the next"
+     ],
+     "answer": 0,
+     "explanation": "Effect 1: Boiling Liquor: Boiling liquor and transfer lines.",
+     "level": "basic",
+     "part": "liquor_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

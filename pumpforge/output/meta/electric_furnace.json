@@ -1,0 +1,735 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "electric_furnace",
+  "title": "Electric Arc Furnace (AC, Three Graphite Electrodes)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 170,
+    "phase": 8,
+    "eq_id": "EQ-248",
+    "subcategory": "Fired equipment",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "electric_furnace_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "electric_furnace_temperature.glb",
+      "title": "Arc and bath temperatures",
+      "description": "The arcs between the electrode tips and the scrap/bath are extremely hot (thousands of °C) and melt the charge; liquid steel is typically tapped at around 1600–1650 °C. Water-cooled panels and roof protect the shell; foamy slag shields the panels from arc radiation.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "power",
+      "kind": "electric",
+      "radius": 0.025,
+      "points": [
+        [
+          -2.6,
+          0.85,
+          -0.0
+        ],
+        [
+          -2.6,
+          2.68,
+          -0.0
+        ],
+        [
+          -1.8,
+          2.68,
+          -0.0
+        ],
+        [
+          0.0,
+          2.68,
+          -0.0
+        ],
+        [
+          0.0,
+          1.15,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "fume_extraction",
+      "kind": "flue_gas",
+      "radius": 0.04,
+      "points": [
+        [
+          0.6,
+          1.8,
+          -0.3
+        ],
+        [
+          0.6,
+          2.5,
+          -0.3
+        ],
+        [
+          1.4,
+          2.5,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "tapping",
+      "kind": "flame",
+      "radius": 0.03,
+      "points": [
+        [
+          0.6,
+          0.6,
+          -0.0
+        ],
+        [
+          0.6,
+          -0.2,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.7,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6204,
+    "parts": 12
+  },
+  "summary": "An electric arc furnace melts steel scrap or direct-reduced iron using electric arcs between three graphite electrodes and the charge. A transformer supplies very high currents; the electrode height is regulated hydraulically to hold the arc. The melt is refined and then tapped.",
+  "classification": {
+    "family": "Fired/electric equipment",
+    "type": "AC electric arc furnace (EAF)"
+  },
+  "model_configuration": {
+    "animation": "Electrodes regulate, arcs flicker, tapping shown"
+  },
+  "standards": [
+    {
+      "id": "IEC 60519",
+      "title": "Safety in electroheating installations",
+      "relevance": "Electrical safety.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "AIST — Making, Shaping and Treating of Steel"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Shell, Refractory Hearth & Water-Cooled Wall Panels",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.9
+      ],
+      "bbox_min": [
+        -1.06,
+        0.35,
+        -1.06
+      ],
+      "bbox_max": [
+        1.06,
+        1.6,
+        1.06
+      ],
+      "label_anchor": [
+        0.0,
+        0.975,
+        1.06
+      ],
+      "center": [
+        0.0,
+        0.975,
+        -0.0
+      ],
+      "info_ref": "ef_shell"
+    },
+    {
+      "id": "molten_bath",
+      "name": "Molten Steel Bath & Slag",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "bt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.86,
+        0.56,
+        -0.86
+      ],
+      "bbox_max": [
+        0.86,
+        0.95,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.755,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.755,
+        -0.43
+      ],
+      "info_ref": "ef_bath"
+    },
+    {
+      "id": "roof",
+      "name": "Water-Cooled Roof with Refractory Delta & Electrode Ports (swings aside for charging)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "roof__back",
+        "roof__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.1,
+        1.62,
+        -1.1
+      ],
+      "bbox_max": [
+        1.1,
+        1.95,
+        1.1
+      ],
+      "label_anchor": [
+        0.0,
+        1.785,
+        1.1
+      ],
+      "center": [
+        0.0,
+        1.785,
+        -0.0
+      ],
+      "info_ref": "ef_roof"
+    },
+    {
+      "id": "electrode_1",
+      "name": "Graphite Electrode 1 with Clamp & Current-Conducting Arm",
+      "group": "electrodes",
+      "section_role": "keep",
+      "nodes": [
+        "el0"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.7,
+        1.1,
+        -0.42
+      ],
+      "bbox_max": [
+        0.12,
+        3.0,
+        -0.18
+      ],
+      "label_anchor": [
+        -0.79,
+        2.05,
+        -0.18
+      ],
+      "center": [
+        -0.79,
+        2.05,
+        -0.3
+      ],
+      "info_ref": "ef_electrodes"
+    },
+    {
+      "id": "arc_1",
+      "name": "Electric Arc 1",
+      "group": "electrodes",
+      "section_role": "keep",
+      "nodes": [
+        "arc0"
+      ],
+      "pivot": [
+        0.0,
+        0.96,
+        -0.3
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.07,
+        0.96,
+        -0.37
+      ],
+      "bbox_max": [
+        0.07,
+        1.12,
+        -0.23
+      ],
+      "label_anchor": [
+        0.0,
+        1.04,
+        -0.23
+      ],
+      "center": [
+        0.0,
+        1.04,
+        -0.3
+      ],
+      "info_ref": "ef_arc"
+    },
+    {
+      "id": "electrode_2",
+      "name": "Graphite Electrode 2 with Clamp & Current-Conducting Arm",
+      "group": "electrodes",
+      "section_role": "keep",
+      "nodes": [
+        "el1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.95981,
+        1.1,
+        0.03
+      ],
+      "bbox_max": [
+        -0.13981,
+        3.0,
+        0.27
+      ],
+      "label_anchor": [
+        -1.04981,
+        2.05,
+        0.27
+      ],
+      "center": [
+        -1.04981,
+        2.05,
+        0.15
+      ],
+      "info_ref": "ef_electrodes"
+    },
+    {
+      "id": "arc_2",
+      "name": "Electric Arc 2",
+      "group": "electrodes",
+      "section_role": "keep",
+      "nodes": [
+        "arc1"
+      ],
+      "pivot": [
+        -0.25981,
+        0.96,
+        0.15
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.32981,
+        0.96,
+        0.08
+      ],
+      "bbox_max": [
+        -0.18981,
+        1.12,
+        0.22
+      ],
+      "label_anchor": [
+        -0.25981,
+        1.04,
+        0.22
+      ],
+      "center": [
+        -0.25981,
+        1.04,
+        0.15
+      ],
+      "info_ref": "ef_arc"
+    },
+    {
+      "id": "electrode_3",
+      "name": "Graphite Electrode 3 with Clamp & Current-Conducting Arm",
+      "group": "electrodes",
+      "section_role": "keep",
+      "nodes": [
+        "el2"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.44019,
+        1.1,
+        0.03
+      ],
+      "bbox_max": [
+        0.37981,
+        3.0,
+        0.27
+      ],
+      "label_anchor": [
+        -0.53019,
+        2.05,
+        0.27
+      ],
+      "center": [
+        -0.53019,
+        2.05,
+        0.15
+      ],
+      "info_ref": "ef_electrodes"
+    },
+    {
+      "id": "arc_3",
+      "name": "Electric Arc 3",
+      "group": "electrodes",
+      "section_role": "keep",
+      "nodes": [
+        "arc2"
+      ],
+      "pivot": [
+        0.25981,
+        0.96,
+        0.15
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.18981,
+        0.96,
+        0.08
+      ],
+      "bbox_max": [
+        0.32981,
+        1.12,
+        0.22
+      ],
+      "label_anchor": [
+        0.25981,
+        1.04,
+        0.22
+      ],
+      "center": [
+        0.25981,
+        1.04,
+        0.15
+      ],
+      "info_ref": "ef_arc"
+    },
+    {
+      "id": "mast_structure",
+      "name": "Electrode Mast Structure & Hydraulic Regulation",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "mast_structure.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.6,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.05,
+        0.0,
+        -0.45
+      ],
+      "bbox_max": [
+        -1.45,
+        2.9,
+        0.45
+      ],
+      "label_anchor": [
+        -1.75,
+        1.45,
+        0.45
+      ],
+      "center": [
+        -1.75,
+        1.45,
+        -0.0
+      ],
+      "info_ref": "ef_mast"
+    },
+    {
+      "id": "tilting_platform",
+      "name": "Tilting Rockers & Eccentric Bottom Tap (EBT)",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "tilting_platform.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.2,
+        0.0,
+        -0.8
+      ],
+      "bbox_max": [
+        1.2,
+        0.7,
+        0.8
+      ],
+      "label_anchor": [
+        0.0,
+        0.35,
+        0.8
+      ],
+      "center": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "ef_tilt"
+    },
+    {
+      "id": "transformer",
+      "name": "Furnace Transformer & Secondary Bus (high current to the electrodes)",
+      "group": "electrical",
+      "section_role": "keep",
+      "nodes": [
+        "trf"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.95,
+        0.0,
+        -0.3
+      ],
+      "bbox_max": [
+        -1.8,
+        2.73,
+        0.3
+      ],
+      "label_anchor": [
+        -2.375,
+        1.365,
+        0.3
+      ],
+      "center": [
+        -2.375,
+        1.365,
+        -0.0
+      ],
+      "info_ref": "ef_transformer"
+    }
+  ],
+  "components": {
+    "ef_shell": {
+      "function": "Holds the bath.",
+      "construction": "Shell, refractory hearth, water-cooled panels.",
+      "material": "Steel/refractory.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Refractory wear, water leaks"
+      ],
+      "inspection": [
+        "Inspect after each heat"
+      ]
+    },
+    "ef_bath": {
+      "function": "Molten steel and slag.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_roof": {
+      "function": "Closes the furnace; swings for charging.",
+      "construction": "Water-cooled roof with delta.",
+      "material": "Steel/refractory.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_electrodes": {
+      "function": "Conduct current and form the arcs.",
+      "construction": "Graphite electrodes, clamps, arms.",
+      "material": "Graphite/copper.",
+      "operating_conditions": "Consumed in operation.",
+      "failure_modes": [
+        "Breakage, tip oxidation"
+      ],
+      "inspection": [
+        "Monitor consumption"
+      ]
+    },
+    "ef_arc": {
+      "function": "Electric arc (heat source).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_mast": {
+      "function": "Carries and moves the arms.",
+      "construction": "Masts with hydraulic cylinders.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_tilt": {
+      "function": "Tilt for tapping/deslagging.",
+      "construction": "Rockers and EBT.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_transformer": {
+      "function": "Supplies arc power.",
+      "construction": "Furnace transformer and bus.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

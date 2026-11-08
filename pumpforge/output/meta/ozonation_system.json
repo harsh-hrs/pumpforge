@@ -1,0 +1,669 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "ozonation_system",
+  "title": "Ozonation System (O₂ Feed, Ozone Generator, Diffuser Contactor, Off-Gas Destructor)",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 224,
+    "phase": 11,
+    "eq_id": "EQ-302",
+    "subcategory": "Disinfection",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "ozonation_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "ozonation_system_pressure.glb",
+      "title": "Strong oxidant, no lasting residual",
+      "description": "Ozone is a very strong oxidant: it disinfects (including Cryptosporidium at higher C·t), removes colour, taste and odour, and oxidises iron, manganese and micro-pollutants. It is made on site because it decomposes quickly. Transfer into water depends on bubble size and contact depth; leftover ozone in the off-gas is destroyed before venting because it is toxic (workplace limits ~ 0.1 ppm).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "oxygen",
+      "kind": "air",
+      "radius": 0.015,
+      "points": [
+        [
+          -2.6,
+          1.3,
+          -0.0
+        ],
+        [
+          -2.0,
+          1.4,
+          -0.3
+        ],
+        [
+          -1.7,
+          1.0,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "ozone",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.4,
+          1.0,
+          -0.0
+        ],
+        [
+          0.3,
+          1.0,
+          -0.0
+        ],
+        [
+          0.3,
+          0.11,
+          -0.0
+        ],
+        [
+          1.15,
+          0.11,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          0.25,
+          1.3,
+          -0.0
+        ],
+        [
+          0.95,
+          1.3,
+          -0.2
+        ],
+        [
+          0.95,
+          0.2,
+          -0.2
+        ],
+        [
+          1.65,
+          0.2,
+          -0.2
+        ],
+        [
+          1.65,
+          1.45,
+          -0.2
+        ],
+        [
+          2.4,
+          1.45,
+          -0.2
+        ],
+        [
+          2.4,
+          0.3,
+          -0.2
+        ],
+        [
+          3.15,
+          0.3,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 19502,
+    "parts": 10
+  },
+  "summary": "An ozonation system produces ozone on site by passing oxygen through a corona discharge, then bubbles it through water in a contact tank. Ozone disinfects and oxidises colour, taste/odour compounds and micro-pollutants; off-gas ozone is destroyed before venting.",
+  "classification": {
+    "family": "Disinfection / oxidation",
+    "type": "Corona-discharge ozone with diffuser contactor"
+  },
+  "model_configuration": {
+    "animation": "Corona glow; bubbles"
+  },
+  "standards": [
+    {
+      "id": "IOA guidelines",
+      "title": "International Ozone Association practice",
+      "relevance": "Design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Rakness — Ozone in Drinking Water Treatment"
+  ],
+  "parts": [
+    {
+      "id": "oxygen_supply",
+      "name": "Oxygen Supply (LOX tank & vaporiser, or PSA oxygen)",
+      "group": "gas",
+      "section_role": "keep",
+      "nodes": [
+        "ox"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.85,
+        0.2,
+        -0.38
+      ],
+      "bbox_max": [
+        -1.92,
+        1.4,
+        0.25
+      ],
+      "label_anchor": [
+        -2.385,
+        0.8,
+        0.25
+      ],
+      "center": [
+        -2.385,
+        0.8,
+        -0.065
+      ],
+      "info_ref": "oz_oxygen"
+    },
+    {
+      "id": "generator_vessel",
+      "name": "Ozone Generator Vessel (cooled shell)",
+      "group": "generator",
+      "section_role": "split",
+      "nodes": [
+        "generator_vessel__back",
+        "generator_vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.6,
+        0.7,
+        -0.3
+      ],
+      "bbox_max": [
+        -0.4,
+        1.3,
+        0.3
+      ],
+      "label_anchor": [
+        -1.0,
+        1.0,
+        0.3
+      ],
+      "center": [
+        -1.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "oz_generator"
+    },
+    {
+      "id": "dielectric_tubes",
+      "name": "Dielectric Tubes / Electrodes (corona discharge: 3 O₂ → 2 O₃)",
+      "group": "generator",
+      "section_role": "keep",
+      "nodes": [
+        "dielectric_tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.6
+      ],
+      "bbox_min": [
+        -1.55,
+        0.86,
+        -0.16
+      ],
+      "bbox_max": [
+        -0.45,
+        1.14,
+        0.16
+      ],
+      "label_anchor": [
+        -1.0,
+        1.0,
+        0.16
+      ],
+      "center": [
+        -1.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "oz_generator"
+    },
+    {
+      "id": "corona",
+      "name": "Corona Discharge Glow",
+      "group": "generator",
+      "section_role": "keep",
+      "nodes": [
+        "corona.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -1.5,
+        0.875,
+        -0.145
+      ],
+      "bbox_max": [
+        -0.5,
+        1.125,
+        0.145
+      ],
+      "label_anchor": [
+        -1.0,
+        1.0,
+        0.145
+      ],
+      "center": [
+        -1.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "oz_generator"
+    },
+    {
+      "id": "power_supply",
+      "name": "Medium-Frequency Power Supply Unit",
+      "group": "electrical",
+      "section_role": "keep",
+      "nodes": [
+        "ps"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -1.3,
+        0.0,
+        -1.0
+      ],
+      "bbox_max": [
+        -0.7,
+        1.0,
+        -0.6
+      ],
+      "label_anchor": [
+        -1.0,
+        0.5,
+        -0.6
+      ],
+      "center": [
+        -1.0,
+        0.5,
+        -0.8
+      ],
+      "info_ref": "oz_power"
+    },
+    {
+      "id": "contactor",
+      "name": "Ozone Contact Tank (covered; under/over baffles; counter-current first cell), Inlet & Outlet",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "contactor__back",
+        "contactor__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        0.3,
+        0.0,
+        -0.5
+      ],
+      "bbox_max": [
+        3.1,
+        1.66,
+        0.5
+      ],
+      "label_anchor": [
+        1.7,
+        0.83,
+        0.5
+      ],
+      "center": [
+        1.7,
+        0.83,
+        -0.0
+      ],
+      "info_ref": "oz_contactor"
+    },
+    {
+      "id": "water",
+      "name": "Water in the Contactor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "wt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.605,
+        0.05,
+        -0.445
+      ],
+      "bbox_max": [
+        2.795,
+        1.5,
+        -0.005
+      ],
+      "label_anchor": [
+        1.7,
+        0.775,
+        -0.005
+      ],
+      "center": [
+        1.7,
+        0.775,
+        -0.225
+      ],
+      "info_ref": "oz_contactor"
+    },
+    {
+      "id": "diffusers",
+      "name": "Ozone Gas Line & Fine-Bubble Ceramic Diffusers",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "diffusers.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.3,
+        0.08,
+        -0.16
+      ],
+      "bbox_max": [
+        1.21,
+        1.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.455,
+        0.55,
+        0.02
+      ],
+      "center": [
+        0.455,
+        0.55,
+        -0.07
+      ],
+      "info_ref": "oz_diffusers"
+    },
+    {
+      "id": "off_gas_destructor",
+      "name": "Off-Gas Ozone Destructor (thermal/catalytic → O₂)",
+      "group": "safety",
+      "section_role": "keep",
+      "nodes": [
+        "dst"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.3
+      ],
+      "bbox_min": [
+        2.22,
+        1.66,
+        -0.48
+      ],
+      "bbox_max": [
+        2.58,
+        2.49,
+        -0.12
+      ],
+      "label_anchor": [
+        2.4,
+        2.075,
+        -0.12
+      ],
+      "center": [
+        2.4,
+        2.075,
+        -0.3
+      ],
+      "info_ref": "oz_destructor"
+    },
+    {
+      "id": "bubbles",
+      "name": "Ozone Bubbles rising and dissolving",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "bubbles0",
+        "bubbles1",
+        "bubbles2",
+        "bubbles3",
+        "bubbles4",
+        "bubbles5",
+        "bubbles6",
+        "bubbles7",
+        "bubbles8",
+        "bubbles9",
+        "bubbles10",
+        "bubbles11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.015
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.015
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.015
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "oz_oxygen": {
+      "function": "Oxygen feed.",
+      "construction": "LOX tank or PSA.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "oz_generator": {
+      "function": "Makes ozone.",
+      "construction": "Generator vessel, dielectrics.",
+      "material": "Stainless/glass.",
+      "operating_conditions": "Cooling critical.",
+      "failure_modes": [
+        "Dielectric failure"
+      ],
+      "inspection": [
+        "Monitor"
+      ]
+    },
+    "oz_power": {
+      "function": "HV/MF power.",
+      "construction": "Power supply.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "oz_contactor": {
+      "function": "Contact.",
+      "construction": "Baffled covered tank.",
+      "material": "Concrete.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "oz_diffusers": {
+      "function": "Fine bubbles.",
+      "construction": "Ceramic diffusers.",
+      "material": "Ceramic/PTFE.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "oz_destructor": {
+      "function": "Destroys off-gas ozone.",
+      "construction": "Thermal/catalytic destructor.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

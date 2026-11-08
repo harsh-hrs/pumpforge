@@ -1,0 +1,591 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "jacketed_vessel",
+ "no": 96,
+ "title": "Jacketed Vessel",
+ "model_title": "Jacketed Vessel (Conventional Jacket, Heating/Cooling Medium)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A jacketed vessel has an outer jacket around its lower shell. Steam, hot oil or cooling water flows through the jacket space and heats or cools the contents through the vessel wall. A spiral baffle in the jacket makes the medium flow fast around the vessel for good heat transfer.",
+   "applications": [
+    "Batch heating/cooling in chemicals, food and pharma",
+    "Melting and holding tanks",
+    "Crystallisers and reactors",
+    "Storage of temperature-sensitive products"
+   ],
+   "key_points": [
+    "No contact between medium and product",
+    "Jacket pressure acts externally on the shell",
+    "Heat transfer limited by wall area",
+    "Spiral baffle raises velocity"
+   ],
+   "classification": {
+    "family": "Pressure vessel with heat-transfer jacket",
+    "type": "Conventional jacket with spiral baffle"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A jacketed vessel has an outer jacket around the lower part of the vessel. A heating or cooling medium (steam, hot oil, chilled water) flows through the jacket space and heats or cools the contents through the vessel wall without mixing with them. A spiral baffle guides the medium for better heat transfer."
+  },
+  "model_3d": {
+   "asset": "glb/jacketed_vessel.glb",
+   "metadata": "meta/jacketed_vessel.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14666,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The heating/cooling medium enters the jacket.",
+    "The spiral baffle guides it round the vessel.",
+    "Heat passes through the vessel wall into the product."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The heating/cooling medium enters the jacket.",
+     "part": "jacket",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The spiral baffle guides it round the vessel.",
+     "part": "spiral_baffle",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heat passes through the vessel wall into the product.",
+     "part": "vessel",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The product level rises and falls as the batch is filled and emptied.",
+     "part": "product",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Batch heating time from Q = U·A·ΔT; U drops if the product is viscous or the wall fouls."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "jacketed_vessel_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/jacketed_vessel.json#components",
+   "key_components": "Vessel, jacket, spiral baffle, nozzles, legs",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Inner Vessel (shell & dished heads)",
+     "info_ref": "jv_vessel",
+     "function": "Holds the product.",
+     "material": "Stainless steel / glass-lined."
+    },
+    {
+     "id": "jacket",
+     "name": "Jacket (annular space for steam / hot oil / cooling water)",
+     "info_ref": "jv_jacket",
+     "function": "Holds the heating/cooling medium against the vessel wall.",
+     "material": "Carbon steel / stainless."
+    },
+    {
+     "id": "spiral_baffle",
+     "name": "Spiral Baffle in Jacket (directs medium flow)",
+     "info_ref": "jv_baffle",
+     "function": "Forces the medium round in a spiral for higher velocity and heat transfer.",
+     "material": "Steel."
+    },
+    {
+     "id": "product",
+     "name": "Product (liquid level animated: filling and emptying)",
+     "info_ref": "jv_product",
+     "function": "Contents (level animated).",
+     "material": "—"
+    },
+    {
+     "id": "nozzles",
+     "name": "Nozzles: Jacket In/Out, Feed, Vent, Bottom Outlet & Gauge",
+     "info_ref": "jv_nozzles",
+     "function": "Process, vent, drain and jacket connections; gauge.",
+     "material": "Stainless."
+    },
+    {
+     "id": "legs",
+     "name": "Support Legs",
+     "info_ref": "jv_supports",
+     "function": "Support legs.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessel 0.1 – 50 m³",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Vessel FV–10 bar; jacket ~ 3–10 bar",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "-20 to 200",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Working volume",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check jacket steam trap and temperatures.",
+     "part": "nozzles",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Descale jacket; inspect inner surface.",
+     "part": "jacket",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Hydro-test both spaces.",
+     "part": "vessel"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Poor heating",
+     "category": "performance",
+     "symptoms": [
+      "Long batch times"
+     ],
+     "causes": [
+      "Air/condensate in jacket, scale"
+     ],
+     "remedies": [
+      "Vent, fix trap, descale"
+     ],
+     "part": "jacket"
+    },
+    {
+     "problem": "Inner shell buckling",
+     "category": "performance",
+     "symptoms": [
+      "Deformation"
+     ],
+     "causes": [
+      "Excess jacket pressure / vacuum inside"
+     ],
+     "remedies": [
+      "Relief on jacket; vacuum breaker"
+     ],
+     "part": "vessel"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Jacketed Vessel — Introduction",
+    "type": "in_app_tour",
+    "model": "jacketed_vessel.glb",
+    "duration_s": 50.6,
+    "script": [
+     {
+      "narration": "This module introduces the Jacketed Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A jacketed vessel has an outer jacket around its lower shell.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Steam, hot oil or cooling water flows through the jacket space and heats or cools the contents through the vessel wall.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A spiral baffle in the jacket makes the medium flow fast around the vessel for good heat transfer.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include batch heating/cooling in chemicals, food and pharma; melting and holding tanks; crystallisers and reactors; storage of temperature-sensitive products.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Jacketed Vessel — Operation",
+    "type": "in_app_tour",
+    "model": "jacketed_vessel.glb",
+    "duration_s": 25.6,
+    "script": [
+     {
+      "narration": "How the Jacketed Vessel works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The heating/cooling medium enters the jacket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "jacket",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The spiral baffle guides it round the vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spiral_baffle",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heat passes through the vessel wall into the product.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vessel",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The product level rises and falls as the batch is filled and emptied.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "product",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Jacketed Vessel — Maintenance",
+    "type": "in_app_tour",
+    "model": "jacketed_vessel.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Jacketed Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check jacket steam trap and temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Descale jacket; inspect inner surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "jacket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Hydro-test both spaces.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor heating: long batch times. Common cause: air/condensate in jacket, scale.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "jacket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for inner shell buckling: deformation. Common cause: excess jacket pressure / vacuum inside.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the jacket for?",
+     "options": [
+      "Insulation only",
+      "To carry a heating/cooling medium against the vessel wall",
+      "Mixing",
+      "Storage"
+     ],
+     "answer": 1,
+     "explanation": "Indirect heat transfer.",
+     "level": "basic"
+    },
+    {
+     "question": "Jacket pressure on the inner shell is…",
+     "options": [
+      "Internal",
+      "External — check for buckling",
+      "Zero",
+      "Irrelevant"
+     ],
+     "answer": 1,
+     "explanation": "External pressure design.",
+     "level": "basic"
+    },
+    {
+     "question": "The spiral baffle…",
+     "options": [
+      "Mixes the product",
+      "Increases medium velocity in the jacket",
+      "Supports the vessel",
+      "Seals the lid"
+     ],
+     "answer": 1,
+     "explanation": "Better h.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the product.\"",
+     "options": [
+      "Spiral Baffle in Jacket (directs medium flow)",
+      "Inner Vessel (shell & dished heads)",
+      "Nozzles: Jacket In/Out, Feed, Vent, Bottom Outlet & Gauge",
+      "Jacket (annular space for steam / hot oil / cooling water)"
+     ],
+     "answer": 1,
+     "explanation": "Inner Vessel (shell & dished heads): Holds the product.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds the heating/cooling medium against the vessel wall.\"",
+     "options": [
+      "Support Legs",
+      "Jacket (annular space for steam / hot oil / cooling water)",
+      "Spiral Baffle in Jacket (directs medium flow)",
+      "Nozzles: Jacket In/Out, Feed, Vent, Bottom Outlet & Gauge"
+     ],
+     "answer": 1,
+     "explanation": "Jacket (annular space for steam / hot oil / cooling water): Holds the heating/cooling medium against the vessel wall.",
+     "level": "basic",
+     "part": "jacket",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Forces the medium round in a spiral for higher velocity and heat transfer.\"",
+     "options": [
+      "Spiral Baffle in Jacket (directs medium flow)",
+      "Support Legs",
+      "Jacket (annular space for steam / hot oil / cooling water)",
+      "Nozzles: Jacket In/Out, Feed, Vent, Bottom Outlet & Gauge"
+     ],
+     "answer": 0,
+     "explanation": "Spiral Baffle in Jacket (directs medium flow): Forces the medium round in a spiral for higher velocity and heat transfer.",
+     "level": "basic",
+     "part": "spiral_baffle",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

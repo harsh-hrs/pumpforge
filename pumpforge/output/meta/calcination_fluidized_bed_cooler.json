@@ -1,0 +1,454 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "calcination_fluidized_bed_cooler",
+  "title": "Calcination Fluidised Bed Cooler (Water-Cooled Tube Bundles, Cascade Chambers)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 209,
+    "phase": 10,
+    "eq_id": "EQ-287",
+    "subcategory": "Calcination",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "calcination_fluidized_bed_cooler_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "calcination_fluidized_bed_cooler_temperature.glb",
+      "title": "Alumina cools chamber by chamber",
+      "description": "Hot alumina from the calciner/cyclone coolers (several hundred °C) flows through the cascade of fluidised chambers. Fluidising air and the immersed water-cooled bundles remove heat; the water flows counter-current to the alumina. Product leaves at roughly 80 °C or less for safe conveying and storage; the warm air is often used as combustion air.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "alumina",
+      "kind": "sand",
+      "radius": 0.025,
+      "points": [
+        [
+          -1.4,
+          2.3,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.0,
+          -0.0
+        ],
+        [
+          1.6,
+          1.0,
+          -0.0
+        ],
+        [
+          1.8,
+          0.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.025,
+      "points": [
+        [
+          -2.5,
+          0.5,
+          -0.0
+        ],
+        [
+          0.0,
+          0.6,
+          0.2
+        ],
+        [
+          0.0,
+          1.8,
+          0.2
+        ],
+        [
+          0.0,
+          2.3,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cooling_water",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          2.2,
+          0.75,
+          -0.7
+        ],
+        [
+          -1.9,
+          1.05,
+          -0.7
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6810,
+    "parts": 5
+  },
+  "summary": "A fluidised bed cooler cools hot calcined alumina. The alumina flows through a cascade of fluidised chambers containing water-cooled tube bundles; fluidising air keeps the bed moving and is warmed for reuse as combustion air.",
+  "classification": {
+    "family": "Calcination",
+    "type": "Fluidised bed cooler with immersed bundles"
+  },
+  "model_configuration": {
+    "chambers": 3,
+    "animation": "Bed flows chamber to chamber"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Fluid bed cooler design",
+      "relevance": "Heat transfer surface.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Outotec/FLSmidth calciner literature"
+  ],
+  "parts": [
+    {
+      "id": "cooler_body",
+      "name": "Cooler Body, Air Distributor & Chamber Weirs",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "cooler_body__back",
+        "cooler_body__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.64,
+        0.5,
+        -0.49
+      ],
+      "bbox_max": [
+        1.64,
+        2.0,
+        0.49
+      ],
+      "label_anchor": [
+        0.0,
+        1.25,
+        0.49
+      ],
+      "center": [
+        0.0,
+        1.25,
+        -0.0
+      ],
+      "info_ref": "fbc_body"
+    },
+    {
+      "id": "cooling_bundles",
+      "name": "Cooling-Water Tube Bundles immersed in the Bed (counter-flow to the alumina)",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "cooling_bundles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.8
+      ],
+      "bbox_min": [
+        -1.475,
+        0.75,
+        -0.555
+      ],
+      "bbox_max": [
+        1.475,
+        1.05,
+        0.4
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        0.4
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -0.0775
+      ],
+      "info_ref": "fbc_tubes"
+    },
+    {
+      "id": "bed",
+      "name": "Fluidised Alumina flowing from Chamber to Chamber",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "bed0",
+        "bed1",
+        "bed2",
+        "bed3",
+        "bed4",
+        "bed5",
+        "bed6",
+        "bed7",
+        "bed8",
+        "bed9",
+        "bed10",
+        "bed11",
+        "bed12",
+        "bed13",
+        "bed14",
+        "bed15",
+        "bed16",
+        "bed17",
+        "bed18",
+        "bed19",
+        "bed20",
+        "bed21",
+        "bed22",
+        "bed23",
+        "bed24",
+        "bed25",
+        "bed26",
+        "bed27",
+        "bed28",
+        "bed29",
+        "bed30",
+        "bed31",
+        "bed32",
+        "bed33",
+        "bed34",
+        "bed35",
+        "bed36",
+        "bed37",
+        "bed38",
+        "bed39",
+        "bed40",
+        "bed41",
+        "bed42",
+        "bed43",
+        "bed44"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.018,
+        -0.01712
+      ],
+      "bbox_max": [
+        0.018,
+        0.018,
+        0.01712
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01712
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "air_plenum",
+      "name": "Fluidising-Air Plenum & Inlet Duct",
+      "group": "air",
+      "section_role": "split",
+      "nodes": [
+        "air_plenum__back",
+        "air_plenum__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.4,
+        0.35,
+        -0.45
+      ],
+      "bbox_max": [
+        1.6,
+        0.65,
+        0.45
+      ],
+      "label_anchor": [
+        -0.4,
+        0.5,
+        0.45
+      ],
+      "center": [
+        -0.4,
+        0.5,
+        -0.0
+      ],
+      "info_ref": "fbc_air"
+    },
+    {
+      "id": "nozzles",
+      "name": "Hot Alumina Inlet (from calciner), Cooled Alumina Outlet, Air Exhaust, Cooling-Water Lines",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.90218,
+        0.6,
+        -0.72988
+      ],
+      "bbox_max": [
+        2.23,
+        2.35,
+        0.228
+      ],
+      "label_anchor": [
+        0.16391,
+        1.475,
+        0.228
+      ],
+      "center": [
+        0.16391,
+        1.475,
+        -0.25094
+      ],
+      "info_ref": "fbc_nozzles"
+    }
+  ],
+  "components": {
+    "fbc_body": {
+      "function": "Contains the bed.",
+      "construction": "Body, distributor, weirs.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fbc_tubes": {
+      "function": "Remove heat.",
+      "construction": "Water-cooled bundles.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Erosion, leaks"
+      ],
+      "inspection": [
+        "Thickness"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    },
+    "fbc_air": {
+      "function": "Fluidising air.",
+      "construction": "Plenum, duct.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fbc_nozzles": {
+      "function": "Connections.",
+      "construction": "Inlet, outlet, water lines.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

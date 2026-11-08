@@ -1,0 +1,638 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "oil_water_separator",
+ "no": 186,
+ "title": "Oil-Water Separator",
+ "model_title": "Oil–Water Separator (Corrugated Plate Interceptor, CPI)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An oil–water separator removes free oil and settleable solids from wastewater by gravity. In a corrugated plate interceptor (CPI), packs of inclined plates give oil droplets only a short distance to rise; they coalesce on the plates and slide up to the oil layer, which is skimmed off, while solids slide down into the hopper.",
+   "applications": [
+    "Refinery and terminal drainage",
+    "Workshops, car washes and fuel stations",
+    "Ballast and produced water pre-treatment"
+   ],
+   "key_points": [
+    "Stokes' law governs separation",
+    "Plates shorten rise distance",
+    "Removes free oil, not emulsions",
+    "Regular skimming and desludging"
+   ],
+   "classification": {
+    "family": "Gravity separator",
+    "type": "Corrugated plate interceptor"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "An oil–water separator removes free oil and settleable solids from wastewater by gravity. In a corrugated plate interceptor (CPI), inclined plates give oil droplets a short distance to rise; they coalesce on the plates, rise to the surface layer and are skimmed off, while solids slide into a hopper."
+  },
+  "model_3d": {
+   "asset": "glb/oil_water_separator.glb",
+   "metadata": "meta/oil_water_separator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 2480,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Oily water enters through the inlet baffle.",
+    "It flows through the inclined plate pack.",
+    "Oil droplets rise and form a layer."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Oily water enters through the inlet baffle.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It flows through the inclined plate pack.",
+     "part": "plate_pack",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil droplets rise and form a layer.",
+     "part": "oil_layer",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The skimmer removes the oil.",
+     "part": "oil_skimmer",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clean water leaves under the oil baffle over the weir.",
+     "part": "tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Removal efficiency vs droplet size: near 100 % above design size (~ 60 µm CPI), falling steeply below."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "oil_water_separator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "oil_water_separator_pressure.glb",
+     "title": "Stokes' law sets the rise velocity",
+     "description": "An oil droplet rises at v = g·d²·(ρw − ρo)/(18·μ) (Stokes). Small droplets rise very slowly, so the inclined plates give each droplet only a short distance to rise before it meets a plate surface, coalesces and slides up to the oil layer. CPI separators typically remove free oil droplets down to roughly 50–60 µm; API separators ~ 150 µm.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/oil_water_separator.json#components",
+   "key_components": "Inlet chamber, corrugated plate pack, oil skimmer, sludge hopper, outlet weir",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Separator Tank: Inlet Baffle, Oil-Retention Baffle, Outlet Weir & Sludge Hopper",
+     "info_ref": "ows_tank",
+     "function": "Holds the flow; baffles and weir.",
+     "material": "Steel/concrete."
+    },
+    {
+     "id": "plate_pack",
+     "name": "Corrugated Plate Pack (45°) — short rise distance for oil droplets",
+     "info_ref": "ows_plates",
+     "function": "Short rise distance; coalescence.",
+     "material": "PP/FRP."
+    },
+    {
+     "id": "water",
+     "name": "Water Phase",
+     "info_ref": "ows_tank",
+     "function": "Holds the flow; baffles and weir.",
+     "material": "Steel/concrete."
+    },
+    {
+     "id": "oil_layer",
+     "name": "Separated Oil Layer",
+     "info_ref": "ows_oil",
+     "function": "Separated oil.",
+     "material": "—"
+    },
+    {
+     "id": "oil_skimmer",
+     "name": "Rotatable Slotted-Pipe Oil Skimmer",
+     "info_ref": "ows_skimmer",
+     "function": "Removes oil.",
+     "material": "Stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Inlet, Clean-Water Outlet & Sludge Drain",
+     "info_ref": "ows_tank",
+     "function": "Holds the flow; baffles and weir.",
+     "material": "Steel/concrete."
+    },
+    {
+     "id": "oil_droplets",
+     "name": "Oil Droplets rising to the Plates and Surface",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "sludge",
+     "name": "Solids settling into the Hopper",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tank ~ 1 – 20 m long",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 1 – 500",
+     "unit": "m³/h"
+    },
+    "operating_pressure": {
+     "typical_range": "Atmospheric",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "Free oil droplets ≥ ~ 50–60 µm (CPI)",
+     "unit": "µm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from design droplet size, flow and oil density (API 421 method)."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API Publication 421"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Tanks on level foundations; access walkways for inspection and skimmer maintenance."
+   ],
+   "alignment": [
+    "Weirs and launders set level so flow and overflow are even."
+   ],
+   "piping": [
+    "Inlet distribution to avoid short-circuiting; sludge/float lines sized for thick material; chemical dosing points upstream."
+   ],
+   "commissioning": [
+    "Fill with water and check levels; start air/recycle; optimise chemical dosing with jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Skim oil; check levels.",
+     "part": "oil_skimmer",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Desludge hopper; clean plates.",
+     "part": "plate_pack",
+     "interval": "monthly/quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect tank coating.",
+     "part": "tank"
+    }
+   ],
+   "lubrication": [
+    "No lubrication of static parts; lubricate pumps, drives and valve actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Oil carry-over",
+     "category": "performance",
+     "symptoms": [
+      "Sheen in effluent"
+     ],
+     "causes": [
+      "Emulsified oil, overload, plates fouled"
+     ],
+     "remedies": [
+      "Reduce flow; clean plates; break emulsions upstream"
+     ],
+     "part": "plate_pack"
+    },
+    {
+     "problem": "Sludge build-up",
+     "category": "performance",
+     "symptoms": [
+      "Short-circuiting"
+     ],
+     "causes": [
+      "Infrequent desludging"
+     ],
+     "remedies": [
+      "Desludge"
+     ],
+     "part": "tank"
+    }
+   ],
+   "safety": [
+    "Flammable vapours; confined space; spill containment."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Oil-Water Separator — Introduction",
+    "type": "in_app_tour",
+    "model": "oil_water_separator.glb",
+    "duration_s": 51.3,
+    "script": [
+     {
+      "narration": "This module introduces the Oil-Water Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An oil–water separator removes free oil and settleable solids from wastewater by gravity.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a corrugated plate interceptor (CPI), packs of inclined plates give oil droplets only a short distance to rise; they coalesce on the plates and slide up to the oil layer, which is skimmed off, while solids slide down into the hopper.",
+      "duration_s": 17.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include refinery and terminal drainage; workshops, car washes and fuel stations; ballast and produced water pre-treatment.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Oil-Water Separator — Operation",
+    "type": "in_app_tour",
+    "model": "oil_water_separator.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "How the Oil-Water Separator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Oily water enters through the inlet baffle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It flows through the inclined plate pack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate_pack",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil droplets rise and form a layer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_layer",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The skimmer removes the oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_skimmer",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clean water leaves under the oil baffle over the weir.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "An oil droplet rises at v = g·d²·(ρw − ρo)/(18·μ) (Stokes).",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Oil-Water Separator — Maintenance",
+    "type": "in_app_tour",
+    "model": "oil_water_separator.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Oil-Water Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Skim oil; check levels.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_skimmer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Desludge hopper; clean plates.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plate_pack",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tank coating.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oil carry-over: sheen in effluent. Common cause: emulsified oil, overload, plates fouled.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "plate_pack",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sludge build-up: short-circuiting. Common cause: infrequent desludging.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Oil droplet rise velocity is proportional to…",
+     "options": [
+      "Diameter squared",
+      "Diameter",
+      "Temperature only",
+      "Flow"
+     ],
+     "answer": 0,
+     "explanation": "Stokes.",
+     "level": "basic"
+    },
+    {
+     "question": "Why inclined plates?",
+     "options": [
+      "Short rise distance; more separation area",
+      "Decoration",
+      "To slow pumps",
+      "To heat"
+     ],
+     "answer": 0,
+     "explanation": "Plate pack.",
+     "level": "basic"
+    },
+    {
+     "question": "Can gravity separators remove emulsified oil?",
+     "options": [
+      "Not effectively",
+      "Yes, fully",
+      "Only hot",
+      "Only cold"
+     ],
+     "answer": 0,
+     "explanation": "Needs chemical/DAF.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the flow; baffles and weir.\"",
+     "options": [
+      "Corrugated Plate Pack (45°) — short rise distance for oil droplets",
+      "Rotatable Slotted-Pipe Oil Skimmer",
+      "Solids settling into the Hopper",
+      "Separator Tank: Inlet Baffle, Oil-Retention Baffle, Outlet Weir & Sludge Hopper"
+     ],
+     "answer": 3,
+     "explanation": "Separator Tank: Inlet Baffle, Oil-Retention Baffle, Outlet Weir & Sludge Hopper: Holds the flow; baffles and weir.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Short rise distance; coalescence.\"",
+     "options": [
+      "Corrugated Plate Pack (45°) — short rise distance for oil droplets",
+      "Separator Tank: Inlet Baffle, Oil-Retention Baffle, Outlet Weir & Sludge Hopper",
+      "Separated Oil Layer",
+      "Rotatable Slotted-Pipe Oil Skimmer"
+     ],
+     "answer": 0,
+     "explanation": "Corrugated Plate Pack (45°) — short rise distance for oil droplets: Short rise distance; coalescence.",
+     "level": "basic",
+     "part": "plate_pack",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separated oil.\"",
+     "options": [
+      "Separator Tank: Inlet Baffle, Oil-Retention Baffle, Outlet Weir & Sludge Hopper",
+      "Corrugated Plate Pack (45°) — short rise distance for oil droplets",
+      "Rotatable Slotted-Pipe Oil Skimmer",
+      "Separated Oil Layer"
+     ],
+     "answer": 3,
+     "explanation": "Separated Oil Layer: Separated oil.",
+     "level": "basic",
+     "part": "oil_layer",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

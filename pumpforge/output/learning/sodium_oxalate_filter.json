@@ -1,0 +1,618 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "sodium_oxalate_filter",
+ "no": 215,
+ "title": "Sodium Oxalate Filter",
+ "model_title": "Horizontal Pressure-Leaf Filter for Sodium Oxalate",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A horizontal pressure-leaf filter separates sodium oxalate crystals from liquor. Slurry is pumped into the closed shell; cake forms on vertical mesh leaves while filtrate leaves through the manifold. The shell then rolls back and the cake is sluiced off.",
+   "applications": [
+    "Oxalate removal",
+    "Polishing filtration"
+   ],
+   "key_points": [
+    "Batch pressure filtration",
+    "Leaves on manifold",
+    "Retractable shell for discharge",
+    "Sluicing removes cake"
+   ],
+   "classification": {
+    "family": "Filtration",
+    "type": "Horizontal pressure-leaf filter"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A horizontal pressure-leaf filter separates sodium oxalate crystals from liquor. Slurry is pumped into the closed shell; cake forms on vertical mesh leaves while filtrate leaves through the manifold. The shell then rolls back and the cake is sluiced off."
+  },
+  "model_3d": {
+   "asset": "glb/sodium_oxalate_filter.glb",
+   "metadata": "meta/sodium_oxalate_filter.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10004,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry fills the shell.",
+    "Cake forms on the leaves.",
+    "Filtrate leaves via the manifold."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry fills the shell.",
+     "part": "shell",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cake forms on the leaves.",
+     "part": "leaves",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Filtrate leaves via the manifold.",
+     "part": "fixed_head",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The shell opens; cake is sluiced into the hopper.",
+     "part": "sluice_header",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Filtrate volume vs time (constant-pressure filtration)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "sodium_oxalate_filter_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "sodium_oxalate_filter_pressure.glb",
+     "title": "Pressure filtration, then cake discharge",
+     "description": "Slurry is pumped into the closed shell under pressure (typically a few bar); liquid passes through the leaf screens into the manifold while oxalate builds up as cake on both faces of each leaf. At the end of the cycle the shell is drained, opened (rolled back) and the cake is sluiced or vibrated off into the hopper.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/sodium_oxalate_filter.json#components",
+   "key_components": "Horizontal pressure-leaf filter: shell, leaves, filtrate manifold, sluicing header, retractable shell",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Pressure Shell (retracts on rails to discharge the cake)",
+     "info_ref": "of_shell",
+     "function": "Pressure envelope; retracts.",
+     "material": "Steel."
+    },
+    {
+     "id": "fixed_head",
+     "name": "Fixed Head, Stand & Filtrate Manifold",
+     "info_ref": "of_head",
+     "function": "Fixed head, manifold.",
+     "material": "Steel."
+    },
+    {
+     "id": "leaves",
+     "name": "Filter Leaves (mesh-covered frames) with Oxalate Cake, on the Filtrate Manifold",
+     "info_ref": "of_leaves",
+     "function": "Filter surfaces.",
+     "material": "Stainless."
+    },
+    {
+     "id": "sluice_header",
+     "name": "Sluicing / Wash Header",
+     "info_ref": "of_sluice",
+     "function": "Cake removal.",
+     "material": "Stainless."
+    },
+    {
+     "id": "rails_supports",
+     "name": "Shell Rails & Carriages",
+     "info_ref": "of_shell",
+     "function": "Pressure envelope; retracts.",
+     "material": "Steel."
+    },
+    {
+     "id": "cake_hopper",
+     "name": "Cake Discharge Hopper",
+     "info_ref": "of_shell",
+     "function": "Pressure envelope; retracts.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_particles",
+     "name": "Oxalate Crystals carried onto the Leaves",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Shell ~ 1 – 2.5 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Area ~ 20 – 150",
+     "unit": "m²"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 2 – 6",
+     "unit": "bar"
+    },
+    "power_rating": {
+     "typical_range": "Feed pump ~ 15 – 75",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Area from filtration tests."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Leaf filter maker data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal expansion."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; let-down valves and lines supported against vibration."
+   ],
+   "piping": [
+    "Relief protection per code; erosion-resistant fittings at let-down points; steam traps/condensate removal; insulation."
+   ],
+   "commissioning": [
+    "Hydro-test; heat up slowly; check relief settings, levels, temperatures and pressures; test interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check cycle and filtrate clarity.",
+     "part": "leaves",
+     "interval": "per cycle"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect leaf screens.",
+     "part": "leaves",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace leaves; shell seal.",
+     "part": "shell"
+    }
+   ],
+   "lubrication": [
+    "Shell drive/hydraulics per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Torn leaf",
+     "category": "performance",
+     "symptoms": [
+      "Cloudy filtrate"
+     ],
+     "causes": [
+      "Damage, wear"
+     ],
+     "remedies": [
+      "Replace leaf"
+     ],
+     "part": "leaves"
+    },
+    {
+     "problem": "Seal leak",
+     "category": "leakage",
+     "symptoms": [
+      "Leakage"
+     ],
+     "causes": [
+      "Worn seal"
+     ],
+     "remedies": [
+      "Replace"
+     ],
+     "part": "shell"
+    }
+   ],
+   "safety": [
+    "Depressurise before opening."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Sodium Oxalate Filter — Introduction",
+    "type": "in_app_tour",
+    "model": "sodium_oxalate_filter.glb",
+    "duration_s": 41.2,
+    "script": [
+     {
+      "narration": "This module introduces the Sodium Oxalate Filter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A horizontal pressure-leaf filter separates sodium oxalate crystals from liquor.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry is pumped into the closed shell; cake forms on vertical mesh leaves while filtrate leaves through the manifold.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The shell then rolls back and the cake is sluiced off.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include oxalate removal; polishing filtration.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Sodium Oxalate Filter — Operation",
+    "type": "in_app_tour",
+    "model": "sodium_oxalate_filter.glb",
+    "duration_s": 38.4,
+    "script": [
+     {
+      "narration": "How the Sodium Oxalate Filter works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry fills the shell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cake forms on the leaves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "leaves",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Filtrate leaves via the manifold.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fixed_head",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The shell opens; cake is sluiced into the hopper.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sluice_header",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Slurry is pumped into the closed shell under pressure (typically a few bar); liquid passes through the leaf screens into the manifold while oxalate builds up as cake on both faces of each leaf.",
+      "duration_s": 14.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Sodium Oxalate Filter — Maintenance",
+    "type": "in_app_tour",
+    "model": "sodium_oxalate_filter.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Sodium Oxalate Filter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check cycle and filtrate clarity.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "leaves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect leaf screens.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "leaves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace leaves; shell seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for torn leaf: cloudy filtrate. Common cause: damage, wear.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "leaves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for seal leak: leakage. Common cause: worn seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Where does cake form?",
+     "options": [
+      "On the leaves",
+      "In the manifold",
+      "On the shell",
+      "In the pump"
+     ],
+     "answer": 0,
+     "explanation": "Leaves.",
+     "level": "basic"
+    },
+    {
+     "question": "How is cake removed?",
+     "options": [
+      "Shell opens; sluicing",
+      "Vacuum",
+      "Fan",
+      "Heat"
+     ],
+     "answer": 0,
+     "explanation": "Discharge.",
+     "level": "basic"
+    },
+    {
+     "question": "Pressure filtration means…",
+     "options": [
+      "Slurry pumped in under pressure",
+      "Vacuum",
+      "Gravity",
+      "Centrifugal"
+     ],
+     "answer": 0,
+     "explanation": "Pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure envelope; retracts.\"",
+     "options": [
+      "Pressure Shell (retracts on rails to discharge the cake)",
+      "Fixed Head, Stand & Filtrate Manifold",
+      "Oxalate Crystals carried onto the Leaves",
+      "Sluicing / Wash Header"
+     ],
+     "answer": 0,
+     "explanation": "Pressure Shell (retracts on rails to discharge the cake): Pressure envelope; retracts.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Fixed head, manifold.\"",
+     "options": [
+      "Fixed Head, Stand & Filtrate Manifold",
+      "Cake Discharge Hopper",
+      "Oxalate Crystals carried onto the Leaves",
+      "Pressure Shell (retracts on rails to discharge the cake)"
+     ],
+     "answer": 0,
+     "explanation": "Fixed Head, Stand & Filtrate Manifold: Fixed head, manifold.",
+     "level": "basic",
+     "part": "fixed_head",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Filter surfaces.\"",
+     "options": [
+      "Fixed Head, Stand & Filtrate Manifold",
+      "Filter Leaves (mesh-covered frames) with Oxalate Cake, on the Filtrate Manifold",
+      "Sluicing / Wash Header",
+      "Shell Rails & Carriages"
+     ],
+     "answer": 1,
+     "explanation": "Filter Leaves (mesh-covered frames) with Oxalate Cake, on the Filtrate Manifold: Filter surfaces.",
+     "level": "basic",
+     "part": "leaves",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

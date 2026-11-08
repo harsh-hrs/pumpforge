@@ -98,6 +98,7 @@ async function load(id){
       parts[o.userData.part_id] = { node:o, rest:o.position.clone(), off:new THREE.Vector3(...o.userData.explode_offset) };
     }
   });
+  root.traverse(o => { if (o.isMesh && o.material.name !== 'section' && meta.parts.find(p => p.id === partOf(o))?.group === 'fluid') Object.assign(o.material, { transparent: true, opacity: 0.55, depthWrite: false }); });
   mixer = new THREE.AnimationMixer(root); actions = {};
   gltf.animations.forEach(c => actions[c.name] = mixer.clipAction(c));
   const box = new THREE.Box3().setFromObject(root); ground.position.y = box.min.y - 0.001;

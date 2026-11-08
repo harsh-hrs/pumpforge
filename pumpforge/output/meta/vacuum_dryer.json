@@ -1,0 +1,413 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "vacuum_dryer",
+  "title": "Rotary Double-Cone Vacuum Dryer",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 165,
+    "phase": 8,
+    "eq_id": "EQ-243",
+    "subcategory": "Drying",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "vacuum_dryer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "vacuum_dryer_pressure.glb",
+      "title": "Low pressure lowers the boiling point",
+      "description": "Under vacuum (e.g. ~ 20–100 mbar abs) water and solvents boil at low temperature (≈ 20–45 °C), so heat-sensitive or solvent-wet products can be dried gently. The slow rotation tumbles the product against the heated wall; vapour is drawn through a filter to a condenser where solvents can be recovered.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "vapour",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          1.3,
+          -0.2
+        ],
+        [
+          0.0,
+          1.3,
+          -1.5
+        ],
+        [
+          0.0,
+          2.3,
+          -1.5
+        ],
+        [
+          1.4,
+          2.3,
+          -1.5
+        ],
+        [
+          1.4,
+          1.4,
+          -1.5
+        ]
+      ]
+    },
+    {
+      "name": "heating_medium",
+      "kind": "hydraulic_oil",
+      "radius": 0.015,
+      "points": [
+        [
+          0.3,
+          1.0,
+          0.9
+        ],
+        [
+          0.35,
+          1.1,
+          0.5
+        ],
+        [
+          0.35,
+          1.5,
+          0.5
+        ],
+        [
+          0.3,
+          1.6,
+          0.9
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 19996,
+    "parts": 5
+  },
+  "summary": "A rotary double-cone vacuum dryer dries batches of heat-sensitive or solvent-wet powders. The double-cone vessel turns slowly on trunnions so the product tumbles against the heated jacket, while a vacuum pump lowers the pressure so the liquid boils at a low temperature. Vapour passes a filter and condenser.",
+  "classification": {
+    "family": "Dryer",
+    "type": "Rotary double-cone vacuum dryer (batch)"
+  },
+  "model_configuration": {
+    "animation": "Vessel rotates; product tumbles"
+  },
+  "standards": [
+    {
+      "id": "NFPA 61 / 652",
+      "title": "Combustible dust (agricultural/food) and fundamentals",
+      "relevance": "Dust explosion protection.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ATEX 2014/34/EU",
+      "title": "Equipment for explosive atmospheres",
+      "relevance": "Hazardous areas.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Vessel and jacket (full vacuum rating).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Pharmaceutical drying guides"
+  ],
+  "parts": [
+    {
+      "id": "double_cone",
+      "name": "Double-Cone Vessel with Heating Jacket, Charging Manway & Discharge Valve",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "double_cone__back",
+        "double_cone__front"
+      ],
+      "pivot": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.675,
+        0.33,
+        -0.675
+      ],
+      "bbox_max": [
+        0.675,
+        2.27,
+        0.675
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.675
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "vd_vessel"
+    },
+    {
+      "id": "powder",
+      "name": "Product Tumbling inside (stays low while the vessel turns)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "pwl"
+      ],
+      "pivot": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.58,
+        0.42,
+        -0.58
+      ],
+      "bbox_max": [
+        0.58,
+        1.2,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.81,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.81,
+        -0.29
+      ],
+      "info_ref": "vd_product"
+    },
+    {
+      "id": "stands_trunnions",
+      "name": "Stands, Trunnions & Bearings (vessel rotates about the trunnion axis)",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "stands_trunnions__back",
+        "stands_trunnions__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.125,
+        0.0,
+        -1.175
+      ],
+      "bbox_max": [
+        0.125,
+        1.4,
+        1.175
+      ],
+      "label_anchor": [
+        0.0,
+        0.7,
+        1.175
+      ],
+      "center": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "info_ref": "vd_stands"
+    },
+    {
+      "id": "vacuum_system",
+      "name": "Vacuum Line (through trunnion), Dust Filter & Condenser to Vacuum Pump",
+      "group": "vacuum",
+      "section_role": "keep",
+      "nodes": [
+        "vacuum_system.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.04,
+        0.525,
+        -1.65
+      ],
+      "bbox_max": [
+        1.55,
+        2.36,
+        0.68
+      ],
+      "label_anchor": [
+        0.755,
+        1.4425,
+        0.68
+      ],
+      "center": [
+        0.755,
+        1.4425,
+        -0.485
+      ],
+      "info_ref": "vd_vacuum"
+    },
+    {
+      "id": "drive",
+      "name": "Drive (motor, gearbox; slow rotation ≈ a few rpm)",
+      "group": "drive",
+      "section_role": "split",
+      "nodes": [
+        "drive__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.175,
+        1.125,
+        1.175
+      ],
+      "bbox_max": [
+        0.175,
+        1.475,
+        1.8
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        1.8
+      ],
+      "center": [
+        0.0,
+        1.3,
+        1.4875
+      ],
+      "info_ref": "vd_drive"
+    }
+  ],
+  "components": {
+    "vd_vessel": {
+      "function": "Holds and tumbles the product.",
+      "construction": "Double cone with jacket, manway, discharge valve.",
+      "material": "Stainless steel (polished).",
+      "operating_conditions": "Full vacuum + jacket pressure.",
+      "failure_modes": [
+        "Seal leaks"
+      ],
+      "inspection": [
+        "Leak test"
+      ]
+    },
+    "vd_product": {
+      "function": "Product.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "vd_stands": {
+      "function": "Support and rotation axis.",
+      "construction": "Stands and trunnions.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "vd_vacuum": {
+      "function": "Removes vapour.",
+      "construction": "Line, filter, condenser.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "vd_drive": {
+      "function": "Rotates the vessel.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

@@ -1,0 +1,624 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "deaerator",
+ "no": 102,
+ "title": "Deaerator",
+ "model_title": "Deaerator (Spray-Tray Type) on Feedwater Storage Tank",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A deaerator removes dissolved oxygen and CO₂ from boiler feedwater. Water is sprayed into steam and cascades over trays, reaching saturation temperature so the gases are released and vented. The hot, deaerated water collects in the storage tank and feeds the boiler feed pumps.",
+   "applications": [
+    "Power-station and industrial boiler feed systems",
+    "Process steam plants",
+    "HRSGs"
+   ],
+   "key_points": [
+    "Hot (saturated) water holds almost no gas",
+    "Vent must show a small steam plume",
+    "Storage gives feed-pump NPSH (elevated)",
+    "Oxygen guarantee ~ 7 ppb (typical)"
+   ],
+   "classification": {
+    "family": "Steam-system vessel",
+    "type": "Spray-tray deaerator with horizontal storage"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A deaerator removes dissolved oxygen and carbon dioxide from boiler feedwater, which would otherwise corrode the boiler. Incoming water is sprayed into steam and trickles over trays, heating it to saturation; the gases are released and vented, and the hot deaerated water collects in the storage tank."
+  },
+  "model_3d": {
+   "asset": "glb/deaerator.glb",
+   "metadata": "meta/deaerator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 34884,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feedwater is sprayed into the deaerator head.",
+    "It cascades over the trays in counter-flow to rising steam.",
+    "Heated to saturation, the water releases O₂ and CO₂, which leave through the vent with a little steam."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feedwater is sprayed into the deaerator head.",
+     "part": "spray_valves",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It cascades over the trays in counter-flow to rising steam.",
+     "part": "trays",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heated to saturation, the water releases O₂ and CO₂, which leave through the vent with a little steam.",
+     "part": "deaerator_head",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Deaerated water collects in the storage tank.",
+     "part": "water",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The feed pumps draw from the bottom outlet.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Dissolved O₂ vs water temperature/pressure: approaches zero at saturation."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "deaerator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/deaerator.json#components",
+   "key_components": "Deaerator head (spray & trays), storage tank, steam inlet, vent",
+   "parts": [
+    {
+     "id": "storage_tank",
+     "name": "Feedwater Storage Tank",
+     "info_ref": "da_tank",
+     "function": "Stores deaerated feedwater for the boiler feed pumps.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "saddles",
+     "name": "Saddle Supports (one fixed, one sliding)",
+     "info_ref": "sv_saddles",
+     "function": "Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "water",
+     "name": "Deaerated Feedwater",
+     "info_ref": "da_water",
+     "function": "Deaerated water (level animated).",
+     "material": "—"
+    },
+    {
+     "id": "deaerator_head",
+     "name": "Deaerator Head (vertical) & Downcomer Neck",
+     "info_ref": "da_head",
+     "function": "Contains the deaeration section.",
+     "material": "Carbon/stainless steel."
+    },
+    {
+     "id": "trays",
+     "name": "Deaerating Trays",
+     "info_ref": "da_trays",
+     "function": "Spread the water into thin films for final gas stripping.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "spray_valves",
+     "name": "Spray Valves (atomise incoming water)",
+     "info_ref": "da_spray",
+     "function": "Atomise incoming water into the steam space.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Water Inlet, Steam Inlet, Vent, Feedwater Outlet & Level Gauge",
+     "info_ref": "da_nozzles",
+     "function": "Water, steam, vent, outlet and level connections.",
+     "material": "Steel."
+    },
+    {
+     "id": "spray",
+     "name": "Water Spray & Cascade (tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Storage 1 – 500 m³",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "~ 0.2 – 10 (pegged pressure)",
+     "unit": "bar(g)"
+    },
+    "design_temperature": {
+     "typical_range": "~ 105 – 180 (saturation)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Feedwater flow",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Elevate the deaerator to give the feed pumps sufficient NPSH margin."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vent plume, pressure and level.",
+     "part": "nozzles",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure dissolved O₂.",
+     "part": "water",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect trays and spray valves.",
+     "part": "trays"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High dissolved oxygen",
+     "category": "performance",
+     "symptoms": [
+      "O₂ above limit"
+     ],
+     "causes": [
+      "Vent closed, low pressure, spray valve fault"
+     ],
+     "remedies": [
+      "Open vent, restore steam, repair valves"
+     ],
+     "part": "spray_valves"
+    },
+    {
+     "problem": "Feed-pump cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise, low flow"
+     ],
+     "causes": [
+      "Pressure decay on load change"
+     ],
+     "remedies": [
+      "Stabilise pressure"
+     ],
+     "part": "storage_tank"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Deaerator — Introduction",
+    "type": "in_app_tour",
+    "model": "deaerator.glb",
+    "duration_s": 44.2,
+    "script": [
+     {
+      "narration": "This module introduces the Deaerator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A deaerator removes dissolved oxygen and CO₂ from boiler feedwater.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water is sprayed into steam and cascades over trays, reaching saturation temperature so the gases are released and vented.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The hot, deaerated water collects in the storage tank and feeds the boiler feed pumps.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include power-station and industrial boiler feed systems; process steam plants; HRSGs.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Deaerator — Operation",
+    "type": "in_app_tour",
+    "model": "deaerator.glb",
+    "duration_s": 32.3,
+    "script": [
+     {
+      "narration": "How the Deaerator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feedwater is sprayed into the deaerator head.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spray_valves",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It cascades over the trays in counter-flow to rising steam.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "trays",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heated to saturation, the water releases O₂ and CO₂, which leave through the vent with a little steam.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "deaerator_head",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Deaerated water collects in the storage tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The feed pumps draw from the bottom outlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Deaerator — Maintenance",
+    "type": "in_app_tour",
+    "model": "deaerator.glb",
+    "duration_s": 35.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Deaerator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vent plume, pressure and level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure dissolved O₂.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect trays and spray valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "trays",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high dissolved oxygen: o₂ above limit. Common cause: vent closed, low pressure, spray valve fault.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "spray_valves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for feed-pump cavitation: noise, low flow. Common cause: pressure decay on load change.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "storage_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why heat feedwater to saturation in a deaerator?",
+     "options": [
+      "To boil it away",
+      "Gas solubility is near zero at saturation",
+      "To save fuel only",
+      "To add oxygen"
+     ],
+     "answer": 1,
+     "explanation": "Henry's law.",
+     "level": "basic"
+    },
+    {
+     "question": "The vent should show…",
+     "options": [
+      "Nothing",
+      "A small steam plume",
+      "Water",
+      "Smoke"
+     ],
+     "answer": 1,
+     "explanation": "Carries gases out.",
+     "level": "basic"
+    },
+    {
+     "question": "Why elevate the deaerator?",
+     "options": [
+      "Appearance",
+      "NPSH for the feed pumps",
+      "Ventilation",
+      "Easier painting"
+     ],
+     "answer": 1,
+     "explanation": "Saturated water.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Stores deaerated feedwater for the boiler feed pumps.\"",
+     "options": [
+      "Feedwater Storage Tank",
+      "Saddle Supports (one fixed, one sliding)",
+      "Deaerated Feedwater",
+      "Deaerator Head (vertical) & Downcomer Neck"
+     ],
+     "answer": 0,
+     "explanation": "Feedwater Storage Tank: Stores deaerated feedwater for the boiler feed pumps.",
+     "level": "basic",
+     "part": "storage_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support a horizontal vessel; one saddle slides to allow thermal expansion.\"",
+     "options": [
+      "Feedwater Storage Tank",
+      "Deaerated Feedwater",
+      "Saddle Supports (one fixed, one sliding)",
+      "Deaerator Head (vertical) & Downcomer Neck"
+     ],
+     "answer": 2,
+     "explanation": "Saddle Supports (one fixed, one sliding): Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "level": "basic",
+     "part": "saddles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Deaerated water (level animated).\"",
+     "options": [
+      "Deaerated Feedwater",
+      "Water Spray & Cascade (tracers)",
+      "Feedwater Storage Tank",
+      "Saddle Supports (one fixed, one sliding)"
+     ],
+     "answer": 0,
+     "explanation": "Deaerated Feedwater: Deaerated water (level animated).",
+     "level": "basic",
+     "part": "water",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

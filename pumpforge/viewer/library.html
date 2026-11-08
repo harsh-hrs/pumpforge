@@ -118,6 +118,12 @@ aside ul { margin: 0; padding-left: 18px; } aside li { margin-bottom: 4px; }
 .chk { display: flex; gap: 6px; align-items: center; font-size: 13px; white-space: nowrap; }
 .libsum { font-size: 12.5px; color: var(--muted); margin: 2px 0 8px; }
 .libcat { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin: 14px 0 6px; }
+.libdept { font: 600 15px var(--f-body); color: var(--ink, #122033); margin: 20px 0 2px; padding-bottom: 4px; border-bottom: 2px solid #2b6cb0; display: flex; justify-content: space-between; align-items: baseline; }
+.libdept small { font: 500 11px var(--f-mono); color: var(--muted); }
+.libdept.future { border-bottom-style: dashed; opacity: .7; }
+.depchips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+.depchips button { font: 500 11.5px var(--f-body); border: 1px solid #c9d4e3; background: #fff; border-radius: 14px; padding: 4px 10px; cursor: pointer; }
+.depchips button[aria-pressed="true"] { background: #2b6cb0; color: #fff; border-color: #2b6cb0; }
 .librow { display: grid; grid-template-columns: 58px 1fr auto auto; gap: 8px; align-items: center; padding: 7px 4px; border-bottom: 1px solid var(--line); cursor: pointer; }
 .librow:hover { background: var(--chip); }
 .librow .no { font: 500 12px var(--f-mono); color: var(--muted); }
@@ -136,7 +142,7 @@ aside ul { margin: 0; padding-left: 18px; } aside li { margin-bottom: 4px; }
 
 <div class="wrap">
   <header>
-    <div class="brand">PumpForge<small>Pumps &middot; valves &middot; piping &middot; <span id="nmods">62</span> modules</small></div>
+    <div class="brand">PumpForge<small>Industrial Engineering Equipment Library &middot; <span id="nmods">217</span> modules</small></div>
     <nav id="nav" aria-label="Pump model"><button id="bPrev" aria-label="Previous module">&lsaquo;</button><select id="pick" aria-label="Choose a pump module"></select><button id="bNext" aria-label="Next module">&rsaquo;</button></nav>
     <div class="hdrtools"><input id="search" type="search" placeholder="Search equipment…" aria-label="Search the library"><button id="bLib" class="hbtn" aria-label="Open library">Library</button><button id="bStar" class="hbtn" aria-pressed="false" aria-label="Bookmark this module">&#9734;</button></div><span class="planned" id="count"></span>
   </header>
@@ -217,8 +223,11 @@ const INDEX = await (await fetch('../output/learning/index.json')).json();
 const MODELS = INDEX.modules; document.getElementById('nmods').textContent = MODELS.length;
 const pick = document.getElementById('pick');
 let lastCat;
+const DEPTS = INDEX.departments || [];
+const DNO = Object.fromEntries(DEPTS.map((d, i) => [d.name, i + 1]));
+const dLabel = n => (DNO[n] ? DNO[n] + '. ' : '') + n;
 for (const m of MODELS) {
-  if (m.category !== lastCat) { lastCat = m.category; const og = document.createElement('optgroup'); og.label = m.category; pick.appendChild(og); }
+  if (m.category !== lastCat) { lastCat = m.category; const og = document.createElement('optgroup'); og.label = m.department ? dLabel(m.department) + (m.department !== m.category ? ' — ' + m.category : '') : m.category; pick.appendChild(og); }
   const o = document.createElement('option'); o.value = m.id; o.textContent = `${m.no}. ${m.title}${m.flagship ? ' ★' : ''}`; pick.lastChild.appendChild(o);
 }
 pick.onchange = () => load(pick.value);
@@ -257,6 +266,7 @@ async function load(id) {
   root.traverse(o => { if (o.isMesh) { const pid = partOf(o); if (pid) o.userData._pid = pid; } });
   const movingParts = new Set(); root.traverse(o => { if (o.isMesh && (animMeshes.has(o.name) || animMeshes.has(o.parent?.name))) movingParts.add(o.userData._pid); });
   root.traverse(o => { if (o.isMesh) o.userData._static = !movingParts.has(o.userData._pid) && meta.parts.find(p => p.id === o.userData._pid)?.group !== 'flow_tracers'; });
+  root.traverse(o => { if (o.isMesh) o.userData._fluid = meta.parts.find(p => p.id === o.userData._pid)?.group === 'fluid'; });   // liquids drawn semi-transparent so internals stay visible
   hiddenParts = new Set(); clearMeasure(); stepIdx = -1; document.getElementById('stepper').hidden = true;
   buildParticles(); buildOverlayBar(); applyState();
   setProg(id, { seen: Date.now() }); document.getElementById('bStar').setAttribute('aria-pressed', String(!!store.get('stars', {})[id]));
@@ -295,7 +305,7 @@ function applyState() {
     if (o.isMesh && o.material.name === 'section') o.visible = cut;
     if (o.isMesh) {
       const ghost = xray && o.userData._static;
-      if (o.material.name !== 'section') { o.material.transparent = ghost; o.material.opacity = ghost ? 0.14 : 1; o.material.depthWrite = !ghost; o.material.needsUpdate = true; }
+      if (o.material.name !== 'section') { const fl = o.userData._fluid && !ghost; o.material.transparent = ghost || fl; o.material.opacity = ghost ? 0.14 : (fl ? 0.55 : 1); o.material.depthWrite = !(ghost || fl); o.material.needsUpdate = true; }
       if (hiddenParts.has(o.userData._pid)) o.visible = false;
     }
   });
@@ -335,7 +345,7 @@ function placeLabels() {
 }
 
 // ------------------------------------------------------------- live flow particles (from meta.flow_paths)
-const KIND_COL = { flow_suction: 0x2b95ff, flow_discharge: 0xff6a1f, air: 0x7cc832, water: 0x3d8fd6, steam: 0xe8eef3, hydraulic_oil: 0xe0a526, flame: 0xff5a00 };
+const KIND_COL = { flow_suction: 0x2b95ff, flow_discharge: 0xff6a1f, air: 0x7cc832, water: 0x3d8fd6, steam: 0xe8eef3, hydraulic_oil: 0xe0a526, flame: 0xff5a00, electric: 0xffcc00, flue_gas: 0x9c8878, exhaust: 0xd2742a, heat: 0xff3b30, power: 0xd63384, sand: 0xc8b38a };
 function clearParticles() { particles.forEach(p => { scene.remove(p.mesh); p.mesh.geometry.dispose(); p.mesh.material.dispose(); }); particles = []; }
 function buildParticles() {
   clearParticles();
@@ -389,22 +399,28 @@ document.getElementById('stClose').onclick = closeSteps;
 document.getElementById('stAuto').onclick = () => { if (stepAuto) { clearInterval(stepAuto); stepAuto = 0; setPressed('stAuto', false); } else { stepAuto = setInterval(() => showStep(stepIdx + 1), 6000); setPressed('stAuto', true); } };
 
 // ------------------------------------------------------------- library: search, progress, bookmarks
+let libDept = 'All';
 function libOpen(q = '') { document.getElementById('lib').hidden = false; const s = document.getElementById('libSearch'); s.value = q; renderLib(); setTimeout(() => s.focus(), 30); }
 function renderLib() {
   const q = document.getElementById('libSearch').value.trim().toLowerCase(), only = document.getElementById('onlyStar').checked, stars = store.get('stars', {});
   const all = store.get('prog', {}), seen = MODELS.filter(m => all[m.id]?.seen).length, passed = MODELS.filter(m => (all[m.id]?.best ?? 0) >= 70).length;
   document.getElementById('libSum').textContent = `${MODELS.length} modules · ${seen} opened · ${passed} quizzes passed · ${Object.keys(stars).filter(k => stars[k]).length} bookmarked`;
-  let html = '', cat = null;
+  let html = '', cat = null, dep = null;
+  html += `<div class="depchips">${['All', ...DEPTS.filter(d => d.modules).map(d => d.name)].map(n => `<button data-dep="${esc(n)}" aria-pressed="${(libDept || 'All') === n}">${esc(n === 'All' ? n : dLabel(n))}</button>`).join('')}</div>`;
   for (const m of MODELS) {
-    const hay = `${m.title} ${m.id} ${m.eq_id || ''} ${m.category} ${m.subcategory || ''} ${(m.keywords || []).join(' ')}`.toLowerCase();
+    const hay = `${m.title} ${m.id} ${m.eq_id || ''} ${m.department || ''} ${m.category} ${m.subcategory || ''} ${(m.keywords || []).join(' ')}`.toLowerCase();
     if (q && !q.split(/\s+/).every(w => hay.includes(w))) continue;
     if (only && !stars[m.id]) continue;
-    if (m.category !== cat) { cat = m.category; html += `<div class="libcat">${esc(cat)}</div>`; }
+    if (libDept && libDept !== 'All' && m.department !== libDept) continue;
+    if (m.department && m.department !== dep) { dep = m.department; const d = DEPTS.find(x => x.name === dep); const ms = MODELS.filter(x => x.department === dep); html += `<div class="libdept">${esc(dLabel(dep))}<small>${d ? d.modules + ' modules · #' + ms[0].no + '–' + ms[ms.length - 1].no : ''}</small></div>`; cat = null; }
+    if (m.category !== cat) { cat = m.category; if (cat !== dep) html += `<div class="libcat">${esc(cat)}</div>`; }
     const p = all[m.id] || {};
-    html += `<div class="librow" data-id="${esc(m.id)}"><span class="no">${esc(m.eq_id || '#' + m.no)}</span><span><span class="t">${esc(m.title)}${m.flagship ? ' ★' : ''}</span><span class="sub">${esc(m.subcategory || 'Phase ' + m.phase)}</span></span>
+    html += `<div class="librow" data-id="${esc(m.id)}"><span class="no">${esc(String(m.no))}</span><span><span class="t">${esc(m.title)}${m.flagship ? ' ★' : ''}</span><span class="sub">${esc([m.eq_id, m.subcategory || 'Phase ' + m.phase].filter(Boolean).join(' · '))}</span></span>
       <span>${p.seen ? '<span class="badge ok">opened</span>' : ''} ${p.best != null ? `<span class="badge ${p.best >= 70 ? 'ok' : ''}">quiz ${p.best}%</span>` : ''}</span><span class="star">${stars[m.id] ? '★' : ''}</span></div>`;
   }
+  if (!q && !only && (!libDept || libDept === 'All')) for (const d of DEPTS.filter(d => !d.modules)) html += `<div class="libdept future">${esc(dLabel(d.name))}<small>${esc(d.status === 'future expansion' ? 'future expansion' : 'coming soon')}</small></div>`;
   document.getElementById('libList').innerHTML = html || '<p>No matches.</p>';
+  document.querySelectorAll('.depchips button').forEach(b => b.onclick = () => { libDept = b.dataset.dep; renderLib(); });
   document.querySelectorAll('.librow').forEach(r => r.onclick = () => { document.getElementById('lib').hidden = true; load(r.dataset.id); });
 }
 document.getElementById('bLib').onclick = () => libOpen();
@@ -428,6 +444,91 @@ function addMeasurePoint(p) {
 // ------------------------------------------------------------- SME tools: calculators, datasheet, notes, compare
 const G = 9.80665;
 const CALCS = {
+  shell_t: { t: 'Shell thickness (ASME VIII UG-27, simplified)', f: [['Design pressure P (bar g)', 10], ['Inside radius R (mm)', 500], ['Allowable stress S (MPa)', 138], ['Joint efficiency E', 0.85], ['Corrosion allowance (mm)', 3]],
+    run: ([Pb, R, S, E, ca]) => { const P = Pb * 0.1; const tc = P * R / (S * E - 0.6 * P), ts = P * R / (2 * S * E - 0.4 * P), th = P * R / (2 * S * E - 0.2 * P) * 1; return `Cylinder (circumferential): t = ${tc.toFixed(2)} + CA = ${(tc + ca).toFixed(2)} mm\nSphere / hemi head: t = ${ts.toFixed(2)} + CA = ${(ts + ca).toFixed(2)} mm\nCheck code edition, MAWP and minimum thickness rules.`; } },
+  lmtd: { t: 'Heat exchanger LMTD & area', f: [['Hot in (°C)', 120], ['Hot out (°C)', 70], ['Cold in (°C)', 25], ['Cold out (°C)', 60], ['Duty Q (kW)', 500], ['Overall U (W/m²K)', 600]],
+    run: ([hi, ho, ci, co, Q, U]) => { const d1 = hi - co, d2 = ho - ci; const L = Math.abs(d1 - d2) < 1e-6 ? d1 : (d1 - d2) / Math.log(d1 / d2); return `LMTD (counter-current) = ${L.toFixed(2)} K\nRequired area A = Q/(U·LMTD) = ${(Q * 1000 / (U * L)).toFixed(2)} m²\n(apply F-correction for multipass)`; } },
+  hvol: { t: 'Horizontal tank volume at level', f: [['Inside diameter D (m)', 2], ['Shell length L (m)', 6], ['Liquid level h (m)', 1.2]],
+    run: ([D, L, h]) => { const R = D / 2, hh = Math.min(Math.max(h, 0), D); const A = R * R * Math.acos((R - hh) / R) - (R - hh) * Math.sqrt(2 * R * hh - hh * hh); const tot = Math.PI * R * R * L;
+      return `Liquid volume (shell only) = ${(A * L).toFixed(3)} m³\nTotal shell volume = ${tot.toFixed(3)} m³\nFill = ${(A * L / tot * 100).toFixed(1)} % (heads not included)`; } },
+  souders: { t: 'Separator gas velocity (Souders–Brown)', f: [['K factor (m/s)', 0.07], ['Liquid density ρL (kg/m³)', 800], ['Gas density ρG (kg/m³)', 20], ['Gas flow (m³/s actual)', 0.5]],
+    run: ([K, rl, rg, Q]) => { const v = K * Math.sqrt((rl - rg) / rg), A = Q / v; return `Max gas velocity = ${v.toFixed(3)} m/s\nMin vessel area = ${A.toFixed(3)} m²\nMin diameter = ${Math.sqrt(4 * A / Math.PI).toFixed(3)} m (vertical, mesh pad)`; } },
+  shaft_power: { t: 'Shaft power ↔ torque', f: [['Power P (kW)', 75], ['Speed n (rpm)', 1480]],
+    run: ([Pk, n]) => { const T = Pk * 1000 * 60 / (2 * Math.PI * n); return `Torque T = ${T.toFixed(1)} N·m\n(P = 2π·n·T / 60)`; } },
+  sync_speed: { t: 'Motor / generator speed & frequency', f: [['Frequency f (Hz)', 50], ['Number of poles p', 4], ['Actual speed n (rpm)', 1470]],
+    run: ([f, p, n]) => { const ns = 120 * f / p; return `Synchronous speed ns = ${ns.toFixed(0)} rpm\nSlip s = ${((ns - n) / ns * 100).toFixed(2)} %\nFrequency for 750 rpm = ${(750 * p / 120).toFixed(1)} Hz`; } },
+  compressor_power: { t: 'Compressor power (isentropic)', f: [['Inlet pressure p1 (bar abs)', 1.013], ['Discharge pressure p2 (bar abs)', 8], ['Inlet flow Q (m³/min)', 10], ['k = cp/cv', 1.4], ['Isentropic efficiency (%)', 75], ['Inlet temperature (°C)', 20]],
+    run: ([p1, p2, Q, k, e, T1]) => { const r = p2 / p1, x = (k - 1) / k, Pi = k / (k - 1) * p1 * 1e5 * Q / 60 * (r ** x - 1) / 1000; const T2 = (T1 + 273.15) * (1 + (r ** x - 1) / (e / 100)) - 273.15;
+      return `Pressure ratio = ${r.toFixed(2)}\nIsentropic power = ${Pi.toFixed(1)} kW\nShaft power ≈ ${(Pi / (e / 100)).toFixed(1)} kW\nDischarge temperature ≈ ${T2.toFixed(0)} °C (no cooling)`; } },
+  drive_ratio: { t: 'Gear / belt / chain ratio', f: [['Driver teeth or diameter', 16], ['Driven teeth or diameter', 32], ['Input speed (rpm)', 1480], ['Input torque (N·m)', 100], ['Efficiency (%)', 97]],
+    run: ([a, b, n, T, e]) => { const i = b / a; return `Ratio i = ${i.toFixed(3)} : 1\nOutput speed = ${(n / i).toFixed(1)} rpm\nOutput torque = ${(T * i * e / 100).toFixed(1)} N·m`; } },
+  flywheel: { t: 'Flywheel energy', f: [['Rim mass (kg)', 500], ['Mean rim radius (m)', 0.6], ['Speed (rpm)', 300], ['Speed drop during stroke (%)', 10]],
+    run: ([mkg, r, n, d]) => { const I = mkg * r * r, w = 2 * Math.PI * n / 60, E = 0.5 * I * w * w, w2 = w * (1 - d / 100); return `I ≈ ${I.toFixed(1)} kg·m² (rim only)\nStored energy = ${(E / 1000).toFixed(2)} kJ\nEnergy released = ${((E - 0.5 * I * w2 * w2) / 1000).toFixed(2)} kJ`; } },
+  bed_cap: { t: 'Bed-flow capacity (belt / apron / drag chain)', f: [['Bed width b (m)', 1.0], ['Mean bed depth h (m)', 0.15], ['Speed v (m/s)', 2.0], ['Bulk density ρ (kg/m³)', 900], ['Fill / efficiency factor φ', 0.9]],
+    run: ([b, h, v, r, f]) => { const qv = b * h * v * f * 3600; return `Volume flow = ${qv.toFixed(1)} m³/h\nMass flow = ${(qv * r / 1000).toFixed(1)} t/h\nQ = 3600 · b · h · v · φ · ρ (use the loaded cross-section for troughed belts)`; } },
+  belt_power: { t: 'Belt conveyor power (simplified ISO 5048 / DIN 22101)', f: [['Capacity Q (t/h)', 500], ['Belt speed v (m/s)', 2.5], ['Length L (m)', 200], ['Lift H (m, + up)', 10], ['Moving mass belt + idlers (kg/m)', 60], ['Artificial friction f', 0.02], ['Coefficient C (secondary resistances)', 1.45], ['Drive efficiency η (%)', 90]],
+    run: ([Q, v, L, H, mm, f, C, e]) => { const ml = Q / (3.6 * v), FU = C * f * L * G * (mm + ml) + H * G * ml, P = FU * v / 1000; return `Load per metre m'L = ${ml.toFixed(1)} kg/m\nPeripheral force F_U ≈ ${(FU / 1000).toFixed(1)} kN\nPower at pulley ≈ ${P.toFixed(1)} kW\nMotor power ≈ ${(P / (e / 100)).toFixed(1)} kW (+ margin)\nC ≈ 1.9 at 80 m … 1.45 at 200 m … 1.1 at 2 km (approx.); f ≈ 0.02 typical.`; } },
+  screw_cap: { t: 'Screw conveyor / feeder capacity', f: [['Screw diameter D (mm)', 300], ['Shaft (pipe) diameter d (mm)', 89], ['Pitch p (mm)', 300], ['Speed n (rpm)', 60], ['Trough loading φ (feeder ≈ 1, conveyor 0.15–0.45)', 0.3], ['Bulk density ρ (kg/m³)', 800]],
+    run: ([D, d, p, n, f, r]) => { const qv = 60 * Math.PI / 4 * ((D / 1000) ** 2 - (d / 1000) ** 2) * p / 1000 * n * f; return `Volume flow = ${qv.toFixed(2)} m³/h\nMass flow = ${(qv * r / 1000).toFixed(2)} t/h\nQ = 60 · π/4 · (D² − d²) · p · n · φ · ρ`; } },
+  bond: { t: 'Crushing/grinding energy (Bond) & reduction ratio', f: [['Feed size F80 (mm)', 150], ['Product size P80 (mm)', 25], ['Bond work index Wi (kWh/t)', 14], ['Throughput (t/h)', 300]],
+    run: ([F, Pp, Wi, T]) => { const W = 10 * Wi * (1 / Math.sqrt(Pp * 1000) - 1 / Math.sqrt(F * 1000)); return `Reduction ratio F80/P80 = ${(F / Pp).toFixed(1)} : 1\nSpecific energy W = ${W.toFixed(2)} kWh/t\nPower ≈ ${(W * T).toFixed(0)} kW (net, before machine-specific factors)\nW = 10 · Wi · (1/√P80 − 1/√F80), sizes in µm.`; } },
+  hoist: { t: 'Hoist power & rope force', f: [['Load incl. hook block (t)', 10], ['Hoisting speed (m/min)', 5], ['Falls of rope (parts of line)', 4], ['Mechanism efficiency η (%)', 85]],
+    run: ([m, v, n, e]) => { const W = m * 1000 * G, P = W * v / 60 / (e / 100) / 1000; return `Load weight = ${(W / 1000).toFixed(1)} kN\nMotor power ≈ ${P.toFixed(1)} kW\nRope force per fall ≈ ${(W / n / 1000).toFixed(1)} kN (ideal; add sheave losses)\nSelect rope MBF ≥ rope force × design factor per the crane standard.`; } },
+  hyd_cyl: { t: 'Hydraulic cylinder force & speed', f: [['Bore D (mm)', 100], ['Rod d (mm)', 56], ['Pressure p (bar)', 160], ['Pump flow Q (L/min)', 60]],
+    run: ([D, d, p, Q]) => { const A = Math.PI / 4 * (D / 1000) ** 2, Ar = A - Math.PI / 4 * (d / 1000) ** 2, q = Q / 60000; return `Bore area = ${(A * 1e4).toFixed(1)} cm²   Annulus = ${(Ar * 1e4).toFixed(1)} cm²\nPush (extend) F = ${(p * 1e5 * A / 1000).toFixed(1)} kN\nPull (retract) F = ${(p * 1e5 * Ar / 1000).toFixed(1)} kN\nExtend speed = ${(q / A).toFixed(3)} m/s   Retract speed = ${(q / Ar).toFixed(3)} m/s\nHydraulic power = ${(p * Q / 600).toFixed(1)} kW`; } },
+  accum: { t: 'Accumulator usable volume (gas law)', f: [['Nominal gas volume V0 (L)', 10], ['Pre-charge p0 (bar g)', 90], ['Min. system pressure p1 (bar g)', 100], ['Max. system pressure p2 (bar g)', 200], ['Polytropic exponent n (1 isothermal, 1.4 adiabatic)', 1.4]],
+    run: ([V, p0, p1, p2, n]) => { const a = x => x + 1.013, dV = V * (Math.pow(a(p0) / a(p1), 1 / n) - Math.pow(a(p0) / a(p2), 1 / n)); return `Usable volume ΔV = ${dV.toFixed(2)} L\nPre-charge / p1 = ${(p0 / p1 * 100).toFixed(0)} %  (bladder: ≈ 90 % typical)\nCompression ratio p2/p0 = ${(a(p2) / a(p0)).toFixed(2)}  (check maker limit, often ≤ 4 for bladders)\nAbsolute pressures used in the gas law.`; } },
+  trommel: { t: 'Drum / trommel critical speed', f: [['Drum inside diameter D (m)', 2.0], ['Operating speed (rpm)', 10]],
+    run: ([D, n]) => { const nc = 42.3 / Math.sqrt(D); return `Critical speed n_c = ${nc.toFixed(1)} rpm\nOperating = ${(n / nc * 100).toFixed(0)} % of critical\nTrommels ≈ 30–40 %, ball/rod mills ≈ 65–80 % of critical.`; } },
+  flash: { t: 'Flash fraction (flash steam / flash evaporation)', f: [['Liquid inlet temperature T1 (°C)', 180], ['Saturation temperature after pressure drop T2 (°C)', 100], ['Liquid cp (kJ/kg·K)', 4.2], ['Latent heat h_fg at T2 (kJ/kg)', 2257], ['Liquid flow (kg/h)', 10000]],
+    run: ([T1, T2, cp, hfg, m]) => { const x = Math.max(0, cp * (T1 - T2) / hfg); return `Flash fraction ≈ ${(x * 100).toFixed(1)} %\nVapour ≈ ${(x * m).toFixed(0)} kg/h   Liquid ≈ ${((1 - x) * m).toFixed(0)} kg/h\nx ≈ cp·(T1 − T2)/h_fg (use steam tables for accuracy)`; } },
+  dryer_load: { t: 'Dryer evaporation load & heat', f: [['Wet feed rate (kg/h)', 1000], ['Initial moisture (% wet basis)', 40], ['Final moisture (% wet basis)', 5], ['Heat per kg evaporated incl. losses (kJ/kg)', 3500]],
+    run: ([F, x1, x2, q]) => { const dry = F * (1 - x1 / 100), prod = dry / (1 - x2 / 100), W = F - prod; return `Dry solids = ${dry.toFixed(0)} kg/h\nProduct = ${prod.toFixed(0)} kg/h\nWater evaporated = ${W.toFixed(0)} kg/h\nHeat ≈ ${(W * q / 3600).toFixed(0)} kW  (convective dryers often ~ 3 000 – 6 000 kJ/kg water)`; } },
+  excess_air: { t: 'Excess air from flue-gas O₂', f: [['O₂ in dry flue gas (%)', 3]],
+    run: ([o]) => `Excess air ≈ ${(o / (20.9 - o) * 100).toFixed(0)} %\nλ (air ratio) ≈ ${(20.9 / (20.9 - o)).toFixed(2)}\nApproximation for complete combustion; typical gas ~ 10–20 %, oil ~ 15–25 %, coal ~ 20–40 %.` },
+  boiler_eff: { t: 'Boiler efficiency (direct method)', f: [['Steam flow (kg/h)', 10000], ['Steam enthalpy (kJ/kg)', 2780], ['Feedwater enthalpy (kJ/kg)', 440], ['Fuel flow (kg/h or Nm³/h)', 760], ['Fuel calorific value (kJ/kg or kJ/Nm³)', 35800]],
+    run: ([ms, hs, hf, mf, cv]) => { const Q = ms * (hs - hf), I = mf * cv; return `Heat to steam = ${(Q / 3600).toFixed(0)} kW\nFuel input = ${(I / 3600).toFixed(0)} kW\nEfficiency ≈ ${(Q / I * 100).toFixed(1)} %  (state GCV or NCV basis)`; } },
+  ct: { t: 'Cooling tower range, approach, make-up', f: [['Circulating flow (m³/h)', 1000], ['Hot water in (°C)', 38], ['Cold water out (°C)', 30], ['Air wet-bulb (°C)', 26], ['Cycles of concentration', 4]],
+    run: ([Q, th, tc, wb, coc]) => { const R = th - tc, E = 0.00153 * Q * R, B = E / (coc - 1); return `Range = ${R.toFixed(1)} °C   Approach = ${(tc - wb).toFixed(1)} °C\nHeat rejected ≈ ${(Q * 1000 / 3600 * 4.18 * R / 1000).toFixed(2)} MW\nEvaporation ≈ ${E.toFixed(1)} m³/h (≈ 0.15 %/°C rule)\nBlowdown ≈ ${B.toFixed(1)} m³/h   Make-up ≈ ${(E + B).toFixed(1)} m³/h (+ drift)`; } },
+  stokes: { t: 'Stokes settling / rise velocity', f: [['Droplet/particle diameter (µm)', 100], ['Particle/droplet density (kg/m³)', 850], ['Continuous-phase density (kg/m³)', 1000], ['Continuous-phase viscosity (cP)', 1.0]],
+    run: ([d, rp, rc, mu]) => { const D = d * 1e-6, v = G * D * D * (rc - rp) / (18 * mu / 1000); return `Velocity = ${(Math.abs(v) * 1000).toFixed(3)} mm/s  (${v > 0 ? 'rises' : 'settles'})\n= ${(Math.abs(v) * 3600).toFixed(2)} m/h\nRe = ${(rc * Math.abs(v) * D / (mu / 1000)).toFixed(3)} (Stokes valid for Re < ~1)`; } },
+  gforce: { t: 'Centrifuge g-force', f: [['Bowl/basket inner radius r (mm)', 250], ['Speed n (rpm)', 3000]],
+    run: ([r, n]) => { const w = 2 * Math.PI * n / 60, g = w * w * r / 1000 / G; return `Relative centrifugal force ≈ ${g.toFixed(0)} × g\nPeripheral speed = ${(w * r / 1000).toFixed(1)} m/s\nRCF = ω²r / g`; } },
+  membrane: { t: 'Membrane flux, recovery & rejection', f: [['Feed flow (m³/h)', 100], ['Permeate flow (m³/h)', 80], ['Membrane area (m²)', 4000], ['Feed concentration (mg/L)', 500], ['Permeate concentration (mg/L)', 25]],
+    run: ([Qf, Qp, A, cf, cp]) => `Flux = ${(Qp * 1000 / A).toFixed(1)} L/m²·h (LMH)\nRecovery = ${(Qp / Qf * 100).toFixed(1)} %\nRejection = ${((1 - cp / cf) * 100).toFixed(1)} %\nConcentrate = ${(Qf - Qp).toFixed(1)} m³/h at ≈ ${((Qf * cf - Qp * cp) / (Qf - Qp)).toFixed(0)} mg/L` },
+  adsorber: { t: 'Adsorber bed life (simplified)', f: [['Bed mass (kg)', 2000], ['Working capacity (kg adsorbate per 100 kg adsorbent)', 8], ['Flow (m³/h, actual)', 500], ['Inlet contaminant (g/m³)', 5]],
+    run: ([m, cap, Q, c]) => { const load = Q * c / 1000, cap_kg = m * cap / 100; return `Contaminant load = ${load.toFixed(2)} kg/h\nUsable capacity ≈ ${cap_kg.toFixed(0)} kg\nTime to breakthrough ≈ ${(cap_kg / load).toFixed(1)} h\nUse dynamic (working) capacity incl. MTZ and ageing, not equilibrium capacity.`; } },
+  bayer_yield: { t: 'Precipitation yield (Bayer A/C)', f: [['Caustic C (g/L as Na₂CO₃)', 230], ['A/C ratio pregnant liquor', 0.70], ['A/C ratio spent liquor', 0.40], ['Liquor flow (m³/h)', 1500]],
+    run: ([C, a1, a2, Q]) => { const y = C * (a1 - a2), al = y * Q / 1000; return `Yield = ${y.toFixed(1)} g/L Al₂O₃\nAlumina = ${al.toFixed(1)} t/h  (${(al * 24).toFixed(0)} t/d)\nHydrate Al(OH)₃ ≈ ${(al * 1.53).toFixed(1)} t/h (×156/102)\nA = Al₂O₃, C = caustic as Na₂CO₃ (refinery convention).`; } },
+  thickener: { t: 'Thickener area from solids flux', f: [['Solids feed (t/h)', 200], ['Design solids flux (t/m²·d)', 15]],
+    run: ([S, f]) => { const A = S * 24 / f; return `Required area ≈ ${A.toFixed(0)} m²\nDiameter ≈ ${Math.sqrt(4 * A / Math.PI).toFixed(1)} m (single unit)\nUse test-work flux with safety factor; high-rate thickeners with flocculant allow higher flux.`; } },
+  slurry: { t: 'Slurry solids % from density', f: [['Slurry density (kg/m³)', 1450], ['Liquid density (kg/m³)', 1250], ['Solids density (kg/m³)', 2400]],
+    run: ([m, l, sd]) => { const cw = sd * (m - l) / (m * (sd - l)), cv = (m - l) / (sd - l); return `Solids by weight Cw = ${(cw * 100).toFixed(1)} %\nSolids by volume Cv = ${(cv * 100).toFixed(1)} %\nSolids concentration = ${(cw * m).toFixed(0)} kg/m³ slurry`; } },
+  chlor: { t: 'Chlorine dose & C·t', f: [['Water flow (m³/h)', 500], ['Chlorine dose (mg/L)', 2.0], ['Free residual after contact (mg/L)', 0.5], ['Contact tank volume (m³)', 300], ['Baffle factor T10/T (0.1 unbaffled … 0.7 serpentine)', 0.5]],
+    run: ([Q, d, c, V, bf]) => { const kg = Q * d * 24 / 1000, t = V / Q * 60, t10 = t * bf; return `Chlorine use ≈ ${kg.toFixed(1)} kg/day\nMean contact time = ${t.toFixed(1)} min · effective T10 ≈ ${t10.toFixed(1)} min\nC·t ≈ ${(c * t10).toFixed(1)} mg·min/L\nCompare with required C·t for the target organism, pH and temperature (regulatory tables).`; } },
+  g_mix: { t: 'Mixing power from velocity gradient G', f: [['Velocity gradient G (s⁻¹)', 50], ['Basin volume V (m³)', 200], ['Water viscosity μ (cP; ≈ 1.0 at 20 °C)', 1.0], ['Detention time t (min)', 20]],
+    run: ([g, V, mu, t]) => { const P = g * g * mu / 1000 * V; return `Power to water P = G²·μ·V ≈ ${(P / 1000).toFixed(2)} kW\nG·t = ${(g * t * 60).toFixed(0)} (flocculation ≈ 10⁴ – 10⁵)\nRapid mix G ≈ 300–1000 s⁻¹ (10–60 s); flocculation G ≈ 10–70 s⁻¹.`; } },
+  softener: { t: 'Ion-exchange resin volume & regenerant', f: [['Flow (m³/h)', 20], ['Ionic load / hardness (mg/L as CaCO₃)', 250], ['Run length between regenerations (h)', 12], ['Operating capacity (g CaCO₃ per L resin)', 45], ['Regenerant dose (g per L resin)', 150]],
+    run: ([Q, h, T, cap, rd]) => { const load = Q * h * T, L = load / cap; return `Load per run = ${(load / 1000).toFixed(1)} kg as CaCO₃\nResin volume ≈ ${L.toFixed(0)} L (${(L / 1000).toFixed(2)} m³)\nRegenerant per regeneration ≈ ${(L * rd / 1000).toFixed(0)} kg\nUse resin-maker capacity curves (depends on regenerant level, water and temperature).`; } },
+  receiver: { t: 'Air receiver size for a demand event', f: [['Air demand to cover (free air, m³/min)', 10], ['Duration (min)', 1], ['Atmospheric pressure (bar a)', 1.013], ['Start pressure (bar g)', 7.5], ['Minimum allowed pressure (bar g)', 6.0]],
+    run: ([Q, t, pa, p1, p2]) => { const V = t * Q * pa / (p1 - p2); return `Receiver volume V = t·Q·p₀/(p₁ − p₂) ≈ ${V.toFixed(2)} m³\nStored usable free air ≈ ${(V * (p1 - p2) / pa).toFixed(1)} m³\nRules of thumb vary; check compressor control band and cycling.`; } },
+  bearing_life: { t: 'Rolling bearing basic rating life (ISO 281)', f: [['Dynamic load rating C (kN)', 50], ['Equivalent dynamic load P (kN)', 5], ['Speed n (rpm)', 1500], ['Bearing type: 1 = ball, 2 = roller', 1]],
+    run: ([C, Pd, n, ty]) => { const p = Math.round(ty) === 2 ? 10 / 3 : 3, L = (C / Pd) ** p; return `L10 = (C/P)^${p === 3 ? '3' : '10/3'} = ${L.toFixed(0)} million revolutions\nL10h = ${(L * 1e6 / (60 * n)).toFixed(0)} hours at ${n} rpm\n90 % of bearings reach this life; contamination and lubrication factors (a_ISO) can raise or cut it greatly.`; } },
+  balance_grade: { t: 'Permissible residual unbalance (ISO 21940-11)', f: [['Balance grade G (mm/s), e.g. 6.3 or 2.5', 6.3], ['Rotor mass (kg)', 50], ['Maximum service speed (rpm)', 1500], ['Number of correction planes', 2]],
+    run: ([G, m, n, pl]) => { const w = 2 * Math.PI * n / 60, e = G / w * 1000, U = e * m; return `Permissible eccentricity e_per = G/ω = ${e.toFixed(1)} µm\nU_per = ${U.toFixed(0)} g·mm total  (≈ ${(U / Math.max(1, Math.round(pl))).toFixed(0)} g·mm per plane, symmetric rotor)\ne.g. at radius 100 mm: ${(U / 100).toFixed(1)} g total`; } },
+  regrease: { t: 'Bearing relubrication quantity', f: [['Bearing outside diameter D (mm)', 160], ['Bearing width B (mm)', 40]],
+    run: ([D, B]) => `Replenishment G ≈ 0.005 × D × B = ${(0.005 * D * B).toFixed(1)} g per relubrication\nInitial fill: bearing full, housing ≈ 30–50 %. Interval from the maker's chart (n·dm, temperature, contamination).` },
+  alignment: { t: 'Rim & face readings → offset and angularity', f: [['Rim reading at 12 o\'clock (mm, zeroed)', 0], ['Rim reading at 6 o\'clock (mm)', -0.24], ['Face reading at 12 (mm, zeroed)', 0], ['Face reading at 6 (mm)', 0.06], ['Face reading diameter (mm)', 150]],
+    run: ([r12, r6, f12, f6, d]) => { const off = (r6 - r12) / 2, ang = (f6 - f12) / d * 100; return `Vertical offset at the indicator plane = ${off.toFixed(3)} mm (½ of rim change; sign = which way the measured shaft sits)\nVertical angularity = ${ang.toFixed(3)} mm per 100 mm\nRepeat at 3 & 9 o'clock for horizontal; then calculate foot moves.`; } },
+  psv_gas: { t: 'PSV required area — gas/vapour, critical flow (API 520 simplified)', f: [['Relieving rate W (kg/h)', 10000], ['Relieving pressure P1 (kPa abs) = set + overpressure + atm', 1200], ['Relieving temperature (K)', 400], ['Molecular weight M', 30], ['Ratio of specific heats k', 1.3], ['Compressibility Z', 0.95], ['Discharge coefficient Kd', 0.975]],
+    run: ([W, P1, T, M, k, Z, Kd]) => { const C = 0.03948 * Math.sqrt(k * (2 / (k + 1)) ** ((k + 1) / (k - 1))), A = W / (C * Kd * P1) * Math.sqrt(T * Z / M);
+      return `C = ${C.toFixed(4)}\nRequired effective area A ≈ ${A.toFixed(0)} mm²\nSelect the next larger API 526 orifice (e.g. D 71, E 126, F 198, G 325, H 506, J 830, K 1186, L 1841, M 2323, N 2800, P 4116, Q 7129, R 10323, T 16774 mm²). Kb, Kc = 1 assumed — verify with API 520.`; } },
+  flare_rad: { t: 'Flare radiation at grade (point-source estimate)', f: [['Flare gas rate (kg/s)', 20], ['Net heating value (MJ/kg)', 46], ['Fraction of heat radiated F', 0.2], ['Transmissivity τ', 1.0], ['Distance from flame centre (m)', 60]],
+    run: ([w, lhv, F, tau, D]) => { const q = tau * F * w * lhv * 1e3 / (4 * Math.PI * D * D); return `Radiation ≈ ${q.toFixed(2)} kW/m² at ${D} m\nAPI 521 guidance (verify): ≈ 1.58 kW/m² continuous exposure, ≈ 4.73 kW/m² for a few minutes with protection, ≈ 6.31 kW/m² brief escape.\nDistance for 1.58 kW/m²: ≈ ${Math.sqrt(tau * F * w * lhv * 1e3 / (4 * Math.PI * 1.58)).toFixed(0)} m from flame centre.`; } },
+  bag_area: { t: 'Baghouse cloth area & bag count', f: [['Gas flow (m³/min, actual)', 1500], ['Air-to-cloth ratio (m/min)', 1.2], ['Bag diameter (mm)', 150], ['Bag length (m)', 6]],
+    run: ([Q, ac, d, L]) => { const A = Q / ac, a = Math.PI * d / 1000 * L; return `Net cloth area ≈ ${A.toFixed(0)} m²\nArea per bag ≈ ${a.toFixed(2)} m² → ≈ ${Math.ceil(A / a)} bags (+ spare compartment if cleaned off-line)`; } },
+  dilution: { t: 'Ventilation: air changes & gas dilution', f: [['Room volume (m³)', 300], ['Ventilation rate (m³/h)', 3600], ['Gas leak rate (m³/h, as gas)', 0.5], ['Gas LEL (vol %)', 5.0]],
+    run: ([V, Q, g, lel]) => { const ach = Q / V, c = g / (Q + g) * 100; return `Air changes = ${ach.toFixed(1)} per hour\nSteady-state concentration ≈ ${c.toFixed(3)} vol % = ${(c / lel * 100).toFixed(1)} % LEL (perfect mixing)\nTime to purge from C0 to 1 % of C0 ≈ ${(Math.log(100) / ach * 60).toFixed(0)} min. Real rooms need a mixing / safety factor.`; } },
   pump_power: { t: 'Pump power', f: [['Flow Q (m³/h)', 100], ['Head H (m)', 50], ['Density ρ (kg/m³)', 1000], ['Pump efficiency η (%)', 75], ['Motor efficiency (%)', 94]],
     run: ([Q, H, r, e, em]) => { const ph = r * G * Q / 3600 * H / 1000, ps = ph / (e / 100); return `Hydraulic power  ${ph.toFixed(2)} kW\nShaft power      ${ps.toFixed(2)} kW\nElectrical input ${(ps / (em / 100)).toFixed(2)} kW`; } },
   affinity: { t: 'Affinity laws (speed change)', f: [['Speed n1 (rpm)', 2950], ['Speed n2 (rpm)', 1475], ['Flow Q1 (m³/h)', 100], ['Head H1 (m)', 50], ['Power P1 (kW)', 18]],
@@ -455,7 +556,7 @@ const CALCS = {
       if (q === 4) return `${v} °C = ${(v * 9 / 5 + 32).toFixed(2)} °F = ${(v + 273.15).toFixed(2)} K`;
       if (q === 5) return `${v} mm = ${(v / 25.4).toFixed(4)} in`; return 'Choose 1–5'; } },
 };
-const FAMILY_CALCS = { valves_piping: ['valve', 'dpmeter', 'pipe', 'insul', 'units'], default: ['pump_power', 'affinity', 'npsha', 'ns', 'pipe', 'valve', 'units'] };
+const FAMILY_CALCS = { safety_environmental: ['psv_gas', 'flare_rad', 'bag_area', 'dilution', 'flash', 'stokes', 'pump_power', 'units'], mechanical_components: ['bearing_life', 'balance_grade', 'regrease', 'alignment', 'drive_ratio', 'shaft_power', 'sync_speed', 'pump_power', 'affinity', 'units'], water_utilities: ['chlor', 'g_mix', 'softener', 'receiver', 'ct', 'flash', 'pump_power', 'npsha', 'stokes', 'pipe', 'units'], alumina_refinery: ['bayer_yield', 'thickener', 'slurry', 'bond', 'trommel', 'stokes', 'gforce', 'flash', 'bed_cap', 'units'], filtration_separation: ['stokes', 'gforce', 'membrane', 'adsorber', 'souders', 'units'], thermal_process: ['lmtd', 'flash', 'dryer_load', 'excess_air', 'boiler_eff', 'ct', 'shell_t', 'units'], material_handling: ['bed_cap', 'belt_power', 'screw_cap', 'bond', 'hoist', 'hyd_cyl', 'accum', 'trommel', 'units'], static_equipment: ['shell_t', 'lmtd', 'hvol', 'souders', 'units'], valves_piping: ['valve', 'dpmeter', 'pipe', 'insul', 'units'], rotating_machinery: ['shaft_power', 'sync_speed', 'compressor_power', 'affinity', 'drive_ratio', 'flywheel', 'units'], default: ['pump_power', 'affinity', 'npsha', 'ns', 'pipe', 'valve', 'units'] };
 function calcHTML(key) {
   const c = CALCS[key];
   return `<div class="calc" data-c="${key}"><h4>${esc(c.t)}</h4>${c.f.map(([l, v], i) => `<div class="row"><label for="c_${key}_${i}">${esc(l)}</label><input id="c_${key}_${i}" type="number" step="any" value="${v}"></div>`).join('')}<div class="out"></div></div>`;
@@ -465,7 +566,14 @@ function wireCalcs() {
     el.querySelectorAll('input').forEach(i => i.oninput = upd); upd(); });
 }
 function toolsHTML(s) {
-  const fam = learn.sections.introduction.hi_family, keys = FAMILY_CALCS[fam] || FAMILY_CALCS.default;
+  const fam = learn.sections.introduction.hi_family, keys0 = FAMILY_CALCS[fam] || FAMILY_CALCS.default;
+  // most relevant calculators first for this module (by id keywords), the rest of the family set after
+  const firstBy = [[/pressure_relief|knockout/, ['psv_gas', 'stokes']], [/flare_stack/, ['flare_rad']], [/baghouse|dry_scrubber/, ['bag_area']], [/ventilation|fire_and_gas/, ['dilution']], [/blowdown/, ['flash']], [/grease|centralized_lub/, ['regrease', 'bearing_life']], [/bearing_housing|thrust_bearing|journal_bearing/, ['bearing_life']], [/balancing|impeller|^rotor$/, ['balance_grade']], [/alignment/, ['alignment']], [/stator/, ['sync_speed']], [/gear_assembly|coupling|universal_joint/, ['drive_ratio', 'shaft_power']], [/chlorination|ozonation|uv_disinfection/, ['chlor']], [/flash_mixer|flocculation|clariflocculator/, ['g_mix']], [/lamella/, ['stokes', 'g_mix']], [/softener|demineral|mixed_bed|degasser_tower/, ['softener']],
+                   [/air_receiver|instrument_air|nitrogen_generation/, ['receiver']], [/cooling_tower/, ['ct']], [/condensate_recovery|steam_distribution/, ['flash', 'pipe']], [/sewage_lift|firewater|chemical_injection/, ['pump_power', 'npsha']], [/hydraulic_(cylinder|power|control)/, ['hyd_cyl', 'accum']], [/accumulator/, ['accum', 'hyd_cyl']], [/crusher/, ['bond']], [/trommel/, ['trommel']],
+                   [/screw_(feeder|conveyor)/, ['screw_cap']], [/crane|hoist|winch|jack/, ['hoist']], [/conveyor|stacker|reclaimer|tripper|feeder|excavator/, ['bed_cap', 'belt_power']], [/flash_evap|forced_circ|multiple_effect|falling_film/, ['flash']], [/dryer/, ['dryer_load']],
+                   [/furnace|combustor|oxidizer|incinerator|steam_generator|economizer|superheater|air_preheater/, ['excess_air', 'boiler_eff']], [/cooling_water|quench/, ['ct']], [/centrifuge/, ['gforce']], [/filtration_system|membrane/, ['membrane']], [/adsorber|desiccant|dehydration/, ['adsorber']], [/precipitation|seed_class/, ['bayer_yield']], [/washer|settling|clarifier/, ['thickener']], [/grinding_mill/, ['bond']], [/washing_drum/, ['trommel']], [/mixing_tank|digestion|desilication/, ['slurry']]];
+  const pref = (firstBy.find(([re]) => re.test(current)) || [null, []])[1];
+  const keys = [...pref.filter(k => keys0.includes(k)), ...keys0.filter(k => !pref.includes(k))];
   const rm = Object.assign({}, s.engineering_parameters.reference_model || {}, store.get('ds', {})[current] || {});
   const rp = Object.assign({}, (s.engineering_parameters.reference_model || {}).rated_point || {}, rm.rated_point || {});
   return `<div class="tools"><p class="disc">Tools for engineers and subject-matter experts. Calculations are simplified textbook relations — verify against the relevant standards before design decisions.</p>
@@ -503,7 +611,7 @@ function render() {
   if (selected) return;
   const s = learn.sections, m = MODELS.find(x => x.id === current);
   const head = `<h2>${esc(m.no)}. ${esc(learn.title)}</h2>
-    <div class="chips"><span class="chip">${esc(learn.category)}</span><span class="chip">Phase ${learn.phase}</span>${learn.flagship ? '<span class="chip">Flagship</span>' : ''}<span class="chip">${meta.stats.parts} parts</span></div>
+    <div class="chips">${(MODELS.find(x => x.id === current) || {}).department ? `<span class="chip">${esc(MODELS.find(x => x.id === current).department)}</span>` : ''}<span class="chip">${esc(learn.category)}</span><span class="chip">Phase ${learn.phase}</span>${learn.flagship ? '<span class="chip">Flagship</span>' : ''}<span class="chip">${meta.stats.parts} parts</span></div>
     <div class="tabs" role="tablist">${TABS.map(([k, t]) => `<button role="tab" data-t="${k}" aria-selected="${tab === k}">${t}</button>`).join('')}</div>`;
   info.innerHTML = head + `<div id="tabBody">${renderTab(s)}</div>`;
   info.querySelectorAll('.tabs button').forEach(b => b.onclick = () => { tab = b.dataset.t; render(); const tb = info.querySelector('.tabs'), sb = tb && tb.querySelector('button[aria-selected="true"]'); if (sb) tb.scrollLeft = Math.max(0, sb.offsetLeft - tb.clientWidth / 2 + sb.offsetWidth / 2); });

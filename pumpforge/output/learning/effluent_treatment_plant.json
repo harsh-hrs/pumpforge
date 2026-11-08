@@ -1,0 +1,791 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "effluent_treatment_plant",
+ "no": 242,
+ "title": "Effluent Treatment Plant",
+ "model_title": "Effluent Treatment Plant — Screening, Equalisation, Neutralisation, Activated Sludge & Secondary Clarifier",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An effluent treatment plant (ETP) cleans industrial wastewater before discharge or reuse. Screening removes coarse solids, equalisation evens out flow and strength, neutralisation corrects pH, an activated-sludge aeration tank lets bacteria consume dissolved organic matter, and a secondary clarifier settles the biomass; most is returned (RAS) and the excess is wasted (WAS).",
+   "applications": [
+    "Industrial effluents from food, chemical, textile, refinery and paper plants",
+    "Combined industrial/sanitary wastewater at sites"
+   ],
+   "key_points": [
+    "Primary → secondary treatment train",
+    "DO ≈ 1.5–2 mg/L; MLSS ≈ 2000–4000 mg/L",
+    "RAS keeps biomass; WAS removes growth",
+    "Typically > 90 % BOD removal"
+   ],
+   "classification": {
+    "family": "Wastewater",
+    "type": "Conventional activated-sludge ETP"
+   },
+   "hi_family": "water_utilities",
+   "summary": "An effluent treatment plant cleans industrial wastewater before discharge or reuse. Screening removes coarse solids, equalisation evens out flow and strength, neutralisation corrects pH, an activated-sludge aeration tank lets bacteria consume dissolved organics, and a secondary clarifier settles the biomass."
+  },
+  "model_3d": {
+   "asset": "glb/effluent_treatment_plant.glb",
+   "metadata": "meta/effluent_treatment_plant.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 20446,
+   "parts": 30
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Bar screen removes rags and debris.",
+    "Equalisation evens out flow and load.",
+    "pH is corrected in the neutralisation tank."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Bar screen removes rags and debris.",
+     "part": "bar_screen",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Equalisation evens out flow and load.",
+     "part": "equalisation_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "pH is corrected in the neutralisation tank.",
+     "part": "ph_control",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Bacteria consume organics with air from the diffusers.",
+     "part": "diffusers",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The clarifier settles sludge; clear effluent overflows.",
+     "part": "sc_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "BOD removal vs sludge age (SRT) and F/M ratio."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "effluent_treatment_plant_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "effluent_treatment_plant_pressure.glb",
+     "title": "Pollution load falls along the train",
+     "description": "Screening removes rags and grit; equalisation evens out flow and strength; neutralisation brings pH into the ≈ 6–9 range the bacteria tolerate. In the aeration tank bacteria oxidise dissolved organic matter (BOD/COD) using oxygen from the diffusers (DO ≈ 1.5–2 mg/L), growing into flocs. The clarifier settles the flocs: most are returned (RAS) to keep the biomass (MLSS ≈ 2,000–4,000 mg/L), the growth is wasted (WAS), and clear treated effluent leaves over the weir — typically > 90 % BOD removal. Discharge limits are set by the local regulator.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/effluent_treatment_plant.json#components",
+   "key_components": "Equalisation, neutralisation, aeration tank, secondary clarifier, sludge handling",
+   "parts": [
+    {
+     "id": "screen_channel",
+     "name": "Inlet Channel",
+     "info_ref": "etp_screen",
+     "function": "Removes coarse solids.",
+     "material": "Concrete/stainless."
+    },
+    {
+     "id": "bar_screen",
+     "name": "Inclined Bar Screen & Screenings Tray",
+     "info_ref": "etp_screen",
+     "function": "Removes coarse solids.",
+     "material": "Concrete/stainless."
+    },
+    {
+     "id": "screen_water",
+     "name": "Raw Effluent",
+     "info_ref": "etp_screen",
+     "function": "Removes coarse solids.",
+     "material": "Concrete/stainless."
+    },
+    {
+     "id": "equalisation_tank",
+     "name": "Equalisation Tank (evens out flow and strength)",
+     "info_ref": "etp_eq",
+     "function": "Evens out flow and load.",
+     "material": "Concrete."
+    },
+    {
+     "id": "eq_liquid",
+     "name": "Equalised Effluent (level varies with inflow)",
+     "info_ref": "etp_eq",
+     "function": "Evens out flow and load.",
+     "material": "Concrete."
+    },
+    {
+     "id": "eq_mixer_body",
+     "name": "Submersible Mixer (motor & mast)",
+     "info_ref": "etp_eq",
+     "function": "Evens out flow and load.",
+     "material": "Concrete."
+    },
+    {
+     "id": "eq_propeller",
+     "name": "Mixer Propeller (keeps solids suspended)",
+     "info_ref": "etp_eq",
+     "function": "Evens out flow and load.",
+     "material": "Concrete."
+    },
+    {
+     "id": "eq_transfer_pump",
+     "name": "Equalisation Transfer Pump (steady feed)",
+     "info_ref": "etp_eq",
+     "function": "Evens out flow and load.",
+     "material": "Concrete."
+    },
+    {
+     "id": "eq_transfer_pump_shaft",
+     "name": "Equalisation Transfer Pump (steady feed) — Shaft & Coupling (turning)",
+     "info_ref": "etp_eq",
+     "function": "Evens out flow and load.",
+     "material": "Concrete."
+    },
+    {
+     "id": "nt_tank",
+     "name": "Neutralisation Tank: Tank, Baffles",
+     "info_ref": "etp_neut_tank",
+     "function": "Holds liquid.",
+     "material": "Concrete/steel/PE."
+    },
+    {
+     "id": "nt_slurry",
+     "name": "Neutralisation Tank: Slurry / Liquor",
+     "info_ref": "etp_neut_slurry",
+     "function": "Process liquid.",
+     "material": "—"
+    },
+    {
+     "id": "nt_agitator",
+     "name": "Neutralisation Tank: Agitator Shaft & Impellers",
+     "info_ref": "etp_neut_agitator",
+     "function": "Mixes.",
+     "material": "Stainless/coated."
+    },
+    {
+     "id": "nt_drive",
+     "name": "Neutralisation Tank: Agitator Drive (motor + gearbox, bridge beam)",
+     "info_ref": "etp_neut_drive",
+     "function": "Drives agitator.",
+     "material": "—"
+    },
+    {
+     "id": "ph_control",
+     "name": "pH Probe & Controller with Acid / Caustic Dosing Tanks and Lines",
+     "info_ref": "etp_neut",
+     "function": "Corrects pH for the biology.",
+     "material": "PP/PVDF, stainless."
+    },
+    {
+     "id": "aeration_tank",
+     "name": "Aeration Tank (activated sludge reactor)",
+     "info_ref": "etp_aeration",
+     "function": "Biological treatment.",
+     "material": "Concrete."
+    },
+    {
+     "id": "mixed_liquor",
+     "name": "Mixed Liquor (wastewater + activated sludge biomass)",
+     "info_ref": "etp_aeration",
+     "function": "Biological treatment.",
+     "material": "Concrete."
+    },
+    {
+     "id": "diffusers",
+     "name": "Fine-Bubble Membrane Disc Diffusers, Drop Pipe & Air Grid",
+     "info_ref": "etp_diffusers",
+     "function": "Transfer oxygen.",
+     "material": "EPDM/PP."
+    },
+    {
+     "id": "blower",
+     "name": "Aeration Blower (positive-displacement or turbo)",
+     "info_ref": "etp_blower",
+     "function": "Supplies air.",
+     "material": "—"
+    },
+    {
+     "id": "blower_impeller",
+     "name": "Blower Impeller",
+     "info_ref": "etp_blower",
+     "function": "Supplies air.",
+     "material": "—"
+    },
+    {
+     "id": "air_bubbles",
+     "name": "Fine air bubbles: oxygen for the bacteria and mixing",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "floc_biomass",
+     "name": "Activated-sludge flocs (bacteria) consuming organic matter",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "sc_tank",
+     "name": "Secondary Clarifier: Tank with Conical Floor & Overflow Launder",
+     "info_ref": "etp_clar_tank",
+     "function": "Holds water; launder collects overflow.",
+     "material": "Concrete/steel."
+    },
+    {
+     "id": "sc_clear",
+     "name": "Secondary Clarifier: Clear Overflow Zone",
+     "info_ref": "etp_clar_zones",
+     "function": "Clear and sludge zones.",
+     "material": "—"
+    },
+    {
+     "id": "sc_mud",
+     "name": "Secondary Clarifier: Settling / Compression Zone (mud bed)",
+     "info_ref": "etp_clar_zones",
+     "function": "Clear and sludge zones.",
+     "material": "—"
+    },
+    {
+     "id": "sc_feedwell",
+     "name": "Secondary Clarifier: Central Feedwell (dissipates feed energy, mixes flocculant)",
+     "info_ref": "etp_clar_feedwell",
+     "function": "Calms inflow.",
+     "material": "Steel."
+    },
+    {
+     "id": "sc_rakes",
+     "name": "Secondary Clarifier: Rake Arms & Blades (move mud to the centre cone)",
+     "info_ref": "etp_clar_rake",
+     "function": "Moves sludge to the pit.",
+     "material": "Steel."
+    },
+    {
+     "id": "sc_drive",
+     "name": "Secondary Clarifier: Bridge & Rake Drive (slow, high torque, overload protection)",
+     "info_ref": "etp_clar_drive",
+     "function": "Turns rakes.",
+     "material": "—"
+    },
+    {
+     "id": "ras_pump",
+     "name": "Return / Waste Activated Sludge (RAS / WAS) Pump",
+     "info_ref": "etp_ras",
+     "function": "Returns and wastes sludge.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "ras_pump_shaft",
+     "name": "Return / Waste Activated Sludge (RAS / WAS) Pump — Shaft & Coupling (turning)",
+     "info_ref": "etp_ras",
+     "function": "Returns and wastes sludge.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "process_piping",
+     "name": "Process Piping: Feed, Transfers, Clarifier Feed, Sludge Underflow, RAS & WAS Lines, Treated-Effluent Outlet & Flowmeter",
+     "info_ref": "etp_piping",
+     "function": "Connects units.",
+     "material": "Steel/HDPE."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Plants ≈ 50 – 50,000 m³/d",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 50 – 50,000",
+     "unit": "m³/day"
+    },
+    "operating_conditions": {
+     "typical_range": "HRT ≈ 6 – 24 h (aeration); SRT ≈ 5 – 20 d",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Mainly aeration ≈ 0.3 – 1 kWh/m³",
+     "unit": "kWh/m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "From flow and load (BOD, COD, TSS, N, P), discharge limits and space."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Metcalf & Eddy"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Reinforced-concrete tank on prepared ground; watertightness test before backfill; allow for buoyancy when empty (groundwater)."
+   ],
+   "alignment": [
+    "Weirs and launders levelled to a few millimetres so overflow is even; drive/bridge centred and level."
+   ],
+   "piping": [
+    "Inlet arranged to spread flow without short-circuiting; sludge lines with flushing points; overflow and drain to a safe place."
+   ],
+   "commissioning": [
+    "Fill with clean water, check for leaks; run mechanisms empty and with water; start chemical dosing and tune by jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check DO, pH, MLSS, sludge blanket and effluent quality.",
+     "part": "mixed_liquor",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean screens; check diffusers and blower.",
+     "part": "blower",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Drain aeration tank; replace diffuser membranes.",
+     "part": "diffusers"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Sludge bulking",
+     "category": "performance",
+     "symptoms": [
+      "Poor settling, turbid effluent"
+     ],
+     "causes": [
+      "Filamentous bacteria (low DO, low F/M, nutrients)"
+     ],
+     "remedies": [
+      "Fix DO/nutrients; chlorinate RAS"
+     ],
+     "part": "sc_mud"
+    },
+    {
+     "problem": "Toxic shock",
+     "category": "performance",
+     "symptoms": [
+      "DO rises, treatment stops"
+     ],
+     "causes": [
+      "Toxic discharge"
+     ],
+     "remedies": [
+      "Divert/hold in equalisation; reseed"
+     ],
+     "part": "mixed_liquor"
+    }
+   ],
+   "safety": [
+    "H₂S and confined spaces; biological hazards — hygiene; chemicals."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Effluent Treatment Plant — Introduction",
+    "type": "in_app_tour",
+    "model": "effluent_treatment_plant.glb",
+    "duration_s": 58.2,
+    "script": [
+     {
+      "narration": "This module introduces the Effluent Treatment Plant.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An effluent treatment plant (ETP) cleans industrial wastewater before discharge or reuse.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Screening removes coarse solids, equalisation evens out flow and strength, neutralisation corrects pH, an activated-sludge aeration tank lets bacteria consume dissolved organic matter, and a secondary clarifier settles the biomass; most is returned (RAS) and the excess is wasted (WAS).",
+      "duration_s": 17.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include industrial effluents from food, chemical, textile, refinery and paper plants; combined industrial/sanitary wastewater at sites.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Mixer Propeller (keeps solids suspended), Equalisation Transfer Pump (steady feed), Equalisation Transfer Pump (steady feed) — Shaft & Coupling (turning), Neutralisation Tank: Agitator Shaft & Impellers.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Effluent Treatment Plant — Operation",
+    "type": "in_app_tour",
+    "model": "effluent_treatment_plant.glb",
+    "duration_s": 37.4,
+    "script": [
+     {
+      "narration": "How the Effluent Treatment Plant works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Bar screen removes rags and debris.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bar_screen",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Equalisation evens out flow and load.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "equalisation_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "pH is corrected in the neutralisation tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ph_control",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Bacteria consume organics with air from the diffusers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffusers",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The clarifier settles sludge; clear effluent overflows.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sc_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Screening removes rags and grit; equalisation evens out flow and strength; neutralisation brings pH into the ≈ 6–9 range the bacteria tolerate.",
+      "duration_s": 9.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Effluent Treatment Plant — Maintenance",
+    "type": "in_app_tour",
+    "model": "effluent_treatment_plant.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Effluent Treatment Plant.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check DO, pH, MLSS, sludge blanket and effluent quality.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mixed_liquor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean screens; check diffusers and blower.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Drain aeration tank; replace diffuser membranes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffusers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sludge bulking: poor settling, turbid effluent. Common cause: filamentous bacteria (low do, low f/m, nutrients).",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "sc_mud",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for toxic shock: do rises, treatment stops. Common cause: toxic discharge.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "mixed_liquor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What do the bacteria need from the diffusers?",
+     "options": [
+      "Oxygen",
+      "Chlorine",
+      "Heat",
+      "Light"
+     ],
+     "answer": 0,
+     "explanation": "Oxygen.",
+     "level": "basic"
+    },
+    {
+     "question": "What is RAS?",
+     "options": [
+      "Returned activated sludge to keep the biomass",
+      "Raw sewage",
+      "Rain",
+      "Acid"
+     ],
+     "answer": 0,
+     "explanation": "RAS.",
+     "level": "basic"
+    },
+    {
+     "question": "Why equalise?",
+     "options": [
+      "Even out flow and strength for stable treatment",
+      "Add bacteria",
+      "Remove grit only",
+      "Cool water"
+     ],
+     "answer": 0,
+     "explanation": "Equalisation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Removes coarse solids.\"",
+     "options": [
+      "Inlet Channel",
+      "Equalised Effluent (level varies with inflow)",
+      "Fine air bubbles: oxygen for the bacteria and mixing",
+      "Neutralisation Tank: Agitator Shaft & Impellers"
+     ],
+     "answer": 0,
+     "explanation": "Inlet Channel: Removes coarse solids.",
+     "level": "basic",
+     "part": "screen_channel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Evens out flow and load.\"",
+     "options": [
+      "Return / Waste Activated Sludge (RAS / WAS) Pump — Shaft & Coupling (turning)",
+      "Aeration Tank (activated sludge reactor)",
+      "Secondary Clarifier: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "Equalisation Tank (evens out flow and strength)"
+     ],
+     "answer": 3,
+     "explanation": "Equalisation Tank (evens out flow and strength): Evens out flow and load.",
+     "level": "basic",
+     "part": "equalisation_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds liquid.\"",
+     "options": [
+      "Neutralisation Tank: Tank, Baffles",
+      "Blower Impeller",
+      "Neutralisation Tank: Slurry / Liquor",
+      "Secondary Clarifier: Tank with Conical Floor & Overflow Launder"
+     ],
+     "answer": 0,
+     "explanation": "Neutralisation Tank: Tank, Baffles: Holds liquid.",
+     "level": "basic",
+     "part": "nt_tank",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

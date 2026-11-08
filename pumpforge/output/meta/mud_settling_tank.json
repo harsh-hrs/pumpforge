@@ -1,0 +1,668 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "mud_settling_tank",
+  "title": "Red Mud Settler / High-Rate Thickener (Primary Residue Separation)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {},
+  "overlays": {
+    "flow": {
+      "file": "mud_settling_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "mud_settling_tank_pressure.glb",
+      "title": "Clear liquor above, compacted mud below",
+      "description": "Digested slurry is diluted and dosed with flocculant in the feedwell; flocs settle quickly, leaving clear pregnant liquor that overflows to security (polishing) filtration. The mud compacts in the lower zone and the rakes move it to the underflow cone. Overflow clarity (often ≲ 100 mg/L solids) and underflow density are the key performance targets.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_discharge",
+      "radius": 0.025,
+      "points": [
+        [
+          -2.3,
+          2.0,
+          -0.0
+        ],
+        [
+          0.0,
+          2.0,
+          -0.0
+        ],
+        [
+          0.0,
+          1.15,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "overflow",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          0.5,
+          1.25,
+          -0.1
+        ],
+        [
+          1.25,
+          1.55,
+          -0.1
+        ],
+        [
+          1.9,
+          1.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "underflow",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          0.2,
+          -0.05
+        ],
+        [
+          0.0,
+          -0.05,
+          -0.0
+        ],
+        [
+          1.8,
+          -0.05,
+          -0.0
+        ],
+        [
+          2.3,
+          0.25,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "flocculant",
+      "kind": "air",
+      "radius": 0.012,
+      "points": [
+        [
+          -2.3,
+          2.2,
+          -0.35
+        ],
+        [
+          -0.2,
+          2.2,
+          -0.35
+        ],
+        [
+          -0.2,
+          1.65,
+          -0.2
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8340,
+    "parts": 10
+  },
+  "summary": "The mud settler (primary thickener) separates red mud from the pregnant liquor after digestion. Flocculant helps the mud settle; clear liquor overflows to polishing filtration and the thickened mud is pumped to the washers.",
+  "classification": {
+    "family": "Residue separation",
+    "type": "High-rate thickener / settler"
+  },
+  "model_configuration": {
+    "animation": "Rakes turn; particles settle"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "st_tank",
+      "name": "Settler: Tank with Conical Floor & Overflow Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "st_tank__back",
+        "st_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.48,
+        0.1,
+        -1.48
+      ],
+      "bbox_max": [
+        1.48,
+        1.65,
+        1.48
+      ],
+      "label_anchor": [
+        0.0,
+        0.875,
+        1.48
+      ],
+      "center": [
+        0.0,
+        0.875,
+        -0.0
+      ],
+      "info_ref": "ms_tank"
+    },
+    {
+      "id": "st_clear",
+      "name": "Settler: Clear Overflow Zone",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "st_cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -1.295,
+        1.1,
+        -1.295
+      ],
+      "bbox_max": [
+        1.295,
+        1.49,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.295,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.295,
+        -0.6475
+      ],
+      "info_ref": "ms_zones"
+    },
+    {
+      "id": "st_mud",
+      "name": "Settler: Settling / Compression Zone (mud bed)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "st_md"
+      ],
+      "pivot": [
+        0.0,
+        0.14,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.4
+      ],
+      "bbox_min": [
+        -1.295,
+        0.14,
+        -1.295
+      ],
+      "bbox_max": [
+        1.295,
+        1.1,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.62,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.62,
+        -0.6475
+      ],
+      "info_ref": "ms_zones"
+    },
+    {
+      "id": "st_feedwell",
+      "name": "Settler: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "st_feedwell__back",
+        "st_feedwell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.3
+      ],
+      "bbox_min": [
+        -0.286,
+        1.1,
+        -0.286
+      ],
+      "bbox_max": [
+        0.286,
+        1.7,
+        0.286
+      ],
+      "label_anchor": [
+        0.0,
+        1.4,
+        0.286
+      ],
+      "center": [
+        0.0,
+        1.4,
+        -0.0
+      ],
+      "info_ref": "ms_feedwell"
+    },
+    {
+      "id": "st_rakes",
+      "name": "Settler: Rake Arms & Blades (move mud to the centre cone)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "st_rakes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -1.26182,
+        0.25,
+        -0.05
+      ],
+      "bbox_max": [
+        1.26182,
+        2.0,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        1.125,
+        0.05
+      ],
+      "center": [
+        0.0,
+        1.125,
+        -0.0
+      ],
+      "info_ref": "ms_rake"
+    },
+    {
+      "id": "st_drive",
+      "name": "Settler: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "st_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.55,
+        1.84,
+        -0.25
+      ],
+      "bbox_max": [
+        1.55,
+        2.6,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        2.22,
+        0.25
+      ],
+      "center": [
+        0.0,
+        2.22,
+        -0.0
+      ],
+      "info_ref": "ms_drive"
+    },
+    {
+      "id": "piping",
+      "name": "Feed Line (digested slurry), Flocculant Dosing Line, Underflow Line & Overflow Outlet",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.2,
+        -0.11,
+        -0.37
+      ],
+      "bbox_max": [
+        1.86,
+        2.22,
+        0.133
+      ],
+      "label_anchor": [
+        -0.17,
+        1.055,
+        0.133
+      ],
+      "center": [
+        -0.17,
+        1.055,
+        -0.1185
+      ],
+      "info_ref": "ms_piping"
+    },
+    {
+      "id": "underflow_pump",
+      "name": "Underflow (mud) Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "underflow_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.65,
+        0.075,
+        -0.15
+      ],
+      "bbox_max": [
+        2.55,
+        0.37,
+        0.15
+      ],
+      "label_anchor": [
+        2.1,
+        0.2225,
+        0.15
+      ],
+      "center": [
+        2.1,
+        0.2225,
+        -0.0
+      ],
+      "info_ref": "ms_piping"
+    },
+    {
+      "id": "underflow_pump_shaft",
+      "name": "Underflow (mud) Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "underflow_pumpc"
+      ],
+      "pivot": [
+        2.04,
+        0.25,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.98,
+        0.23,
+        -0.05
+      ],
+      "bbox_max": [
+        2.1,
+        0.27,
+        0.05
+      ],
+      "label_anchor": [
+        2.04,
+        0.25,
+        0.05
+      ],
+      "center": [
+        2.04,
+        0.25,
+        -0.0
+      ],
+      "info_ref": "ms_piping"
+    },
+    {
+      "id": "settling",
+      "name": "Flocculated Mud Particles settling",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "settling0",
+        "settling1",
+        "settling2",
+        "settling3",
+        "settling4",
+        "settling5",
+        "settling6",
+        "settling7",
+        "settling8",
+        "settling9",
+        "settling10",
+        "settling11",
+        "settling12",
+        "settling13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.01902
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.01902
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01902
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ms_tank": {
+      "function": "Holds slurry; launder collects overflow.",
+      "construction": "Steel/concrete tank with conical floor.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ms_zones": {
+      "function": "Clear and mud zones.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ms_feedwell": {
+      "function": "Calms feed; mixes flocculant.",
+      "construction": "Feedwell.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ms_rake": {
+      "function": "Moves settled mud to the cone; keeps it from setting.",
+      "construction": "Rake arms and blades.",
+      "material": "Steel.",
+      "operating_conditions": "Very slow (minutes per rev).",
+      "failure_modes": [
+        "Bogging (high torque)"
+      ],
+      "inspection": [
+        "Torque trend"
+      ]
+    },
+    "ms_drive": {
+      "function": "Turns the rakes.",
+      "construction": "Bridge, planetary drive, torque protection, lift.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ms_piping": {
+      "function": "Feed, flocculant, underflow, overflow.",
+      "construction": "Pipes and pump.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

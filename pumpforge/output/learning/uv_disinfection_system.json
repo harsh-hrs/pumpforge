@@ -1,0 +1,638 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "uv_disinfection_system",
+ "no": 223,
+ "title": "UV Disinfection System",
+ "model_title": "Closed-Vessel UV Disinfection Reactor",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A UV disinfection reactor passes water through a stainless chamber close to ultraviolet lamps in quartz sleeves. UV-C light around 254 nm damages the DNA of bacteria, viruses and protozoa so they cannot reproduce. Automatic wipers keep the sleeves clean, and a sensor checks that the UV intensity is high enough.",
+   "applications": [
+    "Drinking water (especially for Cryptosporidium/Giardia)",
+    "Wastewater effluent reuse and process water"
+   ],
+   "key_points": [
+    "Dose = intensity × time (mJ/cm²)",
+    "No chemicals, no residual",
+    "Water UV transmittance controls performance",
+    "Wipers and sensor keep dose assured"
+   ],
+   "classification": {
+    "family": "Disinfection",
+    "type": "Closed-vessel UV reactor"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A closed-vessel UV system disinfects water by passing it close to UV lamps housed in quartz sleeves. UV-C light inactivates bacteria, viruses and protozoa; automatic wipers keep sleeves clean and a sensor monitors intensity."
+  },
+  "model_3d": {
+   "asset": "glb/uv_disinfection_system.glb",
+   "metadata": "meta/uv_disinfection_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 5768,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water enters the reactor chamber.",
+    "Lamps emit UV-C through quartz sleeves.",
+    "Microorganisms receive the UV dose as they pass."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water enters the reactor chamber.",
+     "part": "chamber",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Lamps emit UV-C through quartz sleeves.",
+     "part": "uv_lamps",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Microorganisms receive the UV dose as they pass.",
+     "part": "quartz_sleeves",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Wipers clean the sleeves periodically.",
+     "part": "wiper",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The sensor and panel confirm intensity.",
+     "part": "control_sensor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Log inactivation vs UV dose for different organisms."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "uv_disinfection_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "uv_disinfection_system_pressure.glb",
+     "title": "UV dose damages microbial DNA",
+     "description": "UV-C light near 254 nm damages the DNA/RNA of bacteria, viruses and protozoa (Cryptosporidium, Giardia) so they cannot reproduce. Dose = intensity × exposure time (mJ/cm²; drinking water often ≈ 40 mJ/cm²). UV leaves no residual, so a small chlorine dose is often added for the distribution network; water UV transmittance and sleeve fouling control performance.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/uv_disinfection_system.json#components",
+   "key_components": "UV reactor vessel, lamps in quartz sleeves, wiper system, UV intensity sensor, control panel",
+   "parts": [
+    {
+     "id": "chamber",
+     "name": "Stainless Reactor Chamber with Inlet & Outlet",
+     "info_ref": "uv_chamber",
+     "function": "Reactor.",
+     "material": "316L."
+    },
+    {
+     "id": "quartz_sleeves",
+     "name": "Quartz Sleeves (protect lamps, transmit UV-C)",
+     "info_ref": "uv_sleeves",
+     "function": "Protect lamps.",
+     "material": "Quartz."
+    },
+    {
+     "id": "uv_lamps",
+     "name": "UV Lamps (low-pressure amalgam or medium-pressure, 254 nm)",
+     "info_ref": "uv_lamps",
+     "function": "Emit UV-C.",
+     "material": "—"
+    },
+    {
+     "id": "wiper",
+     "name": "Automatic Sleeve Wiper (keeps quartz clean)",
+     "info_ref": "uv_wiper",
+     "function": "Cleans sleeves.",
+     "material": "EPDM."
+    },
+    {
+     "id": "control_sensor",
+     "name": "Ballast/Control Panel & UV-Intensity Sensor",
+     "info_ref": "uv_control",
+     "function": "Power and monitoring.",
+     "material": "—"
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "uv_chamber",
+     "function": "Reactor.",
+     "material": "316L."
+    },
+    {
+     "id": "microbes",
+     "name": "Microorganisms receiving the UV Dose as they pass the Lamps",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Reactors DN 100 – 1000",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 5 – 5000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Dose ≈ 40 mJ/cm² (typical drinking water); UVT ≥ ≈ 75 – 95 %",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 0.5 – 100",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for peak flow, minimum UVT and target dose (validated reactors)."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "US EPA UVDGM",
+    "WHO GDWQ"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth; anchor the skid; bund or drain for chemical / oil spills."
+   ],
+   "alignment": [
+    "Skid level; check pump–motor alignment where not close-coupled; supports so piping loads do not reach equipment nozzles."
+   ],
+   "piping": [
+    "Isolation valves and bypass for maintenance; drains and vents; correct materials for the chemical; label lines and flow direction."
+   ],
+   "commissioning": [
+    "Pressure-test piping; flush; check rotation and interlocks; calibrate instruments; run on water before chemicals."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check UV intensity and alarms.",
+     "part": "control_sensor",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect wipers; clean sleeves if needed.",
+     "part": "wiper",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace lamps (≈ 9,000 – 16,000 h).",
+     "part": "uv_lamps"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low UV intensity",
+     "category": "performance",
+     "symptoms": [
+      "Alarm, low sensor reading"
+     ],
+     "causes": [
+      "Fouled sleeves, aged lamps, low UVT"
+     ],
+     "remedies": [
+      "Clean/replace; improve pretreatment"
+     ],
+     "part": "quartz_sleeves"
+    },
+    {
+     "problem": "Broken sleeve",
+     "category": "performance",
+     "symptoms": [
+      "Water in lamp, trip"
+     ],
+     "causes": [
+      "Thermal shock, impact"
+     ],
+     "remedies": [
+      "Replace; check flow before lamp start"
+     ],
+     "part": "quartz_sleeves"
+    }
+   ],
+   "safety": [
+    "UV burns eyes/skin — interlocks on covers; mercury in lamps: handle and dispose correctly."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "UV Disinfection System — Introduction",
+    "type": "in_app_tour",
+    "model": "uv_disinfection_system.glb",
+    "duration_s": 48.0,
+    "script": [
+     {
+      "narration": "This module introduces the UV Disinfection System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A UV disinfection reactor passes water through a stainless chamber close to ultraviolet lamps in quartz sleeves.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "UV-C light around 254 nm damages the DNA of bacteria, viruses and protozoa so they cannot reproduce.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Automatic wipers keep the sleeves clean, and a sensor checks that the UV intensity is high enough.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include drinking water (especially for Cryptosporidium/Giardia); wastewater effluent reuse and process water.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "UV Disinfection System — Operation",
+    "type": "in_app_tour",
+    "model": "uv_disinfection_system.glb",
+    "duration_s": 37.0,
+    "script": [
+     {
+      "narration": "How the UV Disinfection System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water enters the reactor chamber.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chamber",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Lamps emit UV-C through quartz sleeves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "uv_lamps",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Microorganisms receive the UV dose as they pass.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "quartz_sleeves",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Wipers clean the sleeves periodically.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wiper",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The sensor and panel confirm intensity.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_sensor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "UV-C light near 254 nm damages the DNA/RNA of bacteria, viruses and protozoa (Cryptosporidium, Giardia) so they cannot reproduce.",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "UV Disinfection System — Maintenance",
+    "type": "in_app_tour",
+    "model": "uv_disinfection_system.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the UV Disinfection System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check UV intensity and alarms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_sensor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect wipers; clean sleeves if needed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wiper",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace lamps (≈ 9,000 – 16,000 h).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "uv_lamps",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low uv intensity: alarm, low sensor reading. Common cause: fouled sleeves, aged lamps, low uvt.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "quartz_sleeves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for broken sleeve: water in lamp, trip. Common cause: thermal shock, impact.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "quartz_sleeves",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How does UV disinfect?",
+     "options": [
+      "Damages DNA/RNA so organisms cannot reproduce",
+      "Kills by heat",
+      "Adds chlorine",
+      "Filters them"
+     ],
+     "answer": 0,
+     "explanation": "DNA damage.",
+     "level": "basic"
+    },
+    {
+     "question": "Does UV leave a residual?",
+     "options": [
+      "No",
+      "Yes, for days",
+      "Only at night",
+      "Only in winter"
+     ],
+     "answer": 0,
+     "explanation": "No residual.",
+     "level": "basic"
+    },
+    {
+     "question": "What reduces UV performance?",
+     "options": [
+      "Low UV transmittance and sleeve fouling",
+      "Cold weather only",
+      "Blue paint",
+      "Low pressure"
+     ],
+     "answer": 0,
+     "explanation": "UVT and fouling.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Reactor.\"",
+     "options": [
+      "Stainless Reactor Chamber with Inlet & Outlet",
+      "Ballast/Control Panel & UV-Intensity Sensor",
+      "Quartz Sleeves (protect lamps, transmit UV-C)",
+      "Automatic Sleeve Wiper (keeps quartz clean)"
+     ],
+     "answer": 0,
+     "explanation": "Stainless Reactor Chamber with Inlet & Outlet: Reactor.",
+     "level": "basic",
+     "part": "chamber",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Protect lamps.\"",
+     "options": [
+      "Ballast/Control Panel & UV-Intensity Sensor",
+      "Supports",
+      "Microorganisms receiving the UV Dose as they pass the Lamps",
+      "Quartz Sleeves (protect lamps, transmit UV-C)"
+     ],
+     "answer": 3,
+     "explanation": "Quartz Sleeves (protect lamps, transmit UV-C): Protect lamps.",
+     "level": "basic",
+     "part": "quartz_sleeves",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Emit UV-C.\"",
+     "options": [
+      "UV Lamps (low-pressure amalgam or medium-pressure, 254 nm)",
+      "Stainless Reactor Chamber with Inlet & Outlet",
+      "Quartz Sleeves (protect lamps, transmit UV-C)",
+      "Automatic Sleeve Wiper (keeps quartz clean)"
+     ],
+     "answer": 0,
+     "explanation": "UV Lamps (low-pressure amalgam or medium-pressure, 254 nm): Emit UV-C.",
+     "level": "basic",
+     "part": "uv_lamps",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

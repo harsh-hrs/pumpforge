@@ -1,0 +1,624 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vacuum_dryer",
+ "no": 165,
+ "title": "Vacuum Dryer",
+ "model_title": "Rotary Double-Cone Vacuum Dryer",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A rotary double-cone vacuum dryer dries batches of heat-sensitive or solvent-wet powders. The double-cone vessel turns slowly on trunnions, tumbling the product against its heated jacket. A vacuum pump lowers the pressure so the moisture or solvent boils at a low temperature; vapour passes a filter and is condensed.",
+   "applications": [
+    "Pharmaceutical APIs and intermediates",
+    "Fine chemicals and solvent recovery",
+    "Heat-sensitive foods"
+   ],
+   "key_points": [
+    "Low pressure → low boiling point",
+    "Gentle tumbling, closed system",
+    "Solvent recovery in condenser",
+    "Batch operation"
+   ],
+   "classification": {
+    "family": "Dryer",
+    "type": "Rotary double-cone vacuum dryer (batch)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A rotary double-cone vacuum dryer dries batches of heat-sensitive or solvent-wet powders. The double-cone vessel turns slowly on trunnions so the product tumbles against the heated jacket, while a vacuum pump lowers the pressure so the liquid boils at a low temperature. Vapour passes a filter and condenser."
+  },
+  "model_3d": {
+   "asset": "glb/vacuum_dryer.glb",
+   "metadata": "meta/vacuum_dryer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 19996,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Wet product is charged through the manway.",
+    "Hot water/steam/thermal oil heats the jacket.",
+    "The vessel rotates slowly and the product tumbles."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Wet product is charged through the manway.",
+     "part": "double_cone",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Hot water/steam/thermal oil heats the jacket.",
+     "part": "double_cone",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The vessel rotates slowly and the product tumbles.",
+     "part": "powder",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vapour is drawn through the trunnion to filter and condenser.",
+     "part": "vacuum_system",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drive turns the vessel on its trunnions.",
+     "part": "drive",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Drying curve: constant-rate period then falling-rate period; vacuum level sets product temperature."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vacuum_dryer_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "vacuum_dryer_pressure.glb",
+     "title": "Low pressure lowers the boiling point",
+     "description": "Under vacuum (e.g. ~ 20–100 mbar abs) water and solvents boil at low temperature (≈ 20–45 °C), so heat-sensitive or solvent-wet products can be dried gently. The slow rotation tumbles the product against the heated wall; vapour is drawn through a filter to a condenser where solvents can be recovered.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/vacuum_dryer.json#components",
+   "key_components": "Rotating double cone, heating jacket, vacuum line & filter, drive, condenser",
+   "parts": [
+    {
+     "id": "double_cone",
+     "name": "Double-Cone Vessel with Heating Jacket, Charging Manway & Discharge Valve",
+     "info_ref": "vd_vessel",
+     "function": "Holds and tumbles the product.",
+     "material": "Stainless steel (polished)."
+    },
+    {
+     "id": "powder",
+     "name": "Product Tumbling inside (stays low while the vessel turns)",
+     "info_ref": "vd_product",
+     "function": "Product.",
+     "material": "—"
+    },
+    {
+     "id": "stands_trunnions",
+     "name": "Stands, Trunnions & Bearings (vessel rotates about the trunnion axis)",
+     "info_ref": "vd_stands",
+     "function": "Support and rotation axis.",
+     "material": "Steel."
+    },
+    {
+     "id": "vacuum_system",
+     "name": "Vacuum Line (through trunnion), Dust Filter & Condenser to Vacuum Pump",
+     "info_ref": "vd_vacuum",
+     "function": "Removes vapour.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "drive",
+     "name": "Drive (motor, gearbox; slow rotation ≈ a few rpm)",
+     "info_ref": "vd_drive",
+     "function": "Rotates the vessel.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Working volume ~ 0.05 – 10 m³",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 5 – 200",
+     "unit": "kW"
+    },
+    "operating_temperature": {
+     "typical_range": "Jacket ~ 50 – 150; product ~ 30 – 60",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Batch ~ 20 – 5000",
+     "unit": "kg"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose volume and heating area for batch size and cycle time; solvent compatibility of seals."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Pharmaceutical engineering guides (ISPE)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment, product and dynamic loads; explosion venting directed to a safe area."
+   ],
+   "alignment": [
+    "Align fans, rotary valves and drives; level chambers and beds."
+   ],
+   "piping": [
+    "Air/gas ducts with dampers and expansion joints; dust collection (cyclone, bag filter); explosion isolation where required (ATEX/NFPA)."
+   ],
+   "commissioning": [
+    "Air balance; heat-up curve; water trials then product; check outlet temperature/moisture control and interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vacuum level, jacket temperature, seal condition.",
+     "part": "vacuum_system",
+     "interval": "per batch"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean filter; check condenser.",
+     "part": "vacuum_system",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace trunnion seals and bearings.",
+     "part": "stands_trunnions"
+    }
+   ],
+   "lubrication": [
+    "Drive gearbox oil; trunnion bearings greased."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Vacuum leaks",
+     "category": "leakage",
+     "symptoms": [
+      "Slow drying"
+     ],
+     "causes": [
+      "Seal wear"
+     ],
+     "remedies": [
+      "Replace seals; leak test"
+     ],
+     "part": "stands_trunnions"
+    },
+    {
+     "problem": "Lump formation",
+     "category": "performance",
+     "symptoms": [
+      "Uneven drying"
+     ],
+     "causes": [
+      "Product stickiness"
+     ],
+     "remedies": [
+      "Lump breakers; adjust temperature"
+     ],
+     "part": "powder"
+    }
+   ],
+   "safety": [
+    "Flammable solvents: inerting, ATEX electrical equipment; vessel rated for full vacuum."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vacuum Dryer — Introduction",
+    "type": "in_app_tour",
+    "model": "vacuum_dryer.glb",
+    "duration_s": 48.3,
+    "script": [
+     {
+      "narration": "This module introduces the Vacuum Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A rotary double-cone vacuum dryer dries batches of heat-sensitive or solvent-wet powders.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The double-cone vessel turns slowly on trunnions, tumbling the product against its heated jacket.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A vacuum pump lowers the pressure so the moisture or solvent boils at a low temperature; vapour passes a filter and is condensed.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include pharmaceutical APIs and intermediates; fine chemicals and solvent recovery; heat-sensitive foods.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vacuum Dryer — Operation",
+    "type": "in_app_tour",
+    "model": "vacuum_dryer.glb",
+    "duration_s": 32.4,
+    "script": [
+     {
+      "narration": "How the Vacuum Dryer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Wet product is charged through the manway.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "double_cone",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Hot water/steam/thermal oil heats the jacket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "double_cone",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The vessel rotates slowly and the product tumbles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "powder",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vapour is drawn through the trunnion to filter and condenser.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "vacuum_system",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drive turns the vessel on its trunnions.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Under vacuum (e.g.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vacuum Dryer — Maintenance",
+    "type": "in_app_tour",
+    "model": "vacuum_dryer.glb",
+    "duration_s": 30.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vacuum Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vacuum level, jacket temperature, seal condition.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vacuum_system",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean filter; check condenser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vacuum_system",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace trunnion seals and bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stands_trunnions",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vacuum leaks: slow drying. Common cause: seal wear.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "stands_trunnions",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for lump formation: uneven drying. Common cause: product stickiness.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "powder",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why dry under vacuum?",
+     "options": [
+      "Liquid boils at lower temperature",
+      "Faster rotation",
+      "Cheaper heating",
+      "Prevent tumbling"
+     ],
+     "answer": 0,
+     "explanation": "Boiling point falls with pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "How does vapour leave?",
+     "options": [
+      "Through a line in the trunnion to the filter and condenser",
+      "Through the manway",
+      "Through the drive",
+      "It stays"
+     ],
+     "answer": 0,
+     "explanation": "Trunnion.",
+     "level": "basic"
+    },
+    {
+     "question": "Why condense the vapour?",
+     "options": [
+      "To recover solvents and protect the vacuum pump",
+      "To heat the jacket",
+      "For noise",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds and tumbles the product.\"",
+     "options": [
+      "Double-Cone Vessel with Heating Jacket, Charging Manway & Discharge Valve",
+      "Product Tumbling inside (stays low while the vessel turns)",
+      "Drive (motor, gearbox; slow rotation ≈ a few rpm)",
+      "Vacuum Line (through trunnion), Dust Filter & Condenser to Vacuum Pump"
+     ],
+     "answer": 0,
+     "explanation": "Double-Cone Vessel with Heating Jacket, Charging Manway & Discharge Valve: Holds and tumbles the product.",
+     "level": "basic",
+     "part": "double_cone",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Product.\"",
+     "options": [
+      "Vacuum Line (through trunnion), Dust Filter & Condenser to Vacuum Pump",
+      "Stands, Trunnions & Bearings (vessel rotates about the trunnion axis)",
+      "Product Tumbling inside (stays low while the vessel turns)",
+      "Double-Cone Vessel with Heating Jacket, Charging Manway & Discharge Valve"
+     ],
+     "answer": 2,
+     "explanation": "Product Tumbling inside (stays low while the vessel turns): Product.",
+     "level": "basic",
+     "part": "powder",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support and rotation axis.\"",
+     "options": [
+      "Drive (motor, gearbox; slow rotation ≈ a few rpm)",
+      "Vacuum Line (through trunnion), Dust Filter & Condenser to Vacuum Pump",
+      "Product Tumbling inside (stays low while the vessel turns)",
+      "Stands, Trunnions & Bearings (vessel rotates about the trunnion axis)"
+     ],
+     "answer": 3,
+     "explanation": "Stands, Trunnions & Bearings (vessel rotates about the trunnion axis): Support and rotation axis.",
+     "level": "basic",
+     "part": "stands_trunnions",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

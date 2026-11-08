@@ -1,0 +1,527 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "desilication_tank",
+  "title": "Pre-Desilication Tank (Agitated, Long Residence, Steam-Heated)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {},
+  "overlays": {
+    "flow": {
+      "file": "desilication_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "desilication_tank_temperature.glb",
+      "title": "Removing reactive silica before digestion",
+      "description": "Kaolinite and other reactive silica dissolve in caustic liquor and would later precipitate as scale or contaminate the product. Holding the slurry at about 95–100 °C for several hours (often ~ 6–10 h) lets the silica re-precipitate as sodalite (desilication product, DSP), which leaves with the red mud. Each kg of reactive silica locks up caustic soda and alumina in DSP.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "slurry",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.35,
+          1.9,
+          -0.0
+        ],
+        [
+          -0.4,
+          1.8,
+          -0.05
+        ],
+        [
+          0.4,
+          0.6,
+          -0.05
+        ],
+        [
+          1.35,
+          0.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.25,
+          1.6,
+          -0.3
+        ],
+        [
+          -0.8,
+          1.6,
+          -0.3
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 9282,
+    "parts": 8
+  },
+  "summary": "Pre-desilication tanks hold the bauxite slurry hot for several hours so dissolved reactive silica re-precipitates as sodalite (desilication product) before digestion. This protects heaters from scale and the product from silica.",
+  "classification": {
+    "family": "Desilication",
+    "type": "Agitated heated holding tank"
+  },
+  "model_configuration": {
+    "animation": "DSP crystals grow"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "ds_tank",
+      "name": "Desilication Tank: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "ds_tank__back",
+        "ds_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.95,
+        0.3,
+        -0.95
+      ],
+      "bbox_max": [
+        0.95,
+        2.575,
+        0.95
+      ],
+      "label_anchor": [
+        0.0,
+        1.4375,
+        0.95
+      ],
+      "center": [
+        0.0,
+        1.4375,
+        -0.0
+      ],
+      "info_ref": "dsl_tank"
+    },
+    {
+      "id": "ds_slurry",
+      "name": "Desilication Tank: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ds_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.945,
+        0.33,
+        -0.945
+      ],
+      "bbox_max": [
+        0.945,
+        1.83,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.08,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.08,
+        -0.4725
+      ],
+      "info_ref": "dsl_slurry"
+    },
+    {
+      "id": "ds_agitator",
+      "name": "Desilication Tank: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "ds_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.23489,
+        0.79,
+        -0.38243
+      ],
+      "bbox_max": [
+        0.4275,
+        2.825,
+        0.38243
+      ],
+      "label_anchor": [
+        0.09631,
+        1.8075,
+        0.38243
+      ],
+      "center": [
+        0.09631,
+        1.8075,
+        0.0
+      ],
+      "info_ref": "dsl_agitator"
+    },
+    {
+      "id": "ds_drive",
+      "name": "Desilication Tank: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "ds_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2,
+        2.525,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        3.325,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        2.925,
+        0.2
+      ],
+      "center": [
+        0.0,
+        2.925,
+        -0.0
+      ],
+      "info_ref": "dsl_drive"
+    },
+    {
+      "id": "heating_coil",
+      "name": "Steam Heating Coil (holds ~ 95–100 °C)",
+      "group": "heater",
+      "section_role": "keep",
+      "nodes": [
+        "cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.82465,
+        0.57625,
+        -0.825
+      ],
+      "bbox_max": [
+        0.82489,
+        1.62259,
+        -0.0
+      ],
+      "label_anchor": [
+        0.00012,
+        1.09942,
+        -0.0
+      ],
+      "center": [
+        0.00012,
+        1.09942,
+        -0.4125
+      ],
+      "info_ref": "dsl_coil"
+    },
+    {
+      "id": "nozzles",
+      "name": "Slurry Inlet (top), Outlet (bottom), Steam Inlet",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.25,
+        0.386,
+        -0.357
+      ],
+      "bbox_max": [
+        1.25,
+        2.014,
+        0.114
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        0.114
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.1215
+      ],
+      "info_ref": "dsl_coil"
+    },
+    {
+      "id": "foundation",
+      "name": "Ring-Wall Foundation",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "foundation__back",
+        "foundation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.05,
+        0.0,
+        -1.05
+      ],
+      "bbox_max": [
+        1.05,
+        0.3,
+        1.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        1.05
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "dsl_tank"
+    },
+    {
+      "id": "dsp",
+      "name": "Desilication Product (sodalite) Crystals forming and growing",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "dsp0",
+        "dsp1",
+        "dsp2",
+        "dsp3",
+        "dsp4",
+        "dsp5",
+        "dsp6",
+        "dsp7",
+        "dsp8",
+        "dsp9",
+        "dsp10",
+        "dsp11",
+        "dsp12",
+        "dsp13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.01902
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.01902
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01902
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "dsl_tank": {
+      "function": "Holds the slurry.",
+      "construction": "Tank with baffles/draft tube.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dsl_slurry": {
+      "function": "Process slurry/liquor.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dsl_agitator": {
+      "function": "Mixes and suspends solids.",
+      "construction": "Shaft and impellers.",
+      "material": "Carbon steel (often rubber-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blade wear, scale"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "dsl_drive": {
+      "function": "Drives the agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dsl_coil": {
+      "function": "Heating and connections.",
+      "construction": "Steam coil, nozzles.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

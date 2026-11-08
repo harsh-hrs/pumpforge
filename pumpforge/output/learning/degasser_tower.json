@@ -1,0 +1,659 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "degasser_tower",
+ "no": 228,
+ "title": "Degasser Tower",
+ "model_title": "Forced-Draught Degasser (Decarbonator) Tower",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A forced-draught degasser (decarbonator) removes dissolved CO₂ from water, usually after a cation exchanger. Water is spread over packing and trickles down while a blower sends air up; the CO₂ moves from the water into the air (which contains almost none) and is vented. Degassed water collects in the sump below.",
+   "applications": [
+    "Between cation and anion units in DM plants",
+    "After acid dosing ahead of RO; groundwater CO₂/H₂S stripping"
+   ],
+   "key_points": [
+    "Henry's law: gas leaves water when air has little of it",
+    "Counter-current air and water",
+    "Packing gives surface area",
+    "Outlet CO₂ ≈ 5 mg/L"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Forced-draught packed decarbonator"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A forced-draught degasser removes dissolved CO₂ from water after cation exchange. Water trickles down over packing while a blower sends air up; the CO₂ transfers into the air and is vented."
+  },
+  "model_3d": {
+   "asset": "glb/degasser_tower.glb",
+   "metadata": "meta/degasser_tower.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6496,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water is distributed over the packing.",
+    "It trickles down over the packing surface.",
+    "The blower sends air up the tower."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water is distributed over the packing.",
+     "part": "distributor_eliminator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It trickles down over the packing surface.",
+     "part": "packing",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The blower sends air up the tower.",
+     "part": "blower",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "CO₂-laden air leaves through the vent.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Degassed water collects in the sump.",
+     "part": "sump",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet CO₂ vs air-to-water ratio."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "degasser_tower_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "degasser_tower_pressure.glb",
+     "title": "CO₂ concentration falls down the tower",
+     "description": "After cation exchange, bicarbonate has turned into dissolved CO₂ (carbonic acid). Air blown up through the packing strips it out (Henry's law: the air has almost no CO₂), typically down to ~ 5 mg/L, which greatly reduces the load — and regenerant use — on the anion exchanger.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/degasser_tower.json#components",
+   "key_components": "Packed tower, water distributor, blower, degassed water sump, transfer pump",
+   "parts": [
+    {
+     "id": "tower",
+     "name": "Tower Shell (FRP/PP)",
+     "info_ref": "dg_tower",
+     "function": "Contact column.",
+     "material": "FRP/PP."
+    },
+    {
+     "id": "packing",
+     "name": "Random Packing — PP rings/saddles (high surface area for gas transfer)",
+     "info_ref": "dg_packing",
+     "function": "Gas transfer area.",
+     "material": "PP."
+    },
+    {
+     "id": "distributor_eliminator",
+     "name": "Water Distributor Tray & Mist Eliminator",
+     "info_ref": "dg_distributor",
+     "function": "Even water spread; mist removal.",
+     "material": "PP."
+    },
+    {
+     "id": "sump",
+     "name": "Covered Degassed-Water Sump (tower sits on the cover)",
+     "info_ref": "dg_sump",
+     "function": "Collects water.",
+     "material": "PP/lined."
+    },
+    {
+     "id": "sump_water",
+     "name": "Degassed Water",
+     "info_ref": "dg_sump",
+     "function": "Collects water.",
+     "material": "PP/lined."
+    },
+    {
+     "id": "blower",
+     "name": "Air Blower & Inlet Duct",
+     "info_ref": "dg_blower",
+     "function": "Supplies air.",
+     "material": "—"
+    },
+    {
+     "id": "blower_rotor",
+     "name": "Blower Impeller",
+     "info_ref": "dg_blower",
+     "function": "Supplies air.",
+     "material": "—"
+    },
+    {
+     "id": "nozzles",
+     "name": "Water Inlet & Air/CO₂ Vent",
+     "info_ref": "dg_tower",
+     "function": "Contact column.",
+     "material": "FRP/PP."
+    },
+    {
+     "id": "water_film",
+     "name": "Water trickling down over the Packing",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "air_up",
+     "name": "Air rising and carrying CO₂ out",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Towers ≈ 0.5 – 3 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 5 – 500",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Air/water ≈ 20 – 40 m³/m³; outlet CO₂ ≈ 5 mg/L",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Blower ≈ 1 – 30",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by flow, CO₂ in/out and packing transfer data."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Ion exchange manuals"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Vessels on level foundation or legs anchored; space above for resin loading and below for underdrain access."
+   ],
+   "alignment": [
+    "Vessels plumb so the bed and distributors are level (uneven beds channel)."
+   ],
+   "piping": [
+    "Valve nest with service, backwash, regenerant, rinse; sample points before/after; acid/caustic-resistant lines and safety showers."
+   ],
+   "commissioning": [
+    "Load support layers and resin (soaked), backwash to classify; first regeneration; rinse to quality; check conductivity/silica/hardness."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check blower and sump level.",
+     "part": "blower",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect distributor and packing.",
+     "part": "packing",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace packing if fouled.",
+     "part": "packing"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High CO₂ outlet",
+     "category": "performance",
+     "symptoms": [
+      "Anion runs short"
+     ],
+     "causes": [
+      "Blower failure, channelling"
+     ],
+     "remedies": [
+      "Repair blower; clean distributor"
+     ],
+     "part": "blower"
+    },
+    {
+     "problem": "Packing fouling",
+     "category": "performance",
+     "symptoms": [
+      "High ΔP"
+     ],
+     "causes": [
+      "Biological growth"
+     ],
+     "remedies": [
+      "Clean/replace"
+     ],
+     "part": "packing"
+    }
+   ],
+   "safety": [
+    "Vent gases outside; acidic water — corrosion-resistant materials."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Degasser Tower — Introduction",
+    "type": "in_app_tour",
+    "model": "degasser_tower.glb",
+    "duration_s": 51.6,
+    "script": [
+     {
+      "narration": "This module introduces the Degasser Tower.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A forced-draught degasser (decarbonator) removes dissolved CO₂ from water, usually after a cation exchanger.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water is spread over packing and trickles down while a blower sends air up; the CO₂ moves from the water into the air (which contains almost none) and is vented.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Degassed water collects in the sump below.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include between cation and anion units in DM plants; after acid dosing ahead of RO; groundwater CO₂/H₂S stripping.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Blower Impeller.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Degasser Tower — Operation",
+    "type": "in_app_tour",
+    "model": "degasser_tower.glb",
+    "duration_s": 32.8,
+    "script": [
+     {
+      "narration": "How the Degasser Tower works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water is distributed over the packing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor_eliminator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It trickles down over the packing surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "packing",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The blower sends air up the tower.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "blower",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "CO₂-laden air leaves through the vent.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Degassed water collects in the sump.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sump",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "After cation exchange, bicarbonate has turned into dissolved CO₂ (carbonic acid).",
+      "duration_s": 4.6,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Degasser Tower — Maintenance",
+    "type": "in_app_tour",
+    "model": "degasser_tower.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Degasser Tower.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check blower and sump level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect distributor and packing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace packing if fouled.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high co₂ outlet: anion runs short. Common cause: blower failure, channelling.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "blower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for packing fouling: high δp. Common cause: biological growth.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What gas does it remove?",
+     "options": [
+      "CO₂",
+      "O₂",
+      "N₂",
+      "H₂"
+     ],
+     "answer": 0,
+     "explanation": "CO₂.",
+     "level": "basic"
+    },
+    {
+     "question": "Why counter-current?",
+     "options": [
+      "Maximises driving force",
+      "Saves paint",
+      "Heats water",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Driving force.",
+     "level": "basic"
+    },
+    {
+     "question": "What benefit for the DM plant?",
+     "options": [
+      "Lower load on the anion unit",
+      "Higher pH only",
+      "More silica",
+      "Less water"
+     ],
+     "answer": 0,
+     "explanation": "Anion load.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contact column.\"",
+     "options": [
+      "Tower Shell (FRP/PP)",
+      "Degassed Water",
+      "Air Blower & Inlet Duct",
+      "Covered Degassed-Water Sump (tower sits on the cover)"
+     ],
+     "answer": 0,
+     "explanation": "Tower Shell (FRP/PP): Contact column.",
+     "level": "basic",
+     "part": "tower",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Gas transfer area.\"",
+     "options": [
+      "Air rising and carrying CO₂ out",
+      "Water Inlet & Air/CO₂ Vent",
+      "Random Packing — PP rings/saddles (high surface area for gas transfer)",
+      "Degassed Water"
+     ],
+     "answer": 2,
+     "explanation": "Random Packing — PP rings/saddles (high surface area for gas transfer): Gas transfer area.",
+     "level": "basic",
+     "part": "packing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Even water spread; mist removal.\"",
+     "options": [
+      "Blower Impeller",
+      "Air Blower & Inlet Duct",
+      "Water Distributor Tray & Mist Eliminator",
+      "Random Packing — PP rings/saddles (high surface area for gas transfer)"
+     ],
+     "answer": 2,
+     "explanation": "Water Distributor Tray & Mist Eliminator: Even water spread; mist removal.",
+     "level": "basic",
+     "part": "distributor_eliminator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

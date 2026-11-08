@@ -1,0 +1,652 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "nitrogen_storage_vessel",
+ "no": 234,
+ "title": "Nitrogen Storage Vessel",
+ "model_title": "Liquid Nitrogen Storage Vessel (Vacuum-Insulated) with Ambient Vaporiser",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A liquid nitrogen storage vessel keeps nitrogen as a liquid at about −196 °C in a stainless inner vessel surrounded by a perlite-filled, high-vacuum annulus inside a carbon-steel outer vessel. A pressure-building coil keeps tank pressure, and an ambient-air vaporiser turns withdrawn liquid into gas for the plant; a final regulator sets supply pressure.",
+   "applications": [
+    "Back-up and peak supply of nitrogen for plant inerting",
+    "Cryogenic cooling, food freezing and laboratories"
+   ],
+   "key_points": [
+    "Boils at −196 °C (77 K)",
+    "1 L liquid → ≈ 0.69 Nm³ gas",
+    "Vacuum insulation keeps boil-off low",
+    "Relief on every section that can trap liquid"
+   ],
+   "classification": {
+    "family": "Gas utilities",
+    "type": "Vertical vacuum-insulated cryogenic tank with ambient vaporiser"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A liquid nitrogen storage vessel keeps nitrogen as a liquid at about −196 °C inside a vacuum-insulated double-wall tank. A pressure-building coil holds tank pressure, and an ambient-air vaporiser turns the withdrawn liquid into gas for the plant."
+  },
+  "model_3d": {
+   "asset": "glb/nitrogen_storage_vessel.glb",
+   "metadata": "meta/nitrogen_storage_vessel.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 26372,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Liquid is stored in the inner vessel.",
+    "The vacuum/perlite annulus limits heat leak.",
+    "The pressure builder vaporises a little liquid to hold pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Liquid is stored in the inner vessel.",
+     "part": "liquid_nitrogen",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The vacuum/perlite annulus limits heat leak.",
+     "part": "annulus_insulation",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pressure builder vaporises a little liquid to hold pressure.",
+     "part": "pressure_builder",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Withdrawn liquid warms in the ambient vaporiser.",
+     "part": "ambient_vaporiser",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Relief valves and gauges protect and monitor the tank.",
+     "part": "safety_instruments",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Vaporiser outlet temperature vs flow and running time (icing)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "nitrogen_storage_vessel_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "temperature": {
+     "file": "nitrogen_storage_vessel_temperature.glb",
+     "title": "From −196 °C liquid to ambient gas",
+     "description": "Liquid nitrogen boils at −196 °C (77 K). The vacuum-perlite annulus keeps heat leak so low that daily boil-off is only a fraction of a percent of capacity. Withdrawn liquid warms in the finned ambient vaporiser (heat from the air; frost forms on the cold lower tubes) and leaves close to ambient temperature. 1 litre of liquid gives ≈ 0.69 Nm³ of gas, so a closed-in liquid line must always have a relief device (trapped liquid → very high pressure).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/nitrogen_storage_vessel.json#components",
+   "key_components": "Vacuum-insulated cryogenic tank, ambient vaporiser, pressure building coil, regulator",
+   "parts": [
+    {
+     "id": "outer_vessel",
+     "name": "Outer Vessel / Vacuum Jacket (carbon steel)",
+     "info_ref": "ln_outer",
+     "function": "Vacuum jacket.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "inner_vessel",
+     "name": "Inner Vessel (austenitic stainless steel, rated for −196 °C)",
+     "info_ref": "ln_inner",
+     "function": "Holds the liquid.",
+     "material": "Austenitic stainless (cryogenic)."
+    },
+    {
+     "id": "annulus_insulation",
+     "name": "Annular Space: Perlite (or multilayer insulation) under High Vacuum",
+     "info_ref": "ln_annulus",
+     "function": "Limits heat leak.",
+     "material": "Perlite."
+    },
+    {
+     "id": "liquid_nitrogen",
+     "name": "Liquid Nitrogen (−196 °C at 1 atm; stored at ≈ 2–17 bar)",
+     "info_ref": "ln_inner",
+     "function": "Holds the liquid.",
+     "material": "Austenitic stainless (cryogenic)."
+    },
+    {
+     "id": "legs",
+     "name": "Support Legs",
+     "info_ref": "ln_outer",
+     "function": "Vacuum jacket.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "pressure_builder",
+     "name": "Pressure-Building Coil & Regulator (vaporises a little liquid to hold tank pressure)",
+     "info_ref": "ln_pbc",
+     "function": "Maintains tank pressure.",
+     "material": "Aluminium/stainless."
+    },
+    {
+     "id": "ambient_vaporiser",
+     "name": "Ambient-Air Vaporiser (star-finned aluminium tubes)",
+     "info_ref": "ln_vaporiser",
+     "function": "Vaporises liquid with ambient heat.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "frost",
+     "name": "Frost building on the cold lower tubes",
+     "info_ref": "ln_vaporiser",
+     "function": "Vaporises liquid with ambient heat.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "piping_valves",
+     "name": "Liquid Withdrawal Valve, Fill Connection, Gas Line & Final Line Regulator",
+     "info_ref": "ln_piping",
+     "function": "Fill, withdrawal and gas supply.",
+     "material": "Stainless/brass."
+    },
+    {
+     "id": "safety_instruments",
+     "name": "Dual Safety Relief Valves (change-over), Annulus Burst Disc, Level (ΔP) Gauge & Pressure Gauge",
+     "info_ref": "ln_safety",
+     "function": "Protects against overpressure and indicates contents.",
+     "material": "Brass/stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tanks ≈ 3 – 100 m³",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 2,000 – 70,000",
+     "unit": "Nm³ stored"
+    },
+    "operating_conditions": {
+     "typical_range": "≈ 2 – 17 bar; −196 °C liquid",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Passive (ambient vaporiser)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for consumption × days of autonomy; vaporiser for peak flow and climate."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EIGA Doc 115",
+    "EN 13458"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal movement of connected piping."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; nozzles and supports loaded within limits."
+   ],
+   "piping": [
+    "Relief protection per code, drains at low points, isolations for inspection; slope lines to drains."
+   ],
+   "commissioning": [
+    "Pressure test; set and seal relief valves; check instruments and drains; register with the authority where required."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Read level and pressure.",
+     "part": "safety_instruments",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check frost on shell (vacuum) and vaporiser icing.",
+     "part": "outer_vessel",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Test/replace relief valves.",
+     "part": "safety_instruments"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High boil-off",
+     "category": "performance",
+     "symptoms": [
+      "Pressure rises, venting"
+     ],
+     "causes": [
+      "Vacuum loss"
+     ],
+     "remedies": [
+      "Re-evacuate annulus (specialist)"
+     ],
+     "part": "annulus_insulation"
+    },
+    {
+     "problem": "Cold gas downstream",
+     "category": "performance",
+     "symptoms": [
+      "Frost on pipe, brittle failure risk"
+     ],
+     "causes": [
+      "Over-drawn/iced vaporiser"
+     ],
+     "remedies": [
+      "Reduce flow; switch/defrost bank; low-temperature shut-off"
+     ],
+     "part": "ambient_vaporiser"
+    }
+   ],
+   "safety": [
+    "Cryogenic burns — face shield, gloves; asphyxiation in enclosed areas; no carbon steel in cold service."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Nitrogen Storage Vessel — Introduction",
+    "type": "in_app_tour",
+    "model": "nitrogen_storage_vessel.glb",
+    "duration_s": 52.6,
+    "script": [
+     {
+      "narration": "This module introduces the Nitrogen Storage Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A liquid nitrogen storage vessel keeps nitrogen as a liquid at about −196 °C in a stainless inner vessel surrounded by a perlite-filled, high-vacuum annulus inside a carbon-steel outer vessel.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A pressure-building coil keeps tank pressure, and an ambient-air vaporiser turns withdrawn liquid into gas for the plant; a final regulator sets supply pressure.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include back-up and peak supply of nitrogen for plant inerting; cryogenic cooling, food freezing and laboratories.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Nitrogen Storage Vessel — Operation",
+    "type": "in_app_tour",
+    "model": "nitrogen_storage_vessel.glb",
+    "duration_s": 32.4,
+    "script": [
+     {
+      "narration": "How the Nitrogen Storage Vessel works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Liquid is stored in the inner vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquid_nitrogen",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The vacuum/perlite annulus limits heat leak.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "annulus_insulation",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pressure builder vaporises a little liquid to hold pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "pressure_builder",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Withdrawn liquid warms in the ambient vaporiser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ambient_vaporiser",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Relief valves and gauges protect and monitor the tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "safety_instruments",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Liquid nitrogen boils at −196 °C (77 K).",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Nitrogen Storage Vessel — Maintenance",
+    "type": "in_app_tour",
+    "model": "nitrogen_storage_vessel.glb",
+    "duration_s": 34.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Nitrogen Storage Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Read level and pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "safety_instruments",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check frost on shell (vacuum) and vaporiser icing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outer_vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test/replace relief valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "safety_instruments",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high boil-off: pressure rises, venting. Common cause: vacuum loss.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "annulus_insulation",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cold gas downstream: frost on pipe, brittle failure risk. Common cause: over-drawn/iced vaporiser.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "ambient_vaporiser",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Boiling point of nitrogen at 1 atm?",
+     "options": [
+      "−196 °C",
+      "−78 °C",
+      "0 °C",
+      "−40 °C"
+     ],
+     "answer": 0,
+     "explanation": "77 K.",
+     "level": "basic"
+    },
+    {
+     "question": "What keeps tank pressure?",
+     "options": [
+      "Pressure-building coil",
+      "A compressor",
+      "A pump",
+      "The sun"
+     ],
+     "answer": 0,
+     "explanation": "PBC.",
+     "level": "basic"
+    },
+    {
+     "question": "Why relief on liquid lines?",
+     "options": [
+      "Trapped liquid warms and expands enormously",
+      "For flow",
+      "For colour",
+      "Not needed"
+     ],
+     "answer": 0,
+     "explanation": "Overpressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Vacuum jacket.\"",
+     "options": [
+      "Liquid Nitrogen (−196 °C at 1 atm; stored at ≈ 2–17 bar)",
+      "Dual Safety Relief Valves (change-over), Annulus Burst Disc, Level (ΔP) Gauge & Pressure Gauge",
+      "Outer Vessel / Vacuum Jacket (carbon steel)",
+      "Liquid Withdrawal Valve, Fill Connection, Gas Line & Final Line Regulator"
+     ],
+     "answer": 2,
+     "explanation": "Outer Vessel / Vacuum Jacket (carbon steel): Vacuum jacket.",
+     "level": "basic",
+     "part": "outer_vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds the liquid.\"",
+     "options": [
+      "Ambient-Air Vaporiser (star-finned aluminium tubes)",
+      "Pressure-Building Coil & Regulator (vaporises a little liquid to hold tank pressure)",
+      "Annular Space: Perlite (or multilayer insulation) under High Vacuum",
+      "Inner Vessel (austenitic stainless steel, rated for −196 °C)"
+     ],
+     "answer": 3,
+     "explanation": "Inner Vessel (austenitic stainless steel, rated for −196 °C): Holds the liquid.",
+     "level": "basic",
+     "part": "inner_vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Limits heat leak.\"",
+     "options": [
+      "Outer Vessel / Vacuum Jacket (carbon steel)",
+      "Support Legs",
+      "Annular Space: Perlite (or multilayer insulation) under High Vacuum",
+      "Dual Safety Relief Valves (change-over), Annulus Burst Disc, Level (ΔP) Gauge & Pressure Gauge"
+     ],
+     "answer": 2,
+     "explanation": "Annular Space: Perlite (or multilayer insulation) under High Vacuum: Limits heat leak.",
+     "level": "basic",
+     "part": "annulus_insulation",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

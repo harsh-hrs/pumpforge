@@ -1,0 +1,971 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "centralized_lubrication_system",
+  "title": "Centralized (Progressive) Grease Lubrication System for a Conveyor Drive Station",
+  "category": "14 · Mechanical Components & Maintenance",
+  "library": {
+    "no": 261,
+    "phase": 12,
+    "eq_id": "EQ-339",
+    "subcategory": "Lubrication",
+    "hi_family": "mechanical_components",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "centralized_lubrication_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "centralized_lubrication_system_pressure.glb",
+      "title": "One pump, many points, guaranteed sequence",
+      "description": "A progressive divider has pistons that must each complete their stroke before the next can move, so every outlet receives its measured dose in turn. If any line or bearing blocks, the whole divider stops, pressure rises and the cycle indicator / pressure switch raises an alarm — a blocked point cannot go unnoticed. The controller runs short pump cycles followed by pauses, delivering small, frequent doses that suit bearings better than large manual shots.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "main_line",
+      "kind": "sand",
+      "radius": 0.006,
+      "points": [
+        [
+          -1.2,
+          0.3,
+          -0.16
+        ],
+        [
+          -0.6,
+          0.3,
+          -0.16
+        ],
+        [
+          -0.6,
+          0.56,
+          -0.0
+        ],
+        [
+          -0.35,
+          0.56,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6832,
+    "parts": 20
+  },
+  "summary": "A centralized (progressive) lubrication system uses one pump unit and divider blocks to feed measured amounts of grease automatically to many bearings, in a fixed sequence with monitoring of every cycle.",
+  "classification": {
+    "family": "Lubrication",
+    "type": "Progressive grease system"
+  },
+  "model_configuration": {
+    "animation": "Paddle turns; divider pistons stroke in sequence; doses travel to bearings"
+  },
+  "standards": [
+    {
+      "id": "Maker standards (e.g. SKF Lincoln / Bijur)",
+      "title": "Progressive systems",
+      "relevance": "Design (to be verified).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "SKF Lincoln system manuals"
+  ],
+  "parts": [
+    {
+      "id": "pump_unit",
+      "name": "Pump Unit: Transparent Reservoir, Electric Pump Element, Pressure-Relief Valve & Fill Coupling",
+      "group": "pump",
+      "section_role": "keep",
+      "nodes": [
+        "pump_unit.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.46,
+        0.05,
+        -0.62
+      ],
+      "bbox_max": [
+        -0.935,
+        0.98,
+        0.16
+      ],
+      "label_anchor": [
+        -1.1975,
+        0.515,
+        0.16
+      ],
+      "center": [
+        -1.1975,
+        0.515,
+        -0.23
+      ],
+      "info_ref": "cl_pump"
+    },
+    {
+      "id": "grease_reservoir",
+      "name": "Grease in the Reservoir (level falls as it is used)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "gf"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.344,
+        0.42,
+        -0.144
+      ],
+      "bbox_max": [
+        -1.056,
+        0.85,
+        -0.0
+      ],
+      "label_anchor": [
+        -1.2,
+        0.635,
+        -0.0
+      ],
+      "center": [
+        -1.2,
+        0.635,
+        -0.072
+      ],
+      "info_ref": "cl_pump"
+    },
+    {
+      "id": "stirring_paddle",
+      "name": "Stirring Paddle (feeds grease to the pump element, prevents cavities)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "stirring_paddle.001"
+      ],
+      "pivot": [
+        -1.2,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -1.44,
+        0.42,
+        -0.012
+      ],
+      "bbox_max": [
+        -0.96,
+        0.9,
+        0.012
+      ],
+      "label_anchor": [
+        -1.2,
+        0.66,
+        0.012
+      ],
+      "center": [
+        -1.2,
+        0.66,
+        -0.0
+      ],
+      "info_ref": "cl_pump"
+    },
+    {
+      "id": "divider_block",
+      "name": "Progressive Divider Block (6 sections, pistons discharge in fixed sequence)",
+      "group": "distributor",
+      "section_role": "split",
+      "nodes": [
+        "divider_block__back",
+        "divider_block__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.385,
+        0.545,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.315,
+        0.925,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.735,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.735,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "divider_piston_1",
+      "name": "Divider Piston 1",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "dp0"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.36,
+        0.59,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.34,
+        0.61,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.6,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "divider_piston_2",
+      "name": "Divider Piston 2",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "dp1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.36,
+        0.64,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.34,
+        0.66,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.65,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.65,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "divider_piston_3",
+      "name": "Divider Piston 3",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "dp2"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.36,
+        0.69,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.34,
+        0.71,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.7,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.7,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "divider_piston_4",
+      "name": "Divider Piston 4",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "dp3"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.36,
+        0.74,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.34,
+        0.76,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.75,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "divider_piston_5",
+      "name": "Divider Piston 5",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "dp4"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.36,
+        0.79,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.34,
+        0.81,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.8,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "divider_piston_6",
+      "name": "Divider Piston 6",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "dp5"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.36,
+        0.84,
+        -0.035
+      ],
+      "bbox_max": [
+        -0.34,
+        0.86,
+        0.035
+      ],
+      "label_anchor": [
+        -0.35,
+        0.85,
+        0.035
+      ],
+      "center": [
+        -0.35,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "cycle_indicator",
+      "name": "Cycle Indicator Pin (moves once per complete cycle — proves all outlets delivered)",
+      "group": "distributor",
+      "section_role": "keep",
+      "nodes": [
+        "cip"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.356,
+        0.925,
+        -0.006
+      ],
+      "bbox_max": [
+        -0.344,
+        0.975,
+        0.006
+      ],
+      "label_anchor": [
+        -0.35,
+        0.95,
+        0.006
+      ],
+      "center": [
+        -0.35,
+        0.95,
+        -0.0
+      ],
+      "info_ref": "cl_divider"
+    },
+    {
+      "id": "lube_points",
+      "name": "Lube Points: Six Plummer-Block Bearings on Two Conveyor Shafts",
+      "group": "machine",
+      "section_role": "keep",
+      "nodes": [
+        "lube_points.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.15,
+        0.25,
+        -0.68
+      ],
+      "bbox_max": [
+        1.75,
+        0.4,
+        0.08
+      ],
+      "label_anchor": [
+        0.95,
+        0.325,
+        0.08
+      ],
+      "center": [
+        0.95,
+        0.325,
+        -0.3
+      ],
+      "info_ref": "cl_points"
+    },
+    {
+      "id": "lines",
+      "name": "Main Line (high pressure) & Feed Lines to each Bearing",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "lines.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.2
+      ],
+      "bbox_min": [
+        -1.2,
+        0.292,
+        -0.604
+      ],
+      "bbox_max": [
+        1.60346,
+        0.85346,
+        0.00788
+      ],
+      "label_anchor": [
+        0.20173,
+        0.57273,
+        0.00788
+      ],
+      "center": [
+        0.20173,
+        0.57273,
+        -0.29806
+      ],
+      "info_ref": "cl_lines"
+    },
+    {
+      "id": "controller",
+      "name": "Controller / Timer (pause–run cycles, low-level & cycle-fault alarms)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "controller.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.75,
+        0.0,
+        -0.05
+      ],
+      "bbox_max": [
+        -1.55,
+        0.675,
+        0.05
+      ],
+      "label_anchor": [
+        -1.65,
+        0.3375,
+        0.05
+      ],
+      "center": [
+        -1.65,
+        0.3375,
+        -0.0
+      ],
+      "info_ref": "cl_pump"
+    },
+    {
+      "id": "grease_1",
+      "name": "Grease dose to bearing 1",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "grease_1_0",
+        "grease_1_1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.318,
+        0.592,
+        -0.008
+      ],
+      "bbox_max": [
+        0.103,
+        0.608,
+        0.008
+      ],
+      "label_anchor": [
+        -0.1075,
+        0.6,
+        0.008
+      ],
+      "center": [
+        -0.1075,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "grease_2",
+      "name": "Grease dose to bearing 2",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "grease_2_0",
+        "grease_2_1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.318,
+        0.642,
+        -0.008
+      ],
+      "bbox_max": [
+        0.453,
+        0.658,
+        0.008
+      ],
+      "label_anchor": [
+        0.0675,
+        0.65,
+        0.008
+      ],
+      "center": [
+        0.0675,
+        0.65,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "grease_3",
+      "name": "Grease dose to bearing 3",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "grease_3_0",
+        "grease_3_1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.318,
+        0.692,
+        -0.008
+      ],
+      "bbox_max": [
+        0.803,
+        0.708,
+        0.008
+      ],
+      "label_anchor": [
+        0.2425,
+        0.7,
+        0.008
+      ],
+      "center": [
+        0.2425,
+        0.7,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "grease_4",
+      "name": "Grease dose to bearing 4",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "grease_4_0",
+        "grease_4_1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.318,
+        0.742,
+        -0.608
+      ],
+      "bbox_max": [
+        -0.122,
+        0.758,
+        0.008
+      ],
+      "label_anchor": [
+        -0.22,
+        0.75,
+        0.008
+      ],
+      "center": [
+        -0.22,
+        0.75,
+        -0.3
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "grease_5",
+      "name": "Grease dose to bearing 5",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "grease_5_0",
+        "grease_5_1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.318,
+        0.792,
+        -0.608
+      ],
+      "bbox_max": [
+        0.228,
+        0.808,
+        0.008
+      ],
+      "label_anchor": [
+        -0.045,
+        0.8,
+        0.008
+      ],
+      "center": [
+        -0.045,
+        0.8,
+        -0.3
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "grease_6",
+      "name": "Grease dose to bearing 6",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "grease_6_0",
+        "grease_6_1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.318,
+        0.842,
+        -0.608
+      ],
+      "bbox_max": [
+        0.578,
+        0.858,
+        0.008
+      ],
+      "label_anchor": [
+        0.13,
+        0.85,
+        0.008
+      ],
+      "center": [
+        0.13,
+        0.85,
+        -0.3
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "cl_pump": {
+      "function": "Store and pump grease.",
+      "construction": "Reservoir, paddle, pump element, PRV, controller.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Empty reservoir",
+        "Air pockets"
+      ],
+      "inspection": [
+        "Low-level alarm"
+      ]
+    },
+    "cl_divider": {
+      "function": "Meter and sequence.",
+      "construction": "Progressive divider with cycle indicator.",
+      "material": "Steel/brass.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blockage stops system"
+      ],
+      "inspection": [
+        "Cycle switch"
+      ]
+    },
+    "cl_points": {
+      "function": "Lubricated machine.",
+      "construction": "Plummer blocks on conveyor shafts.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cl_lines": {
+      "function": "Carry grease.",
+      "construction": "Main and feed lines.",
+      "material": "Steel / nylon.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Crushed / leaking line"
+      ],
+      "inspection": [
+        "Walk-down"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

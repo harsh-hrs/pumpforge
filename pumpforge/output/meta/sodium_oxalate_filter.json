@@ -1,0 +1,485 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "sodium_oxalate_filter",
+  "title": "Horizontal Pressure-Leaf Filter for Sodium Oxalate",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 215,
+    "phase": 10,
+    "eq_id": "EQ-293",
+    "subcategory": "Filtration",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "sodium_oxalate_filter_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "sodium_oxalate_filter_pressure.glb",
+      "title": "Pressure filtration, then cake discharge",
+      "description": "Slurry is pumped into the closed shell under pressure (typically a few bar); liquid passes through the leaf screens into the manifold while oxalate builds up as cake on both faces of each leaf. At the end of the cycle the shell is drained, opened (rolled back) and the cake is sluiced or vibrated off into the hopper.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.5,
+          1.4,
+          -0.0
+        ],
+        [
+          -0.9,
+          1.4,
+          -0.1
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.6
+        ]
+      ]
+    },
+    {
+      "name": "filtrate",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.4,
+          0.8,
+          -0.0
+        ],
+        [
+          -0.4,
+          0.67,
+          -0.0
+        ],
+        [
+          -1.4,
+          0.67,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.6
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10004,
+    "parts": 7
+  },
+  "summary": "A horizontal pressure-leaf filter separates sodium oxalate crystals from liquor. Slurry is pumped into the closed shell; cake forms on vertical mesh leaves while filtrate leaves through the manifold. The shell then rolls back and the cake is sluiced off.",
+  "classification": {
+    "family": "Filtration",
+    "type": "Horizontal pressure-leaf filter"
+  },
+  "model_configuration": {
+    "animation": "Filtering, then shell opens"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded storage tanks",
+      "relevance": "Atmospheric tanks (practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Pressure leaf filter maker data"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Pressure Shell (retracts on rails to discharge the cake)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.0,
+        0.55,
+        -0.55
+      ],
+      "bbox_max": [
+        1.275,
+        1.65,
+        0.55
+      ],
+      "label_anchor": [
+        0.1375,
+        1.1,
+        0.55
+      ],
+      "center": [
+        0.1375,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "of_shell"
+    },
+    {
+      "id": "fixed_head",
+      "name": "Fixed Head, Stand & Filtrate Manifold",
+      "group": "frame",
+      "section_role": "split",
+      "nodes": [
+        "fixed_head__back",
+        "fixed_head__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.4,
+        0.0,
+        -0.63
+      ],
+      "bbox_max": [
+        0.9,
+        1.73,
+        0.63
+      ],
+      "label_anchor": [
+        -0.25,
+        0.865,
+        0.63
+      ],
+      "center": [
+        -0.25,
+        0.865,
+        -0.0
+      ],
+      "info_ref": "of_head"
+    },
+    {
+      "id": "leaves",
+      "name": "Filter Leaves (mesh-covered frames) with Oxalate Cake, on the Filtrate Manifold",
+      "group": "filter_media",
+      "section_role": "split",
+      "nodes": [
+        "leaves__back",
+        "leaves__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.6
+      ],
+      "bbox_min": [
+        -0.825,
+        0.66,
+        -0.47
+      ],
+      "bbox_max": [
+        0.825,
+        1.6,
+        0.47
+      ],
+      "label_anchor": [
+        0.0,
+        1.13,
+        0.47
+      ],
+      "center": [
+        0.0,
+        1.13,
+        -0.0
+      ],
+      "info_ref": "of_leaves"
+    },
+    {
+      "id": "sluice_header",
+      "name": "Sluicing / Wash Header",
+      "group": "water",
+      "section_role": "keep",
+      "nodes": [
+        "sluice_header.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.3
+      ],
+      "bbox_min": [
+        -1.0,
+        1.47,
+        -0.025
+      ],
+      "bbox_max": [
+        0.9,
+        1.575,
+        0.025
+      ],
+      "label_anchor": [
+        -0.05,
+        1.5225,
+        0.025
+      ],
+      "center": [
+        -0.05,
+        1.5225,
+        -0.0
+      ],
+      "info_ref": "of_sluice"
+    },
+    {
+      "id": "rails_supports",
+      "name": "Shell Rails & Carriages",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "rails_supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.2,
+        0.0,
+        -0.5
+      ],
+      "bbox_max": [
+        2.2,
+        0.56,
+        0.5
+      ],
+      "label_anchor": [
+        0.5,
+        0.28,
+        0.5
+      ],
+      "center": [
+        0.5,
+        0.28,
+        -0.0
+      ],
+      "info_ref": "of_shell"
+    },
+    {
+      "id": "cake_hopper",
+      "name": "Cake Discharge Hopper",
+      "group": "discharge",
+      "section_role": "keep",
+      "nodes": [
+        "hp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        0.05,
+        -0.5
+      ],
+      "bbox_max": [
+        1.0,
+        0.45,
+        0.5
+      ],
+      "label_anchor": [
+        0.0,
+        0.25,
+        0.5
+      ],
+      "center": [
+        0.0,
+        0.25,
+        -0.0
+      ],
+      "info_ref": "of_shell"
+    },
+    {
+      "id": "feed_particles",
+      "name": "Oxalate Crystals carried onto the Leaves",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "feed_particles0",
+        "feed_particles1",
+        "feed_particles2",
+        "feed_particles3",
+        "feed_particles4",
+        "feed_particles5",
+        "feed_particles6",
+        "feed_particles7",
+        "feed_particles8",
+        "feed_particles9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "of_shell": {
+      "function": "Pressure envelope; retracts.",
+      "construction": "Shell on rails.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "of_head": {
+      "function": "Fixed head, manifold.",
+      "construction": "Head and stand.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "of_leaves": {
+      "function": "Filter surfaces.",
+      "construction": "Mesh leaves.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Mesh damage"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "of_sluice": {
+      "function": "Cake removal.",
+      "construction": "Sluice header.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

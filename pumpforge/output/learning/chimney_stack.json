@@ -1,0 +1,624 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "chimney_stack",
+ "no": 111,
+ "title": "Chimney / Stack",
+ "model_title": "Self-Supported Steel Chimney / Stack (lined, with helical strakes)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A chimney or stack releases flue gases high above the ground so they disperse safely. Hot gas rises by natural draft. Steel stacks are lined against heat and acid condensation, fitted with helical strakes against wind vibration, and carry sampling ports, platforms and warning lights.",
+   "applications": [
+    "Boilers and furnaces",
+    "Power plants and incinerators",
+    "Process heaters and gas turbines",
+    "Kilns and dryers"
+   ],
+   "key_points": [
+    "Height set by dispersion modelling",
+    "Natural draft ∝ height × density difference",
+    "Strakes stop vortex-induced vibration",
+    "CEMS sampling ports"
+   ],
+   "classification": {
+    "family": "Process structure",
+    "type": "Self-supported lined steel stack with strakes"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A chimney (stack) discharges flue gases high enough to disperse them safely. Hot gas rises by natural draft; height and exit velocity set the dispersion. Steel stacks are lined against acid condensation, fitted with helical strakes against wind-induced vibration, and carry sampling ports, platforms and an aviation light."
+  },
+  "model_3d": {
+   "asset": "glb/chimney_stack.glb",
+   "metadata": "meta/chimney_stack.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10448,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Flue gas enters through the breeching.",
+    "It rises up the lined shell by draft.",
+    "Strakes break up wind vortices."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flue gas enters through the breeching.",
+     "part": "breeching",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It rises up the lined shell by draft.",
+     "part": "lining",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Strakes break up wind vortices.",
+     "part": "strakes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas is sampled at the ports for emissions monitoring.",
+     "part": "access",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The plume disperses above the top.",
+     "part": "plume",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Draft = H·g·(ρ_air − ρ_gas)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "chimney_stack_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/chimney_stack.json#components",
+   "key_components": "Steel shell, lining, breeching, platforms, ladder, strakes",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Steel Shell (flared base for stability)",
+     "info_ref": "ch_shell",
+     "function": "Carries loads and contains the gas.",
+     "material": "Carbon/weathering steel."
+    },
+    {
+     "id": "lining",
+     "name": "Internal Lining / Insulation (corrosion & heat protection)",
+     "info_ref": "ch_lining",
+     "function": "Protects against heat and acid condensation.",
+     "material": "Mineral wool, refractory, alloy liner."
+    },
+    {
+     "id": "strakes",
+     "name": "Helical Strakes (suppress wind-induced vortex shedding)",
+     "info_ref": "ch_strakes",
+     "function": "Break up vortex shedding that causes vibration.",
+     "material": "Steel."
+    },
+    {
+     "id": "breeching",
+     "name": "Breeching (flue-gas inlet duct)",
+     "info_ref": "ch_breeching",
+     "function": "Brings flue gas in.",
+     "material": "Steel."
+    },
+    {
+     "id": "access",
+     "name": "Platforms (sampling/inspection) & Caged Ladder",
+     "info_ref": "ch_access",
+     "function": "Access for sampling and inspection.",
+     "material": "Steel."
+    },
+    {
+     "id": "fittings",
+     "name": "Aviation Light, Lightning Rod, Sampling Ports (CEMS) & Drain/Clean-out",
+     "info_ref": "ch_fittings",
+     "function": "Safety and monitoring fittings.",
+     "material": "—"
+    },
+    {
+     "id": "foundation",
+     "name": "Foundation & Anchor Bolts",
+     "info_ref": "ch_foundation",
+     "function": "Anchors the stack.",
+     "material": "Concrete."
+    },
+    {
+     "id": "plume",
+     "name": "Flue Gas / Plume (tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Height 15 – 250 m; Ø 0.5 – 10 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Near atmospheric (draft ~ Pa)",
+     "unit": "Pa"
+    },
+    "design_temperature": {
+     "typical_range": "Flue gas ~ 80 – 600",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Gas flow",
+     "unit": "m³/s"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Ring-wall or slab foundation with settlement monitoring; tank bottom with drainage slope and leak detection."
+   ],
+   "alignment": [
+    "Erect plumb; check deflection limits; install aviation lighting per authority."
+   ],
+   "piping": [
+    "Flexible connections at shell nozzles to absorb settlement; fire protection and bunding per code."
+   ],
+   "commissioning": [
+    "Hydrostatic test with settlement survey; calibrate level gauges and overfill protection."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check lights and CEMS.",
+     "part": "fittings",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect shell thickness and lining.",
+     "part": "shell",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Repaint/re-line; inspect anchor bolts.",
+     "part": "foundation"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Acid corrosion",
+     "category": "corrosion",
+     "symptoms": [
+      "Thinning, holes"
+     ],
+     "causes": [
+      "Flue gas below dew point"
+     ],
+     "remedies": [
+      "Maintain temperature; corrosion-resistant liner"
+     ],
+     "part": "lining"
+    },
+    {
+     "problem": "Wind vibration",
+     "category": "vibration",
+     "symptoms": [
+      "Oscillation"
+     ],
+     "causes": [
+      "Vortex shedding"
+     ],
+     "remedies": [
+      "Strakes/dampers"
+     ],
+     "part": "strakes"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Chimney / Stack — Introduction",
+    "type": "in_app_tour",
+    "model": "chimney_stack.glb",
+    "duration_s": 47.8,
+    "script": [
+     {
+      "narration": "This module introduces the Chimney / Stack.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A chimney or stack releases flue gases high above the ground so they disperse safely.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot gas rises by natural draft.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Steel stacks are lined against heat and acid condensation, fitted with helical strakes against wind vibration, and carry sampling ports, platforms and warning lights.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include boilers and furnaces; power plants and incinerators; process heaters and gas turbines; kilns and dryers.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Chimney / Stack — Operation",
+    "type": "in_app_tour",
+    "model": "chimney_stack.glb",
+    "duration_s": 28.2,
+    "script": [
+     {
+      "narration": "How the Chimney / Stack works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flue gas enters through the breeching.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "breeching",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It rises up the lined shell by draft.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lining",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Strakes break up wind vortices.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "strakes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas is sampled at the ports for emissions monitoring.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "access",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The plume disperses above the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "plume",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Chimney / Stack — Maintenance",
+    "type": "in_app_tour",
+    "model": "chimney_stack.glb",
+    "duration_s": 31.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Chimney / Stack.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check lights and CEMS.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fittings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect shell thickness and lining.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Repaint/re-line; inspect anchor bolts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "foundation",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for acid corrosion: thinning, holes. Common cause: flue gas below dew point.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "lining",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wind vibration: oscillation. Common cause: vortex shedding.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "strakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Natural draft depends on…",
+     "options": [
+      "Stack colour",
+      "Height and density difference between hot gas and air",
+      "Number of ladders",
+      "Wind only"
+     ],
+     "answer": 1,
+     "explanation": "Buoyancy.",
+     "level": "basic"
+    },
+    {
+     "question": "Helical strakes prevent…",
+     "options": [
+      "Corrosion",
+      "Vortex-induced vibration",
+      "Lightning",
+      "Rain entry"
+     ],
+     "answer": 1,
+     "explanation": "Break up shedding.",
+     "level": "basic"
+    },
+    {
+     "question": "Why line steel stacks?",
+     "options": [
+      "Appearance",
+      "Protect against heat and acid condensation",
+      "Weight",
+      "Noise only"
+     ],
+     "answer": 1,
+     "explanation": "Durability.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries loads and contains the gas.\"",
+     "options": [
+      "Breeching (flue-gas inlet duct)",
+      "Internal Lining / Insulation (corrosion & heat protection)",
+      "Steel Shell (flared base for stability)",
+      "Helical Strakes (suppress wind-induced vortex shedding)"
+     ],
+     "answer": 2,
+     "explanation": "Steel Shell (flared base for stability): Carries loads and contains the gas.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Protects against heat and acid condensation.\"",
+     "options": [
+      "Helical Strakes (suppress wind-induced vortex shedding)",
+      "Internal Lining / Insulation (corrosion & heat protection)",
+      "Steel Shell (flared base for stability)",
+      "Breeching (flue-gas inlet duct)"
+     ],
+     "answer": 1,
+     "explanation": "Internal Lining / Insulation (corrosion & heat protection): Protects against heat and acid condensation.",
+     "level": "basic",
+     "part": "lining",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Break up vortex shedding that causes vibration.\"",
+     "options": [
+      "Internal Lining / Insulation (corrosion & heat protection)",
+      "Steel Shell (flared base for stability)",
+      "Breeching (flue-gas inlet duct)",
+      "Helical Strakes (suppress wind-induced vortex shedding)"
+     ],
+     "answer": 3,
+     "explanation": "Helical Strakes (suppress wind-induced vortex shedding): Break up vortex shedding that causes vibration.",
+     "level": "basic",
+     "part": "strakes",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

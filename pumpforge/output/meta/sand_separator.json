@@ -1,0 +1,438 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "sand_separator",
+  "title": "Sand Separator — Inclined Screw Classifier (Coarse Sand from Red Mud Slurry)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 206,
+    "phase": 10,
+    "eq_id": "EQ-284",
+    "subcategory": "Residue Separation",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "sand_separator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "sand_separator_pressure.glb",
+      "title": "Sand settles, mud overflows",
+      "description": "Coarse sand (typically > ~ 100 µm) settles quickly in the pool and is raked up the incline, draining and being washed on the way, while fine red mud stays in suspension and overflows the weir to the washers. Removing sand early reduces erosion in thickeners, pumps and pipelines; the washed sand is often used for residue-area construction.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.1,
+          1.55,
+          -0.0
+        ],
+        [
+          -1.1,
+          0.95,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "overflow",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.3,
+          1.05,
+          -0.05
+        ],
+        [
+          -1.62,
+          1.15,
+          -0.0
+        ],
+        [
+          -1.9,
+          0.75,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "sand",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          -0.92447,
+          0.65451,
+          -0.05
+        ],
+        [
+          1.54828,
+          1.45795,
+          -0.05
+        ],
+        [
+          1.54338,
+          0.88885,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 3104,
+    "parts": 6
+  },
+  "summary": "A sand separator removes coarse sand from the red mud slurry. In an inclined screw classifier the sand settles in a pool and is raked up the incline by a slowly turning screw, draining as it goes, while fine mud overflows to the washers.",
+  "classification": {
+    "family": "Residue separation",
+    "type": "Inclined screw (spiral) classifier"
+  },
+  "model_configuration": {
+    "animation": "Screw turns; sand raked up"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Classifier design",
+      "relevance": "Sizing by sand load and overflow area.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "TMS Light Metals proceedings — Bayer process practice",
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids"
+  ],
+  "parts": [
+    {
+      "id": "trough_tank",
+      "name": "Inclined Trough & Settling Pool (with overflow weir)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "trough_tank__back",
+        "trough_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.65,
+        0.25,
+        -0.4
+      ],
+      "bbox_max": [
+        1.5227,
+        1.83614,
+        0.4
+      ],
+      "label_anchor": [
+        -0.06365,
+        1.04307,
+        0.4
+      ],
+      "center": [
+        -0.06365,
+        1.04307,
+        -0.0
+      ],
+      "info_ref": "ss_trough"
+    },
+    {
+      "id": "pool_slurry",
+      "name": "Pool of Mud Slurry (fines overflow, sand settles)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ps"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -1.6,
+        0.495,
+        -0.36
+      ],
+      "bbox_max": [
+        -0.6,
+        1.045,
+        -0.0
+      ],
+      "label_anchor": [
+        -1.1,
+        0.77,
+        -0.0
+      ],
+      "center": [
+        -1.1,
+        0.77,
+        -0.18
+      ],
+      "info_ref": "ss_trough"
+    },
+    {
+      "id": "screw",
+      "name": "Spiral Screw (rakes settled sand up the incline)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "screw.001"
+      ],
+      "pivot": [
+        0.02658,
+        1.06353,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -1.5612,
+        0.49658,
+        -0.23462
+      ],
+      "bbox_max": [
+        1.70947,
+        1.66137,
+        0.23499
+      ],
+      "label_anchor": [
+        0.07414,
+        1.07898,
+        0.23499
+      ],
+      "center": [
+        0.07414,
+        1.07898,
+        0.00019
+      ],
+      "info_ref": "ss_screw"
+    },
+    {
+      "id": "drive_discharge",
+      "name": "Head Drive (gearmotor) & Sand Discharge Chute",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "dr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        1.36838,
+        0.93885,
+        -0.225
+      ],
+      "bbox_max": [
+        1.91838,
+        2.23885,
+        0.225
+      ],
+      "label_anchor": [
+        1.64338,
+        1.58885,
+        0.225
+      ],
+      "center": [
+        1.64338,
+        1.58885,
+        -0.0
+      ],
+      "info_ref": "ss_drive"
+    },
+    {
+      "id": "supports",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.31873,
+        0.0,
+        -0.35
+      ],
+      "bbox_max": [
+        1.13275,
+        1.30344,
+        0.35
+      ],
+      "label_anchor": [
+        0.40701,
+        0.65172,
+        0.35
+      ],
+      "center": [
+        0.40701,
+        0.65172,
+        -0.0
+      ],
+      "info_ref": "ss_trough"
+    },
+    {
+      "id": "sand",
+      "name": "Sand Grains raked up the Incline (drained of liquor)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "sand0",
+        "sand1",
+        "sand2",
+        "sand3",
+        "sand4",
+        "sand5",
+        "sand6",
+        "sand7",
+        "sand8",
+        "sand9",
+        "sand10",
+        "sand11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        -0.025,
+        -0.02378
+      ],
+      "bbox_max": [
+        0.025,
+        0.025,
+        0.02378
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02378
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ss_trough": {
+      "function": "Settling pool and incline.",
+      "construction": "Trough, tank, weir.",
+      "material": "Steel (wear-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ss_screw": {
+      "function": "Rakes sand up.",
+      "construction": "Spiral screw on shaft.",
+      "material": "Steel with wear shoes.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Flight wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "ss_drive": {
+      "function": "Turns screw; discharges sand.",
+      "construction": "Gearmotor, chute.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

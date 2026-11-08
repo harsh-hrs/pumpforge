@@ -1,0 +1,651 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "waste_heat_recovery_boiler",
+  "title": "Waste Heat Recovery Boiler (Horizontal HRSG, Single Pressure)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 156,
+    "phase": 8,
+    "eq_id": "EQ-234",
+    "subcategory": "Boilers",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "waste_heat_recovery_boiler_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "waste_heat_recovery_boiler_temperature.glb",
+      "title": "Gas temperature profile through the HRSG",
+      "description": "Exhaust gas gives up heat to the superheater, then the evaporator, then the economizer. The smallest gas-to-water temperature difference — the pinch point at the evaporator outlet — and the approach temperature at the economizer outlet set how much heat can be recovered (typical design pinch ~ 8–15 °C).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "exhaust_gas",
+      "kind": "exhaust",
+      "radius": 0.05,
+      "points": [
+        [
+          -2.4,
+          1.3,
+          -0.0
+        ],
+        [
+          1.8,
+          1.3,
+          -0.0
+        ],
+        [
+          2.0,
+          1.7,
+          -0.0
+        ],
+        [
+          2.0,
+          4.7,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "water_steam",
+      "kind": "steam",
+      "radius": 0.015,
+      "points": [
+        [
+          0.8,
+          0.6,
+          0.8
+        ],
+        [
+          0.8,
+          0.6,
+          0.47
+        ],
+        [
+          0.8,
+          2.0,
+          0.47
+        ],
+        [
+          0.8,
+          2.7,
+          0.62
+        ],
+        [
+          0.7,
+          2.7,
+          0.2
+        ],
+        [
+          0.0,
+          3.2,
+          -0.0
+        ],
+        [
+          -1.1,
+          3.2,
+          -0.0
+        ],
+        [
+          -1.1,
+          2.0,
+          -0.3
+        ],
+        [
+          -1.1,
+          0.6,
+          -0.3
+        ],
+        [
+          -1.1,
+          0.6,
+          0.8
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 22404,
+    "parts": 10
+  },
+  "summary": "A waste heat recovery boiler (heat recovery steam generator, HRSG) makes steam from the hot exhaust of a gas turbine, engine, furnace or kiln. The gas passes superheater, evaporator and economizer banks in turn; water/steam circulates naturally between the drum and evaporator.",
+  "classification": {
+    "family": "Boiler",
+    "type": "Horizontal natural-circulation HRSG (single pressure)"
+  },
+  "model_configuration": {
+    "animation": "Circulation tracers; drum level"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC Section I",
+      "title": "Rules for construction of power boilers",
+      "relevance": "Boiler design and safety valves.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 12952 / EN 12953",
+      "title": "Water-tube / shell boilers",
+      "relevance": "European boiler codes.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Ganapathy — Waste Heat Boiler Deskbook"
+  ],
+  "parts": [
+    {
+      "id": "casing",
+      "name": "Insulated Gas Casing & Inlet Transition (from turbine/kiln exhaust)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "casing__back",
+        "casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -2.3,
+        0.475,
+        -0.575
+      ],
+      "bbox_max": [
+        1.6,
+        2.125,
+        0.575
+      ],
+      "label_anchor": [
+        -0.35,
+        1.3,
+        0.575
+      ],
+      "center": [
+        -0.35,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "hr_casing"
+    },
+    {
+      "id": "superheater",
+      "name": "Superheater (hottest gas) Tube Bank & Headers",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "superheater.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -1.14,
+        0.56,
+        -0.46
+      ],
+      "bbox_max": [
+        -0.91,
+        2.04,
+        0.46
+      ],
+      "label_anchor": [
+        -1.025,
+        1.3,
+        0.46
+      ],
+      "center": [
+        -1.025,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "hr_coils"
+    },
+    {
+      "id": "evaporator",
+      "name": "Evaporator (boiling tubes) Tube Bank & Headers",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "evaporator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.8
+      ],
+      "bbox_min": [
+        -0.39,
+        0.56,
+        -0.46
+      ],
+      "bbox_max": [
+        0.14,
+        2.04,
+        0.46
+      ],
+      "label_anchor": [
+        -0.125,
+        1.3,
+        0.46
+      ],
+      "center": [
+        -0.125,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "hr_coils"
+    },
+    {
+      "id": "economizer",
+      "name": "Economizer (coolest gas) Tube Bank & Headers",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "economizer.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        0.8
+      ],
+      "bbox_min": [
+        0.76,
+        0.56,
+        -0.46
+      ],
+      "bbox_max": [
+        1.14,
+        2.04,
+        0.46
+      ],
+      "label_anchor": [
+        0.95,
+        1.3,
+        0.46
+      ],
+      "center": [
+        0.95,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "hr_coils"
+    },
+    {
+      "id": "steam_drum",
+      "name": "Steam Drum (separates steam from water)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "steam_drum__back",
+        "steam_drum__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        2.4,
+        -0.3
+      ],
+      "bbox_max": [
+        1.0,
+        3.0,
+        0.3
+      ],
+      "label_anchor": [
+        0.0,
+        2.7,
+        0.3
+      ],
+      "center": [
+        0.0,
+        2.7,
+        -0.0
+      ],
+      "info_ref": "hr_drum"
+    },
+    {
+      "id": "drum_water",
+      "name": "Drum Water Level",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "dw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        0.3
+      ],
+      "bbox_min": [
+        -0.7,
+        2.412,
+        -0.28702
+      ],
+      "bbox_max": [
+        0.7,
+        2.68,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.546,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.546,
+        -0.14351
+      ],
+      "info_ref": "hr_drum"
+    },
+    {
+      "id": "circulation_piping",
+      "name": "Downcomer, Risers, Saturated-Steam & Economizer Links",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "circulation_piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.5
+      ],
+      "bbox_min": [
+        -1.14,
+        0.55,
+        -0.67
+      ],
+      "bbox_max": [
+        0.84,
+        3.24,
+        0.66
+      ],
+      "label_anchor": [
+        -0.15,
+        1.895,
+        0.66
+      ],
+      "center": [
+        -0.15,
+        1.895,
+        -0.005
+      ],
+      "info_ref": "hr_piping"
+    },
+    {
+      "id": "stack",
+      "name": "Outlet Transition & Stack",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "stack__back",
+        "stack__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.55,
+        0.475,
+        -0.575
+      ],
+      "bbox_max": [
+        2.35,
+        4.5,
+        0.575
+      ],
+      "label_anchor": [
+        1.95,
+        2.4875,
+        0.575
+      ],
+      "center": [
+        1.95,
+        2.4875,
+        -0.0
+      ],
+      "info_ref": "hr_casing"
+    },
+    {
+      "id": "gas_particles",
+      "name": "Exhaust Gas crossing the Banks",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "gas_particles_0",
+        "gas_particles_1",
+        "gas_particles_2",
+        "gas_particles_3",
+        "gas_particles_4",
+        "gas_particles_5",
+        "gas_particles_6",
+        "gas_particles_7",
+        "gas_particles_8",
+        "gas_particles_9",
+        "gas_particles_10",
+        "gas_particles_11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.33,
+        1.57,
+        -0.51
+      ],
+      "bbox_max": [
+        2.03,
+        3.93362,
+        -0.17
+      ],
+      "label_anchor": [
+        -0.15,
+        2.75181,
+        -0.17
+      ],
+      "center": [
+        -0.15,
+        2.75181,
+        -0.34
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "circulation",
+      "name": "Natural Circulation: Drum → Downcomer → Evaporator → Risers → Drum",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "circulation_0",
+        "circulation_1",
+        "circulation_2",
+        "circulation_3",
+        "circulation_4",
+        "circulation_5",
+        "circulation_6",
+        "circulation_7",
+        "circulation_8",
+        "circulation_9",
+        "circulation_10",
+        "circulation_11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.622,
+        0.578,
+        -0.642
+      ],
+      "bbox_max": [
+        0.122,
+        2.622,
+        0.022
+      ],
+      "label_anchor": [
+        -0.25,
+        1.6,
+        0.022
+      ],
+      "center": [
+        -0.25,
+        1.6,
+        -0.31
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hr_casing": {
+      "function": "Gas path, transitions and stack.",
+      "construction": "Insulated casing.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hr_coils": {
+      "function": "Heat transfer banks (SH, EVAP, ECO).",
+      "construction": "Finned vertical tubes with headers.",
+      "material": "Carbon/alloy steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Flow-accelerated corrosion, fatigue"
+      ],
+      "inspection": [
+        "Thickness, NDT"
+      ]
+    },
+    "hr_drum": {
+      "function": "Separates steam from water; holds inventory.",
+      "construction": "Steam drum with internals.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Level control critical.",
+      "failure_modes": [
+        "Carry-over"
+      ],
+      "inspection": [
+        "Level gauges"
+      ]
+    },
+    "hr_piping": {
+      "function": "Circulation links.",
+      "construction": "Downcomer, risers.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

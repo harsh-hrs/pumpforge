@@ -1,0 +1,596 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "double_pipe_heat_exchanger",
+ "no": 93,
+ "title": "Double Pipe Heat Exchanger",
+ "model_title": "Double Pipe (Hairpin) Heat Exchanger — Counter-Current",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A double pipe heat exchanger has one pipe inside another. The hot fluid flows through the inner tube and the cold fluid through the annulus around it, in opposite directions (counter-current). Heat passes through the inner tube wall. Several hairpins can be connected in series for more area.",
+   "applications": [
+    "Small duties and high-pressure services",
+    "Sludges and viscous fluids (finned/scraped versions)",
+    "Pilot plants and process heating/cooling",
+    "Lube-oil coolers"
+   ],
+   "key_points": [
+    "Simple and easy to clean",
+    "True counter-current flow",
+    "Q = U·A·LMTD",
+    "Economical up to ~ 30–50 m² per unit"
+   ],
+   "classification": {
+    "family": "Tubular heat exchanger",
+    "type": "Double-pipe hairpin, counter-current"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A double pipe (hairpin) heat exchanger is the simplest exchanger: one fluid flows in an inner tube, the other in the annulus between it and an outer pipe. Running the two fluids in opposite directions (counter-current) gives the best heat transfer. Hairpins are compact, easy to clean and handle high pressure."
+  },
+  "model_3d": {
+   "asset": "glb/double_pipe_heat_exchanger.glb",
+   "metadata": "meta/double_pipe_heat_exchanger.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6152,
+   "parts": 4
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot fluid enters the inner tube.",
+    "Cold fluid enters the annulus at the far end and flows the opposite way.",
+    "Heat passes through the tube wall from hot to cold."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot fluid enters the inner tube.",
+     "part": "inner_tube",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cold fluid enters the annulus at the far end and flows the opposite way.",
+     "part": "shell_pipes",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heat passes through the tube wall from hot to cold.",
+     "part": "inner_tube",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The return bend links the two legs of the hairpin.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Temperature profiles along the length; LMTD for counter-current > co-current for the same terminal temperatures."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "double_pipe_heat_exchanger_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "temperature": {
+     "file": "double_pipe_heat_exchanger_temperature.glb",
+     "title": "Temperature along the hot stream",
+     "description": "Counter-current flow: the hot fluid (inner tube) cools as it travels while the cold fluid in the annulus flows the opposite way and warms up. Counter-flow keeps a temperature difference along the whole length, so it transfers more heat than parallel flow.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/double_pipe_heat_exchanger.json#components",
+   "key_components": "Inner tube, outer pipe (annulus), return bend, nozzles",
+   "parts": [
+    {
+     "id": "shell_pipes",
+     "name": "Outer Pipes (Shell Legs) with End Closures",
+     "info_ref": "dp_outer",
+     "function": "Contains the annulus fluid around the inner tube.",
+     "material": "Carbon steel / stainless."
+    },
+    {
+     "id": "inner_tube",
+     "name": "Inner Tube with Return Bend (hairpin)",
+     "info_ref": "dp_inner",
+     "function": "Carries the tube-side fluid; its wall is the heat-transfer surface.",
+     "material": "Copper, stainless, carbon steel; finned versions exist."
+    },
+    {
+     "id": "nozzles",
+     "name": "Annulus Nozzles & Return-Bend Housing",
+     "info_ref": "dp_nozzles",
+     "function": "Connect the annulus fluid; return housing protects the bend.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "dp_supports",
+     "function": "Support the hairpin.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Inner tube ~ 20 – 100 mm; outer ~ 50 – 200 mm",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 300+ (high-pressure hairpins)",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "-50 to 500 (material dependent)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Area ~ 1 – 50 m² per hairpin",
+     "unit": "m²"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on saddles/structure designed for full-of-water weight; allow one end to slide."
+   ],
+   "alignment": [
+    "Provide pull-out space for tube bundles or plates; align nozzles to piping without strain."
+   ],
+   "piping": [
+    "Install vents and drains on both sides; fit strainers where fouling solids are expected.",
+    "Arrange counter-current connections as designed."
+   ],
+   "commissioning": [
+    "Pressure-test each side; vent air; bring flows on gradually to avoid thermal shock."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor outlet temperatures and ΔP.",
+     "part": "nozzles",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean tube and annulus (mechanical/chemical).",
+     "part": "inner_tube",
+     "interval": "as fouling dictates"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Hydro-test; replace gaskets/inner tube.",
+     "part": "shell_pipes"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Fouling",
+     "category": "performance",
+     "symptoms": [
+      "Falling duty, rising ΔP"
+     ],
+     "causes": [
+      "Deposits, scale"
+     ],
+     "remedies": [
+      "Clean; raise velocity"
+     ],
+     "part": "inner_tube"
+    },
+    {
+     "problem": "Leak between fluids",
+     "category": "leakage",
+     "symptoms": [
+      "Contamination"
+     ],
+     "causes": [
+      "Tube corrosion, cracked bend"
+     ],
+     "remedies": [
+      "Replace tube"
+     ],
+     "part": "inner_tube"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Double Pipe Heat Exchanger — Introduction",
+    "type": "in_app_tour",
+    "model": "double_pipe_heat_exchanger.glb",
+    "duration_s": 49.3,
+    "script": [
+     {
+      "narration": "This module introduces the Double Pipe Heat Exchanger.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A double pipe heat exchanger has one pipe inside another.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The hot fluid flows through the inner tube and the cold fluid through the annulus around it, in opposite directions (counter-current).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Heat passes through the inner tube wall.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include small duties and high-pressure services; sludges and viscous fluids (finned/scraped versions); pilot plants and process heating/cooling; lube-oil coolers.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Outer Pipes (Shell Legs) with End Closures.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Double Pipe Heat Exchanger — Operation",
+    "type": "in_app_tour",
+    "model": "double_pipe_heat_exchanger.glb",
+    "duration_s": 37.2,
+    "script": [
+     {
+      "narration": "How the Double Pipe Heat Exchanger works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot fluid enters the inner tube.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inner_tube",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cold fluid enters the annulus at the far end and flows the opposite way.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "shell_pipes",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heat passes through the tube wall from hot to cold.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "inner_tube",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The return bend links the two legs of the hairpin.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Counter-current flow: the hot fluid (inner tube) cools as it travels while the cold fluid in the annulus flows the opposite way and warms up.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Double Pipe Heat Exchanger — Maintenance",
+    "type": "in_app_tour",
+    "model": "double_pipe_heat_exchanger.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Double Pipe Heat Exchanger.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor outlet temperatures and ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean tube and annulus (mechanical/chemical).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inner_tube",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Hydro-test; replace gaskets/inner tube.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell_pipes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fouling: falling duty, rising δp. Common cause: deposits, scale.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "inner_tube",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for leak between fluids: contamination. Common cause: tube corrosion, cracked bend.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "inner_tube",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is counter-current flow preferred?",
+     "options": [
+      "Easier piping",
+      "Larger mean temperature difference → more heat transfer",
+      "Lower pressure drop",
+      "Cheaper"
+     ],
+     "answer": 1,
+     "explanation": "Higher LMTD.",
+     "level": "basic"
+    },
+    {
+     "question": "Heat transfer rate is given by…",
+     "options": [
+      "Q = m·g·h",
+      "Q = U·A·ΔT_lm",
+      "Q = ½ m v²",
+      "Q = P/V"
+     ],
+     "answer": 1,
+     "explanation": "Basic exchanger equation.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does the cold fluid flow?",
+     "options": [
+      "Inside the inner tube",
+      "In the annulus",
+      "Outside the outer pipe",
+      "In the bend only"
+     ],
+     "answer": 1,
+     "explanation": "Annulus side.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the annulus fluid around the inner tube.\"",
+     "options": [
+      "Supports",
+      "Inner Tube with Return Bend (hairpin)",
+      "Annulus Nozzles & Return-Bend Housing",
+      "Outer Pipes (Shell Legs) with End Closures"
+     ],
+     "answer": 3,
+     "explanation": "Outer Pipes (Shell Legs) with End Closures: Contains the annulus fluid around the inner tube.",
+     "level": "basic",
+     "part": "shell_pipes",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the tube-side fluid; its wall is the heat-transfer surface.\"",
+     "options": [
+      "Annulus Nozzles & Return-Bend Housing",
+      "Supports",
+      "Outer Pipes (Shell Legs) with End Closures",
+      "Inner Tube with Return Bend (hairpin)"
+     ],
+     "answer": 3,
+     "explanation": "Inner Tube with Return Bend (hairpin): Carries the tube-side fluid; its wall is the heat-transfer surface.",
+     "level": "basic",
+     "part": "inner_tube",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Connect the annulus fluid; return housing protects the bend.\"",
+     "options": [
+      "Outer Pipes (Shell Legs) with End Closures",
+      "Inner Tube with Return Bend (hairpin)",
+      "Supports",
+      "Annulus Nozzles & Return-Bend Housing"
+     ],
+     "answer": 3,
+     "explanation": "Annulus Nozzles & Return-Bend Housing: Connect the annulus fluid; return housing protects the bend.",
+     "level": "basic",
+     "part": "nozzles",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,682 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "jaw_crusher",
+ "no": 126,
+ "title": "Jaw Crusher",
+ "model_title": "Single-Toggle Jaw Crusher",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A jaw crusher breaks rock by compression between a fixed jaw and a moving (swing) jaw. In the single-toggle design the swing jaw hangs on an eccentric shaft at the top and is supported at the bottom by a toggle plate. As the shaft turns, the jaw moves towards and away from the fixed jaw with an elliptical motion. Rock is nipped, crushed and moves down the V-shaped chamber until it is small enough to pass the closed-side setting (CSS) at the bottom.",
+   "applications": [
+    "Primary crushing of hard rock, ore and recycled concrete",
+    "Quarry and mining primary stations",
+    "Mobile crushing plants"
+   ],
+   "key_points": [
+    "Compression crushing in a V-shaped chamber",
+    "Product size set by the closed-side setting (CSS)",
+    "Reduction ratio typically about 6–8 : 1",
+    "Toggle plate acts as a safety element"
+   ],
+   "classification": {
+    "family": "Crusher (compression)",
+    "type": "Single-toggle jaw crusher"
+   },
+   "hi_family": "material_handling",
+   "summary": "A jaw crusher breaks rock between a fixed jaw and a swinging jaw. The eccentric shaft moves the top of the swing jaw in a small orbit while the toggle plate holds the bottom; the jaw squeezes and releases the rock, which breaks and falls lower into the narrowing chamber until it passes the closed-side setting."
+  },
+  "model_3d": {
+   "asset": "glb/jaw_crusher.glb",
+   "metadata": "meta/jaw_crusher.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3024,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Rock enters the top of the chamber between the jaws.",
+    "The eccentric shaft and flywheels drive the swing jaw towards and away from the fixed jaw.",
+    "The swing jaw squeezes the rock against the fixed jaw; broken pieces fall lower each stroke."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Rock enters the top of the chamber between the jaws.",
+     "part": "fixed_jaw",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The eccentric shaft and flywheels drive the swing jaw towards and away from the fixed jaw.",
+     "part": "eccentric_flywheels",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The swing jaw squeezes the rock against the fixed jaw; broken pieces fall lower each stroke.",
+     "part": "swing_jaw",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The toggle plate supports the bottom of the jaw and sets the closed-side setting.",
+     "part": "toggle_plate",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Product leaves through the gap at the bottom.",
+     "part": "product",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Capacity rises with CSS and speed (up to an optimum); product gradation becomes finer with smaller CSS."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "jaw_crusher_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "wear": {
+     "file": "jaw_crusher_wear.glb",
+     "title": "Jaw die wear zones",
+     "description": "The dies wear fastest in the lower third, near the closed-side setting, where the gap is tightest and most of the crushing work is done (purple). Wear there opens the setting and makes the product coarser, so the setting is re-adjusted with shims or wedges. Many dies are symmetrical and can be turned top-to-bottom once to use the less-worn upper part.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/jaw_crusher.json#components",
+   "key_components": "Fixed & swing jaws, eccentric shaft, flywheels, toggle plate",
+   "parts": [
+    {
+     "id": "frame",
+     "name": "Main Frame (fabricated)",
+     "info_ref": "jc_frame",
+     "function": "Carries all loads.",
+     "material": "Steel."
+    },
+    {
+     "id": "fixed_jaw",
+     "name": "Fixed Jaw Die (corrugated manganese liner)",
+     "info_ref": "jc_fixed_jaw",
+     "function": "Stationary crushing surface.",
+     "material": "Manganese steel."
+    },
+    {
+     "id": "swing_jaw",
+     "name": "Swing (Moving) Jaw on Eccentric Shaft",
+     "info_ref": "jc_swing_jaw",
+     "function": "Moving crushing surface.",
+     "material": "Steel/manganese."
+    },
+    {
+     "id": "toggle_plate",
+     "name": "Toggle Plate (safety element) & Tension Rod",
+     "info_ref": "jc_toggle",
+     "function": "Transmits force; breaks to protect the crusher from tramp metal.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "eccentric_flywheels",
+     "name": "Eccentric Shaft, Flywheel & Grooved Drive Pulley",
+     "info_ref": "jc_eccentric",
+     "function": "Creates the jaw motion and stores energy.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "rocks",
+     "name": "Rock Crushed Progressively in the Chamber",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "product",
+     "name": "Crushed Product",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Feed opening ~ 0.4 × 0.6 m to 1.6 × 2.0 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 30 – 400",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 200 – 350",
+     "unit": "rpm",
+     "note": "eccentric shaft"
+    },
+    "capacity": {
+     "typical_range": "~ 50 – 1500+",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Feed opening ≥ about 1.2 × the largest lump; check capacity at the required CSS from maker's tables."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer crushing & screening handbooks (e.g. Metso, Sandvik)",
+    "MSHA/ISO machinery safety guidance"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a massive reinforced-concrete foundation or steel structure designed for the crusher's dynamic loads (maker's load data); use anti-vibration mounts where specified.",
+    "Allow crane access and lay-down space for liner and wear-part changes."
+   ],
+   "alignment": [
+    "Align motor and crusher sheaves or coupling; set V-belt tension to the maker's figure.",
+    "Set the closed-side setting (CSS) or gap with the maker's gauge/lead-ball method."
+   ],
+   "piping": [
+    "Feed with a controlled feeder (choke or regulated feed as designed); avoid segregated or one-sided feed.",
+    "Fit a tramp-metal magnet or metal detector ahead of the crusher and dust extraction at transfer points.",
+    "Lubrication system: connect oil supply/return, cooler and filter; check flow and pressure switches."
+   ],
+   "commissioning": [
+    "Check lubrication flows and temperatures before starting; run empty to check direction, vibration and current.",
+    "Introduce feed gradually; measure product size and adjust the setting; record power draw as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for bridging, unusual noise and oil/grease temperatures.",
+     "part": "frame",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure CSS and jaw-die wear; re-set the setting.",
+     "part": "fixed_jaw",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Turn or replace jaw dies; replace toggle plate and seats; replace eccentric bearings.",
+     "part": "swing_jaw"
+    }
+   ],
+   "lubrication": [
+    "Eccentric shaft bearings: grease or circulating oil to the maker's schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Toggle plate breakage",
+     "category": "performance",
+     "symptoms": [
+      "Crusher stops crushing, jaw hangs back"
+     ],
+     "causes": [
+      "Uncrushable tramp metal (designed safety failure), fatigue"
+     ],
+     "remedies": [
+      "Remove tramp; replace toggle; improve tramp removal"
+     ],
+     "part": "toggle_plate"
+    },
+    {
+     "problem": "Product too coarse",
+     "category": "performance",
+     "symptoms": [
+      "Oversize in product"
+     ],
+     "causes": [
+      "Worn dies, CSS opened"
+     ],
+     "remedies": [
+      "Re-set CSS; turn/replace dies"
+     ],
+     "part": "fixed_jaw"
+    },
+    {
+     "problem": "Bearing overheating",
+     "category": "bearing",
+     "symptoms": [
+      "High temperature"
+     ],
+     "causes": [
+      "Lubrication fault, overload"
+     ],
+     "remedies": [
+      "Correct lubrication; check feed"
+     ],
+     "part": "eccentric_flywheels"
+    }
+   ],
+   "safety": [
+    "Lock out and block the flywheels before entering the chamber; beware of rock falling or being ejected.",
+    "Never clear a blocked crusher by hand or with the drive running."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Jaw Crusher — Introduction",
+    "type": "in_app_tour",
+    "model": "jaw_crusher.glb",
+    "duration_s": 55.6,
+    "script": [
+     {
+      "narration": "This module introduces the Jaw Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A jaw crusher breaks rock by compression between a fixed jaw and a moving (swing) jaw.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In the single-toggle design the swing jaw hangs on an eccentric shaft at the top and is supported at the bottom by a toggle plate.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "As the shaft turns, the jaw moves towards and away from the fixed jaw with an elliptical motion.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include primary crushing of hard rock, ore and recycled concrete; quarry and mining primary stations; mobile crushing plants.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Main Frame (fabricated), Eccentric Shaft, Flywheel & Grooved Drive Pulley.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Jaw Crusher — Operation",
+    "type": "in_app_tour",
+    "model": "jaw_crusher.glb",
+    "duration_s": 47.2,
+    "script": [
+     {
+      "narration": "How the Jaw Crusher works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Rock enters the top of the chamber between the jaws.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "fixed_jaw",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The eccentric shaft and flywheels drive the swing jaw towards and away from the fixed jaw.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "eccentric_flywheels",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The swing jaw squeezes the rock against the fixed jaw; broken pieces fall lower each stroke.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "swing_jaw",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The toggle plate supports the bottom of the jaw and sets the closed-side setting.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "toggle_plate",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Product leaves through the gap at the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "product",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The dies wear fastest in the lower third, near the closed-side setting, where the gap is tightest and most of the crushing work is done (purple).",
+      "duration_s": 11.2,
+      "action": {
+       "overlay": "wear",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Jaw Crusher — Maintenance",
+    "type": "in_app_tour",
+    "model": "jaw_crusher.glb",
+    "duration_s": 42.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Jaw Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for bridging, unusual noise and oil/grease temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "frame",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure CSS and jaw-die wear; re-set the setting.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "fixed_jaw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Turn or replace jaw dies; replace toggle plate and seats; replace eccentric bearings.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "swing_jaw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for toggle plate breakage: crusher stops crushing, jaw hangs back. Common cause: uncrushable tramp metal (designed safety failure), fatigue.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "toggle_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for product too coarse: oversize in product. Common cause: worn dies, css opened.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "fixed_jaw",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bearing overheating: high temperature. Common cause: lubrication fault, overload.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "eccentric_flywheels",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What sets the product size of a jaw crusher?",
+     "options": [
+      "Feed opening",
+      "Closed-side setting (CSS)",
+      "Flywheel colour",
+      "Motor voltage"
+     ],
+     "answer": 1,
+     "explanation": "Smallest gap at the bottom.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the role of the toggle plate?",
+     "options": [
+      "Decoration",
+      "Supports the jaw and breaks as a safety element on tramp metal",
+      "Feeds the rock",
+      "Heats the jaw"
+     ],
+     "answer": 1,
+     "explanation": "Sacrificial safety element.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are flywheels fitted?",
+     "options": [
+      "To store energy and smooth the peak crushing loads",
+      "To cool the crusher",
+      "To weigh the rock",
+      "To lift the crusher"
+     ],
+     "answer": 0,
+     "explanation": "Energy storage.",
+     "level": "basic"
+    },
+    {
+     "question": "Where do jaw dies wear most?",
+     "options": [
+      "Top",
+      "Lower part near the discharge",
+      "Back side",
+      "They do not wear"
+     ],
+     "answer": 1,
+     "explanation": "Most crushing work occurs near the CSS.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries all loads.\"",
+     "options": [
+      "Main Frame (fabricated)",
+      "Toggle Plate (safety element) & Tension Rod",
+      "Eccentric Shaft, Flywheel & Grooved Drive Pulley",
+      "Rock Crushed Progressively in the Chamber"
+     ],
+     "answer": 0,
+     "explanation": "Main Frame (fabricated): Carries all loads.",
+     "level": "basic",
+     "part": "frame",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Stationary crushing surface.\"",
+     "options": [
+      "Main Frame (fabricated)",
+      "Swing (Moving) Jaw on Eccentric Shaft",
+      "Fixed Jaw Die (corrugated manganese liner)",
+      "Toggle Plate (safety element) & Tension Rod"
+     ],
+     "answer": 2,
+     "explanation": "Fixed Jaw Die (corrugated manganese liner): Stationary crushing surface.",
+     "level": "basic",
+     "part": "fixed_jaw",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Moving crushing surface.\"",
+     "options": [
+      "Swing (Moving) Jaw on Eccentric Shaft",
+      "Toggle Plate (safety element) & Tension Rod",
+      "Eccentric Shaft, Flywheel & Grooved Drive Pulley",
+      "Rock Crushed Progressively in the Chamber"
+     ],
+     "answer": 0,
+     "explanation": "Swing (Moving) Jaw on Eccentric Shaft: Moving crushing surface.",
+     "level": "basic",
+     "part": "swing_jaw",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

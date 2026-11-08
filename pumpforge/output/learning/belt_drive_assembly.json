@@ -1,0 +1,670 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "belt_drive_assembly",
+ "no": 89,
+ "title": "Belt Drive Assembly",
+ "model_title": "V-Belt Drive Assembly (3 Belts, Motor on Tensioning Slide Base)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A V-belt drive transmits power between parallel shafts by friction between wedge-shaped belts and grooved sheaves. The speed ratio is the ratio of the sheave pitch diameters. Correct tension and alignment give long belt life.",
+   "applications": [
+    "Fans and blowers",
+    "Pumps and compressors",
+    "Agricultural and workshop machines",
+    "Crushers and mills"
+   ],
+   "key_points": [
+    "Ratio = D_driven / D_driver",
+    "Tension: not too slack (slip), not too tight (bearings)",
+    "Replace belts as a matched set",
+    "Guard required"
+   ],
+   "classification": {
+    "family": "Mechanical drive",
+    "type": "Multi-groove classical/narrow V-belt drive"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A V-belt drive transmits power between parallel shafts by friction between wedge-shaped belts and grooved sheaves. The speed ratio equals the ratio of sheave diameters (here 2.5:1). Belts are tensioned by sliding the motor on its base; a guard protects people. Belt drives are simple, quiet, absorb shock and allow speed changes by changing sheaves."
+  },
+  "model_3d": {
+   "asset": "glb/belt_drive_assembly.glb",
+   "metadata": "meta/belt_drive_assembly.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 37368,
+   "parts": 14
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor turns the small driver sheave.",
+    "Belts wedge into the grooves; friction transmits the torque.",
+    "The large driven sheave turns slower in proportion to the diameters."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor turns the small driver sheave.",
+     "part": "driver_sheave",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Belts wedge into the grooves; friction transmits the torque.",
+     "part": "belts",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The large driven sheave turns slower in proportion to the diameters.",
+     "part": "driven_sheave",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The slide base tensions the belts.",
+     "part": "slide_base",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The guard encloses the drive for safety.",
+     "part": "guard",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Power rating per belt vs speed (belt maker tables); efficiency ~ 93–97 %."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "belt_drive_assembly_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/belt_drive_assembly.json#components",
+   "key_components": "Driver & driven sheaves, V-belts, tensioning base, guard",
+   "parts": [
+    {
+     "id": "driver_sheave",
+     "name": "Driver Sheave (small, on motor shaft) — Taper-Lock bush",
+     "info_ref": "bd_sheave",
+     "function": "Grip the belts and transmit torque.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "driven_sheave",
+     "name": "Driven Sheave (large) & Driven Shaft",
+     "info_ref": "bd_sheave",
+     "function": "Grip the belts and transmit torque.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "belts",
+     "name": "Matched Set of V-Belts (3)",
+     "info_ref": "bd_belts",
+     "function": "Transmit power by friction in the grooves.",
+     "material": "Rubber with polyester cords."
+    },
+    {
+     "id": "belt_markers",
+     "name": "Belt Motion Markers",
+     "info_ref": "bd_belts",
+     "function": "Transmit power by friction in the grooves.",
+     "material": "Rubber with polyester cords."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Drive Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Drive Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Drive Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Drive Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Drive Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Drive Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "slide_base",
+     "name": "Motor Slide Base & Tensioning Screw",
+     "info_ref": "bd_slide_base",
+     "function": "Allows belt tensioning and alignment.",
+     "material": "Steel."
+    },
+    {
+     "id": "driven_bearings",
+     "name": "Driven Shaft Plummer Blocks",
+     "info_ref": "bd_bearings",
+     "function": "Support the driven shaft.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "frame",
+     "name": "Base Frame",
+     "info_ref": "bd_slide_base",
+     "function": "Allows belt tensioning and alignment.",
+     "material": "Steel."
+    },
+    {
+     "id": "guard",
+     "name": "Belt Guard (hidden in cutaway)",
+     "info_ref": "bd_guard",
+     "function": "Prevents contact with moving parts.",
+     "material": "Steel mesh/sheet."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Sheave Ø ~ 50 – 2000 mm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.1 – 1000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Belt speed typically 5 – 35 m/s",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "Ratio up to ~ 8:1",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "belts": {
+     "typical_range": "Section SPZ/SPA/SPB/SPC or A/B/C",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount driver and driven machines on a rigid common base so centre distances and alignment stay fixed."
+   ],
+   "alignment": [
+    "Align shafts parallel and the wheels/hubs in the same plane (straight-edge or laser); misalignment is the main cause of early wear."
+   ],
+   "piping": [
+    "Fit guards that fully enclose moving parts but allow inspection and lubrication."
+   ],
+   "commissioning": [
+    "Tension by the deflection method (force for a given deflection per span); re-tension after the first 24 h."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Look/listen for slip, cracking, squeal.",
+     "part": "belts",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check tension and alignment.",
+     "part": "slide_base",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace belts as a set; check groove wear.",
+     "part": "driver_sheave"
+    }
+   ],
+   "lubrication": [
+    "No belt dressing; grease plummer blocks per schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Belt slip",
+     "category": "performance",
+     "symptoms": [
+      "Squeal, glazing, heat"
+     ],
+     "causes": [
+      "Low tension, worn grooves, overload"
+     ],
+     "remedies": [
+      "Re-tension; replace sheaves"
+     ],
+     "part": "belts"
+    },
+    {
+     "problem": "Rapid belt wear",
+     "category": "wear",
+     "symptoms": [
+      "Frayed sides"
+     ],
+     "causes": [
+      "Misalignment"
+     ],
+     "remedies": [
+      "Align sheaves"
+     ],
+     "part": "slide_base"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Belt Drive Assembly — Introduction",
+    "type": "in_app_tour",
+    "model": "belt_drive_assembly.glb",
+    "duration_s": 42.9,
+    "script": [
+     {
+      "narration": "This module introduces the Belt Drive Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A V-belt drive transmits power between parallel shafts by friction between wedge-shaped belts and grooved sheaves.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The speed ratio is the ratio of the sheave pitch diameters.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Correct tension and alignment give long belt life.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include fans and blowers; pumps and compressors; agricultural and workshop machines; crushers and mills.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Belt Drive Assembly — Operation",
+    "type": "in_app_tour",
+    "model": "belt_drive_assembly.glb",
+    "duration_s": 28.8,
+    "script": [
+     {
+      "narration": "How the Belt Drive Assembly works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor turns the small driver sheave.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "driver_sheave",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Belts wedge into the grooves; friction transmits the torque.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "belts",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The large driven sheave turns slower in proportion to the diameters.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "driven_sheave",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The slide base tensions the belts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "slide_base",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The guard encloses the drive for safety.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "guard",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Belt Drive Assembly — Maintenance",
+    "type": "in_app_tour",
+    "model": "belt_drive_assembly.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Belt Drive Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Look/listen for slip, cracking, squeal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "belts",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check tension and alignment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "slide_base",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace belts as a set; check groove wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "driver_sheave",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for belt slip: squeal, glazing, heat. Common cause: low tension, worn grooves, overload.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "belts",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rapid belt wear: frayed sides. Common cause: misalignment.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "slide_base",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "A 150 mm driver drives a 375 mm sheave. The driven speed at 1450 rpm input is about…",
+     "options": [
+      "3625 rpm",
+      "580 rpm",
+      "1450 rpm",
+      "725 rpm"
+     ],
+     "answer": 1,
+     "explanation": "1450 × 150/375.",
+     "level": "basic"
+    },
+    {
+     "question": "Why replace V-belts as a matched set?",
+     "options": [
+      "Cheaper",
+      "So all belts share the load equally",
+      "Colour matching",
+      "Not necessary"
+     ],
+     "answer": 1,
+     "explanation": "Different lengths unbalance load.",
+     "level": "basic"
+    },
+    {
+     "question": "Over-tensioning belts mainly damages…",
+     "options": [
+      "The guard",
+      "Shaft bearings",
+      "The motor windings",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "High bearing loads.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Grip the belts and transmit torque.\"",
+     "options": [
+      "Belt Guard (hidden in cutaway)",
+      "Drive Motor – Fan Cover",
+      "Drive Motor – Frame & End Shields",
+      "Driver Sheave (small, on motor shaft) — Taper-Lock bush"
+     ],
+     "answer": 3,
+     "explanation": "Driver Sheave (small, on motor shaft) — Taper-Lock bush: Grip the belts and transmit torque.",
+     "level": "basic",
+     "part": "driver_sheave",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transmit power by friction in the grooves.\"",
+     "options": [
+      "Drive Motor – Cooling Fan",
+      "Matched Set of V-Belts (3)",
+      "Driven Sheave (large) & Driven Shaft",
+      "Base Frame"
+     ],
+     "answer": 1,
+     "explanation": "Matched Set of V-Belts (3): Transmit power by friction in the grooves.",
+     "level": "basic",
+     "part": "belts",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Allows belt tensioning and alignment.\"",
+     "options": [
+      "Belt Guard (hidden in cutaway)",
+      "Drive Motor – Cooling Fan",
+      "Belt Motion Markers",
+      "Motor Slide Base & Tensioning Screw"
+     ],
+     "answer": 3,
+     "explanation": "Motor Slide Base & Tensioning Screw: Allows belt tensioning and alignment.",
+     "level": "basic",
+     "part": "slide_base",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

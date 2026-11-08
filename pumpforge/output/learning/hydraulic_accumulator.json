@@ -1,0 +1,634 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydraulic_accumulator",
+ "no": 146,
+ "title": "Hydraulic Accumulator",
+ "model_title": "Bladder-Type Hydraulic Accumulator",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A hydraulic accumulator stores energy as compressed gas. In a bladder accumulator, a rubber bladder inside a steel shell is pre-charged with nitrogen. When system pressure rises above the pre-charge, oil flows in and compresses the gas; when pressure falls, the gas pushes the oil back out. A poppet valve at the oil port stops the bladder being extruded.",
+   "applications": [
+    "Emergency/backup energy (e.g. closing valves, braking)",
+    "Supplementing pump flow for short peaks",
+    "Absorbing pressure shocks and pulsations",
+    "Compensating for thermal expansion and leakage"
+   ],
+   "key_points": [
+    "Pre-charge with NITROGEN only — never oxygen or air",
+    "Bladder type: pre-charge ≈ 0.9 × minimum system pressure (rule of thumb)",
+    "Gas law sets usable volume (p·Vⁿ = constant)",
+    "Pressure vessel — design/inspection codes apply"
+   ],
+   "classification": {
+    "family": "Hydraulic equipment",
+    "type": "Bladder accumulator"
+   },
+   "hi_family": "material_handling",
+   "summary": "A hydraulic accumulator stores energy in compressed gas. In this bladder type a nitrogen-filled bladder sits inside a steel shell; when system pressure rises, oil enters and squeezes the bladder; when pressure falls, the gas pushes the oil back out. Used for energy storage, pulsation damping and emergency power."
+  },
+  "model_3d": {
+   "asset": "glb/hydraulic_accumulator.glb",
+   "metadata": "meta/hydraulic_accumulator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9126,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The bladder is pre-charged with nitrogen through the gas valve.",
+    "System pressure rises; oil enters through the poppet port.",
+    "Oil compresses the bladder and gas."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The bladder is pre-charged with nitrogen through the gas valve.",
+     "part": "gas_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "System pressure rises; oil enters through the poppet port.",
+     "part": "oil_port",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil compresses the bladder and gas.",
+     "part": "bladder",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When the system needs flow, gas pressure pushes the oil back out.",
+     "part": "oil",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Usable volume ΔV = V₀·(p₀/p₁)^(1/n) − V₀·(p₀/p₂)^(1/n) (n = 1 isothermal, ≈ 1.4 adiabatic)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydraulic_accumulator_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "hydraulic_accumulator_pressure.glb",
+     "title": "Gas and oil at the same pressure",
+     "description": "The bladder separates nitrogen from oil but transmits pressure, so gas and oil are always at the same pressure. Before any oil enters, the gas is at the pre-charge pressure p₀ (bladder type: typically about 90 % of the minimum system pressure). Oil enters as the system pressure rises, compressing the gas (p·V = constant for slow, isothermal changes; p·V^1.4 for fast, adiabatic ones). The usable oil volume is the gas volume change between maximum and minimum system pressure.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "N₂ pre-charge p₀ ≈ 0.9 × p_min (bladder, rule of thumb)",
+       "anchor": [
+        0.0,
+        0.99,
+        -0.0
+       ]
+      },
+      {
+       "text": "ΔV = V₁ − V₂ between p_min and p_max",
+       "anchor": [
+        0.17,
+        0.27,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/hydraulic_accumulator.json#components",
+   "key_components": "Shell, bladder, gas valve, poppet",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Forged Steel Shell (pressure vessel)",
+     "info_ref": "ha_shell",
+     "function": "Pressure vessel.",
+     "material": "Steel."
+    },
+    {
+     "id": "bladder",
+     "name": "Elastomer Bladder pre-charged with Nitrogen",
+     "info_ref": "ha_bladder",
+     "function": "Separates gas from oil.",
+     "material": "NBR/ECO."
+    },
+    {
+     "id": "gas_valve",
+     "name": "Gas (Nitrogen) Charging Valve",
+     "info_ref": "ha_gas_valve",
+     "function": "Charges nitrogen.",
+     "material": "—"
+    },
+    {
+     "id": "oil_port",
+     "name": "Oil Port with Anti-Extrusion Poppet Valve",
+     "info_ref": "ha_poppet",
+     "function": "Stops the bladder extruding into the port.",
+     "material": "—"
+    },
+    {
+     "id": "oil",
+     "name": "Hydraulic Oil (enters as the system pressure rises)",
+     "info_ref": "ha_oil",
+     "function": "Oil.",
+     "material": "—"
+    },
+    {
+     "id": "mounting",
+     "name": "Mounting Clamp & Base",
+     "info_ref": "ha_mount",
+     "function": "Mounting.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "~ 0.2 – 200 L nominal",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "n/a — stores energy (E ≈ ∫p dV)",
+     "unit": "kJ"
+    },
+    "speed": {
+     "typical_range": "Discharge in ms (shock) to s (emergency)",
+     "unit": "s"
+    },
+    "capacity": {
+     "typical_range": "Max pressure ~ 200 – 690",
+     "unit": "bar"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from required ΔV between p_min and p_max using the gas law; choose bladder/piston/diaphragm type for flow rate and compression ratio."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 4413",
+    "Pressure equipment regulations (e.g. PED 2014/68/EU)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount vertically (gas valve up for bladder type) with clamps that do not restrict the shell; allow access to the gas valve."
+   ],
+   "alignment": [
+    "Align motor and pump with the bell housing and coupling; mount cylinders so the rod is not side-loaded (use spherical bearings/clevises)."
+   ],
+   "piping": [
+    "Fit a safety block with isolation, bleed-down valve and relief valve."
+   ],
+   "commissioning": [
+    "Fill through a filter with the specified oil; flush the system to the target cleanliness (ISO 4406 code).",
+    "Bleed air; start with relief valves backed off, then set pressures; check for leaks, temperatures and noise."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check system pressure behaviour (pump cycling).",
+     "part": "shell",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check pre-charge with a charging kit (oil side drained).",
+     "part": "gas_valve",
+     "interval": "3–6 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bladder; periodic pressure-vessel inspection per regulations.",
+     "part": "bladder"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — keep the gas valve cap fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of pre-charge",
+     "category": "performance",
+     "symptoms": [
+      "Pump cycles more often, poor damping"
+     ],
+     "causes": [
+      "Gas valve leak, bladder permeation"
+     ],
+     "remedies": [
+      "Recharge with nitrogen; replace valve core"
+     ],
+     "part": "gas_valve"
+    },
+    {
+     "problem": "Bladder rupture",
+     "category": "performance",
+     "symptoms": [
+      "Gas in oil, no accumulator effect"
+     ],
+     "causes": [
+      "Over-compression (pre-charge too low), age"
+     ],
+     "remedies": [
+      "Replace bladder; correct pre-charge"
+     ],
+     "part": "bladder"
+    }
+   ],
+   "safety": [
+    "Always discharge the oil side before any work; an accumulator keeps the system pressurised after the pump stops.",
+    "Charge with nitrogen only using a regulator."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Accumulator — Introduction",
+    "type": "in_app_tour",
+    "model": "hydraulic_accumulator.glb",
+    "duration_s": 52.9,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Accumulator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A hydraulic accumulator stores energy as compressed gas.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a bladder accumulator, a rubber bladder inside a steel shell is pre-charged with nitrogen.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "When system pressure rises above the pre-charge, oil flows in and compresses the gas; when pressure falls, the gas pushes the oil back out.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include emergency/backup energy (e.g. closing valves, braking); supplementing pump flow for short peaks; absorbing pressure shocks and pulsations; compensating for thermal expansion and leakage.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Accumulator — Operation",
+    "type": "in_app_tour",
+    "model": "hydraulic_accumulator.glb",
+    "duration_s": 33.7,
+    "script": [
+     {
+      "narration": "How the Hydraulic Accumulator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The bladder is pre-charged with nitrogen through the gas valve.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "gas_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "System pressure rises; oil enters through the poppet port.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_port",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil compresses the bladder and gas.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bladder",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When the system needs flow, gas pressure pushes the oil back out.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "oil",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The bladder separates nitrogen from oil but transmits pressure, so gas and oil are always at the same pressure.",
+      "duration_s": 7.9,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Accumulator — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydraulic_accumulator.glb",
+    "duration_s": 38.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Accumulator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check system pressure behaviour (pump cycling).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check pre-charge with a charging kit (oil side drained).",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "gas_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bladder; periodic pressure-vessel inspection per regulations.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bladder",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of pre-charge: pump cycles more often, poor damping. Common cause: gas valve leak, bladder permeation.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "gas_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bladder rupture: gas in oil, no accumulator effect. Common cause: over-compression (pre-charge too low), age.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "bladder",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which gas is used for pre-charging?",
+     "options": [
+      "Nitrogen",
+      "Oxygen",
+      "Air",
+      "Hydrogen"
+     ],
+     "answer": 0,
+     "explanation": "Inert — oxygen/air risk diesel-effect explosion.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical bladder pre-charge is about…",
+     "options": [
+      "90 % of minimum system pressure",
+      "200 % of max pressure",
+      "Atmospheric",
+      "Equal to maximum pressure"
+     ],
+     "answer": 0,
+     "explanation": "Rule of thumb ≈ 0.9 × p_min.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the poppet valve at the oil port do?",
+     "options": [
+      "Stops the bladder extruding into the port",
+      "Charges the gas",
+      "Measures pressure",
+      "Cools the oil"
+     ],
+     "answer": 0,
+     "explanation": "Anti-extrusion.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure vessel.\"",
+     "options": [
+      "Forged Steel Shell (pressure vessel)",
+      "Oil Port with Anti-Extrusion Poppet Valve",
+      "Mounting Clamp & Base",
+      "Gas (Nitrogen) Charging Valve"
+     ],
+     "answer": 0,
+     "explanation": "Forged Steel Shell (pressure vessel): Pressure vessel.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates gas from oil.\"",
+     "options": [
+      "Gas (Nitrogen) Charging Valve",
+      "Elastomer Bladder pre-charged with Nitrogen",
+      "Hydraulic Oil (enters as the system pressure rises)",
+      "Forged Steel Shell (pressure vessel)"
+     ],
+     "answer": 1,
+     "explanation": "Elastomer Bladder pre-charged with Nitrogen: Separates gas from oil.",
+     "level": "basic",
+     "part": "bladder",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Charges nitrogen.\"",
+     "options": [
+      "Gas (Nitrogen) Charging Valve",
+      "Mounting Clamp & Base",
+      "Elastomer Bladder pre-charged with Nitrogen",
+      "Hydraulic Oil (enters as the system pressure rises)"
+     ],
+     "answer": 0,
+     "explanation": "Gas (Nitrogen) Charging Valve: Charges nitrogen.",
+     "level": "basic",
+     "part": "gas_valve",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

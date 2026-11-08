@@ -1,0 +1,610 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "autoclave",
+ "no": 99,
+ "title": "Autoclave",
+ "model_title": "Industrial Autoclave (Horizontal, Quick-Opening Door)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An autoclave is a pressure vessel that treats a load with heat and pressure (steam or hot gas) — for curing composites, vulcanising rubber, treating wood or sterilising. A quick-opening door locked by a rotating ring allows fast loading; safety interlocks prevent opening while pressurised.",
+   "applications": [
+    "Aerospace composite curing",
+    "Rubber vulcanising",
+    "Medical/waste sterilisation",
+    "Autoclaved aerated concrete, glass laminating"
+   ],
+   "key_points": [
+    "Quick-opening closure needs interlocks",
+    "Pressure–temperature cycle controlled",
+    "Fatigue from cycling",
+    "Vacuum often used before steam"
+   ],
+   "classification": {
+    "family": "Pressure vessel (batch process)",
+    "type": "Horizontal autoclave with quick-opening door"
+   },
+   "hi_family": "static_equipment",
+   "summary": "An industrial autoclave is a pressure vessel that applies heat and pressure (usually steam or hot gas) to a load — for curing composites, vulcanising rubber, treating wood or sterilising. A quick-opening door with a rotating locking ring allows fast loading; interlocks prevent opening under pressure."
+  },
+  "model_3d": {
+   "asset": "glb/autoclave.glb",
+   "metadata": "meta/autoclave.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 5844,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The load cart is rolled in on rails.",
+    "Steam enters through the distributor; the fan evens the temperature."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The load cart is rolled in on rails.",
+     "part": "load_cart",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The door closes and the locking ring rotates to engage the lugs.",
+     "part": "lock_ring",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam enters through the distributor; the fan evens the temperature.",
+     "part": "steam_distributor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "After the hold time, pressure is released, the ring unlocks and the door opens.",
+     "part": "door",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Cycle chart: vacuum → ramp → hold (pressure & temperature) → cool/vent."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "autoclave_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/autoclave.json#components",
+   "key_components": "Shell, quick-opening door, lock ring, load cart, steam distributor, fan",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Pressure Shell, Dished Rear Head & Door Ring",
+     "info_ref": "ac_shell",
+     "function": "Pressure boundary.",
+     "material": "Carbon/stainless steel."
+    },
+    {
+     "id": "insulation",
+     "name": "Insulation & Cladding",
+     "info_ref": "ac_insulation",
+     "function": "Reduces heat loss.",
+     "material": "—"
+    },
+    {
+     "id": "door",
+     "name": "Quick-Opening Door (bayonet/lock-ring closure)",
+     "info_ref": "ac_door",
+     "function": "Closes the vessel quickly.",
+     "material": "Steel."
+    },
+    {
+     "id": "lock_ring",
+     "name": "Locking Ring (rotates to lock/unlock the door lugs)",
+     "info_ref": "ac_lock_ring",
+     "function": "Locks the door lugs (bayonet).",
+     "material": "Steel."
+    },
+    {
+     "id": "rails",
+     "name": "Internal Rails",
+     "info_ref": "ac_rails",
+     "function": "Guide the load cart.",
+     "material": "Steel."
+    },
+    {
+     "id": "load_cart",
+     "name": "Load Cart with Product (e.g. composite parts / goods to sterilise)",
+     "info_ref": "ac_cart",
+     "function": "Carries the product.",
+     "material": "Steel."
+    },
+    {
+     "id": "steam_distributor",
+     "name": "Steam Distributor Pipe",
+     "info_ref": "ac_distributor",
+     "function": "Distributes steam evenly.",
+     "material": "Stainless."
+    },
+    {
+     "id": "circulation_fan",
+     "name": "Circulation Fan (uniform temperature)",
+     "info_ref": "ac_fan",
+     "function": "Circulates the atmosphere for uniform temperature.",
+     "material": "Stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Steam Inlet, Vacuum Connection, Condensate Drain, Safety Valve & Gauge",
+     "info_ref": "ac_nozzles",
+     "function": "Steam, vacuum, drain, safety valve, gauge.",
+     "material": "—"
+    },
+    {
+     "id": "saddles",
+     "name": "Saddle Supports",
+     "info_ref": "ac_saddles",
+     "function": "Support the shell.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 0.5 – 10 m; length up to ~ 40 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 10–20 (composites); ~3 (sterilisers)",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 400",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Chamber volume",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check door seal and interlock function.",
+     "part": "door",
+     "interval": "each cycle"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect lock-ring lugs (NDT); calibrate sensors.",
+     "part": "lock_ring",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Pressure-vessel inspection; replace door seal.",
+     "part": "shell"
+    }
+   ],
+   "lubrication": [
+    "Grease lock-ring guides and door hinge."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Door seal leak",
+     "category": "leakage",
+     "symptoms": [
+      "Steam leak at door"
+     ],
+     "causes": [
+      "Worn/damaged seal"
+     ],
+     "remedies": [
+      "Replace seal"
+     ],
+     "part": "door"
+    },
+    {
+     "problem": "Interlock fault",
+     "category": "performance",
+     "symptoms": [
+      "Door cannot open/close"
+     ],
+     "causes": [
+      "Sensor failure"
+     ],
+     "remedies": [
+      "Repair — never bypass"
+     ],
+     "part": "lock_ring"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Autoclave — Introduction",
+    "type": "in_app_tour",
+    "model": "autoclave.glb",
+    "duration_s": 45.7,
+    "script": [
+     {
+      "narration": "This module introduces the Autoclave.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An autoclave is a pressure vessel that treats a load with heat and pressure (steam or hot gas) — for curing composites, vulcanising rubber, treating wood or sterilising.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A quick-opening door locked by a rotating ring allows fast loading; safety interlocks prevent opening while pressurised.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include aerospace composite curing; rubber vulcanising; medical/waste sterilisation; autoclaved aerated concrete, glass laminating.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Circulation Fan (uniform temperature).",
+      "duration_s": 4.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Autoclave — Operation",
+    "type": "in_app_tour",
+    "model": "autoclave.glb",
+    "duration_s": 27.2,
+    "script": [
+     {
+      "narration": "How the Autoclave works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The load cart is rolled in on rails.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "load_cart",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The door closes and the locking ring rotates to engage the lugs.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "lock_ring",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam enters through the distributor; the fan evens the temperature.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "steam_distributor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "After the hold time, pressure is released, the ring unlocks and the door opens.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "door",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Autoclave — Maintenance",
+    "type": "in_app_tour",
+    "model": "autoclave.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Autoclave.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check door seal and interlock function.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "door",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect lock-ring lugs (NDT); calibrate sensors.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lock_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pressure-vessel inspection; replace door seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for door seal leak: steam leak at door. Common cause: worn/damaged seal.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "door",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for interlock fault: door cannot open/close. Common cause: sensor failure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "lock_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What prevents opening the door under pressure?",
+     "options": [
+      "Operator memory",
+      "Safety interlocks",
+      "Gravity",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "Mandatory for quick-actuating closures.",
+     "level": "basic"
+    },
+    {
+     "question": "Why rotate a locking ring?",
+     "options": [
+      "Decoration",
+      "To engage/disengage the door lugs (bayonet)",
+      "To heat the door",
+      "To seal electrically"
+     ],
+     "answer": 1,
+     "explanation": "Quick closure.",
+     "level": "basic"
+    },
+    {
+     "question": "Why run a fan inside?",
+     "options": [
+      "Cooling the motor",
+      "Uniform temperature around the load",
+      "Noise",
+      "Lighting"
+     ],
+     "answer": 1,
+     "explanation": "Uniformity.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure boundary.\"",
+     "options": [
+      "Pressure Shell, Dished Rear Head & Door Ring",
+      "Insulation & Cladding",
+      "Steam Inlet, Vacuum Connection, Condensate Drain, Safety Valve & Gauge",
+      "Steam Distributor Pipe"
+     ],
+     "answer": 0,
+     "explanation": "Pressure Shell, Dished Rear Head & Door Ring: Pressure boundary.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Reduces heat loss.\"",
+     "options": [
+      "Insulation & Cladding",
+      "Load Cart with Product (e.g. composite parts / goods to sterilise)",
+      "Locking Ring (rotates to lock/unlock the door lugs)",
+      "Pressure Shell, Dished Rear Head & Door Ring"
+     ],
+     "answer": 0,
+     "explanation": "Insulation & Cladding: Reduces heat loss.",
+     "level": "basic",
+     "part": "insulation",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the vessel quickly.\"",
+     "options": [
+      "Quick-Opening Door (bayonet/lock-ring closure)",
+      "Steam Distributor Pipe",
+      "Internal Rails",
+      "Insulation & Cladding"
+     ],
+     "answer": 0,
+     "explanation": "Quick-Opening Door (bayonet/lock-ring closure): Closes the vessel quickly.",
+     "level": "basic",
+     "part": "door",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

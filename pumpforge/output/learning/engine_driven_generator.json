@@ -1,0 +1,745 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "engine_driven_generator",
+ "no": 81,
+ "title": "Engine-Driven Generator",
+ "model_title": "Engine-Driven Generator (Spark-Ignition Gas Engine, Inline-4)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An engine-driven generator uses a reciprocating engine to turn an AC generator. In a spark-ignition gas engine the fuel–air mixture is ignited by spark plugs; the pistons drive the crankshaft and flywheel, which turn the generator rotor. The governor holds constant speed so the frequency stays at 50/60 Hz.",
+   "applications": [
+    "Gas-engine CHP (combined heat and power)",
+    "Biogas and landfill-gas power",
+    "Prime power in remote sites",
+    "Peaking and grid support"
+   ],
+   "key_points": [
+    "Speed fixes frequency: f = p·n/120",
+    "Governor controls speed, AVR controls voltage",
+    "Heat can be recovered (CHP)",
+    "Load acceptance limited by engine"
+   ],
+   "classification": {
+    "family": "Prime mover + generator",
+    "type": "Gas-engine generating set (inline-4, spark ignition)"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "An engine-driven generator uses a reciprocating engine as the prime mover to turn a generator. In this spark-ignition gas engine, fuel–air mixture burns in each cylinder and pushes the pistons down; the crankshaft turns the flywheel and the generator rotor, which induces AC voltage in the stator. The governor holds the speed constant so the frequency stays at 50 or 60 Hz."
+  },
+  "model_3d": {
+   "asset": "glb/engine_driven_generator.glb",
+   "metadata": "meta/engine_driven_generator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 19812,
+   "parts": 17
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Fuel–air mixture burns in each cylinder and pushes the piston down.",
+    "Connecting rods turn the crankshaft; the flywheel smooths the torque.",
+    "The rotating field induces 3-phase voltage in the stator."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Fuel–air mixture burns in each cylinder and pushes the piston down.",
+     "part": "e_pistons",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Connecting rods turn the crankshaft; the flywheel smooths the torque.",
+     "part": "e_crankshaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The flywheel drives the generator rotor through the housing adaptor.",
+     "part": "flywheel",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotating field induces 3-phase voltage in the stator.",
+     "part": "g_stator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The radiator and fan remove engine heat.",
+     "part": "radiator",
+     "cut": false,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Fuel consumption vs load: best specific consumption near 75–100 % load."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "engine_driven_generator_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/engine_driven_generator.json#components",
+   "key_components": "Gas engine (pistons, crankshaft, rods), flywheel, coupling, generator, radiator",
+   "parts": [
+    {
+     "id": "e_block",
+     "name": "Gas Engine – Cylinder Block & Crankcase",
+     "info_ref": "engine_block",
+     "function": "Holds the cylinders and crankshaft; contains coolant passages and the oil sump.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "e_head",
+     "name": "Gas Engine – Cylinder Head, Valves & Spark Plugs",
+     "info_ref": "engine_head",
+     "function": "Closes the cylinders and carries valves and injectors/spark plugs.",
+     "material": "Cast iron/aluminium."
+    },
+    {
+     "id": "e_crankshaft",
+     "name": "Gas Engine – Crankshaft",
+     "info_ref": "engine_crankshaft",
+     "function": "Turns the up-and-down motion of the pistons into rotation.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "e_pistons",
+     "name": "Gas Engine – Pistons & Rings",
+     "info_ref": "engine_pistons",
+     "function": "Transmit combustion pressure to the connecting rods.",
+     "material": "Aluminium alloy/steel."
+    },
+    {
+     "id": "e_conrods",
+     "name": "Gas Engine – Connecting Rods",
+     "info_ref": "engine_conrods",
+     "function": "Link the pistons to the crankshaft.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "flywheel",
+     "name": "Flywheel with Starter Ring Gear",
+     "info_ref": "edg_flywheel",
+     "function": "Smooths the engine's pulsating torque and carries the starter ring gear.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "flywheel_housing",
+     "name": "Flywheel Housing (SAE adaptor to generator)",
+     "info_ref": "edg_flywheel",
+     "function": "Smooths the engine's pulsating torque and carries the starter ring gear.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "g_frame",
+     "name": "Generator – Frame, End Shields & Terminal Box",
+     "info_ref": "gen_frame",
+     "function": "Supports the stator, holds the bearings and protects the windings.",
+     "material": "Steel."
+    },
+    {
+     "id": "g_stator",
+     "name": "Generator – Stator Core & 3-Phase Armature Winding",
+     "info_ref": "gen_stator",
+     "function": "Carries the 3-phase armature winding in which the voltage is induced.",
+     "material": "Electrical steel; copper; class F/H insulation."
+    },
+    {
+     "id": "g_rotor",
+     "name": "Generator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+     "info_ref": "gen_rotor",
+     "function": "Produces the magnetic field (DC excited) and is turned by the prime mover.",
+     "material": "Steel; copper."
+    },
+    {
+     "id": "g_exciter",
+     "name": "Generator – Exciter Stator & Cover",
+     "info_ref": "gen_exciter",
+     "function": "Brushless exciter: supplies the rotor field current via rotating diodes.",
+     "material": "Steel, copper."
+    },
+    {
+     "id": "radiator",
+     "name": "Radiator (coolant–air heat exchanger)",
+     "info_ref": "edg_radiator",
+     "function": "Rejects engine heat from the coolant to air.",
+     "material": "Aluminium/copper."
+    },
+    {
+     "id": "cooling_fan",
+     "name": "Engine Cooling Fan",
+     "info_ref": "edg_fan",
+     "function": "Pulls air through the radiator.",
+     "material": "Steel/plastic."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    },
+    {
+     "id": "engine_mounts",
+     "name": "Engine Mounts",
+     "info_ref": "edg_flywheel",
+     "function": "Smooths the engine's pulsating torque and carries the starter ring gear.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "exhaust",
+     "name": "Exhaust Manifold & Outlet",
+     "info_ref": "edg_exhaust",
+     "function": "Carries exhaust gas away.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "control_panel",
+     "name": "Generator Control Panel (AVR, protection, synchroniser)",
+     "info_ref": "edg_panel",
+     "function": "Controls, protects and synchronises the set.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Frame sizes ~ 20 kW – 10 MW",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "20 – 10 000",
+     "unit": "kWe"
+    },
+    "speed": {
+     "typical_range": "1500 / 1800 (4-pole)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Output 400 V–11 kV, 50/60 Hz",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "electrical_efficiency": {
+     "typical_range": "~ 35 – 45",
+     "unit": "%"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Fuel gas train with pressure regulation; exhaust with silencer and flexible connection; ventilation for combustion and cooling air."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check output voltage, frequency and alarms.",
+     "part": "control_panel",
+     "interval": "daily"
+    },
+    {
+     "task": "Check coolant, oil and fuel levels.",
+     "part": "radiator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change engine oil and filters; check belts and battery.",
+     "part": "e_block",
+     "interval": "250–500 h"
+    },
+    {
+     "task": "Measure generator insulation resistance.",
+     "part": "g_stator",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Engine top/major overhaul; alternator bearing replacement.",
+     "part": "e_head"
+    }
+   ],
+   "lubrication": [
+    "Engine oil per maker (API/ACEA class); alternator bearings greased or sealed."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Engine misfire",
+     "category": "performance",
+     "symptoms": [
+      "Rough running, power loss"
+     ],
+     "causes": [
+      "Spark plug wear, ignition fault"
+     ],
+     "remedies": [
+      "Replace plugs/coils"
+     ],
+     "part": "e_head"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "High coolant temperature"
+     ],
+     "causes": [
+      "Blocked radiator, fan belt"
+     ],
+     "remedies": [
+      "Clean radiator, check fan"
+     ],
+     "part": "radiator"
+    },
+    {
+     "problem": "Voltage instability",
+     "category": "performance",
+     "symptoms": [
+      "Voltage hunting"
+     ],
+     "causes": [
+      "AVR fault"
+     ],
+     "remedies": [
+      "Check AVR"
+     ],
+     "part": "g_exciter"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Engine-Driven Generator — Introduction",
+    "type": "in_app_tour",
+    "model": "engine_driven_generator.glb",
+    "duration_s": 57.7,
+    "script": [
+     {
+      "narration": "This module introduces the Engine-Driven Generator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An engine-driven generator uses a reciprocating engine to turn an AC generator.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a spark-ignition gas engine the fuel–air mixture is ignited by spark plugs; the pistons drive the crankshaft and flywheel, which turn the generator rotor.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The governor holds constant speed so the frequency stays at 50/60 Hz.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include gas-engine CHP (combined heat and power); biogas and landfill-gas power; prime power in remote sites; peaking and grid support.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Flywheel with Starter Ring Gear, Generator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Engine-Driven Generator — Operation",
+    "type": "in_app_tour",
+    "model": "engine_driven_generator.glb",
+    "duration_s": 29.8,
+    "script": [
+     {
+      "narration": "How the Engine-Driven Generator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Fuel–air mixture burns in each cylinder and pushes the piston down.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "e_pistons",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Connecting rods turn the crankshaft; the flywheel smooths the torque.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "e_crankshaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flywheel drives the generator rotor through the housing adaptor.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "flywheel",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotating field induces 3-phase voltage in the stator.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "g_stator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The radiator and fan remove engine heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "radiator",
+       "cut": false,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Engine-Driven Generator — Maintenance",
+    "type": "in_app_tour",
+    "model": "engine_driven_generator.glb",
+    "duration_s": 45.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Engine-Driven Generator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check output voltage, frequency and alarms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_panel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check coolant, oil and fuel levels.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "radiator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change engine oil and filters; check belts and battery.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "e_block",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure generator insulation resistance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "g_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Engine top/major overhaul; alternator bearing replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "e_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for engine misfire: rough running, power loss. Common cause: spark plug wear, ignition fault.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "e_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: high coolant temperature. Common cause: blocked radiator, fan belt.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "radiator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for voltage instability: voltage hunting. Common cause: avr fault.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "g_exciter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What sets the output frequency?",
+     "options": [
+      "Engine speed and number of poles",
+      "Fuel type",
+      "Radiator size",
+      "Cable length"
+     ],
+     "answer": 0,
+     "explanation": "f = p·n/120.",
+     "level": "basic"
+    },
+    {
+     "question": "Which device keeps voltage constant?",
+     "options": [
+      "Governor",
+      "AVR",
+      "Radiator",
+      "Flywheel"
+     ],
+     "answer": 1,
+     "explanation": "Automatic voltage regulator.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the flywheel for?",
+     "options": [
+      "Cooling",
+      "Smoothing engine torque pulses",
+      "Measuring speed",
+      "Starting only"
+     ],
+     "answer": 1,
+     "explanation": "Energy storage between firing strokes.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the cylinders and crankshaft; contains coolant passages and the oil sump.\"",
+     "options": [
+      "Generator – Frame, End Shields & Terminal Box",
+      "Gas Engine – Cylinder Block & Crankcase",
+      "Generator Control Panel (AVR, protection, synchroniser)",
+      "Gas Engine – Connecting Rods"
+     ],
+     "answer": 1,
+     "explanation": "Gas Engine – Cylinder Block & Crankcase: Holds the cylinders and crankshaft; contains coolant passages and the oil sump.",
+     "level": "basic",
+     "part": "e_block",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the cylinders and carries valves and injectors/spark plugs.\"",
+     "options": [
+      "Generator – Stator Core & 3-Phase Armature Winding",
+      "Flywheel Housing (SAE adaptor to generator)",
+      "Gas Engine – Cylinder Head, Valves & Spark Plugs",
+      "Flywheel with Starter Ring Gear"
+     ],
+     "answer": 2,
+     "explanation": "Gas Engine – Cylinder Head, Valves & Spark Plugs: Closes the cylinders and carries valves and injectors/spark plugs.",
+     "level": "basic",
+     "part": "e_head",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Turns the up-and-down motion of the pistons into rotation.\"",
+     "options": [
+      "Flywheel Housing (SAE adaptor to generator)",
+      "Gas Engine – Crankshaft",
+      "Flywheel with Starter Ring Gear",
+      "Exhaust Manifold & Outlet"
+     ],
+     "answer": 1,
+     "explanation": "Gas Engine – Crankshaft: Turns the up-and-down motion of the pistons into rotation.",
+     "level": "basic",
+     "part": "e_crankshaft",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

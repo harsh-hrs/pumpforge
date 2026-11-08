@@ -1,0 +1,654 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flash_evaporator",
+ "no": 157,
+ "title": "Flash Evaporator",
+ "model_title": "Flash Evaporator (Heater → Pressure Reduction → Flash Vessel)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A flash evaporator separates vapour from a liquid by a sudden drop in pressure. The liquid is first heated under pressure so it cannot boil; it then passes a pressure-reducing valve into a vessel at lower pressure, where part of it flashes into vapour. The vapour leaves through a demister at the top and the concentrated liquid from the bottom.",
+   "applications": [
+    "Multi-stage flash (MSF) desalination stages",
+    "Condensate and blowdown flash recovery",
+    "Concentration of solutions without heating surfaces in the vessel"
+   ],
+   "key_points": [
+    "No heating surface in the flash vessel — less fouling",
+    "Flash fraction ≈ cp·(T_in − T_sat)/h_fg",
+    "Demister prevents carry-over",
+    "Vessel pressure sets the flashing temperature"
+   ],
+   "classification": {
+    "family": "Evaporator",
+    "type": "Single-stage flash evaporator"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A flash evaporator separates vapour from a liquid by sudden pressure reduction. The liquid is heated under pressure, then throttled into a vessel at lower pressure; part of it instantly boils (\"flashes\"), cooling the rest. Vapour leaves through a demister at the top, the concentrated liquid from the bottom."
+  },
+  "model_3d": {
+   "asset": "glb/flash_evaporator.glb",
+   "metadata": "meta/flash_evaporator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 20758,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The feed heater heats the liquid under pressure.",
+    "The flash valve reduces the pressure.",
+    "In the vessel part of the liquid flashes to vapour."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The feed heater heats the liquid under pressure.",
+     "part": "feed_heater",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The flash valve reduces the pressure.",
+     "part": "flash_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In the vessel part of the liquid flashes to vapour.",
+     "part": "flash_vessel",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The demister removes droplets from the vapour.",
+     "part": "demister",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Concentrated liquid leaves from the bottom.",
+     "part": "concentrate",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Fraction flashed rises with the difference between inlet temperature and vessel saturation temperature."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flash_evaporator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "flash_evaporator_pressure.glb",
+     "title": "Pressure drop causes flashing",
+     "description": "The feed is heated under pressure so it does not boil. Passing the pressure-reducing valve into the lower-pressure vessel, it is suddenly above its boiling point at the new pressure: part of it flashes to vapour, and the latent heat taken by that vapour cools the remaining liquid to the saturation temperature of the vessel. Flash fraction ≈ cp·(T_in − T_sat) / h_fg.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flash_evaporator.json#components",
+   "key_components": "Flash vessel, pressure-reducing valve, demister, vapour outlet, brine outlet, heater",
+   "parts": [
+    {
+     "id": "flash_vessel",
+     "name": "Flash Vessel (lower pressure)",
+     "info_ref": "fe_vessel",
+     "function": "Flash vessel: vapour/liquid separation at low pressure.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "demister",
+     "name": "Mesh-Pad Demister (stops droplet carry-over)",
+     "info_ref": "fe_demister",
+     "function": "Removes entrained droplets from the vapour.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "concentrate",
+     "name": "Liquid Collecting in the Vessel (concentrate / brine)",
+     "info_ref": "fe_liquid",
+     "function": "Concentrate.",
+     "material": "—"
+    },
+    {
+     "id": "nozzles",
+     "name": "Nozzles: Hot Feed Inlet (tangential), Vapour Outlet, Concentrate Outlet, Level Gauge",
+     "info_ref": "fe_vessel",
+     "function": "Flash vessel: vapour/liquid separation at low pressure.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "feed_heater",
+     "name": "Feed Heater (raises liquid temperature under pressure)",
+     "info_ref": "fe_heater",
+     "function": "Heats feed under pressure.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_line",
+     "name": "Feed Line",
+     "info_ref": "fe_valve",
+     "function": "Drops the pressure to cause flashing.",
+     "material": "Steel."
+    },
+    {
+     "id": "flash_valve",
+     "name": "Pressure-Reducing (Flash) Valve — pressure drops, liquid partly flashes to vapour",
+     "info_ref": "fe_valve",
+     "function": "Drops the pressure to cause flashing.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Legs",
+     "info_ref": "fe_vessel",
+     "function": "Flash vessel: vapour/liquid separation at low pressure.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "flash_vapour",
+     "name": "Vapour Flashing off the Liquid",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessel ~ 0.5 – 4 m diameter",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "Feed heater ~ 0.1 – 50",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Feed ~ 100 – 180; vessel ~ 40 – 120",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Feed ~ 1 – 1000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose vessel size for vapour velocity (Souders–Brown) and residence time; multiple stages for high recovery."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Perry's Chemical Engineers' Handbook — Evaporation"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support vessels on structure/legs designed for operating and flooded weights; allow thermal growth of calandrias and vapour lines."
+   ],
+   "alignment": [
+    "Vertical calandrias plumb (falling-film distribution depends on it); slope liquor lines for drainage."
+   ],
+   "piping": [
+    "Vapour lines sized for low ΔP; condensate drained by traps or level control; vents for non-condensables on each steam chest.",
+    "Vacuum system (condenser + vacuum pump/ejector) for the last effect."
+   ],
+   "commissioning": [
+    "Leak/vacuum test; water trials (wetting, levels); bring steam on slowly; set levels and densities; CIP routine."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor vessel pressure, level and vapour quality.",
+     "part": "flash_vessel",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check demister ΔP; inspect flash valve trim.",
+     "part": "demister",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect vessel for erosion at the inlet.",
+     "part": "nozzles"
+    }
+   ],
+   "lubrication": [
+    "No lubrication for the static parts — lubricate valve stems, rotating parts and drives per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Carry-over of liquid",
+     "category": "performance",
+     "symptoms": [
+      "Contaminated vapour/condensate"
+     ],
+     "causes": [
+      "Demister damaged, high level, foaming"
+     ],
+     "remedies": [
+      "Repair demister; control level"
+     ],
+     "part": "demister"
+    },
+    {
+     "problem": "Valve erosion",
+     "category": "wear",
+     "symptoms": [
+      "Poor control"
+     ],
+     "causes": [
+      "Two-phase flashing flow"
+     ],
+     "remedies": [
+      "Hardened trim; angle valve"
+     ],
+     "part": "flash_valve"
+    }
+   ],
+   "safety": [
+    "Relief valve on vessel; flashing hot liquid and steam burn hazard."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flash Evaporator — Introduction",
+    "type": "in_app_tour",
+    "model": "flash_evaporator.glb",
+    "duration_s": 55.1,
+    "script": [
+     {
+      "narration": "This module introduces the Flash Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A flash evaporator separates vapour from a liquid by a sudden drop in pressure.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The liquid is first heated under pressure so it cannot boil; it then passes a pressure-reducing valve into a vessel at lower pressure, where part of it flashes into vapour.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The vapour leaves through a demister at the top and the concentrated liquid from the bottom.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include multi-stage flash (MSF) desalination stages; condensate and blowdown flash recovery; concentration of solutions without heating surfaces in the vessel.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flash Evaporator — Operation",
+    "type": "in_app_tour",
+    "model": "flash_evaporator.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "How the Flash Evaporator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The feed heater heats the liquid under pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_heater",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flash valve reduces the pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In the vessel part of the liquid flashes to vapour.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "flash_vessel",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The demister removes droplets from the vapour.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "demister",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Concentrated liquid leaves from the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "concentrate",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The feed is heated under pressure so it does not boil.",
+      "duration_s": 4.6,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flash Evaporator — Maintenance",
+    "type": "in_app_tour",
+    "model": "flash_evaporator.glb",
+    "duration_s": 33.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flash Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor vessel pressure, level and vapour quality.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check demister ΔP; inspect flash valve trim.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "demister",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect vessel for erosion at the inlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for carry-over of liquid: contaminated vapour/condensate. Common cause: demister damaged, high level, foaming.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "demister",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for valve erosion: poor control. Common cause: two-phase flashing flow.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "flash_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What causes flashing?",
+     "options": [
+      "Sudden pressure reduction below the liquid's saturation pressure",
+      "Adding heat in the vessel",
+      "Cooling",
+      "Mixing air"
+     ],
+     "answer": 0,
+     "explanation": "Pressure drop.",
+     "level": "basic"
+    },
+    {
+     "question": "Why heat the feed under pressure?",
+     "options": [
+      "So it does not boil before the flash valve",
+      "To cool it",
+      "To add air",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Suppress boiling.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the demister do?",
+     "options": [
+      "Removes droplets from the vapour",
+      "Heats the liquid",
+      "Measures level",
+      "Pumps liquid"
+     ],
+     "answer": 0,
+     "explanation": "Entrainment control.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Flash vessel: vapour/liquid separation at low pressure.\"",
+     "options": [
+      "Liquid Collecting in the Vessel (concentrate / brine)",
+      "Flash Vessel (lower pressure)",
+      "Feed Heater (raises liquid temperature under pressure)",
+      "Feed Line"
+     ],
+     "answer": 1,
+     "explanation": "Flash Vessel (lower pressure): Flash vessel: vapour/liquid separation at low pressure.",
+     "level": "basic",
+     "part": "flash_vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Removes entrained droplets from the vapour.\"",
+     "options": [
+      "Mesh-Pad Demister (stops droplet carry-over)",
+      "Flash Vessel (lower pressure)",
+      "Vapour Flashing off the Liquid",
+      "Legs"
+     ],
+     "answer": 0,
+     "explanation": "Mesh-Pad Demister (stops droplet carry-over): Removes entrained droplets from the vapour.",
+     "level": "basic",
+     "part": "demister",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Concentrate.\"",
+     "options": [
+      "Feed Heater (raises liquid temperature under pressure)",
+      "Mesh-Pad Demister (stops droplet carry-over)",
+      "Liquid Collecting in the Vessel (concentrate / brine)",
+      "Flash Vessel (lower pressure)"
+     ],
+     "answer": 2,
+     "explanation": "Liquid Collecting in the Vessel (concentrate / brine): Concentrate.",
+     "level": "basic",
+     "part": "concentrate",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

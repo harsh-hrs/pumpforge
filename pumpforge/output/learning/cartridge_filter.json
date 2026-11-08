@@ -1,0 +1,647 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "cartridge_filter",
+ "no": 175,
+ "title": "Cartridge Filter",
+ "model_title": "Multi-Cartridge Filter Housing (Outside-In Pleated Cartridges)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A cartridge filter removes fine particles from a liquid or gas. Several pleated filter cartridges stand on a tube sheet inside a pressure housing. The fluid flows from outside to inside through the filter media; particles are trapped on the media surface, and the clean fluid flows down the cartridge cores to the outlet.",
+   "applications": [
+    "Pre-filtration before RO/NF membranes (≈ 5 µm)",
+    "Polishing of chemicals, water and solvents",
+    "Fuel and lube-oil filtration",
+    "Pharmaceutical and food liquids"
+   ],
+   "key_points": [
+    "Rated by micron size (nominal or absolute)",
+    "ΔP rises as dirt loads the media",
+    "Change at terminal ΔP",
+    "Seals prevent bypass of dirty fluid"
+   ],
+   "classification": {
+    "family": "Filter",
+    "type": "Multi-cartridge housing (outside-in)"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A cartridge filter removes fine particles from liquids or gases. The fluid flows from outside to inside through pleated filter cartridges mounted on a tube sheet; particles are trapped on the media and clean fluid flows down the cores to the outlet. Cartridges are replaced when the differential pressure reaches its limit."
+  },
+  "model_3d": {
+   "asset": "glb/cartridge_filter.glb",
+   "metadata": "meta/cartridge_filter.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 16008,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Dirty fluid enters the housing.",
+    "It flows through the pleated media from outside to inside.",
+    "Particles are trapped on the media surface."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Dirty fluid enters the housing.",
+     "part": "nozzles_gauge",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It flows through the pleated media from outside to inside.",
+     "part": "cartridges",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Particles are trapped on the media surface.",
+     "part": "cartridges",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The tube sheet keeps dirty and clean sides apart.",
+     "part": "tube_sheet",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Filtered fluid leaves through the bottom outlet.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "ΔP vs time: slow rise then rapid rise as the media blinds; filter life ends at the terminal ΔP."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "cartridge_filter_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "cartridge_filter_pressure.glb",
+     "title": "Differential pressure across the cartridges",
+     "description": "Upstream (dirty side, red) pressure is higher than downstream (clean side, green). As dirt builds on the media the differential pressure (ΔP) rises; cartridges are changed at the maker's terminal ΔP (often ~ 1–2.5 bar) or a set interval. Too high a ΔP can collapse or bypass a cartridge.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/cartridge_filter.json#components",
+   "key_components": "Housing, bolted cover, pleated cartridges, tube sheet, vent/drain, ΔP gauge",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Housing (pressure vessel) & Body Flange",
+     "info_ref": "cf_housing",
+     "function": "Pressure envelope.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "cover",
+     "name": "Bolted (or swing-bolt) Cover with Vent",
+     "info_ref": "cf_cover",
+     "function": "Access for cartridge change.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "tube_sheet",
+     "name": "Tube Sheet / Cartridge Seat Plate (separates dirty and clean sides)",
+     "info_ref": "cf_tubesheet",
+     "function": "Holds cartridges; separates dirty and clean sides.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "cartridges",
+     "name": "Pleated Filter Cartridges (media wrapped round perforated cores)",
+     "info_ref": "cf_cartridges",
+     "function": "Capture particles.",
+     "material": "PP/PES/glass fibre."
+    },
+    {
+     "id": "nozzles_gauge",
+     "name": "Inlet, Outlet, Drain & Differential-Pressure Gauge",
+     "info_ref": "cf_dp",
+     "function": "Connections and ΔP indication.",
+     "material": "Steel."
+    },
+    {
+     "id": "legs",
+     "name": "Support Legs",
+     "info_ref": "cf_housing",
+     "function": "Pressure envelope.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "dirt",
+     "name": "Dirt Particles Captured on the Media",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "clean_fluid",
+     "name": "Filtered Fluid flowing down the Cartridge Cores",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Housing ~ 100 – 800 mm diameter; 1 – 100+ cartridges",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 1 – 1000",
+     "unit": "m³/h"
+    },
+    "operating_pressure": {
+     "typical_range": "Up to ~ 10 – 100 (housing rating)",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "~ 0.1 – 100 µm rating",
+     "unit": "µm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose rating and media for the fluid; size number of cartridges for flux and life."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Sutherland — Filters and Filtration Handbook"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level foundation/skid for operating (full) weight; access for element/media change and lifting."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; skids level; align pumps/drives."
+   ],
+   "piping": [
+    "Isolation and bypass valves; vents and drains; pressure gauges or ΔP transmitter across the unit; relief protection where the vessel can be over-pressured."
+   ],
+   "commissioning": [
+    "Leak/pressure test; flush lines before installing elements/media; bring flow on gradually; record clean ΔP and performance baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Record ΔP.",
+     "part": "nozzles_gauge",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace cartridges at terminal ΔP; inspect seals.",
+     "part": "cartridges",
+     "interval": "as required"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect housing and cover seal.",
+     "part": "cover"
+    }
+   ],
+   "lubrication": [
+    "No lubrication of static parts; lubricate pumps, drives and valve actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Rapid ΔP rise",
+     "category": "performance",
+     "symptoms": [
+      "Short cartridge life"
+     ],
+     "causes": [
+      "High solids load, upstream upset"
+     ],
+     "remedies": [
+      "Improve pre-treatment; coarser pre-filter"
+     ],
+     "part": "cartridges"
+    },
+    {
+     "problem": "Bypass",
+     "category": "performance",
+     "symptoms": [
+      "Particles downstream"
+     ],
+     "causes": [
+      "Damaged O-rings, poor seating"
+     ],
+     "remedies": [
+      "Re-seat; replace seals"
+     ],
+     "part": "tube_sheet"
+    }
+   ],
+   "safety": [
+    "Depressurise and drain before opening; hazardous fluids require PPE."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Cartridge Filter — Introduction",
+    "type": "in_app_tour",
+    "model": "cartridge_filter.glb",
+    "duration_s": 56.9,
+    "script": [
+     {
+      "narration": "This module introduces the Cartridge Filter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A cartridge filter removes fine particles from a liquid or gas.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Several pleated filter cartridges stand on a tube sheet inside a pressure housing.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The fluid flows from outside to inside through the filter media; particles are trapped on the media surface, and the clean fluid flows down the cartridge cores to the outlet.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include pre-filtration before RO/NF membranes (≈ 5 µm); polishing of chemicals, water and solvents; fuel and lube-oil filtration; pharmaceutical and food liquids.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Housing (pressure vessel) & Body Flange, Bolted (or swing-bolt) Cover with Vent.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Cartridge Filter — Operation",
+    "type": "in_app_tour",
+    "model": "cartridge_filter.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "How the Cartridge Filter works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Dirty fluid enters the housing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles_gauge",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It flows through the pleated media from outside to inside.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "cartridges",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Particles are trapped on the media surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cartridges",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The tube sheet keeps dirty and clean sides apart.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tube_sheet",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Filtered fluid leaves through the bottom outlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Upstream (dirty side, red) pressure is higher than downstream (clean side, green).",
+      "duration_s": 5.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Cartridge Filter — Maintenance",
+    "type": "in_app_tour",
+    "model": "cartridge_filter.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Cartridge Filter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Record ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles_gauge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace cartridges at terminal ΔP; inspect seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cartridges",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect housing and cover seal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cover",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rapid δp rise: short cartridge life. Common cause: high solids load, upstream upset.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "cartridges",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bypass: particles downstream. Common cause: damaged o-rings, poor seating.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "tube_sheet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does ΔP rise during operation?",
+     "options": [
+      "Dirt builds up on the media",
+      "Fluid gets lighter",
+      "Pump speeds up",
+      "Media cleans itself"
+     ],
+     "answer": 0,
+     "explanation": "Loading.",
+     "level": "basic"
+    },
+    {
+     "question": "What does \"absolute rating\" mean?",
+     "options": [
+      "Removes essentially all particles above the stated size",
+      "Removes half",
+      "Colour",
+      "Housing pressure"
+     ],
+     "answer": 0,
+     "explanation": "High efficiency at size.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must the tube sheet seal well?",
+     "options": [
+      "To stop dirty fluid bypassing the cartridges",
+      "For noise",
+      "For weight",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Bypass.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure envelope.\"",
+     "options": [
+      "Bolted (or swing-bolt) Cover with Vent",
+      "Tube Sheet / Cartridge Seat Plate (separates dirty and clean sides)",
+      "Housing (pressure vessel) & Body Flange",
+      "Pleated Filter Cartridges (media wrapped round perforated cores)"
+     ],
+     "answer": 2,
+     "explanation": "Housing (pressure vessel) & Body Flange: Pressure envelope.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Access for cartridge change.\"",
+     "options": [
+      "Pleated Filter Cartridges (media wrapped round perforated cores)",
+      "Bolted (or swing-bolt) Cover with Vent",
+      "Housing (pressure vessel) & Body Flange",
+      "Tube Sheet / Cartridge Seat Plate (separates dirty and clean sides)"
+     ],
+     "answer": 1,
+     "explanation": "Bolted (or swing-bolt) Cover with Vent: Access for cartridge change.",
+     "level": "basic",
+     "part": "cover",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds cartridges; separates dirty and clean sides.\"",
+     "options": [
+      "Support Legs",
+      "Tube Sheet / Cartridge Seat Plate (separates dirty and clean sides)",
+      "Housing (pressure vessel) & Body Flange",
+      "Bolted (or swing-bolt) Cover with Vent"
+     ],
+     "answer": 1,
+     "explanation": "Tube Sheet / Cartridge Seat Plate (separates dirty and clean sides): Holds cartridges; separates dirty and clean sides.",
+     "level": "basic",
+     "part": "tube_sheet",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

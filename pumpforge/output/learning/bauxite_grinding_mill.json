@@ -1,0 +1,638 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "bauxite_grinding_mill",
+ "no": 195,
+ "title": "Bauxite Grinding Mill",
+ "model_title": "Bauxite Ball Mill (Wet Grinding in Spent Liquor, Overflow Discharge)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A ball mill grinds bauxite wet in spent caustic liquor. The rotating shell lifts steel balls that cascade onto the charge, crushing and abrading the bauxite into a fine slurry. Grinding exposes the alumina minerals so they dissolve quickly in digestion.",
+   "applications": [
+    "Bauxite grinding in Bayer refineries",
+    "Wet grinding of ores"
+   ],
+   "key_points": [
+    "Speed ~ 65–78 % of critical",
+    "Ball charge ~ 30–40 % of volume",
+    "Grinding in spent liquor starts dissolution",
+    "Product size controlled by screens/cyclones"
+   ],
+   "classification": {
+    "family": "Grinding",
+    "type": "Overflow-discharge ball mill (wet)"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A ball mill grinds bauxite in spent caustic liquor. The rotating shell lifts steel balls that cascade onto the charge, crushing and abrading the bauxite into a fine slurry ready for desilication and digestion."
+  },
+  "model_3d": {
+   "asset": "glb/bauxite_grinding_mill.glb",
+   "metadata": "meta/bauxite_grinding_mill.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8456,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Bauxite and liquor enter through the feed trunnion.",
+    "The shell rotates, driven through the girth gear.",
+    "Balls cascade and break the bauxite."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Bauxite and liquor enter through the feed trunnion.",
+     "part": "feed_discharge",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The shell rotates, driven through the girth gear.",
+     "part": "girth_tyres",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Balls cascade and break the bauxite.",
+     "part": "charge",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Slurry overflows through the discharge trunnion.",
+     "part": "heads_trunnions",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Bearings carry the mill.",
+     "part": "bearings_drive",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Specific energy vs product size (Bond law)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "bauxite_grinding_mill_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "bauxite_grinding_mill_pressure.glb",
+     "title": "Critical speed and grinding action",
+     "description": "The mill turns at about 65–78 % of critical speed (n_c = 42.3/√D rpm). Balls are lifted up the rising side and cascade/cataract back onto the toe of the charge, breaking bauxite by impact and attrition. Grinding in spent liquor starts the dissolution of gibbsite and produces slurry for digestion; product size is controlled by classification (screens/cyclones).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/bauxite_grinding_mill.json#components",
+   "key_components": "Shell & liners, heads & trunnions, ball charge, girth gear & pinion, gearbox, motor, bearings",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Mill: Shell with Liners / Lifters (rotates)",
+     "info_ref": "bg_shell",
+     "function": "Grinding chamber.",
+     "material": "Steel/Ni-hard or rubber."
+    },
+    {
+     "id": "girth_tyres",
+     "name": "Mill: Riding Tyres & Girth Gear (turn with the shell)",
+     "info_ref": "bg_drive",
+     "function": "Rotation and support.",
+     "material": "Steel."
+    },
+    {
+     "id": "heads_trunnions",
+     "name": "Feed & Discharge Heads with Hollow Trunnions",
+     "info_ref": "bg_heads",
+     "function": "Feed/discharge and trunnions.",
+     "material": "Cast steel."
+    },
+    {
+     "id": "bearings_drive",
+     "name": "Trunnion Bearings, Pedestals & Drive (motor, gearbox, pinion)",
+     "info_ref": "bg_drive",
+     "function": "Rotation and support.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_discharge",
+     "name": "Feed Spout, Trommel Screen & Discharge Sump",
+     "info_ref": "bg_heads",
+     "function": "Feed/discharge and trunnions.",
+     "material": "Cast steel."
+    },
+    {
+     "id": "balls",
+     "name": "Grinding Balls & Charge (cascading / cataracting)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "charge",
+     "name": "Ball Charge Bed (≈ 30–40 % of mill volume)",
+     "info_ref": "bg_charge",
+     "function": "Grinding media.",
+     "material": "Forged steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Mill ~ 3 – 5 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 500",
+     "unit": "t/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Liquor temperature ~ 60 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "~ 1 – 5",
+     "unit": "MW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by Bond work index and required product size."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Wills' Mineral Processing Technology"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Massive foundation designed for dynamic loads (maker data); grout base plates."
+   ],
+   "alignment": [
+    "Align drive train (motor–gearbox–pinion) and check gear mesh/backlash; level rollers/trunnions."
+   ],
+   "piping": [
+    "Feed and discharge chutes free of the moving machine; water/liquor supplies with isolation; dust or spray containment."
+   ],
+   "commissioning": [
+    "No-load run (rotation, vibration, temperatures); then load gradually; record power and throughput baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor power, bearing temperatures, noise.",
+     "part": "bearings_drive",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Ball top-up; liner inspection.",
+     "part": "charge",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Reline; gear inspection.",
+     "part": "shell"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overload/overfilling",
+     "category": "performance",
+     "symptoms": [
+      "Power drop, noise change"
+     ],
+     "causes": [
+      "Too much feed"
+     ],
+     "remedies": [
+      "Reduce feed"
+     ],
+     "part": "charge"
+    },
+    {
+     "problem": "Liner/bolt failure",
+     "category": "performance",
+     "symptoms": [
+      "Leaks, noise"
+     ],
+     "causes": [
+      "Wear, impact"
+     ],
+     "remedies": [
+      "Replace liners"
+     ],
+     "part": "shell"
+    }
+   ],
+   "safety": [
+    "Lock out and inch-drive procedures; never enter a rotating mill."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Bauxite Grinding Mill — Introduction",
+    "type": "in_app_tour",
+    "model": "bauxite_grinding_mill.glb",
+    "duration_s": 49.4,
+    "script": [
+     {
+      "narration": "This module introduces the Bauxite Grinding Mill.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A ball mill grinds bauxite wet in spent caustic liquor.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The rotating shell lifts steel balls that cascade onto the charge, crushing and abrading the bauxite into a fine slurry.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Grinding exposes the alumina minerals so they dissolve quickly in digestion.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include bauxite grinding in Bayer refineries; wet grinding of ores.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Mill: Shell with Liners / Lifters (rotates), Mill: Riding Tyres & Girth Gear (turn with the shell), Feed & Discharge Heads with Hollow Trunnions.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Bauxite Grinding Mill — Operation",
+    "type": "in_app_tour",
+    "model": "bauxite_grinding_mill.glb",
+    "duration_s": 34.4,
+    "script": [
+     {
+      "narration": "How the Bauxite Grinding Mill works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Bauxite and liquor enter through the feed trunnion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_discharge",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The shell rotates, driven through the girth gear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "girth_tyres",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Balls cascade and break the bauxite.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "charge",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Slurry overflows through the discharge trunnion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "heads_trunnions",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Bearings carry the mill.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings_drive",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The mill turns at about 65–78 % of critical speed (n_c = 42.3/√D rpm).",
+      "duration_s": 6.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Bauxite Grinding Mill — Maintenance",
+    "type": "in_app_tour",
+    "model": "bauxite_grinding_mill.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Bauxite Grinding Mill.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor power, bearing temperatures, noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Ball top-up; liner inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "charge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Reline; gear inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload/overfilling: power drop, noise change. Common cause: too much feed.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "charge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for liner/bolt failure: leaks, noise. Common cause: wear, impact.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Typical mill speed?",
+     "options": [
+      "~ 65–78 % of critical",
+      "100 %",
+      "10 %",
+      "200 %"
+     ],
+     "answer": 0,
+     "explanation": "Cascading.",
+     "level": "basic"
+    },
+    {
+     "question": "Why grind in spent liquor?",
+     "options": [
+      "Starts dissolution and makes slurry",
+      "Cools the mill",
+      "Lubricates balls",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Process slurry.",
+     "level": "basic"
+    },
+    {
+     "question": "What drives the shell?",
+     "options": [
+      "Pinion and girth gear",
+      "Belt on balls",
+      "Hydraulics",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Gear drive.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Grinding chamber.\"",
+     "options": [
+      "Trunnion Bearings, Pedestals & Drive (motor, gearbox, pinion)",
+      "Mill: Shell with Liners / Lifters (rotates)",
+      "Feed Spout, Trommel Screen & Discharge Sump",
+      "Grinding Balls & Charge (cascading / cataracting)"
+     ],
+     "answer": 1,
+     "explanation": "Mill: Shell with Liners / Lifters (rotates): Grinding chamber.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotation and support.\"",
+     "options": [
+      "Feed Spout, Trommel Screen & Discharge Sump",
+      "Mill: Shell with Liners / Lifters (rotates)",
+      "Ball Charge Bed (≈ 30–40 % of mill volume)",
+      "Mill: Riding Tyres & Girth Gear (turn with the shell)"
+     ],
+     "answer": 3,
+     "explanation": "Mill: Riding Tyres & Girth Gear (turn with the shell): Rotation and support.",
+     "level": "basic",
+     "part": "girth_tyres",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Feed/discharge and trunnions.\"",
+     "options": [
+      "Ball Charge Bed (≈ 30–40 % of mill volume)",
+      "Grinding Balls & Charge (cascading / cataracting)",
+      "Mill: Riding Tyres & Girth Gear (turn with the shell)",
+      "Feed & Discharge Heads with Hollow Trunnions"
+     ],
+     "answer": 3,
+     "explanation": "Feed & Discharge Heads with Hollow Trunnions: Feed/discharge and trunnions.",
+     "level": "basic",
+     "part": "heads_trunnions",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

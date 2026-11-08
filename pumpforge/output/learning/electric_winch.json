@@ -1,0 +1,633 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "electric_winch",
+ "no": 143,
+ "title": "Electric Winch",
+ "model_title": "Electric Winch (Drum, Gearbox, Brake)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An electric winch pulls or lifts loads by winding a wire rope onto a drum. A motor drives the drum through a reduction gearbox, and a spring-applied brake holds the load when power is off. Winches haul wagons, pull equipment into place, tension cables or act as the hoist on cranes and lifts.",
+   "applications": [
+    "Haulage of rail wagons and skips",
+    "Mooring and marine handling",
+    "Construction and erection pulling",
+    "Hoist drives"
+   ],
+   "key_points": [
+    "Rope line pull drops as the rope layers build up (larger effective drum radius)",
+    "Spring-applied, power-released brake",
+    "Keep minimum dead turns on the drum",
+    "Fleet angle controls spooling"
+   ],
+   "classification": {
+    "family": "Lifting/hauling equipment",
+    "type": "Electric drum winch"
+   },
+   "hi_family": "material_handling",
+   "summary": "An electric winch pulls or lifts loads by winding wire rope onto a drum. The motor drives the drum through a reduction gearbox; a spring-applied electromagnetic brake holds the load when power is off."
+  },
+  "model_3d": {
+   "asset": "glb/electric_winch.glb",
+   "metadata": "meta/electric_winch.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7136,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor drives the gearbox.",
+    "The gearbox turns the drum at low speed with high torque.",
+    "The rope winds onto the grooved drum."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor drives the gearbox.",
+     "part": "motor_brake",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The gearbox turns the drum at low speed with high torque.",
+     "part": "gearbox",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rope winds onto the grooved drum.",
+     "part": "drum",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rope pulls the load.",
+     "part": "load",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Line pull F = drum torque / effective radius; line speed = ω × radius — both change from first to outer rope layer."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "electric_winch_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/electric_winch.json#components",
+   "key_components": "Drum, gearbox, brake, motor, wire rope",
+   "parts": [
+    {
+     "id": "drum",
+     "name": "Rope Drum (grooved) with Wound Wire Rope",
+     "info_ref": "ew_drum",
+     "function": "Winds the rope.",
+     "material": "Steel."
+    },
+    {
+     "id": "gearbox",
+     "name": "Reduction Gearbox (planetary/helical)",
+     "info_ref": "ew_gearbox",
+     "function": "Reduces speed, increases torque.",
+     "material": "—"
+    },
+    {
+     "id": "motor_brake",
+     "name": "Motor & Spring-Applied Electromagnetic Brake",
+     "info_ref": "ew_motor",
+     "function": "Drive and fail-safe brake.",
+     "material": "—"
+    },
+    {
+     "id": "frame",
+     "name": "Base Frame & Drum Supports",
+     "info_ref": "ew_frame",
+     "function": "Frame.",
+     "material": "Steel."
+    },
+    {
+     "id": "rope",
+     "name": "Wire Rope to Load",
+     "info_ref": "ew_rope",
+     "function": "Transmits the pull.",
+     "material": "Steel."
+    },
+    {
+     "id": "load",
+     "name": "Load being Hauled",
+     "info_ref": "ew_load",
+     "function": "Load.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Drum ~ 0.2 – 2 m diameter",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 2 – 500",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Line speed ~ 5 – 60",
+     "unit": "m/min"
+    },
+    "capacity": {
+     "typical_range": "Line pull ~ 5 – 500+",
+     "unit": "kN"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for line pull at the outermost working layer, speed and duty; rope per D/d ratio and safety factor."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 4309 — Wire rope discard criteria",
+    "EN 14492-1 — Power-driven winches and hoists (to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Runway beams, columns or pillar foundations designed for the crane wheel/moment loads including dynamic and test loads (structural engineer sign-off)."
+   ],
+   "alignment": [
+    "Align the first sheave with the drum centre so the fleet angle stays within the maker's limit (typically about 0.5–1.5° plain drum, up to ~2° grooved — check maker)."
+   ],
+   "piping": [
+    "Power supply via conductor rails, festoon or cable reel; mainline isolator accessible; pendant or radio control labelled with directions."
+   ],
+   "commissioning": [
+    "Function-test all motions and limit switches (hoist upper/lower, travel); check brakes; proof load test and thorough examination by a competent person before first use, per the applicable standard and local regulations."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check brake, rope spooling and dead turns.",
+     "part": "drum",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect rope; check gearbox oil.",
+     "part": "rope",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul gearbox and brake; replace rope.",
+     "part": "gearbox"
+    }
+   ],
+   "lubrication": [
+    "Gearbox oil; drum bearings greased; rope dressing."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wire rope damage",
+     "category": "performance",
+     "symptoms": [
+      "Broken wires, kinks, corrosion"
+     ],
+     "causes": [
+      "Wear on sheaves/drum, overload, poor spooling"
+     ],
+     "remedies": [
+      "Inspect and discard per criteria (ISO 4309); correct reeving"
+     ],
+     "part": "rope"
+    },
+    {
+     "problem": "Brake failure",
+     "category": "performance",
+     "symptoms": [
+      "Load drift, increased stopping distance"
+     ],
+     "causes": [
+      "Worn linings, contamination, wrong adjustment"
+     ],
+     "remedies": [
+      "Adjust/replace linings; test brake"
+     ],
+     "part": "motor_brake"
+    },
+    {
+     "problem": "Overload",
+     "category": "performance",
+     "symptoms": [
+      "Trip of limiter, structural deformation"
+     ],
+     "causes": [
+      "Unknown load weight, side pulling"
+     ],
+     "remedies": [
+      "Use load limiter; train riggers"
+     ],
+     "part": "motor_brake"
+    },
+    {
+     "problem": "Poor spooling",
+     "category": "performance",
+     "symptoms": [
+      "Rope crossing, crushing on drum"
+     ],
+     "causes": [
+      "Fleet angle too large, slack rope"
+     ],
+     "remedies": [
+      "Re-align sheave; spooling gear"
+     ],
+     "part": "drum"
+    }
+   ],
+   "safety": [
+    "Stand clear of the rope line (snap-back zone); never step over a tensioned rope."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Electric Winch — Introduction",
+    "type": "in_app_tour",
+    "model": "electric_winch.glb",
+    "duration_s": 51.9,
+    "script": [
+     {
+      "narration": "This module introduces the Electric Winch.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An electric winch pulls or lifts loads by winding a wire rope onto a drum.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A motor drives the drum through a reduction gearbox, and a spring-applied brake holds the load when power is off.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Winches haul wagons, pull equipment into place, tension cables or act as the hoist on cranes and lifts.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include haulage of rail wagons and skips; mooring and marine handling; construction and erection pulling; hoist drives.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rope Drum (grooved) with Wound Wire Rope.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Electric Winch — Operation",
+    "type": "in_app_tour",
+    "model": "electric_winch.glb",
+    "duration_s": 24.8,
+    "script": [
+     {
+      "narration": "How the Electric Winch works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor drives the gearbox.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "motor_brake",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The gearbox turns the drum at low speed with high torque.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "gearbox",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rope winds onto the grooved drum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rope pulls the load.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "load",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Electric Winch — Maintenance",
+    "type": "in_app_tour",
+    "model": "electric_winch.glb",
+    "duration_s": 42.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Electric Winch.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check brake, rope spooling and dead turns.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drum",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect rope; check gearbox oil.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rope",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul gearbox and brake; replace rope.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gearbox",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wire rope damage: broken wires, kinks, corrosion. Common cause: wear on sheaves/drum, overload, poor spooling.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "rope",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for brake failure: load drift, increased stopping distance. Common cause: worn linings, contamination, wrong adjustment.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "motor_brake",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload: trip of limiter, structural deformation. Common cause: unknown load weight, side pulling.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "motor_brake",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does line pull fall as rope builds up on the drum?",
+     "options": [
+      "The effective radius increases",
+      "The motor weakens",
+      "The rope gets lighter",
+      "It does not"
+     ],
+     "answer": 0,
+     "explanation": "F = T / r.",
+     "level": "basic"
+    },
+    {
+     "question": "What holds the load if power fails?",
+     "options": [
+      "Spring-applied brake",
+      "The rope",
+      "Gravity",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Fail-safe brake.",
+     "level": "basic"
+    },
+    {
+     "question": "Why keep dead turns on the drum?",
+     "options": [
+      "To reduce load on the rope anchor",
+      "For decoration",
+      "To speed up",
+      "To cool the rope"
+     ],
+     "answer": 0,
+     "explanation": "Friction carries most of the load.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Winds the rope.\"",
+     "options": [
+      "Reduction Gearbox (planetary/helical)",
+      "Base Frame & Drum Supports",
+      "Rope Drum (grooved) with Wound Wire Rope",
+      "Load being Hauled"
+     ],
+     "answer": 2,
+     "explanation": "Rope Drum (grooved) with Wound Wire Rope: Winds the rope.",
+     "level": "basic",
+     "part": "drum",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Reduces speed, increases torque.\"",
+     "options": [
+      "Load being Hauled",
+      "Reduction Gearbox (planetary/helical)",
+      "Motor & Spring-Applied Electromagnetic Brake",
+      "Wire Rope to Load"
+     ],
+     "answer": 1,
+     "explanation": "Reduction Gearbox (planetary/helical): Reduces speed, increases torque.",
+     "level": "basic",
+     "part": "gearbox",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drive and fail-safe brake.\"",
+     "options": [
+      "Motor & Spring-Applied Electromagnetic Brake",
+      "Load being Hauled",
+      "Reduction Gearbox (planetary/helical)",
+      "Wire Rope to Load"
+     ],
+     "answer": 0,
+     "explanation": "Motor & Spring-Applied Electromagnetic Brake: Drive and fail-safe brake.",
+     "level": "basic",
+     "part": "motor_brake",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

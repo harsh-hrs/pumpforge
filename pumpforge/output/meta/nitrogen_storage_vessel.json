@@ -1,0 +1,678 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "nitrogen_storage_vessel",
+  "title": "Liquid Nitrogen Storage Vessel (Vacuum-Insulated) with Ambient Vaporiser",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 234,
+    "phase": 11,
+    "eq_id": "EQ-312",
+    "subcategory": "Gas Utilities",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "nitrogen_storage_vessel_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "nitrogen_storage_vessel_temperature.glb",
+      "title": "From −196 °C liquid to ambient gas",
+      "description": "Liquid nitrogen boils at −196 °C (77 K). The vacuum-perlite annulus keeps heat leak so low that daily boil-off is only a fraction of a percent of capacity. Withdrawn liquid warms in the finned ambient vaporiser (heat from the air; frost forms on the cold lower tubes) and leaves close to ambient temperature. 1 litre of liquid gives ≈ 0.69 Nm³ of gas, so a closed-in liquid line must always have a relief device (trapped liquid → very high pressure).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "liquid_out",
+      "kind": "flow_suction",
+      "radius": 0.016,
+      "points": [
+        [
+          0.0,
+          1.05,
+          -0.05
+        ],
+        [
+          0.0,
+          0.45,
+          0.25
+        ],
+        [
+          0.0,
+          0.18,
+          0.25
+        ],
+        [
+          1.7,
+          0.18,
+          0.2
+        ],
+        [
+          1.7,
+          2.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "gas_to_plant",
+      "kind": "air",
+      "radius": 0.016,
+      "points": [
+        [
+          1.7,
+          2.2,
+          -0.12
+        ],
+        [
+          1.7,
+          2.45,
+          -0.12
+        ],
+        [
+          2.6,
+          2.45,
+          -0.12
+        ],
+        [
+          2.6,
+          1.2,
+          -0.12
+        ],
+        [
+          3.1,
+          1.2,
+          -0.12
+        ]
+      ]
+    },
+    {
+      "name": "pressure_build",
+      "kind": "steam",
+      "radius": 0.012,
+      "points": [
+        [
+          0.0,
+          0.45,
+          -0.0
+        ],
+        [
+          0.0,
+          0.3,
+          -0.0
+        ],
+        [
+          0.8,
+          0.3,
+          -0.6
+        ],
+        [
+          0.92,
+          1.4,
+          -0.6
+        ],
+        [
+          1.04,
+          3.77,
+          -0.6
+        ],
+        [
+          0.12,
+          3.77,
+          -0.6
+        ],
+        [
+          0.12,
+          3.65,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 26372,
+    "parts": 10
+  },
+  "summary": "A liquid nitrogen storage vessel keeps nitrogen as a liquid at about −196 °C inside a vacuum-insulated double-wall tank. A pressure-building coil holds tank pressure, and an ambient-air vaporiser turns the withdrawn liquid into gas for the plant.",
+  "classification": {
+    "family": "Gas utilities",
+    "type": "Vertical vacuum-insulated cryogenic tank with ambient vaporiser"
+  },
+  "model_configuration": {
+    "animation": "Level falls as liquid is used; frost grows on the vaporiser"
+  },
+  "standards": [
+    {
+      "id": "EN 13458 / ASME VIII",
+      "title": "Static vacuum-insulated cryogenic vessels",
+      "relevance": "Design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EIGA Doc 115 / CGA P-12",
+      "title": "Storage of cryogenic air gases at users' premises",
+      "relevance": "Siting & safety.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "EIGA documents"
+  ],
+  "parts": [
+    {
+      "id": "outer_vessel",
+      "name": "Outer Vessel / Vacuum Jacket (carbon steel)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "outer_vessel__back",
+        "outer_vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -0.6,
+        0.45,
+        -0.6
+      ],
+      "bbox_max": [
+        0.6,
+        3.65,
+        0.6
+      ],
+      "label_anchor": [
+        0.0,
+        2.05,
+        0.6
+      ],
+      "center": [
+        0.0,
+        2.05,
+        -0.0
+      ],
+      "info_ref": "ln_outer"
+    },
+    {
+      "id": "inner_vessel",
+      "name": "Inner Vessel (austenitic stainless steel, rated for −196 °C)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "inner_vessel__back",
+        "inner_vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.45
+      ],
+      "bbox_min": [
+        -0.5,
+        0.6,
+        -0.5
+      ],
+      "bbox_max": [
+        0.5,
+        3.5,
+        0.5
+      ],
+      "label_anchor": [
+        0.0,
+        2.05,
+        0.5
+      ],
+      "center": [
+        0.0,
+        2.05,
+        -0.0
+      ],
+      "info_ref": "ln_inner"
+    },
+    {
+      "id": "annulus_insulation",
+      "name": "Annular Space: Perlite (or multilayer insulation) under High Vacuum",
+      "group": "insulation",
+      "section_role": "keep",
+      "nodes": [
+        "ins"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.1,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.59,
+        0.46,
+        -0.59
+      ],
+      "bbox_max": [
+        0.59,
+        3.64,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.05,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.05,
+        -0.295
+      ],
+      "info_ref": "ln_annulus"
+    },
+    {
+      "id": "liquid_nitrogen",
+      "name": "Liquid Nitrogen (−196 °C at 1 atm; stored at ≈ 2–17 bar)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lin"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.492,
+        0.604,
+        -0.492
+      ],
+      "bbox_max": [
+        0.492,
+        2.65,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.627,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.627,
+        -0.246
+      ],
+      "info_ref": "ln_inner"
+    },
+    {
+      "id": "legs",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.50826,
+        0.0,
+        -0.50826
+      ],
+      "bbox_max": [
+        0.50826,
+        0.8,
+        0.50826
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.50826
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "ln_outer"
+    },
+    {
+      "id": "pressure_builder",
+      "name": "Pressure-Building Coil & Regulator (vaporises a little liquid to hold tank pressure)",
+      "group": "pressure_control",
+      "section_role": "keep",
+      "nodes": [
+        "pressure_builder.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.025,
+        0.275,
+        -0.645
+      ],
+      "bbox_max": [
+        1.085,
+        3.78902,
+        0.025
+      ],
+      "label_anchor": [
+        0.53,
+        2.03201,
+        0.025
+      ],
+      "center": [
+        0.53,
+        2.03201,
+        -0.31
+      ],
+      "info_ref": "ln_pbc"
+    },
+    {
+      "id": "ambient_vaporiser",
+      "name": "Ambient-Air Vaporiser (star-finned aluminium tubes)",
+      "group": "vaporiser",
+      "section_role": "keep",
+      "nodes": [
+        "ambient_vaporiser.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.46,
+        0.0,
+        -0.36
+      ],
+      "bbox_max": [
+        2.26,
+        2.225,
+        0.44
+      ],
+      "label_anchor": [
+        1.86,
+        1.1125,
+        0.44
+      ],
+      "center": [
+        1.86,
+        1.1125,
+        0.04
+      ],
+      "info_ref": "ln_vaporiser"
+    },
+    {
+      "id": "frost",
+      "name": "Frost building on the cold lower tubes",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "frost.001"
+      ],
+      "pivot": [
+        1.86,
+        0.32,
+        0.04
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.65,
+        0.32,
+        -0.17
+      ],
+      "bbox_max": [
+        2.07,
+        0.95,
+        0.25
+      ],
+      "label_anchor": [
+        1.86,
+        0.635,
+        0.25
+      ],
+      "center": [
+        1.86,
+        0.635,
+        0.04
+      ],
+      "info_ref": "ln_vaporiser"
+    },
+    {
+      "id": "piping_valves",
+      "name": "Liquid Withdrawal Valve, Fill Connection, Gas Line & Final Line Regulator",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping_valves.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.2,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.8,
+        0.15502,
+        -0.266
+      ],
+      "bbox_max": [
+        3.0,
+        2.48,
+        0.325
+      ],
+      "label_anchor": [
+        1.1,
+        1.31751,
+        0.325
+      ],
+      "center": [
+        1.1,
+        1.31751,
+        0.0295
+      ],
+      "info_ref": "ln_piping"
+    },
+    {
+      "id": "safety_instruments",
+      "name": "Dual Safety Relief Valves (change-over), Annulus Burst Disc, Level (ΔP) Gauge & Pressure Gauge",
+      "group": "safety",
+      "section_role": "keep",
+      "nodes": [
+        "safety_instruments.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.05,
+        0.0,
+        -0.34
+      ],
+      "bbox_max": [
+        0.34,
+        3.8,
+        0.38
+      ],
+      "label_anchor": [
+        -0.355,
+        1.9,
+        0.38
+      ],
+      "center": [
+        -0.355,
+        1.9,
+        0.02
+      ],
+      "info_ref": "ln_safety"
+    }
+  ],
+  "components": {
+    "ln_outer": {
+      "function": "Vacuum jacket.",
+      "construction": "Outer shell.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Vacuum loss (sweating/frost on shell)"
+      ],
+      "inspection": [
+        "Check shell for cold spots"
+      ]
+    },
+    "ln_inner": {
+      "function": "Holds the liquid.",
+      "construction": "Inner pressure vessel.",
+      "material": "Austenitic stainless (cryogenic).",
+      "operating_conditions": "−196 °C.",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Statutory inspection"
+      ]
+    },
+    "ln_annulus": {
+      "function": "Limits heat leak.",
+      "construction": "Perlite powder / MLI under high vacuum.",
+      "material": "Perlite.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Vacuum degradation → high boil-off"
+      ],
+      "inspection": [
+        "Boil-off / vacuum check"
+      ]
+    },
+    "ln_pbc": {
+      "function": "Maintains tank pressure.",
+      "construction": "Finned coil and regulator.",
+      "material": "Aluminium/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ln_vaporiser": {
+      "function": "Vaporises liquid with ambient heat.",
+      "construction": "Star-finned tubes.",
+      "material": "Aluminium.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Excess icing → cold gas downstream"
+      ],
+      "inspection": [
+        "Defrost, outlet temperature"
+      ]
+    },
+    "ln_piping": {
+      "function": "Fill, withdrawal and gas supply.",
+      "construction": "Valves, regulator, lines.",
+      "material": "Stainless/brass.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Trapped liquid overpressure"
+      ],
+      "inspection": [
+        "Relief devices on every liquid section"
+      ]
+    },
+    "ln_safety": {
+      "function": "Protects against overpressure and indicates contents.",
+      "construction": "Dual relief valves, burst disc, ΔP level gauge.",
+      "material": "Brass/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Valve icing"
+      ],
+      "inspection": [
+        "Periodic test"
+      ]
+    }
+  }
+}

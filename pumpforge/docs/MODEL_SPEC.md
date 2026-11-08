@@ -1,6 +1,6 @@
-# PumpForge model specification (v1.1)
+# PumpForge model specification (v1.4)
 
-Every pump ships as three files, plus optional teaching overlays. The set covers all 62 catalogue entries (39 pumps, 23 valves & piping items):
+Every pump ships as three files, plus optional teaching overlays. The set covers all 192 catalogue entries (39 pumps, 23 valves & piping, 30 rotating, 25 static, 32 material-handling, 25 thermal & process and 18 filtration & separation items):
 
 | File | Purpose |
 |---|---|
@@ -67,7 +67,7 @@ Either play the **`Explode`** clip (1 s, from assembled to exploded; play it in 
 - Typical values, such as air pressure ranges, are labelled as typical. Always defer to the manufacturer's data.
 
 ## Teaching overlays (schema 1.1)
-Besides `<id>_flow.glb`, a model can export `<id>_<kind>.glb` overlays. The current kinds are `pressure`, `thrust`, `wear`, `installation`, `magnetic_field` (solenoid valve), `quench` (flame arrestor), `heat_loss` (pipe insulation) and `heat_input` (heat tracing).
+Besides `<id>_flow.glb`, a model can export `<id>_<kind>.glb` overlays. The current kinds are `pressure`, `thrust`, `wear`, `installation`, `magnetic_field` (solenoid valve), `quench` (flame arrestor), `heat_loss` (pipe insulation), `heat_input` (heat tracing), `waveforms`, `torque`, `balance`, `temperature` and `noise`. Flow kinds now also include `electric`, `power` (mechanical power path), `flue_gas` and `exhaust`.
 
 - `meta.overlays[kind]` gives the file, title, description, render mode and annotations.
 - Overlay materials: `pressure_0` … `pressure_9` (blue → red, low → high pressure), `thrust` (magenta, impeller thrust), `counter_force` (green, balancing force), and `wear_light`, `wear_moderate`, `wear_severe` (yellow, pink, purple).

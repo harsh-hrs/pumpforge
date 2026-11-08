@@ -1,0 +1,580 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "lpg_storage_bullet",
+ "no": 114,
+ "title": "LPG Storage Bullet",
+ "model_title": "LPG Storage Bullet (Horizontal Pressure Vessel)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An LPG bullet is a horizontal pressure vessel storing liquefied petroleum gas under its own vapour pressure. It is filled to no more than about 85 % to allow for liquid expansion, and protected by relief valves, water deluge and remote isolation.",
+   "applications": [
+    "LPG bottling plants and depots",
+    "Refinery and gas-plant storage",
+    "Industrial fuel storage"
+   ],
+   "key_points": [
+    "Pressure = vapour pressure at temperature",
+    "Max fill ~ 85 % (typical)",
+    "Relief sized for fire exposure",
+    "BLEVE prevention: deluge, mounding, spacing"
+   ],
+   "classification": {
+    "family": "Pressure storage",
+    "type": "Horizontal LPG bullet with hemispherical heads"
+   },
+   "hi_family": "static_equipment",
+   "summary": "An LPG bullet is a horizontal pressure vessel that stores liquefied petroleum gas under its own vapour pressure. It is filled to no more than about 85 % so the liquid can expand. Safety relief valves, a water deluge system and remote-operated valves protect it; it is mounded or spaced per fire codes."
+  },
+  "model_3d": {
+   "asset": "glb/lpg_storage_bullet.glb",
+   "metadata": "meta/lpg_storage_bullet.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11950,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "LPG is stored as liquid with vapour above it.",
+    "Liquid is drawn from the bottom; vapour line balances pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "LPG is stored as liquid with vapour above it.",
+     "part": "lpg_liquid",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquid is drawn from the bottom; vapour line balances pressure.",
+     "part": "fittings",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Relief valves protect against overpressure (e.g. fire).",
+     "part": "fittings",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The deluge ring cools the shell in a fire.",
+     "part": "deluge",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Vapour pressure vs temperature for propane/butane."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "lpg_storage_bullet_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/lpg_storage_bullet.json#components",
+   "key_components": "Horizontal pressure vessel, PSVs, level gauge, deluge, saddles",
+   "parts": [
+    {
+     "id": "bullet",
+     "name": "Bullet Shell & Hemispherical Heads",
+     "info_ref": "lpg_shell",
+     "function": "Contains LPG under pressure.",
+     "material": "Carbon steel (impact tested)."
+    },
+    {
+     "id": "saddles",
+     "name": "Saddle Supports (one fixed, one sliding)",
+     "info_ref": "sv_saddles",
+     "function": "Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "lpg_liquid",
+     "name": "Liquid LPG (≤ ~85 % fill; vapour above)",
+     "info_ref": "lpg_liquid",
+     "function": "Liquid LPG.",
+     "material": "—"
+    },
+    {
+     "id": "fittings",
+     "name": "Safety Relief Valves & Vent Stack, Vapour/Liquid/Fill Nozzles, Drain, Manway, Level & Temperature Gauges",
+     "info_ref": "lpg_fittings",
+     "function": "Relief, process connections and gauges.",
+     "material": "—"
+    },
+    {
+     "id": "deluge",
+     "name": "Water Deluge / Spray Ring (fire protection, cooling)",
+     "info_ref": "lpg_deluge",
+     "function": "Cools the vessel in a fire.",
+     "material": "Steel."
+    },
+    {
+     "id": "earthing",
+     "name": "Earthing Boss & Bonding",
+     "info_ref": "lpg_earthing",
+     "function": "Prevents static build-up.",
+     "material": "Copper."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 2 – 4 m; length 10 – 60 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "~ 17 – 20 (propane)",
+     "unit": "bar(g)"
+    },
+    "design_temperature": {
+     "typical_range": "-45 to 55",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Water capacity",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Excess-flow and remotely operated valves on liquid lines; spacing and fire protection per NFPA 58/API 2510."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level and pressure.",
+     "part": "lpg_liquid",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Test relief valves and deluge.",
+     "part": "deluge",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Internal inspection and NDT.",
+     "part": "bullet"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overfill",
+     "category": "performance",
+     "symptoms": [
+      "High level"
+     ],
+     "causes": [
+      "Gauge fault"
+     ],
+     "remedies": [
+      "Independent high-level trip"
+     ],
+     "part": "fittings"
+    },
+    {
+     "problem": "BLEVE risk in fire",
+     "category": "performance",
+     "symptoms": [
+      "Fire impingement"
+     ],
+     "causes": [
+      "Shell overheating above liquid"
+     ],
+     "remedies": [
+      "Deluge, mounding, relief"
+     ],
+     "part": "deluge"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "LPG Storage Bullet — Introduction",
+    "type": "in_app_tour",
+    "model": "lpg_storage_bullet.glb",
+    "duration_s": 43.9,
+    "script": [
+     {
+      "narration": "This module introduces the LPG Storage Bullet.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An LPG bullet is a horizontal pressure vessel storing liquefied petroleum gas under its own vapour pressure.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is filled to no more than about 85 % to allow for liquid expansion, and protected by relief valves, water deluge and remote isolation.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include LPG bottling plants and depots; refinery and gas-plant storage; industrial fuel storage.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "LPG Storage Bullet — Operation",
+    "type": "in_app_tour",
+    "model": "lpg_storage_bullet.glb",
+    "duration_s": 24.4,
+    "script": [
+     {
+      "narration": "How the LPG Storage Bullet works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "LPG is stored as liquid with vapour above it.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lpg_liquid",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquid is drawn from the bottom; vapour line balances pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "fittings",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Relief valves protect against overpressure (e.g. fire).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fittings",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The deluge ring cools the shell in a fire.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "deluge",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "LPG Storage Bullet — Maintenance",
+    "type": "in_app_tour",
+    "model": "lpg_storage_bullet.glb",
+    "duration_s": 32.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the LPG Storage Bullet.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level and pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lpg_liquid",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test relief valves and deluge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "deluge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Internal inspection and NDT.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bullet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overfill: high level. Common cause: gauge fault.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fittings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bleve risk in fire: fire impingement. Common cause: shell overheating above liquid.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "deluge",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why not fill an LPG vessel to 100 %?",
+     "options": [
+      "Cost",
+      "Liquid expands with temperature and could over-pressure",
+      "Colour",
+      "It is allowed"
+     ],
+     "answer": 1,
+     "explanation": "Expansion space.",
+     "level": "basic"
+    },
+    {
+     "question": "What determines the pressure?",
+     "options": [
+      "Fill level",
+      "Vapour pressure at the liquid temperature",
+      "Vessel size",
+      "Pump"
+     ],
+     "answer": 1,
+     "explanation": "Saturated.",
+     "level": "basic"
+    },
+    {
+     "question": "Purpose of the deluge ring?",
+     "options": [
+      "Washing",
+      "Cool the vessel in a fire",
+      "Fill",
+      "Earthing"
+     ],
+     "answer": 1,
+     "explanation": "Fire protection.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains LPG under pressure.\"",
+     "options": [
+      "Earthing Boss & Bonding",
+      "Liquid LPG (≤ ~85 % fill; vapour above)",
+      "Water Deluge / Spray Ring (fire protection, cooling)",
+      "Bullet Shell & Hemispherical Heads"
+     ],
+     "answer": 3,
+     "explanation": "Bullet Shell & Hemispherical Heads: Contains LPG under pressure.",
+     "level": "basic",
+     "part": "bullet",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support a horizontal vessel; one saddle slides to allow thermal expansion.\"",
+     "options": [
+      "Saddle Supports (one fixed, one sliding)",
+      "Water Deluge / Spray Ring (fire protection, cooling)",
+      "Bullet Shell & Hemispherical Heads",
+      "Safety Relief Valves & Vent Stack, Vapour/Liquid/Fill Nozzles, Drain, Manway, Level & Temperature Gauges"
+     ],
+     "answer": 0,
+     "explanation": "Saddle Supports (one fixed, one sliding): Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "level": "basic",
+     "part": "saddles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Liquid LPG.\"",
+     "options": [
+      "Earthing Boss & Bonding",
+      "Saddle Supports (one fixed, one sliding)",
+      "Liquid LPG (≤ ~85 % fill; vapour above)",
+      "Water Deluge / Spray Ring (fire protection, cooling)"
+     ],
+     "answer": 2,
+     "explanation": "Liquid LPG (≤ ~85 % fill; vapour above): Liquid LPG.",
+     "level": "basic",
+     "part": "lpg_liquid",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

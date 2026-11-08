@@ -1,0 +1,611 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "mixed_bed_polisher",
+ "no": 226,
+ "title": "Mixed Bed Polisher",
+ "model_title": "Mixed-Bed Ion-Exchange Polisher",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A mixed-bed polisher contains cation and anion resins mixed intimately in one vessel. The water meets H⁺ and OH⁻ sites alternately thousands of times, like many two-bed units in series, giving very pure water. To regenerate, the resins are separated by backwashing, regenerated separately with acid and caustic, and re-mixed with air.",
+   "applications": [
+    "Polishing after RO or two-bed DM for high-pressure boilers",
+    "Electronics, pharmaceutical and laboratory water"
+   ],
+   "key_points": [
+    "Conductivity < ≈ 0.1 µS/cm",
+    "Separation by backwash (anion lighter)",
+    "Air mixing after regeneration",
+    "Interface collector between layers"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Mixed-bed ion exchange"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A mixed-bed polisher contains cation and anion resins mixed together, producing very high-purity water. For regeneration the resins are separated by backwashing, regenerated separately and re-mixed with air."
+  },
+  "model_3d": {
+   "asset": "glb/mixed_bed_polisher.glb",
+   "metadata": "meta/mixed_bed_polisher.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11770,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Pre-treated water enters at the top.",
+    "Mixed resins remove the remaining ions.",
+    "For regeneration, backwash separates the resins."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Pre-treated water enters at the top.",
+     "part": "mb",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Mixed resins remove the remaining ions.",
+     "part": "mixed_resin",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "For regeneration, backwash separates the resins.",
+     "part": "mixed_resin",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Acid and caustic regenerate each layer; air re-mixes.",
+     "part": "instruments_air",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet conductivity vs throughput."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "mixed_bed_polisher_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "mixed_bed_polisher_pressure.glb",
+     "title": "Thousands of tiny demineralisers in series",
+     "description": "In service the cation and anion beads are mixed, so the water meets alternate H⁺ and OH⁻ exchange sites thousands of times — like countless two-bed units in series. This \"polishes\" water to very high purity (conductivity < ~ 0.1 µS/cm, silica < ~ 10–20 µg/L) for high-pressure boilers and electronics. For regeneration the resins are separated by backwashing (lighter anion on top), regenerated separately, then re-mixed with air (the animation shows the separation and remixing).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/mixed_bed_polisher.json#components",
+   "key_components": "Pressure vessel, mixed cation/anion resin bed, interface collector, air mixing system",
+   "parts": [
+    {
+     "id": "mb",
+     "name": "Mixed-Bed Vessel (rubber-lined)",
+     "info_ref": "mb_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    },
+    {
+     "id": "mb_resin",
+     "name": "Mixed-Bed Vessel: Support Layer",
+     "info_ref": "mb_resin",
+     "function": "Exchanges ions.",
+     "material": "Polystyrene-DVB resin."
+    },
+    {
+     "id": "mb_internals",
+     "name": "Mixed-Bed Vessel: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+     "info_ref": "mb_internals",
+     "function": "Even flow distribution.",
+     "material": "PP/stainless."
+    },
+    {
+     "id": "mixed_resin",
+     "name": "Intimately Mixed Cation + Anion Resin (separated by backwash before regeneration)",
+     "info_ref": "mb_resin",
+     "function": "Exchanges ions.",
+     "material": "Polystyrene-DVB resin."
+    },
+    {
+     "id": "instruments_air",
+     "name": "Valve Nest, Air-Mix Line, Sight Glass & Conductivity / Silica Analyser",
+     "info_ref": "mb_control",
+     "function": "Valves, air mix, monitoring.",
+     "material": "—"
+    },
+    {
+     "id": "supports",
+     "name": "Legs",
+     "info_ref": "mb_vessel",
+     "function": "Pressure vessel for resin.",
+     "material": "Rubber-lined steel / FRP."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Vessels ≈ 0.5 – 3 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 5 – 300",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Outlet ≈ 0.06 – 0.1 µS/cm; silica ≈ 10 – 20 µg/L",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 1 – 20",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Use downstream of RO/two-bed; size by flow and ionic load."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Ion exchange manuals"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Vessels on level foundation or legs anchored; space above for resin loading and below for underdrain access."
+   ],
+   "alignment": [
+    "Vessels plumb so the bed and distributors are level (uneven beds channel)."
+   ],
+   "piping": [
+    "Valve nest with service, backwash, regenerant, rinse; sample points before/after; acid/caustic-resistant lines and safety showers."
+   ],
+   "commissioning": [
+    "Load support layers and resin (soaked), backwash to classify; first regeneration; rinse to quality; check conductivity/silica/hardness."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check outlet conductivity and silica.",
+     "part": "instruments_air",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Resin analysis.",
+     "part": "mixed_resin",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect interface collector and laterals.",
+     "part": "mb_internals"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Poor separation",
+     "category": "performance",
+     "symptoms": [
+      "Short runs, poor quality"
+     ],
+     "causes": [
+      "Resin cross-contamination"
+     ],
+     "remedies": [
+      "Improve backwash; resin replacement"
+     ],
+     "part": "mixed_resin"
+    },
+    {
+     "problem": "Resin loss",
+     "category": "performance",
+     "symptoms": [
+      "Resin downstream"
+     ],
+     "causes": [
+      "Broken nozzle"
+     ],
+     "remedies": [
+      "Repair underdrain"
+     ],
+     "part": "mb_internals"
+    }
+   ],
+   "safety": [
+    "Acid/caustic handling; pressure vessel rules."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Mixed Bed Polisher — Introduction",
+    "type": "in_app_tour",
+    "model": "mixed_bed_polisher.glb",
+    "duration_s": 50.9,
+    "script": [
+     {
+      "narration": "This module introduces the Mixed Bed Polisher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A mixed-bed polisher contains cation and anion resins mixed intimately in one vessel.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The water meets H⁺ and OH⁻ sites alternately thousands of times, like many two-bed units in series, giving very pure water.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "To regenerate, the resins are separated by backwashing, regenerated separately with acid and caustic, and re-mixed with air.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include polishing after RO or two-bed DM for high-pressure boilers; electronics, pharmaceutical and laboratory water.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Mixed Bed Polisher — Operation",
+    "type": "in_app_tour",
+    "model": "mixed_bed_polisher.glb",
+    "duration_s": 36.3,
+    "script": [
+     {
+      "narration": "How the Mixed Bed Polisher works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pre-treated water enters at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mb",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Mixed resins remove the remaining ions.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mixed_resin",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "For regeneration, backwash separates the resins.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mixed_resin",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Acid and caustic regenerate each layer; air re-mixes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "instruments_air",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "In service the cation and anion beads are mixed, so the water meets alternate H⁺ and OH⁻ exchange sites thousands of times — like countless two-bed units in series.",
+      "duration_s": 12.1,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Mixed Bed Polisher — Maintenance",
+    "type": "in_app_tour",
+    "model": "mixed_bed_polisher.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Mixed Bed Polisher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check outlet conductivity and silica.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "instruments_air",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Resin analysis.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mixed_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect interface collector and laterals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mb_internals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor separation: short runs, poor quality. Common cause: resin cross-contamination.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "mixed_resin",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for resin loss: resin downstream. Common cause: broken nozzle.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "mb_internals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is mixed-bed water so pure?",
+     "options": [
+      "Water meets alternating H⁺/OH⁻ sites many times",
+      "It is boiled",
+      "Chlorine is added",
+      "It is filtered"
+     ],
+     "answer": 0,
+     "explanation": "Many stages.",
+     "level": "basic"
+    },
+    {
+     "question": "How are resins separated?",
+     "options": [
+      "Backwash — different densities",
+      "By magnet",
+      "By hand",
+      "By acid"
+     ],
+     "answer": 0,
+     "explanation": "Backwash.",
+     "level": "basic"
+    },
+    {
+     "question": "How are they re-mixed?",
+     "options": [
+      "Air",
+      "Paddles",
+      "Pumps",
+      "Not at all"
+     ],
+     "answer": 0,
+     "explanation": "Air.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure vessel for resin.\"",
+     "options": [
+      "Mixed-Bed Vessel (rubber-lined)",
+      "Mixed-Bed Vessel: Support Layer",
+      "Intimately Mixed Cation + Anion Resin (separated by backwash before regeneration)",
+      "Valve Nest, Air-Mix Line, Sight Glass & Conductivity / Silica Analyser"
+     ],
+     "answer": 0,
+     "explanation": "Mixed-Bed Vessel (rubber-lined): Pressure vessel for resin.",
+     "level": "basic",
+     "part": "mb",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Exchanges ions.\"",
+     "options": [
+      "Mixed-Bed Vessel: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "Mixed-Bed Vessel: Support Layer",
+      "Mixed-Bed Vessel (rubber-lined)",
+      "Legs"
+     ],
+     "answer": 1,
+     "explanation": "Mixed-Bed Vessel: Support Layer: Exchanges ions.",
+     "level": "basic",
+     "part": "mb_resin",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Even flow distribution.\"",
+     "options": [
+      "Valve Nest, Air-Mix Line, Sight Glass & Conductivity / Silica Analyser",
+      "Mixed-Bed Vessel: Inlet Distributor & Underdrain Collector (laterals with nozzles)",
+      "Legs",
+      "Mixed-Bed Vessel: Support Layer"
+     ],
+     "answer": 1,
+     "explanation": "Mixed-Bed Vessel: Inlet Distributor & Underdrain Collector (laterals with nozzles): Even flow distribution.",
+     "level": "basic",
+     "part": "mb_internals",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,648 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "nanofiltration_system",
+ "no": 179,
+ "title": "Nanofiltration System",
+ "model_title": "Nanofiltration Unit (Spiral-Wound Elements, 2:1 Array)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A nanofiltration system forces water at moderate pressure through spiral-wound membrane elements. NF lets water and most monovalent salts through but rejects hardness (calcium, magnesium), sulphate, colour and many organic molecules. Elements are housed in pressure vessels arranged in stages to increase recovery.",
+   "applications": [
+    "Water softening and colour removal",
+    "Sulphate removal from seawater (oil-field injection)",
+    "Food and dairy (demineralisation)",
+    "Wastewater reuse"
+   ],
+   "key_points": [
+    "Between UF and RO",
+    "Feed pressure ≈ 5–20 bar",
+    "High rejection of divalent ions",
+    "Concentrate valve sets recovery"
+   ],
+   "classification": {
+    "family": "Membrane system",
+    "type": "Spiral-wound NF, 2:1 array"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A nanofiltration unit forces feed water at moderate pressure through spiral-wound membrane elements. NF removes hardness, sulphate, colour and many organics while letting most monovalent salts pass. Elements sit in pressure vessels arranged in stages to raise recovery."
+  },
+  "model_3d": {
+   "asset": "glb/nanofiltration_system.glb",
+   "metadata": "meta/nanofiltration_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 21102,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The cartridge pre-filter protects the elements.",
+    "The high-pressure pump raises the feed pressure.",
+    "Feed flows along the element spacers; water permeates the membrane leaves."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The cartridge pre-filter protects the elements.",
+     "part": "cartridge_prefilter",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The high-pressure pump raises the feed pressure.",
+     "part": "hp_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Feed flows along the element spacers; water permeates the membrane leaves.",
+     "part": "spiral_elements",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Stage-1 concentrate feeds stage 2.",
+     "part": "pressure_vessels",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Permeate and concentrate leave through their headers.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Normalised permeate flow and salt passage vs time — the basis for deciding when to clean."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "nanofiltration_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "nanofiltration_system_pressure.glb",
+     "title": "Feed pressure overcomes osmotic pressure",
+     "description": "Nanofiltration needs a feed pressure of roughly 5–20 bar (between UF and reverse osmosis). Water and most monovalent ions pass; divalent ions (hardness, sulphate) and organics above ~ 200–1000 Da are largely rejected. Pressure falls slightly along each vessel; stage 2 treats the stage 1 concentrate to raise recovery.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/nanofiltration_system.json#components",
+   "key_components": "Spiral-wound elements, pressure vessels (2:1 array), high-pressure pump, cartridge prefilter, concentrate valve",
+   "parts": [
+    {
+     "id": "pressure_vessels",
+     "name": "FRP Pressure Vessels (stage 1: two, stage 2: one)",
+     "info_ref": "nf_vessels",
+     "function": "Contain elements under pressure.",
+     "material": "FRP."
+    },
+    {
+     "id": "spiral_elements",
+     "name": "Spiral-Wound Membrane Elements (membrane leaves, feed spacers, permeate tube)",
+     "info_ref": "nf_elements",
+     "function": "Separate solutes.",
+     "material": "Polyamide TFC."
+    },
+    {
+     "id": "piping",
+     "name": "Feed Manifold, Interstage, Concentrate Line (with control valve) & Permeate Header",
+     "info_ref": "nf_piping",
+     "function": "Manifolds and control.",
+     "material": "Stainless."
+    },
+    {
+     "id": "cartridge_prefilter",
+     "name": "Cartridge Pre-Filter (≈ 5 µm, protects the elements)",
+     "info_ref": "nf_prefilter",
+     "function": "Protects elements.",
+     "material": "Stainless."
+    },
+    {
+     "id": "hp_pump",
+     "name": "High-Pressure Feed Pump (multistage)",
+     "info_ref": "nf_pump",
+     "function": "Provides feed pressure.",
+     "material": "Stainless."
+    },
+    {
+     "id": "hp_pump_shaft",
+     "name": "High-Pressure Feed Pump (multistage) — Shaft & Coupling (turning)",
+     "info_ref": "nf_pump",
+     "function": "Provides feed pressure.",
+     "material": "Stainless."
+    },
+    {
+     "id": "rack",
+     "name": "Pressure-Vessel Rack",
+     "info_ref": "nf_vessels",
+     "function": "Contain elements under pressure.",
+     "material": "FRP."
+    },
+    {
+     "id": "feed_tracers",
+     "name": "Feed flowing along the Element Spacers",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "8-inch elements, ~ 37 – 41 m² each",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 100 000",
+     "unit": "m³/d"
+    },
+    "operating_pressure": {
+     "typical_range": "~ 5 – 20",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "Divalent rejection typically > 90 %",
+     "unit": "%"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Use projection software of the membrane maker; set recovery from scaling limits."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASTM D4516",
+    "Membrane maker design guides"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Skid or tank on level foundation; room for module removal and CIP equipment."
+   ],
+   "alignment": [
+    "Modules/vessels square and supported without strain on ports."
+   ],
+   "piping": [
+    "Pre-treatment (strainer/cartridge filter) ahead of membranes; sampling points for feed, permeate and concentrate; CIP connections."
+   ],
+   "commissioning": [
+    "Flush preservative; integrity test; start at low flux; set recovery; record normalised flux, ΔP and rejection baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Record pressures, flows, conductivity; normalise data.",
+     "part": "piping",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "CIP when normalised flow drops ~ 10–15 %.",
+     "part": "spiral_elements",
+     "interval": "as required"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace elements (typically 3–7 years).",
+     "part": "spiral_elements"
+    }
+   ],
+   "lubrication": [
+    "HP pump per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Scaling",
+     "category": "performance",
+     "symptoms": [
+      "Rising ΔP in last stage, falling flow"
+     ],
+     "causes": [
+      "Exceeding solubility (CaSO₄, CaCO₃)"
+     ],
+     "remedies": [
+      "Antiscalant; acid; lower recovery"
+     ],
+     "part": "spiral_elements"
+    },
+    {
+     "problem": "Fouling",
+     "category": "performance",
+     "symptoms": [
+      "First-stage ΔP rise"
+     ],
+     "causes": [
+      "Colloids, biofilm"
+     ],
+     "remedies": [
+      "Better pre-treatment; CIP"
+     ],
+     "part": "pressure_vessels"
+    }
+   ],
+   "safety": [
+    "High pressure; chemical cleaning."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Nanofiltration System — Introduction",
+    "type": "in_app_tour",
+    "model": "nanofiltration_system.glb",
+    "duration_s": 54.9,
+    "script": [
+     {
+      "narration": "This module introduces the Nanofiltration System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A nanofiltration system forces water at moderate pressure through spiral-wound membrane elements.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "NF lets water and most monovalent salts through but rejects hardness (calcium, magnesium), sulphate, colour and many organic molecules.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Elements are housed in pressure vessels arranged in stages to increase recovery.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include water softening and colour removal; sulphate removal from seawater (oil-field injection); food and dairy (demineralisation); wastewater reuse.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: FRP Pressure Vessels (stage 1: two, stage 2: one), High-Pressure Feed Pump (multistage), High-Pressure Feed Pump (multistage) — Shaft & Coupling (turning).",
+      "duration_s": 11.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Nanofiltration System — Operation",
+    "type": "in_app_tour",
+    "model": "nanofiltration_system.glb",
+    "duration_s": 35.0,
+    "script": [
+     {
+      "narration": "How the Nanofiltration System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The cartridge pre-filter protects the elements.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cartridge_prefilter",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The high-pressure pump raises the feed pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hp_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Feed flows along the element spacers; water permeates the membrane leaves.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "spiral_elements",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Stage-1 concentrate feeds stage 2.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pressure_vessels",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Permeate and concentrate leave through their headers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Nanofiltration needs a feed pressure of roughly 5–20 bar (between UF and reverse osmosis).",
+      "duration_s": 6.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Nanofiltration System — Maintenance",
+    "type": "in_app_tour",
+    "model": "nanofiltration_system.glb",
+    "duration_s": 33.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Nanofiltration System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Record pressures, flows, conductivity; normalise data.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "CIP when normalised flow drops ~ 10–15 %.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spiral_elements",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace elements (typically 3–7 years).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spiral_elements",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling: rising δp in last stage, falling flow. Common cause: exceeding solubility (caso₄, caco₃).",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "spiral_elements",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fouling: first-stage δp rise. Common cause: colloids, biofilm.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "pressure_vessels",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "NF strongly rejects…",
+     "options": [
+      "Divalent ions like Ca²⁺ and SO₄²⁻",
+      "All monovalent ions",
+      "Only bacteria",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Divalent.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical NF feed pressure is…",
+     "options": [
+      "~ 5–20 bar",
+      "~ 0.1 bar",
+      "~ 200 bar",
+      "~ 1000 bar"
+     ],
+     "answer": 0,
+     "explanation": "Moderate.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the second stage treat?",
+     "options": [
+      "First-stage concentrate",
+      "Permeate",
+      "Air",
+      "Clean water"
+     ],
+     "answer": 0,
+     "explanation": "Raises recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contain elements under pressure.\"",
+     "options": [
+      "High-Pressure Feed Pump (multistage) — Shaft & Coupling (turning)",
+      "Feed flowing along the Element Spacers",
+      "FRP Pressure Vessels (stage 1: two, stage 2: one)",
+      "Spiral-Wound Membrane Elements (membrane leaves, feed spacers, permeate tube)"
+     ],
+     "answer": 2,
+     "explanation": "FRP Pressure Vessels (stage 1: two, stage 2: one): Contain elements under pressure.",
+     "level": "basic",
+     "part": "pressure_vessels",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separate solutes.\"",
+     "options": [
+      "Spiral-Wound Membrane Elements (membrane leaves, feed spacers, permeate tube)",
+      "Pressure-Vessel Rack",
+      "FRP Pressure Vessels (stage 1: two, stage 2: one)",
+      "Feed Manifold, Interstage, Concentrate Line (with control valve) & Permeate Header"
+     ],
+     "answer": 0,
+     "explanation": "Spiral-Wound Membrane Elements (membrane leaves, feed spacers, permeate tube): Separate solutes.",
+     "level": "basic",
+     "part": "spiral_elements",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Manifolds and control.\"",
+     "options": [
+      "Pressure-Vessel Rack",
+      "FRP Pressure Vessels (stage 1: two, stage 2: one)",
+      "Spiral-Wound Membrane Elements (membrane leaves, feed spacers, permeate tube)",
+      "Feed Manifold, Interstage, Concentrate Line (with control valve) & Permeate Header"
+     ],
+     "answer": 3,
+     "explanation": "Feed Manifold, Interstage, Concentrate Line (with control valve) & Permeate Header: Manifolds and control.",
+     "level": "basic",
+     "part": "piping",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

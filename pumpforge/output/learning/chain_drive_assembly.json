@@ -1,0 +1,670 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "chain_drive_assembly",
+ "no": 90,
+ "title": "Chain Drive Assembly",
+ "model_title": "Roller Chain Drive Assembly (Simplex, 15T / 30T Sprockets)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A roller chain drive transmits power positively between sprockets. Chain rollers seat in the tooth gaps, so there is no slip and the ratio equals the tooth ratio. Chains need lubrication and correct slack.",
+   "applications": [
+    "Conveyors and elevators",
+    "Agricultural and food machinery",
+    "Low-speed, high-torque drives",
+    "Motorcycles and bicycles"
+   ],
+   "key_points": [
+    "Positive drive — exact ratio",
+    "Lubrication is essential",
+    "Replace at ~3 % elongation (typical)",
+    "Odd tooth count on small sprocket"
+   ],
+   "classification": {
+    "family": "Mechanical drive",
+    "type": "Simplex roller chain drive with idler"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A roller chain drive transmits power positively (no slip) between sprockets. Rollers seat in the sprocket tooth gaps, so the speed ratio is exactly the tooth ratio (30/15 = 2:1). Chains handle high torque at low speed; they need lubrication and correct slack, provided here by a drip lubricator and an idler tensioner on the slack side."
+  },
+  "model_3d": {
+   "asset": "glb/chain_drive_assembly.glb",
+   "metadata": "meta/chain_drive_assembly.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 38468,
+   "parts": 14
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor turns the driver sprocket.",
+    "Teeth engage the rollers and pull the chain round.",
+    "The driven sprocket turns at the tooth ratio (15/30 = half speed)."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor turns the driver sprocket.",
+     "part": "driver_sprocket",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Teeth engage the rollers and pull the chain round.",
+     "part": "chain",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The driven sprocket turns at the tooth ratio (15/30 = half speed).",
+     "part": "driven_sprocket",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The idler takes up slack on the slack side.",
+     "part": "tensioner",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drip lubricator oils the chain joints.",
+     "part": "lubricator",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Power rating vs small-sprocket speed (chain maker tables); efficiency ~ 97–98 %."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "chain_drive_assembly_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/chain_drive_assembly.json#components",
+   "key_components": "Sprockets, roller chain, idler/tensioner, lubrication",
+   "parts": [
+    {
+     "id": "driver_sprocket",
+     "name": "Driver Sprocket (15 teeth)",
+     "info_ref": "cd_sprocket",
+     "function": "Engage the chain rollers to transmit torque.",
+     "material": "Steel, induction-hardened teeth."
+    },
+    {
+     "id": "driven_sprocket",
+     "name": "Driven Sprocket (30 teeth) & Shaft",
+     "info_ref": "cd_sprocket",
+     "function": "Engage the chain rollers to transmit torque.",
+     "material": "Steel, induction-hardened teeth."
+    },
+    {
+     "id": "chain",
+     "name": "Roller Chain (rollers, inner & outer link plates)",
+     "info_ref": "cd_chain",
+     "function": "Carries the load between sprockets.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Gearmotor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Gearmotor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Gearmotor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Gearmotor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Gearmotor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Gearmotor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "tensioner",
+     "name": "Idler Sprocket Tensioner (slack side)",
+     "info_ref": "cd_tensioner",
+     "function": "Takes up slack and limits whip.",
+     "material": "Steel."
+    },
+    {
+     "id": "lubricator",
+     "name": "Drip Lubricator",
+     "info_ref": "cd_lubricator",
+     "function": "Supplies oil to the chain joints.",
+     "material": "Glass/brass."
+    },
+    {
+     "id": "driven_bearings",
+     "name": "Driven Shaft Plummer Blocks",
+     "info_ref": "bd_bearings",
+     "function": "Support the driven shaft.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "frame",
+     "name": "Base Frame & Motor Base",
+     "info_ref": "bd_slide_base",
+     "function": "Supports motor and shafts.",
+     "material": "Steel."
+    },
+    {
+     "id": "guard",
+     "name": "Chain Guard (hidden in cutaway)",
+     "info_ref": "bd_guard",
+     "function": "Prevents contact with the chain.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pitch 6 – 76 mm (ISO 606)",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.1 – 500+",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Small sprocket up to ~ 3000 (small pitch)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Ratio up to ~ 7:1 per stage",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "links": {
+     "typical_range": "Even number of links preferred",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount driver and driven machines on a rigid common base so centre distances and alignment stay fixed."
+   ],
+   "alignment": [
+    "Align shafts parallel and the wheels/hubs in the same plane (straight-edge or laser); misalignment is the main cause of early wear."
+   ],
+   "piping": [
+    "Fit guards that fully enclose moving parts but allow inspection and lubrication."
+   ],
+   "commissioning": [
+    "Set slack ~ 2–4 % of span (typical); lubricate before start."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check lubrication and noise.",
+     "part": "lubricator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure chain elongation; check sprocket teeth.",
+     "part": "chain",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace chain and sprockets together when worn.",
+     "part": "driver_sprocket"
+    }
+   ],
+   "lubrication": [
+    "Chain oil by drip, bath or spray depending on chain speed."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Chain elongation (wear)",
+     "category": "wear",
+     "symptoms": [
+      "Riding up on teeth, jumping"
+     ],
+     "causes": [
+      "Lack of lubrication, age"
+     ],
+     "remedies": [
+      "Lubricate; replace chain"
+     ],
+     "part": "chain"
+    },
+    {
+     "problem": "Sprocket tooth wear",
+     "category": "wear",
+     "symptoms": [
+      "Hooked teeth"
+     ],
+     "causes": [
+      "Worn chain run too long"
+     ],
+     "remedies": [
+      "Replace sprockets with chain"
+     ],
+     "part": "driven_sprocket"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Chain Drive Assembly — Introduction",
+    "type": "in_app_tour",
+    "model": "chain_drive_assembly.glb",
+    "duration_s": 43.5,
+    "script": [
+     {
+      "narration": "This module introduces the Chain Drive Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A roller chain drive transmits power positively between sprockets.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Chain rollers seat in the tooth gaps, so there is no slip and the ratio equals the tooth ratio.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Chains need lubrication and correct slack.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include conveyors and elevators; agricultural and food machinery; low-speed, high-torque drives; motorcycles and bicycles.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Chain Drive Assembly — Operation",
+    "type": "in_app_tour",
+    "model": "chain_drive_assembly.glb",
+    "duration_s": 29.2,
+    "script": [
+     {
+      "narration": "How the Chain Drive Assembly works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor turns the driver sprocket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "driver_sprocket",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Teeth engage the rollers and pull the chain round.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chain",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The driven sprocket turns at the tooth ratio (15/30 = half speed).",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "driven_sprocket",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The idler takes up slack on the slack side.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tensioner",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drip lubricator oils the chain joints.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lubricator",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Chain Drive Assembly — Maintenance",
+    "type": "in_app_tour",
+    "model": "chain_drive_assembly.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Chain Drive Assembly.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check lubrication and noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lubricator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure chain elongation; check sprocket teeth.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace chain and sprockets together when worn.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "driver_sprocket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chain elongation (wear): riding up on teeth, jumping. Common cause: lack of lubrication, age.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "chain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sprocket tooth wear: hooked teeth. Common cause: worn chain run too long.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "driven_sprocket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Ratio of a 15T driver and 30T driven sprocket is…",
+     "options": [
+      "1:1",
+      "2:1 reduction",
+      "1:2 increase",
+      "15:1"
+     ],
+     "answer": 1,
+     "explanation": "30/15.",
+     "level": "basic"
+    },
+    {
+     "question": "Why does a chain drive not slip?",
+     "options": [
+      "Belts are rubber",
+      "Rollers mesh positively with the teeth",
+      "Magnetism",
+      "Oil"
+     ],
+     "answer": 1,
+     "explanation": "Positive engagement.",
+     "level": "basic"
+    },
+    {
+     "question": "A worn chain on new sprockets will…",
+     "options": [
+      "Last longer",
+      "Wear the new sprockets quickly — replace together",
+      "Run quieter",
+      "Be fine"
+     ],
+     "answer": 1,
+     "explanation": "Mismatched pitch.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Engage the chain rollers to transmit torque.\"",
+     "options": [
+      "Driven Shaft Plummer Blocks",
+      "Gearmotor – Cooling Fan",
+      "Chain Guard (hidden in cutaway)",
+      "Driver Sprocket (15 teeth)"
+     ],
+     "answer": 3,
+     "explanation": "Driver Sprocket (15 teeth): Engage the chain rollers to transmit torque.",
+     "level": "basic",
+     "part": "driver_sprocket",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the load between sprockets.\"",
+     "options": [
+      "Drip Lubricator",
+      "Gearmotor – Rotor & Shaft",
+      "Roller Chain (rollers, inner & outer link plates)",
+      "Driven Shaft Plummer Blocks"
+     ],
+     "answer": 2,
+     "explanation": "Roller Chain (rollers, inner & outer link plates): Carries the load between sprockets.",
+     "level": "basic",
+     "part": "chain",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Takes up slack and limits whip.\"",
+     "options": [
+      "Gearmotor – Rotor & Shaft",
+      "Driven Shaft Plummer Blocks",
+      "Gearmotor – Bearings (DE & NDE)",
+      "Idler Sprocket Tensioner (slack side)"
+     ],
+     "answer": 3,
+     "explanation": "Idler Sprocket Tensioner (slack side): Takes up slack and limits whip.",
+     "level": "basic",
+     "part": "tensioner",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

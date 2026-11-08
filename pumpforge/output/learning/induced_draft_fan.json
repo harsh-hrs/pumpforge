@@ -1,0 +1,744 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "induced_draft_fan",
+ "no": 70,
+ "title": "Induced Draft Fan",
+ "model_title": "Induced Draft (ID) Fan with Inlet Box & Louvre Damper",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An induced draft (ID) fan pulls flue gas out of a boiler or furnace through the air heater and dust collector and pushes it up the stack. It keeps the furnace slightly below atmospheric pressure (balanced draft with an FD fan). It handles hot, dusty gas, so it is robust and wear-protected.",
+   "applications": [
+    "Utility and industrial boilers",
+    "Kilns and furnaces",
+    "Process gas exhaust after scrubbers / bag filters",
+    "Incinerators"
+   ],
+   "key_points": [
+    "Handles hot, dusty, corrosive gas",
+    "Controls furnace draft (pressure)",
+    "Erosion and build-up cause imbalance",
+    "Inlet dampers or VFD for control"
+   ],
+   "classification": {
+    "family": "Fan (dynamic) — boiler draft fan",
+    "type": "Centrifugal, inlet box, louvre damper control, coupled motor"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "An induced draft (ID) fan sits after the boiler, dust collector or scrubber and sucks the hot flue gas out of the furnace, keeping it slightly below atmospheric pressure (balanced draft). It handles hot, dusty and sometimes corrosive gas, so it is robust, heavily built and often controlled by inlet dampers, inlet vanes or a variable-speed drive."
+  },
+  "model_3d": {
+   "asset": "glb/induced_draft_fan.glb",
+   "metadata": "meta/induced_draft_fan.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 29192,
+   "parts": 15
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The spinning blades throw the air outward, adding velocity and pressure.",
+    "The scroll housing collects the air; its widening passage slows it and turns velocity into pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Flue gas comes down the duct into the inlet box.",
+     "part": "inlet_box",
+     "cut": false,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The louvre damper modulates to control furnace draft.",
+     "part": "inlet_damper",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The spinning blades throw the air outward, adding velocity and pressure.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The scroll housing collects the air; its widening passage slows it and turns velocity into pressure.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Bearings and the coupled motor drive the shaft.",
+     "part": "bearings",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "As centrifugal fans; system resistance rises with boiler load and dust collector ΔP. Gas density (temperature) changes pressure: p ∝ ρ."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "induced_draft_fan_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/induced_draft_fan.json#components",
+   "key_components": "Impeller, scroll, inlet box, inlet damper, bearings, flue gas duct",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Scroll (Volute) Housing with Outlet",
+     "info_ref": "cf_housing",
+     "function": "Collects air from the impeller, slows it down and converts velocity into pressure; guides it to the outlet.",
+     "material": "Carbon steel; stainless or lined for corrosive gas."
+    },
+    {
+     "id": "impeller",
+     "name": "Impeller (10 backward-curved aerofoil blades), Hub & Shaft",
+     "info_ref": "cf_impeller",
+     "function": "Adds energy to the air by spinning it outward.",
+     "material": "Steel; wear-resistant liners for dusty gas."
+    },
+    {
+     "id": "inlet_cone",
+     "name": "Inlet Cone (Venturi)",
+     "info_ref": "cf_inlet_cone",
+     "function": "Guides air smoothly into the impeller eye.",
+     "material": "Steel."
+    },
+    {
+     "id": "bearings",
+     "name": "Bearing Pedestals (Plummer Blocks, Fixed & Free)",
+     "info_ref": "cf_bearings",
+     "function": "Support the shaft and impeller.",
+     "material": "Cast iron housing; rolling or sleeve bearings."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "stand",
+     "name": "Fan Housing Support & Sole Plate",
+     "info_ref": "cf_stand",
+     "function": "Supports the housing and bearings.",
+     "material": "Steel."
+    },
+    {
+     "id": "inlet_box",
+     "name": "Inlet Box & Flue-Gas Duct",
+     "info_ref": "cf_inlet_box",
+     "function": "Turns the gas from the duct into the fan inlet.",
+     "material": "Steel."
+    },
+    {
+     "id": "inlet_damper",
+     "name": "Inlet Louvre Damper (blades modulate)",
+     "info_ref": "cf_damper",
+     "function": "Controls (or isolates) the flow by changing the blade angle.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Impeller Ø 1.5 – 5 m (utility)",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "100 – 10 000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "500 – 1500",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "20 – 1000 m³/s",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "gas_temperature": {
+     "typical_range": "~ 120 – 200 (after air heater)",
+     "unit": "°C"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Fit expansion joints at inlet and outlet ducts for thermal movement; insulate hot ducts."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check bearing temperature and vibration.",
+     "part": "bearings",
+     "interval": "daily"
+    },
+    {
+     "task": "Check damper actuator response.",
+     "part": "inlet_damper",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean impeller and housing; check inlet cone gap.",
+     "part": "impeller",
+     "interval": "6–12 months"
+    },
+    {
+     "task": "Check coupling alignment.",
+     "part": "coupling",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect impeller for erosion/cracks; re-balance.",
+     "part": "impeller"
+    },
+    {
+     "task": "Replace bearings.",
+     "part": "bearings"
+    }
+   ],
+   "lubrication": [
+    "Grease or oil bath for the plummer-block bearings; motor bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Vibration from imbalance",
+     "category": "vibration",
+     "symptoms": [
+      "Rising 1× running-speed vibration"
+     ],
+     "causes": [
+      "Dust build-up or erosion on blades"
+     ],
+     "remedies": [
+      "Clean / repair and balance"
+     ],
+     "part": "impeller"
+    },
+    {
+     "problem": "Bearing overheating",
+     "category": "bearing",
+     "symptoms": [
+      "High bearing temperature"
+     ],
+     "causes": [
+      "Lack/excess of grease, misalignment"
+     ],
+     "remedies": [
+      "Correct lubrication; align"
+     ],
+     "part": "bearings"
+    },
+    {
+     "problem": "Erosion of blades",
+     "category": "wear",
+     "symptoms": [
+      "Falling performance, vibration"
+     ],
+     "causes": [
+      "Fly ash"
+     ],
+     "remedies": [
+      "Hard-facing, liners, improve dust collection"
+     ],
+     "part": "impeller"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Induced Draft Fan — Introduction",
+    "type": "in_app_tour",
+    "model": "induced_draft_fan.glb",
+    "duration_s": 56.8,
+    "script": [
+     {
+      "narration": "This module introduces the Induced Draft Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An induced draft (ID) fan pulls flue gas out of a boiler or furnace through the air heater and dust collector and pushes it up the stack.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It keeps the furnace slightly below atmospheric pressure (balanced draft with an FD fan).",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It handles hot, dusty gas, so it is robust and wear-protected.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include utility and industrial boilers; kilns and furnaces; process gas exhaust after scrubbers / bag filters; incinerators.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Scroll (Volute) Housing with Outlet, Impeller (10 backward-curved aerofoil blades), Hub & Shaft, Inlet Cone (Venturi), Inlet Box & Flue-Gas Duct.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Induced Draft Fan — Operation",
+    "type": "in_app_tour",
+    "model": "induced_draft_fan.glb",
+    "duration_s": 31.7,
+    "script": [
+     {
+      "narration": "How the Induced Draft Fan works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flue gas comes down the duct into the inlet box.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "inlet_box",
+       "cut": false,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The louvre damper modulates to control furnace draft.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_damper",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The spinning blades throw the air outward, adding velocity and pressure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The scroll housing collects the air; its widening passage slows it and turns velocity into pressure.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Bearings and the coupled motor drive the shaft.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Induced Draft Fan — Maintenance",
+    "type": "in_app_tour",
+    "model": "induced_draft_fan.glb",
+    "duration_s": 52.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Induced Draft Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check bearing temperature and vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check damper actuator response.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_damper",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean impeller and housing; check inlet cone gap.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check coupling alignment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coupling",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impeller for erosion/cracks; re-balance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vibration from imbalance: rising 1× running-speed vibration. Common cause: dust build-up or erosion on blades.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bearing overheating: high bearing temperature. Common cause: lack/excess of grease, misalignment.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for erosion of blades: falling performance, vibration. Common cause: fly ash.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "An ID fan keeps the furnace at…",
+     "options": [
+      "High positive pressure",
+      "Slightly below atmospheric pressure",
+      "Exactly zero flow",
+      "Vacuum of 1 bar"
+     ],
+     "answer": 1,
+     "explanation": "Balanced draft.",
+     "level": "basic"
+    },
+    {
+     "question": "Hot gas has lower density; for the same speed the fan pressure…",
+     "options": [
+      "Increases",
+      "Decreases",
+      "Is unchanged",
+      "Doubles"
+     ],
+     "answer": 1,
+     "explanation": "p ∝ ρ.",
+     "level": "basic"
+    },
+    {
+     "question": "A common cause of ID fan vibration is…",
+     "options": [
+      "Clean air",
+      "Ash build-up or erosion on the impeller",
+      "Low speed",
+      "Paint colour"
+     ],
+     "answer": 1,
+     "explanation": "Imbalance.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Collects air from the impeller, slows it down and converts velocity into pressure; guides it to the outlet.\"",
+     "options": [
+      "Flexible Coupling",
+      "Electric Motor – Rotor & Shaft",
+      "Impeller (10 backward-curved aerofoil blades), Hub & Shaft",
+      "Scroll (Volute) Housing with Outlet"
+     ],
+     "answer": 3,
+     "explanation": "Scroll (Volute) Housing with Outlet: Collects air from the impeller, slows it down and converts velocity into pressure; guides it to the outlet.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy to the air by spinning it outward.\"",
+     "options": [
+      "Electric Motor – Fan Cover",
+      "Inlet Louvre Damper (blades modulate)",
+      "Scroll (Volute) Housing with Outlet",
+      "Impeller (10 backward-curved aerofoil blades), Hub & Shaft"
+     ],
+     "answer": 3,
+     "explanation": "Impeller (10 backward-curved aerofoil blades), Hub & Shaft: Adds energy to the air by spinning it outward.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Guides air smoothly into the impeller eye.\"",
+     "options": [
+      "Electric Motor – Stator",
+      "Bearing Pedestals (Plummer Blocks, Fixed & Free)",
+      "Scroll (Volute) Housing with Outlet",
+      "Inlet Cone (Venturi)"
+     ],
+     "answer": 3,
+     "explanation": "Inlet Cone (Venturi): Guides air smoothly into the impeller eye.",
+     "level": "basic",
+     "part": "inlet_cone",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

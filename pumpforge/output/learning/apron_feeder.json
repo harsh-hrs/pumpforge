@@ -1,0 +1,668 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "apron_feeder",
+ "no": 118,
+ "title": "Apron Feeder",
+ "model_title": "Apron Feeder (Heavy-Duty, Chain-Driven Pans)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An apron feeder is a heavy-duty feeder that draws material out from under a hopper or bin. Overlapping steel pans are bolted to two strands of crawler-type chain. The chains run around a head (drive) sprocket and a tail sprocket. The pans carry the material forward at low speed and drop it off the head end. It is built to take large lumps and the impact of material dumped from trucks.",
+   "applications": [
+    "Primary feeding of run-of-mine ore from a dump hopper to a primary crusher",
+    "Withdrawing coal, limestone and ore from stockpile tunnels",
+    "Feeding sticky or wet material that would hang on a vibrating feeder",
+    "Reclaim from large bins"
+   ],
+   "key_points": [
+    "Handles large lumps and high impact",
+    "Low speed — feed rate set by bed depth × width × speed",
+    "Variable-speed drive controls the feed rate",
+    "Pans and chains are the main wear items"
+   ],
+   "classification": {
+    "family": "Feeder",
+    "type": "Heavy-duty apron (pan) feeder"
+   },
+   "hi_family": "material_handling",
+   "summary": "An apron feeder pulls heavy, lumpy ore out from under a hopper at a controlled rate. Overlapping steel pans bolted to crawler-type chains form a moving floor; the drive sprockets at the head pull the chain, and the pans dump the ore over the head. It withstands impact from large lumps and high loads."
+  },
+  "model_3d": {
+   "asset": "glb/apron_feeder.glb",
+   "metadata": "meta/apron_feeder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7484,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material from the hopper sits on the overlapping pans.",
+    "The drive turns the head sprocket and shaft, pulling the chain and pans forward.",
+    "The pans carry a bed of material under the hopper skirts at low speed."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material from the hopper sits on the overlapping pans.",
+     "part": "hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drive turns the head sprocket and shaft, pulling the chain and pans forward.",
+     "part": "head_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pans carry a bed of material under the hopper skirts at low speed.",
+     "part": "pans",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the head end material falls off into the crusher or chute; the empty pans return underneath around the tail sprocket.",
+     "part": "tail_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Feed rate ∝ belt speed for a fixed bed depth (Q = 3600 · B · h · v · ρ · fill factor, t/h with B, h, v in m and m/s, ρ in t/m³)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "apron_feeder_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/apron_feeder.json#components",
+   "key_components": "Pans, crawler chains, head/tail sprockets, frame, hopper, drive",
+   "parts": [
+    {
+     "id": "pans",
+     "name": "Overlapping Apron Pans on Crawler-Type Chains",
+     "info_ref": "af_pans",
+     "function": "Moving floor that carries the ore.",
+     "material": "Manganese steel."
+    },
+    {
+     "id": "tail_shaft",
+     "name": "Tail Shaft & Sprockets",
+     "info_ref": "af_sprockets",
+     "function": "Drive and return the chains.",
+     "material": "Steel."
+    },
+    {
+     "id": "head_shaft",
+     "name": "Head (drive) Shaft & Sprockets",
+     "info_ref": "af_sprockets",
+     "function": "Drive and return the chains.",
+     "material": "Steel."
+    },
+    {
+     "id": "frame",
+     "name": "Main Frame, Carrying Rollers & Track Rails",
+     "info_ref": "af_frame",
+     "function": "Supports the chain on carrying rollers.",
+     "material": "Steel."
+    },
+    {
+     "id": "hopper",
+     "name": "Feed Hopper & Skirt Boards",
+     "info_ref": "af_hopper",
+     "function": "Holds ore; skirts contain the bed.",
+     "material": "Steel, liners."
+    },
+    {
+     "id": "drive",
+     "name": "Drive: Motor, Gearbox (planetary/shaft-mounted)",
+     "info_ref": "af_drive",
+     "function": "Drives the head shaft slowly with high torque.",
+     "material": "—"
+    },
+    {
+     "id": "ore",
+     "name": "Ore Lumps (bed carried by the pans)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Pan width ~ 0.9 – 3 m; length 3 – 30 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 10 – 200+",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 0.05 – 0.4",
+     "unit": "m/s",
+     "note": "low speed to limit wear"
+    },
+    "capacity": {
+     "typical_range": "~ 50 – 10 000+",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size the width for about 2–3 × the maximum lump size and the bed depth for the required rate at a moderate speed.",
+    "Check the hopper load on the pans (draw-down vs static load) — it sets drive power."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CEMA — Bulk material handling practice",
+    "Manufacturer apron feeder design guides"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on steelwork or a concrete plinth designed for the hopper/bin load on the feeder plus impact and dynamic loads.",
+    "Isolate vibrating machines from the structure with their springs/rubber mounts — never weld or rigidly bolt the vibrating body to the structure."
+   ],
+   "alignment": [
+    "Set the feeder at the designed slope and centre it under the hopper outlet; set skirt boards and the hopper gate to the design bed depth.",
+    "Align drive and driven shafts (laser or dial gauge) or set the exciter motors as the maker specifies."
+   ],
+   "piping": [
+    "Chutes and skirts: allow a gap that widens in the direction of travel so material does not jam; fit dust seals and connect dust extraction where required.",
+    "Leave clear access for liner change and for the hopper shut-off gate."
+   ],
+   "commissioning": [
+    "Run empty first: check direction, amplitude/speed, temperatures and noise.",
+    "Load gradually, check the material bed is even and the discharge rate matches the set-point; record motor current as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for spillage, pan damage and chain tracking.",
+     "part": "pans",
+     "interval": "daily"
+    },
+    {
+     "task": "Check drive temperature and oil level.",
+     "part": "drive",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure chain/roller wear and pan gaps; adjust chain tension at the tail.",
+     "part": "tail_shaft",
+     "interval": "monthly"
+    },
+    {
+     "task": "Inspect skirt liners and hopper wear liners.",
+     "part": "hopper",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace worn pans, chain links, rollers and sprockets as a set where pitch has grown.",
+     "part": "head_shaft"
+    }
+   ],
+   "lubrication": [
+    "Gear reducer: oil to grade and change interval.",
+    "Chain rollers and shaft bearings: grease to schedule (sealed-for-life rollers need none)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Chain or pan breakage",
+     "category": "performance",
+     "symptoms": [
+      "Sudden stop, broken pans, spillage"
+     ],
+     "causes": [
+      "Large lumps dropped from height without a rock box",
+      "Worn chain pitch, loose bolts"
+     ],
+     "remedies": [
+      "Keep a material cushion in the hopper",
+      "Replace worn chain; torque bolts"
+     ],
+     "part": "pans"
+    },
+    {
+     "problem": "Excessive spillage",
+     "category": "performance",
+     "symptoms": [
+      "Material on the floor under the feeder"
+     ],
+     "causes": [
+      "Skirt gap or liners worn",
+      "Bed depth too high for the skirts"
+     ],
+     "remedies": [
+      "Re-set skirts/liners",
+      "Reduce gate height"
+     ],
+     "part": "hopper"
+    },
+    {
+     "problem": "Drive overload",
+     "category": "performance",
+     "symptoms": [
+      "High current, trips"
+     ],
+     "causes": [
+      "Packed material, frozen or sticky feed",
+      "Too deep a bed"
+     ],
+     "remedies": [
+      "Clear build-up; reduce bed depth; check VSD settings"
+     ],
+     "part": "drive"
+    }
+   ],
+   "safety": [
+    "Lock out and block the pans before working under a loaded hopper — stored material can drive the pans.",
+    "Never clear blockages with the feeder running."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Apron Feeder — Introduction",
+    "type": "in_app_tour",
+    "model": "apron_feeder.glb",
+    "duration_s": 55.1,
+    "script": [
+     {
+      "narration": "This module introduces the Apron Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An apron feeder is a heavy-duty feeder that draws material out from under a hopper or bin.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Overlapping steel pans are bolted to two strands of crawler-type chain.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The chains run around a head (drive) sprocket and a tail sprocket.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include primary feeding of run-of-mine ore from a dump hopper to a primary crusher; withdrawing coal, limestone and ore from stockpile tunnels; feeding sticky or wet material that would hang on a vibrating feeder; reclaim from large bins.",
+      "duration_s": 17.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Apron Feeder — Operation",
+    "type": "in_app_tour",
+    "model": "apron_feeder.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "How the Apron Feeder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material from the hopper sits on the overlapping pans.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hopper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drive turns the head sprocket and shaft, pulling the chain and pans forward.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "head_shaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pans carry a bed of material under the hopper skirts at low speed.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "pans",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the head end material falls off into the crusher or chute; the empty pans return underneath around the tail sprocket.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "tail_shaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Apron Feeder — Maintenance",
+    "type": "in_app_tour",
+    "model": "apron_feeder.glb",
+    "duration_s": 56.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Apron Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for spillage, pan damage and chain tracking.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pans",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check drive temperature and oil level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure chain/roller wear and pan gaps; adjust chain tension at the tail.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "tail_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect skirt liners and hopper wear liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hopper",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace worn pans, chain links, rollers and sprockets as a set where pitch has grown.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "head_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chain or pan breakage: sudden stop, broken pans, spillage. Common cause: large lumps dropped from height without a rock box.",
+      "duration_s": 9.2,
+      "action": {
+       "highlight": "pans",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for excessive spillage: material on the floor under the feeder. Common cause: skirt gap or liners worn.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "hopper",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for drive overload: high current, trips. Common cause: packed material, frozen or sticky feed.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is an apron feeder chosen for primary crusher feed?",
+     "options": [
+      "It is the cheapest feeder",
+      "It takes large lumps and high impact loads",
+      "It screens out fines",
+      "It runs at very high speed"
+     ],
+     "answer": 1,
+     "explanation": "Heavy pans on crawler chains withstand impact.",
+     "level": "basic"
+    },
+    {
+     "question": "Feed rate of an apron feeder is mainly controlled by…",
+     "options": [
+      "Hopper height",
+      "Pan speed (VSD) and bed depth",
+      "Pan colour",
+      "Tail sprocket diameter only"
+     ],
+     "answer": 1,
+     "explanation": "Q ∝ B·h·v.",
+     "level": "basic"
+    },
+    {
+     "question": "Why do apron feeders run slowly?",
+     "options": [
+      "To reduce wear and spillage",
+      "To increase noise",
+      "Because chains cannot turn faster",
+      "To heat the material"
+     ],
+     "answer": 0,
+     "explanation": "Low speed limits wear and impact.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Moving floor that carries the ore.\"",
+     "options": [
+      "Head (drive) Shaft & Sprockets",
+      "Ore Lumps (bed carried by the pans)",
+      "Overlapping Apron Pans on Crawler-Type Chains",
+      "Tail Shaft & Sprockets"
+     ],
+     "answer": 2,
+     "explanation": "Overlapping Apron Pans on Crawler-Type Chains: Moving floor that carries the ore.",
+     "level": "basic",
+     "part": "pans",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drive and return the chains.\"",
+     "options": [
+      "Tail Shaft & Sprockets",
+      "Overlapping Apron Pans on Crawler-Type Chains",
+      "Feed Hopper & Skirt Boards",
+      "Ore Lumps (bed carried by the pans)"
+     ],
+     "answer": 0,
+     "explanation": "Tail Shaft & Sprockets: Drive and return the chains.",
+     "level": "basic",
+     "part": "tail_shaft",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the chain on carrying rollers.\"",
+     "options": [
+      "Drive: Motor, Gearbox (planetary/shaft-mounted)",
+      "Main Frame, Carrying Rollers & Track Rails",
+      "Head (drive) Shaft & Sprockets",
+      "Ore Lumps (bed carried by the pans)"
+     ],
+     "answer": 1,
+     "explanation": "Main Frame, Carrying Rollers & Track Rails: Supports the chain on carrying rollers.",
+     "level": "basic",
+     "part": "frame",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,611 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "impact_crusher",
+ "no": 129,
+ "title": "Impact Crusher",
+ "model_title": "Horizontal Shaft Impact (HSI) Crusher",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A horizontal shaft impact (HSI) crusher breaks material by impact rather than compression. A fast-turning rotor with blow bars strikes the falling feed and throws it against impact aprons (curtains). Rocks shatter along natural weaknesses, giving a well-shaped (cubical) product. The gap between the rotor and the aprons controls the product size.",
+   "applications": [
+    "Limestone and softer rock crushing",
+    "Recycling concrete and asphalt",
+    "Secondary crushing for cubical aggregate"
+   ],
+   "key_points": [
+    "Impact crushing with blow bars",
+    "High reduction ratio and good shape",
+    "Apron gap sets product size",
+    "Best for low-abrasion feed (wear cost)"
+   ],
+   "classification": {
+    "family": "Crusher (impact)",
+    "type": "HSI with two aprons"
+   },
+   "hi_family": "material_handling",
+   "summary": "A horizontal shaft impact crusher breaks rock by impact. Blow bars on a fast rotor hit the falling rock and hurl it against impact aprons; it shatters along natural weaknesses, giving cubical product. The apron gap sets product size."
+  },
+  "model_3d": {
+   "asset": "glb/impact_crusher.glb",
+   "metadata": "meta/impact_crusher.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 2080,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed enters through the inlet into the path of the rotor.",
+    "The rotor's blow bars hit the material at high tip speed.",
+    "Particles are thrown against the impact aprons and break again."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed enters through the inlet into the path of the rotor.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotor's blow bars hit the material at high tip speed.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Particles are thrown against the impact aprons and break again.",
+     "part": "impact_aprons",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Crushed material leaves at the bottom.",
+     "part": "rocks",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Finer product with higher rotor speed and smaller apron gap; wear rate rises steeply with abrasiveness and speed."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "impact_crusher_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "wear": {
+     "file": "impact_crusher_wear.glb",
+     "title": "Apron and blow-bar wear",
+     "description": "The lower (secondary) apron sees finer, faster material and a closer gap, so it wears most (purple). Blow bars wear on their leading edge; they are turned end-for-end or reversed, and replaced in opposite pairs to keep the rotor balanced. Worn bars and aprons open the effective gap and coarsen the product.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/impact_crusher.json#components",
+   "key_components": "Rotor with blow bars, impact aprons, housing",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Housing with Wear Liners",
+     "info_ref": "ic_housing",
+     "function": "Encloses the crushing chamber.",
+     "material": "Steel."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor with Blow Bars & Shaft",
+     "info_ref": "ic_rotor",
+     "function": "Strikes the rock.",
+     "material": "Steel; blow bars martensitic/ceramic."
+    },
+    {
+     "id": "impact_aprons",
+     "name": "Impact Aprons (curtains) — adjustable gap sets product size",
+     "info_ref": "ic_aprons",
+     "function": "Rock impacts and rebounds.",
+     "material": "Steel with liners."
+    },
+    {
+     "id": "drive",
+     "name": "Drive (motor & V-belts)",
+     "info_ref": "ic_drive",
+     "function": "Drive.",
+     "material": "—"
+    },
+    {
+     "id": "rocks",
+     "name": "Feed Thrown Against the Aprons",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Rotor ~ 1 – 1.6 m diameter, 1 – 2.5 m wide",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 100 – 800",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Rotor tip speed ~ 25 – 50",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 1500",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Use for low-to-medium abrasive feed where shape matters; check silica/abrasion index with the maker."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer impact crusher data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a massive reinforced-concrete foundation or steel structure designed for the crusher's dynamic loads (maker's load data); use anti-vibration mounts where specified.",
+    "Allow crane access and lay-down space for liner and wear-part changes."
+   ],
+   "alignment": [
+    "Align motor and crusher sheaves or coupling; set V-belt tension to the maker's figure.",
+    "Set the closed-side setting (CSS) or gap with the maker's gauge/lead-ball method."
+   ],
+   "piping": [
+    "Feed with a controlled feeder (choke or regulated feed as designed); avoid segregated or one-sided feed.",
+    "Fit a tramp-metal magnet or metal detector ahead of the crusher and dust extraction at transfer points.",
+    "Lubrication system: connect oil supply/return, cooler and filter; check flow and pressure switches."
+   ],
+   "commissioning": [
+    "Check lubrication flows and temperatures before starting; run empty to check direction, vibration and current.",
+    "Introduce feed gradually; measure product size and adjust the setting; record power draw as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vibration and blow-bar wear through inspection doors.",
+     "part": "rotor",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure and adjust apron gaps.",
+     "part": "impact_aprons",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Turn/replace blow bars (in balanced pairs) and liners; replace bearings.",
+     "part": "rotor"
+    }
+   ],
+   "lubrication": [
+    "Rotor bearings: grease/oil to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Rotor imbalance",
+     "category": "performance",
+     "symptoms": [
+      "High vibration"
+     ],
+     "causes": [
+      "Unequal blow-bar wear or mismatched bars"
+     ],
+     "remedies": [
+      "Replace bars in sets; balance"
+     ],
+     "part": "rotor"
+    },
+    {
+     "problem": "Product too coarse",
+     "category": "performance",
+     "symptoms": [
+      "Oversize"
+     ],
+     "causes": [
+      "Worn bars/aprons, gap too large"
+     ],
+     "remedies": [
+      "Adjust gap; replace wear parts"
+     ],
+     "part": "impact_aprons"
+    }
+   ],
+   "safety": [
+    "Lock out and pin the rotor before opening; flying debris hazard — keep doors closed when running."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Impact Crusher — Introduction",
+    "type": "in_app_tour",
+    "model": "impact_crusher.glb",
+    "duration_s": 46.9,
+    "script": [
+     {
+      "narration": "This module introduces the Impact Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A horizontal shaft impact (HSI) crusher breaks material by impact rather than compression.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A fast-turning rotor with blow bars strikes the falling feed and throws it against impact aprons (curtains).",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Rocks shatter along natural weaknesses, giving a well-shaped (cubical) product.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include limestone and softer rock crushing; recycling concrete and asphalt; secondary crushing for cubical aggregate.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Housing with Wear Liners, Rotor with Blow Bars & Shaft.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Impact Crusher — Operation",
+    "type": "in_app_tour",
+    "model": "impact_crusher.glb",
+    "duration_s": 33.1,
+    "script": [
+     {
+      "narration": "How the Impact Crusher works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters through the inlet into the path of the rotor.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotor's blow bars hit the material at high tip speed.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Particles are thrown against the impact aprons and break again.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "impact_aprons",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Crushed material leaves at the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rocks",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The lower (secondary) apron sees finer, faster material and a closer gap, so it wears most (purple).",
+      "duration_s": 7.1,
+      "action": {
+       "overlay": "wear",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Impact Crusher — Maintenance",
+    "type": "in_app_tour",
+    "model": "impact_crusher.glb",
+    "duration_s": 34.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Impact Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vibration and blow-bar wear through inspection doors.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure and adjust apron gaps.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impact_aprons",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Turn/replace blow bars (in balanced pairs) and liners; replace bearings.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rotor imbalance: high vibration. Common cause: unequal blow-bar wear or mismatched bars.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for product too coarse: oversize. Common cause: worn bars/aprons, gap too large.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "impact_aprons",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "An HSI crusher breaks rock mainly by…",
+     "options": [
+      "Compression",
+      "Impact",
+      "Attrition only",
+      "Heating"
+     ],
+     "answer": 1,
+     "explanation": "Blow bars hit the feed.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets the product size?",
+     "options": [
+      "Rotor colour",
+      "Apron gap and rotor speed",
+      "Feed hopper size",
+      "Motor voltage"
+     ],
+     "answer": 1,
+     "explanation": "Gap and speed.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are HSI crushers less suited to very abrasive rock?",
+     "options": [
+      "Wear costs of blow bars become high",
+      "They cannot turn",
+      "They need water",
+      "They are too slow"
+     ],
+     "answer": 0,
+     "explanation": "Wear cost.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the crushing chamber.\"",
+     "options": [
+      "Feed Thrown Against the Aprons",
+      "Drive (motor & V-belts)",
+      "Impact Aprons (curtains) — adjustable gap sets product size",
+      "Housing with Wear Liners"
+     ],
+     "answer": 3,
+     "explanation": "Housing with Wear Liners: Encloses the crushing chamber.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Strikes the rock.\"",
+     "options": [
+      "Feed Thrown Against the Aprons",
+      "Drive (motor & V-belts)",
+      "Impact Aprons (curtains) — adjustable gap sets product size",
+      "Rotor with Blow Bars & Shaft"
+     ],
+     "answer": 3,
+     "explanation": "Rotor with Blow Bars & Shaft: Strikes the rock.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rock impacts and rebounds.\"",
+     "options": [
+      "Rotor with Blow Bars & Shaft",
+      "Impact Aprons (curtains) — adjustable gap sets product size",
+      "Housing with Wear Liners",
+      "Feed Thrown Against the Aprons"
+     ],
+     "answer": 1,
+     "explanation": "Impact Aprons (curtains) — adjustable gap sets product size: Rock impacts and rebounds.",
+     "level": "basic",
+     "part": "impact_aprons",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

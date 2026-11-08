@@ -1,0 +1,664 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "baghouse_dust_collector",
+ "no": 277,
+ "title": "Baghouse Dust Collector",
+ "model_title": "Baghouse Dust Collector — Pulse-Jet Bags & Cages, Tubesheet, Blowpipes, Hopper & Rotary Valve",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pulse-jet baghouse filters dust from gas through rows of fabric bags supported on wire cages. Dust builds a cake on the outside of the bags; short reverse pulses of compressed air flex the bags row by row so the cake falls into the hopper, from where a rotary airlock discharges it.",
+   "applications": [
+    "Cement, mining, alumina and power plants",
+    "Dust extraction, kilns and dry-scrubber product collection"
+   ],
+   "key_points": [
+    "Outlet ≈ < 5–10 mg/Nm³",
+    "Air-to-cloth ≈ 0.8–1.5 m/min",
+    "ΔP-controlled pulsing",
+    "Watch temperature and dew point"
+   ],
+   "classification": {
+    "family": "Environmental",
+    "type": "Pulse-jet fabric filter"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A pulse-jet baghouse filters dust from gas through rows of fabric bags; the dust cake is removed periodically by short reverse pulses of compressed air and falls to a hopper and rotary valve."
+  },
+  "model_3d": {
+   "asset": "glb/baghouse_dust_collector.glb",
+   "metadata": "meta/baghouse_dust_collector.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8236,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Dusty gas enters the dirty-gas chamber.",
+    "Dust forms a cake on the bags.",
+    "Clean gas leaves through the plenum."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Dusty gas enters the dirty-gas chamber.",
+     "part": "casing_hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dust forms a cake on the bags.",
+     "part": "filter_bags_row_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clean gas leaves through the plenum.",
+     "part": "filter_bags_cages",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pulses clean each row in turn.",
+     "part": "pulse_cleaning",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The airlock discharges dust.",
+     "part": "rotary_valve_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Filter ΔP vs time between cleaning pulses."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "baghouse_dust_collector_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "baghouse_dust_collector_pressure.glb",
+     "title": "Filter on the outside, clean by a pulse",
+     "description": "Dirty gas flows from outside to inside through the bags; dust builds a cake that itself becomes the fine filter (outlet dust often < 5–10 mg/Nm³). As the cake grows the pressure drop rises (typically held ≈ 1–1.5 kPa); the controller then fires a short compressed-air pulse down each row in turn, flexing the bags so the cake drops to the hopper. Air-to-cloth ratio (≈ 0.8–1.5 m/min for pulse-jet) sets the bag area. Watch temperature (bag limits), dew point (wet cake) and spark ignition risk.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/baghouse_dust_collector.json#components",
+   "key_components": "Bags & cages, tubesheet, pulse valves & blowpipes, hopper, rotary valve",
+   "parts": [
+    {
+     "id": "casing_hopper",
+     "name": "Casing (dirty-gas chamber), Pyramid Hopper & Clean-Air Plenum",
+     "info_ref": "bh_casing",
+     "function": "Contain gas and dust.",
+     "material": "Steel."
+    },
+    {
+     "id": "filter_bags_cages",
+     "name": "Wire Cages & Bag Snap-Rings in the Tubesheet",
+     "info_ref": "bh_bags",
+     "function": "Filter dust.",
+     "material": "PE / PPS / PTFE / glass."
+    },
+    {
+     "id": "pulse_cleaning",
+     "name": "Compressed-Air Header, Diaphragm Valves, Blowpipes (one per row) & Sequencer / ΔP Controller",
+     "info_ref": "bh_cleaning",
+     "function": "Clean bags.",
+     "material": "—"
+    },
+    {
+     "id": "filter_bags_row_1",
+     "name": "Filter Bags Row 1 (needle-felt) — flex outward during the reverse pulse",
+     "info_ref": "bh_bags",
+     "function": "Filter dust.",
+     "material": "PE / PPS / PTFE / glass."
+    },
+    {
+     "id": "filter_bags_row_2",
+     "name": "Filter Bags Row 2 (needle-felt) — flex outward during the reverse pulse",
+     "info_ref": "bh_bags",
+     "function": "Filter dust.",
+     "material": "PE / PPS / PTFE / glass."
+    },
+    {
+     "id": "filter_bags_row_3",
+     "name": "Filter Bags Row 3 (needle-felt) — flex outward during the reverse pulse",
+     "info_ref": "bh_bags",
+     "function": "Filter dust.",
+     "material": "PE / PPS / PTFE / glass."
+    },
+    {
+     "id": "filter_bags_row_4",
+     "name": "Filter Bags Row 4 (needle-felt) — flex outward during the reverse pulse",
+     "info_ref": "bh_bags",
+     "function": "Filter dust.",
+     "material": "PE / PPS / PTFE / glass."
+    },
+    {
+     "id": "rotary_valve",
+     "name": "Rotary Airlock Valve (discharges dust, keeps air seal)",
+     "info_ref": "bh_discharge",
+     "function": "Remove dust.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "rotary_valve_rotor",
+     "name": "Airlock Rotor",
+     "info_ref": "bh_discharge",
+     "function": "Remove dust.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "dust_in_hopper",
+     "name": "Collected Dust in the Hopper",
+     "info_ref": "bh_discharge",
+     "function": "Remove dust.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "dust",
+     "name": "Dust caught on the bag surfaces (filter cake)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "cake_fall",
+     "name": "Cake released by the pulse falls to the hopper",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bags ≈ 120 – 160 mm × 2 – 8 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1,000 – 2,000,000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "ΔP ≈ 1 – 1.5 kPa; temperature by bag material",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Outlet < ≈ 5–10 mg/Nm³",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Bag area from gas flow ÷ air-to-cloth ratio; media by temperature and chemistry."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EPA Cost Manual"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure for equipment, liquid / dust loads and wind; access platforms for maintenance."
+   ],
+   "alignment": [
+    "Fans and pumps aligned; ducts supported to avoid loads on equipment."
+   ],
+   "piping": [
+    "Corrosion-resistant materials for wet acid service; drains at low points; expansion joints on hot ducts."
+   ],
+   "commissioning": [
+    "Run on air/water; check ΔP, flows and controls; then process gas; emission test against permit."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check ΔP and opacity / dust monitor.",
+     "part": "pulse_cleaning",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check pulse valves and compressed air.",
+     "part": "pulse_cleaning",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bags (≈ 2–5 years).",
+     "part": "filter_bags_row_1"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Bag leak",
+     "category": "leakage",
+     "symptoms": [
+      "Dust emission spike"
+     ],
+     "causes": [
+      "Abrasion, burn holes"
+     ],
+     "remedies": [
+      "Find & replace bag"
+     ],
+     "part": "filter_bags_row_2"
+    },
+    {
+     "problem": "High ΔP",
+     "category": "performance",
+     "symptoms": [
+      "Reduced airflow"
+     ],
+     "causes": [
+      "Blinding (moisture), cleaning failure"
+     ],
+     "remedies": [
+      "Fix pulse; avoid dew point"
+     ],
+     "part": "pulse_cleaning"
+    }
+   ],
+   "safety": [
+    "Combustible dust: explosion venting, spark arrestors; confined-space entry."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Baghouse Dust Collector — Introduction",
+    "type": "in_app_tour",
+    "model": "baghouse_dust_collector.glb",
+    "duration_s": 52.4,
+    "script": [
+     {
+      "narration": "This module introduces the Baghouse Dust Collector.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pulse-jet baghouse filters dust from gas through rows of fabric bags supported on wire cages.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Dust builds a cake on the outside of the bags; short reverse pulses of compressed air flex the bags row by row so the cake falls into the hopper, from where a rotary airlock discharges it.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cement, mining, alumina and power plants; dust extraction, kilns and dry-scrubber product collection.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Casing (dirty-gas chamber), Pyramid Hopper & Clean-Air Plenum, Airlock Rotor.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Baghouse Dust Collector — Operation",
+    "type": "in_app_tour",
+    "model": "baghouse_dust_collector.glb",
+    "duration_s": 39.4,
+    "script": [
+     {
+      "narration": "How the Baghouse Dust Collector works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Dusty gas enters the dirty-gas chamber.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing_hopper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dust forms a cake on the bags.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filter_bags_row_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clean gas leaves through the plenum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filter_bags_cages",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pulses clean each row in turn.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pulse_cleaning",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The airlock discharges dust.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotary_valve_rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Dirty gas flows from outside to inside through the bags; dust builds a cake that itself becomes the fine filter (outlet dust often < 5–10 mg/Nm³).",
+      "duration_s": 11.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Baghouse Dust Collector — Maintenance",
+    "type": "in_app_tour",
+    "model": "baghouse_dust_collector.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Baghouse Dust Collector.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check ΔP and opacity / dust monitor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pulse_cleaning",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check pulse valves and compressed air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pulse_cleaning",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bags (≈ 2–5 years).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filter_bags_row_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bag leak: dust emission spike. Common cause: abrasion, burn holes.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "filter_bags_row_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high δp: reduced airflow. Common cause: blinding (moisture), cleaning failure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "pulse_cleaning",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What actually filters the fine dust?",
+     "options": [
+      "The dust cake on the bags",
+      "Cages",
+      "Hopper",
+      "Fan"
+     ],
+     "answer": 0,
+     "explanation": "Cake.",
+     "level": "basic"
+    },
+    {
+     "question": "How are bags cleaned?",
+     "options": [
+      "Reverse compressed-air pulse",
+      "Washing",
+      "Vibration only",
+      "Not cleaned"
+     ],
+     "answer": 0,
+     "explanation": "Pulse-jet.",
+     "level": "basic"
+    },
+    {
+     "question": "Risk of running below dew point?",
+     "options": [
+      "Wet, blinded bags",
+      "Faster flow",
+      "Lower ΔP",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Blinding.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contain gas and dust.\"",
+     "options": [
+      "Filter Bags Row 4 (needle-felt) — flex outward during the reverse pulse",
+      "Rotary Airlock Valve (discharges dust, keeps air seal)",
+      "Dust caught on the bag surfaces (filter cake)",
+      "Casing (dirty-gas chamber), Pyramid Hopper & Clean-Air Plenum"
+     ],
+     "answer": 3,
+     "explanation": "Casing (dirty-gas chamber), Pyramid Hopper & Clean-Air Plenum: Contain gas and dust.",
+     "level": "basic",
+     "part": "casing_hopper",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Filter dust.\"",
+     "options": [
+      "Wire Cages & Bag Snap-Rings in the Tubesheet",
+      "Dust caught on the bag surfaces (filter cake)",
+      "Casing (dirty-gas chamber), Pyramid Hopper & Clean-Air Plenum",
+      "Compressed-Air Header, Diaphragm Valves, Blowpipes (one per row) & Sequencer / ΔP Controller"
+     ],
+     "answer": 0,
+     "explanation": "Wire Cages & Bag Snap-Rings in the Tubesheet: Filter dust.",
+     "level": "basic",
+     "part": "filter_bags_cages",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Clean bags.\"",
+     "options": [
+      "Compressed-Air Header, Diaphragm Valves, Blowpipes (one per row) & Sequencer / ΔP Controller",
+      "Dust caught on the bag surfaces (filter cake)",
+      "Filter Bags Row 3 (needle-felt) — flex outward during the reverse pulse",
+      "Wire Cages & Bag Snap-Rings in the Tubesheet"
+     ],
+     "answer": 0,
+     "explanation": "Compressed-Air Header, Diaphragm Valves, Blowpipes (one per row) & Sequencer / ΔP Controller: Clean bags.",
+     "level": "basic",
+     "part": "pulse_cleaning",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

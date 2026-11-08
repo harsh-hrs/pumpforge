@@ -1,0 +1,590 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "blowdown_tank",
+ "no": 269,
+ "title": "Blowdown Tank",
+ "model_title": "Boiler Blowdown Tank (Atmospheric Flash Tank with Vent, Quench & Drain)",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A boiler blowdown tank receives water blown down from boilers at high pressure and temperature. Entering tangentially, part of it flashes to steam that leaves through a large vent; the rest is retained, mixed with cooling water and drained at a safe temperature to the sewer.",
+   "applications": [
+    "Continuous and intermittent (bottom) boiler blowdown",
+    "Drain collection from high-pressure steam traps and drains"
+   ],
+   "key_points": [
+    "Vented to atmosphere — never pressurised",
+    "Tangential inlet + wear plate",
+    "Cooling-water quench for discharge temperature",
+    "Siphon-loop drain holds a water seal"
+   ],
+   "classification": {
+    "family": "Safety",
+    "type": "Atmospheric blowdown (flash) tank"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A boiler blowdown tank receives hot blowdown water from boilers at pressure, lets it flash safely at atmospheric pressure, vents the flash steam and cools the remaining water before drain."
+  },
+  "model_3d": {
+   "asset": "glb/blowdown_tank.glb",
+   "metadata": "meta/blowdown_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14848,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Blowdown enters tangentially.",
+    "It swirls and partly flashes to steam.",
+    "Flash steam leaves through the vent."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Blowdown enters tangentially.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It swirls and partly flashes to steam.",
+     "part": "wear_plate",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flash steam leaves through the vent.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Retained water is cooled and drained.",
+     "part": "water",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flash fraction vs boiler pressure."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "blowdown_tank_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "blowdown_tank_temperature.glb",
+     "title": "Flash it, vent it, cool it",
+     "description": "Boiler blowdown leaves at boiler pressure and saturation temperature. Entering the vented tank tangentially, part of it flashes to steam (released through the vent) and the rest drops to ≈ 100 °C. Cooling water is added so the drain to the sewer stays below the permitted temperature (often ≤ ≈ 40–60 °C, local rules). The tank must never be pressurised: the vent is sized for the flash flow and must not be valved.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/blowdown_tank.json#components",
+   "key_components": "Vertical flash tank, tangential inlet, wear plate, vent, quench, siphon drain",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Blowdown Tank (vertical, wear plate at the tangential inlet)",
+     "info_ref": "bdt_tank",
+     "function": "Receive and flash blowdown.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "wear_plate",
+     "name": "Wear Plate (takes the erosive tangential jet)",
+     "info_ref": "bdt_tank",
+     "function": "Receive and flash blowdown.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "water",
+     "name": "Retained Water (water seal at the outlet)",
+     "info_ref": "bdt_tank",
+     "function": "Receive and flash blowdown.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "piping",
+     "name": "Tangential Blowdown Inlet, Atmospheric Vent with Separator Head, Siphon-Loop Drain, Cooling-Water Quench (temp-controlled)",
+     "info_ref": "bdt_piping",
+     "function": "Inlet, vent, drain, quench.",
+     "material": "Steel."
+    },
+    {
+     "id": "flash",
+     "name": "Flash steam rising to the vent",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "swirl",
+     "name": "Blowdown swirling around the shell",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tanks ≈ 0.5 – 2 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Sized for maximum blowdown rate",
+     "unit": "kg/s"
+    },
+    "operating_conditions": {
+     "typical_range": "Atmospheric; inlet at boiler pressure",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Drain ≤ ≈ 40–60 °C (local limit)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by blowdown flow and flash steam; vent area per guidance."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "NBBI blowoff guidelines"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations / supports designed for operating, test, wind/seismic and (for relief) reaction loads."
+   ],
+   "alignment": [
+    "Vessels plumb; headers sloped continuously as specified (no pockets)."
+   ],
+   "piping": [
+    "Relief/drain lines self-draining to the destination; supports for reaction and thermal loads; isolation valves car-sealed / locked as required."
+   ],
+   "commissioning": [
+    "Pressure test; verify set pressures and certificates; function-test instruments and interlocks; record as-built in the safety documentation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vent is clear; discharge temperature.",
+     "part": "piping",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect wear plate and shell thickness.",
+     "part": "wear_plate",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Repair erosion areas.",
+     "part": "tank"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication (valve stems / actuators per maker)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tank pressurised",
+     "category": "performance",
+     "symptoms": [
+      "Steam leaks, overpressure"
+     ],
+     "causes": [
+      "Vent blocked or undersized"
+     ],
+     "remedies": [
+      "Clear / resize vent"
+     ],
+     "part": "piping"
+    },
+    {
+     "problem": "Shell erosion",
+     "category": "wear",
+     "symptoms": [
+      "Thinning at inlet"
+     ],
+     "causes": [
+      "Worn wear plate"
+     ],
+     "remedies": [
+      "Replace plate"
+     ],
+     "part": "wear_plate"
+    }
+   ],
+   "safety": [
+    "Hot water / steam burns; never stand near the vent outlet."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Blowdown Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "blowdown_tank.glb",
+    "duration_s": 46.7,
+    "script": [
+     {
+      "narration": "This module introduces the Blowdown Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A boiler blowdown tank receives water blown down from boilers at high pressure and temperature.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Entering tangentially, part of it flashes to steam that leaves through a large vent; the rest is retained, mixed with cooling water and drained at a safe temperature to the sewer.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include continuous and intermittent (bottom) boiler blowdown; drain collection from high-pressure steam traps and drains.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Blowdown Tank — Operation",
+    "type": "in_app_tour",
+    "model": "blowdown_tank.glb",
+    "duration_s": 28.2,
+    "script": [
+     {
+      "narration": "How the Blowdown Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Blowdown enters tangentially.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It swirls and partly flashes to steam.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wear_plate",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flash steam leaves through the vent.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Retained water is cooled and drained.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Boiler blowdown leaves at boiler pressure and saturation temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Blowdown Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "blowdown_tank.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Blowdown Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vent is clear; discharge temperature.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect wear plate and shell thickness.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wear_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Repair erosion areas.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tank pressurised: steam leaks, overpressure. Common cause: vent blocked or undersized.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for shell erosion: thinning at inlet. Common cause: worn wear plate.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "wear_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why tangential inlet?",
+     "options": [
+      "Swirl separates steam and protects the shell (with wear plate)",
+      "Looks better",
+      "Cheaper",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Swirl.",
+     "level": "basic"
+    },
+    {
+     "question": "Can the vent have a valve?",
+     "options": [
+      "No — tank must never be pressurised",
+      "Yes",
+      "Only at night",
+      "Only at start"
+     ],
+     "answer": 0,
+     "explanation": "Never valved.",
+     "level": "basic"
+    },
+    {
+     "question": "Why add cooling water?",
+     "options": [
+      "Limit drain temperature",
+      "Make steam",
+      "Raise pressure",
+      "Clean tank"
+     ],
+     "answer": 0,
+     "explanation": "Temperature limit.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Receive and flash blowdown.\"",
+     "options": [
+      "Blowdown swirling around the shell",
+      "Tangential Blowdown Inlet, Atmospheric Vent with Separator Head, Siphon-Loop Drain, Cooling-Water Quench (temp-controlled)",
+      "Flash steam rising to the vent",
+      "Blowdown Tank (vertical, wear plate at the tangential inlet)"
+     ],
+     "answer": 3,
+     "explanation": "Blowdown Tank (vertical, wear plate at the tangential inlet): Receive and flash blowdown.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Inlet, vent, drain, quench.\"",
+     "options": [
+      "Blowdown Tank (vertical, wear plate at the tangential inlet)",
+      "Retained Water (water seal at the outlet)",
+      "Tangential Blowdown Inlet, Atmospheric Vent with Separator Head, Siphon-Loop Drain, Cooling-Water Quench (temp-controlled)",
+      "Blowdown swirling around the shell"
+     ],
+     "answer": 2,
+     "explanation": "Tangential Blowdown Inlet, Atmospheric Vent with Separator Head, Siphon-Loop Drain, Cooling-Water Quench (temp-controlled): Inlet, vent, drain, quench.",
+     "level": "basic",
+     "part": "piping",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

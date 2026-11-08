@@ -159,6 +159,11 @@ def _component_questions(pid, meta, n=3):
                 dis.append(o)
             if len(dis) == 3:
                 break
+        for o in others:
+            if len(dis) >= 3:
+                break
+            if o not in dis and o != p['name']:
+                dis.append(o)
         if len(dis) < 3:
             continue
         pos = h % 4

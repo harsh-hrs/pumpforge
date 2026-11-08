@@ -1,0 +1,673 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "alumina_hydrate_filter",
+  "title": "Rotary Vacuum Drum Filter for Alumina Hydrate",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 207,
+    "phase": 10,
+    "eq_id": "EQ-285",
+    "subcategory": "Filtration",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "alumina_hydrate_filter_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "alumina_hydrate_filter_pressure.glb",
+      "title": "Vacuum zones round the drum",
+      "description": "Each drum sector passes through the slurry (cake formation under vacuum), then dewatering and washing zones, then a blow-back zone where the vacuum valve switches to air pressure to release the cake at the scraper. Vacuum is typically ~ 0.4–0.8 bar below atmospheric; cake moisture and wash efficiency set the soda carried to calcination.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "vacuum_filtrate",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          0.0,
+          0.45,
+          -0.1
+        ],
+        [
+          0.0,
+          0.8,
+          -0.05
+        ],
+        [
+          1.05,
+          1.0,
+          -0.0
+        ],
+        [
+          1.5,
+          1.0,
+          -0.0
+        ],
+        [
+          1.9,
+          0.8,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cake",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          1.1,
+          -0.68
+        ],
+        [
+          0.0,
+          0.6,
+          -0.85
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 13460,
+    "parts": 11
+  },
+  "summary": "A rotary vacuum drum filter separates alumina hydrate from liquor. The drum turns partly submerged in slurry; vacuum draws liquor through the cloth so a cake forms, is washed and dewatered, and is scraped off with air blow-back.",
+  "classification": {
+    "family": "Filtration",
+    "type": "Rotary vacuum drum filter"
+  },
+  "model_configuration": {
+    "animation": "Drum sectors turn; cake on drum"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Vacuum filter design",
+      "relevance": "Filter area by filtration rate.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "TMS Light Metals proceedings — Bayer process practice",
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids"
+  ],
+  "parts": [
+    {
+      "id": "trough",
+      "name": "Slurry Trough (drum submerged ~ 30–40 %)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "trough__back",
+        "trough__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.95,
+        0.2,
+        -0.78553
+      ],
+      "bbox_max": [
+        0.95,
+        0.85,
+        0.78553
+      ],
+      "label_anchor": [
+        0.0,
+        0.525,
+        0.78553
+      ],
+      "center": [
+        0.0,
+        0.525,
+        -0.0
+      ],
+      "info_ref": "hf_trough"
+    },
+    {
+      "id": "slurry",
+      "name": "Hydrate Slurry in the Trough",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.89,
+        0.235,
+        -0.70334
+      ],
+      "bbox_max": [
+        0.89,
+        0.7,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.4675,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.4675,
+        -0.35167
+      ],
+      "info_ref": "hf_trough"
+    },
+    {
+      "id": "drum",
+      "name": "Drum with Internal Filtrate Pipes (rotates ~ 0.5–3 rpm)",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "drum__back",
+        "drum__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -1.3,
+        0.4,
+        -0.6
+      ],
+      "bbox_max": [
+        1.2,
+        1.6,
+        0.6
+      ],
+      "label_anchor": [
+        -0.05,
+        1.0,
+        0.6
+      ],
+      "center": [
+        -0.05,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "hf_drum"
+    },
+    {
+      "id": "filter_sectors",
+      "name": "Filter Cloth Sector Strips (show drum rotation)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "filter_sectors.001"
+      ],
+      "pivot": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        1.0
+      ],
+      "bbox_min": [
+        -0.87,
+        0.3825,
+        -0.6175
+      ],
+      "bbox_max": [
+        0.87,
+        1.6175,
+        0.6175
+      ],
+      "label_anchor": [
+        0.0,
+        1.0,
+        0.6175
+      ],
+      "center": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "hf_drum"
+    },
+    {
+      "id": "cake",
+      "name": "Hydrate Cake: forms in the slurry, is dewatered/washed, then scraped off",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ck"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.5
+      ],
+      "bbox_min": [
+        -0.86,
+        0.40799,
+        -0.62985
+      ],
+      "bbox_max": [
+        0.86,
+        1.62972,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.01886,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.01886,
+        -0.31493
+      ],
+      "info_ref": "hf_cake"
+    },
+    {
+      "id": "scraper_chute",
+      "name": "Discharge Scraper (with air blow-back) & Cake Chute",
+      "group": "discharge",
+      "section_role": "keep",
+      "nodes": [
+        "scraper_chute.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.9,
+        0.2,
+        -1.1
+      ],
+      "bbox_max": [
+        0.9,
+        1.09626,
+        -0.59612
+      ],
+      "label_anchor": [
+        0.0,
+        0.64813,
+        -0.59612
+      ],
+      "center": [
+        0.0,
+        0.64813,
+        -0.84806
+      ],
+      "info_ref": "hf_scraper"
+    },
+    {
+      "id": "wash_sprays",
+      "name": "Cake Wash Sprays",
+      "group": "water",
+      "section_role": "keep",
+      "nodes": [
+        "wash_sprays.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.3
+      ],
+      "bbox_min": [
+        -0.9,
+        1.7,
+        0.175
+      ],
+      "bbox_max": [
+        0.9,
+        1.825,
+        0.225
+      ],
+      "label_anchor": [
+        0.0,
+        1.7625,
+        0.225
+      ],
+      "center": [
+        0.0,
+        1.7625,
+        0.2
+      ],
+      "info_ref": "hf_wash"
+    },
+    {
+      "id": "vacuum_system",
+      "name": "Automatic Vacuum (control) Valve, Vacuum Line & Filtrate Receiver",
+      "group": "vacuum",
+      "section_role": "keep",
+      "nodes": [
+        "vv"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.95,
+        0.19,
+        -0.22
+      ],
+      "bbox_max": [
+        2.12,
+        1.18,
+        0.22
+      ],
+      "label_anchor": [
+        1.535,
+        0.685,
+        0.22
+      ],
+      "center": [
+        1.535,
+        0.685,
+        -0.0
+      ],
+      "info_ref": "hf_valve"
+    },
+    {
+      "id": "drive_agitator",
+      "name": "Drum Drive & Trough Agitator (keeps solids suspended)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "dv"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.9,
+        0.245,
+        -0.15
+      ],
+      "bbox_max": [
+        0.85,
+        1.15,
+        0.15
+      ],
+      "label_anchor": [
+        -0.525,
+        0.6975,
+        0.15
+      ],
+      "center": [
+        -0.525,
+        0.6975,
+        -0.0
+      ],
+      "info_ref": "hf_drive"
+    },
+    {
+      "id": "supports",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9,
+        0.0,
+        -0.65
+      ],
+      "bbox_max": [
+        0.9,
+        0.2,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        0.1,
+        0.65
+      ],
+      "center": [
+        0.0,
+        0.1,
+        -0.0
+      ],
+      "info_ref": "hf_trough"
+    },
+    {
+      "id": "filtrate",
+      "name": "Liquor drawn through the Cloth into the Drum",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "filtrate0",
+        "filtrate1",
+        "filtrate2",
+        "filtrate3",
+        "filtrate4",
+        "filtrate5",
+        "filtrate6",
+        "filtrate7",
+        "filtrate8",
+        "filtrate9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hf_trough": {
+      "function": "Holds slurry.",
+      "construction": "Trough.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hf_drum": {
+      "function": "Carries cloth; filtrate pipes.",
+      "construction": "Drum and sectors.",
+      "material": "Steel/PP cloth.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Cloth blinding"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "hf_cake": {
+      "function": "Hydrate cake.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hf_scraper": {
+      "function": "Discharges cake.",
+      "construction": "Scraper and chute.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hf_wash": {
+      "function": "Wash cake.",
+      "construction": "Spray header.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hf_valve": {
+      "function": "Switches vacuum/blow per sector.",
+      "construction": "Automatic valve, receiver.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear plate leakage"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "hf_drive": {
+      "function": "Drive and agitator.",
+      "construction": "Gearmotor, agitator.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

@@ -1,0 +1,623 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "gantry_crane",
+ "no": 140,
+ "title": "Gantry Crane",
+ "model_title": "Double-Girder Gantry Crane (Rail-Mounted)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A gantry crane has a bridge (one or two girders) supported on legs that run on rails at ground level. A trolley (crab) with a hoist travels across the girders, and the whole gantry travels along the rails, so the hook can reach any point in a rectangular area. It is used outdoors or where no building structure can carry a runway.",
+   "applications": [
+    "Shipyards and container terminals",
+    "Precast concrete and steel stockyards",
+    "Power plants and dams (maintenance)",
+    "Rail yards"
+   ],
+   "key_points": [
+    "Three motions: hoist, cross-travel (trolley), long-travel (gantry)",
+    "Legs run on ground rails",
+    "Duty classification (ISO 4301 / FEM / CMAA) sets design",
+    "Limit switches and load limiters are essential"
+   ],
+   "classification": {
+    "family": "Crane",
+    "type": "Double-girder rail-mounted gantry crane"
+   },
+   "hi_family": "material_handling",
+   "summary": "A gantry crane is an overhead crane supported on legs that run on ground rails. The trolley (crab) runs along the girders and its hoist raises and lowers the hook; the whole gantry travels along the runway. Used in yards, ports and workshops."
+  },
+  "model_3d": {
+   "asset": "glb/gantry_crane.glb",
+   "metadata": "meta/gantry_crane.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 1356,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The gantry travels along the runway rails (long travel).",
+    "The crab/trolley moves across the girders (cross travel).",
+    "The hoist drum winds the wire rope to raise or lower the hook."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The gantry travels along the runway rails (long travel).",
+     "part": "gantry",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The crab/trolley moves across the girders (cross travel).",
+     "part": "hst_trolley",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hoist drum winds the wire rope to raise or lower the hook.",
+     "part": "hst_rope",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The operator controls from the cab or by radio.",
+     "part": "cab",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Hoist power P ≈ m · g · v / η (W) — e.g. 10 t at 5 m/min with η = 0.85 → ≈ 9.6 kW."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "gantry_crane_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/gantry_crane.json#components",
+   "key_components": "Girders, legs, end carriages, trolley, hoist",
+   "parts": [
+    {
+     "id": "gantry",
+     "name": "Gantry Structure: Twin Girders, Legs & End Carriages (long travel)",
+     "info_ref": "cr_gantry",
+     "function": "Main structure carrying the trolley.",
+     "material": "Steel."
+    },
+    {
+     "id": "rails",
+     "name": "Runway Rails",
+     "info_ref": "hm_rails",
+     "function": "Runway rails.",
+     "material": "Steel."
+    },
+    {
+     "id": "hst_trolley",
+     "name": "Crab / Trolley: Trolley, Rope Drum & Hoist Motor",
+     "info_ref": "cr_hoist",
+     "function": "Lifts the load.",
+     "material": "Steel."
+    },
+    {
+     "id": "hst_hook",
+     "name": "Hook Block & Load",
+     "info_ref": "cr_hoist",
+     "function": "Lifts the load.",
+     "material": "Steel."
+    },
+    {
+     "id": "hst_rope",
+     "name": "Wire Rope (scales with hook height)",
+     "info_ref": "cr_hoist",
+     "function": "Lifts the load.",
+     "material": "Steel."
+    },
+    {
+     "id": "cab",
+     "name": "Operator Cab / Radio Control",
+     "info_ref": "cr_controls",
+     "function": "Operator control.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Span ~ 10 – 60 m; lift ~ 6 – 40 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Hoist ~ 5 – 200",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Hoist ~ 1 – 15 m/min; travel ~ 20 – 60 m/min",
+     "unit": "m/min"
+    },
+    "capacity": {
+     "typical_range": "SWL ~ 5 – 500+",
+     "unit": "t"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Specify SWL, span, lift, speeds, duty class (ISO 4301 group), environment and wind loads."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 4301-1 — Cranes: classification",
+    "ASME B30.2 — Overhead and gantry cranes",
+    "ISO 4309 — Wire ropes: care, maintenance, inspection and discard"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Runway beams, columns or pillar foundations designed for the crane wheel/moment loads including dynamic and test loads (structural engineer sign-off)."
+   ],
+   "alignment": [
+    "Rails/beams within span, level and straightness tolerances; end stops and buffers fitted."
+   ],
+   "piping": [
+    "Power supply via conductor rails, festoon or cable reel; mainline isolator accessible; pendant or radio control labelled with directions."
+   ],
+   "commissioning": [
+    "Function-test all motions and limit switches (hoist upper/lower, travel); check brakes; proof load test and thorough examination by a competent person before first use, per the applicable standard and local regulations."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Pre-use check: limits, brakes, rope, hook latch.",
+     "part": "hst_hook",
+     "interval": "daily/shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect ropes, sheaves, wheels and rails.",
+     "part": "hst_rope",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Thorough examination by a competent person; overhaul hoist gearbox and brakes.",
+     "part": "gantry",
+     "interval": "per regulation (e.g. 6–12 months)"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule.",
+    "Wire rope: lubricate with rope dressing."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wire rope damage",
+     "category": "performance",
+     "symptoms": [
+      "Broken wires, kinks, corrosion"
+     ],
+     "causes": [
+      "Wear on sheaves/drum, overload, poor spooling"
+     ],
+     "remedies": [
+      "Inspect and discard per criteria (ISO 4309); correct reeving"
+     ],
+     "part": "hst_rope"
+    },
+    {
+     "problem": "Brake failure",
+     "category": "performance",
+     "symptoms": [
+      "Load drift, increased stopping distance"
+     ],
+     "causes": [
+      "Worn linings, contamination, wrong adjustment"
+     ],
+     "remedies": [
+      "Adjust/replace linings; test brake"
+     ],
+     "part": "hst_trolley"
+    },
+    {
+     "problem": "Overload",
+     "category": "performance",
+     "symptoms": [
+      "Trip of limiter, structural deformation"
+     ],
+     "causes": [
+      "Unknown load weight, side pulling"
+     ],
+     "remedies": [
+      "Use load limiter; train riggers"
+     ],
+     "part": "hst_trolley"
+    }
+   ],
+   "safety": [
+    "Never stand under a suspended load; use trained slingers; check wind speed limits; storm-lock outdoor cranes."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Gantry Crane — Introduction",
+    "type": "in_app_tour",
+    "model": "gantry_crane.glb",
+    "duration_s": 53.8,
+    "script": [
+     {
+      "narration": "This module introduces the Gantry Crane.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A gantry crane has a bridge (one or two girders) supported on legs that run on rails at ground level.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A trolley (crab) with a hoist travels across the girders, and the whole gantry travels along the rails, so the hook can reach any point in a rectangular area.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is used outdoors or where no building structure can carry a runway.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include shipyards and container terminals; precast concrete and steel stockyards; power plants and dams (maintenance); rail yards.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Gantry Crane — Operation",
+    "type": "in_app_tour",
+    "model": "gantry_crane.glb",
+    "duration_s": 25.6,
+    "script": [
+     {
+      "narration": "How the Gantry Crane works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The gantry travels along the runway rails (long travel).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gantry",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The crab/trolley moves across the girders (cross travel).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hst_trolley",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hoist drum winds the wire rope to raise or lower the hook.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "hst_rope",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The operator controls from the cab or by radio.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cab",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Gantry Crane — Maintenance",
+    "type": "in_app_tour",
+    "model": "gantry_crane.glb",
+    "duration_s": 43.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Gantry Crane.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Pre-use check: limits, brakes, rope, hook latch.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hst_hook",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect ropes, sheaves, wheels and rails.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hst_rope",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Thorough examination by a competent person; overhaul hoist gearbox and brakes.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "gantry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wire rope damage: broken wires, kinks, corrosion. Common cause: wear on sheaves/drum, overload, poor spooling.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "hst_rope",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for brake failure: load drift, increased stopping distance. Common cause: worn linings, contamination, wrong adjustment.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "hst_trolley",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overload: trip of limiter, structural deformation. Common cause: unknown load weight, side pulling.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "hst_trolley",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which motion moves the whole crane along the rails?",
+     "options": [
+      "Long travel",
+      "Cross travel",
+      "Hoisting",
+      "Slewing"
+     ],
+     "answer": 0,
+     "explanation": "Gantry travel.",
+     "level": "basic"
+    },
+    {
+     "question": "Hoist power for 10 t at 5 m/min (η 0.85) is about…",
+     "options": [
+      "~ 1 kW",
+      "~ 10 kW",
+      "~ 100 kW",
+      "~ 1 MW"
+     ],
+     "answer": 1,
+     "explanation": "9.81e4 × 0.0833 / 0.85 ≈ 9.6 kW.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are load limiters fitted?",
+     "options": [
+      "To prevent lifting above the rated load",
+      "To weigh trucks",
+      "To speed up",
+      "To reduce noise"
+     ],
+     "answer": 0,
+     "explanation": "Overload protection.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Main structure carrying the trolley.\"",
+     "options": [
+      "Operator Cab / Radio Control",
+      "Gantry Structure: Twin Girders, Legs & End Carriages (long travel)",
+      "Wire Rope (scales with hook height)",
+      "Crab / Trolley: Trolley, Rope Drum & Hoist Motor"
+     ],
+     "answer": 1,
+     "explanation": "Gantry Structure: Twin Girders, Legs & End Carriages (long travel): Main structure carrying the trolley.",
+     "level": "basic",
+     "part": "gantry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Runway rails.\"",
+     "options": [
+      "Hook Block & Load",
+      "Gantry Structure: Twin Girders, Legs & End Carriages (long travel)",
+      "Operator Cab / Radio Control",
+      "Runway Rails"
+     ],
+     "answer": 3,
+     "explanation": "Runway Rails: Runway rails.",
+     "level": "basic",
+     "part": "rails",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Lifts the load.\"",
+     "options": [
+      "Gantry Structure: Twin Girders, Legs & End Carriages (long travel)",
+      "Crab / Trolley: Trolley, Rope Drum & Hoist Motor",
+      "Runway Rails",
+      "Operator Cab / Radio Control"
+     ],
+     "answer": 1,
+     "explanation": "Crab / Trolley: Trolley, Rope Drum & Hoist Motor: Lifts the load.",
+     "level": "basic",
+     "part": "hst_trolley",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

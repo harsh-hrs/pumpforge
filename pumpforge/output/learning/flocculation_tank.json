@@ -1,0 +1,634 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flocculation_tank",
+ "no": 220,
+ "title": "Flocculation Tank",
+ "model_title": "Horizontal-Paddle Flocculation Tank (Three Tapered-Energy Stages)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A flocculation tank stirs coagulated water gently for 15–30 minutes so small particles collide and stick together into large, heavy flocs. This tank has three compartments in series with horizontal paddle reels; each stage turns more slowly than the last (tapered energy) so the growing flocs are not broken.",
+   "applications": [
+    "Ahead of clarifiers and lamella settlers in water treatment",
+    "Industrial wastewater physico-chemical treatment"
+   ],
+   "key_points": [
+    "Tapered energy: G falls stage by stage",
+    "G·t ≈ 10⁴ – 10⁵",
+    "Over-and-under baffles prevent short-circuiting",
+    "Paddle tip speed kept low"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Horizontal paddle flocculator (tapered)"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A flocculation tank gently stirs coagulated water so tiny particles collide and stick together into large flocs that settle easily. Horizontal paddle reels in three stages run at decreasing speeds."
+  },
+  "model_3d": {
+   "asset": "glb/flocculation_tank.glb",
+   "metadata": "meta/flocculation_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3260,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Coagulated water enters stage 1.",
+    "Paddle reel 1 turns fastest to start collisions.",
+    "Water passes under the first baffle into stage 2."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Coagulated water enters stage 1.",
+     "part": "tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Paddle reel 1 turns fastest to start collisions.",
+     "part": "paddle_reel_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water passes under the first baffle into stage 2.",
+     "part": "paddle_reel_2",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Stage 3 is slowest so large flocs survive.",
+     "part": "paddle_reel_3",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flocculated water leaves to the clarifier.",
+     "part": "tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Floc size vs time for different G values."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flocculation_tank_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "flocculation_tank_pressure.glb",
+     "title": "Tapered mixing energy",
+     "description": "Flocculation needs gentle mixing for 15–30 min. Energy is highest in the first stage (G ≈ 50–70 s⁻¹) to promote collisions and lowest in the last (G ≈ 10–20 s⁻¹) so the large, fragile flocs are not broken up before settling. The product G·t (≈ 10⁴–10⁵) is a key design number.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flocculation_tank.json#components",
+   "key_components": "Three-stage tank, horizontal paddle reels, baffle walls, variable-speed drives",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Flocculation Basin, Over-and-Under Baffle Walls (3 compartments), Inlet & Outlet",
+     "info_ref": "ft_tank",
+     "function": "Basin.",
+     "material": "Concrete."
+    },
+    {
+     "id": "water",
+     "name": "Coagulated Water",
+     "info_ref": "ft_tank",
+     "function": "Basin.",
+     "material": "Concrete."
+    },
+    {
+     "id": "paddle_reel_1",
+     "name": "Paddle Reel 1 (speed tapers stage by stage)",
+     "info_ref": "ft_paddles",
+     "function": "Gentle mixing.",
+     "material": "Steel/FRP."
+    },
+    {
+     "id": "paddle_reel_2",
+     "name": "Paddle Reel 2 (speed tapers stage by stage)",
+     "info_ref": "ft_paddles",
+     "function": "Gentle mixing.",
+     "material": "Steel/FRP."
+    },
+    {
+     "id": "paddle_reel_3",
+     "name": "Paddle Reel 3 (speed tapers stage by stage)",
+     "info_ref": "ft_paddles",
+     "function": "Gentle mixing.",
+     "material": "Steel/FRP."
+    },
+    {
+     "id": "drives",
+     "name": "Variable-Speed Gearmotor Drives",
+     "info_ref": "ft_drive",
+     "function": "Variable-speed drive.",
+     "material": "—"
+    },
+    {
+     "id": "flocs",
+     "name": "Flocs growing from pin-point to large settleable flocs",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "≈ 3 – 20 m long, 3 – 5 m deep",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 200 – 5000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Detention ≈ 15 – 30 min; G ≈ 70 → 10 s⁻¹",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 0.5 – 5 per stage",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Volume from flow × detention; power per stage from G."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "AWWA",
+    "MWH"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Reinforced-concrete tank on prepared ground; watertightness test before backfill; allow for buoyancy when empty (groundwater)."
+   ],
+   "alignment": [
+    "Weirs and launders levelled to a few millimetres so overflow is even; drive/bridge centred and level."
+   ],
+   "piping": [
+    "Inlet arranged to spread flow without short-circuiting; sludge lines with flushing points; overflow and drain to a safe place."
+   ],
+   "commissioning": [
+    "Fill with clean water, check for leaks; run mechanisms empty and with water; start chemical dosing and tune by jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check paddle speeds and floc appearance.",
+     "part": "paddle_reel_1",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect shaft seals and bearings.",
+     "part": "drives",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Drain; replace worn paddle boards.",
+     "part": "paddle_reel_2"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Pin-point floc",
+     "category": "performance",
+     "symptoms": [
+      "Small flocs, poor settling"
+     ],
+     "causes": [
+      "Under-dosing",
+      "Too short time",
+      "Too high G"
+     ],
+     "remedies": [
+      "Jar test; reduce speed"
+     ],
+     "part": "paddle_reel_3"
+    },
+    {
+     "problem": "Shaft seal leak",
+     "category": "leakage",
+     "symptoms": [
+      "Water at drive side"
+     ],
+     "causes": [
+      "Seal wear"
+     ],
+     "remedies": [
+      "Replace seal"
+     ],
+     "part": "drives"
+    }
+   ],
+   "safety": [
+    "Guard drives; handrails at open tanks."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flocculation Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "flocculation_tank.glb",
+    "duration_s": 56.6,
+    "script": [
+     {
+      "narration": "This module introduces the Flocculation Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A flocculation tank stirs coagulated water gently for 15–30 minutes so small particles collide and stick together into large, heavy flocs.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "This tank has three compartments in series with horizontal paddle reels; each stage turns more slowly than the last (tapered energy) so the growing flocs are not broken.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include ahead of clarifiers and lamella settlers in water treatment; industrial wastewater physico-chemical treatment.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Paddle Reel 1 (speed tapers stage by stage), Paddle Reel 2 (speed tapers stage by stage), Paddle Reel 3 (speed tapers stage by stage).",
+      "duration_s": 12.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flocculation Tank — Operation",
+    "type": "in_app_tour",
+    "model": "flocculation_tank.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "How the Flocculation Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Coagulated water enters stage 1.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Paddle reel 1 turns fastest to start collisions.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "paddle_reel_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water passes under the first baffle into stage 2.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "paddle_reel_2",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Stage 3 is slowest so large flocs survive.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "paddle_reel_3",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flocculated water leaves to the clarifier.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Flocculation needs gentle mixing for 15–30 min.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flocculation Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "flocculation_tank.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flocculation Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check paddle speeds and floc appearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "paddle_reel_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect shaft seals and bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drives",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Drain; replace worn paddle boards.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "paddle_reel_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pin-point floc: small flocs, poor settling. Common cause: under-dosing.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "paddle_reel_3",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for shaft seal leak: water at drive side. Common cause: seal wear.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "drives",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why taper the energy?",
+     "options": [
+      "Large flocs are fragile and break at high G",
+      "To save money only",
+      "To heat water",
+      "To add oxygen"
+     ],
+     "answer": 0,
+     "explanation": "Tapered energy.",
+     "level": "basic"
+    },
+    {
+     "question": "What does over-and-under baffling prevent?",
+     "options": [
+      "Short-circuiting",
+      "Corrosion",
+      "Freezing",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "Plug flow.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical flocculation time?",
+     "options": [
+      "≈ 15 – 30 min",
+      "≈ 5 s",
+      "≈ 12 h",
+      "≈ 3 days"
+     ],
+     "answer": 0,
+     "explanation": "Minutes.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Basin.\"",
+     "options": [
+      "Flocculation Basin, Over-and-Under Baffle Walls (3 compartments), Inlet & Outlet",
+      "Paddle Reel 2 (speed tapers stage by stage)",
+      "Flocs growing from pin-point to large settleable flocs",
+      "Variable-Speed Gearmotor Drives"
+     ],
+     "answer": 0,
+     "explanation": "Flocculation Basin, Over-and-Under Baffle Walls (3 compartments), Inlet & Outlet: Basin.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Gentle mixing.\"",
+     "options": [
+      "Variable-Speed Gearmotor Drives",
+      "Paddle Reel 1 (speed tapers stage by stage)",
+      "Flocculation Basin, Over-and-Under Baffle Walls (3 compartments), Inlet & Outlet",
+      "Flocs growing from pin-point to large settleable flocs"
+     ],
+     "answer": 1,
+     "explanation": "Paddle Reel 1 (speed tapers stage by stage): Gentle mixing.",
+     "level": "basic",
+     "part": "paddle_reel_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Variable-speed drive.\"",
+     "options": [
+      "Flocculation Basin, Over-and-Under Baffle Walls (3 compartments), Inlet & Outlet",
+      "Paddle Reel 1 (speed tapers stage by stage)",
+      "Variable-Speed Gearmotor Drives",
+      "Coagulated Water"
+     ],
+     "answer": 2,
+     "explanation": "Variable-Speed Gearmotor Drives: Variable-speed drive.",
+     "level": "basic",
+     "part": "drives",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

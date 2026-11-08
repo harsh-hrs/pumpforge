@@ -1,0 +1,714 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "oxalate_removal_system",
+  "title": "Sodium Oxalate Removal (Seeded Crystallizer + Hydrocyclone)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 214,
+    "phase": 10,
+    "eq_id": "EQ-292",
+    "subcategory": "Liquor Treatment",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "oxalate_removal_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "oxalate_removal_system_temperature.glb",
+      "title": "Why oxalate must be removed",
+      "description": "Organic matter in bauxite degrades in the hot caustic liquor to sodium oxalate. If it builds up, oxalate co-precipitates with gibbsite, giving fine, weak hydrate and lower yield. A side-stream is cooled and seeded with oxalate crystals so oxalate crystallises in a controlled way; crystals are separated (cyclones/filters) and destroyed (e.g. by lime or burning), and the clean liquor returns.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "liquor_in",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.1,
+          2.0,
+          -0.0
+        ],
+        [
+          -0.2,
+          1.9,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "to_cyclone",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.6,
+          0.6,
+          -0.0
+        ],
+        [
+          1.2,
+          0.6,
+          -0.0
+        ],
+        [
+          1.2,
+          2.5,
+          -0.0
+        ],
+        [
+          1.6,
+          2.45,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "clean_liquor",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          1.6,
+          2.6,
+          -0.0
+        ],
+        [
+          1.6,
+          3.0,
+          -0.0
+        ],
+        [
+          2.5,
+          3.0,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "seed_return",
+      "kind": "sand",
+      "radius": 0.015,
+      "points": [
+        [
+          1.6,
+          1.65,
+          -0.0
+        ],
+        [
+          1.6,
+          1.0,
+          -0.0
+        ],
+        [
+          0.4,
+          1.0,
+          -0.0
+        ],
+        [
+          0.4,
+          1.9,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8516,
+    "parts": 11
+  },
+  "summary": "An oxalate removal system takes a side-stream of liquor, cools and seeds it so sodium oxalate crystallises in a controlled way, and separates the crystals in hydrocyclones. Clean liquor returns; part of the crystals is recycled as seed.",
+  "classification": {
+    "family": "Liquor treatment",
+    "type": "Seeded oxalate crystallization"
+  },
+  "model_configuration": {
+    "animation": "Crystals grow; cyclone separates"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded storage tanks",
+      "relevance": "Atmospheric tanks (practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "TMS Light Metals proceedings — Bayer process practice",
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids"
+  ],
+  "parts": [
+    {
+      "id": "ox_tank",
+      "name": "Oxalate Crystallizer: Tank, Baffles & Draft Tube",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "ox_tank__back",
+        "ox_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.715,
+        0.4,
+        -0.715
+      ],
+      "bbox_max": [
+        0.715,
+        2.2,
+        0.715
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.715
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ox_tank"
+    },
+    {
+      "id": "ox_slurry",
+      "name": "Oxalate Crystallizer: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ox_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.695,
+        0.43,
+        -0.695
+      ],
+      "bbox_max": [
+        0.695,
+        1.93,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.18,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.18,
+        -0.3475
+      ],
+      "info_ref": "ox_slurry"
+    },
+    {
+      "id": "ox_agitator",
+      "name": "Oxalate Crystallizer: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "ox_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.12872,
+        1.34,
+        -0.20769
+      ],
+      "bbox_max": [
+        0.231,
+        2.47,
+        0.20769
+      ],
+      "label_anchor": [
+        0.05114,
+        1.905,
+        0.20769
+      ],
+      "center": [
+        0.05114,
+        1.905,
+        -0.0
+      ],
+      "info_ref": "ox_agitator"
+    },
+    {
+      "id": "ox_drive",
+      "name": "Oxalate Crystallizer: Agitator Drive (motor + gearbox, bridge beam)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "ox_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.85,
+        2.22,
+        -0.16
+      ],
+      "bbox_max": [
+        0.85,
+        2.97,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        2.595,
+        0.16
+      ],
+      "center": [
+        0.0,
+        2.595,
+        -0.0
+      ],
+      "info_ref": "ox_drive"
+    },
+    {
+      "id": "cooling_jacket",
+      "name": "Cooling Jacket (lowers temperature to drive crystallisation)",
+      "group": "heater",
+      "section_role": "split",
+      "nodes": [
+        "cooling_jacket__back",
+        "cooling_jacket__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.77,
+        0.6,
+        -0.77
+      ],
+      "bbox_max": [
+        0.77,
+        2.0,
+        0.77
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.77
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ox_cooling"
+    },
+    {
+      "id": "hydrocyclone",
+      "name": "Hydrocyclone (separates oxalate crystals; overflow = de-oxalated liquor)",
+      "group": "separator",
+      "section_role": "keep",
+      "nodes": [
+        "hydrocyclone.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.48,
+        1.6,
+        -0.12
+      ],
+      "bbox_max": [
+        1.72,
+        2.85,
+        0.12
+      ],
+      "label_anchor": [
+        1.6,
+        2.225,
+        0.12
+      ],
+      "center": [
+        1.6,
+        2.225,
+        -0.0
+      ],
+      "info_ref": "ox_cyclone"
+    },
+    {
+      "id": "piping",
+      "name": "Crystallizer → Cyclone Feed, Seed Return (underflow) & Clean Liquor Overflow",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        0.56,
+        -0.10804
+      ],
+      "bbox_max": [
+        2.4,
+        3.03,
+        0.095
+      ],
+      "label_anchor": [
+        0.7,
+        1.795,
+        0.095
+      ],
+      "center": [
+        0.7,
+        1.795,
+        -0.00652
+      ],
+      "info_ref": "ox_cyclone"
+    },
+    {
+      "id": "feed_pump",
+      "name": "Cyclone Feed Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "feed_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        1.05,
+        0.075,
+        -0.65
+      ],
+      "bbox_max": [
+        1.95,
+        0.37,
+        -0.35
+      ],
+      "label_anchor": [
+        1.5,
+        0.2225,
+        -0.35
+      ],
+      "center": [
+        1.5,
+        0.2225,
+        -0.5
+      ],
+      "info_ref": "ox_cyclone"
+    },
+    {
+      "id": "feed_pump_shaft",
+      "name": "Cyclone Feed Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "feed_pumpc"
+      ],
+      "pivot": [
+        1.44,
+        0.25,
+        -0.5
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        1.38,
+        0.23,
+        -0.55
+      ],
+      "bbox_max": [
+        1.5,
+        0.27,
+        -0.45
+      ],
+      "label_anchor": [
+        1.44,
+        0.25,
+        -0.45
+      ],
+      "center": [
+        1.44,
+        0.25,
+        -0.5
+      ],
+      "info_ref": "ox_cyclone"
+    },
+    {
+      "id": "foundation",
+      "name": "Ring-Wall Foundation",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "foundation__back",
+        "foundation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.8,
+        0.0,
+        -0.8
+      ],
+      "bbox_max": [
+        0.8,
+        0.4,
+        0.8
+      ],
+      "label_anchor": [
+        0.0,
+        0.2,
+        0.8
+      ],
+      "center": [
+        0.0,
+        0.2,
+        -0.0
+      ],
+      "info_ref": "ox_tank"
+    },
+    {
+      "id": "oxalate",
+      "name": "Needle-like Sodium Oxalate Crystals growing on Seed",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "oxalate0",
+        "oxalate1",
+        "oxalate2",
+        "oxalate3",
+        "oxalate4",
+        "oxalate5",
+        "oxalate6",
+        "oxalate7",
+        "oxalate8",
+        "oxalate9",
+        "oxalate10",
+        "oxalate11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.016,
+        -0.016,
+        -0.01522
+      ],
+      "bbox_max": [
+        0.016,
+        0.016,
+        0.01522
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01522
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ox_tank": {
+      "function": "Holds the slurry.",
+      "construction": "Tank with baffles/draft tube.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ox_slurry": {
+      "function": "Process slurry/liquor.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ox_agitator": {
+      "function": "Mixes and suspends solids.",
+      "construction": "Shaft and impellers.",
+      "material": "Carbon steel (often rubber-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blade wear, scale"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "ox_drive": {
+      "function": "Drives the agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ox_cooling": {
+      "function": "Cools liquor.",
+      "construction": "Jacket.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ox_cyclone": {
+      "function": "Separates crystals; piping; pump.",
+      "construction": "Hydrocyclone, lines, pump.",
+      "material": "Lined steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

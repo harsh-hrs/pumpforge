@@ -1,0 +1,463 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "coalescer",
+  "title": "Liquid–Liquid Coalescer (Cartridge Coalescer + Vane Pack, Water Boot)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 187,
+    "phase": 9,
+    "eq_id": "EQ-265",
+    "subcategory": "Liquid–liquid separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "coalescer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "coalescer_pressure.glb",
+      "title": "Coalescence: small drops become large drops",
+      "description": "Fine dispersed droplets (a few µm to tens of µm) are captured by the fibres of the coalescing media, merge with other captured droplets and leave the outer surface as large drops. Large drops settle quickly (Stokes: velocity ∝ d²) into the water boot. Surfactants can disarm coalescing media, so they are selected for the interfacial tension of the system.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "hydraulic_oil",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.7,
+          1.05,
+          -0.0
+        ],
+        [
+          -0.7,
+          1.05,
+          -0.0
+        ],
+        [
+          0.1,
+          1.0,
+          -0.0
+        ],
+        [
+          1.7,
+          1.15,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          0.6,
+          0.85,
+          -0.1
+        ],
+        [
+          0.8,
+          0.4,
+          -0.0
+        ],
+        [
+          0.8,
+          -0.05,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 16754,
+    "parts": 7
+  },
+  "summary": "A liquid–liquid coalescer removes fine water droplets from hydrocarbons (or oil from water). The fluid passes through coalescing cartridges whose fibres capture small droplets and merge them into large drops; a vane pack catches remaining drops, and the separated water settles into the boot where an interface controller drains it.",
+  "classification": {
+    "family": "Liquid–liquid separator",
+    "type": "Horizontal cartridge coalescer with water boot"
+  },
+  "model_configuration": {
+    "animation": "Droplets grow and settle"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Maker coalescer design guides"
+  ],
+  "parts": [
+    {
+      "id": "vessel",
+      "name": "Horizontal Vessel & Water Boot",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "vessel__back",
+        "vessel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.425,
+        0.175,
+        -0.45
+      ],
+      "bbox_max": [
+        1.425,
+        1.5,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        0.8375,
+        0.45
+      ],
+      "center": [
+        0.0,
+        0.8375,
+        -0.0
+      ],
+      "info_ref": "co_vessel"
+    },
+    {
+      "id": "coalescing_elements",
+      "name": "Tube Sheet, Coalescing Cartridges (inside-out) & Vane Separator Pack",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "coalescing_elements.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.7
+      ],
+      "bbox_min": [
+        -0.7,
+        0.61,
+        -0.44
+      ],
+      "bbox_max": [
+        0.525,
+        1.49,
+        0.44
+      ],
+      "label_anchor": [
+        -0.0875,
+        1.05,
+        0.44
+      ],
+      "center": [
+        -0.0875,
+        1.05,
+        -0.0
+      ],
+      "info_ref": "co_elements"
+    },
+    {
+      "id": "liquid",
+      "name": "Continuous Hydrocarbon Phase",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.15,
+        0.61,
+        -0.44
+      ],
+      "bbox_max": [
+        1.15,
+        1.4,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.005,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.005,
+        -0.22
+      ],
+      "info_ref": "co_vessel"
+    },
+    {
+      "id": "boot_water",
+      "name": "Separated Water in the Boot (interface controlled)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "bw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.66,
+        0.18,
+        -0.14
+      ],
+      "bbox_max": [
+        0.94,
+        0.48,
+        -0.0
+      ],
+      "label_anchor": [
+        0.8,
+        0.33,
+        -0.0
+      ],
+      "center": [
+        0.8,
+        0.33,
+        -0.07
+      ],
+      "info_ref": "co_boot"
+    },
+    {
+      "id": "nozzles_instruments",
+      "name": "Inlet, Outlet, Water Drain & Interface Level Transmitter",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles_instruments.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.675,
+        -0.025,
+        -0.114
+      ],
+      "bbox_max": [
+        1.675,
+        1.264,
+        0.114
+      ],
+      "label_anchor": [
+        0.0,
+        0.6195,
+        0.114
+      ],
+      "center": [
+        0.0,
+        0.6195,
+        -0.0
+      ],
+      "info_ref": "co_boot"
+    },
+    {
+      "id": "saddles",
+      "name": "Saddles",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "saddles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9,
+        0.0,
+        -0.35
+      ],
+      "bbox_max": [
+        0.9,
+        0.7,
+        0.35
+      ],
+      "label_anchor": [
+        0.0,
+        0.35,
+        0.35
+      ],
+      "center": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "co_vessel"
+    },
+    {
+      "id": "drops",
+      "name": "Fine Water Droplets growing into Large Drops",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "wd0",
+        "wd1",
+        "wd2",
+        "wd3",
+        "wd4",
+        "wd5",
+        "wd6",
+        "wd7",
+        "wd8",
+        "wd9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.01141
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.01141
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01141
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "co_vessel": {
+      "function": "Pressure envelope.",
+      "construction": "Horizontal vessel.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "co_elements": {
+      "function": "Coalesce droplets.",
+      "construction": "Cartridges, tube sheet, vane pack.",
+      "material": "Glass fibre/PTFE/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Disarming by surfactants, plugging"
+      ],
+      "inspection": [
+        "ΔP, outlet water content"
+      ]
+    },
+    "co_boot": {
+      "function": "Collects water; interface control.",
+      "construction": "Boot, LT, drain.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

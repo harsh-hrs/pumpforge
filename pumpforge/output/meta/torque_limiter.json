@@ -1,0 +1,451 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "torque_limiter",
+  "title": "Friction Torque Limiter (Slip Clutch) with Chain Sprocket",
+  "category": "7 · Rotating Equipment – Additional Machinery",
+  "library": {
+    "no": 87,
+    "phase": 5,
+    "eq_id": "EQ-165",
+    "subcategory": "Mechanical Drives",
+    "hi_family": "rotating_machinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "torque_limiter_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "torque": {
+      "file": "torque_limiter_torque.glb",
+      "title": "Driving torque vs load torque",
+      "description": "Disc springs clamp the sprocket between the friction facings. While the load torque (red) is below the set slip torque, the friction transmits the drive torque (magenta) and everything turns together. On a jam the load torque exceeds the setting: the facings slip, the hub keeps turning and the sprocket stops — protecting the drive. Tighten the nut to raise the setting.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Normal: hub and sprocket turn together",
+          "anchor": [
+            0.15,
+            0.45,
+            -0.0
+          ]
+        },
+        {
+          "text": "Overload: sprocket stops, facings slip",
+          "anchor": [
+            -0.1,
+            -0.05,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "power",
+      "kind": "power",
+      "radius": 0.006,
+      "points": [
+        [
+          -0.4,
+          0.2,
+          -0.0
+        ],
+        [
+          -0.05,
+          0.22,
+          -0.0
+        ],
+        [
+          -0.04,
+          0.28,
+          -0.0
+        ],
+        [
+          -0.02,
+          0.27278,
+          -0.0
+        ],
+        [
+          -0.02,
+          0.28278,
+          0.12
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.5
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8580,
+    "parts": 6
+  },
+  "summary": "A torque limiter protects machines from overload. In this friction type, disc springs clamp a sprocket between friction facings on a hub. Up to the set torque everything turns together; if the driven machine jams, the facings slip so the motor and gearbox are not damaged. The slip torque is set by tightening the adjusting nut.",
+  "classification": {
+    "family": "Overload protection device",
+    "type": "Friction slip clutch with chain sprocket"
+  },
+  "model_configuration": {
+    "animation": "Normal drive for half the loop, then the sprocket stops (jam) while the hub keeps turning"
+  },
+  "standards": [
+    {
+      "id": "Manufacturer setting data",
+      "title": "Torque setting charts",
+      "relevance": "Slip torque vs nut position.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Manufacturer torque limiter catalogues (generic)"
+  ],
+  "parts": [
+    {
+      "id": "hub",
+      "name": "Hub on Driving Shaft (with marker)",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "hub__back",
+        "hub__front"
+      ],
+      "pivot": [
+        0.0,
+        0.2,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.36,
+        0.1,
+        -0.1
+      ],
+      "bbox_max": [
+        0.12,
+        0.3,
+        0.1
+      ],
+      "label_anchor": [
+        -0.12,
+        0.2,
+        0.1
+      ],
+      "center": [
+        -0.12,
+        0.2,
+        -0.0
+      ],
+      "info_ref": "tl_hub"
+    },
+    {
+      "id": "friction_facings",
+      "name": "Friction Facings (linings)",
+      "group": "friction",
+      "section_role": "split",
+      "nodes": [
+        "friction_facings__back",
+        "friction_facings__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.25,
+        0.0
+      ],
+      "bbox_min": [
+        -0.044,
+        0.105,
+        -0.095
+      ],
+      "bbox_max": [
+        0.004,
+        0.295,
+        0.095
+      ],
+      "label_anchor": [
+        -0.02,
+        0.2,
+        0.095
+      ],
+      "center": [
+        -0.02,
+        0.2,
+        -0.0
+      ],
+      "info_ref": "tl_facings"
+    },
+    {
+      "id": "sprocket",
+      "name": "Sprocket (driven member, free on a bush) — stops on overload",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "sprocket__back",
+        "sprocket__front"
+      ],
+      "pivot": [
+        0.0,
+        0.2,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.35
+      ],
+      "bbox_min": [
+        -0.04,
+        0.12193,
+        -0.07807
+      ],
+      "bbox_max": [
+        -0.008,
+        0.27807,
+        0.07807
+      ],
+      "label_anchor": [
+        -0.024,
+        0.2,
+        0.07807
+      ],
+      "center": [
+        -0.024,
+        0.2,
+        -0.0
+      ],
+      "info_ref": "tl_sprocket"
+    },
+    {
+      "id": "pressure_plate",
+      "name": "Pressure Plate, Disc (Belleville) Springs & Adjusting Nut",
+      "group": "friction",
+      "section_role": "split",
+      "nodes": [
+        "pressure_plate__back",
+        "pressure_plate__front"
+      ],
+      "pivot": [
+        0.0,
+        0.2,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.005,
+        0.105,
+        -0.095
+      ],
+      "bbox_max": [
+        0.095,
+        0.295,
+        0.095
+      ],
+      "label_anchor": [
+        0.05,
+        0.2,
+        0.095
+      ],
+      "center": [
+        0.05,
+        0.2,
+        -0.0
+      ],
+      "info_ref": "tl_springs"
+    },
+    {
+      "id": "chain",
+      "name": "Roller Chain to Driven Machine (stalls on jam)",
+      "group": "power_transmission",
+      "section_role": "keep",
+      "nodes": [
+        "chain.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.03,
+        0.22185,
+        -0.07324
+      ],
+      "bbox_max": [
+        -0.01,
+        0.27816,
+        0.18724
+      ],
+      "label_anchor": [
+        -0.02,
+        0.25001,
+        0.18724
+      ],
+      "center": [
+        -0.02,
+        0.25001,
+        0.057
+      ],
+      "info_ref": "tl_chain"
+    },
+    {
+      "id": "bearings",
+      "name": "Shaft Bearings",
+      "group": "bearings",
+      "section_role": "keep",
+      "nodes": [
+        "bearings.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.3462,
+        0.0,
+        -0.126
+      ],
+      "bbox_max": [
+        -0.0938,
+        0.26,
+        0.126
+      ],
+      "label_anchor": [
+        -0.22,
+        0.13,
+        0.126
+      ],
+      "center": [
+        -0.22,
+        0.13,
+        -0.0
+      ],
+      "info_ref": "tl_bearings"
+    }
+  ],
+  "components": {
+    "tl_hub": {
+      "function": "Mounted on the driving shaft; carries the friction facings and springs.",
+      "construction": "Hub with flange and threaded end.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear on bush seat"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "tl_facings": {
+      "function": "Transmit torque by friction and slip on overload.",
+      "construction": "Friction linings.",
+      "material": "Non-asbestos organic / sintered.",
+      "operating_conditions": "Keep free of oil.",
+      "failure_modes": [
+        "Glazing, wear"
+      ],
+      "inspection": [
+        "Slip test"
+      ]
+    },
+    "tl_sprocket": {
+      "function": "Driven member that transmits power to the chain.",
+      "construction": "Sprocket on a bush between the facings.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Tooth wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "tl_springs": {
+      "function": "Provide the clamping force that sets the slip torque.",
+      "construction": "Pressure plate, Belleville springs and adjusting nut with lock screws.",
+      "material": "Spring steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fatigue"
+      ],
+      "inspection": [
+        "Re-set torque"
+      ]
+    },
+    "tl_chain": {
+      "function": "Carries power to the driven machine.",
+      "construction": "Roller chain.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear elongation"
+      ],
+      "inspection": [
+        "Measure elongation"
+      ]
+    },
+    "tl_bearings": {
+      "function": "Support the shaft.",
+      "construction": "Bearings.",
+      "material": "Cast iron.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "—"
+      ]
+    }
+  }
+}

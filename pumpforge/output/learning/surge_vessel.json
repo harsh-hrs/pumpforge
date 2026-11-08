@@ -1,0 +1,584 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "surge_vessel",
+ "no": 105,
+ "title": "Surge Vessel",
+ "model_title": "Surge Vessel (Air-Cushion Type) for Water-Hammer Protection",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A surge vessel protects pipelines from water hammer. When a pump trips or a valve closes, a pressure wave travels along the pipe; the vessel's compressed-air cushion lets water flow out or in, damping the pressure swings and preventing vacuum.",
+   "applications": [
+    "Pumped water mains and irrigation lines",
+    "Sewage rising mains",
+    "Cooling water and fire water systems",
+    "Oil pipelines (bladder type)"
+   ],
+   "key_points": [
+    "Sized by transient (surge) analysis",
+    "Air volume must be maintained",
+    "Close to the pump discharge",
+    "Bladder types avoid air dissolving"
+   ],
+   "classification": {
+    "family": "Pressure vessel (transient protection)",
+    "type": "Air-cushion surge vessel"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A surge vessel protects a pipeline from water hammer. When a pump trips or a valve closes quickly, pressure waves travel along the pipe; the vessel's compressed-air cushion lets water flow in or out, damping the pressure rise and preventing column separation (vacuum)."
+  },
+  "model_3d": {
+   "asset": "glb/surge_vessel.glb",
+   "metadata": "meta/surge_vessel.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 12398,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "In normal running the air cushion is compressed to line pressure.",
+    "When the pump trips, water flows out of the vessel into the main, preventing vacuum.",
+    "When the reverse wave returns, water flows back in and compresses the air."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "In normal running the air cushion is compressed to line pressure.",
+     "part": "air_cushion",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When the pump trips, water flows out of the vessel into the main, preventing vacuum.",
+     "part": "water",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "When the reverse wave returns, water flows back in and compresses the air.",
+     "part": "connections",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The compressor tops up air that dissolves over time.",
+     "part": "air_compressor",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pressure envelope (max/min) along the pipeline with and without protection."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "surge_vessel_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/surge_vessel.json#components",
+   "key_components": "Vessel, air cushion, level gauge, compressor connection",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Surge Vessel (pressure vessel)",
+     "info_ref": "sg_vessel",
+     "function": "Holds water and the air cushion.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "supports",
+     "name": "Support Legs",
+     "info_ref": "sg_supports",
+     "function": "Supports.",
+     "material": "Steel."
+    },
+    {
+     "id": "water",
+     "name": "Water (level oscillates during a surge)",
+     "info_ref": "sg_water",
+     "function": "Water (oscillating level).",
+     "material": "—"
+    },
+    {
+     "id": "air_cushion",
+     "name": "Compressed Air Cushion (expands/compresses to absorb surges)",
+     "info_ref": "sg_air",
+     "function": "Compressible cushion that absorbs surges.",
+     "material": "Air."
+    },
+    {
+     "id": "connections",
+     "name": "Connection to Pipeline, Level Gauge, Air Make-up, Safety Valve & Gauge",
+     "info_ref": "sg_connections",
+     "function": "Connection to main, gauges, air and safety valve.",
+     "material": "Steel."
+    },
+    {
+     "id": "air_compressor",
+     "name": "Air Compressor (maintains air volume)",
+     "info_ref": "sg_compressor",
+     "function": "Tops up the air volume.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "0.5 – 200 m³",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 40",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "0 – 50",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Total vessel volume",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check water level/air volume.",
+     "part": "water",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Service compressor; test relief valve.",
+     "part": "air_compressor",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Internal inspection.",
+     "part": "vessel"
+    }
+   ],
+   "lubrication": [
+    "Compressor oil per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of air cushion",
+     "category": "priming",
+     "symptoms": [
+      "Vessel full of water; surges unprotected"
+     ],
+     "causes": [
+      "Air dissolved, compressor fault"
+     ],
+     "remedies": [
+      "Restore air; repair compressor"
+     ],
+     "part": "air_cushion"
+    },
+    {
+     "problem": "Over-pressure",
+     "category": "performance",
+     "symptoms": [
+      "High transient pressures"
+     ],
+     "causes": [
+      "Undersized/incorrect pre-charge"
+     ],
+     "remedies": [
+      "Re-check surge analysis"
+     ],
+     "part": "vessel"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Surge Vessel — Introduction",
+    "type": "in_app_tour",
+    "model": "surge_vessel.glb",
+    "duration_s": 47.5,
+    "script": [
+     {
+      "narration": "This module introduces the Surge Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A surge vessel protects pipelines from water hammer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "When a pump trips or a valve closes, a pressure wave travels along the pipe; the vessel's compressed-air cushion lets water flow out or in, damping the pressure swings and preventing vacuum.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include pumped water mains and irrigation lines; sewage rising mains; cooling water and fire water systems; oil pipelines (bladder type).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Surge Vessel — Operation",
+    "type": "in_app_tour",
+    "model": "surge_vessel.glb",
+    "duration_s": 28.4,
+    "script": [
+     {
+      "narration": "How the Surge Vessel works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "In normal running the air cushion is compressed to line pressure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "air_cushion",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When the pump trips, water flows out of the vessel into the main, preventing vacuum.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "water",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "When the reverse wave returns, water flows back in and compresses the air.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "connections",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The compressor tops up air that dissolves over time.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_compressor",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Surge Vessel — Maintenance",
+    "type": "in_app_tour",
+    "model": "surge_vessel.glb",
+    "duration_s": 35.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Surge Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check water level/air volume.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Service compressor; test relief valve.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_compressor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Internal inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of air cushion: vessel full of water; surges unprotected. Common cause: air dissolved, compressor fault.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "air_cushion",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for over-pressure: high transient pressures. Common cause: undersized/incorrect pre-charge.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What causes water hammer?",
+     "options": [
+      "Slow valve closure",
+      "Sudden change in flow (pump trip, fast valve closure)",
+      "Low temperature",
+      "Pipe colour"
+     ],
+     "answer": 1,
+     "explanation": "Transient.",
+     "level": "basic"
+    },
+    {
+     "question": "What absorbs the surge?",
+     "options": [
+      "The vessel steel",
+      "The compressed air cushion",
+      "The pump",
+      "The ground"
+     ],
+     "answer": 1,
+     "explanation": "Gas spring.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is air topped up?",
+     "options": [
+      "To cool water",
+      "Air dissolves into water over time",
+      "To clean",
+      "Not needed"
+     ],
+     "answer": 1,
+     "explanation": "Maintain volume.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds water and the air cushion.\"",
+     "options": [
+      "Connection to Pipeline, Level Gauge, Air Make-up, Safety Valve & Gauge",
+      "Support Legs",
+      "Compressed Air Cushion (expands/compresses to absorb surges)",
+      "Surge Vessel (pressure vessel)"
+     ],
+     "answer": 3,
+     "explanation": "Surge Vessel (pressure vessel): Holds water and the air cushion.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports.\"",
+     "options": [
+      "Support Legs",
+      "Surge Vessel (pressure vessel)",
+      "Compressed Air Cushion (expands/compresses to absorb surges)",
+      "Air Compressor (maintains air volume)"
+     ],
+     "answer": 0,
+     "explanation": "Support Legs: Supports.",
+     "level": "basic",
+     "part": "supports",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Water (oscillating level).\"",
+     "options": [
+      "Connection to Pipeline, Level Gauge, Air Make-up, Safety Valve & Gauge",
+      "Surge Vessel (pressure vessel)",
+      "Water (level oscillates during a surge)",
+      "Compressed Air Cushion (expands/compresses to absorb surges)"
+     ],
+     "answer": 2,
+     "explanation": "Water (level oscillates during a surge): Water (oscillating level).",
+     "level": "basic",
+     "part": "water",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

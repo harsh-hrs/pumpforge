@@ -1,0 +1,618 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vibration_monitoring_system",
+ "no": 265,
+ "title": "Vibration Monitoring System",
+ "model_title": "Vibration Monitoring System — Accelerometers, Proximity Probes, Keyphasor & Monitor Rack (API 670 style)",
+ "category": "14 · Mechanical Components & Maintenance",
+ "phase": 12,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vibration monitoring system measures machine vibration continuously: accelerometers on bearing housings (horizontal, vertical, axial), proximity probes measuring shaft movement in oil-film bearings, and a keyphasor for phase. A monitor rack compares readings with alert and trip limits and feeds trends to the control system.",
+   "applications": [
+    "Critical turbomachinery protection (API 670)",
+    "Pumps, fans and motors in process plants"
+   ],
+   "key_points": [
+    "ISO 20816 zones A–D",
+    "1× unbalance, 2× misalignment",
+    "Bearing defect frequencies",
+    "Voting & delays avoid false trips"
+   ],
+   "classification": {
+    "family": "Condition monitoring",
+    "type": "Permanently installed protection / monitoring system"
+   },
+   "hi_family": "mechanical_components",
+   "summary": "A vibration monitoring system measures machine vibration continuously with accelerometers on bearing housings and proximity probes at shafts, and a monitor rack compares readings with alert and trip limits."
+  },
+  "model_3d": {
+   "asset": "glb/vibration_monitoring_system.glb",
+   "metadata": "meta/vibration_monitoring_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3970,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Accelerometers sense casing vibration.",
+    "Proximity probes sense shaft motion.",
+    "Signals go to the rack."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Accelerometers sense casing vibration.",
+     "part": "accelerometers",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Proximity probes sense shaft motion.",
+     "part": "proximity_probes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Signals go to the rack.",
+     "part": "monitor_rack",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Alerts and trips protect the machine.",
+     "part": "monitor_rack",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Vibration trend vs time with alert / danger limits."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vibration_monitoring_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "vibration_monitoring_system_pressure.glb",
+     "title": "Severity zones guide action",
+     "description": "Casing vibration (velocity, mm/s RMS, 10–1000 Hz) is judged against ISO 20816 zones A (new) → B (unrestricted) → C (limited time) → D (damage likely); shaft displacement from proximity probes (µm pk-pk) is used on oil-film bearing machines. Trends and spectra reveal causes: 1× running speed — unbalance; 2× and axial — misalignment; bearing defect frequencies (BPFO / BPFI) — rolling bearing damage; sub-synchronous — oil whirl. The rack raises alerts and trips per API 670 logic (voting, delays).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/vibration_monitoring_system.json#components",
+   "key_components": "Accelerometers, proximity probes, keyphasor, junction box, monitor rack",
+   "parts": [
+    {
+     "id": "baseplate",
+     "name": "Common Baseplate (grouted)",
+     "info_ref": "al_base",
+     "function": "Support both machines.",
+     "material": "Steel."
+    },
+    {
+     "id": "pump",
+     "name": "Pump (stationary machine — reference) with bearing housing",
+     "info_ref": "al_machines",
+     "function": "Driven and driver machines.",
+     "material": "—"
+    },
+    {
+     "id": "motor",
+     "name": "Motor",
+     "info_ref": "al_machines",
+     "function": "Driven and driver machines.",
+     "material": "—"
+    },
+    {
+     "id": "shaft_coupling",
+     "name": "Shaft & Coupling with Keyphasor Notch (once-per-turn reference)",
+     "info_ref": "vm_shaft",
+     "function": "Rotating element with reference.",
+     "material": "Steel."
+    },
+    {
+     "id": "accelerometers",
+     "name": "Accelerometers / Velocity Transducers at each Bearing (H, V and A directions)",
+     "info_ref": "vm_sensors",
+     "function": "Measure casing vibration.",
+     "material": "Stainless."
+    },
+    {
+     "id": "proximity_probes",
+     "name": "X–Y Proximity Probes (shaft relative displacement) & Keyphasor Probe",
+     "info_ref": "vm_probes",
+     "function": "Measure shaft displacement.",
+     "material": "—"
+    },
+    {
+     "id": "monitor_rack",
+     "name": "Junction Box, Cable & Monitor Rack (alarm / trip relays to DCS & shutdown system)",
+     "info_ref": "vm_rack",
+     "function": "Process, alarm, trip.",
+     "material": "—"
+    },
+    {
+     "id": "signals",
+     "name": "Vibration signals to the monitor",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Machines of any size",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "Up to ≈ 20,000+",
+     "unit": "rpm"
+    },
+    "load_capacity": {
+     "typical_range": "Velocity mm/s RMS; displacement µm pk-pk",
+     "unit": "—"
+    },
+    "operating_conditions": {
+     "typical_range": "Frequency range ≈ 10–1000 Hz (velocity)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Sensors by bearing type and machine criticality; rack per API 670."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "part_number": null,
+    "datasheet": null,
+    "rated_point": {
+     "speed_rpm": null,
+     "load_or_torque": null,
+     "temperature": null,
+     "pressure": null
+    },
+    "status": "empty — fill from the component datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 20816",
+    "API 670"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Machine on a stable base; for alignment, check and correct soft foot before measuring."
+   ],
+   "alignment": [
+    "Mount brackets / sensors rigidly and square; check bracket sag (dial) or warm-up (laser)."
+   ],
+   "piping": [
+    "Cables / wireless links routed safely away from rotating parts."
+   ],
+   "commissioning": [
+    "Verify sensor function and calibration; record as-found and as-left values."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Review alarms and trends.",
+     "part": "monitor_rack",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check sensor mounting and gap voltages.",
+     "part": "proximity_probes",
+     "interval": "at outage"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Loop-test channels and trips.",
+     "part": "monitor_rack"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "False trip",
+     "category": "performance",
+     "symptoms": [
+      "Trip without real vibration"
+     ],
+     "causes": [
+      "Loose connector, single-channel logic"
+     ],
+     "remedies": [
+      "Fix wiring; 2oo2 voting"
+     ],
+     "part": "monitor_rack"
+    },
+    {
+     "problem": "Sensor detached",
+     "category": "performance",
+     "symptoms": [
+      "Flat or noisy signal"
+     ],
+     "causes": [
+      "Mounting failure"
+     ],
+     "remedies": [
+      "Remount, stud"
+     ],
+     "part": "accelerometers"
+    }
+   ],
+   "safety": [
+    "Never bypass trips without authorised procedure."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vibration Monitoring System — Introduction",
+    "type": "in_app_tour",
+    "model": "vibration_monitoring_system.glb",
+    "duration_s": 47.7,
+    "script": [
+     {
+      "narration": "This module introduces the Vibration Monitoring System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vibration monitoring system measures machine vibration continuously: accelerometers on bearing housings (horizontal, vertical, axial), proximity probes measuring shaft movement in oil-film bearings, and a keyphasor for phase.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A monitor rack compares readings with alert and trip limits and feeds trends to the control system.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include critical turbomachinery protection (API 670); pumps, fans and motors in process plants.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Shaft & Coupling with Keyphasor Notch (once-per-turn reference).",
+      "duration_s": 6.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vibration Monitoring System — Operation",
+    "type": "in_app_tour",
+    "model": "vibration_monitoring_system.glb",
+    "duration_s": 40.9,
+    "script": [
+     {
+      "narration": "How the Vibration Monitoring System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Accelerometers sense casing vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "accelerometers",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Proximity probes sense shaft motion.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "proximity_probes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Signals go to the rack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_rack",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Alerts and trips protect the machine.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_rack",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Casing vibration (velocity, mm/s RMS, 10–1000 Hz) is judged against ISO 20816 zones A (new) → B (unrestricted) → C (limited time) → D (damage likely); shaft displacement from proximity probes (µm pk-pk) is used on oil-film bearing machines.",
+      "duration_s": 16.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vibration Monitoring System — Maintenance",
+    "type": "in_app_tour",
+    "model": "vibration_monitoring_system.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vibration Monitoring System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Review alarms and trends.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_rack",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check sensor mounting and gap voltages.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "proximity_probes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Loop-test channels and trips.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_rack",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for false trip: trip without real vibration. Common cause: loose connector, single-channel logic.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "monitor_rack",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sensor detached: flat or noisy signal. Common cause: mounting failure.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "accelerometers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Dominant 1× vibration suggests…",
+     "options": [
+      "Unbalance",
+      "Misalignment",
+      "Bearing defect",
+      "Cavitation"
+     ],
+     "answer": 0,
+     "explanation": "Unbalance.",
+     "level": "basic"
+    },
+    {
+     "question": "Proximity probes measure…",
+     "options": [
+      "Shaft relative displacement",
+      "Temperature",
+      "Pressure",
+      "Flow"
+     ],
+     "answer": 0,
+     "explanation": "Displacement.",
+     "level": "basic"
+    },
+    {
+     "question": "Standard for protection systems?",
+     "options": [
+      "API 670",
+      "API 610",
+      "ISO 5167",
+      "NFPA 20"
+     ],
+     "answer": 0,
+     "explanation": "API 670.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Support both machines.\"",
+     "options": [
+      "Pump (stationary machine — reference) with bearing housing",
+      "Shaft & Coupling with Keyphasor Notch (once-per-turn reference)",
+      "Common Baseplate (grouted)",
+      "Accelerometers / Velocity Transducers at each Bearing (H, V and A directions)"
+     ],
+     "answer": 2,
+     "explanation": "Common Baseplate (grouted): Support both machines.",
+     "level": "basic",
+     "part": "baseplate",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Driven and driver machines.\"",
+     "options": [
+      "Vibration signals to the monitor",
+      "Common Baseplate (grouted)",
+      "Shaft & Coupling with Keyphasor Notch (once-per-turn reference)",
+      "Pump (stationary machine — reference) with bearing housing"
+     ],
+     "answer": 3,
+     "explanation": "Pump (stationary machine — reference) with bearing housing: Driven and driver machines.",
+     "level": "basic",
+     "part": "pump",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotating element with reference.\"",
+     "options": [
+      "Vibration signals to the monitor",
+      "Common Baseplate (grouted)",
+      "Pump (stationary machine — reference) with bearing housing",
+      "Shaft & Coupling with Keyphasor Notch (once-per-turn reference)"
+     ],
+     "answer": 3,
+     "explanation": "Shaft & Coupling with Keyphasor Notch (once-per-turn reference): Rotating element with reference.",
+     "level": "basic",
+     "part": "shaft_coupling",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

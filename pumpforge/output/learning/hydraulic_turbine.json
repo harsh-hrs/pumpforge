@@ -1,0 +1,625 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydraulic_turbine",
+ "no": 75,
+ "title": "Hydraulic Turbine",
+ "model_title": "Francis Hydraulic Turbine (Vertical Shaft) with Generator",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A Francis turbine is a reaction water turbine. Water from the penstock fills the spiral casing, passes the stay vanes and adjustable wicket gates and flows inward through the runner, turning it, then leaves down the draft tube. The gates control flow; the vertical shaft drives a generator.",
+   "applications": [
+    "Hydropower plants (medium heads ~ 40–600 m)",
+    "Pumped storage (reversible pump-turbines)",
+    "Small hydro"
+   ],
+   "key_points": [
+    "Reaction turbine — full of water, pressure drops across the runner",
+    "Wicket gates control flow and power",
+    "Draft tube recovers energy",
+    "Cavitation if set too high"
+   ],
+   "classification": {
+    "family": "Hydraulic turbine (reaction)",
+    "type": "Francis, vertical shaft, spiral casing"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A Francis hydraulic turbine converts the pressure and velocity of water into shaft power. Water from the penstock fills the spiral casing, passes the stay vanes and the adjustable wicket gates — which set the flow and give it swirl — and flows inward through the runner, turning it. The water leaves downward through the draft tube, which recovers energy. The vertical shaft drives a generator above."
+  },
+  "model_3d": {
+   "asset": "glb/hydraulic_turbine.glb",
+   "metadata": "meta/hydraulic_turbine.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 19774,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water enters the spiral casing from the penstock.",
+    "Stay vanes and wicket gates guide the water and set the flow.",
+    "Water flows inward through the runner blades, turning the runner."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water enters the spiral casing from the penstock.",
+     "part": "spiral_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Stay vanes and wicket gates guide the water and set the flow.",
+     "part": "wicket_gates",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water flows inward through the runner blades, turning the runner.",
+     "part": "runner",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The water leaves downward through the draft tube, which recovers kinetic energy.",
+     "part": "draft_tube",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The shaft turns the generator above.",
+     "part": "generator_stator",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Efficiency hill chart vs flow and head; peak ~ 90–95 % near design point; part-load draft-tube vortex."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydraulic_turbine_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/hydraulic_turbine.json#components",
+   "key_components": "Spiral casing, stay vanes, wicket gates, Francis runner, draft tube, generator",
+   "parts": [
+    {
+     "id": "spiral_casing",
+     "name": "Spiral Casing (Scroll) & Inlet Pipe",
+     "info_ref": "ht_spiral",
+     "function": "Distributes water evenly around the runner.",
+     "material": "Welded steel plate, embedded in concrete."
+    },
+    {
+     "id": "stay_ring",
+     "name": "Stay Ring & Stay Vanes (fixed)",
+     "info_ref": "ht_stay_vanes",
+     "function": "Fixed vanes that carry structural loads and guide the water.",
+     "material": "Steel."
+    },
+    {
+     "id": "wicket_gates",
+     "name": "Wicket Gates (Guide Vanes) — open/close to control flow",
+     "info_ref": "ht_wicket_gates",
+     "function": "Control the flow and set the inflow angle.",
+     "material": "Stainless/bronze."
+    },
+    {
+     "id": "runner",
+     "name": "Francis Runner (crown, band, 13 blades), Shaft & Generator Rotor",
+     "info_ref": "ht_runner",
+     "function": "Turns the water energy into torque.",
+     "material": "Cast/fabricated 13Cr-4Ni stainless."
+    },
+    {
+     "id": "draft_tube",
+     "name": "Draft Tube (cone, elbow & diffuser)",
+     "info_ref": "ht_draft_tube",
+     "function": "Slows the outflow and recovers kinetic energy (suction head).",
+     "material": "Steel liner / concrete."
+    },
+    {
+     "id": "head_cover",
+     "name": "Head Cover, Gate Operating Ring & Turbine Guide Bearing",
+     "info_ref": "ht_head_cover",
+     "function": "Closes the top of the runner chamber and holds the guide bearing and gate mechanism.",
+     "material": "Steel."
+    },
+    {
+     "id": "generator_stator",
+     "name": "Generator Stator, Brackets & Thrust Bearing",
+     "info_ref": "ht_generator",
+     "function": "Converts shaft power into electricity.",
+     "material": "Steel, copper."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Runner Ø 0.3 – 10 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.1 – 800 000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 75 – 1000 (synchronous speeds)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Flow 0.1 – 1000 m³/s",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "head": {
+     "typical_range": "~ 40 – 600",
+     "unit": "m"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Embedded in reinforced concrete; spiral casing and draft tube liner concreted in place."
+   ],
+   "alignment": [
+    "Shaft line plumb and centred to tight limits; guide bearing clearances set."
+   ],
+   "piping": [
+    "Support suction and discharge piping independently so no pipe strain reaches the casing; fit flexible connections where vibration or thermal movement is expected.",
+    "Install inlet filters/strainers and isolation valves; add drains and vents."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor vibration, bearing temperatures, gate position and head-cover pressure.",
+     "part": "head_cover",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check wicket gate shear pins and bushings.",
+     "part": "wicket_gates",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Repair cavitation damage on runner; inspect draft tube.",
+     "part": "runner",
+     "interval": "major outage"
+    }
+   ],
+   "lubrication": [
+    "Oil-lubricated guide and thrust bearings; greased gate bushings (or self-lubricated)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Cavitation erosion",
+     "category": "cavitation",
+     "symptoms": [
+      "Pitting on blades, noise"
+     ],
+     "causes": [
+      "Low tailwater/setting, off-design operation"
+     ],
+     "remedies": [
+      "Weld repair with stainless; operate in good zone"
+     ],
+     "part": "runner"
+    },
+    {
+     "problem": "Draft-tube pressure pulsation",
+     "category": "pulsation",
+     "symptoms": [
+      "Vibration at part load"
+     ],
+     "causes": [
+      "Vortex rope"
+     ],
+     "remedies": [
+      "Air admission, avoid rough zone"
+     ],
+     "part": "draft_tube"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Turbine — Introduction",
+    "type": "in_app_tour",
+    "model": "hydraulic_turbine.glb",
+    "duration_s": 54.3,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A Francis turbine is a reaction water turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water from the penstock fills the spiral casing, passes the stay vanes and adjustable wicket gates and flows inward through the runner, turning it, then leaves down the draft tube.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The gates control flow; the vertical shaft drives a generator.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include hydropower plants (medium heads ~ 40–600 m); pumped storage (reversible pump-turbines); small hydro.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Spiral Casing (Scroll) & Inlet Pipe, Francis Runner (crown, band, 13 blades), Shaft & Generator Rotor, Draft Tube (cone, elbow & diffuser).",
+      "duration_s": 10.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Turbine — Operation",
+    "type": "in_app_tour",
+    "model": "hydraulic_turbine.glb",
+    "duration_s": 30.4,
+    "script": [
+     {
+      "narration": "How the Hydraulic Turbine works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water enters the spiral casing from the penstock.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spiral_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Stay vanes and wicket gates guide the water and set the flow.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "wicket_gates",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water flows inward through the runner blades, turning the runner.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "runner",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The water leaves downward through the draft tube, which recovers kinetic energy.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "draft_tube",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The shaft turns the generator above.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "generator_stator",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Turbine — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydraulic_turbine.glb",
+    "duration_s": 34.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor vibration, bearing temperatures, gate position and head-cover pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "head_cover",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check wicket gate shear pins and bushings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "wicket_gates",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Repair cavitation damage on runner; inspect draft tube.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "runner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cavitation erosion: pitting on blades, noise. Common cause: low tailwater/setting, off-design operation.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "runner",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for draft-tube pressure pulsation: vibration at part load. Common cause: vortex rope.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "draft_tube",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What do the wicket gates do?",
+     "options": [
+      "Seal the shaft",
+      "Control the flow and inflow angle",
+      "Cool the generator",
+      "Store water"
+     ],
+     "answer": 1,
+     "explanation": "They are the turbine \"throttle\".",
+     "level": "basic"
+    },
+    {
+     "question": "Francis turbines are best for…",
+     "options": [
+      "Very high heads > 1000 m",
+      "Medium heads",
+      "Very low heads < 5 m",
+      "Wind"
+     ],
+     "answer": 1,
+     "explanation": "Pelton for high, Kaplan for low.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is there a draft tube?",
+     "options": [
+      "To recover kinetic energy of the outflow",
+      "To add water",
+      "To lift the runner",
+      "Decoration"
+     ],
+     "answer": 0,
+     "explanation": "Lowers runner outlet pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Distributes water evenly around the runner.\"",
+     "options": [
+      "Head Cover, Gate Operating Ring & Turbine Guide Bearing",
+      "Generator Stator, Brackets & Thrust Bearing",
+      "Spiral Casing (Scroll) & Inlet Pipe",
+      "Stay Ring & Stay Vanes (fixed)"
+     ],
+     "answer": 2,
+     "explanation": "Spiral Casing (Scroll) & Inlet Pipe: Distributes water evenly around the runner.",
+     "level": "basic",
+     "part": "spiral_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Fixed vanes that carry structural loads and guide the water.\"",
+     "options": [
+      "Wicket Gates (Guide Vanes) — open/close to control flow",
+      "Francis Runner (crown, band, 13 blades), Shaft & Generator Rotor",
+      "Draft Tube (cone, elbow & diffuser)",
+      "Stay Ring & Stay Vanes (fixed)"
+     ],
+     "answer": 3,
+     "explanation": "Stay Ring & Stay Vanes (fixed): Fixed vanes that carry structural loads and guide the water.",
+     "level": "basic",
+     "part": "stay_ring",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Control the flow and set the inflow angle.\"",
+     "options": [
+      "Draft Tube (cone, elbow & diffuser)",
+      "Head Cover, Gate Operating Ring & Turbine Guide Bearing",
+      "Generator Stator, Brackets & Thrust Bearing",
+      "Wicket Gates (Guide Vanes) — open/close to control flow"
+     ],
+     "answer": 3,
+     "explanation": "Wicket Gates (Guide Vanes) — open/close to control flow: Control the flow and set the inflow angle.",
+     "level": "basic",
+     "part": "wicket_gates",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,694 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "flare_stack",
+  "title": "Elevated Flare Stack — Water-Seal Drum, Riser, Molecular Seal, Steam-Assisted Tip & Pilots",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 272,
+    "phase": 13,
+    "eq_id": "EQ-350",
+    "subcategory": "Gas Disposal",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "flare_stack_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "flare_stack_temperature.glb",
+      "title": "Radiation sets the stack height",
+      "description": "A flare safely burns gas released by relief valves and blowdown. Its height and location are set so thermal radiation at grade stays within limits (e.g. ≈ 1.58 kW/m² for continuous exposure of personnel, higher for short emergency exposure — API 521, verify edition). Steam (or air) injected at the tip mixes air into the flame for smokeless burning; continuous pilots guarantee ignition; the water seal and purge gas with a molecular seal stop air entering and flashback.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flare_gas",
+      "kind": "flue_gas",
+      "radius": 0.04,
+      "points": [
+        [
+          -3.3,
+          1.2,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.2,
+          -0.0
+        ],
+        [
+          -1.4,
+          0.4,
+          -0.0
+        ],
+        [
+          -0.8,
+          0.85,
+          -0.05
+        ],
+        [
+          -0.25,
+          1.05,
+          -0.0
+        ],
+        [
+          0.6,
+          1.05,
+          -0.0
+        ],
+        [
+          0.6,
+          6.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          1.4,
+          0.3,
+          -0.2
+        ],
+        [
+          1.4,
+          6.45,
+          -0.2
+        ],
+        [
+          0.85,
+          6.45,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 14178,
+    "parts": 12
+  },
+  "summary": "A flare stack safely burns hydrocarbon gas released by relief and blowdown. Gas passes a water-seal drum and rises up the stack to a tip where pilots ignite it; steam injection makes the flame smokeless.",
+  "classification": {
+    "family": "Gas disposal",
+    "type": "Elevated steam-assisted flare"
+  },
+  "model_configuration": {
+    "animation": "Flame and pilots flicker; gas bubbles through the seal"
+  },
+  "standards": [
+    {
+      "id": "API 520 Pt I / II",
+      "title": "Sizing, selection and installation of pressure-relieving devices",
+      "relevance": "PSV sizing and installation.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 521 / ISO 23251",
+      "title": "Pressure-relieving and depressuring systems",
+      "relevance": "Relief, flare and KO drum design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 521",
+    "API 537"
+  ],
+  "parts": [
+    {
+      "id": "seal_drum",
+      "name": "Liquid (Water) Seal Drum — prevents flashback and air ingress",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "seal_drum__back",
+        "seal_drum__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -2.025,
+        0.0,
+        -0.45
+      ],
+      "bbox_max": [
+        0.025,
+        1.05,
+        0.45
+      ],
+      "label_anchor": [
+        -1.0,
+        0.525,
+        0.45
+      ],
+      "center": [
+        -1.0,
+        0.525,
+        -0.0
+      ],
+      "info_ref": "fl_seal"
+    },
+    {
+      "id": "seal_water",
+      "name": "Seal Water",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.8,
+        0.16,
+        -0.42824
+      ],
+      "bbox_max": [
+        -0.2,
+        0.5,
+        -0.0
+      ],
+      "label_anchor": [
+        -1.0,
+        0.33,
+        -0.0
+      ],
+      "center": [
+        -1.0,
+        0.33,
+        -0.21412
+      ],
+      "info_ref": "fl_seal"
+    },
+    {
+      "id": "inlet_dip_leg",
+      "name": "Flare Header Inlet & Dip Leg (gas bubbles through the water seal)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "dip"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -3.2,
+        0.4,
+        -0.12
+      ],
+      "bbox_max": [
+        -1.28,
+        1.32,
+        0.12
+      ],
+      "label_anchor": [
+        -2.24,
+        0.86,
+        0.12
+      ],
+      "center": [
+        -2.24,
+        0.86,
+        -0.0
+      ],
+      "info_ref": "fl_seal"
+    },
+    {
+      "id": "riser",
+      "name": "Flare Riser / Stack (self-supported)",
+      "group": "stack",
+      "section_role": "split",
+      "nodes": [
+        "riser__back",
+        "riser__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.25,
+        0.0,
+        -0.5
+      ],
+      "bbox_max": [
+        1.1,
+        6.0,
+        0.5
+      ],
+      "label_anchor": [
+        0.425,
+        3.0,
+        0.5
+      ],
+      "center": [
+        0.425,
+        3.0,
+        -0.0
+      ],
+      "info_ref": "fl_riser"
+    },
+    {
+      "id": "molecular_seal",
+      "name": "Molecular (Gas) Seal — reduces purge gas needed to keep air out",
+      "group": "stack",
+      "section_role": "keep",
+      "nodes": [
+        "molecular_seal.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.34,
+        5.0,
+        -0.26
+      ],
+      "bbox_max": [
+        0.86,
+        5.64,
+        0.26
+      ],
+      "label_anchor": [
+        0.6,
+        5.32,
+        0.26
+      ],
+      "center": [
+        0.6,
+        5.32,
+        -0.0
+      ],
+      "info_ref": "fl_riser"
+    },
+    {
+      "id": "flare_tip",
+      "name": "Flare Tip with Steam Ring & Injectors (smokeless burning)",
+      "group": "tip",
+      "section_role": "keep",
+      "nodes": [
+        "flare_tip.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        0.325,
+        0.3,
+        -0.275
+      ],
+      "bbox_max": [
+        1.43,
+        6.55,
+        0.275
+      ],
+      "label_anchor": [
+        0.8775,
+        3.425,
+        0.275
+      ],
+      "center": [
+        0.8775,
+        3.425,
+        -0.0
+      ],
+      "info_ref": "fl_tip"
+    },
+    {
+      "id": "pilots_ignition",
+      "name": "Continuous Pilots, Flame-Front Generator / Ignition Panel & Pilot Gas",
+      "group": "ignition",
+      "section_role": "keep",
+      "nodes": [
+        "pilots_ignition.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.2,
+        -0.4
+      ],
+      "bbox_min": [
+        0.36651,
+        0.0,
+        -0.18673
+      ],
+      "bbox_max": [
+        2.45,
+        6.65,
+        0.27164
+      ],
+      "label_anchor": [
+        1.40826,
+        3.325,
+        0.27164
+      ],
+      "center": [
+        1.40826,
+        3.325,
+        0.04245
+      ],
+      "info_ref": "fl_pilots"
+    },
+    {
+      "id": "flare_flame",
+      "name": "Flare Flame",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "flare_flamef"
+      ],
+      "pivot": [
+        0.6,
+        6.55,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.35552,
+        6.55,
+        -0.3
+      ],
+      "bbox_max": [
+        1.04627,
+        8.10223,
+        0.3
+      ],
+      "label_anchor": [
+        0.70089,
+        7.32611,
+        0.3
+      ],
+      "center": [
+        0.70089,
+        7.32611,
+        -0.0
+      ],
+      "info_ref": "fl_tip"
+    },
+    {
+      "id": "pilot_flame_1",
+      "name": "Pilot Flame 1",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "pilot_flame_1f"
+      ],
+      "pivot": [
+        0.82105,
+        6.65,
+        -0.09346
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.79105,
+        6.65,
+        -0.12346
+      ],
+      "bbox_max": [
+        0.85105,
+        6.83,
+        -0.06346
+      ],
+      "label_anchor": [
+        0.82105,
+        6.74,
+        -0.06346
+      ],
+      "center": [
+        0.82105,
+        6.74,
+        -0.09346
+      ],
+      "info_ref": "fl_pilots"
+    },
+    {
+      "id": "pilot_flame_2",
+      "name": "Pilot Flame 2",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "pilot_flame_2f"
+      ],
+      "pivot": [
+        0.40853,
+        6.65,
+        -0.14471
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.37853,
+        6.65,
+        -0.17471
+      ],
+      "bbox_max": [
+        0.43853,
+        6.83,
+        -0.11471
+      ],
+      "label_anchor": [
+        0.40853,
+        6.74,
+        -0.11471
+      ],
+      "center": [
+        0.40853,
+        6.74,
+        -0.14471
+      ],
+      "info_ref": "fl_pilots"
+    },
+    {
+      "id": "pilot_flame_3",
+      "name": "Pilot Flame 3",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "pilot_flame_3f"
+      ],
+      "pivot": [
+        0.57041,
+        6.65,
+        0.23817
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.54041,
+        6.65,
+        0.20817
+      ],
+      "bbox_max": [
+        0.60041,
+        6.83,
+        0.26817
+      ],
+      "label_anchor": [
+        0.57041,
+        6.74,
+        0.26817
+      ],
+      "center": [
+        0.57041,
+        6.74,
+        0.23817
+      ],
+      "info_ref": "fl_pilots"
+    },
+    {
+      "id": "bubbles",
+      "name": "Relief gas bubbling through the water seal",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "bubbles0",
+        "bubbles1",
+        "bubbles2",
+        "bubbles3",
+        "bubbles4",
+        "bubbles5"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.03,
+        -0.03,
+        -0.03
+      ],
+      "bbox_max": [
+        0.03,
+        0.03,
+        0.03
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.03
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fl_seal": {
+      "function": "Prevent flashback / air ingress.",
+      "construction": "Water-seal drum with dip leg.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fl_riser": {
+      "function": "Elevate the flame.",
+      "construction": "Riser, molecular seal.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fl_tip": {
+      "function": "Burn gas smokelessly.",
+      "construction": "Tip with steam ring.",
+      "material": "Stainless / high alloy.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Tip burn-back damage"
+      ],
+      "inspection": [
+        "Thermal imaging, inspection at outage"
+      ]
+    },
+    "fl_pilots": {
+      "function": "Guarantee ignition.",
+      "construction": "Pilots, flame-front generator.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Pilot out"
+      ],
+      "inspection": [
+        "Pilot monitoring (thermocouples / acoustic)"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

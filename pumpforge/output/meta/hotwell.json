@@ -1,0 +1,468 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "hotwell",
+  "title": "Condenser Hotwell (Surface Condenser Lower Section)",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 104,
+    "phase": 6,
+    "eq_id": "EQ-182",
+    "subcategory": "Storage Equipment",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "hotwell_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "exhaust_steam",
+      "kind": "steam",
+      "radius": 0.014,
+      "points": [
+        [
+          0.0,
+          1.9,
+          -0.1
+        ],
+        [
+          0.0,
+          1.45,
+          -0.1
+        ],
+        [
+          -0.3,
+          1.2,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "condensate_out",
+      "kind": "water",
+      "radius": 0.012,
+      "points": [
+        [
+          0.0,
+          0.4,
+          -0.1
+        ],
+        [
+          0.5,
+          0.3,
+          -0.05
+        ],
+        [
+          0.5,
+          -0.05,
+          -0.0
+        ],
+        [
+          1.45,
+          -0.05,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "cooling_water",
+      "kind": "flow_suction",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.3,
+          1.15,
+          0.25
+        ],
+        [
+          0.9,
+          1.15,
+          0.25
+        ],
+        [
+          0.9,
+          1.4,
+          -0.25
+        ],
+        [
+          -1.3,
+          1.4,
+          -0.25
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6178,
+    "parts": 6
+  },
+  "summary": "The hotwell is the collection box at the bottom of a steam surface condenser. Steam from the turbine condenses on the cold tubes; the condensate drips into the hotwell, which provides a small storage volume and suction head for the condensate extraction pumps. A level controller keeps the level steady.",
+  "classification": {
+    "family": "Condenser component / storage",
+    "type": "Surface-condenser hotwell"
+  },
+  "model_configuration": {
+    "animation": "Condensate drops fall into the hotwell; level fluctuates"
+  },
+  "standards": [
+    {
+      "id": "HEI 2629",
+      "title": "Standards for Steam Surface Condensers",
+      "relevance": "Design and hotwell storage.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "HEI condenser standards"
+  ],
+  "parts": [
+    {
+      "id": "condenser_shell",
+      "name": "Condenser Shell (lower part) — exhaust steam from turbine above",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "condenser_shell__back",
+        "condenser_shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        0.75,
+        -0.6
+      ],
+      "bbox_max": [
+        1.0,
+        1.75,
+        0.6
+      ],
+      "label_anchor": [
+        0.0,
+        1.25,
+        0.6
+      ],
+      "center": [
+        0.0,
+        1.25,
+        -0.0
+      ],
+      "info_ref": "hw_shell"
+    },
+    {
+      "id": "tube_bundle",
+      "name": "Cooling-Water Tube Bundle & Tube Sheets",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "tube_bundle.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.985,
+        0.75,
+        -0.58
+      ],
+      "bbox_max": [
+        0.985,
+        1.75,
+        0.58
+      ],
+      "label_anchor": [
+        0.0,
+        1.25,
+        0.58
+      ],
+      "center": [
+        0.0,
+        1.25,
+        -0.0
+      ],
+      "info_ref": "hw_tubes"
+    },
+    {
+      "id": "hotwell_box",
+      "name": "Hotwell (condensate collection box)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "hotwell_box__back",
+        "hotwell_box__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9,
+        0.15,
+        -0.5
+      ],
+      "bbox_max": [
+        0.9,
+        0.75,
+        0.5
+      ],
+      "label_anchor": [
+        0.0,
+        0.45,
+        0.5
+      ],
+      "center": [
+        0.0,
+        0.45,
+        -0.0
+      ],
+      "info_ref": "hw_box"
+    },
+    {
+      "id": "condensate",
+      "name": "Condensate (level held by the level controller)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lqb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.875,
+        0.155,
+        -0.475
+      ],
+      "bbox_max": [
+        0.875,
+        0.505,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.33,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.33,
+        -0.2375
+      ],
+      "info_ref": "hw_condensate"
+    },
+    {
+      "id": "connections",
+      "name": "Condensate Outlet to CEP, Level Transmitter, CW Inlet/Outlet, Air Extraction & Make-up",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "connections.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.2,
+        -0.12,
+        -0.75
+      ],
+      "bbox_max": [
+        1.4,
+        1.87,
+        0.73
+      ],
+      "label_anchor": [
+        0.1,
+        0.875,
+        0.73
+      ],
+      "center": [
+        0.1,
+        0.875,
+        -0.01
+      ],
+      "info_ref": "hw_connections"
+    },
+    {
+      "id": "drops",
+      "name": "Condensate Droplets (from tubes)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "drops0",
+        "drops1",
+        "drops2",
+        "drops3",
+        "drops4",
+        "drops5",
+        "drops6",
+        "drops7",
+        "drops8",
+        "drops9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        -0.014,
+        -0.014
+      ],
+      "bbox_max": [
+        0.014,
+        0.014,
+        0.014
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.014
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hw_shell": {
+      "function": "Encloses the condensing steam.",
+      "construction": "Fabricated shell.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Under vacuum.",
+      "failure_modes": [
+        "Air in-leakage"
+      ],
+      "inspection": [
+        "Helium leak test"
+      ]
+    },
+    "hw_tubes": {
+      "function": "Condense the steam with cooling water inside.",
+      "construction": "Tube bundle and tube sheets.",
+      "material": "Stainless/titanium/Cu-Ni.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Tube leaks"
+      ],
+      "inspection": [
+        "Eddy current"
+      ]
+    },
+    "hw_box": {
+      "function": "Collects condensate.",
+      "construction": "Box below the bundle.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hw_condensate": {
+      "function": "Condensate (level animated).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hw_connections": {
+      "function": "Outlet to CEP, level, CW, air extraction, make-up.",
+      "construction": "Nozzles.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

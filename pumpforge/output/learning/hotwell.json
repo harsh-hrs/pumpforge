@@ -1,0 +1,591 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hotwell",
+ "no": 104,
+ "title": "Hotwell",
+ "model_title": "Condenser Hotwell (Surface Condenser Lower Section)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The hotwell is the condensate collection box under a steam surface condenser. Turbine exhaust steam condenses on cold tubes, drips into the hotwell, and the condensate extraction pumps draw it out. The hotwell gives a little storage and the suction head for those pumps; a level controller holds the level.",
+   "applications": [
+    "Steam turbine surface condensers",
+    "Process condensers"
+   ],
+   "key_points": [
+    "Under vacuum — air leaks harm performance",
+    "Level control protects CEPs",
+    "Storage typically a few minutes of flow",
+    "Make-up enters here"
+   ],
+   "classification": {
+    "family": "Condenser component / storage",
+    "type": "Surface-condenser hotwell"
+   },
+   "hi_family": "static_equipment",
+   "summary": "The hotwell is the collection box at the bottom of a steam surface condenser. Steam from the turbine condenses on the cold tubes; the condensate drips into the hotwell, which provides a small storage volume and suction head for the condensate extraction pumps. A level controller keeps the level steady."
+  },
+  "model_3d": {
+   "asset": "glb/hotwell.glb",
+   "metadata": "meta/hotwell.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6178,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Exhaust steam enters the condenser from the turbine above.",
+    "It condenses on the cold tubes carrying cooling water.",
+    "Condensate drips into the hotwell."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Exhaust steam enters the condenser from the turbine above.",
+     "part": "condenser_shell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It condenses on the cold tubes carrying cooling water.",
+     "part": "tube_bundle",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Condensate drips into the hotwell.",
+     "part": "hotwell_box",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Level is held by the controller; CEPs draw condensate out.",
+     "part": "connections",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Condenser pressure vs cooling-water temperature and flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hotwell_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/hotwell.json#components",
+   "key_components": "Condenser lower shell, tube bundle, hotwell box, condensate outlet",
+   "parts": [
+    {
+     "id": "condenser_shell",
+     "name": "Condenser Shell (lower part) — exhaust steam from turbine above",
+     "info_ref": "hw_shell",
+     "function": "Encloses the condensing steam.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "tube_bundle",
+     "name": "Cooling-Water Tube Bundle & Tube Sheets",
+     "info_ref": "hw_tubes",
+     "function": "Condense the steam with cooling water inside.",
+     "material": "Stainless/titanium/Cu-Ni."
+    },
+    {
+     "id": "hotwell_box",
+     "name": "Hotwell (condensate collection box)",
+     "info_ref": "hw_box",
+     "function": "Collects condensate.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "condensate",
+     "name": "Condensate (level held by the level controller)",
+     "info_ref": "hw_condensate",
+     "function": "Condensate (level animated).",
+     "material": "—"
+    },
+    {
+     "id": "connections",
+     "name": "Condensate Outlet to CEP, Level Transmitter, CW Inlet/Outlet, Air Extraction & Make-up",
+     "info_ref": "hw_connections",
+     "function": "Outlet to CEP, level, CW, air extraction, make-up.",
+     "material": "Steel."
+    },
+    {
+     "id": "drops",
+     "name": "Condensate Droplets (from tubes)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Storage ~ 1 – 3 min of condensate flow (HEI typical)",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Vacuum (~ 0.05 – 0.1 bar abs)",
+     "unit": "bar(a)"
+    },
+    "design_temperature": {
+     "typical_range": "~ 30 – 50",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Condensate flow",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor level, vacuum and condensate conductivity.",
+     "part": "condensate",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Leak test for air in-leakage.",
+     "part": "condenser_shell",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Clean tubes; inspect hotwell.",
+     "part": "tube_bundle"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low level / CEP cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Pump noise, trips"
+     ],
+     "causes": [
+      "Level control fault"
+     ],
+     "remedies": [
+      "Fix controller; make-up"
+     ],
+     "part": "connections"
+    },
+    {
+     "problem": "Tube leak",
+     "category": "leakage",
+     "symptoms": [
+      "High conductivity"
+     ],
+     "causes": [
+      "Tube corrosion/erosion"
+     ],
+     "remedies": [
+      "Plug tubes"
+     ],
+     "part": "tube_bundle"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hotwell — Introduction",
+    "type": "in_app_tour",
+    "model": "hotwell.glb",
+    "duration_s": 44.9,
+    "script": [
+     {
+      "narration": "This module introduces the Hotwell.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The hotwell is the condensate collection box under a steam surface condenser.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Turbine exhaust steam condenses on cold tubes, drips into the hotwell, and the condensate extraction pumps draw it out.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The hotwell gives a little storage and the suction head for those pumps; a level controller holds the level.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include steam turbine surface condensers; process condensers.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hotwell — Operation",
+    "type": "in_app_tour",
+    "model": "hotwell.glb",
+    "duration_s": 24.4,
+    "script": [
+     {
+      "narration": "How the Hotwell works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Exhaust steam enters the condenser from the turbine above.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "condenser_shell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It condenses on the cold tubes carrying cooling water.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tube_bundle",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Condensate drips into the hotwell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hotwell_box",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Level is held by the controller; CEPs draw condensate out.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "connections",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hotwell — Maintenance",
+    "type": "in_app_tour",
+    "model": "hotwell.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hotwell.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor level, vacuum and condensate conductivity.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "condensate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Leak test for air in-leakage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "condenser_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean tubes; inspect hotwell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low level / cep cavitation: pump noise, trips. Common cause: level control fault.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "connections",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tube leak: high conductivity. Common cause: tube corrosion/erosion.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the hotwell?",
+     "options": [
+      "Turbine casing",
+      "Condensate collection box under the condenser",
+      "Boiler drum",
+      "Cooling tower basin"
+     ],
+     "answer": 1,
+     "explanation": "Collection box.",
+     "level": "basic"
+    },
+    {
+     "question": "Why monitor condensate conductivity?",
+     "options": [
+      "Colour",
+      "To detect cooling-water tube leaks",
+      "Temperature",
+      "Level"
+     ],
+     "answer": 1,
+     "explanation": "Contamination.",
+     "level": "basic"
+    },
+    {
+     "question": "Air in-leakage causes…",
+     "options": [
+      "Better vacuum",
+      "Poorer vacuum and lower efficiency",
+      "No effect",
+      "Higher level"
+     ],
+     "answer": 1,
+     "explanation": "Non-condensables.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the condensing steam.\"",
+     "options": [
+      "Condensate Outlet to CEP, Level Transmitter, CW Inlet/Outlet, Air Extraction & Make-up",
+      "Cooling-Water Tube Bundle & Tube Sheets",
+      "Condensate (level held by the level controller)",
+      "Condenser Shell (lower part) — exhaust steam from turbine above"
+     ],
+     "answer": 3,
+     "explanation": "Condenser Shell (lower part) — exhaust steam from turbine above: Encloses the condensing steam.",
+     "level": "basic",
+     "part": "condenser_shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Condense the steam with cooling water inside.\"",
+     "options": [
+      "Condenser Shell (lower part) — exhaust steam from turbine above",
+      "Cooling-Water Tube Bundle & Tube Sheets",
+      "Condensate (level held by the level controller)",
+      "Condensate Droplets (from tubes)"
+     ],
+     "answer": 1,
+     "explanation": "Cooling-Water Tube Bundle & Tube Sheets: Condense the steam with cooling water inside.",
+     "level": "basic",
+     "part": "tube_bundle",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Collects condensate.\"",
+     "options": [
+      "Condensate Outlet to CEP, Level Transmitter, CW Inlet/Outlet, Air Extraction & Make-up",
+      "Condenser Shell (lower part) — exhaust steam from turbine above",
+      "Hotwell (condensate collection box)",
+      "Condensate (level held by the level controller)"
+     ],
+     "answer": 2,
+     "explanation": "Hotwell (condensate collection box): Collects condensate.",
+     "level": "basic",
+     "part": "hotwell_box",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

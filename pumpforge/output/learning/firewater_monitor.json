@@ -1,0 +1,576 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "firewater_monitor",
+ "no": 281,
+ "title": "Firewater Monitor",
+ "model_title": "Firewater Monitor (Oscillating) on a Hydrant Riser — Swivel Joints, Adjustable Fog/Jet Nozzle",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A firewater monitor is a fixed, swivelling nozzle mounted on a hydrant riser that throws a large stream of water — straight jet for reach or fog for cooling. Oscillating monitors sweep automatically using a water-powered drive so equipment can be cooled without people nearby.",
+   "applications": [
+    "Cooling of tanks, vessels and structures during fires",
+    "Process areas, jetties and loading racks"
+   ],
+   "key_points": [
+    "≈ 1000–4000 L/min at ≈ 7 bar",
+    "Jet for reach, fog for cooling",
+    "Oscillating = unattended coverage",
+    "Q = K·√P"
+   ],
+   "classification": {
+    "family": "Fire protection",
+    "type": "Oscillating monitor on hydrant riser"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A firewater monitor is a fixed nozzle on a swivelling head that throws a large, aimable stream of water (straight jet or fog) to fight fires or cool equipment; oscillating monitors sweep automatically."
+  },
+  "model_3d": {
+   "asset": "glb/firewater_monitor.glb",
+   "metadata": "meta/firewater_monitor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8644,
+   "parts": 4
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Water comes up the riser.",
+    "The monitor head swivels and elevates.",
+    "The nozzle forms jet or fog."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Water comes up the riser.",
+     "part": "riser_valve",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The monitor head swivels and elevates.",
+     "part": "monitor_head",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The nozzle forms jet or fog.",
+     "part": "water_jet",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water cools the protected equipment.",
+     "part": "protected_equipment",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Reach vs nozzle pressure and elevation angle."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "firewater_monitor_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "firewater_monitor_pressure.glb",
+     "title": "Nozzle pressure sets reach and flow",
+     "description": "A monitor delivers a large, aimable flow (≈ 1000–4000 L/min for typical plant monitors) at nozzle pressure ≈ 7 bar. Straight-stream reach can exceed ≈ 40–60 m; fog patterns give a shorter, wider cooling curtain to protect people and equipment from radiant heat. Oscillating monitors sweep automatically so the area can be cooled unattended. Flow ∝ √(pressure): Q = K·√P.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/firewater_monitor.json#components",
+   "key_components": "Riser, isolation valve, swivel joints, oscillator, fog/jet nozzle",
+   "parts": [
+    {
+     "id": "riser_valve",
+     "name": "Underground Fire Main, Riser & Isolation Valve (drain at base)",
+     "info_ref": "fm_riser",
+     "function": "Supply water.",
+     "material": "Steel/ductile iron."
+    },
+    {
+     "id": "monitor_head",
+     "name": "Monitor Body: Horizontal & Vertical Swivel Joints, Water-Powered Oscillator, Tiller",
+     "info_ref": "fm_monitor",
+     "function": "Aim and throw water.",
+     "material": "Bronze/steel."
+    },
+    {
+     "id": "water_jet",
+     "name": "Water Stream (straight jet ↔ fog pattern)",
+     "info_ref": "fm_monitor",
+     "function": "Aim and throw water.",
+     "material": "Bronze/steel."
+    },
+    {
+     "id": "protected_equipment",
+     "name": "Protected Equipment (tank / vessel being cooled)",
+     "info_ref": "fm_target",
+     "function": "Protected equipment.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 65 – 150 monitors",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1,000 – 4,000 (plant) up to > 10,000",
+     "unit": "L/min"
+    },
+    "operating_conditions": {
+     "typical_range": "≈ 7 – 10 bar at nozzle",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Straight-stream reach ≈ 40 – 70 m",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Flow and reach from fire-water study; materials for environment."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "NFPA 24",
+    "NFPA 15"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports per fire code; protected cabling and piping in fire zones."
+   ],
+   "alignment": [
+    "Detectors aimed / monitors oriented per coverage study."
+   ],
+   "piping": [
+    "Fire water / foam lines flushed; drains and test connections provided."
+   ],
+   "commissioning": [
+    "Acceptance tests with witnesses (flow, foam ratio, detector function, cause & effect)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Visual check; drains clear.",
+     "part": "riser_valve",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Operate through full range; flow test.",
+     "part": "monitor_head",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul swivels and nozzle.",
+     "part": "monitor_head"
+    }
+   ],
+   "lubrication": [
+    "Grease swivel joints per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Seized swivel",
+     "category": "performance",
+     "symptoms": [
+      "Cannot aim"
+     ],
+     "causes": [
+      "Corrosion, no exercise"
+     ],
+     "remedies": [
+      "Lubricate; exercise"
+     ],
+     "part": "monitor_head"
+    },
+    {
+     "problem": "Short reach",
+     "category": "performance",
+     "symptoms": [
+      "Weak stream"
+     ],
+     "causes": [
+      "Low pressure, debris in nozzle"
+     ],
+     "remedies": [
+      "Check supply; clean"
+     ],
+     "part": "water_jet"
+    }
+   ],
+   "safety": [
+    "High-pressure stream can injure — keep clear; test only in safe directions."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Firewater Monitor — Introduction",
+    "type": "in_app_tour",
+    "model": "firewater_monitor.glb",
+    "duration_s": 46.0,
+    "script": [
+     {
+      "narration": "This module introduces the Firewater Monitor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A firewater monitor is a fixed, swivelling nozzle mounted on a hydrant riser that throws a large stream of water — straight jet for reach or fog for cooling.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Oscillating monitors sweep automatically using a water-powered drive so equipment can be cooled without people nearby.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cooling of tanks, vessels and structures during fires; process areas, jetties and loading racks.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Firewater Monitor — Operation",
+    "type": "in_app_tour",
+    "model": "firewater_monitor.glb",
+    "duration_s": 32.5,
+    "script": [
+     {
+      "narration": "How the Firewater Monitor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water comes up the riser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "riser_valve",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The monitor head swivels and elevates.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_head",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The nozzle forms jet or fog.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water_jet",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water cools the protected equipment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "protected_equipment",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "A monitor delivers a large, aimable flow (≈ 1000–4000 L/min for typical plant monitors) at nozzle pressure ≈ 7 bar.",
+      "duration_s": 8.3,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Firewater Monitor — Maintenance",
+    "type": "in_app_tour",
+    "model": "firewater_monitor.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Firewater Monitor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Visual check; drains clear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "riser_valve",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Operate through full range; flow test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul swivels and nozzle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "monitor_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for seized swivel: cannot aim. Common cause: corrosion, no exercise.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "monitor_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for short reach: weak stream. Common cause: low pressure, debris in nozzle.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "water_jet",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Fog vs jet?",
+     "options": [
+      "Fog cools/protects, jet reaches far",
+      "Same",
+      "Fog reaches farther",
+      "Jet cools better"
+     ],
+     "answer": 0,
+     "explanation": "Patterns.",
+     "level": "basic"
+    },
+    {
+     "question": "Flow vs pressure?",
+     "options": [
+      "Q ∝ √P",
+      "Q ∝ P²",
+      "Q constant",
+      "Q ∝ 1/P"
+     ],
+     "answer": 0,
+     "explanation": "√P.",
+     "level": "basic"
+    },
+    {
+     "question": "Why oscillating?",
+     "options": [
+      "Unattended sweeping coverage",
+      "Save water",
+      "Noise",
+      "Looks good"
+     ],
+     "answer": 0,
+     "explanation": "Unattended.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supply water.\"",
+     "options": [
+      "Water Stream (straight jet ↔ fog pattern)",
+      "Monitor Body: Horizontal & Vertical Swivel Joints, Water-Powered Oscillator, Tiller",
+      "Underground Fire Main, Riser & Isolation Valve (drain at base)",
+      "Protected Equipment (tank / vessel being cooled)"
+     ],
+     "answer": 2,
+     "explanation": "Underground Fire Main, Riser & Isolation Valve (drain at base): Supply water.",
+     "level": "basic",
+     "part": "riser_valve",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Protected equipment.\"",
+     "options": [
+      "Monitor Body: Horizontal & Vertical Swivel Joints, Water-Powered Oscillator, Tiller",
+      "Water Stream (straight jet ↔ fog pattern)",
+      "Protected Equipment (tank / vessel being cooled)",
+      "Underground Fire Main, Riser & Isolation Valve (drain at base)"
+     ],
+     "answer": 2,
+     "explanation": "Protected Equipment (tank / vessel being cooled): Protected equipment.",
+     "level": "basic",
+     "part": "protected_equipment",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

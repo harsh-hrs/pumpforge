@@ -1,0 +1,634 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "weigh_feeder",
+ "no": 122,
+ "title": "Weigh Feeder",
+ "model_title": "Belt Weigh Feeder (Gravimetric, Load Cell + Speed Sensor)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A weigh feeder (gravimetric belt feeder) is a short belt conveyor that measures and controls the mass flow of material. Load cells under a weigh idler measure the belt load per metre; a speed sensor measures belt speed. The controller multiplies the two to get the flow rate (kg/s) and adjusts belt speed to hold the set-point.",
+   "applications": [
+    "Feeding raw meal, coal and additives to kilns and mills",
+    "Blending in cement, minerals and chemicals",
+    "Proportioning ingredients in food and plastics processes"
+   ],
+   "key_points": [
+    "Rate = belt load (kg/m) × belt speed (m/s)",
+    "Closed-loop control via VSD",
+    "Typical accuracy about ±0.5 – 1 % (well installed)",
+    "Needs regular zero and span calibration"
+   ],
+   "classification": {
+    "family": "Feeder (gravimetric)",
+    "type": "Belt weigh feeder"
+   },
+   "hi_family": "material_handling",
+   "summary": "A belt weigh feeder delivers a set mass flow (kg/h). A load cell under a weigh idler measures belt loading (kg/m) and a speed sensor measures belt speed; the controller multiplies them and adjusts belt speed to hold the set rate."
+  },
+  "model_3d": {
+   "asset": "glb/weigh_feeder.glb",
+   "metadata": "meta/weigh_feeder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4740,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material from the inlet chute forms a bed on the belt.",
+    "Load cells under the weigh idler measure the belt load.",
+    "A speed sensor on the tail pulley measures belt speed."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material from the inlet chute forms a bed on the belt.",
+     "part": "inlet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Load cells under the weigh idler measure the belt load.",
+     "part": "weigh_idler",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A speed sensor on the tail pulley measures belt speed.",
+     "part": "speed_sensor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The controller computes rate = load × speed and trims the drive speed to hold the set-point.",
+     "part": "controller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Accuracy is best between about 20–100 % of rated capacity; at very low belt loads zero errors dominate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "weigh_feeder_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/weigh_feeder.json#components",
+   "key_components": "Belt, weigh idler & load cell, speed sensor, controller",
+   "parts": [
+    {
+     "id": "bfbelt",
+     "name": "Feeder Belt",
+     "info_ref": "hk_belt",
+     "function": "Carries the material.",
+     "material": "Rubber."
+    },
+    {
+     "id": "bfpulley_1",
+     "name": "Tail Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Drive/return pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "bfpulley_2",
+     "name": "Head (Drive) Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Drive/return pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "bfmarks",
+     "name": "Feeder Belt Motion Markers",
+     "info_ref": "hk_belt",
+     "function": "Carries the material.",
+     "material": "Rubber."
+    },
+    {
+     "id": "bfframe",
+     "name": "Feeder Belt Frame & Idlers (troughing and return)",
+     "info_ref": "hk_idlers",
+     "function": "Frame and idlers.",
+     "material": "Steel."
+    },
+    {
+     "id": "weigh_idler",
+     "name": "Weigh Idler on Load Cell (measures belt load, kg/m)",
+     "info_ref": "wf_loadcell",
+     "function": "Measures belt load.",
+     "material": "—"
+    },
+    {
+     "id": "speed_sensor",
+     "name": "Speed Sensor on Tail Pulley (belt speed, m/s)",
+     "info_ref": "wf_speed",
+     "function": "Measures belt speed.",
+     "material": "—"
+    },
+    {
+     "id": "controller",
+     "name": "Weigh Controller (rate = load × speed; adjusts belt speed via VFD)",
+     "info_ref": "wf_controller",
+     "function": "Computes and controls feed rate.",
+     "material": "—"
+    },
+    {
+     "id": "inlet",
+     "name": "Inlet Hopper & Shear Gate (sets bed depth)",
+     "info_ref": "wf_inlet",
+     "function": "Feeds and shapes the bed.",
+     "material": "Steel."
+    },
+    {
+     "id": "drive",
+     "name": "Variable-Speed Gearmotor (VFD)",
+     "info_ref": "wf_drive",
+     "function": "Variable-speed drive.",
+     "material": "—"
+    },
+    {
+     "id": "material",
+     "name": "Material on Belt",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Belt width ~ 0.3 – 1.6 m; centres ~ 1.5 – 5 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 0.37 – 15",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 0.02 – 0.5",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 0.1 – 1000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose belt width and speed so the design rate falls in the mid-range of the weighing capacity; specify accuracy and turndown."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "OIML R 50 — Continuous totalizing automatic weighing instruments (belt weighers)",
+    "Manufacturer weigh feeder data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on steelwork or a concrete plinth designed for the hopper/bin load on the feeder plus impact and dynamic loads.",
+    "Isolate vibrating machines from the structure with their springs/rubber mounts — never weld or rigidly bolt the vibrating body to the structure."
+   ],
+   "alignment": [
+    "Install the weigh idler and approach idlers in line (laser) — misalignment causes belt-tension errors.",
+    "Protect the weigh section from wind, dust build-up and skirt friction."
+   ],
+   "piping": [
+    "Chutes and skirts: allow a gap that widens in the direction of travel so material does not jam; fit dust seals and connect dust extraction where required.",
+    "Leave clear access for liner change and for the hopper shut-off gate."
+   ],
+   "commissioning": [
+    "Run empty first: check direction, amplitude/speed, temperatures and noise.",
+    "Load gradually, check the material bed is even and the discharge rate matches the set-point; record motor current as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Clean the belt and weigh area; check belt tracking.",
+     "part": "bfbelt",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Zero calibration and test-weight span check.",
+     "part": "weigh_idler",
+     "interval": "weekly/monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Material (drop) test against a reference scale; replace belt and idlers.",
+     "part": "controller"
+    }
+   ],
+   "lubrication": [
+    "Pulley bearings and gearmotor: lubricate to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Weighing drift",
+     "category": "performance",
+     "symptoms": [
+      "Rate disagrees with stock reconciliation"
+     ],
+     "causes": [
+      "Build-up on weigh idler, belt tension change, wind"
+     ],
+     "remedies": [
+      "Clean, re-zero, re-span; enclose"
+     ],
+     "part": "weigh_idler"
+    },
+    {
+     "problem": "Belt mistracking",
+     "category": "performance",
+     "symptoms": [
+      "Belt runs off, edge wear"
+     ],
+     "causes": [
+      "Pulley misalignment, material build-up"
+     ],
+     "remedies": [
+      "Re-align, clean pulleys"
+     ],
+     "part": "bfbelt"
+    }
+   ],
+   "safety": [
+    "Lock out before cleaning; use guards at pulleys (nip points)."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Weigh Feeder — Introduction",
+    "type": "in_app_tour",
+    "model": "weigh_feeder.glb",
+    "duration_s": 55.5,
+    "script": [
+     {
+      "narration": "This module introduces the Weigh Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A weigh feeder (gravimetric belt feeder) is a short belt conveyor that measures and controls the mass flow of material.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Load cells under a weigh idler measure the belt load per metre; a speed sensor measures belt speed.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The controller multiplies the two to get the flow rate (kg/s) and adjusts belt speed to hold the set-point.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include feeding raw meal, coal and additives to kilns and mills; blending in cement, minerals and chemicals; proportioning ingredients in food and plastics processes.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Weigh Feeder — Operation",
+    "type": "in_app_tour",
+    "model": "weigh_feeder.glb",
+    "duration_s": 27.9,
+    "script": [
+     {
+      "narration": "How the Weigh Feeder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material from the inlet chute forms a bed on the belt.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "inlet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Load cells under the weigh idler measure the belt load.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "weigh_idler",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A speed sensor on the tail pulley measures belt speed.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "speed_sensor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The controller computes rate = load × speed and trims the drive speed to hold the set-point.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "controller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Weigh Feeder — Maintenance",
+    "type": "in_app_tour",
+    "model": "weigh_feeder.glb",
+    "duration_s": 37.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Weigh Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Clean the belt and weigh area; check belt tracking.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bfbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Zero calibration and test-weight span check.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "weigh_idler",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Material (drop) test against a reference scale; replace belt and idlers.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "controller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for weighing drift: rate disagrees with stock reconciliation. Common cause: build-up on weigh idler, belt tension change, wind.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "weigh_idler",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for belt mistracking: belt runs off, edge wear. Common cause: pulley misalignment, material build-up.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "bfbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How does a weigh feeder calculate flow rate?",
+     "options": [
+      "Motor current only",
+      "Belt load per metre × belt speed",
+      "Pulley diameter × voltage",
+      "Hopper level × time"
+     ],
+     "answer": 1,
+     "explanation": "Load × speed.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the purpose of the speed sensor?",
+     "options": [
+      "To weigh the belt",
+      "To measure belt speed for the rate calculation",
+      "To stop the belt",
+      "To heat the belt"
+     ],
+     "answer": 1,
+     "explanation": "Speed term.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is zero calibration needed?",
+     "options": [
+      "To remove the empty-belt weight and its changes",
+      "To make the belt faster",
+      "To change the set-point",
+      "It is not needed"
+     ],
+     "answer": 0,
+     "explanation": "Tare drifts with belt build-up and tension.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries the material.\"",
+     "options": [
+      "Variable-Speed Gearmotor (VFD)",
+      "Weigh Controller (rate = load × speed; adjusts belt speed via VFD)",
+      "Weigh Idler on Load Cell (measures belt load, kg/m)",
+      "Feeder Belt"
+     ],
+     "answer": 3,
+     "explanation": "Feeder Belt: Carries the material.",
+     "level": "basic",
+     "part": "bfbelt",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drive/return pulleys.\"",
+     "options": [
+      "Feeder Belt Frame & Idlers (troughing and return)",
+      "Material on Belt",
+      "Variable-Speed Gearmotor (VFD)",
+      "Tail Pulley"
+     ],
+     "answer": 3,
+     "explanation": "Tail Pulley: Drive/return pulleys.",
+     "level": "basic",
+     "part": "bfpulley_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Frame and idlers.\"",
+     "options": [
+      "Tail Pulley",
+      "Feeder Belt Frame & Idlers (troughing and return)",
+      "Feeder Belt Motion Markers",
+      "Inlet Hopper & Shear Gate (sets bed depth)"
+     ],
+     "answer": 1,
+     "explanation": "Feeder Belt Frame & Idlers (troughing and return): Frame and idlers.",
+     "level": "basic",
+     "part": "bfframe",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

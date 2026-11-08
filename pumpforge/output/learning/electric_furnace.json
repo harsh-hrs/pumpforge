@@ -1,0 +1,675 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "electric_furnace",
+ "no": 170,
+ "title": "Electric Furnace",
+ "model_title": "Electric Arc Furnace (AC, Three Graphite Electrodes)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An electric arc furnace (EAF) melts steel scrap or direct-reduced iron with electric arcs. A transformer supplies very high current to three graphite electrodes; arcs form between the electrode tips and the charge. Electrode height is regulated to hold the arc. The melt is refined and tapped through a bottom tap hole.",
+   "applications": [
+    "Steel making from scrap (mini-mills)",
+    "Stainless and special steels",
+    "Foundries"
+   ],
+   "key_points": [
+    "Electric energy melts the charge",
+    "Electrodes consumed in operation",
+    "Water-cooled panels and roof",
+    "Foamy slag shields walls and improves efficiency"
+   ],
+   "classification": {
+    "family": "Fired/electric equipment",
+    "type": "AC electric arc furnace (EAF)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "An electric arc furnace melts steel scrap or direct-reduced iron using electric arcs between three graphite electrodes and the charge. A transformer supplies very high currents; the electrode height is regulated hydraulically to hold the arc. The melt is refined and then tapped."
+  },
+  "model_3d": {
+   "asset": "glb/electric_furnace.glb",
+   "metadata": "meta/electric_furnace.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6204,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Scrap is charged with the roof swung aside.",
+    "The transformer supplies high current to the electrodes.",
+    "Arcs between electrodes and scrap melt the charge."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Scrap is charged with the roof swung aside.",
+     "part": "roof",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The transformer supplies high current to the electrodes.",
+     "part": "transformer",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Arcs between electrodes and scrap melt the charge.",
+     "part": "arc_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Electrode regulation keeps the arc length steady.",
+     "part": "electrode_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The molten steel is tapped through the bottom tap.",
+     "part": "molten_bath",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Electrical energy ≈ 350–450 kWh per tonne of steel (typical modern EAF, depends on charge and chemical energy)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "electric_furnace_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "temperature": {
+     "file": "electric_furnace_temperature.glb",
+     "title": "Arc and bath temperatures",
+     "description": "The arcs between the electrode tips and the scrap/bath are extremely hot (thousands of °C) and melt the charge; liquid steel is typically tapped at around 1600–1650 °C. Water-cooled panels and roof protect the shell; foamy slag shields the panels from arc radiation.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/electric_furnace.json#components",
+   "key_components": "Shell & refractory, roof, three graphite electrodes, electrode arms, tilt mechanism, tap spout",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Shell, Refractory Hearth & Water-Cooled Wall Panels",
+     "info_ref": "ef_shell",
+     "function": "Holds the bath.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "molten_bath",
+     "name": "Molten Steel Bath & Slag",
+     "info_ref": "ef_bath",
+     "function": "Molten steel and slag.",
+     "material": "—"
+    },
+    {
+     "id": "roof",
+     "name": "Water-Cooled Roof with Refractory Delta & Electrode Ports (swings aside for charging)",
+     "info_ref": "ef_roof",
+     "function": "Closes the furnace; swings for charging.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "electrode_1",
+     "name": "Graphite Electrode 1 with Clamp & Current-Conducting Arm",
+     "info_ref": "ef_electrodes",
+     "function": "Conduct current and form the arcs.",
+     "material": "Graphite/copper."
+    },
+    {
+     "id": "arc_1",
+     "name": "Electric Arc 1",
+     "info_ref": "ef_arc",
+     "function": "Electric arc (heat source).",
+     "material": "—"
+    },
+    {
+     "id": "electrode_2",
+     "name": "Graphite Electrode 2 with Clamp & Current-Conducting Arm",
+     "info_ref": "ef_electrodes",
+     "function": "Conduct current and form the arcs.",
+     "material": "Graphite/copper."
+    },
+    {
+     "id": "arc_2",
+     "name": "Electric Arc 2",
+     "info_ref": "ef_arc",
+     "function": "Electric arc (heat source).",
+     "material": "—"
+    },
+    {
+     "id": "electrode_3",
+     "name": "Graphite Electrode 3 with Clamp & Current-Conducting Arm",
+     "info_ref": "ef_electrodes",
+     "function": "Conduct current and form the arcs.",
+     "material": "Graphite/copper."
+    },
+    {
+     "id": "arc_3",
+     "name": "Electric Arc 3",
+     "info_ref": "ef_arc",
+     "function": "Electric arc (heat source).",
+     "material": "—"
+    },
+    {
+     "id": "mast_structure",
+     "name": "Electrode Mast Structure & Hydraulic Regulation",
+     "info_ref": "ef_mast",
+     "function": "Carries and moves the arms.",
+     "material": "Steel."
+    },
+    {
+     "id": "tilting_platform",
+     "name": "Tilting Rockers & Eccentric Bottom Tap (EBT)",
+     "info_ref": "ef_tilt",
+     "function": "Tilt for tapping/deslagging.",
+     "material": "Steel."
+    },
+    {
+     "id": "transformer",
+     "name": "Furnace Transformer & Secondary Bus (high current to the electrodes)",
+     "info_ref": "ef_transformer",
+     "function": "Supplies arc power.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Shell ~ 4 – 10 m diameter",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "Transformer ~ 20 – 300",
+     "unit": "MVA"
+    },
+    "operating_temperature": {
+     "typical_range": "Tap ~ 1600 – 1650",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Heat size ~ 20 – 300",
+     "unit": "t"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by heat size, tap-to-tap time and transformer power."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "IEC 60519",
+    "AIST — Making, Shaping and Treating of Steel"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Heavy foundation for tilting loads; water-cooling systems with leak detection."
+   ],
+   "alignment": [
+    "Electrode masts aligned with roof ports."
+   ],
+   "piping": [
+    "Cooling water to panels/roof; off-gas duct to fume treatment; oxygen and carbon injection."
+   ],
+   "commissioning": [
+    "Test cooling water flows, electrode regulation, tilt and emergency systems; dry refractory."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Inspect panels for leaks, electrode joints.",
+     "part": "shell",
+     "interval": "every heat"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Refractory gunning/repair.",
+     "part": "shell",
+     "interval": "daily"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace roof/panels; transformer maintenance.",
+     "part": "transformer"
+    }
+   ],
+   "lubrication": [
+    "Hydraulic system oil and filters; tilt bearings greased."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Water leak into furnace",
+     "category": "leakage",
+     "symptoms": [
+      "Steam, explosion risk"
+     ],
+     "causes": [
+      "Panel cracks"
+     ],
+     "remedies": [
+      "Immediate shutdown; repair panels"
+     ],
+     "part": "shell"
+    },
+    {
+     "problem": "Electrode breakage",
+     "category": "performance",
+     "symptoms": [
+      "Arc loss"
+     ],
+     "causes": [
+      "Scrap cave-in, joint failure"
+     ],
+     "remedies": [
+      "Proper charging; joint torque"
+     ],
+     "part": "electrode_1"
+    }
+   ],
+   "safety": [
+    "Molten metal and water: strict leak detection; arc flash/EMF; PPE and exclusion zones."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Electric Furnace — Introduction",
+    "type": "in_app_tour",
+    "model": "electric_furnace.glb",
+    "duration_s": 50.4,
+    "script": [
+     {
+      "narration": "This module introduces the Electric Furnace.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An electric arc furnace (EAF) melts steel scrap or direct-reduced iron with electric arcs.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A transformer supplies very high current to three graphite electrodes; arcs form between the electrode tips and the charge.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Electrode height is regulated to hold the arc.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include steel making from scrap (mini-mills); stainless and special steels; foundries.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Shell, Refractory Hearth & Water-Cooled Wall Panels, Water-Cooled Roof with Refractory Delta & Electrode Ports (swings aside for charging).",
+      "duration_s": 10.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Electric Furnace — Operation",
+    "type": "in_app_tour",
+    "model": "electric_furnace.glb",
+    "duration_s": 40.7,
+    "script": [
+     {
+      "narration": "How the Electric Furnace works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Scrap is charged with the roof swung aside.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "roof",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The transformer supplies high current to the electrodes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "transformer",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Arcs between electrodes and scrap melt the charge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "arc_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Electrode regulation keeps the arc length steady.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "electrode_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The molten steel is tapped through the bottom tap.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "molten_bath",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The arcs between the electrode tips and the scrap/bath are extremely hot (thousands of °C) and melt the charge; liquid steel is typically tapped at around 1600–1650 °C.",
+      "duration_s": 12.5,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Electric Furnace — Maintenance",
+    "type": "in_app_tour",
+    "model": "electric_furnace.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Electric Furnace.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Inspect panels for leaks, electrode joints.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Refractory gunning/repair.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace roof/panels; transformer maintenance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "transformer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water leak into furnace: steam, explosion risk. Common cause: panel cracks.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for electrode breakage: arc loss. Common cause: scrap cave-in, joint failure.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "electrode_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What melts the steel in an EAF?",
+     "options": [
+      "Electric arcs",
+      "Gas burners only",
+      "Induction coils",
+      "Steam"
+     ],
+     "answer": 0,
+     "explanation": "Arcs.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are wall panels water-cooled?",
+     "options": [
+      "To protect them from the arc radiation and heat",
+      "To cool steel",
+      "To make steam",
+      "For noise"
+     ],
+     "answer": 0,
+     "explanation": "Protection.",
+     "level": "basic"
+    },
+    {
+     "question": "What is a major explosion hazard?",
+     "options": [
+      "Water contacting molten steel",
+      "Too much scrap",
+      "Low current",
+      "Cold roof"
+     ],
+     "answer": 0,
+     "explanation": "Steam explosion.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the bath.\"",
+     "options": [
+      "Graphite Electrode 1 with Clamp & Current-Conducting Arm",
+      "Graphite Electrode 3 with Clamp & Current-Conducting Arm",
+      "Shell, Refractory Hearth & Water-Cooled Wall Panels",
+      "Tilting Rockers & Eccentric Bottom Tap (EBT)"
+     ],
+     "answer": 2,
+     "explanation": "Shell, Refractory Hearth & Water-Cooled Wall Panels: Holds the bath.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Molten steel and slag.\"",
+     "options": [
+      "Electrode Mast Structure & Hydraulic Regulation",
+      "Molten Steel Bath & Slag",
+      "Shell, Refractory Hearth & Water-Cooled Wall Panels",
+      "Graphite Electrode 2 with Clamp & Current-Conducting Arm"
+     ],
+     "answer": 1,
+     "explanation": "Molten Steel Bath & Slag: Molten steel and slag.",
+     "level": "basic",
+     "part": "molten_bath",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Closes the furnace; swings for charging.\"",
+     "options": [
+      "Shell, Refractory Hearth & Water-Cooled Wall Panels",
+      "Graphite Electrode 2 with Clamp & Current-Conducting Arm",
+      "Electric Arc 1",
+      "Water-Cooled Roof with Refractory Delta & Electrode Ports (swings aside for charging)"
+     ],
+     "answer": 3,
+     "explanation": "Water-Cooled Roof with Refractory Delta & Electrode Ports (swings aside for charging): Closes the furnace; swings for charging.",
+     "level": "basic",
+     "part": "roof",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

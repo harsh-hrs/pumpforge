@@ -1,0 +1,640 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "gas_scrubbing_system",
+  "title": "Gas Scrubbing System — Packed Caustic Absorber, Recirculation, pH-Controlled Dosing, ID Fan & Stack",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 274,
+    "phase": 13,
+    "eq_id": "EQ-352",
+    "subcategory": "Environmental",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "gas_scrubbing_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "gas_scrubbing_system_pressure.glb",
+      "title": "Pollutant falls as gas rises through the packing",
+      "description": "Acid gases (e.g. H₂S, HCl, SO₂, Cl₂) are absorbed into the liquor and neutralised by caustic (e.g. H₂S + 2 NaOH → Na₂S + 2 H₂O). Counter-current flow keeps the strongest liquor meeting the cleanest gas, so removal can exceed 99 %. Design uses liquid-to-gas ratio, packing height (NTU × HTU) and pH control; spent liquor is bled off and fresh caustic added.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "gas",
+      "kind": "flue_gas",
+      "radius": 0.03,
+      "points": [
+        [
+          -2.1,
+          1.1,
+          -0.0
+        ],
+        [
+          0.0,
+          1.2,
+          -0.05
+        ],
+        [
+          0.0,
+          3.8,
+          -0.05
+        ],
+        [
+          0.9,
+          4.2,
+          -0.0
+        ],
+        [
+          1.25,
+          3.8,
+          -0.0
+        ],
+        [
+          1.25,
+          5.9,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "liquor",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          0.5,
+          0.3,
+          -0.0
+        ],
+        [
+          1.1,
+          0.3,
+          -0.0
+        ],
+        [
+          1.1,
+          3.1,
+          -0.0
+        ],
+        [
+          0.0,
+          3.1,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 14052,
+    "parts": 10
+  },
+  "summary": "A gas scrubbing system removes acid or toxic gases from a vent stream by absorbing them into a circulating caustic solution in a packed tower, with pH-controlled dosing, a fan and a stack.",
+  "classification": {
+    "family": "Environmental",
+    "type": "Packed caustic absorber system"
+  },
+  "model_configuration": {
+    "animation": "Gas rises, liquor falls, fan turns"
+  },
+  "standards": [
+    {
+      "id": "US EPA Air Pollution Control Cost Manual",
+      "title": "Control device design guidance",
+      "relevance": "Scrubbers & filters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "Local emission limits (e.g. EU IED BREF)",
+      "title": "Emission limits",
+      "relevance": "Site-specific — to be verified.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Perry's Chemical Engineers' Handbook"
+  ],
+  "parts": [
+    {
+      "id": "absorber",
+      "name": "Absorber Tower (FRP) with Integral Sump",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "absorber__back",
+        "absorber__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.515,
+        0.05,
+        -0.515
+      ],
+      "bbox_max": [
+        0.515,
+        3.8,
+        0.515
+      ],
+      "label_anchor": [
+        0.0,
+        1.925,
+        0.515
+      ],
+      "center": [
+        0.0,
+        1.925,
+        -0.0
+      ],
+      "info_ref": "gs_tower"
+    },
+    {
+      "id": "packing",
+      "name": "Random Packing (gas–liquid contact area)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "pk"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.499,
+        1.4,
+        -0.499
+      ],
+      "bbox_max": [
+        0.499,
+        2.8,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        2.1,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        2.1,
+        -0.2495
+      ],
+      "info_ref": "gs_packing"
+    },
+    {
+      "id": "distributor_demister",
+      "name": "Liquid Distributor / Spray Header & Mist Eliminator",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "distributor_demister.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.5
+      ],
+      "bbox_min": [
+        -0.49,
+        3.0,
+        -0.49
+      ],
+      "bbox_max": [
+        0.49,
+        3.502,
+        0.03
+      ],
+      "label_anchor": [
+        0.0,
+        3.251,
+        0.03
+      ],
+      "center": [
+        0.0,
+        3.251,
+        -0.23
+      ],
+      "info_ref": "gs_distributor"
+    },
+    {
+      "id": "scrubbing_liquor",
+      "name": "Scrubbing Liquor (dilute caustic, pH ≈ 8–10)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.495,
+        0.08,
+        -0.495
+      ],
+      "bbox_max": [
+        0.495,
+        0.65,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.365,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.365,
+        -0.2475
+      ],
+      "info_ref": "gs_tower"
+    },
+    {
+      "id": "recirc_pump",
+      "name": "Recirculation Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recirc_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.95,
+        0.125,
+        -0.15
+      ],
+      "bbox_max": [
+        1.85,
+        0.42,
+        0.15
+      ],
+      "label_anchor": [
+        1.4,
+        0.2725,
+        0.15
+      ],
+      "center": [
+        1.4,
+        0.2725,
+        -0.0
+      ],
+      "info_ref": "gs_pump"
+    },
+    {
+      "id": "recirc_pump_shaft",
+      "name": "Recirculation Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recirc_pumpc"
+      ],
+      "pivot": [
+        1.34,
+        0.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.28,
+        0.28,
+        -0.05
+      ],
+      "bbox_max": [
+        1.4,
+        0.32,
+        0.05
+      ],
+      "label_anchor": [
+        1.34,
+        0.3,
+        0.05
+      ],
+      "center": [
+        1.34,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "gs_pump"
+    },
+    {
+      "id": "liquor_circuit",
+      "name": "Recirculation Line, Caustic Day Tank & Metering Pump (pH control), Blowdown of Spent Liquor",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "liquor_circuit.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.4
+      ],
+      "bbox_min": [
+        -1.45,
+        0.05,
+        -0.85
+      ],
+      "bbox_max": [
+        1.4,
+        3.14,
+        0.525
+      ],
+      "label_anchor": [
+        -0.025,
+        1.595,
+        0.525
+      ],
+      "center": [
+        -0.025,
+        1.595,
+        -0.1625
+      ],
+      "info_ref": "gs_dosing"
+    },
+    {
+      "id": "gas_path",
+      "name": "Gas Inlet Duct, Outlet Duct, ID Fan & Discharge Stack",
+      "group": "ducts",
+      "section_role": "keep",
+      "nodes": [
+        "gas_path.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.0,
+        0.0,
+        -0.3
+      ],
+      "bbox_max": [
+        1.55,
+        5.8,
+        0.3
+      ],
+      "label_anchor": [
+        -0.225,
+        2.9,
+        0.3
+      ],
+      "center": [
+        -0.225,
+        2.9,
+        -0.0
+      ],
+      "info_ref": "gs_fan"
+    },
+    {
+      "id": "fan_impeller",
+      "name": "ID Fan Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "fan_impeller.001"
+      ],
+      "pivot": [
+        1.25,
+        3.6,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.022,
+        3.38591,
+        -0.03
+      ],
+      "bbox_max": [
+        1.478,
+        3.81409,
+        0.03
+      ],
+      "label_anchor": [
+        1.25,
+        3.6,
+        0.03
+      ],
+      "center": [
+        1.25,
+        3.6,
+        -0.0
+      ],
+      "info_ref": "gs_fan"
+    },
+    {
+      "id": "liquor_rain",
+      "name": "Liquor trickling down through the packing",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "liquor_rain0",
+        "liquor_rain1",
+        "liquor_rain2",
+        "liquor_rain3",
+        "liquor_rain4",
+        "liquor_rain5",
+        "liquor_rain6",
+        "liquor_rain7",
+        "liquor_rain8",
+        "liquor_rain9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.015,
+        -0.015
+      ],
+      "bbox_max": [
+        0.015,
+        0.015,
+        0.015
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.015
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "gs_tower": {
+      "function": "Contact gas and liquor.",
+      "construction": "FRP tower with sump.",
+      "material": "FRP / PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gs_packing": {
+      "function": "Transfer area.",
+      "construction": "Random packing.",
+      "material": "PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling, scaling"
+      ],
+      "inspection": [
+        "ΔP trend"
+      ]
+    },
+    "gs_distributor": {
+      "function": "Spread liquor; stop mist.",
+      "construction": "Distributor, demister.",
+      "material": "PP / steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gs_pump": {
+      "function": "Recirculate liquor.",
+      "construction": "Pump.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gs_dosing": {
+      "function": "Control pH.",
+      "construction": "Caustic tank, metering pump, pH, blowdown.",
+      "material": "PE/PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "gs_fan": {
+      "function": "Move gas.",
+      "construction": "Ducts, ID fan, stack.",
+      "material": "FRP/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

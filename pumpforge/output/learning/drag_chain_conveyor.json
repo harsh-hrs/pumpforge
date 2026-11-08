@@ -1,0 +1,611 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "drag_chain_conveyor",
+ "no": 137,
+ "title": "Drag Chain Conveyor",
+ "model_title": "En-Masse Drag Chain Conveyor (Enclosed, Flighted Chain)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A drag chain (en-masse) conveyor moves bulk solids inside an enclosed casing. A chain with flights runs along the bottom; the flights drag the material, and because the material moves as a solid mass with the chain (the \"en-masse\" principle), the bed moves even above the flights. It is dust-tight, gentle, and can run horizontal, inclined or vertical.",
+   "applications": [
+    "Cement, clinker and raw meal",
+    "Grain and feed handling",
+    "Coal, ash and wood chips",
+    "Hot and abrasive materials (with suitable liners)"
+   ],
+   "key_points": [
+    "Totally enclosed and dust-tight",
+    "Low speed (≈ 0.1 – 0.5 m/s)",
+    "Multiple inlets and outlets possible",
+    "Chain elongation and wear are the main issues"
+   ],
+   "classification": {
+    "family": "Conveyor",
+    "type": "En-masse drag chain conveyor"
+   },
+   "hi_family": "material_handling",
+   "summary": "A drag chain (en-masse) conveyor moves bulk solids inside an enclosed casing. A chain with flights drags the material bed along the bottom; because the material moves as a mass with the chain, it is gentle, dust-tight and can convey horizontally, inclined or around bends."
+  },
+  "model_3d": {
+   "asset": "glb/drag_chain_conveyor.glb",
+   "metadata": "meta/drag_chain_conveyor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 5344,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material enters through the inlet spout onto the chain.",
+    "The drive turns the head sprocket, pulling the chain.",
+    "Flights drag the material bed along the casing bottom as a mass."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material enters through the inlet spout onto the chain.",
+     "part": "inlet_outlet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drive turns the head sprocket, pulling the chain.",
+     "part": "sprocket_2",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flights drag the material bed along the casing bottom as a mass.",
+     "part": "chain",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Material leaves through the bottom outlet; the chain returns on top.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Capacity Q ≈ 3600 · B · h · v · ρ · η (η ~ 0.7–0.9) — linear with chain speed."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "drag_chain_conveyor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/drag_chain_conveyor.json#components",
+   "key_components": "Casing, chain with flights, sprockets, drive",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Enclosed Casing (dust-tight) with Inlet & Outlet",
+     "info_ref": "dc_casing",
+     "function": "Encloses the chain and material.",
+     "material": "Steel."
+    },
+    {
+     "id": "chain",
+     "name": "Chain with Flights (drags the material bed)",
+     "info_ref": "dc_chain",
+     "function": "Drags the material.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "sprocket_1",
+     "name": "Tail (take-up) Sprocket & Shaft",
+     "info_ref": "dc_sprocket",
+     "function": "Drive and take-up.",
+     "material": "Steel."
+    },
+    {
+     "id": "sprocket_2",
+     "name": "Head (drive) Sprocket & Shaft",
+     "info_ref": "dc_sprocket",
+     "function": "Drive and take-up.",
+     "material": "Steel."
+    },
+    {
+     "id": "inlet_outlet",
+     "name": "Inlet Spout & Bottom Outlet Gate",
+     "info_ref": "dc_casing",
+     "function": "Encloses the chain and material.",
+     "material": "Steel."
+    },
+    {
+     "id": "drive",
+     "name": "Drive Gearmotor",
+     "info_ref": "dc_drive",
+     "function": "Drive.",
+     "material": "—"
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "dc_casing",
+     "function": "Encloses the chain and material.",
+     "material": "Steel."
+    },
+    {
+     "id": "grain",
+     "name": "Bulk Material Moving as a Mass",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Casing width ~ 0.15 – 1.2 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 2 – 110",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 0.1 – 0.5",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 1000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose casing width/chain speed for the volumetric rate; materials and liners for temperature and abrasion."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CEMA — Bulk handling conveyors",
+    "Manufacturer en-masse conveyor data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the conveyor stringers and drive frames on steelwork or plinths designed for belt tension, material load and drive torque."
+   ],
+   "alignment": [
+    "Survey the structure so all pulleys and idlers are square to the centre line; train the belt empty, then loaded."
+   ],
+   "piping": [
+    "Chutes designed for the material trajectory to centre-load the belt; skirts and dust seals at loading points; belt cleaners and plough at the discharge."
+   ],
+   "commissioning": [
+    "Check pull-wire emergency stops, belt-drift and speed switches; run empty and loaded; record take-up position and motor current."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check chain tension and noise.",
+     "part": "sprocket_1",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure chain elongation; inspect flights and liners.",
+     "part": "chain",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace chain and sprockets together when worn.",
+     "part": "chain"
+    }
+   ],
+   "lubrication": [
+    "Gearmotor oil; take-up screws and bearings greased."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Chain elongation",
+     "category": "performance",
+     "symptoms": [
+      "Chain jumps sprockets, noise"
+     ],
+     "causes": [
+      "Wear of pins/bushes"
+     ],
+     "remedies": [
+      "Adjust take-up; replace chain+sprockets"
+     ],
+     "part": "chain"
+    },
+    {
+     "problem": "Casing floor wear",
+     "category": "wear",
+     "symptoms": [
+      "Holes, leaks"
+     ],
+     "causes": [
+      "Abrasive material"
+     ],
+     "remedies": [
+      "Wear liners"
+     ],
+     "part": "casing"
+    }
+   ],
+   "safety": [
+    "Lock out before opening inspection doors; chain nip at sprockets."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Drag Chain Conveyor — Introduction",
+    "type": "in_app_tour",
+    "model": "drag_chain_conveyor.glb",
+    "duration_s": 59.0,
+    "script": [
+     {
+      "narration": "This module introduces the Drag Chain Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A drag chain (en-masse) conveyor moves bulk solids inside an enclosed casing.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A chain with flights runs along the bottom; the flights drag the material, and because the material moves as a solid mass with the chain (the \"en-masse\" principle), the bed moves even above the flights.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is dust-tight, gentle, and can run horizontal, inclined or vertical.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include cement, clinker and raw meal; grain and feed handling; coal, ash and wood chips; hot and abrasive materials (with suitable liners).",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Enclosed Casing (dust-tight) with Inlet & Outlet, Inlet Spout & Bottom Outlet Gate.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Drag Chain Conveyor — Operation",
+    "type": "in_app_tour",
+    "model": "drag_chain_conveyor.glb",
+    "duration_s": 25.8,
+    "script": [
+     {
+      "narration": "How the Drag Chain Conveyor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material enters through the inlet spout onto the chain.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_outlet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drive turns the head sprocket, pulling the chain.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sprocket_2",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flights drag the material bed along the casing bottom as a mass.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "chain",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Material leaves through the bottom outlet; the chain returns on top.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Drag Chain Conveyor — Maintenance",
+    "type": "in_app_tour",
+    "model": "drag_chain_conveyor.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Drag Chain Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check chain tension and noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sprocket_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure chain elongation; inspect flights and liners.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace chain and sprockets together when worn.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chain elongation: chain jumps sprockets, noise. Common cause: wear of pins/bushes.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "chain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for casing floor wear: holes, leaks. Common cause: abrasive material.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the \"en-masse\" principle?",
+     "options": [
+      "Material moves as a solid mass with the chain",
+      "Material is blown by air",
+      "Material falls freely",
+      "Material is weighed"
+     ],
+     "answer": 0,
+     "explanation": "Mass flow.",
+     "level": "basic"
+    },
+    {
+     "question": "A key advantage of drag chain conveyors is…",
+     "options": [
+      "Dust-tight enclosure",
+      "Very high speed",
+      "Open top",
+      "No chain"
+     ],
+     "answer": 0,
+     "explanation": "Enclosed.",
+     "level": "basic"
+    },
+    {
+     "question": "Why replace chain and sprockets together?",
+     "options": [
+      "Worn sprockets quickly wear new chain",
+      "For colour matching",
+      "It is required by law",
+      "They are one part"
+     ],
+     "answer": 0,
+     "explanation": "Pitch mismatch.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the chain and material.\"",
+     "options": [
+      "Enclosed Casing (dust-tight) with Inlet & Outlet",
+      "Head (drive) Sprocket & Shaft",
+      "Chain with Flights (drags the material bed)",
+      "Drive Gearmotor"
+     ],
+     "answer": 0,
+     "explanation": "Enclosed Casing (dust-tight) with Inlet & Outlet: Encloses the chain and material.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drags the material.\"",
+     "options": [
+      "Inlet Spout & Bottom Outlet Gate",
+      "Chain with Flights (drags the material bed)",
+      "Enclosed Casing (dust-tight) with Inlet & Outlet",
+      "Tail (take-up) Sprocket & Shaft"
+     ],
+     "answer": 1,
+     "explanation": "Chain with Flights (drags the material bed): Drags the material.",
+     "level": "basic",
+     "part": "chain",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drive and take-up.\"",
+     "options": [
+      "Bulk Material Moving as a Mass",
+      "Tail (take-up) Sprocket & Shaft",
+      "Enclosed Casing (dust-tight) with Inlet & Outlet",
+      "Chain with Flights (drags the material bed)"
+     ],
+     "answer": 1,
+     "explanation": "Tail (take-up) Sprocket & Shaft: Drive and take-up.",
+     "level": "basic",
+     "part": "sprocket_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

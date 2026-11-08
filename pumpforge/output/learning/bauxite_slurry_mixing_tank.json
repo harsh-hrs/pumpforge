@@ -1,0 +1,613 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "bauxite_slurry_mixing_tank",
+ "no": 196,
+ "title": "Bauxite Slurry Mixing Tank",
+ "model_title": "Bauxite Slurry Mixing / Storage Tank (Agitated)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A bauxite slurry mixing tank receives ground bauxite slurry and spent liquor and keeps the solids suspended with an agitator. It buffers flow between grinding and digestion and is where slurry density is adjusted.",
+   "applications": [
+    "Slurry storage and density control before desilication/digestion",
+    "Buffering between grinding and digestion",
+    "Mixing ground bauxite with spent liquor (liquor-to-solids ratio)"
+   ],
+   "key_points": [
+    "Agitator keeps solids suspended",
+    "Hours of residence buffer the plant",
+    "Density control (solids %)",
+    "Pre-desilication starts here"
+   ],
+   "classification": {
+    "family": "Slurry preparation",
+    "type": "Agitated slurry storage tank"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "An agitated tank receives ground bauxite slurry and spent liquor, keeps the solids in suspension and buffers the flow between grinding and digestion. Density and level are controlled before the slurry is pumped on."
+  },
+  "model_3d": {
+   "asset": "glb/bauxite_slurry_mixing_tank.glb",
+   "metadata": "meta/bauxite_slurry_mixing_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 5728,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Ground slurry and liquor enter.",
+    "The agitator mixes and suspends solids.",
+    "Level and density are measured."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Ground slurry and liquor enter.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The agitator mixes and suspends solids.",
+     "part": "mx_agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Level and density are measured.",
+     "part": "mx_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pump sends slurry onward.",
+     "part": "slurry_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Just-suspended speed (Zwietering) vs particle size and solids loading."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "bauxite_slurry_mixing_tank_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "bauxite_slurry_mixing_tank_pressure.glb",
+     "title": "Keeping solids in suspension",
+     "description": "The agitator must give enough upward flow to keep coarse bauxite particles off the floor (the \"just-suspended\" speed, Zwietering correlation). Tanks are sized for hours of residence to buffer the mills from digestion and to start pre-desilication. Solids content is typically ~ 40–55 wt % (slurry density control).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/bauxite_slurry_mixing_tank.json#components",
+   "key_components": "Tank, baffles, hydrofoil agitator, drive, inlets, level transmitter, transfer pump",
+   "parts": [
+    {
+     "id": "mx_tank",
+     "name": "Slurry Tank: Tank, Baffles",
+     "info_ref": "sm_tank",
+     "function": "Holds the slurry.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "mx_slurry",
+     "name": "Slurry Tank: Slurry / Liquor",
+     "info_ref": "sm_slurry",
+     "function": "Process slurry/liquor.",
+     "material": "—"
+    },
+    {
+     "id": "mx_agitator",
+     "name": "Slurry Tank: Agitator Shaft & Impeller",
+     "info_ref": "sm_agitator",
+     "function": "Mixes and suspends solids.",
+     "material": "Carbon steel (often rubber-lined)."
+    },
+    {
+     "id": "mx_drive",
+     "name": "Slurry Tank: Agitator Drive (motor + gearbox, bridge beam)",
+     "info_ref": "sm_drive",
+     "function": "Drives the agitator.",
+     "material": "—"
+    },
+    {
+     "id": "nozzles",
+     "name": "Ground Bauxite Slurry Inlet, Spent-Liquor Inlet, Outlet & Level Transmitter",
+     "info_ref": "sm_nozzles",
+     "function": "Inlets/outlet/level.",
+     "material": "Steel."
+    },
+    {
+     "id": "slurry_pump",
+     "name": "Slurry Transfer Pump (to digestion)",
+     "info_ref": "sm_pump",
+     "function": "Transfers slurry.",
+     "material": "High-chrome/rubber."
+    },
+    {
+     "id": "slurry_pump_shaft",
+     "name": "Slurry Transfer Pump (to digestion) — Shaft & Coupling (turning)",
+     "info_ref": "sm_pump",
+     "function": "Transfers slurry.",
+     "material": "High-chrome/rubber."
+    },
+    {
+     "id": "foundation",
+     "name": "Ring-Wall Foundation",
+     "info_ref": "sm_nozzles",
+     "function": "Inlets/outlet/level.",
+     "material": "Steel."
+    },
+    {
+     "id": "swirl",
+     "name": "Solids kept in suspension by the agitator flow",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tank ~ 8 – 20 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "Residence ~ 4 – 12 h",
+     "unit": "h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 70 – 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Agitator ~ 30 – 200",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size tank for residence; agitator for suspension at design solids."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer process practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Ring-wall or slab foundation designed for full liquid/slurry weight plus agitator dynamic loads; settlement monitoring for large tanks."
+   ],
+   "alignment": [
+    "Tank plumb and level; agitator shaft vertical and concentric; check gearbox mounting."
+   ],
+   "piping": [
+    "Nozzles sized for slurry velocity (avoid settling and erosion); flush connections; scaling-resistant design and descaling access.",
+    "Caustic service: suitable materials, gaskets and spray shields; eyewash/safety showers nearby."
+   ],
+   "commissioning": [
+    "Water trials (agitator run with water, check vibration and power); then caustic/slurry; verify levels, interlocks and spillage containment (bunds)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check agitator, level, density.",
+     "part": "mx_agitator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect impeller wear and scale.",
+     "part": "mx_agitator",
+     "interval": "shutdown"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Gearbox overhaul.",
+     "part": "mx_drive"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Solids settling",
+     "category": "performance",
+     "symptoms": [
+      "Sanding, high torque at restart"
+     ],
+     "causes": [
+      "Agitator stop, low speed"
+     ],
+     "remedies": [
+      "Restart procedures; air sparge"
+     ],
+     "part": "mx_slurry"
+    },
+    {
+     "problem": "Scaling",
+     "category": "performance",
+     "symptoms": [
+      "Reduced volume"
+     ],
+     "causes": [
+      "DSP scale"
+     ],
+     "remedies": [
+      "Descale"
+     ],
+     "part": "mx_tank"
+    }
+   ],
+   "safety": [
+    "Hot caustic — PPE, splash protection."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Bauxite Slurry Mixing Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "bauxite_slurry_mixing_tank.glb",
+    "duration_s": 51.0,
+    "script": [
+     {
+      "narration": "This module introduces the Bauxite Slurry Mixing Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A bauxite slurry mixing tank receives ground bauxite slurry and spent liquor and keeps the solids suspended with an agitator.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It buffers flow between grinding and digestion and is where slurry density is adjusted.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include slurry storage and density control before desilication/digestion; buffering between grinding and digestion; mixing ground bauxite with spent liquor (liquor-to-solids ratio).",
+      "duration_s": 10.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Slurry Tank: Agitator Shaft & Impeller, Slurry Transfer Pump (to digestion), Slurry Transfer Pump (to digestion) — Shaft & Coupling (turning).",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Bauxite Slurry Mixing Tank — Operation",
+    "type": "in_app_tour",
+    "model": "bauxite_slurry_mixing_tank.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "How the Bauxite Slurry Mixing Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Ground slurry and liquor enter.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The agitator mixes and suspends solids.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mx_agitator",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Level and density are measured.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mx_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pump sends slurry onward.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "slurry_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The agitator must give enough upward flow to keep coarse bauxite particles off the floor (the \"just-suspended\" speed, Zwietering correlation).",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Bauxite Slurry Mixing Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "bauxite_slurry_mixing_tank.glb",
+    "duration_s": 32.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Bauxite Slurry Mixing Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check agitator, level, density.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mx_agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impeller wear and scale.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mx_agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Gearbox overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mx_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for solids settling: sanding, high torque at restart. Common cause: agitator stop, low speed.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "mx_slurry",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling: reduced volume. Common cause: dsp scale.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mx_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Main job of the agitator?",
+     "options": [
+      "Keep solids suspended",
+      "Heat slurry",
+      "Grind",
+      "Pump"
+     ],
+     "answer": 0,
+     "explanation": "Suspension.",
+     "level": "basic"
+    },
+    {
+     "question": "Why hours of residence?",
+     "options": [
+      "Buffer and start desilication",
+      "Cooling",
+      "Noise",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Buffer.",
+     "level": "basic"
+    },
+    {
+     "question": "What is controlled here?",
+     "options": [
+      "Slurry density",
+      "Voltage",
+      "Colour",
+      "Pressure only"
+     ],
+     "answer": 0,
+     "explanation": "Density.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Inlets/outlet/level.\"",
+     "options": [
+      "Slurry Tank: Tank, Baffles",
+      "Slurry Transfer Pump (to digestion)",
+      "Ground Bauxite Slurry Inlet, Spent-Liquor Inlet, Outlet & Level Transmitter",
+      "Slurry Tank: Slurry / Liquor"
+     ],
+     "answer": 2,
+     "explanation": "Ground Bauxite Slurry Inlet, Spent-Liquor Inlet, Outlet & Level Transmitter: Inlets/outlet/level.",
+     "level": "basic",
+     "part": "nozzles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transfers slurry.\"",
+     "options": [
+      "Ground Bauxite Slurry Inlet, Spent-Liquor Inlet, Outlet & Level Transmitter",
+      "Slurry Tank: Tank, Baffles",
+      "Slurry Tank: Slurry / Liquor",
+      "Slurry Transfer Pump (to digestion)"
+     ],
+     "answer": 3,
+     "explanation": "Slurry Transfer Pump (to digestion): Transfers slurry.",
+     "level": "basic",
+     "part": "slurry_pump",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

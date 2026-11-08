@@ -1,0 +1,703 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "soft_starter",
+ "no": 85,
+ "title": "Soft Starter",
+ "model_title": "Soft Starter with Bypass Contactor (3-Phase Thyristor Control)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A soft starter limits the starting current and torque of an AC motor. Anti-parallel thyristors in each phase pass only part of each half-cycle at first and the firing angle is advanced over the ramp until full voltage; a bypass contactor then closes. It does not control running speed.",
+   "applications": [
+    "Pumps (reduces water hammer with soft stop)",
+    "Fans and compressors",
+    "Conveyors (avoids belt slip)",
+    "Where supply capacity limits direct-on-line starting"
+   ],
+   "key_points": [
+    "Reduced voltage start: torque ∝ V²",
+    "Starting current typically 2–4 × FLC",
+    "Bypass contactor removes heat during running",
+    "Cheaper than a VFD; no speed control"
+   ],
+   "classification": {
+    "family": "Power electronic motor starter",
+    "type": "3-phase controlled soft starter with internal bypass"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A soft starter reduces the starting current and torque shock of an AC motor. Anti-parallel thyristor (SCR) pairs in each phase let through only part of each half-cycle at first (reduced voltage); the firing angle is advanced over the ramp time until full voltage is reached, then a bypass contactor closes. Unlike a VFD, it does not change the running speed — only how the motor starts and stops."
+  },
+  "model_3d": {
+   "asset": "glb/soft_starter.glb",
+   "metadata": "meta/soft_starter.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3708,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "At start, the thyristors fire late in each half-cycle — reduced voltage reaches the motor.",
+    "The control module advances the firing angle along the ramp; the motor accelerates smoothly.",
+    "Current transformers monitor current for current-limit and protection."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "At start, the thyristors fire late in each half-cycle — reduced voltage reaches the motor.",
+     "part": "thyristors",
+     "cut": true,
+     "operate": true,
+     "overlay": "waveforms",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The control module advances the firing angle along the ramp; the motor accelerates smoothly.",
+     "part": "control_module",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Current transformers monitor current for current-limit and protection.",
+     "part": "current_transformers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At full voltage the bypass contactor closes and carries the running current.",
+     "part": "bypass_contacts",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A soft stop reverses the ramp (useful against pump water hammer).",
+     "part": "motor_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Starting current and torque vs speed for DOL vs soft start; current limit typically 2–4 × FLC."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "soft_starter_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "waveforms": {
+     "file": "soft_starter_waveforms.glb",
+     "title": "Voltage ramp by phase-angle control",
+     "description": "At start the thyristors fire late in each half-cycle, so only part of the sine wave reaches the motor (low voltage, low torque and current). The firing angle is advanced over the ramp time until the full voltage is applied; then the bypass contactor closes.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Start: reduced voltage",
+       "anchor": [
+        -0.4,
+        1.84,
+        0.225
+       ]
+      },
+      {
+       "text": "Ramp: firing advanced",
+       "anchor": [
+        -0.4,
+        1.68,
+        0.225
+       ]
+      },
+      {
+       "text": "Full voltage → bypass",
+       "anchor": [
+        -0.4,
+        1.52,
+        0.225
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/soft_starter.json#components",
+   "key_components": "Thyristor (SCR) pairs, bypass contactor, heatsink, control module, current transformers",
+   "parts": [
+    {
+     "id": "enclosure",
+     "name": "Starter Enclosure",
+     "info_ref": "ss_enclosure",
+     "function": "Houses the starter.",
+     "material": "Steel."
+    },
+    {
+     "id": "door",
+     "name": "Front Door (hidden in cutaway)",
+     "info_ref": "ss_enclosure",
+     "function": "Houses the starter.",
+     "material": "Steel."
+    },
+    {
+     "id": "thyristors",
+     "name": "Thyristor (SCR) Pairs — one anti-parallel pair per phase — on Heatsinks",
+     "info_ref": "ss_scr",
+     "function": "Control the voltage applied during start/stop by phase-angle firing.",
+     "material": "Silicon, aluminium."
+    },
+    {
+     "id": "current_transformers",
+     "name": "Current Transformers (current limit & protection)",
+     "info_ref": "ss_ct",
+     "function": "Measure motor current for current-limit and protection.",
+     "material": "—"
+    },
+    {
+     "id": "bypass_contactor",
+     "name": "Bypass Contactor Body & Coil",
+     "info_ref": "ss_bypass",
+     "function": "Short-circuits the SCRs after start to eliminate losses.",
+     "material": "Silver-alloy contacts."
+    },
+    {
+     "id": "bypass_contacts",
+     "name": "Bypass Contacts (close after the ramp)",
+     "info_ref": "ss_bypass",
+     "function": "Short-circuits the SCRs after start to eliminate losses.",
+     "material": "Silver-alloy contacts."
+    },
+    {
+     "id": "control_module",
+     "name": "Control Module (ramp time, initial voltage, current limit)",
+     "info_ref": "ss_control",
+     "function": "Sets ramp time, initial voltage, current limit; provides protection.",
+     "material": "Electronics."
+    },
+    {
+     "id": "terminals",
+     "name": "Line & Motor Terminals",
+     "info_ref": "ss_terminals",
+     "function": "Line and motor connections.",
+     "material": "Copper."
+    },
+    {
+     "id": "motor_frame",
+     "name": "Motor (soft-started) – Frame",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "motor_stator",
+     "name": "Motor (soft-started) – Stator & Windings",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "motor_rotor",
+     "name": "Motor (soft-started) – Rotor, Shaft & Speed Marker Disc",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "plinth",
+     "name": "Plinth",
+     "info_ref": "ss_enclosure",
+     "function": "Houses the starter.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Frames ~ 3 kW – several MW",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "3 – 5000+",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Motor runs at its normal speed",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Rated current (A); starts per hour",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "ramp_time": {
+     "typical_range": "~ 2 – 60",
+     "unit": "s"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Install on a level plinth or wall in a clean, dry, ventilated room within the rated ambient temperature."
+   ],
+   "alignment": [
+    "Keep the specified clearances above and below for cooling air; mount vertically as the maker requires."
+   ],
+   "piping": [
+    "Cabling: size cables for current and voltage drop; use screened (EMC) motor cable where required and bond the screen 360° at both ends.",
+    "Segregate power and control cables; fit the correct glands to keep the IP rating."
+   ],
+   "commissioning": [
+    "Check supply voltage, earthing and insulation resistance of the motor and cables before energising.",
+    "Enter motor nameplate data and protection settings; run an identification/auto-tune if available.",
+    "Check direction of rotation and record currents."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check fault log and temperatures.",
+     "part": "control_module",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check terminal torque; clean heatsinks.",
+     "part": "thyristors",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect bypass contacts.",
+     "part": "bypass_contacts"
+    }
+   ],
+   "lubrication": [
+    "None."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Thyristor failure",
+     "category": "performance",
+     "symptoms": [
+      "Phase loss / shorted SCR trip"
+     ],
+     "causes": [
+      "Overload, too many starts, surge"
+     ],
+     "remedies": [
+      "Replace SCR; check starts per hour"
+     ],
+     "part": "thyristors"
+    },
+    {
+     "problem": "Long start / stall",
+     "category": "performance",
+     "symptoms": [
+      "Motor does not reach speed"
+     ],
+     "causes": [
+      "Current limit too low for the load"
+     ],
+     "remedies": [
+      "Raise current limit; check load"
+     ],
+     "part": "control_module"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Soft Starter — Introduction",
+    "type": "in_app_tour",
+    "model": "soft_starter.glb",
+    "duration_s": 55.0,
+    "script": [
+     {
+      "narration": "This module introduces the Soft Starter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A soft starter limits the starting current and torque of an AC motor.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Anti-parallel thyristors in each phase pass only part of each half-cycle at first and the firing angle is advanced over the ramp until full voltage; a bypass contactor then closes.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It does not control running speed.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include pumps (reduces water hammer with soft stop); fans and compressors; conveyors (avoids belt slip); where supply capacity limits direct-on-line starting.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Motor (soft-started) – Rotor, Shaft & Speed Marker Disc.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Soft Starter — Operation",
+    "type": "in_app_tour",
+    "model": "soft_starter.glb",
+    "duration_s": 44.6,
+    "script": [
+     {
+      "narration": "How the Soft Starter works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "At start, the thyristors fire late in each half-cycle — reduced voltage reaches the motor.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "thyristors",
+       "cut": true,
+       "operate": true,
+       "overlay": "waveforms",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The control module advances the firing angle along the ramp; the motor accelerates smoothly.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "control_module",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Current transformers monitor current for current-limit and protection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "current_transformers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At full voltage the bypass contactor closes and carries the running current.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bypass_contacts",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A soft stop reverses the ramp (useful against pump water hammer).",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "motor_rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "At start the thyristors fire late in each half-cycle, so only part of the sine wave reaches the motor (low voltage, low torque and current).",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "waveforms",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Soft Starter — Maintenance",
+    "type": "in_app_tour",
+    "model": "soft_starter.glb",
+    "duration_s": 36.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Soft Starter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check fault log and temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "control_module",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check terminal torque; clean heatsinks.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "thyristors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect bypass contacts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bypass_contacts",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for thyristor failure: phase loss / shorted scr trip. Common cause: overload, too many starts, surge.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "thyristors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for long start / stall: motor does not reach speed. Common cause: current limit too low for the load.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "control_module",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Does a soft starter change the running speed?",
+     "options": [
+      "Yes",
+      "No — it only controls start and stop",
+      "Only for pumps",
+      "Only at night"
+     ],
+     "answer": 1,
+     "explanation": "Unlike a VFD.",
+     "level": "basic"
+    },
+    {
+     "question": "If voltage is halved during the start, motor torque falls to about…",
+     "options": [
+      "50 %",
+      "25 %",
+      "75 %",
+      "100 %"
+     ],
+     "answer": 1,
+     "explanation": "Torque ∝ V².",
+     "level": "basic"
+    },
+    {
+     "question": "Why close a bypass contactor after the ramp?",
+     "options": [
+      "To speed up the motor",
+      "To remove thyristor losses and heat in running",
+      "For EMC only",
+      "To stop the motor"
+     ],
+     "answer": 1,
+     "explanation": "Efficiency.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Houses the starter.\"",
+     "options": [
+      "Starter Enclosure",
+      "Motor (soft-started) – Frame",
+      "Line & Motor Terminals",
+      "Bypass Contactor Body & Coil"
+     ],
+     "answer": 0,
+     "explanation": "Starter Enclosure: Houses the starter.",
+     "level": "basic",
+     "part": "enclosure",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Control the voltage applied during start/stop by phase-angle firing.\"",
+     "options": [
+      "Starter Enclosure",
+      "Motor (soft-started) – Frame",
+      "Thyristor (SCR) Pairs — one anti-parallel pair per phase — on Heatsinks",
+      "Control Module (ramp time, initial voltage, current limit)"
+     ],
+     "answer": 2,
+     "explanation": "Thyristor (SCR) Pairs — one anti-parallel pair per phase — on Heatsinks: Control the voltage applied during start/stop by phase-angle firing.",
+     "level": "basic",
+     "part": "thyristors",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Measure motor current for current-limit and protection.\"",
+     "options": [
+      "Line & Motor Terminals",
+      "Starter Enclosure",
+      "Current Transformers (current limit & protection)",
+      "Motor (soft-started) – Frame"
+     ],
+     "answer": 2,
+     "explanation": "Current Transformers (current limit & protection): Measure motor current for current-limit and protection.",
+     "level": "basic",
+     "part": "current_transformers",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

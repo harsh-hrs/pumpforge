@@ -1,0 +1,607 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "preheater",
+  "title": "Shell & U-Tube Preheater (Steam-Heated Feedwater Heater)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 151,
+    "phase": 8,
+    "eq_id": "EQ-229",
+    "subcategory": "Heat transfer",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "preheater_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "preheater_temperature.glb",
+      "title": "Temperature: water heats along the bundle",
+      "description": "Feedwater (cool, blue) gains heat as it passes the tubes; condensing steam on the shell side stays near its saturation temperature, which is why the temperature difference is largest at the cold end. Condensate is sub-cooled in the drain-cooling zone at the bottom.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feedwater",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -0.8,
+          0.25,
+          -0.0
+        ],
+        [
+          -0.8,
+          0.7,
+          -0.0
+        ],
+        [
+          1.2,
+          0.69,
+          -0.06
+        ],
+        [
+          1.35,
+          0.85,
+          -0.06
+        ],
+        [
+          1.2,
+          1.01,
+          -0.06
+        ],
+        [
+          -0.8,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.8,
+          1.45,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.025,
+      "points": [
+        [
+          0.35,
+          1.47,
+          -0.0
+        ],
+        [
+          0.35,
+          1.17,
+          -0.0
+        ],
+        [
+          0.6,
+          1.15,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "condensate_drain",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.7,
+          0.53,
+          -0.1
+        ],
+        [
+          1.0,
+          0.5,
+          -0.0
+        ],
+        [
+          1.0,
+          0.25,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 13932,
+    "parts": 8
+  },
+  "summary": "A preheater raises the temperature of a fluid before it enters the main process — for example a feedwater heater, where turbine extraction steam condenses on the outside of a U-tube bundle and heats the boiler feedwater flowing inside. This recovers heat and improves cycle efficiency.",
+  "classification": {
+    "family": "Heat exchanger",
+    "type": "Shell & U-tube condensing preheater"
+  },
+  "model_configuration": {
+    "animation": "Condensate drips; level held in drain-cooling zone"
+  },
+  "standards": [
+    {
+      "id": "TEMA",
+      "title": "Standards of the Tubular Exchanger Manufacturers Association",
+      "relevance": "Mechanical design of shell & tube exchangers.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 660",
+      "title": "Shell-and-tube heat exchangers",
+      "relevance": "Refinery/petrochemical service.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "HEI 2622",
+      "title": "Standards for closed feedwater heaters",
+      "relevance": "Power-plant feedwater heaters.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "HEI feedwater heater standards"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Shell (steam side)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.6,
+        0.45,
+        -0.4
+      ],
+      "bbox_max": [
+        1.6,
+        1.25,
+        0.4
+      ],
+      "label_anchor": [
+        0.5,
+        0.85,
+        0.4
+      ],
+      "center": [
+        0.5,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "ph_shell"
+    },
+    {
+      "id": "channel",
+      "name": "Channel (water box) with Pass Partition & Tubesheet",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "channel__back",
+        "channel__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.19,
+        0.42,
+        -0.43
+      ],
+      "bbox_max": [
+        -0.6,
+        1.28,
+        0.43
+      ],
+      "label_anchor": [
+        -0.895,
+        0.85,
+        0.43
+      ],
+      "center": [
+        -0.895,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "ph_channel"
+    },
+    {
+      "id": "tube_bundle",
+      "name": "U-Tube Bundle (feedwater inside)",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "tube_bundle.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.6
+      ],
+      "bbox_min": [
+        -0.6,
+        0.59,
+        -0.19
+      ],
+      "bbox_max": [
+        1.51,
+        1.11,
+        0.19
+      ],
+      "label_anchor": [
+        0.455,
+        0.85,
+        0.19
+      ],
+      "center": [
+        0.455,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "ph_bundle"
+    },
+    {
+      "id": "baffles",
+      "name": "Segmental Baffles & Steam Impingement Plate",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "baffles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -0.255,
+        0.462,
+        -0.388
+      ],
+      "bbox_max": [
+        0.955,
+        1.238,
+        0.388
+      ],
+      "label_anchor": [
+        0.35,
+        0.85,
+        0.388
+      ],
+      "center": [
+        0.35,
+        0.85,
+        -0.0
+      ],
+      "info_ref": "ph_baffles"
+    },
+    {
+      "id": "condensate",
+      "name": "Condensate Level (drain-cooling zone)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.3
+      ],
+      "bbox_min": [
+        -0.59,
+        0.461,
+        -0.26962
+      ],
+      "bbox_max": [
+        1.4,
+        0.57,
+        -0.0
+      ],
+      "label_anchor": [
+        0.405,
+        0.5155,
+        -0.0
+      ],
+      "center": [
+        0.405,
+        0.5155,
+        -0.13481
+      ],
+      "info_ref": "ph_condensate"
+    },
+    {
+      "id": "nozzles",
+      "name": "Nozzles: Steam In, Condensate Drain, Feedwater In/Out, Vent",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.914,
+        0.25,
+        -0.152
+      ],
+      "bbox_max": [
+        1.238,
+        1.47,
+        0.152
+      ],
+      "label_anchor": [
+        0.162,
+        0.86,
+        0.152
+      ],
+      "center": [
+        0.162,
+        0.86,
+        -0.0
+      ],
+      "info_ref": "ph_nozzles"
+    },
+    {
+      "id": "saddles",
+      "name": "Saddle Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "sd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.28,
+        0.0,
+        -0.4
+      ],
+      "bbox_max": [
+        1.08,
+        0.646,
+        0.4
+      ],
+      "label_anchor": [
+        0.4,
+        0.323,
+        0.4
+      ],
+      "center": [
+        0.4,
+        0.323,
+        -0.0
+      ],
+      "info_ref": "ph_saddles"
+    },
+    {
+      "id": "drips",
+      "name": "Condensate Dripping off the Tubes",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "drips0",
+        "drips1",
+        "drips2",
+        "drips3",
+        "drips4",
+        "drips5",
+        "drips6",
+        "drips7",
+        "drips8",
+        "drips9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ph_shell": {
+      "function": "Contains the condensing steam.",
+      "construction": "Cylindrical shell.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ph_channel": {
+      "function": "Water box: water in/out.",
+      "construction": "Channel, pass partition, tubesheet.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ph_bundle": {
+      "function": "Heat transfer surface.",
+      "construction": "U-tubes.",
+      "material": "Stainless/carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Tube leaks, erosion at inlet"
+      ],
+      "inspection": [
+        "Eddy current"
+      ]
+    },
+    "ph_baffles": {
+      "function": "Support tubes, direct steam; impingement plate protects tubes.",
+      "construction": "Segmental baffles.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ph_condensate": {
+      "function": "Condensate level (drain cooling).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ph_nozzles": {
+      "function": "Steam, drain, water and vent connections.",
+      "construction": "Nozzles.",
+      "material": "Steel.",
+      "operating_conditions": "Vent non-condensables continuously.",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ph_saddles": {
+      "function": "Supports.",
+      "construction": "Saddles.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

@@ -1,0 +1,620 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "silencer",
+ "no": 112,
+ "title": "Silencer",
+ "model_title": "Combination (Reactive + Absorptive) Silencer for Gas/Steam Vent or Engine Exhaust",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A silencer reduces noise from flowing gas. Reactive chambers and baffles reflect low-frequency sound; absorptive packing behind a perforated tube converts high-frequency sound into heat. Together they give broad-band noise reduction with low pressure loss.",
+   "applications": [
+    "Engine and gas-turbine exhausts",
+    "Steam and safety-valve vents",
+    "Blower/compressor intakes and outlets",
+    "Fan ducts"
+   ],
+   "key_points": [
+    "Insertion loss in dB",
+    "Reactive = low frequency; absorptive = high frequency",
+    "Back-pressure limits",
+    "Packing retention"
+   ],
+   "classification": {
+    "family": "Noise control",
+    "type": "Combination reactive/absorptive silencer"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A silencer reduces noise from gas flow (engine exhausts, blow-offs, vents). Reactive chambers and baffles reflect low-frequency sound back toward the source; absorptive packing behind a perforated tube converts high-frequency sound into heat. Combined designs cover a wide frequency range with low pressure drop."
+  },
+  "model_3d": {
+   "asset": "glb/silencer.glb",
+   "metadata": "meta/silencer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4156,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Noisy gas enters the inlet cone.",
+    "Baffled chambers reflect low-frequency sound.",
+    "Packing behind the perforated tube absorbs high frequencies."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Noisy gas enters the inlet cone.",
+     "part": "shell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Baffled chambers reflect low-frequency sound.",
+     "part": "baffles",
+     "cut": true,
+     "operate": true,
+     "overlay": "noise",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Packing behind the perforated tube absorbs high frequencies.",
+     "part": "absorptive_section",
+     "cut": true,
+     "operate": true,
+     "overlay": "noise",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Quieter gas leaves the outlet.",
+     "part": "connections",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Insertion loss vs frequency (octave bands)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "silencer_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "noise": {
+     "file": "silencer_noise.glb",
+     "title": "Sound level through the silencer",
+     "description": "Large rings = loud. Chambers and baffles reflect low-frequency sound back (reactive); the packing around the perforated tube absorbs high frequencies (absorptive). Insertion loss is typically 20–40 dB(A).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Inlet: loud pulsating gas",
+       "anchor": [
+        -1.4,
+        1.0,
+        -0.0
+       ]
+      },
+      {
+       "text": "Outlet: much quieter",
+       "anchor": [
+        1.4,
+        0.85,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/silencer.json#components",
+   "key_components": "Perforated tube, absorptive packing, baffle chambers, shell",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Silencer Shell with Inlet & Outlet Cones",
+     "info_ref": "si_shell",
+     "function": "Pressure shell.",
+     "material": "Steel."
+    },
+    {
+     "id": "baffles",
+     "name": "Reactive Baffles (expansion chambers reflect low-frequency sound)",
+     "info_ref": "si_baffles",
+     "function": "Create chambers that reflect sound.",
+     "material": "Steel."
+    },
+    {
+     "id": "absorptive_section",
+     "name": "Perforated Tube & Absorptive Packing (mineral wool) — high-frequency absorption",
+     "info_ref": "si_absorptive",
+     "function": "Absorb high-frequency noise.",
+     "material": "Steel, mineral wool."
+    },
+    {
+     "id": "connections",
+     "name": "Inlet & Outlet Flanges",
+     "info_ref": "si_connections",
+     "function": "Flanges.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Supports",
+     "info_ref": "si_supports",
+     "function": "Supports.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "DN 25 – 3000",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 40 (vent silencers)",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 600",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Insertion loss ~ 20 – 40",
+     "unit": "dB(A)"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for rattles and leaks.",
+     "part": "shell",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect packing condition.",
+     "part": "absorptive_section",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Repack/replace.",
+     "part": "absorptive_section"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Packing loss",
+     "category": "performance",
+     "symptoms": [
+      "Noise rises"
+     ],
+     "causes": [
+      "Erosion/burn-out of packing"
+     ],
+     "remedies": [
+      "Repack with retention cloth"
+     ],
+     "part": "absorptive_section"
+    },
+    {
+     "problem": "Excess back-pressure",
+     "category": "performance",
+     "symptoms": [
+      "Engine power loss"
+     ],
+     "causes": [
+      "Blockage"
+     ],
+     "remedies": [
+      "Clean"
+     ],
+     "part": "baffles"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Silencer — Introduction",
+    "type": "in_app_tour",
+    "model": "silencer.glb",
+    "duration_s": 46.3,
+    "script": [
+     {
+      "narration": "This module introduces the Silencer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A silencer reduces noise from flowing gas.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Reactive chambers and baffles reflect low-frequency sound; absorptive packing behind a perforated tube converts high-frequency sound into heat.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Together they give broad-band noise reduction with low pressure loss.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include engine and gas-turbine exhausts; steam and safety-valve vents; blower/compressor intakes and outlets; fan ducts.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Silencer Shell with Inlet & Outlet Cones.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Silencer — Operation",
+    "type": "in_app_tour",
+    "model": "silencer.glb",
+    "duration_s": 28.2,
+    "script": [
+     {
+      "narration": "How the Silencer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Noisy gas enters the inlet cone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Baffled chambers reflect low-frequency sound.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "baffles",
+       "cut": true,
+       "operate": true,
+       "overlay": "noise",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Packing behind the perforated tube absorbs high frequencies.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "absorptive_section",
+       "cut": true,
+       "operate": true,
+       "overlay": "noise",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Quieter gas leaves the outlet.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "connections",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Large rings = loud.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "noise",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Silencer — Maintenance",
+    "type": "in_app_tour",
+    "model": "silencer.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Silencer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for rattles and leaks.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect packing condition.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "absorptive_section",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Repack/replace.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "absorptive_section",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for packing loss: noise rises. Common cause: erosion/burn-out of packing.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "absorptive_section",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for excess back-pressure: engine power loss. Common cause: blockage.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "baffles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Reactive silencers mainly control…",
+     "options": [
+      "High frequencies",
+      "Low frequencies",
+      "Vibration only",
+      "Temperature"
+     ],
+     "answer": 1,
+     "explanation": "Reflection.",
+     "level": "basic"
+    },
+    {
+     "question": "Absorptive packing converts sound into…",
+     "options": [
+      "Light",
+      "Heat",
+      "Pressure",
+      "Electricity"
+     ],
+     "answer": 1,
+     "explanation": "Dissipation.",
+     "level": "basic"
+    },
+    {
+     "question": "Insertion loss is measured in…",
+     "options": [
+      "bar",
+      "dB",
+      "kW",
+      "m/s"
+     ],
+     "answer": 1,
+     "explanation": "Decibels.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure shell.\"",
+     "options": [
+      "Silencer Shell with Inlet & Outlet Cones",
+      "Reactive Baffles (expansion chambers reflect low-frequency sound)",
+      "Supports",
+      "Inlet & Outlet Flanges"
+     ],
+     "answer": 0,
+     "explanation": "Silencer Shell with Inlet & Outlet Cones: Pressure shell.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Create chambers that reflect sound.\"",
+     "options": [
+      "Reactive Baffles (expansion chambers reflect low-frequency sound)",
+      "Silencer Shell with Inlet & Outlet Cones",
+      "Supports",
+      "Inlet & Outlet Flanges"
+     ],
+     "answer": 0,
+     "explanation": "Reactive Baffles (expansion chambers reflect low-frequency sound): Create chambers that reflect sound.",
+     "level": "basic",
+     "part": "baffles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Absorb high-frequency noise.\"",
+     "options": [
+      "Perforated Tube & Absorptive Packing (mineral wool) — high-frequency absorption",
+      "Silencer Shell with Inlet & Outlet Cones",
+      "Supports",
+      "Inlet & Outlet Flanges"
+     ],
+     "answer": 0,
+     "explanation": "Perforated Tube & Absorptive Packing (mineral wool) — high-frequency absorption: Absorb high-frequency noise.",
+     "level": "basic",
+     "part": "absorptive_section",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,774 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "rotary_screw_compressor",
+ "no": 64,
+ "title": "Rotary Screw Compressor",
+ "model_title": "Oil-Injected Rotary Screw Compressor Package (4/6 Lobe Rotors)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A rotary screw compressor compresses gas between two meshing helical rotors. Gas fills the lobe spaces at the inlet, is sealed off and carried along the rotors while the pocket shrinks, then leaves through the discharge port. Oil-injected machines use oil to seal, cool and lubricate; it is separated afterwards.",
+   "applications": [
+    "Plant and instrument air (most common industrial compressor)",
+    "Refrigeration and heat pumps",
+    "Gas boosting (fuel gas, flare gas recovery)",
+    "Mobile construction compressors"
+   ],
+   "key_points": [
+    "Continuous, almost pulsation-free flow",
+    "Few wear parts — long service intervals",
+    "Built-in volume ratio set by the ports",
+    "Oil separator and oil quality are critical"
+   ],
+   "classification": {
+    "family": "Positive-displacement compressor (rotary)",
+    "type": "Twin-screw, oil-injected, single stage, direct drive"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "An oil-injected rotary screw compressor uses two meshing helical rotors. Gas fills the spaces between the lobes at the inlet end; as the rotors turn the pocket is sealed, carried along and made smaller until it opens to the discharge port. Injected oil seals, cools and lubricates; it is then separated from the air in the separator vessel and returned."
+  },
+  "model_3d": {
+   "asset": "glb/rotary_screw_compressor.glb",
+   "metadata": "meta/rotary_screw_compressor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 44478,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Air enters through the filter and inlet valve into the lobes at the inlet end.",
+    "The male rotor (driven by the motor) turns the female rotor; a pocket of air is sealed between the lobes and the casing.",
+    "As the rotors turn, the pocket moves toward the discharge end and its volume shrinks — pressure rises."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Air enters through the filter and inlet valve into the lobes at the inlet end.",
+     "part": "inlet_valve_filter",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The male rotor (driven by the motor) turns the female rotor; a pocket of air is sealed between the lobes and the casing.",
+     "part": "male_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "As the rotors turn, the pocket moves toward the discharge end and its volume shrinks — pressure rises.",
+     "part": "female_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil injected into the pockets seals the clearances and absorbs the heat of compression.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The air–oil mixture leaves through the discharge port to the separator vessel; clean air goes to service and oil returns.",
+     "part": "oil_separator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flow almost constant with pressure; specific power (kW per m³/min) is the key efficiency measure (ISO 1217 Annex C/E)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "rotary_screw_compressor_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "rotary_screw_compressor_pressure.glb",
+     "title": "Pressure along the rotors",
+     "description": "Air trapped between the lobes is carried from the inlet end toward the discharge end; the pocket shrinks and the pressure rises until the pocket reaches the discharge port (built-in volume ratio).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Inlet: atmospheric",
+       "anchor": [
+        -0.19,
+        0.79,
+        -0.0
+       ]
+      },
+      {
+       "text": "Discharge: e.g. 7–8 bar(g)",
+       "anchor": [
+        0.22,
+        0.31,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/rotary_screw_compressor.json#components",
+   "key_components": "Male & female rotors, rotor casing, bearings, inlet valve, oil separator",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Rotor Casing (Inlet Port top, Discharge Port bottom)",
+     "info_ref": "sc_casing",
+     "function": "Encloses the rotors with tight clearances; contains inlet and discharge ports.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "male_rotor",
+     "name": "Male Rotor (4 lobes) — driven by the motor",
+     "info_ref": "sc_male",
+     "function": "Driven rotor; with the female rotor it forms shrinking pockets of gas.",
+     "material": "Forged steel."
+    },
+    {
+     "id": "female_rotor",
+     "name": "Female Rotor (6 flutes)",
+     "info_ref": "sc_female",
+     "function": "Meshes with the male rotor and is driven through the oil film.",
+     "material": "Forged steel / ductile iron."
+    },
+    {
+     "id": "bearings",
+     "name": "Rotor Bearings (radial rollers + discharge-end thrust bearings)",
+     "info_ref": "sc_bearings",
+     "function": "Locate rotors radially and carry the axial gas thrust.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "inlet_valve_filter",
+     "name": "Air Filter & Inlet (Suction-Throttle) Valve",
+     "info_ref": "sc_inlet",
+     "function": "Cleans incoming air and controls capacity (load/unload or modulation).",
+     "material": "Aluminium, paper/synthetic media."
+    },
+    {
+     "id": "oil_separator",
+     "name": "Oil Separator Vessel, Separator Element & Oil Sump",
+     "info_ref": "sc_separator",
+     "function": "Separates oil from the compressed air and stores the oil.",
+     "material": "Carbon steel vessel; glass-fibre element."
+    },
+    {
+     "id": "piping",
+     "name": "Discharge Line, Oil Injection Line & Service Air Outlet",
+     "info_ref": "sc_piping",
+     "function": "Carries air/oil mixture to the separator, oil back to injection, and air to service.",
+     "material": "Steel, copper."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Rotor diameter ~ 50 – 500 mm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "4 – 500 (oil-injected air)",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "1500 – 6000 (rotor tip speed governed)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "0.5 – 100 m³/min free air delivery",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "discharge_pressure": {
+     "typical_range": "7 – 13 bar(g) typical (single stage)",
+     "unit": "bar"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Use an air receiver, dryer and filters per the required ISO 8573-1 class; slope pipework to drains.",
+    "Provide enough ventilation to remove the compressor heat (or recover it)."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check oil level, discharge temperature and separator ΔP.",
+     "part": "oil_separator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change oil, oil filter, air filter and separator element per running hours.",
+     "part": "oil_separator",
+     "interval": "2000–8000 h"
+    },
+    {
+     "task": "Check inlet valve function.",
+     "part": "inlet_valve_filter",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace rotor bearings and shaft seal (airend overhaul).",
+     "part": "bearings",
+     "interval": "~ 40 000 h"
+    }
+   ],
+   "lubrication": [
+    "Compressor oil (mineral or synthetic) as specified; oil also lubricates the bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High discharge temperature",
+     "category": "performance",
+     "symptoms": [
+      "Trips on temperature"
+     ],
+     "causes": [
+      "Low oil, blocked oil cooler, high ambient"
+     ],
+     "remedies": [
+      "Top up oil, clean cooler, improve ventilation"
+     ],
+     "part": "piping"
+    },
+    {
+     "problem": "Oil carry-over",
+     "category": "performance",
+     "symptoms": [
+      "Oil in the air system"
+     ],
+     "causes": [
+      "Separator element failed, high oil level, scavenge line blocked"
+     ],
+     "remedies": [
+      "Replace element, correct level"
+     ],
+     "part": "oil_separator"
+    },
+    {
+     "problem": "Bearing wear",
+     "category": "wear",
+     "symptoms": [
+      "Rising vibration and noise"
+     ],
+     "causes": [
+      "Age, oil contamination"
+     ],
+     "remedies": [
+      "Airend overhaul"
+     ],
+     "part": "bearings"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Rotary Screw Compressor — Introduction",
+    "type": "in_app_tour",
+    "model": "rotary_screw_compressor.glb",
+    "duration_s": 58.5,
+    "script": [
+     {
+      "narration": "This module introduces the Rotary Screw Compressor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A rotary screw compressor compresses gas between two meshing helical rotors.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gas fills the lobe spaces at the inlet, is sealed off and carried along the rotors while the pocket shrinks, then leaves through the discharge port.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Oil-injected machines use oil to seal, cool and lubricate; it is separated afterwards.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include plant and instrument air (most common industrial compressor); refrigeration and heat pumps; gas boosting (fuel gas, flare gas recovery); mobile construction compressors.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rotor Casing (Inlet Port top, Discharge Port bottom), Male Rotor (4 lobes) — driven by the motor, Female Rotor (6 flutes).",
+      "duration_s": 10.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Rotary Screw Compressor — Operation",
+    "type": "in_app_tour",
+    "model": "rotary_screw_compressor.glb",
+    "duration_s": 59.5,
+    "script": [
+     {
+      "narration": "How the Rotary Screw Compressor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Air enters through the filter and inlet valve into the lobes at the inlet end.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "inlet_valve_filter",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The male rotor (driven by the motor) turns the female rotor; a pocket of air is sealed between the lobes and the casing.",
+      "duration_s": 9.6,
+      "action": {
+       "highlight": "male_rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "As the rotors turn, the pocket moves toward the discharge end and its volume shrinks — pressure rises.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "female_rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil injected into the pockets seals the clearances and absorbs the heat of compression.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The air–oil mixture leaves through the discharge port to the separator vessel; clean air goes to service and oil returns.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "oil_separator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Air trapped between the lobes is carried from the inlet end toward the discharge end; the pocket shrinks and the pressure rises until the pocket reaches the discharge port (built-in volume ratio).",
+      "duration_s": 13.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Rotary Screw Compressor — Maintenance",
+    "type": "in_app_tour",
+    "model": "rotary_screw_compressor.glb",
+    "duration_s": 48.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Rotary Screw Compressor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check oil level, discharge temperature and separator ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_separator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change oil, oil filter, air filter and separator element per running hours.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "oil_separator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check inlet valve function.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_valve_filter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace rotor bearings and shaft seal (airend overhaul).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high discharge temperature: trips on temperature. Common cause: low oil, blocked oil cooler, high ambient.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oil carry-over: oil in the air system. Common cause: separator element failed, high oil level, scavenge line blocked.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "oil_separator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bearing wear: rising vibration and noise. Common cause: age, oil contamination.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "In an oil-injected screw compressor the oil does NOT…",
+     "options": [
+      "Seal the clearances",
+      "Cool the air",
+      "Lubricate bearings",
+      "Drive the female rotor through gears"
+     ],
+     "answer": 3,
+     "explanation": "In oil-injected units the male drives the female through the oil film — no timing gears.",
+     "level": "basic"
+    },
+    {
+     "question": "Why does the pressure rise along the rotors?",
+     "options": [
+      "The rotors heat the air",
+      "The trapped pocket gets smaller",
+      "The motor speeds up",
+      "Oil pushes the air"
+     ],
+     "answer": 1,
+     "explanation": "Positive displacement.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets the \"built-in\" pressure ratio?",
+     "options": [
+      "Motor size",
+      "The size and position of the discharge port",
+      "The air filter",
+      "Oil grade"
+     ],
+     "answer": 1,
+     "explanation": "Built-in volume ratio.",
+     "level": "basic"
+    },
+    {
+     "question": "The male rotor has 4 lobes and the female 6. If the male turns at 3000 rpm, the female turns at…",
+     "options": [
+      "4500 rpm",
+      "3000 rpm",
+      "2000 rpm",
+      "1500 rpm"
+     ],
+     "answer": 2,
+     "explanation": "3000 × 4/6.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the rotors with tight clearances; contains inlet and discharge ports.\"",
+     "options": [
+      "Rotor Casing (Inlet Port top, Discharge Port bottom)",
+      "Electric Motor – Bearings (DE & NDE)",
+      "Flexible Coupling",
+      "Electric Motor – Rotor & Shaft"
+     ],
+     "answer": 0,
+     "explanation": "Rotor Casing (Inlet Port top, Discharge Port bottom): Encloses the rotors with tight clearances; contains inlet and discharge ports.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Driven rotor; with the female rotor it forms shrinking pockets of gas.\"",
+     "options": [
+      "Electric Motor – Rotor & Shaft",
+      "Rotor Bearings (radial rollers + discharge-end thrust bearings)",
+      "Male Rotor (4 lobes) — driven by the motor",
+      "Electric Motor – Stator"
+     ],
+     "answer": 2,
+     "explanation": "Male Rotor (4 lobes) — driven by the motor: Driven rotor; with the female rotor it forms shrinking pockets of gas.",
+     "level": "basic",
+     "part": "male_rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Meshes with the male rotor and is driven through the oil film.\"",
+     "options": [
+      "Air Filter & Inlet (Suction-Throttle) Valve",
+      "Electric Motor – Bearings (DE & NDE)",
+      "Flexible Coupling",
+      "Female Rotor (6 flutes)"
+     ],
+     "answer": 3,
+     "explanation": "Female Rotor (6 flutes): Meshes with the male rotor and is driven through the oil film.",
+     "level": "basic",
+     "part": "female_rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

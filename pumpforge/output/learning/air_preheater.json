@@ -1,0 +1,639 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "air_preheater",
+ "no": 154,
+ "title": "Air Preheater",
+ "model_title": "Rotary Regenerative Air Preheater (Ljungström Type)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An air preheater transfers heat from the boiler flue gas to the incoming combustion air. In the rotary regenerative (Ljungström) type, a slowly rotating rotor packed with corrugated steel plates passes alternately through the gas and air streams: the plates absorb heat in the gas and release it to the air.",
+   "applications": [
+    "Coal, oil and gas-fired utility boilers",
+    "Large industrial boilers and furnaces"
+   ],
+   "key_points": [
+    "Hotter air → better combustion and efficiency",
+    "Rotor ≈ 1–3 rpm",
+    "Air-to-gas leakage through seals is the main loss",
+    "Cold end prone to acid corrosion/fouling"
+   ],
+   "classification": {
+    "family": "Boiler heat recovery",
+    "type": "Ljungström rotary regenerative (vertical shaft)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A rotary regenerative air preheater transfers heat from boiler flue gas to the incoming combustion air. A large rotor packed with corrugated steel plates turns slowly; the plates are heated while passing through the gas side and release that heat while passing through the air side."
+  },
+  "model_3d": {
+   "asset": "glb/air_preheater.glb",
+   "metadata": "meta/air_preheater.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7964,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot flue gas passes down through one half of the rotor.",
+    "The rotor turns slowly, carrying heated plates to the air side.",
+    "Combustion air flows up through the other half and is heated."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot flue gas passes down through one half of the rotor.",
+     "part": "ducts",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotor turns slowly, carrying heated plates to the air side.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Combustion air flows up through the other half and is heated.",
+     "part": "housing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Seals and sector plates limit leakage between the streams.",
+     "part": "sector_plates_seals",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drive turns the rotor through a pinion and pin rack.",
+     "part": "drive",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Air outlet temperature rises with gas inlet temperature and rotor speed up to a limit; leakage % rises as seals wear."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "air_preheater_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "air_preheater_temperature.glb",
+     "title": "Hot side vs cold side of the rotor",
+     "description": "The matrix plates in the gas half (right) are heated by the flue gas; as the rotor turns (about 1–3 rpm) they move into the air half (left) and give that heat to the combustion air. Hotter combustion air improves boiler efficiency (roughly 1 % fuel saving per ~20 °C of extra air temperature, rule of thumb). Leakage of air into gas past the seals is the main performance loss.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/air_preheater.json#components",
+   "key_components": "Rotating heat-transfer matrix (rotor), sector plates, seals, gas & air ducts, drive",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Housing (rotor shell)",
+     "info_ref": "ap_housing",
+     "function": "Encloses the rotor.",
+     "material": "Steel."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor with Heating-Element Baskets (matrix) — turns slowly through gas and air",
+     "info_ref": "ap_rotor",
+     "function": "Stores and transfers heat.",
+     "material": "Steel/enamelled cold end."
+    },
+    {
+     "id": "sector_plates_seals",
+     "name": "Sector Plates & Radial/Circumferential Seals (limit air-to-gas leakage)",
+     "info_ref": "ap_seals",
+     "function": "Limit air leakage into the gas side.",
+     "material": "Steel."
+    },
+    {
+     "id": "ducts",
+     "name": "Ducts: Flue Gas In (top) / Out (bottom), Air In (bottom) / Out (top)",
+     "info_ref": "ap_ducts",
+     "function": "Connect gas and air paths.",
+     "material": "Steel."
+    },
+    {
+     "id": "drive",
+     "name": "Rotor Drive (motor, reducer, pinion on pin rack)",
+     "info_ref": "ap_drive",
+     "function": "Turns the rotor.",
+     "material": "—"
+    },
+    {
+     "id": "structure",
+     "name": "Support Structure",
+     "info_ref": "ap_housing",
+     "function": "Encloses the rotor.",
+     "material": "Steel."
+    },
+    {
+     "id": "gas_particles",
+     "name": "Hot Flue Gas passing Down through the Matrix",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "air_particles",
+     "name": "Combustion Air passing Up through the Matrix",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Rotor ~ 3 – 20 m diameter",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 5 – 300",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Gas ~ 350 → 130; air ~ 30 → 300",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Air ~ 50 – 5000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Compare regenerative vs tubular recuperative heaters for leakage tolerance and size; check cold-end temperature."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ASME PTC 4.3",
+    "Babcock & Wilcox — Steam"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth/foundation designed for operating weight full of water; allow access for tube cleaning and burner maintenance."
+   ],
+   "alignment": [
+    "Level the boiler; align burner and fan; check expansion allowances on headers and casings."
+   ],
+   "piping": [
+    "Fit safety valves with unobstructed discharge piped to a safe place; feedwater with check and isolation valves; blowdown to a blowdown vessel.",
+    "Flue/stack sized for the draught required; explosion relief where specified."
+   ],
+   "commissioning": [
+    "Boil-out/chemical clean; hydro-test; set and test safety valves; test low-water cut-outs and flame safeguard (purge, ignition, flame failure); tune combustion (O₂, CO)."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor ΔP, leakage (O₂ rise) and temperatures.",
+     "part": "housing",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Soot blowing/washing of the matrix.",
+     "part": "rotor",
+     "interval": "per schedule"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Adjust/replace seals; replace cold-end baskets.",
+     "part": "sector_plates_seals"
+    }
+   ],
+   "lubrication": [
+    "Rotor support/guide bearings: oil per maker; drive gearbox oil."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High air-to-gas leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Higher fan power, O₂ rise across heater"
+     ],
+     "causes": [
+      "Seal wear, rotor distortion"
+     ],
+     "remedies": [
+      "Adjust/replace seals"
+     ],
+     "part": "sector_plates_seals"
+    },
+    {
+     "problem": "Cold-end fouling/corrosion",
+     "category": "corrosion",
+     "symptoms": [
+      "ΔP rise"
+     ],
+     "causes": [
+      "Acid condensation, ammonium bisulphate"
+     ],
+     "remedies": [
+      "Raise cold-end temperature; wash; enamelled baskets"
+     ],
+     "part": "rotor"
+    }
+   ],
+   "safety": [
+    "Fire risk from deposits — fire detection and washing systems; lock out the drive before entry."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Air Preheater — Introduction",
+    "type": "in_app_tour",
+    "model": "air_preheater.glb",
+    "duration_s": 52.3,
+    "script": [
+     {
+      "narration": "This module introduces the Air Preheater.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An air preheater transfers heat from the boiler flue gas to the incoming combustion air.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In the rotary regenerative (Ljungström) type, a slowly rotating rotor packed with corrugated steel plates passes alternately through the gas and air streams: the plates absorb heat in the gas and release it to the air.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include coal, oil and gas-fired utility boilers; large industrial boilers and furnaces.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Housing (rotor shell), Rotor with Heating-Element Baskets (matrix) — turns slowly through gas and air.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Air Preheater — Operation",
+    "type": "in_app_tour",
+    "model": "air_preheater.glb",
+    "duration_s": 46.0,
+    "script": [
+     {
+      "narration": "How the Air Preheater works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot flue gas passes down through one half of the rotor.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "ducts",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotor turns slowly, carrying heated plates to the air side.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Combustion air flows up through the other half and is heated.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "housing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Seals and sector plates limit leakage between the streams.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sector_plates_seals",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drive turns the rotor through a pinion and pin rack.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "drive",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The matrix plates in the gas half (right) are heated by the flue gas; as the rotor turns (about 1–3 rpm) they move into the air half (left) and give that heat to the combustion air.",
+      "duration_s": 15.4,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Air Preheater — Maintenance",
+    "type": "in_app_tour",
+    "model": "air_preheater.glb",
+    "duration_s": 36.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Air Preheater.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor ΔP, leakage (O₂ rise) and temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Soot blowing/washing of the matrix.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Adjust/replace seals; replace cold-end baskets.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sector_plates_seals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high air-to-gas leakage: higher fan power, o₂ rise across heater. Common cause: seal wear, rotor distortion.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "sector_plates_seals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cold-end fouling/corrosion: δp rise. Common cause: acid condensation, ammonium bisulphate.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How does a regenerative air preheater work?",
+     "options": [
+      "A rotor stores heat in gas and releases it in air",
+      "Gas and air mix",
+      "Electric heating",
+      "Water transfers heat"
+     ],
+     "answer": 0,
+     "explanation": "Regeneration.",
+     "level": "basic"
+    },
+    {
+     "question": "Main loss mechanism?",
+     "options": [
+      "Air leakage to gas side past seals",
+      "Noise",
+      "Paint",
+      "Vibration"
+     ],
+     "answer": 0,
+     "explanation": "Seal leakage.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical rotor speed is…",
+     "options": [
+      "About 1–3 rpm",
+      "1500 rpm",
+      "100 rpm",
+      "0 rpm"
+     ],
+     "answer": 0,
+     "explanation": "Slow rotation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the rotor.\"",
+     "options": [
+      "Ducts: Flue Gas In (top) / Out (bottom), Air In (bottom) / Out (top)",
+      "Rotor Drive (motor, reducer, pinion on pin rack)",
+      "Housing (rotor shell)",
+      "Hot Flue Gas passing Down through the Matrix"
+     ],
+     "answer": 2,
+     "explanation": "Housing (rotor shell): Encloses the rotor.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Stores and transfers heat.\"",
+     "options": [
+      "Sector Plates & Radial/Circumferential Seals (limit air-to-gas leakage)",
+      "Housing (rotor shell)",
+      "Ducts: Flue Gas In (top) / Out (bottom), Air In (bottom) / Out (top)",
+      "Rotor with Heating-Element Baskets (matrix) — turns slowly through gas and air"
+     ],
+     "answer": 3,
+     "explanation": "Rotor with Heating-Element Baskets (matrix) — turns slowly through gas and air: Stores and transfers heat.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Limit air leakage into the gas side.\"",
+     "options": [
+      "Sector Plates & Radial/Circumferential Seals (limit air-to-gas leakage)",
+      "Housing (rotor shell)",
+      "Rotor with Heating-Element Baskets (matrix) — turns slowly through gas and air",
+      "Ducts: Flue Gas In (top) / Out (bottom), Air In (bottom) / Out (top)"
+     ],
+     "answer": 0,
+     "explanation": "Sector Plates & Radial/Circumferential Seals (limit air-to-gas leakage): Limit air leakage into the gas side.",
+     "level": "basic",
+     "part": "sector_plates_seals",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

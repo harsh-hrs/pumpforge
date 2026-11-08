@@ -1,0 +1,1112 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "multiple_effect_evaporator",
+  "title": "Triple-Effect Evaporator (Forward Feed, Short-Tube Calandrias)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 160,
+    "phase": 8,
+    "eq_id": "EQ-238",
+    "subcategory": "Evaporation",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "multiple_effect_evaporator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "multiple_effect_evaporator_pressure.glb",
+      "title": "Pressure and boiling point fall from effect to effect",
+      "description": "Effect 1 operates at the highest pressure and temperature, heated by live steam. Its vapour is hot enough to boil the liquor in effect 2, which runs at a lower pressure (lower boiling point), and so on to the last effect under vacuum. Each kilogram of steam evaporates roughly N × 0.8–1 kg of water in N effects (steam economy), at the cost of more heating surface.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "live_steam",
+      "kind": "steam",
+      "radius": 0.025,
+      "points": [
+        [
+          -2.48,
+          1.45,
+          -0.0
+        ],
+        [
+          -1.8,
+          1.4,
+          0.15
+        ],
+        [
+          -1.8,
+          0.9,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "vapour_1_to_2",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.6,
+          2.4,
+          -0.0
+        ],
+        [
+          -1.6,
+          2.85,
+          -0.0
+        ],
+        [
+          -0.9,
+          2.85,
+          -0.0
+        ],
+        [
+          -0.9,
+          1.45,
+          -0.0
+        ],
+        [
+          -0.2,
+          1.4,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "vapour_2_to_3",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          2.4,
+          -0.0
+        ],
+        [
+          0.0,
+          2.85,
+          -0.0
+        ],
+        [
+          0.7,
+          2.85,
+          -0.0
+        ],
+        [
+          0.7,
+          1.45,
+          -0.0
+        ],
+        [
+          1.4,
+          1.4,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "last_vapour",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          1.6,
+          2.4,
+          -0.0
+        ],
+        [
+          1.6,
+          2.85,
+          -0.0
+        ],
+        [
+          2.5,
+          2.85,
+          -0.0
+        ],
+        [
+          2.5,
+          1.4,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "liquor",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          -2.5,
+          0.9,
+          -0.0
+        ],
+        [
+          -1.98,
+          0.9,
+          -0.0
+        ],
+        [
+          -1.6,
+          0.4,
+          -0.0
+        ],
+        [
+          -1.6,
+          0.3,
+          -0.0
+        ],
+        [
+          -0.4,
+          0.3,
+          -0.0
+        ],
+        [
+          -0.38,
+          0.9,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4,
+          -0.0
+        ],
+        [
+          0.0,
+          0.3,
+          -0.0
+        ],
+        [
+          1.2,
+          0.3,
+          -0.0
+        ],
+        [
+          1.22,
+          0.9,
+          -0.0
+        ],
+        [
+          1.6,
+          0.3,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 44272,
+    "parts": 19
+  },
+  "summary": "A multiple effect evaporator uses the vapour from one evaporator body (effect) as the heating steam of the next, which runs at lower pressure and boiling point. Only the first effect uses live steam, so steam consumption per kilogram of water evaporated falls roughly in proportion to the number of effects.",
+  "classification": {
+    "family": "Evaporator",
+    "type": "Triple-effect, forward feed"
+  },
+  "model_configuration": {
+    "effects": 3,
+    "animation": "Boiling in each effect"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Shells under pressure/vacuum.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "TEMA",
+      "title": "Tubular exchanger standards",
+      "relevance": "Calandria/heater design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "McCabe, Smith & Harriott — Unit Operations of Chemical Engineering"
+  ],
+  "parts": [
+    {
+      "id": "effect_1",
+      "name": "Effect 1: Calandria (steam chest)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "effect_1__back",
+        "effect_1__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -2.01,
+        0.77,
+        -0.41
+      ],
+      "bbox_max": [
+        -1.19,
+        1.63,
+        0.41
+      ],
+      "label_anchor": [
+        -1.6,
+        1.2,
+        0.41
+      ],
+      "center": [
+        -1.6,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "me_effect"
+    },
+    {
+      "id": "effect_1_tubes",
+      "name": "Effect 1: Tubes",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "effect_1_tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -1.89015,
+        0.77,
+        -0.29015
+      ],
+      "bbox_max": [
+        -1.30985,
+        1.63,
+        0.29015
+      ],
+      "label_anchor": [
+        -1.6,
+        1.2,
+        0.29015
+      ],
+      "center": [
+        -1.6,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "me_effect"
+    },
+    {
+      "id": "body_1",
+      "name": "Effect 1: Vapour Body & Bottom Cone",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "body_1__back",
+        "body_1__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.5
+      ],
+      "bbox_min": [
+        -1.98,
+        0.27,
+        -0.38
+      ],
+      "bbox_max": [
+        -1.22,
+        2.72,
+        0.38
+      ],
+      "label_anchor": [
+        -1.6,
+        1.495,
+        0.38
+      ],
+      "center": [
+        -1.6,
+        1.495,
+        -0.0
+      ],
+      "info_ref": "me_body"
+    },
+    {
+      "id": "liquor_1",
+      "name": "Effect 1: Boiling Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq1"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.968,
+        0.78,
+        -0.368
+      ],
+      "bbox_max": [
+        -1.232,
+        1.75,
+        -0.0
+      ],
+      "label_anchor": [
+        -1.6,
+        1.265,
+        -0.0
+      ],
+      "center": [
+        -1.6,
+        1.265,
+        -0.184
+      ],
+      "info_ref": "me_liquor"
+    },
+    {
+      "id": "vapour_1",
+      "name": "Effect 1: Vapour Bubbles",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "vapour_10",
+        "vapour_11",
+        "vapour_12",
+        "vapour_13",
+        "vapour_14",
+        "vapour_15"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.018,
+        -0.018
+      ],
+      "bbox_max": [
+        0.018,
+        0.018,
+        0.018
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.018
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "effect_2",
+      "name": "Effect 2: Calandria (steam chest)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "effect_2__back",
+        "effect_2__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.41,
+        0.77,
+        -0.41
+      ],
+      "bbox_max": [
+        0.41,
+        1.63,
+        0.41
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        0.41
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "me_effect"
+    },
+    {
+      "id": "effect_2_tubes",
+      "name": "Effect 2: Tubes",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "effect_2_tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.29015,
+        0.77,
+        -0.29015
+      ],
+      "bbox_max": [
+        0.29015,
+        1.63,
+        0.29015
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        0.29015
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "me_effect"
+    },
+    {
+      "id": "body_2",
+      "name": "Effect 2: Vapour Body & Bottom Cone",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "body_2__back",
+        "body_2__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.38,
+        0.27,
+        -0.38
+      ],
+      "bbox_max": [
+        0.38,
+        2.72,
+        0.38
+      ],
+      "label_anchor": [
+        0.0,
+        1.495,
+        0.38
+      ],
+      "center": [
+        0.0,
+        1.495,
+        -0.0
+      ],
+      "info_ref": "me_body"
+    },
+    {
+      "id": "liquor_2",
+      "name": "Effect 2: Boiling Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq2"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.368,
+        0.78,
+        -0.368
+      ],
+      "bbox_max": [
+        0.368,
+        1.75,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.265,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.265,
+        -0.184
+      ],
+      "info_ref": "me_liquor"
+    },
+    {
+      "id": "vapour_2",
+      "name": "Effect 2: Vapour Bubbles",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "vapour_20",
+        "vapour_21",
+        "vapour_22",
+        "vapour_23",
+        "vapour_24",
+        "vapour_25"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.018,
+        -0.018
+      ],
+      "bbox_max": [
+        0.018,
+        0.018,
+        0.018
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.018
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "effect_3",
+      "name": "Effect 3: Calandria (steam chest)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "effect_3__back",
+        "effect_3__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        1.19,
+        0.77,
+        -0.41
+      ],
+      "bbox_max": [
+        2.01,
+        1.63,
+        0.41
+      ],
+      "label_anchor": [
+        1.6,
+        1.2,
+        0.41
+      ],
+      "center": [
+        1.6,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "me_effect"
+    },
+    {
+      "id": "effect_3_tubes",
+      "name": "Effect 3: Tubes",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "effect_3_tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        1.30985,
+        0.77,
+        -0.29015
+      ],
+      "bbox_max": [
+        1.89015,
+        1.63,
+        0.29015
+      ],
+      "label_anchor": [
+        1.6,
+        1.2,
+        0.29015
+      ],
+      "center": [
+        1.6,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "me_effect"
+    },
+    {
+      "id": "body_3",
+      "name": "Effect 3: Vapour Body & Bottom Cone",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "body_3__back",
+        "body_3__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.5
+      ],
+      "bbox_min": [
+        1.22,
+        0.27,
+        -0.38
+      ],
+      "bbox_max": [
+        1.98,
+        2.72,
+        0.38
+      ],
+      "label_anchor": [
+        1.6,
+        1.495,
+        0.38
+      ],
+      "center": [
+        1.6,
+        1.495,
+        -0.0
+      ],
+      "info_ref": "me_body"
+    },
+    {
+      "id": "liquor_3",
+      "name": "Effect 3: Boiling Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq3"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.232,
+        0.78,
+        -0.368
+      ],
+      "bbox_max": [
+        1.968,
+        1.75,
+        -0.0
+      ],
+      "label_anchor": [
+        1.6,
+        1.265,
+        -0.0
+      ],
+      "center": [
+        1.6,
+        1.265,
+        -0.184
+      ],
+      "info_ref": "me_liquor"
+    },
+    {
+      "id": "vapour_3",
+      "name": "Effect 3: Vapour Bubbles",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "vapour_30",
+        "vapour_31",
+        "vapour_32",
+        "vapour_33",
+        "vapour_34",
+        "vapour_35"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.018,
+        -0.018
+      ],
+      "bbox_max": [
+        0.018,
+        0.018,
+        0.018
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.018
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "vapour_lines",
+      "name": "Vapour Lines: vapour of each effect heats the next",
+      "group": "piping",
+      "section_role": "split",
+      "nodes": [
+        "vapour_lines__back",
+        "vapour_lines__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.28,
+        1.317,
+        -0.133
+      ],
+      "bbox_max": [
+        2.57,
+        2.92,
+        0.133
+      ],
+      "label_anchor": [
+        0.145,
+        2.1185,
+        0.133
+      ],
+      "center": [
+        0.145,
+        2.1185,
+        -0.0
+      ],
+      "info_ref": "me_vapour"
+    },
+    {
+      "id": "liquor_lines",
+      "name": "Liquor Transfer Lines (forward feed: pressure difference moves liquor to the next effect)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "liquor_lines.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.63,
+        0.122,
+        -0.057
+      ],
+      "bbox_max": [
+        1.657,
+        0.93,
+        0.057
+      ],
+      "label_anchor": [
+        0.0135,
+        0.526,
+        0.057
+      ],
+      "center": [
+        0.0135,
+        0.526,
+        -0.0
+      ],
+      "info_ref": "me_liquor"
+    },
+    {
+      "id": "condenser",
+      "name": "Final Condenser & Vacuum Connection (lowest pressure)",
+      "group": "condenser",
+      "section_role": "keep",
+      "nodes": [
+        "cd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        2.25,
+        0.475,
+        -0.25
+      ],
+      "bbox_max": [
+        2.95,
+        1.525,
+        0.25
+      ],
+      "label_anchor": [
+        2.6,
+        1.0,
+        0.25
+      ],
+      "center": [
+        2.6,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "me_condenser"
+    },
+    {
+      "id": "structure",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "structure.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.9219,
+        0.0,
+        -0.3219
+      ],
+      "bbox_max": [
+        1.9219,
+        0.65,
+        0.3219
+      ],
+      "label_anchor": [
+        0.0,
+        0.325,
+        0.3219
+      ],
+      "center": [
+        0.0,
+        0.325,
+        -0.0
+      ],
+      "info_ref": "me_body"
+    }
+  ],
+  "components": {
+    "me_effect": {
+      "function": "Calandria of each effect.",
+      "construction": "Short-tube vertical calandria.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling"
+      ],
+      "inspection": [
+        "Clean"
+      ]
+    },
+    "me_body": {
+      "function": "Vapour body of each effect.",
+      "construction": "Vessel.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "me_liquor": {
+      "function": "Boiling liquor and transfer lines.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    },
+    "me_vapour": {
+      "function": "Vapour lines between effects.",
+      "construction": "Pipes.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "me_condenser": {
+      "function": "Condenses last-effect vapour; vacuum.",
+      "construction": "Condenser.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

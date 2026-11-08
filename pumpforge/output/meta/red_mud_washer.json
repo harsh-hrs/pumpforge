@@ -1,0 +1,998 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "red_mud_washer",
+  "title": "Red Mud Washer Train (Counter-Current Decantation, 3 Thickeners)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {},
+  "overlays": {
+    "flow": {
+      "file": "red_mud_washer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "red_mud_washer_pressure.glb",
+      "title": "Counter-current washing recovers caustic",
+      "description": "Mud moves forward (left → right) while wash water moves backward (right → left). Each stage dilutes the soluble soda and alumina left in the mud, so the liquor strength falls from red (first washer) to blue (last). Recovered liquor returns to the circuit; washed mud goes to residue storage. Typically 4–7 washers are used, with flocculant to speed settling.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "mud",
+      "kind": "sand",
+      "radius": 0.025,
+      "points": [
+        [
+          -2.0,
+          0.15,
+          -0.0
+        ],
+        [
+          0.0,
+          1.2,
+          0.3
+        ],
+        [
+          0.0,
+          0.15,
+          -0.0
+        ],
+        [
+          2.0,
+          1.2,
+          0.3
+        ],
+        [
+          2.0,
+          0.15,
+          -0.0
+        ],
+        [
+          3.2,
+          0.15,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "wash_liquor",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          3.2,
+          1.6,
+          -0.3
+        ],
+        [
+          2.0,
+          1.2,
+          -0.3
+        ],
+        [
+          2.9,
+          1.4,
+          -0.5
+        ],
+        [
+          0.0,
+          1.2,
+          -0.3
+        ],
+        [
+          0.9,
+          1.4,
+          -0.5
+        ],
+        [
+          -2.0,
+          1.2,
+          -0.3
+        ],
+        [
+          -3.2,
+          1.2,
+          -0.5
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 16722,
+    "parts": 19
+  },
+  "summary": "Red mud washers are thickeners in a counter-current decantation (CCD) train. Mud moves forward from washer to washer while wash water flows backward, recovering dissolved caustic soda and alumina from the mud.",
+  "classification": {
+    "family": "Residue washing",
+    "type": "CCD thickener train"
+  },
+  "model_configuration": {
+    "washers": 3,
+    "animation": "Rakes turn; mud and wash flows"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "w1_tank",
+      "name": "Washer 1: Tank with Conical Floor & Overflow Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "w1_tank__back",
+        "w1_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -2.93,
+        0.1,
+        -0.93
+      ],
+      "bbox_max": [
+        -1.07,
+        1.1,
+        0.93
+      ],
+      "label_anchor": [
+        -2.0,
+        0.6,
+        0.93
+      ],
+      "center": [
+        -2.0,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "rw_tank"
+    },
+    {
+      "id": "w1_clear",
+      "name": "Washer 1: Clear Overflow Zone",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "w1_cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -2.745,
+        0.77,
+        -0.745
+      ],
+      "bbox_max": [
+        -1.255,
+        0.94,
+        -0.0
+      ],
+      "label_anchor": [
+        -2.0,
+        0.855,
+        -0.0
+      ],
+      "center": [
+        -2.0,
+        0.855,
+        -0.3725
+      ],
+      "info_ref": "rw_zones"
+    },
+    {
+      "id": "w1_mud",
+      "name": "Washer 1: Settling / Compression Zone (mud bed)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "w1_md"
+      ],
+      "pivot": [
+        -2.0,
+        0.14,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.4
+      ],
+      "bbox_min": [
+        -2.745,
+        0.14,
+        -0.745
+      ],
+      "bbox_max": [
+        -1.255,
+        0.77,
+        -0.0
+      ],
+      "label_anchor": [
+        -2.0,
+        0.455,
+        -0.0
+      ],
+      "center": [
+        -2.0,
+        0.455,
+        -0.3725
+      ],
+      "info_ref": "rw_zones"
+    },
+    {
+      "id": "w1_feedwell",
+      "name": "Washer 1: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "w1_feedwell__back",
+        "w1_feedwell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.3
+      ],
+      "bbox_min": [
+        -2.165,
+        0.77,
+        -0.165
+      ],
+      "bbox_max": [
+        -1.835,
+        1.15,
+        0.165
+      ],
+      "label_anchor": [
+        -2.0,
+        0.96,
+        0.165
+      ],
+      "center": [
+        -2.0,
+        0.96,
+        -0.0
+      ],
+      "info_ref": "rw_feedwell"
+    },
+    {
+      "id": "w1_rakes",
+      "name": "Washer 1: Rake Arms & Blades (move mud to the centre cone)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "w1_rakes.001"
+      ],
+      "pivot": [
+        -2.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -2.71544,
+        0.24,
+        -0.05
+      ],
+      "bbox_max": [
+        -1.28457,
+        1.45,
+        0.05
+      ],
+      "label_anchor": [
+        -2.0,
+        0.845,
+        0.05
+      ],
+      "center": [
+        -2.0,
+        0.845,
+        -0.0
+      ],
+      "info_ref": "rw_rake"
+    },
+    {
+      "id": "w1_drive",
+      "name": "Washer 1: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "w1_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        -3.0,
+        1.29,
+        -0.25
+      ],
+      "bbox_max": [
+        -1.0,
+        2.05,
+        0.25
+      ],
+      "label_anchor": [
+        -2.0,
+        1.67,
+        0.25
+      ],
+      "center": [
+        -2.0,
+        1.67,
+        -0.0
+      ],
+      "info_ref": "rw_drive"
+    },
+    {
+      "id": "w2_tank",
+      "name": "Washer 2: Tank with Conical Floor & Overflow Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "w2_tank__back",
+        "w2_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.93,
+        0.1,
+        -0.93
+      ],
+      "bbox_max": [
+        0.93,
+        1.1,
+        0.93
+      ],
+      "label_anchor": [
+        0.0,
+        0.6,
+        0.93
+      ],
+      "center": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "rw_tank"
+    },
+    {
+      "id": "w2_clear",
+      "name": "Washer 2: Clear Overflow Zone",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "w2_cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.745,
+        0.77,
+        -0.745
+      ],
+      "bbox_max": [
+        0.745,
+        0.94,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.855,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.855,
+        -0.3725
+      ],
+      "info_ref": "rw_zones"
+    },
+    {
+      "id": "w2_mud",
+      "name": "Washer 2: Settling / Compression Zone (mud bed)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "w2_md"
+      ],
+      "pivot": [
+        0.0,
+        0.14,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.4
+      ],
+      "bbox_min": [
+        -0.745,
+        0.14,
+        -0.745
+      ],
+      "bbox_max": [
+        0.745,
+        0.77,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.455,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.455,
+        -0.3725
+      ],
+      "info_ref": "rw_zones"
+    },
+    {
+      "id": "w2_feedwell",
+      "name": "Washer 2: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "w2_feedwell__back",
+        "w2_feedwell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.3
+      ],
+      "bbox_min": [
+        -0.165,
+        0.77,
+        -0.165
+      ],
+      "bbox_max": [
+        0.165,
+        1.15,
+        0.165
+      ],
+      "label_anchor": [
+        0.0,
+        0.96,
+        0.165
+      ],
+      "center": [
+        0.0,
+        0.96,
+        -0.0
+      ],
+      "info_ref": "rw_feedwell"
+    },
+    {
+      "id": "w2_rakes",
+      "name": "Washer 2: Rake Arms & Blades (move mud to the centre cone)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "w2_rakes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        -0.71543,
+        0.24,
+        -0.05
+      ],
+      "bbox_max": [
+        0.71543,
+        1.45,
+        0.05
+      ],
+      "label_anchor": [
+        0.0,
+        0.845,
+        0.05
+      ],
+      "center": [
+        0.0,
+        0.845,
+        -0.0
+      ],
+      "info_ref": "rw_rake"
+    },
+    {
+      "id": "w2_drive",
+      "name": "Washer 2: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "w2_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        1.29,
+        -0.25
+      ],
+      "bbox_max": [
+        1.0,
+        2.05,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        1.67,
+        0.25
+      ],
+      "center": [
+        0.0,
+        1.67,
+        -0.0
+      ],
+      "info_ref": "rw_drive"
+    },
+    {
+      "id": "w3_tank",
+      "name": "Washer 3: Tank with Conical Floor & Overflow Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "w3_tank__back",
+        "w3_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        1.07,
+        0.1,
+        -0.93
+      ],
+      "bbox_max": [
+        2.93,
+        1.1,
+        0.93
+      ],
+      "label_anchor": [
+        2.0,
+        0.6,
+        0.93
+      ],
+      "center": [
+        2.0,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "rw_tank"
+    },
+    {
+      "id": "w3_clear",
+      "name": "Washer 3: Clear Overflow Zone",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "w3_cl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        1.255,
+        0.77,
+        -0.745
+      ],
+      "bbox_max": [
+        2.745,
+        0.94,
+        -0.0
+      ],
+      "label_anchor": [
+        2.0,
+        0.855,
+        -0.0
+      ],
+      "center": [
+        2.0,
+        0.855,
+        -0.3725
+      ],
+      "info_ref": "rw_zones"
+    },
+    {
+      "id": "w3_mud",
+      "name": "Washer 3: Settling / Compression Zone (mud bed)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "w3_md"
+      ],
+      "pivot": [
+        2.0,
+        0.14,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.1,
+        0.4
+      ],
+      "bbox_min": [
+        1.255,
+        0.14,
+        -0.745
+      ],
+      "bbox_max": [
+        2.745,
+        0.77,
+        -0.0
+      ],
+      "label_anchor": [
+        2.0,
+        0.455,
+        -0.0
+      ],
+      "center": [
+        2.0,
+        0.455,
+        -0.3725
+      ],
+      "info_ref": "rw_zones"
+    },
+    {
+      "id": "w3_feedwell",
+      "name": "Washer 3: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "group": "internals",
+      "section_role": "split",
+      "nodes": [
+        "w3_feedwell__back",
+        "w3_feedwell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.3
+      ],
+      "bbox_min": [
+        1.835,
+        0.77,
+        -0.165
+      ],
+      "bbox_max": [
+        2.165,
+        1.15,
+        0.165
+      ],
+      "label_anchor": [
+        2.0,
+        0.96,
+        0.165
+      ],
+      "center": [
+        2.0,
+        0.96,
+        -0.0
+      ],
+      "info_ref": "rw_feedwell"
+    },
+    {
+      "id": "w3_rakes",
+      "name": "Washer 3: Rake Arms & Blades (move mud to the centre cone)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "w3_rakes.001"
+      ],
+      "pivot": [
+        2.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.8
+      ],
+      "bbox_min": [
+        1.28457,
+        0.24,
+        -0.05
+      ],
+      "bbox_max": [
+        2.71544,
+        1.45,
+        0.05
+      ],
+      "label_anchor": [
+        2.0,
+        0.845,
+        0.05
+      ],
+      "center": [
+        2.0,
+        0.845,
+        -0.0
+      ],
+      "info_ref": "rw_rake"
+    },
+    {
+      "id": "w3_drive",
+      "name": "Washer 3: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "w3_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.7,
+        -0.0
+      ],
+      "bbox_min": [
+        1.0,
+        1.29,
+        -0.25
+      ],
+      "bbox_max": [
+        3.0,
+        2.05,
+        0.25
+      ],
+      "label_anchor": [
+        2.0,
+        1.67,
+        0.25
+      ],
+      "center": [
+        2.0,
+        1.67,
+        -0.0
+      ],
+      "info_ref": "rw_drive"
+    },
+    {
+      "id": "interstage_piping",
+      "name": "Underflow (mud) Lines Forward & Overflow (wash liquor) Lines Backward",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "interstage_piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.03458,
+        0.065,
+        -0.535
+      ],
+      "bbox_max": [
+        3.1,
+        1.635,
+        0.33494
+      ],
+      "label_anchor": [
+        0.53271,
+        0.85,
+        0.33494
+      ],
+      "center": [
+        0.53271,
+        0.85,
+        -0.10003
+      ],
+      "info_ref": "rw_piping"
+    }
+  ],
+  "components": {
+    "rw_tank": {
+      "function": "Holds slurry; launder collects overflow.",
+      "construction": "Steel/concrete tank with conical floor.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rw_zones": {
+      "function": "Clear and mud zones.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rw_feedwell": {
+      "function": "Calms feed; mixes flocculant.",
+      "construction": "Feedwell.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rw_rake": {
+      "function": "Moves settled mud to the cone; keeps it from setting.",
+      "construction": "Rake arms and blades.",
+      "material": "Steel.",
+      "operating_conditions": "Very slow (minutes per rev).",
+      "failure_modes": [
+        "Bogging (high torque)"
+      ],
+      "inspection": [
+        "Torque trend"
+      ]
+    },
+    "rw_drive": {
+      "function": "Turns the rakes.",
+      "construction": "Bridge, planetary drive, torque protection, lift.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "rw_piping": {
+      "function": "Interstage lines.",
+      "construction": "Underflow and overflow pipes.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

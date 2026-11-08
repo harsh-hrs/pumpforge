@@ -1,0 +1,598 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "demister_vessel",
+ "no": 110,
+ "title": "Demister Vessel",
+ "model_title": "Demister Vessel (Mesh Pad + Vane Pack Mist Eliminator)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A demister vessel removes fine liquid mist from gas. Droplets strike the wires of a knitted mesh pad, coalesce into larger drops and drain; a chevron vane pack catches what remains by repeated changes of direction. Clean gas leaves at the top.",
+   "applications": [
+    "Compressor and turbine inlet protection",
+    "Absorber/scrubber outlets",
+    "Sulphuric acid plants",
+    "Steam drums and evaporators"
+   ],
+   "key_points": [
+    "Mesh for fine droplets (≥ ~3–5 µm)",
+    "Vanes for higher loads",
+    "Velocity window (K-factor)",
+    "ΔP indicates fouling"
+   ],
+   "classification": {
+    "family": "Gas treatment / separator",
+    "type": "Vertical mist eliminator vessel (mesh + vane)"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A demister vessel removes fine liquid mist from gas. Droplets hit the wires of a knitted mesh pad, merge into larger drops and drain away; a chevron vane pack after it uses changes of direction to catch remaining droplets. Clean, dry gas leaves at the top."
+  },
+  "model_3d": {
+   "asset": "glb/demister_vessel.glb",
+   "metadata": "meta/demister_vessel.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11194,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Mist-laden gas enters below the mesh pad.",
+    "Droplets impact and coalesce on the mesh wires.",
+    "The vane pack catches remaining droplets."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Mist-laden gas enters below the mesh pad.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Droplets impact and coalesce on the mesh wires.",
+     "part": "mesh_pad",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The vane pack catches remaining droplets.",
+     "part": "vane_pack",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Coalesced liquid drains to the bottom.",
+     "part": "drained_liquid",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Separation efficiency vs droplet size and gas velocity."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "demister_vessel_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/demister_vessel.json#components",
+   "key_components": "Mesh pad, vane pack, drain, vessel",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Vessel",
+     "info_ref": "dm_vessel",
+     "function": "Vessel.",
+     "material": "Steel."
+    },
+    {
+     "id": "supports",
+     "name": "Legs",
+     "info_ref": "dm_supports",
+     "function": "Legs.",
+     "material": "Steel."
+    },
+    {
+     "id": "mesh_pad",
+     "name": "Knitted Wire-Mesh Pad (coalesces fine droplets)",
+     "info_ref": "dm_mesh",
+     "function": "Coalesces fine droplets.",
+     "material": "Stainless."
+    },
+    {
+     "id": "vane_pack",
+     "name": "Chevron Vane Pack (inertial separation)",
+     "info_ref": "dm_vanes",
+     "function": "Inertial capture of droplets.",
+     "material": "Stainless."
+    },
+    {
+     "id": "drained_liquid",
+     "name": "Drained Liquid",
+     "info_ref": "dm_liquid",
+     "function": "Drained liquid.",
+     "material": "—"
+    },
+    {
+     "id": "nozzles",
+     "name": "Inlet, Clean-Gas Outlet, Drain & ΔP Transmitter",
+     "info_ref": "dm_nozzles",
+     "function": "Connections and ΔP.",
+     "material": "—"
+    },
+    {
+     "id": "mist",
+     "name": "Mist Droplets (captured and drained)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 0.2 – 5 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 150",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "-20 to 300",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Gas flow",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor ΔP across pad.",
+     "part": "nozzles",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Wash/clean pad.",
+     "part": "mesh_pad",
+     "interval": "as needed"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace pad/vanes.",
+     "part": "vane_pack"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Plugged pad",
+     "category": "performance",
+     "symptoms": [
+      "High ΔP"
+     ],
+     "causes": [
+      "Solids, salts, polymers"
+     ],
+     "remedies": [
+      "Wash or replace"
+     ],
+     "part": "mesh_pad"
+    },
+    {
+     "problem": "Re-entrainment",
+     "category": "performance",
+     "symptoms": [
+      "Liquid carry-over"
+     ],
+     "causes": [
+      "Velocity too high"
+     ],
+     "remedies": [
+      "Reduce flow; resize"
+     ],
+     "part": "mesh_pad"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Demister Vessel — Introduction",
+    "type": "in_app_tour",
+    "model": "demister_vessel.glb",
+    "duration_s": 46.8,
+    "script": [
+     {
+      "narration": "This module introduces the Demister Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A demister vessel removes fine liquid mist from gas.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Droplets strike the wires of a knitted mesh pad, coalesce into larger drops and drain; a chevron vane pack catches what remains by repeated changes of direction.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Clean gas leaves at the top.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include compressor and turbine inlet protection; absorber/scrubber outlets; sulphuric acid plants; steam drums and evaporators.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Demister Vessel — Operation",
+    "type": "in_app_tour",
+    "model": "demister_vessel.glb",
+    "duration_s": 24.2,
+    "script": [
+     {
+      "narration": "How the Demister Vessel works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Mist-laden gas enters below the mesh pad.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Droplets impact and coalesce on the mesh wires.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mesh_pad",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The vane pack catches remaining droplets.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vane_pack",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Coalesced liquid drains to the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drained_liquid",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Demister Vessel — Maintenance",
+    "type": "in_app_tour",
+    "model": "demister_vessel.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Demister Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor ΔP across pad.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Wash/clean pad.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mesh_pad",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace pad/vanes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vane_pack",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for plugged pad: high δp. Common cause: solids, salts, polymers.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "mesh_pad",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for re-entrainment: liquid carry-over. Common cause: velocity too high.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "mesh_pad",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How does a mesh pad catch droplets?",
+     "options": [
+      "Heating",
+      "Impaction and coalescence on wires",
+      "Electric field",
+      "Freezing"
+     ],
+     "answer": 1,
+     "explanation": "Inertial impaction.",
+     "level": "basic"
+    },
+    {
+     "question": "Too high gas velocity causes…",
+     "options": [
+      "Better efficiency",
+      "Re-entrainment of liquid",
+      "Lower ΔP",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "Flooding of pad.",
+     "level": "basic"
+    },
+    {
+     "question": "Rising ΔP across the pad means…",
+     "options": [
+      "Pad fouling",
+      "Pad missing",
+      "Low flow",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Deposits.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Vessel.\"",
+     "options": [
+      "Vessel",
+      "Inlet, Clean-Gas Outlet, Drain & ΔP Transmitter",
+      "Mist Droplets (captured and drained)",
+      "Legs"
+     ],
+     "answer": 0,
+     "explanation": "Vessel: Vessel.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Legs.\"",
+     "options": [
+      "Chevron Vane Pack (inertial separation)",
+      "Drained Liquid",
+      "Legs",
+      "Inlet, Clean-Gas Outlet, Drain & ΔP Transmitter"
+     ],
+     "answer": 2,
+     "explanation": "Legs: Legs.",
+     "level": "basic",
+     "part": "supports",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Coalesces fine droplets.\"",
+     "options": [
+      "Legs",
+      "Chevron Vane Pack (inertial separation)",
+      "Drained Liquid",
+      "Knitted Wire-Mesh Pad (coalesces fine droplets)"
+     ],
+     "answer": 3,
+     "explanation": "Knitted Wire-Mesh Pad (coalesces fine droplets): Coalesces fine droplets.",
+     "level": "basic",
+     "part": "mesh_pad",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

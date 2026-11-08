@@ -1,0 +1,650 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "speed_reducer",
+ "no": 88,
+ "title": "Speed Reducer",
+ "model_title": "Two-Stage Helical Speed Reducer (Parallel Shaft, 6:1)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A speed reducer is an enclosed gear drive that lowers speed and raises torque. In this two-stage helical reducer, each stage's ratio equals its tooth ratio (32/16 and 45/15), giving 6:1 overall; output torque ≈ input torque × ratio × efficiency.",
+   "applications": [
+    "Conveyors, mixers, agitators",
+    "Cranes and hoists",
+    "Pump and fan drives at low speed",
+    "Extruders and mills"
+   ],
+   "key_points": [
+    "Ratio = product of stage ratios",
+    "Torque multiplied, speed divided",
+    "Helical gears: quiet, axial thrust",
+    "Oil level and cleanliness critical"
+   ],
+   "classification": {
+    "family": "Gear drive",
+    "type": "Parallel-shaft helical reducer, two stages"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A speed reducer (gearbox) lowers speed and raises torque between a motor and a slow machine. In this two-stage helical reducer, a 16-tooth pinion drives a 32-tooth gear (2:1), and a 15-tooth pinion on the same intermediate shaft drives a 45-tooth gear (3:1) — 6:1 overall. Helical teeth run quietly and carry high loads; the gears dip into an oil bath for lubrication."
+  },
+  "model_3d": {
+   "asset": "glb/speed_reducer.glb",
+   "metadata": "meta/speed_reducer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 29704,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor drives the input shaft and pinion at high speed.",
+    "The pinion turns the larger gear — first reduction (2:1).",
+    "The intermediate pinion drives the output gear — second reduction (3:1)."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor drives the input shaft and pinion at high speed.",
+     "part": "input_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pinion turns the larger gear — first reduction (2:1).",
+     "part": "intermediate_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The intermediate pinion drives the output gear — second reduction (3:1).",
+     "part": "output_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gears dip into the oil bath, which lubricates gears and bearings by splash.",
+     "part": "oil_bath",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Bearings carry radial and helical axial loads.",
+     "part": "bearings",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Efficiency ~ 97–98 % per helical stage; thermal rating may limit continuous power."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "speed_reducer_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/speed_reducer.json#components",
+   "key_components": "Helical gears and pinions, shafts, bearings, split housing",
+   "parts": [
+    {
+     "id": "housing",
+     "name": "Gear Housing (split, front half removed in cutaway)",
+     "info_ref": "sr_housing",
+     "function": "Holds the shafts in alignment, contains the oil.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "oil_bath",
+     "name": "Oil Bath (splash lubrication)",
+     "info_ref": "sr_oil",
+     "function": "Lubricates and cools gears and bearings.",
+     "material": "Mineral/synthetic gear oil (ISO VG per AGMA 9005)."
+    },
+    {
+     "id": "input_shaft",
+     "name": "Input Shaft & Pinion (z = 16)",
+     "info_ref": "sr_input",
+     "function": "High-speed input shaft with first pinion.",
+     "material": "Case-hardened alloy steel."
+    },
+    {
+     "id": "intermediate_shaft",
+     "name": "Intermediate Shaft: Gear (z = 32) & Pinion (z = 15)",
+     "info_ref": "sr_intermediate",
+     "function": "Transfers torque between the two stages.",
+     "material": "Case-hardened steel."
+    },
+    {
+     "id": "output_shaft",
+     "name": "Output Shaft & Gear (z = 45)",
+     "info_ref": "sr_output",
+     "function": "Low-speed, high-torque output.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "bearings",
+     "name": "Shaft Bearings (taper-roller / ball)",
+     "info_ref": "sr_bearings",
+     "function": "Support shafts and carry helical axial loads.",
+     "material": "Bearing steel."
+    },
+    {
+     "id": "breather",
+     "name": "Breather, Oil Fill & Drain Plugs",
+     "info_ref": "sr_breather",
+     "function": "Vents pressure and allows filling/draining.",
+     "material": "Brass."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Centre distance ~ 50 – 1000+ mm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.1 – 5000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Input typically 750 – 3000",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Output torque up to ~ 1 000 000 Nm",
+     "unit": "Nm"
+    }
+   },
+   "additional": {
+    "ratio": {
+     "typical_range": "~ 1.25 – 400 (1–4 stages)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rigid, flat mounting; shim to avoid housing distortion."
+   ],
+   "alignment": [
+    "Align shafts parallel and the wheels/hubs in the same plane (straight-edge or laser); misalignment is the main cause of early wear."
+   ],
+   "piping": [
+    "Fit guards that fully enclose moving parts but allow inspection and lubrication."
+   ],
+   "commissioning": [
+    "Check rotation, set tension/slack or torque setting, run in and re-check after the first hours of operation."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check oil level, temperature and noise.",
+     "part": "oil_bath",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change oil; oil analysis.",
+     "part": "oil_bath",
+     "interval": "~ 5000–10 000 h"
+    },
+    {
+     "task": "Clean breather.",
+     "part": "breather",
+     "interval": "6 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bearings and seals; inspect tooth contact.",
+     "part": "bearings"
+    }
+   ],
+   "lubrication": [
+    "Gear oil grade per AGMA 9005 / maker (ISO VG 150–460 typical)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tooth pitting / wear",
+     "category": "wear",
+     "symptoms": [
+      "Noise, vibration, metal in oil"
+     ],
+     "causes": [
+      "Overload, poor lubrication"
+     ],
+     "remedies": [
+      "Correct oil; replace gears"
+     ],
+     "part": "output_shaft"
+    },
+    {
+     "problem": "Oil leakage",
+     "category": "leakage",
+     "symptoms": [
+      "Oil on base"
+     ],
+     "causes": [
+      "Worn seals, blocked breather"
+     ],
+     "remedies": [
+      "Replace seals, clean breather"
+     ],
+     "part": "housing"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "High oil temperature"
+     ],
+     "causes": [
+      "Overload, wrong oil level"
+     ],
+     "remedies": [
+      "Correct level/load; add cooling"
+     ],
+     "part": "oil_bath"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Speed Reducer — Introduction",
+    "type": "in_app_tour",
+    "model": "speed_reducer.glb",
+    "duration_s": 55.2,
+    "script": [
+     {
+      "narration": "This module introduces the Speed Reducer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A speed reducer is an enclosed gear drive that lowers speed and raises torque.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In this two-stage helical reducer, each stage's ratio equals its tooth ratio (32/16 and 45/15), giving 6:1 overall; output torque ≈ input torque × ratio × efficiency.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include conveyors, mixers, agitators; cranes and hoists; pump and fan drives at low speed; extruders and mills.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Gear Housing (split, front half removed in cutaway), Input Shaft & Pinion (z = 16), Intermediate Shaft: Gear (z = 32) & Pinion (z = 15), Output Shaft & Gear (z = 45).",
+      "duration_s": 13.3,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Speed Reducer — Operation",
+    "type": "in_app_tour",
+    "model": "speed_reducer.glb",
+    "duration_s": 31.0,
+    "script": [
+     {
+      "narration": "How the Speed Reducer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor drives the input shaft and pinion at high speed.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "input_shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pinion turns the larger gear — first reduction (2:1).",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "intermediate_shaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The intermediate pinion drives the output gear — second reduction (3:1).",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "output_shaft",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gears dip into the oil bath, which lubricates gears and bearings by splash.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "oil_bath",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Bearings carry radial and helical axial loads.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Speed Reducer — Maintenance",
+    "type": "in_app_tour",
+    "model": "speed_reducer.glb",
+    "duration_s": 42.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Speed Reducer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check oil level, temperature and noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_bath",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change oil; oil analysis.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_bath",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean breather.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "breather",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bearings and seals; inspect tooth contact.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tooth pitting / wear: noise, vibration, metal in oil. Common cause: overload, poor lubrication.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "output_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oil leakage: oil on base. Common cause: worn seals, blocked breather.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: high oil temperature. Common cause: overload, wrong oil level.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "oil_bath",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Overall ratio of stages 2:1 and 3:1 is…",
+     "options": [
+      "5:1",
+      "6:1",
+      "1.5:1",
+      "3:2"
+     ],
+     "answer": 1,
+     "explanation": "Multiply stage ratios.",
+     "level": "basic"
+    },
+    {
+     "question": "If the input is 1500 rpm, the output of a 6:1 reducer is…",
+     "options": [
+      "9000 rpm",
+      "250 rpm",
+      "1500 rpm",
+      "600 rpm"
+     ],
+     "answer": 1,
+     "explanation": "1500/6.",
+     "level": "basic"
+    },
+    {
+     "question": "Helical gears produce…",
+     "options": [
+      "No axial force",
+      "An axial thrust the bearings must carry",
+      "Lower torque",
+      "Higher speed"
+     ],
+     "answer": 1,
+     "explanation": "Due to the helix angle.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the shafts in alignment, contains the oil.\"",
+     "options": [
+      "Input Shaft & Pinion (z = 16)",
+      "Gear Housing (split, front half removed in cutaway)",
+      "Intermediate Shaft: Gear (z = 32) & Pinion (z = 15)",
+      "Output Shaft & Gear (z = 45)"
+     ],
+     "answer": 1,
+     "explanation": "Gear Housing (split, front half removed in cutaway): Holds the shafts in alignment, contains the oil.",
+     "level": "basic",
+     "part": "housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Lubricates and cools gears and bearings.\"",
+     "options": [
+      "Breather, Oil Fill & Drain Plugs",
+      "Gear Housing (split, front half removed in cutaway)",
+      "Input Shaft & Pinion (z = 16)",
+      "Oil Bath (splash lubrication)"
+     ],
+     "answer": 3,
+     "explanation": "Oil Bath (splash lubrication): Lubricates and cools gears and bearings.",
+     "level": "basic",
+     "part": "oil_bath",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"High-speed input shaft with first pinion.\"",
+     "options": [
+      "Output Shaft & Gear (z = 45)",
+      "Shaft Bearings (taper-roller / ball)",
+      "Breather, Oil Fill & Drain Plugs",
+      "Input Shaft & Pinion (z = 16)"
+     ],
+     "answer": 3,
+     "explanation": "Input Shaft & Pinion (z = 16): High-speed input shaft with first pinion.",
+     "level": "basic",
+     "part": "input_shaft",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

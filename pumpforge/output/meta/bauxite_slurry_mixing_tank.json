@@ -1,0 +1,601 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "bauxite_slurry_mixing_tank",
+  "title": "Bauxite Slurry Mixing / Storage Tank (Agitated)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {},
+  "overlays": {
+    "flow": {
+      "file": "bauxite_slurry_mixing_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "bauxite_slurry_mixing_tank_pressure.glb",
+      "title": "Keeping solids in suspension",
+      "description": "The agitator must give enough upward flow to keep coarse bauxite particles off the floor (the \"just-suspended\" speed, Zwietering correlation). Tanks are sized for hours of residence to buffer the mills from digestion and to start pre-desilication. Solids content is typically ~ 40–55 wt % (slurry density control).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "slurry_in",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.7,
+          2.3,
+          -0.0
+        ],
+        [
+          -0.5,
+          2.3,
+          -0.0
+        ],
+        [
+          -0.5,
+          1.7,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "spent_liquor",
+      "kind": "flow_suction",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.7,
+          2.45,
+          -0.4
+        ],
+        [
+          -0.3,
+          2.45,
+          -0.4
+        ],
+        [
+          -0.3,
+          1.7,
+          -0.4
+        ]
+      ]
+    },
+    {
+      "name": "to_digestion",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          0.75,
+          0.45,
+          -0.0
+        ],
+        [
+          1.45,
+          0.25,
+          -0.0
+        ],
+        [
+          2.25,
+          0.25,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 5728,
+    "parts": 9
+  },
+  "summary": "An agitated tank receives ground bauxite slurry and spent liquor, keeps the solids in suspension and buffers the flow between grinding and digestion. Density and level are controlled before the slurry is pumped on.",
+  "classification": {
+    "family": "Slurry preparation",
+    "type": "Agitated slurry storage tank"
+  },
+  "model_configuration": {
+    "animation": "Agitator turns; solids circulate"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "mx_tank",
+      "name": "Slurry Tank: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "mx_tank__back",
+        "mx_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.865,
+        0.3,
+        -0.865
+      ],
+      "bbox_max": [
+        0.865,
+        2.0,
+        0.865
+      ],
+      "label_anchor": [
+        0.0,
+        1.15,
+        0.865
+      ],
+      "center": [
+        0.0,
+        1.15,
+        -0.0
+      ],
+      "info_ref": "sm_tank"
+    },
+    {
+      "id": "mx_slurry",
+      "name": "Slurry Tank: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "mx_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.845,
+        0.33,
+        -0.845
+      ],
+      "bbox_max": [
+        0.845,
+        1.745,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.0375,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.0375,
+        -0.4225
+      ],
+      "info_ref": "sm_slurry"
+    },
+    {
+      "id": "mx_agitator",
+      "name": "Slurry Tank: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "mx_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.21057,
+        0.76,
+        -0.34241
+      ],
+      "bbox_max": [
+        0.3825,
+        2.27,
+        0.34241
+      ],
+      "label_anchor": [
+        0.08596,
+        1.515,
+        0.34241
+      ],
+      "center": [
+        0.08596,
+        1.515,
+        -0.0
+      ],
+      "info_ref": "sm_agitator"
+    },
+    {
+      "id": "mx_drive",
+      "name": "Slurry Tank: Agitator Drive (motor + gearbox, bridge beam)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "mx_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.0,
+        2.02,
+        -0.16
+      ],
+      "bbox_max": [
+        1.0,
+        2.77,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        2.395,
+        0.16
+      ],
+      "center": [
+        0.0,
+        2.395,
+        -0.0
+      ],
+      "info_ref": "sm_drive"
+    },
+    {
+      "id": "nozzles",
+      "name": "Ground Bauxite Slurry Inlet, Spent-Liquor Inlet, Outlet & Level Transmitter",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.6,
+        0.336,
+        -0.56
+      ],
+      "bbox_max": [
+        1.15,
+        2.49,
+        0.114
+      ],
+      "label_anchor": [
+        -0.225,
+        1.413,
+        0.114
+      ],
+      "center": [
+        -0.225,
+        1.413,
+        -0.223
+      ],
+      "info_ref": "sm_nozzles"
+    },
+    {
+      "id": "slurry_pump",
+      "name": "Slurry Transfer Pump (to digestion)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "slurry_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.3,
+        0.075,
+        -0.15
+      ],
+      "bbox_max": [
+        2.2,
+        0.37,
+        0.15
+      ],
+      "label_anchor": [
+        1.75,
+        0.2225,
+        0.15
+      ],
+      "center": [
+        1.75,
+        0.2225,
+        -0.0
+      ],
+      "info_ref": "sm_pump"
+    },
+    {
+      "id": "slurry_pump_shaft",
+      "name": "Slurry Transfer Pump (to digestion) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "slurry_pumpc"
+      ],
+      "pivot": [
+        1.69,
+        0.25,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.63,
+        0.23,
+        -0.05
+      ],
+      "bbox_max": [
+        1.75,
+        0.27,
+        0.05
+      ],
+      "label_anchor": [
+        1.69,
+        0.25,
+        0.05
+      ],
+      "center": [
+        1.69,
+        0.25,
+        -0.0
+      ],
+      "info_ref": "sm_pump"
+    },
+    {
+      "id": "foundation",
+      "name": "Ring-Wall Foundation",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "foundation__back",
+        "foundation__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.95,
+        0.0,
+        -0.95
+      ],
+      "bbox_max": [
+        0.95,
+        0.3,
+        0.95
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.95
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "sm_nozzles"
+    },
+    {
+      "id": "swirl",
+      "name": "Solids kept in suspension by the agitator flow",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "swirl0",
+        "swirl1",
+        "swirl2",
+        "swirl3",
+        "swirl4",
+        "swirl5",
+        "swirl6",
+        "swirl7",
+        "swirl8",
+        "swirl9",
+        "swirl10",
+        "swirl11",
+        "swirl12",
+        "swirl13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        -0.025,
+        -0.02378
+      ],
+      "bbox_max": [
+        0.025,
+        0.025,
+        0.02378
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02378
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "sm_tank": {
+      "function": "Holds the slurry.",
+      "construction": "Tank with baffles/draft tube.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sm_slurry": {
+      "function": "Process slurry/liquor.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sm_agitator": {
+      "function": "Mixes and suspends solids.",
+      "construction": "Shaft and impellers.",
+      "material": "Carbon steel (often rubber-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blade wear, scale"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "sm_drive": {
+      "function": "Drives the agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sm_nozzles": {
+      "function": "Inlets/outlet/level.",
+      "construction": "Nozzles, LT.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sm_pump": {
+      "function": "Transfers slurry.",
+      "construction": "Slurry pump.",
+      "material": "High-chrome/rubber.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

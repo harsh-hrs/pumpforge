@@ -1,0 +1,652 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "causticization_tank",
+  "title": "Causticization Reactor with Lime Slaker (Caustic Recovery)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 213,
+    "phase": 10,
+    "eq_id": "EQ-291",
+    "subcategory": "Caustic Recovery",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "causticization_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "causticization_tank_pressure.glb",
+      "title": "Recovering caustic from carbonate",
+      "description": "Carbon dioxide picked up by the liquor turns caustic into sodium carbonate, which does nothing useful. Adding slaked lime converts it back: Na₂CO₃ + Ca(OH)₂ → 2 NaOH + CaCO₃↓. The calcium carbonate solids are separated and the regenerated caustic returns to the circuit; conditions (temperature, liquor strength) are chosen to limit alumina losses as calcium aluminates.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "lime_milk",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          -2.6,
+          1.3,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.25,
+          -0.0
+        ],
+        [
+          -0.95,
+          1.25,
+          -0.0
+        ],
+        [
+          -0.3,
+          2.3,
+          -0.0
+        ],
+        [
+          -0.3,
+          1.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "liquor",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.7,
+          2.5,
+          -0.5
+        ],
+        [
+          0.3,
+          2.5,
+          -0.5
+        ],
+        [
+          0.3,
+          1.6,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "product",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.65,
+          0.5,
+          -0.0
+        ],
+        [
+          1.25,
+          0.5,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10802,
+    "parts": 10
+  },
+  "summary": "A causticization reactor regenerates caustic soda from sodium carbonate in the liquor by reaction with slaked lime. Calcium carbonate precipitates and is separated; the recovered caustic returns to the process.",
+  "classification": {
+    "family": "Caustic recovery",
+    "type": "Agitated reactor with lime slaker"
+  },
+  "model_configuration": {
+    "animation": "Agitator and slaker turn; CaCO₃ forms"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Pressure parts.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded storage tanks",
+      "relevance": "Atmospheric tanks (practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "TMS Light Metals proceedings — Bayer process practice",
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids"
+  ],
+  "parts": [
+    {
+      "id": "cz_tank",
+      "name": "Causticization Reactor: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "cz_tank__back",
+        "cz_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.75,
+        0.3,
+        -0.75
+      ],
+      "bbox_max": [
+        0.75,
+        2.275,
+        0.75
+      ],
+      "label_anchor": [
+        0.0,
+        1.2875,
+        0.75
+      ],
+      "center": [
+        0.0,
+        1.2875,
+        -0.0
+      ],
+      "info_ref": "ct_tank"
+    },
+    {
+      "id": "cz_slurry",
+      "name": "Causticization Reactor: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "cz_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.745,
+        0.33,
+        -0.745
+      ],
+      "bbox_max": [
+        0.745,
+        1.66,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.995,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.995,
+        -0.3725
+      ],
+      "info_ref": "ct_slurry"
+    },
+    {
+      "id": "cz_agitator",
+      "name": "Causticization Reactor: Agitator Shaft & Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "cz_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.3375,
+        0.73,
+        -0.3375
+      ],
+      "bbox_max": [
+        0.3375,
+        2.525,
+        0.3375
+      ],
+      "label_anchor": [
+        0.0,
+        1.6275,
+        0.3375
+      ],
+      "center": [
+        0.0,
+        1.6275,
+        -0.0
+      ],
+      "info_ref": "ct_agitator"
+    },
+    {
+      "id": "cz_drive",
+      "name": "Causticization Reactor: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "cz_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2,
+        2.225,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        3.025,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        2.625,
+        0.2
+      ],
+      "center": [
+        0.0,
+        2.625,
+        -0.0
+      ],
+      "info_ref": "ct_drive"
+    },
+    {
+      "id": "lime_slaker",
+      "name": "Lime Slaker (CaO + H₂O → Ca(OH)₂ milk of lime)",
+      "group": "slaker",
+      "section_role": "split",
+      "nodes": [
+        "lime_slaker__back",
+        "lime_slaker__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.95,
+        1.0,
+        -0.3
+      ],
+      "bbox_max": [
+        -1.4,
+        1.6,
+        0.3
+      ],
+      "label_anchor": [
+        -2.175,
+        1.3,
+        0.3
+      ],
+      "center": [
+        -2.175,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ct_slaker"
+    },
+    {
+      "id": "slaker_paddles",
+      "name": "Slaker Paddle Shaft",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "slaker_paddles.001"
+      ],
+      "pivot": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -2.65,
+        1.09,
+        -0.20696
+      ],
+      "bbox_max": [
+        -1.29,
+        1.49354,
+        0.20696
+      ],
+      "label_anchor": [
+        -1.97,
+        1.29177,
+        0.20696
+      ],
+      "center": [
+        -1.97,
+        1.29177,
+        -0.0
+      ],
+      "info_ref": "ct_slaker"
+    },
+    {
+      "id": "lime_silo",
+      "name": "Quicklime Silo & Feeder",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "lime_silo__back",
+        "lime_silo__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.3,
+        1.45,
+        -0.3
+      ],
+      "bbox_max": [
+        -1.7,
+        2.6,
+        0.3
+      ],
+      "label_anchor": [
+        -2.0,
+        2.025,
+        0.3
+      ],
+      "center": [
+        -2.0,
+        2.025,
+        -0.0
+      ],
+      "info_ref": "ct_slaker"
+    },
+    {
+      "id": "piping",
+      "name": "Lime Milk Line, Liquor Inlet & Slurry Outlet (to separation)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.6,
+        0.386,
+        -0.55
+      ],
+      "bbox_max": [
+        1.05,
+        2.55,
+        0.114
+      ],
+      "label_anchor": [
+        -0.275,
+        1.468,
+        0.114
+      ],
+      "center": [
+        -0.275,
+        1.468,
+        -0.218
+      ],
+      "info_ref": "ct_piping"
+    },
+    {
+      "id": "supports",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.63533,
+        0.0,
+        -0.63533
+      ],
+      "bbox_max": [
+        0.63533,
+        0.3,
+        0.63533
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.63533
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "ct_piping"
+    },
+    {
+      "id": "caco3",
+      "name": "Calcium Carbonate (CaCO₃) particles forming",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "caco30",
+        "caco31",
+        "caco32",
+        "caco33",
+        "caco34",
+        "caco35",
+        "caco36",
+        "caco37",
+        "caco38",
+        "caco39",
+        "caco310",
+        "caco311"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.018,
+        -0.01712
+      ],
+      "bbox_max": [
+        0.018,
+        0.018,
+        0.01712
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01712
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ct_tank": {
+      "function": "Holds the slurry.",
+      "construction": "Tank with baffles/draft tube.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ct_slurry": {
+      "function": "Process slurry/liquor.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ct_agitator": {
+      "function": "Mixes and suspends solids.",
+      "construction": "Shaft and impellers.",
+      "material": "Carbon steel (often rubber-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blade wear, scale"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "ct_drive": {
+      "function": "Drives the agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ct_slaker": {
+      "function": "Prepares lime milk.",
+      "construction": "Slaker, paddles, lime silo.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ct_piping": {
+      "function": "Feeds and outlet.",
+      "construction": "Pipes.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

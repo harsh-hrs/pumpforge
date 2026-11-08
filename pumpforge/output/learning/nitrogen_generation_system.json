@@ -1,0 +1,673 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "nitrogen_generation_system",
+ "no": 233,
+ "title": "Nitrogen Generation System",
+ "model_title": "Nitrogen Generation System — Pressure Swing Adsorption (Carbon Molecular Sieve)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A pressure-swing-adsorption (PSA) nitrogen generator makes nitrogen from compressed air. Two adsorbers filled with carbon molecular sieve take turns: at pressure the sieve takes up oxygen much faster than nitrogen, so nitrogen passes to a buffer vessel; the bed is then depressurised to release the oxygen and regenerate, while the other bed takes over.",
+   "applications": [
+    "Inert blanketing and purging of tanks and vessels",
+    "Food packaging, laser cutting and instrument purge"
+   ],
+   "key_points": [
+    "Kinetic separation: O₂ diffuses faster into CMS",
+    "Cycle ≈ 60 s per bed",
+    "Purity ≈ 95 – 99.999 % (higher purity → lower yield)",
+    "Oxygen analyser and off-spec vent"
+   ],
+   "classification": {
+    "family": "Gas utilities",
+    "type": "Twin-bed PSA with carbon molecular sieve"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A PSA nitrogen generator separates nitrogen from compressed air. Two towers filled with carbon molecular sieve take turns: under pressure the sieve takes up oxygen faster than nitrogen, so nitrogen passes to a buffer vessel; the tower is then depressurised to release the oxygen and regenerate."
+  },
+  "model_3d": {
+   "asset": "glb/nitrogen_generation_system.glb",
+   "metadata": "meta/nitrogen_generation_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 33556,
+   "parts": 13
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Clean, oil-free compressed air enters the active bed.",
+    "CMS adsorbs oxygen; the O₂ front advances.",
+    "Nitrogen passes to the buffer vessel."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Clean, oil-free compressed air enters the active bed.",
+     "part": "air_treatment",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "CMS adsorbs oxygen; the O₂ front advances.",
+     "part": "oxygen_front",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Nitrogen passes to the buffer vessel.",
+     "part": "nitrogen_buffer",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The other bed vents O₂-rich gas and regenerates.",
+     "part": "valve_manifold",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The analyser checks purity before supply.",
+     "part": "product_controls",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Nitrogen yield vs purity (falls steeply above 99.9 %)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "nitrogen_generation_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "nitrogen_generation_system_pressure.glb",
+     "title": "Kinetic separation by pressure swing",
+     "description": "Carbon molecular sieve separates by speed, not equilibrium: O₂ molecules (≈ 0.346 nm) diffuse into the pores much faster than N₂ (≈ 0.364 nm). With feed air at ≈ 7–10 bar(g) the CMS takes up O₂ in the short cycle (≈ 60 s) and N₂ passes through as product (purity typically 95 – 99.999 %). The tower is then depressurised to atmosphere, releasing the O₂-rich gas, while the other tower takes over; a pressure-equalisation step between towers saves air.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/nitrogen_generation_system.json#components",
+   "key_components": "Air feed, CMS adsorber beds (PSA), switching valves, nitrogen buffer vessel, analyser",
+   "parts": [
+    {
+     "id": "adsorber_a",
+     "name": "Adsorber A (adsorbing at pressure)",
+     "info_ref": "n2_adsorber",
+     "function": "Pressure vessels for the CMS.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "cms_a",
+     "name": "Carbon Molecular Sieve Bed A",
+     "info_ref": "n2_cms",
+     "function": "Separates O₂ from N₂ by diffusion rate.",
+     "material": "Carbon."
+    },
+    {
+     "id": "legs_a",
+     "name": "Adsorber A Legs",
+     "info_ref": "n2_adsorber",
+     "function": "Pressure vessels for the CMS.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "adsorber_b",
+     "name": "Adsorber B (depressurised — regenerating)",
+     "info_ref": "n2_adsorber",
+     "function": "Pressure vessels for the CMS.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "cms_b",
+     "name": "Carbon Molecular Sieve Bed B",
+     "info_ref": "n2_cms",
+     "function": "Separates O₂ from N₂ by diffusion rate.",
+     "material": "Carbon."
+    },
+    {
+     "id": "legs_b",
+     "name": "Adsorber B Legs",
+     "info_ref": "n2_adsorber",
+     "function": "Pressure vessels for the CMS.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "oxygen_front",
+     "name": "Oxygen Adsorption Front (O₂ held by the CMS; N₂ passes)",
+     "info_ref": "n2_cms",
+     "function": "Separates O₂ from N₂ by diffusion rate.",
+     "material": "Carbon."
+    },
+    {
+     "id": "valve_manifold",
+     "name": "Pneumatic Valve Manifolds (feed / exhaust / equalise / product) & Exhaust Silencer",
+     "info_ref": "n2_valves",
+     "function": "Sequence pressurise / equalise / vent.",
+     "material": "Stainless/brass."
+    },
+    {
+     "id": "air_treatment",
+     "name": "Feed-Air Treatment: Coalescing Filter & Activated-Carbon Filter (protect the CMS from oil)",
+     "info_ref": "n2_filters",
+     "function": "Remove oil and vapour from feed air.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "nitrogen_buffer",
+     "name": "Nitrogen Buffer Vessel (smooths the cyclic product flow)",
+     "info_ref": "n2_buffer",
+     "function": "Smooths product flow.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "product_controls",
+     "name": "Product Flow Control, Oxygen Analyser (ppm / %) & Off-Spec Vent Valve",
+     "info_ref": "n2_controls",
+     "function": "Checks purity, controls flow.",
+     "material": "—"
+    },
+    {
+     "id": "oxygen_molecules",
+     "name": "O₂ molecules (small, fast) trapped in the CMS pores",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "nitrogen_molecules",
+     "name": "N₂ molecules passing through to the product",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Adsorbers ≈ 0.2 – 1.5 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 5 – 5000",
+     "unit": "Nm³/h N₂"
+    },
+    "operating_conditions": {
+     "typical_range": "Feed ≈ 7 – 10 bar(g); purity ≈ 95 – 99.999 %",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Mostly compressor power ≈ 0.25 – 0.5 kWh/Nm³",
+     "unit": "kWh/Nm³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by flow and purity; air demand from maker curves."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EIGA / CGA guidance"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal movement of connected piping."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; nozzles and supports loaded within limits."
+   ],
+   "piping": [
+    "Relief protection per code, drains at low points, isolations for inspection; slope lines to drains."
+   ],
+   "commissioning": [
+    "Pressure test; set and seal relief valves; check instruments and drains; register with the authority where required."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check purity, pressure and cycle.",
+     "part": "product_controls",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Change feed filters; calibrate analyser.",
+     "part": "air_treatment",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Service valves; check CMS.",
+     "part": "valve_manifold"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Purity drops",
+     "category": "performance",
+     "symptoms": [
+      "O₂ alarm"
+     ],
+     "causes": [
+      "Leaking valve, oil-poisoned CMS, overdraw"
+     ],
+     "remedies": [
+      "Repair valve; replace CMS; reduce flow"
+     ],
+     "part": "cms_a"
+    },
+    {
+     "problem": "CMS dust",
+     "category": "performance",
+     "symptoms": [
+      "Filter blockage"
+     ],
+     "causes": [
+      "Bed movement"
+     ],
+     "remedies": [
+      "Re-compact/replace"
+     ],
+     "part": "cms_a"
+    }
+   ],
+   "safety": [
+    "O₂-deficiency monitors in enclosed spaces; vent O₂-rich exhaust safely."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Nitrogen Generation System — Introduction",
+    "type": "in_app_tour",
+    "model": "nitrogen_generation_system.glb",
+    "duration_s": 50.9,
+    "script": [
+     {
+      "narration": "This module introduces the Nitrogen Generation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A pressure-swing-adsorption (PSA) nitrogen generator makes nitrogen from compressed air.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Two adsorbers filled with carbon molecular sieve take turns: at pressure the sieve takes up oxygen much faster than nitrogen, so nitrogen passes to a buffer vessel; the bed is then depressurised to release the oxygen and regenerate, while the other bed takes over.",
+      "duration_s": 18.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include inert blanketing and purging of tanks and vessels; food packaging, laser cutting and instrument purge.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Nitrogen Generation System — Operation",
+    "type": "in_app_tour",
+    "model": "nitrogen_generation_system.glb",
+    "duration_s": 38.2,
+    "script": [
+     {
+      "narration": "How the Nitrogen Generation System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Clean, oil-free compressed air enters the active bed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_treatment",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "CMS adsorbs oxygen; the O₂ front advances.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oxygen_front",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Nitrogen passes to the buffer vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nitrogen_buffer",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The other bed vents O₂-rich gas and regenerates.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valve_manifold",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The analyser checks purity before supply.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "product_controls",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Carbon molecular sieve separates by speed, not equilibrium: O₂ molecules (≈ 0.346 nm) diffuse into the pores much faster than N₂ (≈ 0.364 nm).",
+      "duration_s": 10.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Nitrogen Generation System — Maintenance",
+    "type": "in_app_tour",
+    "model": "nitrogen_generation_system.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Nitrogen Generation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check purity, pressure and cycle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "product_controls",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Change feed filters; calibrate analyser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_treatment",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Service valves; check CMS.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valve_manifold",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for purity drops: o₂ alarm. Common cause: leaking valve, oil-poisoned cms, overdraw.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "cms_a",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cms dust: filter blockage. Common cause: bed movement.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "cms_a",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does CMS separate O₂?",
+     "options": [
+      "O₂ diffuses into the pores faster than N₂",
+      "O₂ is heavier",
+      "Magnetism",
+      "Temperature"
+     ],
+     "answer": 0,
+     "explanation": "Kinetics.",
+     "level": "basic"
+    },
+    {
+     "question": "What happens if more purity is demanded?",
+     "options": [
+      "Yield falls (more air per Nm³ N₂)",
+      "Yield rises",
+      "No change",
+      "Pressure drops to zero"
+     ],
+     "answer": 0,
+     "explanation": "Trade-off.",
+     "level": "basic"
+    },
+    {
+     "question": "Biggest hazard of nitrogen?",
+     "options": [
+      "Asphyxiation (no smell, no warning)",
+      "Explosion",
+      "Toxicity",
+      "Fire"
+     ],
+     "answer": 0,
+     "explanation": "Asphyxiation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Pressure vessels for the CMS.\"",
+     "options": [
+      "Nitrogen Buffer Vessel (smooths the cyclic product flow)",
+      "Pneumatic Valve Manifolds (feed / exhaust / equalise / product) & Exhaust Silencer",
+      "N₂ molecules passing through to the product",
+      "Adsorber A (adsorbing at pressure)"
+     ],
+     "answer": 3,
+     "explanation": "Adsorber A (adsorbing at pressure): Pressure vessels for the CMS.",
+     "level": "basic",
+     "part": "adsorber_a",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates O₂ from N₂ by diffusion rate.\"",
+     "options": [
+      "Adsorber A Legs",
+      "Carbon Molecular Sieve Bed A",
+      "Feed-Air Treatment: Coalescing Filter & Activated-Carbon Filter (protect the CMS from oil)",
+      "N₂ molecules passing through to the product"
+     ],
+     "answer": 1,
+     "explanation": "Carbon Molecular Sieve Bed A: Separates O₂ from N₂ by diffusion rate.",
+     "level": "basic",
+     "part": "cms_a",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Sequence pressurise / equalise / vent.\"",
+     "options": [
+      "Feed-Air Treatment: Coalescing Filter & Activated-Carbon Filter (protect the CMS from oil)",
+      "Oxygen Adsorption Front (O₂ held by the CMS; N₂ passes)",
+      "Pneumatic Valve Manifolds (feed / exhaust / equalise / product) & Exhaust Silencer",
+      "Product Flow Control, Oxygen Analyser (ppm / %) & Off-Spec Vent Valve"
+     ],
+     "answer": 2,
+     "explanation": "Pneumatic Valve Manifolds (feed / exhaust / equalise / product) & Exhaust Silencer: Sequence pressurise / equalise / vent.",
+     "level": "basic",
+     "part": "valve_manifold",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

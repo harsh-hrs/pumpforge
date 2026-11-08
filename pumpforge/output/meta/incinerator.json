@@ -1,0 +1,592 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "incinerator",
+  "title": "Rotary Kiln Incinerator with Secondary Combustion Chamber",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 168,
+    "phase": 8,
+    "eq_id": "EQ-246",
+    "subcategory": "Combustion & emissions",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "incinerator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "incinerator_temperature.glb",
+      "title": "Secondary chamber: temperature and residence time",
+      "description": "Solids burn and ash out in the kiln (often ~ 850–1200 °C). Gases are then held in the secondary chamber; EU rules (Industrial Emissions Directive) require at least 850 °C for 2 s (1100 °C if the waste contains more than 1 % halogenated organics as chlorine) to complete combustion of organic compounds. Rapid quenching afterwards limits dioxin re-formation.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flue_gas",
+      "kind": "flue_gas",
+      "radius": 0.04,
+      "points": [
+        [
+          -1.4,
+          1.2,
+          -0.1
+        ],
+        [
+          1.0,
+          1.08648,
+          -0.1
+        ],
+        [
+          1.6,
+          1.28648,
+          -0.1
+        ],
+        [
+          1.6,
+          3.4,
+          -0.1
+        ],
+        [
+          2.7,
+          3.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "waste_feed",
+      "kind": "sand",
+      "radius": 0.03,
+      "points": [
+        [
+          -1.9,
+          2.6,
+          -0.0
+        ],
+        [
+          -1.9,
+          1.8,
+          -0.0
+        ],
+        [
+          -1.5,
+          1.0,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "ash",
+      "kind": "sand",
+      "radius": 0.025,
+      "points": [
+        [
+          0.9,
+          0.78648,
+          -0.0
+        ],
+        [
+          1.35,
+          0.3,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 7468,
+    "parts": 9
+  },
+  "summary": "A rotary kiln incinerator burns solid, sludge and liquid wastes. Waste fed at the upper end tumbles down the slowly rotating, slightly inclined kiln while it dries, burns and becomes ash. The gases pass to a secondary combustion chamber where an afterburner ensures complete combustion before heat recovery and gas cleaning.",
+  "classification": {
+    "family": "Combustion / waste treatment",
+    "type": "Rotary kiln incinerator with SCC"
+  },
+  "model_configuration": {
+    "animation": "Kiln rotates; waste tumbles; flames"
+  },
+  "standards": [
+    {
+      "id": "NFPA 85 / NFPA 86",
+      "title": "Boiler and combustion systems / ovens and furnaces",
+      "relevance": "Combustion safeguards.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 746-2",
+      "title": "Industrial thermoprocessing equipment — combustion and fuel handling",
+      "relevance": "Safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "Directive 2010/75/EU (IED)",
+      "title": "Industrial Emissions Directive — waste incineration chapter",
+      "relevance": "850 °C / 2 s rule.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Niessen — Combustion and Incineration Processes"
+  ],
+  "parts": [
+    {
+      "id": "rotary_kiln",
+      "name": "Rotary Kiln: Shell, Refractory, Riding Tyres & Girth Gear (inclined, rotating)",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "rotary_kiln__back",
+        "rotary_kiln__front"
+      ],
+      "pivot": [
+        -0.3,
+        1.14324,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.9
+      ],
+      "bbox_min": [
+        -1.62443,
+        0.59564,
+        -0.66
+      ],
+      "bbox_max": [
+        1.02443,
+        1.91788,
+        0.66
+      ],
+      "label_anchor": [
+        -0.3,
+        1.25676,
+        0.66
+      ],
+      "center": [
+        -0.3,
+        1.25676,
+        -0.0
+      ],
+      "info_ref": "ik_kiln"
+    },
+    {
+      "id": "supports_drive",
+      "name": "Support Rollers, Piers & Kiln Drive (motor, reducer, pinion)",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.25048,
+        0.0,
+        -0.54
+      ],
+      "bbox_max": [
+        0.65048,
+        0.99324,
+        1.6
+      ],
+      "label_anchor": [
+        -0.3,
+        0.49662,
+        1.6
+      ],
+      "center": [
+        -0.3,
+        0.49662,
+        0.53
+      ],
+      "info_ref": "ik_supports"
+    },
+    {
+      "id": "feed_hood",
+      "name": "Feed-End Hood, Waste Feed Chute (ram) & Primary Burner",
+      "group": "casing",
+      "section_role": "keep",
+      "nodes": [
+        "fh"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.5,
+        0.5,
+        -0.7
+      ],
+      "bbox_max": [
+        -1.65,
+        2.45,
+        0.7
+      ],
+      "label_anchor": [
+        -2.075,
+        1.475,
+        0.7
+      ],
+      "center": [
+        -2.075,
+        1.475,
+        -0.0
+      ],
+      "info_ref": "ik_feed"
+    },
+    {
+      "id": "kiln_flame",
+      "name": "Kiln Burner Flame",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "kiln_flamef"
+      ],
+      "pivot": [
+        -1.75,
+        1.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.75,
+        0.82763,
+        -0.17
+      ],
+      "bbox_max": [
+        -0.7502,
+        1.16757,
+        0.17
+      ],
+      "label_anchor": [
+        -1.2501,
+        0.9976,
+        0.17
+      ],
+      "center": [
+        -1.2501,
+        0.9976,
+        -0.0
+      ],
+      "info_ref": "ik_feed"
+    },
+    {
+      "id": "secondary_chamber",
+      "name": "Secondary Combustion Chamber (≥ 850 °C, ≥ 2 s) & Ash Quench below",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "secondary_chamber__back",
+        "secondary_chamber__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        1.1,
+        0.0,
+        -0.6
+      ],
+      "bbox_max": [
+        2.1,
+        3.2,
+        0.6
+      ],
+      "label_anchor": [
+        1.6,
+        1.6,
+        0.6
+      ],
+      "center": [
+        1.6,
+        1.6,
+        -0.0
+      ],
+      "info_ref": "ik_scc"
+    },
+    {
+      "id": "scc_flame",
+      "name": "Secondary (Afterburner) Flame",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "scc_flamef"
+      ],
+      "pivot": [
+        1.2,
+        2.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.2,
+        2.2023,
+        -0.12
+      ],
+      "bbox_max": [
+        1.67891,
+        2.46954,
+        0.12
+      ],
+      "label_anchor": [
+        1.43946,
+        2.33592,
+        0.12
+      ],
+      "center": [
+        1.43946,
+        2.33592,
+        -0.0
+      ],
+      "info_ref": "ik_scc"
+    },
+    {
+      "id": "scc_burner",
+      "name": "Afterburner",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "ab"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.75,
+        2.2,
+        -0.1
+      ],
+      "bbox_max": [
+        1.15,
+        2.4,
+        0.1
+      ],
+      "label_anchor": [
+        0.95,
+        2.3,
+        0.1
+      ],
+      "center": [
+        0.95,
+        2.3,
+        -0.0
+      ],
+      "info_ref": "ik_scc"
+    },
+    {
+      "id": "gas_outlet",
+      "name": "Hot Gas Outlet to Boiler / Quench & Air Pollution Control",
+      "group": "casing",
+      "section_role": "keep",
+      "nodes": [
+        "go"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        1.35,
+        3.2,
+        -0.25
+      ],
+      "bbox_max": [
+        2.6,
+        3.85,
+        0.25
+      ],
+      "label_anchor": [
+        1.975,
+        3.525,
+        0.25
+      ],
+      "center": [
+        1.975,
+        3.525,
+        -0.0
+      ],
+      "info_ref": "ik_scc"
+    },
+    {
+      "id": "waste",
+      "name": "Waste Tumbling down the Kiln, Burning to Ash",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "waste0",
+        "waste1",
+        "waste2",
+        "waste3",
+        "waste4",
+        "waste5",
+        "waste6",
+        "waste7",
+        "waste8",
+        "waste9",
+        "waste10",
+        "waste11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.05444,
+        -0.05853,
+        -0.05095
+      ],
+      "bbox_max": [
+        0.05444,
+        0.05853,
+        0.05095
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.05095
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ik_kiln": {
+      "function": "Burns waste while turning it.",
+      "construction": "Inclined steel shell with refractory, tyres, girth gear.",
+      "material": "Steel/refractory.",
+      "operating_conditions": "≈ 0.5–3 rpm, 1–3° slope.",
+      "failure_modes": [
+        "Refractory loss, shell hot spots"
+      ],
+      "inspection": [
+        "Shell scanner"
+      ]
+    },
+    "ik_supports": {
+      "function": "Support and drive.",
+      "construction": "Rollers, piers, drive.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ik_feed": {
+      "function": "Feeds waste; primary firing.",
+      "construction": "Feed hood, ram, burner.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ik_scc": {
+      "function": "Completes gas combustion.",
+      "construction": "Refractory-lined chamber with afterburner.",
+      "material": "Steel/refractory.",
+      "operating_conditions": "≥ 850 °C for ≥ 2 s.",
+      "failure_modes": [
+        "Slagging"
+      ],
+      "inspection": [
+        "Temperature monitoring"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

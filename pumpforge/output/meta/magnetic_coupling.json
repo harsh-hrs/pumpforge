@@ -1,0 +1,672 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "magnetic_coupling",
+  "title": "Magnetic (Synchronous Permanent-Magnet) Coupling with Containment Shell",
+  "category": "7 · Rotating Equipment – Additional Machinery",
+  "library": {
+    "no": 86,
+    "phase": 5,
+    "eq_id": "EQ-164",
+    "subcategory": "Couplings",
+    "hi_family": "rotating_machinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "magnetic_coupling_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "magnetic_field": {
+      "file": "magnetic_coupling_magnetic_field.glb",
+      "title": "Magnetic field through the can",
+      "description": "Each outer magnet attracts the opposite pole on the inner rotor through the thin, non-magnetic containment shell. Torque is transmitted without contact; if the load torque exceeds the coupling rating the rotors slip (\"decouple\").",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Flux passes through the shell — no shaft seal needed",
+          "anchor": [
+            -0.03,
+            0.62,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "torque_path",
+      "kind": "power",
+      "radius": 0.008,
+      "points": [
+        [
+          -0.6,
+          0.4,
+          -0.0
+        ],
+        [
+          -0.17,
+          0.4,
+          -0.0
+        ],
+        [
+          -0.03,
+          0.512,
+          -0.0
+        ],
+        [
+          -0.03,
+          0.477,
+          -0.0
+        ],
+        [
+          0.05,
+          0.4,
+          -0.0
+        ],
+        [
+          0.5,
+          0.4,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 22720,
+    "parts": 10
+  },
+  "summary": "A magnetic coupling transmits torque through a sealed wall without any shaft seal. Permanent magnets on an outer rotor (on the motor shaft) attract the opposite poles of magnets on an inner rotor (on the pump or mixer shaft). A thin, non-magnetic containment shell separates the two, so the process fluid is completely sealed — ideal for toxic, flammable or valuable liquids.",
+  "classification": {
+    "family": "Coupling (non-contact)",
+    "type": "Synchronous coaxial permanent-magnet coupling"
+  },
+  "model_configuration": {
+    "magnets": "12 per rotor, alternating N/S",
+    "shell": "Stainless (eddy-current losses) — non-metallic shells avoid losses"
+  },
+  "standards": [
+    {
+      "id": "API 685",
+      "title": "Sealless Centrifugal Pumps",
+      "relevance": "Magnetic drive pumps.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Manufacturer magnetic coupling guides (generic)"
+  ],
+  "parts": [
+    {
+      "id": "outer_rotor",
+      "name": "Outer (Driving) Magnet Rotor on Motor Shaft — alternating N/S magnets",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "outer_rotor__back",
+        "outer_rotor__front"
+      ],
+      "pivot": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.45,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.45,
+        0.26,
+        -0.14
+      ],
+      "bbox_max": [
+        0.1,
+        0.54,
+        0.14
+      ],
+      "label_anchor": [
+        -0.175,
+        0.4,
+        0.14
+      ],
+      "center": [
+        -0.175,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "mc_outer"
+    },
+    {
+      "id": "containment_shell",
+      "name": "Containment Shell (Can) — static seal between atmosphere and process",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "containment_shell__back",
+        "containment_shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.35,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.15,
+        0.24,
+        -0.16
+      ],
+      "bbox_max": [
+        0.15,
+        0.56,
+        0.16
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.16
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "mc_can"
+    },
+    {
+      "id": "inner_rotor",
+      "name": "Inner (Driven) Magnet Rotor on Pump/Load Shaft",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "inner_rotor__back",
+        "inner_rotor__front"
+      ],
+      "pivot": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "explode_offset": [
+        0.45,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.13,
+        0.315,
+        -0.085
+      ],
+      "bbox_max": [
+        0.5,
+        0.485,
+        0.085
+      ],
+      "label_anchor": [
+        0.185,
+        0.4,
+        0.085
+      ],
+      "center": [
+        0.185,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "mc_inner"
+    },
+    {
+      "id": "bearing_housings",
+      "name": "Bearing Housings (motor side & load side)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "bearing_housings__back",
+        "bearing_housings__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.3762,
+        0.0,
+        -0.126
+      ],
+      "bbox_max": [
+        0.3962,
+        0.46,
+        0.126
+      ],
+      "label_anchor": [
+        0.01,
+        0.23,
+        0.126
+      ],
+      "center": [
+        0.01,
+        0.23,
+        -0.0
+      ],
+      "info_ref": "mc_bearings"
+    },
+    {
+      "id": "m_motor_frame",
+      "name": "Electric Motor – Frame & End Shields",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_frame__back",
+        "m_motor_frame__front"
+      ],
+      "pivot": [
+        -1.5,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -0.95,
+        0.0,
+        -0.15485
+      ],
+      "bbox_max": [
+        -0.55,
+        0.5934,
+        0.15485
+      ],
+      "label_anchor": [
+        -0.75,
+        0.2967,
+        0.15485
+      ],
+      "center": [
+        -0.75,
+        0.2967,
+        0.0
+      ],
+      "info_ref": "motor_frame_h"
+    },
+    {
+      "id": "m_stator",
+      "name": "Electric Motor – Stator",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_stator__back",
+        "m_stator__front"
+      ],
+      "pivot": [
+        -1.5,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.364,
+        0.0
+      ],
+      "bbox_min": [
+        -0.914,
+        0.274,
+        -0.126
+      ],
+      "bbox_max": [
+        -0.586,
+        0.526,
+        0.126
+      ],
+      "label_anchor": [
+        -0.75,
+        0.4,
+        0.126
+      ],
+      "center": [
+        -0.75,
+        0.4,
+        0.0
+      ],
+      "info_ref": "stator"
+    },
+    {
+      "id": "m_rotor",
+      "name": "Electric Motor – Rotor & Shaft",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_rotor.001"
+      ],
+      "pivot": [
+        -0.55,
+        0.4,
+        0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.0,
+        -0.392
+      ],
+      "bbox_min": [
+        -0.97,
+        0.31964,
+        -0.08078
+      ],
+      "bbox_max": [
+        -0.45,
+        0.48036,
+        0.08078
+      ],
+      "label_anchor": [
+        -0.71,
+        0.4,
+        0.08078
+      ],
+      "center": [
+        -0.71,
+        0.4,
+        0.0
+      ],
+      "info_ref": "rotor"
+    },
+    {
+      "id": "m_motor_bearings",
+      "name": "Electric Motor – Bearings (DE & NDE)",
+      "group": "bearings",
+      "section_role": "split",
+      "nodes": [
+        "m_motor_bearings__back",
+        "m_motor_bearings__front"
+      ],
+      "pivot": [
+        -1.5,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.6,
+        0.224,
+        -0.392
+      ],
+      "bbox_min": [
+        -0.9446,
+        0.34,
+        -0.06
+      ],
+      "bbox_max": [
+        -0.5554,
+        0.46,
+        0.06
+      ],
+      "label_anchor": [
+        -0.75,
+        0.4,
+        0.06
+      ],
+      "center": [
+        -0.75,
+        0.4,
+        0.0
+      ],
+      "info_ref": "motor_bearings"
+    },
+    {
+      "id": "m_motor_fan",
+      "name": "Electric Motor – Cooling Fan",
+      "group": "motor",
+      "section_role": "keep",
+      "nodes": [
+        "m_fan"
+      ],
+      "pivot": [
+        -0.95,
+        0.4,
+        0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -0.971,
+        0.29275,
+        -0.11202
+      ],
+      "bbox_max": [
+        -0.953,
+        0.5134,
+        0.11202
+      ],
+      "label_anchor": [
+        -0.962,
+        0.40308,
+        0.11202
+      ],
+      "center": [
+        -0.962,
+        0.40308,
+        0.0
+      ],
+      "info_ref": "motor_fan"
+    },
+    {
+      "id": "m_fan_cover",
+      "name": "Electric Motor – Fan Cover",
+      "group": "motor",
+      "section_role": "split",
+      "nodes": [
+        "m_fan_cover__back",
+        "m_fan_cover__front"
+      ],
+      "pivot": [
+        -1.5,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.24,
+        0.0,
+        0.0
+      ],
+      "bbox_min": [
+        -1.006,
+        0.2572,
+        -0.1428
+      ],
+      "bbox_max": [
+        -0.93,
+        0.5428,
+        0.1428
+      ],
+      "label_anchor": [
+        -0.968,
+        0.4,
+        0.1428
+      ],
+      "center": [
+        -0.968,
+        0.4,
+        0.0
+      ],
+      "info_ref": "fan_cover"
+    }
+  ],
+  "components": {
+    "mc_outer": {
+      "function": "Carries the driving magnets.",
+      "construction": "Steel cup with bonded magnets.",
+      "material": "Steel; NdFeB or SmCo magnets.",
+      "operating_conditions": "Magnets lose strength above their temperature limit.",
+      "failure_modes": [
+        "Demagnetisation"
+      ],
+      "inspection": [
+        "Torque check"
+      ]
+    },
+    "mc_can": {
+      "function": "Seals the process side from atmosphere.",
+      "construction": "Thin-walled shell.",
+      "material": "Stainless, Hastelloy, PEEK/ceramic.",
+      "operating_conditions": "Metal shells heat up from eddy currents.",
+      "failure_modes": [
+        "Rubbing → leak"
+      ],
+      "inspection": [
+        "Clearance, temperature"
+      ]
+    },
+    "mc_inner": {
+      "function": "Carries the driven magnets on the load shaft.",
+      "construction": "Encapsulated magnet rotor.",
+      "material": "Steel/stainless; magnets.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Decoupling on overload"
+      ],
+      "inspection": [
+        "—"
+      ]
+    },
+    "mc_bearings": {
+      "function": "Support each shaft.",
+      "construction": "Bearing housings.",
+      "material": "Cast iron.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear"
+      ],
+      "inspection": [
+        "Vibration"
+      ]
+    },
+    "motor_frame_h": {
+      "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+      "construction": "Totally enclosed fan-cooled (TEFC) frame with external cooling fins, drive-end and non-drive-end end shields, terminal box and lifting eye.",
+      "material": "Cast iron or aluminium frame; steel fasteners.",
+      "operating_conditions": "Frame size, enclosure (IP rating), efficiency class (e.g. IEC 60034-30-1 IE3/IE4) and insulation class per motor data sheet.",
+      "failure_modes": [
+        "Overheating from blocked fins or fan cover",
+        "Soft foot causing frame distortion and vibration",
+        "Moisture ingress at terminal box"
+      ],
+      "inspection": [
+        "Clean fins and fan cover",
+        "Check foot shims for soft foot",
+        "Insulation resistance before start-up"
+      ]
+    },
+    "stator": {
+      "function": "Produces the rotating magnetic field.",
+      "construction": "Laminated electrical-steel core with insulated copper windings; end turns project at each end.",
+      "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical).",
+      "operating_conditions": "Rated voltage and frequency; temperature rise within insulation class.",
+      "failure_modes": [
+        "Winding insulation failure",
+        "Single phasing",
+        "Overload overheating"
+      ],
+      "inspection": [
+        "Insulation resistance / polarisation index",
+        "Phase current balance",
+        "Winding temperature where RTDs fitted"
+      ]
+    },
+    "rotor": {
+      "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+      "construction": "Laminated core with aluminium or copper bars and end rings, shrunk on the shaft and dynamically balanced.",
+      "material": "Electrical steel, die-cast aluminium or copper.",
+      "operating_conditions": "Runs slightly below synchronous speed (slip).",
+      "failure_modes": [
+        "Broken rotor bars",
+        "Imbalance",
+        "Rotor-stator rub after bearing failure"
+      ],
+      "inspection": [
+        "Motor current signature analysis",
+        "Vibration at 1x and pole-pass sidebands"
+      ]
+    },
+    "motor_bearings": {
+      "function": "Support the motor rotor at drive and non-drive ends.",
+      "construction": "Deep-groove ball bearings (roller bearing at drive end on larger belt-driven motors); one end locates axially.",
+      "material": "Bearing steel; grease lubricated.",
+      "operating_conditions": "Regrease interval depends on speed, size and temperature; insulated bearings recommended with VFDs to prevent electrical fluting.",
+      "failure_modes": [
+        "Lubrication failure",
+        "Contamination",
+        "Electrical erosion (fluting) with VFDs"
+      ],
+      "inspection": [
+        "Temperature and vibration trend",
+        "Regrease per nameplate",
+        "High-frequency envelope analysis"
+      ]
+    },
+    "motor_fan": {
+      "function": "Draws cooling air over the finned frame.",
+      "construction": "Shaft-mounted radial or bidirectional fan at the non-drive end.",
+      "material": "Polymer, aluminium or steel.",
+      "operating_conditions": "Rotates with the shaft.",
+      "failure_modes": [
+        "Broken blades",
+        "Clogged air inlet"
+      ],
+      "inspection": [
+        "Visual check through fan cover; clean inlet"
+      ]
+    },
+    "fan_cover": {
+      "function": "Guards the fan and directs air along the fins.",
+      "construction": "Pressed-steel cowl with perforated air inlet.",
+      "material": "Steel or polymer.",
+      "operating_conditions": "Air inlet must be kept clear (minimum clearance to walls per manufacturer).",
+      "failure_modes": [
+        "Dents causing fan contact",
+        "Blocked inlet"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

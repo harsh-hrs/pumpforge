@@ -1,0 +1,695 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "weigh_feeder",
+  "title": "Belt Weigh Feeder (Gravimetric, Load Cell + Speed Sensor)",
+  "category": "9 · Material Handling & Heavy Mechanical Equipment",
+  "library": {
+    "no": 122,
+    "phase": 7,
+    "eq_id": "EQ-200",
+    "subcategory": "Feeders",
+    "hi_family": "material_handling",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "weigh_feeder_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "material",
+      "kind": "sand",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.55,
+          1.25,
+          -0.0
+        ],
+        [
+          -0.55,
+          0.72,
+          -0.0
+        ],
+        [
+          0.8,
+          0.72,
+          -0.0
+        ],
+        [
+          0.92,
+          0.25,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "signal",
+      "kind": "electric",
+      "radius": 0.006,
+      "points": [
+        [
+          0.1,
+          0.6,
+          -0.33
+        ],
+        [
+          0.0,
+          0.9,
+          -0.55
+        ],
+        [
+          0.8,
+          0.7,
+          -0.45
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 4740,
+    "parts": 11
+  },
+  "summary": "A belt weigh feeder delivers a set mass flow (kg/h). A load cell under a weigh idler measures belt loading (kg/m) and a speed sensor measures belt speed; the controller multiplies them and adjusts belt speed to hold the set rate.",
+  "classification": {
+    "family": "Feeder (gravimetric)",
+    "type": "Belt weigh feeder"
+  },
+  "model_configuration": {
+    "animation": "Belt runs; weigh idler deflects slightly"
+  },
+  "standards": [
+    {
+      "id": "OIML R 50",
+      "title": "Continuous totalizing automatic weighing instruments (belt weighers)",
+      "relevance": "Accuracy classes.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "OIML R 50"
+  ],
+  "parts": [
+    {
+      "id": "bfbelt",
+      "name": "Feeder Belt",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfbelt.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.89,
+        0.51,
+        -0.25
+      ],
+      "bbox_max": [
+        0.89,
+        0.69,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        0.6,
+        0.25
+      ],
+      "center": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "hk_belt"
+    },
+    {
+      "id": "bfpulley_1",
+      "name": "Tail Pulley",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfp0"
+      ],
+      "pivot": [
+        -0.8,
+        0.6,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.2,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.878,
+        0.522,
+        -0.33
+      ],
+      "bbox_max": [
+        -0.722,
+        0.678,
+        0.33
+      ],
+      "label_anchor": [
+        -0.8,
+        0.6,
+        0.33
+      ],
+      "center": [
+        -0.8,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "hk_pulley"
+    },
+    {
+      "id": "bfpulley_2",
+      "name": "Head (Drive) Pulley",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfp1"
+      ],
+      "pivot": [
+        0.8,
+        0.6,
+        -0.0
+      ],
+      "explode_offset": [
+        0.2,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.722,
+        0.522,
+        -0.33
+      ],
+      "bbox_max": [
+        0.878,
+        0.678,
+        0.33
+      ],
+      "label_anchor": [
+        0.8,
+        0.6,
+        0.33
+      ],
+      "center": [
+        0.8,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "hk_pulley"
+    },
+    {
+      "id": "bfmarks",
+      "name": "Feeder Belt Motion Markers",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfmk0",
+        "bfmk1",
+        "bfmk2",
+        "bfmk3",
+        "bfmk4",
+        "bfmk5",
+        "bfmk6",
+        "bfmk7",
+        "bfmk8",
+        "bfmk9",
+        "bfmk10",
+        "bfmk11",
+        "bfmk12",
+        "bfmk13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.01,
+        -0.002,
+        -0.225
+      ],
+      "bbox_max": [
+        0.01,
+        0.002,
+        0.225
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.225
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "hk_belt"
+    },
+    {
+      "id": "bfframe",
+      "name": "Feeder Belt Frame & Idlers (troughing and return)",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfframe.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.25,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.8,
+        0.0,
+        -0.33
+      ],
+      "bbox_max": [
+        0.8,
+        0.72206,
+        0.33
+      ],
+      "label_anchor": [
+        0.0,
+        0.36103,
+        0.33
+      ],
+      "center": [
+        0.0,
+        0.36103,
+        -0.0
+      ],
+      "info_ref": "hk_idlers"
+    },
+    {
+      "id": "weigh_idler",
+      "name": "Weigh Idler on Load Cell (measures belt load, kg/m)",
+      "group": "instrument",
+      "section_role": "keep",
+      "nodes": [
+        "lc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.4
+      ],
+      "bbox_min": [
+        0.06,
+        0.56,
+        -0.36
+      ],
+      "bbox_max": [
+        0.14,
+        0.678,
+        0.18
+      ],
+      "label_anchor": [
+        0.1,
+        0.619,
+        0.18
+      ],
+      "center": [
+        0.1,
+        0.619,
+        -0.09
+      ],
+      "info_ref": "wf_loadcell"
+    },
+    {
+      "id": "speed_sensor",
+      "name": "Speed Sensor on Tail Pulley (belt speed, m/s)",
+      "group": "instrument",
+      "section_role": "keep",
+      "nodes": [
+        "sp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.84,
+        0.56,
+        -0.33
+      ],
+      "bbox_max": [
+        -0.76,
+        0.69,
+        -0.27
+      ],
+      "label_anchor": [
+        -0.8,
+        0.625,
+        -0.27
+      ],
+      "center": [
+        -0.8,
+        0.625,
+        -0.3
+      ],
+      "info_ref": "wf_speed"
+    },
+    {
+      "id": "controller",
+      "name": "Weigh Controller (rate = load × speed; adjusts belt speed via VFD)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "ctl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.15,
+        0.7,
+        -0.66
+      ],
+      "bbox_max": [
+        0.15,
+        1.1,
+        -0.54
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        -0.54
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -0.6
+      ],
+      "info_ref": "wf_controller"
+    },
+    {
+      "id": "inlet",
+      "name": "Inlet Hopper & Shear Gate (sets bed depth)",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "inlet__back",
+        "inlet__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.808,
+        0.695,
+        -0.258
+      ],
+      "bbox_max": [
+        -0.292,
+        1.2,
+        0.258
+      ],
+      "label_anchor": [
+        -0.55,
+        0.9475,
+        0.258
+      ],
+      "center": [
+        -0.55,
+        0.9475,
+        -0.0
+      ],
+      "info_ref": "wf_inlet"
+    },
+    {
+      "id": "drive",
+      "name": "Variable-Speed Gearmotor (VFD)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "drive"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.3
+      ],
+      "bbox_min": [
+        0.7,
+        0.5,
+        -0.8
+      ],
+      "bbox_max": [
+        0.9,
+        0.71,
+        -0.36
+      ],
+      "label_anchor": [
+        0.8,
+        0.605,
+        -0.36
+      ],
+      "center": [
+        0.8,
+        0.605,
+        -0.58
+      ],
+      "info_ref": "wf_drive"
+    },
+    {
+      "id": "material",
+      "name": "Material on Belt",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "material0",
+        "material1",
+        "material2",
+        "material3",
+        "material4",
+        "material5",
+        "material6",
+        "material7",
+        "material8",
+        "material9",
+        "material10",
+        "material11",
+        "material12",
+        "material13",
+        "material14",
+        "material15"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.0196,
+        -0.02107,
+        -0.02013
+      ],
+      "bbox_max": [
+        0.0196,
+        0.02107,
+        0.02013
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02013
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hk_belt": {
+      "function": "Carries the material.",
+      "construction": "Endless belt.",
+      "material": "Rubber.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hk_pulley": {
+      "function": "Drive/return pulleys.",
+      "construction": "Pulleys.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hk_idlers": {
+      "function": "Frame and idlers.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "wf_loadcell": {
+      "function": "Measures belt load.",
+      "construction": "Weigh idler on load cell.",
+      "material": "—",
+      "operating_conditions": "Calibrate with test weights/chains.",
+      "failure_modes": [
+        "Drift"
+      ],
+      "inspection": [
+        "Zero/span check"
+      ]
+    },
+    "wf_speed": {
+      "function": "Measures belt speed.",
+      "construction": "Pulse sensor.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "wf_controller": {
+      "function": "Computes and controls feed rate.",
+      "construction": "Controller with VFD output.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "wf_inlet": {
+      "function": "Feeds and shapes the bed.",
+      "construction": "Hopper and shear gate.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "wf_drive": {
+      "function": "Variable-speed drive.",
+      "construction": "Gearmotor with VFD.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

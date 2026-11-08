@@ -1,0 +1,660 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "fluidized_bed_combustor",
+ "no": 166,
+ "title": "Fluidized Bed Combustor",
+ "model_title": "Bubbling Fluidised Bed Combustor (with In-Bed Tubes & Cyclone)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A bubbling fluidised bed combustor burns fuel inside a hot bed of sand fluidised by air blown up through a distributor. The well-mixed, hot bed burns low-grade or variable fuels completely at a moderate temperature; in-bed tubes raise steam, and a cyclone returns fines to the bed.",
+   "applications": [
+    "Biomass and waste-to-energy boilers",
+    "Low-grade coal and lignite",
+    "Sludge incineration"
+   ],
+   "key_points": [
+    "Bed ~ 800–900 °C: low NOx, in-bed sulphur capture with limestone",
+    "Fuel-flexible",
+    "Large thermal inertia",
+    "Erosion of in-bed surfaces"
+   ],
+   "classification": {
+    "family": "Combustion",
+    "type": "Bubbling fluidised bed (BFB)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A bubbling fluidised bed combustor burns fuel inside a hot bed of sand kept fluidised by air blown through a distributor. The hot, well-mixed bed burns low-grade and variable fuels at a moderate, uniform temperature; tubes in the bed and walls raise steam, and a cyclone returns fines to the bed."
+  },
+  "model_3d": {
+   "asset": "glb/fluidized_bed_combustor.glb",
+   "metadata": "meta/fluidized_bed_combustor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14104,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Fluidising air enters the wind box.",
+    "The distributor nozzles spread air across the bed.",
+    "Fuel drops into the bubbling sand bed and burns."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Fluidising air enters the wind box.",
+     "part": "air_inlet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The distributor nozzles spread air across the bed.",
+     "part": "air_distributor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fuel drops into the bubbling sand bed and burns.",
+     "part": "fuel_feed",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In-bed tubes absorb heat.",
+     "part": "in_bed_tubes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The cyclone returns fines; flue gas goes to heat recovery.",
+     "part": "cyclone_return",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Bed temperature vs fuel/air ratio; agglomeration risk rises above ash softening temperatures."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "fluidized_bed_combustor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "fluidized_bed_combustor_temperature.glb",
+     "title": "Low, uniform combustion temperature",
+     "description": "The bed is kept at roughly 800–900 °C — hot enough to burn the fuel completely but low enough to limit thermal NOx and to let limestone added to the bed capture sulphur. The large mass of hot sand gives stable combustion even of wet, low-grade or variable fuels.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/fluidized_bed_combustor.json#components",
+   "key_components": "Combustor shell, air distributor & nozzles, sand bed, fuel feed, in-bed tubes, cyclone",
+   "parts": [
+    {
+     "id": "combustor_shell",
+     "name": "Combustor Shell, Refractory Lining & Wind Box (below distributor)",
+     "info_ref": "bc_shell",
+     "function": "Contains the bed and freeboard.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "air_distributor",
+     "name": "Air Distributor Plate with Bubble-Cap Nozzles",
+     "info_ref": "bc_distributor",
+     "function": "Distributes fluidising air.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "in_bed_tubes",
+     "name": "In-Bed Heat Transfer Tubes (raise steam, control bed temperature)",
+     "info_ref": "bc_tubes",
+     "function": "Remove heat from the bed.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "sand_bed",
+     "name": "Bubbling Sand Bed (inert bed material + fuel + ash)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "bed_flame_1",
+     "name": "Combustion in the Bed 1",
+     "info_ref": "bc_bed",
+     "function": "Combustion zone.",
+     "material": "—"
+    },
+    {
+     "id": "bed_flame_2",
+     "name": "Combustion in the Bed 2",
+     "info_ref": "bc_bed",
+     "function": "Combustion zone.",
+     "material": "—"
+    },
+    {
+     "id": "fuel_feed",
+     "name": "Fuel Feed Hopper & Chute (coal, biomass, waste)",
+     "info_ref": "bc_feed",
+     "function": "Feeds fuel.",
+     "material": "Steel."
+    },
+    {
+     "id": "air_inlet",
+     "name": "Primary (Fluidising) Air Inlet to Wind Box",
+     "info_ref": "bc_air",
+     "function": "Primary air.",
+     "material": "Steel."
+    },
+    {
+     "id": "cyclone_return",
+     "name": "Cyclone & Return Leg (fines back to the bed)",
+     "info_ref": "bc_cyclone",
+     "function": "Returns fines.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "ash_drain",
+     "name": "Bed Ash Drain",
+     "info_ref": "bc_shell",
+     "function": "Contains the bed and freeboard.",
+     "material": "Steel/refractory."
+    },
+    {
+     "id": "fuel",
+     "name": "Fuel Particles Dropping into the Bed",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bed area ~ 1 – 100 m²",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 1 – 300",
+     "unit": "MW(th)"
+    },
+    "operating_temperature": {
+     "typical_range": "Bed ~ 800 – 900",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Fuel ~ 0.5 – 100",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "BFB for biomass/waste up to medium sizes; CFB for larger, higher-velocity units."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Basu — Combustion and Gasification in Fluidized Beds",
+    "NFPA 85"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Foundations for weight, thermal growth and dynamic loads; refractory dry-out after installation."
+   ],
+   "alignment": [
+    "Burner and fan alignment; kiln/rotor alignment for rotating equipment."
+   ],
+   "piping": [
+    "Fuel train per burner management standards; air ducts; flue gas path to air-pollution control; emissions monitoring (CEMS)."
+   ],
+   "commissioning": [
+    "Refractory dry-out; purge and light-off; tune combustion; verify residence-time temperature and emissions."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor bed temperature and ΔP.",
+     "part": "combustor_shell",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Drain bed ash; check nozzles.",
+     "part": "ash_drain",
+     "interval": "daily"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect in-bed tubes for erosion; refractory.",
+     "part": "in_bed_tubes"
+    }
+   ],
+   "lubrication": [
+    "Fans and feeders per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Bed agglomeration",
+     "category": "performance",
+     "symptoms": [
+      "Defluidisation, hot spots"
+     ],
+     "causes": [
+      "Alkali-rich fuels, high temperature"
+     ],
+     "remedies": [
+      "Bed material change; additives; lower T"
+     ],
+     "part": "combustor_shell"
+    },
+    {
+     "problem": "Tube erosion",
+     "category": "wear",
+     "symptoms": [
+      "Thinning"
+     ],
+     "causes": [
+      "Bed particle impact"
+     ],
+     "remedies": [
+      "Shields, studs, lower velocity"
+     ],
+     "part": "in_bed_tubes"
+    }
+   ],
+   "safety": [
+    "Bed slumping/hot-restart procedures; dust and hot ash; BMS."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Fluidized Bed Combustor — Introduction",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_combustor.glb",
+    "duration_s": 49.5,
+    "script": [
+     {
+      "narration": "This module introduces the Fluidized Bed Combustor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A bubbling fluidised bed combustor burns fuel inside a hot bed of sand fluidised by air blown up through a distributor.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The well-mixed, hot bed burns low-grade or variable fuels completely at a moderate temperature; in-bed tubes raise steam, and a cyclone returns fines to the bed.",
+      "duration_s": 12.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include biomass and waste-to-energy boilers; low-grade coal and lignite; sludge incineration.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Combustor Shell, Refractory Lining & Wind Box (below distributor).",
+      "duration_s": 5.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Fluidized Bed Combustor — Operation",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_combustor.glb",
+    "duration_s": 42.2,
+    "script": [
+     {
+      "narration": "How the Fluidized Bed Combustor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Fluidising air enters the wind box.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_inlet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The distributor nozzles spread air across the bed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_distributor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fuel drops into the bubbling sand bed and burns.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fuel_feed",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In-bed tubes absorb heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "in_bed_tubes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The cyclone returns fines; flue gas goes to heat recovery.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "cyclone_return",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The bed is kept at roughly 800–900 °C — hot enough to burn the fuel completely but low enough to limit thermal NOx and to let limestone added to the bed capture sulphur.",
+      "duration_s": 13.8,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Fluidized Bed Combustor — Maintenance",
+    "type": "in_app_tour",
+    "model": "fluidized_bed_combustor.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Fluidized Bed Combustor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor bed temperature and ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "combustor_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Drain bed ash; check nozzles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ash_drain",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect in-bed tubes for erosion; refractory.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "in_bed_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for bed agglomeration: defluidisation, hot spots. Common cause: alkali-rich fuels, high temperature.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "combustor_shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tube erosion: thinning. Common cause: bed particle impact.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "in_bed_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why do FBCs produce less NOx?",
+     "options": [
+      "Lower combustion temperature (~ 850 °C)",
+      "No air",
+      "Special fuel",
+      "Higher temperature"
+     ],
+     "answer": 0,
+     "explanation": "Low thermal NOx.",
+     "level": "basic"
+    },
+    {
+     "question": "How is sulphur captured?",
+     "options": [
+      "Limestone added to the bed",
+      "Water spray",
+      "Not possible",
+      "By the stack"
+     ],
+     "answer": 0,
+     "explanation": "CaO + SO₂.",
+     "level": "basic"
+    },
+    {
+     "question": "What keeps the bed fluidised?",
+     "options": [
+      "Air blown up through the distributor",
+      "Paddles",
+      "Vibration",
+      "Gravity"
+     ],
+     "answer": 0,
+     "explanation": "Air.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the bed and freeboard.\"",
+     "options": [
+      "Bubbling Sand Bed (inert bed material + fuel + ash)",
+      "Combustor Shell, Refractory Lining & Wind Box (below distributor)",
+      "Primary (Fluidising) Air Inlet to Wind Box",
+      "Combustion in the Bed 1"
+     ],
+     "answer": 1,
+     "explanation": "Combustor Shell, Refractory Lining & Wind Box (below distributor): Contains the bed and freeboard.",
+     "level": "basic",
+     "part": "combustor_shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distributes fluidising air.\"",
+     "options": [
+      "Air Distributor Plate with Bubble-Cap Nozzles",
+      "Primary (Fluidising) Air Inlet to Wind Box",
+      "In-Bed Heat Transfer Tubes (raise steam, control bed temperature)",
+      "Bed Ash Drain"
+     ],
+     "answer": 0,
+     "explanation": "Air Distributor Plate with Bubble-Cap Nozzles: Distributes fluidising air.",
+     "level": "basic",
+     "part": "air_distributor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Remove heat from the bed.\"",
+     "options": [
+      "Fuel Particles Dropping into the Bed",
+      "Bubbling Sand Bed (inert bed material + fuel + ash)",
+      "Fuel Feed Hopper & Chute (coal, biomass, waste)",
+      "In-Bed Heat Transfer Tubes (raise steam, control bed temperature)"
+     ],
+     "answer": 3,
+     "explanation": "In-Bed Heat Transfer Tubes (raise steam, control bed temperature): Remove heat from the bed.",
+     "level": "basic",
+     "part": "in_bed_tubes",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

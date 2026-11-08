@@ -1,0 +1,590 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "labyrinth_seal",
+ "no": 243,
+ "title": "Labyrinth Seal",
+ "model_title": "Labyrinth Seal (Compressor / Turbine Shaft Seal)",
+ "category": "14 · Mechanical Components & Maintenance",
+ "phase": 12,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A labyrinth seal is a non-contacting seal used on compressors, turbines and bearing housings. A row of knife-edge teeth runs with a small clearance to the shaft; leaking gas is throttled at each tooth and loses its energy in the cavity after it, so pressure drops in steps and leakage stays small without any rubbing.",
+   "applications": [
+    "Interstage and shaft-end seals of centrifugal compressors and steam turbines",
+    "Bearing-housing isolators and oil seals on pumps, fans and gearboxes"
+   ],
+   "key_points": [
+    "Non-contacting → no wear in normal running",
+    "Leakage falls with more teeth and smaller clearance",
+    "Buffer / eductor port at a middle cavity",
+    "Clearance grows if teeth rub"
+   ],
+   "classification": {
+    "family": "Sealing systems",
+    "type": "Straight-through stator labyrinth"
+   },
+   "hi_family": "mechanical_components",
+   "summary": "A labyrinth seal is a non-contacting shaft seal: a series of knife-edge teeth with tiny clearances throttles the gas leaking along the shaft step by step, keeping leakage low without any rubbing contact."
+  },
+  "model_3d": {
+   "asset": "glb/labyrinth_seal.glb",
+   "metadata": "meta/labyrinth_seal.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 11228,
+   "parts": 4
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "High-pressure gas reaches the first tooth.",
+    "It accelerates through the tiny clearance and loses pressure.",
+    "Its kinetic energy is dissipated as turbulence in the cavity."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "High-pressure gas reaches the first tooth.",
+     "part": "labyrinth_stator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It accelerates through the tiny clearance and loses pressure.",
+     "part": "labyrinth_stator",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Its kinetic energy is dissipated as turbulence in the cavity.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The process repeats at every tooth until the low-pressure side.",
+     "part": "shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Leakage vs number of teeth and clearance."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "labyrinth_seal_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "labyrinth_seal_pressure.glb",
+     "title": "Pressure drops step by step",
+     "description": "A labyrinth seal is a non-contacting seal: gas leaking along the shaft is forced through a series of tiny clearances at the knife-edge teeth. At each tooth it accelerates and loses pressure; in the cavity after it the jet's kinetic energy is dissipated as turbulence instead of being recovered. Pressure therefore falls in steps from the high-pressure side to the low-pressure side. Leakage falls with more teeth and smaller clearance, but never reaches zero; a buffer-gas or eductor port at a middle cavity can stop process gas escaping.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/labyrinth_seal.json#components",
+   "key_components": "Knife-edge teeth, cavities, stator ring, casing, buffer-gas port",
+   "parts": [
+    {
+     "id": "labyrinth_stator",
+     "name": "Labyrinth Stator: Knife-Edge Teeth & Cavities (aluminium / abradable)",
+     "info_ref": "lab_stator",
+     "function": "Throttles leakage.",
+     "material": "Aluminium / abradable / steel."
+    },
+    {
+     "id": "casing",
+     "name": "Casing / Diaphragm holding the Seal",
+     "info_ref": "lab_casing",
+     "function": "Holds the seal, buffer port.",
+     "material": "Cast iron / steel."
+    },
+    {
+     "id": "shaft",
+     "name": "Rotor Shaft (turning; tooth tips run with small radial clearance)",
+     "info_ref": "lab_shaft",
+     "function": "Rotor surface for the seal.",
+     "material": "Alloy steel."
+    },
+    {
+     "id": "leakage",
+     "name": "Leakage gas throttled at each tooth, swirling in each cavity",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Shaft ≈ 25 – 400 mm diameter",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "Up to ≈ 15,000 – 20,000",
+     "unit": "rpm"
+    },
+    "load_capacity": {
+     "typical_range": "Pressure difference up to tens of bar (multi-stage)",
+     "unit": "—"
+    },
+    "operating_conditions": {
+     "typical_range": "Radial clearance ≈ 0.1 – 0.5 mm; gas or oil-mist service",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Select tooth count, clearance and material (aluminium, abradable, steel) for pressure, speed and rub tolerance."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "part_number": null,
+    "datasheet": null,
+    "rated_point": {
+     "speed_rpm": null,
+     "load_or_torque": null,
+     "temperature": null,
+     "pressure": null
+    },
+    "status": "empty — fill from the component datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 617"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Component is installed in its machine: housing bores, shaft fits and shoulders to drawing tolerances; clean, burr-free surfaces."
+   ],
+   "alignment": [
+    "Concentricity and squareness checked with dial indicators (runout, face run-out) to maker limits."
+   ],
+   "piping": [
+    "Lubrication / flush / buffer connections clean and flushed before first run; correct orientation of ports."
+   ],
+   "commissioning": [
+    "Hand-turn first; run at low speed, check temperature, leakage and vibration; record baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Trend leakage / buffer flow and bearing temperatures.",
+     "part": "casing",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect for rub marks during outages.",
+     "part": "labyrinth_stator",
+     "interval": "at outage"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace damaged labyrinths; restore clearance.",
+     "part": "labyrinth_stator"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Excess leakage",
+     "category": "leakage",
+     "symptoms": [
+      "High buffer flow, efficiency loss"
+     ],
+     "causes": [
+      "Teeth rubbed (vibration, thermal bow)"
+     ],
+     "remedies": [
+      "Replace; correct the cause of the rub"
+     ],
+     "part": "labyrinth_stator"
+    },
+    {
+     "problem": "Oil leak at bearing labyrinth",
+     "category": "leakage",
+     "symptoms": [
+      "Oil at the shaft"
+     ],
+     "causes": [
+      "Drain blocked, pressurised housing"
+     ],
+     "remedies": [
+      "Clear drain; vent housing"
+     ],
+     "part": "casing"
+    }
+   ],
+   "safety": [
+    "Toxic/flammable process gas: buffer or eductor systems to prevent release."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Labyrinth Seal — Introduction",
+    "type": "in_app_tour",
+    "model": "labyrinth_seal.glb",
+    "duration_s": 59.0,
+    "script": [
+     {
+      "narration": "This module introduces the Labyrinth Seal.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A labyrinth seal is a non-contacting seal used on compressors, turbines and bearing housings.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A row of knife-edge teeth runs with a small clearance to the shaft; leaking gas is throttled at each tooth and loses its energy in the cavity after it, so pressure drops in steps and leakage stays small without any rubbing.",
+      "duration_s": 17.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include interstage and shaft-end seals of centrifugal compressors and steam turbines; bearing-housing isolators and oil seals on pumps, fans and gearboxes.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Casing / Diaphragm holding the Seal, Rotor Shaft (turning; tooth tips run with small radial clearance).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Labyrinth Seal — Operation",
+    "type": "in_app_tour",
+    "model": "labyrinth_seal.glb",
+    "duration_s": 35.8,
+    "script": [
+     {
+      "narration": "How the Labyrinth Seal works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "High-pressure gas reaches the first tooth.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "labyrinth_stator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It accelerates through the tiny clearance and loses pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "labyrinth_stator",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Its kinetic energy is dissipated as turbulence in the cavity.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The process repeats at every tooth until the low-pressure side.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "A labyrinth seal is a non-contacting seal: gas leaking along the shaft is forced through a series of tiny clearances at the knife-edge teeth.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Labyrinth Seal — Maintenance",
+    "type": "in_app_tour",
+    "model": "labyrinth_seal.glb",
+    "duration_s": 36.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Labyrinth Seal.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Trend leakage / buffer flow and bearing temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect for rub marks during outages.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "labyrinth_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace damaged labyrinths; restore clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "labyrinth_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for excess leakage: high buffer flow, efficiency loss. Common cause: teeth rubbed (vibration, thermal bow).",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "labyrinth_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oil leak at bearing labyrinth: oil at the shaft. Common cause: drain blocked, pressurised housing.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Does a labyrinth seal touch the shaft in normal running?",
+     "options": [
+      "No — it is non-contacting",
+      "Yes, always",
+      "Only at full speed",
+      "Only when cold"
+     ],
+     "answer": 0,
+     "explanation": "Non-contacting.",
+     "level": "basic"
+    },
+    {
+     "question": "How does it reduce leakage?",
+     "options": [
+      "Repeated throttling and energy dissipation at many teeth",
+      "Spring-loaded faces",
+      "Rubber lips",
+      "Magnetism"
+     ],
+     "answer": 0,
+     "explanation": "Throttling.",
+     "level": "basic"
+    },
+    {
+     "question": "What happens to leakage after a rub?",
+     "options": [
+      "It increases (clearance larger)",
+      "It falls",
+      "No change",
+      "Becomes zero"
+     ],
+     "answer": 0,
+     "explanation": "Larger clearance.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Throttles leakage.\"",
+     "options": [
+      "Casing / Diaphragm holding the Seal",
+      "Rotor Shaft (turning; tooth tips run with small radial clearance)",
+      "Labyrinth Stator: Knife-Edge Teeth & Cavities (aluminium / abradable)",
+      "Leakage gas throttled at each tooth, swirling in each cavity"
+     ],
+     "answer": 2,
+     "explanation": "Labyrinth Stator: Knife-Edge Teeth & Cavities (aluminium / abradable): Throttles leakage.",
+     "level": "basic",
+     "part": "labyrinth_stator",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds the seal, buffer port.\"",
+     "options": [
+      "Casing / Diaphragm holding the Seal",
+      "Labyrinth Stator: Knife-Edge Teeth & Cavities (aluminium / abradable)",
+      "Rotor Shaft (turning; tooth tips run with small radial clearance)",
+      "Leakage gas throttled at each tooth, swirling in each cavity"
+     ],
+     "answer": 0,
+     "explanation": "Casing / Diaphragm holding the Seal: Holds the seal, buffer port.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Rotor surface for the seal.\"",
+     "options": [
+      "Casing / Diaphragm holding the Seal",
+      "Rotor Shaft (turning; tooth tips run with small radial clearance)",
+      "Leakage gas throttled at each tooth, swirling in each cavity",
+      "Labyrinth Stator: Knife-Edge Teeth & Cavities (aluminium / abradable)"
+     ],
+     "answer": 1,
+     "explanation": "Rotor Shaft (turning; tooth tips run with small radial clearance): Rotor surface for the seal.",
+     "level": "basic",
+     "part": "shaft",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

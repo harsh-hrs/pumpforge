@@ -1,0 +1,519 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "air_preheater",
+  "title": "Rotary Regenerative Air Preheater (Ljungström Type)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 154,
+    "phase": 8,
+    "eq_id": "EQ-232",
+    "subcategory": "Boiler heat recovery",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "air_preheater_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "air_preheater_temperature.glb",
+      "title": "Hot side vs cold side of the rotor",
+      "description": "The matrix plates in the gas half (right) are heated by the flue gas; as the rotor turns (about 1–3 rpm) they move into the air half (left) and give that heat to the combustion air. Hotter combustion air improves boiler efficiency (roughly 1 % fuel saving per ~20 °C of extra air temperature, rule of thumb). Leakage of air into gas past the seals is the main performance loss.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flue_gas",
+      "kind": "flue_gas",
+      "radius": 0.04,
+      "points": [
+        [
+          0.5,
+          2.7,
+          -0.3
+        ],
+        [
+          0.5,
+          0.0,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.04,
+      "points": [
+        [
+          -0.5,
+          0.0,
+          -0.3
+        ],
+        [
+          -0.5,
+          2.7,
+          -0.3
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 7964,
+    "parts": 8
+  },
+  "summary": "A rotary regenerative air preheater transfers heat from boiler flue gas to the incoming combustion air. A large rotor packed with corrugated steel plates turns slowly; the plates are heated while passing through the gas side and release that heat while passing through the air side.",
+  "classification": {
+    "family": "Boiler heat recovery",
+    "type": "Ljungström rotary regenerative (vertical shaft)"
+  },
+  "model_configuration": {
+    "animation": "Rotor turns; gas down, air up"
+  },
+  "standards": [
+    {
+      "id": "ASME PTC 4.3",
+      "title": "Air heaters — performance test code",
+      "relevance": "Performance testing.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Babcock & Wilcox — Steam"
+  ],
+  "parts": [
+    {
+      "id": "housing",
+      "name": "Housing (rotor shell)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "housing__back",
+        "housing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -0.93,
+        0.75,
+        -0.93
+      ],
+      "bbox_max": [
+        0.93,
+        1.85,
+        0.93
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.93
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ap_housing"
+    },
+    {
+      "id": "rotor",
+      "name": "Rotor with Heating-Element Baskets (matrix) — turns slowly through gas and air",
+      "group": "rotating_element",
+      "section_role": "split",
+      "nodes": [
+        "rotor__back",
+        "rotor__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.9
+      ],
+      "bbox_min": [
+        -0.88,
+        0.65,
+        -0.88
+      ],
+      "bbox_max": [
+        0.88,
+        1.95,
+        0.88
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.88
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ap_rotor"
+    },
+    {
+      "id": "sector_plates_seals",
+      "name": "Sector Plates & Radial/Circumferential Seals (limit air-to-gas leakage)",
+      "group": "seals",
+      "section_role": "keep",
+      "nodes": [
+        "sector_plates_seals.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.3
+      ],
+      "bbox_min": [
+        -0.885,
+        0.845,
+        -0.885
+      ],
+      "bbox_max": [
+        0.885,
+        1.755,
+        0.885
+      ],
+      "label_anchor": [
+        0.0,
+        1.3,
+        0.885
+      ],
+      "center": [
+        0.0,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ap_seals"
+    },
+    {
+      "id": "ducts",
+      "name": "Ducts: Flue Gas In (top) / Out (bottom), Air In (bottom) / Out (top)",
+      "group": "ducts",
+      "section_role": "split",
+      "nodes": [
+        "ducts__back",
+        "ducts__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.875,
+        0.1,
+        -0.725
+      ],
+      "bbox_max": [
+        0.875,
+        2.6,
+        0.725
+      ],
+      "label_anchor": [
+        0.0,
+        1.35,
+        0.725
+      ],
+      "center": [
+        0.0,
+        1.35,
+        -0.0
+      ],
+      "info_ref": "ap_ducts"
+    },
+    {
+      "id": "drive",
+      "name": "Rotor Drive (motor, reducer, pinion on pin rack)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "drv"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.89,
+        1.175,
+        -0.125
+      ],
+      "bbox_max": [
+        1.3,
+        1.425,
+        0.125
+      ],
+      "label_anchor": [
+        1.095,
+        1.3,
+        0.125
+      ],
+      "center": [
+        1.095,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "ap_drive"
+    },
+    {
+      "id": "structure",
+      "name": "Support Structure",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "lg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.78781,
+        0.0,
+        -0.78781
+      ],
+      "bbox_max": [
+        0.78781,
+        0.1,
+        0.78781
+      ],
+      "label_anchor": [
+        0.0,
+        0.05,
+        0.78781
+      ],
+      "center": [
+        0.0,
+        0.05,
+        -0.0
+      ],
+      "info_ref": "ap_housing"
+    },
+    {
+      "id": "gas_particles",
+      "name": "Hot Flue Gas passing Down through the Matrix",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "gas_particles0",
+        "gas_particles1",
+        "gas_particles2",
+        "gas_particles3",
+        "gas_particles4",
+        "gas_particles5",
+        "gas_particles6",
+        "gas_particles7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        -0.025,
+        -0.025
+      ],
+      "bbox_max": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.025
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "air_particles",
+      "name": "Combustion Air passing Up through the Matrix",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "air_particles0",
+        "air_particles1",
+        "air_particles2",
+        "air_particles3",
+        "air_particles4",
+        "air_particles5",
+        "air_particles6",
+        "air_particles7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        -0.025,
+        -0.025
+      ],
+      "bbox_max": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.025
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ap_housing": {
+      "function": "Encloses the rotor.",
+      "construction": "Housing.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ap_rotor": {
+      "function": "Stores and transfers heat.",
+      "construction": "Rotor with heating-element baskets.",
+      "material": "Steel/enamelled cold end.",
+      "operating_conditions": "≈ 1–3 rpm.",
+      "failure_modes": [
+        "Fouling, cold-end corrosion"
+      ],
+      "inspection": [
+        "ΔP trend, wash"
+      ]
+    },
+    "ap_seals": {
+      "function": "Limit air leakage into the gas side.",
+      "construction": "Radial, axial and circumferential seals; sector plates.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear → leakage"
+      ],
+      "inspection": [
+        "Leakage test (O₂ rise)"
+      ]
+    },
+    "ap_ducts": {
+      "function": "Connect gas and air paths.",
+      "construction": "Ducts.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ap_drive": {
+      "function": "Turns the rotor.",
+      "construction": "Motor, reducer, pin rack.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

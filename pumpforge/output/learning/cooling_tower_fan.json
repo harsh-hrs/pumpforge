@@ -1,0 +1,618 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "cooling_tower_fan",
+ "no": 238,
+ "title": "Cooling Tower Fan",
+ "model_title": "Induced-Draught Cooling Tower Fan with Velocity-Recovery Stack, Gearbox & Drive Shaft",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A cooling tower fan is a large, slow axial fan that draws air through an induced-draught tower. It runs inside a flared fan stack that recovers velocity pressure, and is driven by a motor outside the humid air through a drive shaft and a right-angle gearbox.",
+   "applications": [
+    "Induced-draught counterflow and crossflow cooling towers",
+    "Air-cooled heat exchangers (similar fans)"
+   ],
+   "key_points": [
+    "Large diameter, low speed (tip ≲ 60 m/s)",
+    "Adjustable-pitch blades set load",
+    "Stack recovers velocity pressure",
+    "Vibration switch trips on imbalance"
+   ],
+   "classification": {
+    "family": "Cooling utilities",
+    "type": "Induced-draught axial fan with gearbox drive"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A cooling tower fan is a large, slow axial fan that draws air up through the tower. It sits in a flared fan stack that recovers velocity pressure, and is driven by a motor outside the air stream through a drive shaft and a right-angle gearbox."
+  },
+  "model_3d": {
+   "asset": "glb/cooling_tower_fan.glb",
+   "metadata": "meta/cooling_tower_fan.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3492,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The motor drives the shaft from outside the stack.",
+    "The gearbox turns the drive 90° and reduces speed.",
+    "The fan draws air up through fill."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The motor drives the shaft from outside the stack.",
+     "part": "motor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The gearbox turns the drive 90° and reduces speed.",
+     "part": "gearbox",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The fan draws air up through fill.",
+     "part": "fan_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The stack recovers pressure as air leaves.",
+     "part": "fan_deck_stack",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Fan static pressure and power vs airflow for different blade pitches."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "cooling_tower_fan_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "cooling_tower_fan_pressure.glb",
+     "title": "Fan lifts the air; the stack recovers velocity pressure",
+     "description": "The induced-draught fan draws air through the louvres and fill, so the plenum below the fan is slightly below atmospheric pressure (typically ≈ 100–250 Pa of static pressure duty). Large fans turn slowly (tip speed usually ≤ ≈ 60 m/s for noise) and move very large volumes. The flared stack slows the leaving air, turning part of its velocity pressure back into static pressure, so the fan needs less power. Blade pitch is set to load the motor correctly; tip clearance to the stack should be small and even.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/cooling_tower_fan.json#components",
+   "key_components": "Axial fan rotor, adjustable-pitch blades, fan stack, drive shaft, motor",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Tower Casing (air-inlet openings on two faces)",
+     "info_ref": "ctf_structure",
+     "function": "Casing, fill and deck.",
+     "material": "Concrete/FRP."
+    },
+    {
+     "id": "fill",
+     "name": "Fill Pack (air passes up through it)",
+     "info_ref": "ctf_structure",
+     "function": "Casing, fill and deck.",
+     "material": "Concrete/FRP."
+    },
+    {
+     "id": "fan_deck_stack",
+     "name": "Fan Deck & Fan Stack (cylinder with flared velocity-recovery section)",
+     "info_ref": "ctf_stack",
+     "function": "Shroud and velocity recovery.",
+     "material": "FRP."
+    },
+    {
+     "id": "handrail",
+     "name": "Fan-Deck Handrail",
+     "info_ref": "ctf_structure",
+     "function": "Casing, fill and deck.",
+     "material": "Concrete/FRP."
+    },
+    {
+     "id": "fan_rotor",
+     "name": "Axial Fan: Hub & 6 Adjustable-Pitch FRP Blades",
+     "info_ref": "ctf_fan",
+     "function": "Moves air.",
+     "material": "FRP/aluminium."
+    },
+    {
+     "id": "gearbox",
+     "name": "Right-Angle Gearbox on Torque Tube, Vibration Switch & Remote Oil Gauge / Fill Line",
+     "info_ref": "ctf_gearbox",
+     "function": "Reduces speed, turns 90°.",
+     "material": "Cast iron."
+    },
+    {
+     "id": "motor",
+     "name": "Fan Motor (outside the humid air stream)",
+     "info_ref": "ctf_motor",
+     "function": "Drives the fan.",
+     "material": "—"
+    },
+    {
+     "id": "drive_shaft",
+     "name": "Drive Shaft (composite tube) with Flexible Couplings",
+     "info_ref": "ctf_shaft",
+     "function": "Transmits power to the gearbox.",
+     "material": "Carbon fibre/steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Fan diameter ≈ 2 – 15 m",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 50 – 2000",
+     "unit": "m³/s air"
+    },
+    "operating_conditions": {
+     "typical_range": "Static pressure ≈ 100 – 250 Pa; ≈ 60 – 300 rpm",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 5 – 250",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Select for air flow and static pressure at design; check noise and tip speed."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CTI"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rigid foundation or support steel to maker data; grout base plates; check natural frequencies away from running speed."
+   ],
+   "alignment": [
+    "Laser-align drive train; check soft foot; set shaft runout and gear contact per maker."
+   ],
+   "piping": [
+    "Lube/oil lines and vents accessible from outside; vibration switch wiring; guarding."
+   ],
+   "commissioning": [
+    "Bump test rotation; run-in with vibration and temperature monitoring; record baseline spectrum."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vibration and unusual noise.",
+     "part": "gearbox",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check blade pitch, tip clearance and bolts.",
+     "part": "fan_rotor",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Rebalance; replace blades/couplings.",
+     "part": "drive_shaft"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High vibration",
+     "category": "vibration",
+     "symptoms": [
+      "Vibration trip"
+     ],
+     "causes": [
+      "Blade imbalance, ice, loose bolts"
+     ],
+     "remedies": [
+      "Inspect, rebalance, re-torque"
+     ],
+     "part": "fan_rotor"
+    },
+    {
+     "problem": "Coupling failure",
+     "category": "performance",
+     "symptoms": [
+      "Shaft not turning"
+     ],
+     "causes": [
+      "Misalignment"
+     ],
+     "remedies": [
+      "Replace, realign"
+     ],
+     "part": "drive_shaft"
+    }
+   ],
+   "safety": [
+    "Lock out before deck entry; vibration cut-out; guard couplings."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Cooling Tower Fan — Introduction",
+    "type": "in_app_tour",
+    "model": "cooling_tower_fan.glb",
+    "duration_s": 51.6,
+    "script": [
+     {
+      "narration": "This module introduces the Cooling Tower Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A cooling tower fan is a large, slow axial fan that draws air through an induced-draught tower.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It runs inside a flared fan stack that recovers velocity pressure, and is driven by a motor outside the humid air through a drive shaft and a right-angle gearbox.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include induced-draught counterflow and crossflow cooling towers; air-cooled heat exchangers (similar fans).",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Axial Fan: Hub & 6 Adjustable-Pitch FRP Blades, Drive Shaft (composite tube) with Flexible Couplings.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Cooling Tower Fan — Operation",
+    "type": "in_app_tour",
+    "model": "cooling_tower_fan.glb",
+    "duration_s": 36.7,
+    "script": [
+     {
+      "narration": "How the Cooling Tower Fan works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The motor drives the shaft from outside the stack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "motor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The gearbox turns the drive 90° and reduces speed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gearbox",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The fan draws air up through fill.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The stack recovers pressure as air leaves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_deck_stack",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The induced-draught fan draws air through the louvres and fill, so the plenum below the fan is slightly below atmospheric pressure (typically ≈ 100–250 Pa of static pressure duty).",
+      "duration_s": 12.5,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Cooling Tower Fan — Maintenance",
+    "type": "in_app_tour",
+    "model": "cooling_tower_fan.glb",
+    "duration_s": 31.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Cooling Tower Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vibration and unusual noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gearbox",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check blade pitch, tip clearance and bolts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rebalance; replace blades/couplings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high vibration: vibration trip. Common cause: blade imbalance, ice, loose bolts.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "fan_rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for coupling failure: shaft not turning. Common cause: misalignment.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "drive_shaft",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is the motor outside the stack?",
+     "options": [
+      "Keeps it out of hot, humid air",
+      "For looks",
+      "Shorter cable",
+      "Less noise only"
+     ],
+     "answer": 0,
+     "explanation": "Environment.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the flared stack do?",
+     "options": [
+      "Recovers velocity pressure",
+      "Adds water",
+      "Heats air",
+      "Holds oil"
+     ],
+     "answer": 0,
+     "explanation": "Velocity recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "How is fan load adjusted?",
+     "options": [
+      "Blade pitch (or VFD)",
+      "Stack height",
+      "Oil",
+      "Valves"
+     ],
+     "answer": 0,
+     "explanation": "Pitch.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Casing, fill and deck.\"",
+     "options": [
+      "Fan Deck & Fan Stack (cylinder with flared velocity-recovery section)",
+      "Right-Angle Gearbox on Torque Tube, Vibration Switch & Remote Oil Gauge / Fill Line",
+      "Tower Casing (air-inlet openings on two faces)",
+      "Drive Shaft (composite tube) with Flexible Couplings"
+     ],
+     "answer": 2,
+     "explanation": "Tower Casing (air-inlet openings on two faces): Casing, fill and deck.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Shroud and velocity recovery.\"",
+     "options": [
+      "Axial Fan: Hub & 6 Adjustable-Pitch FRP Blades",
+      "Fan Deck & Fan Stack (cylinder with flared velocity-recovery section)",
+      "Tower Casing (air-inlet openings on two faces)",
+      "Right-Angle Gearbox on Torque Tube, Vibration Switch & Remote Oil Gauge / Fill Line"
+     ],
+     "answer": 1,
+     "explanation": "Fan Deck & Fan Stack (cylinder with flared velocity-recovery section): Shroud and velocity recovery.",
+     "level": "basic",
+     "part": "fan_deck_stack",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Moves air.\"",
+     "options": [
+      "Right-Angle Gearbox on Torque Tube, Vibration Switch & Remote Oil Gauge / Fill Line",
+      "Axial Fan: Hub & 6 Adjustable-Pitch FRP Blades",
+      "Tower Casing (air-inlet openings on two faces)",
+      "Fan Deck & Fan Stack (cylinder with flared velocity-recovery section)"
+     ],
+     "answer": 1,
+     "explanation": "Axial Fan: Hub & 6 Adjustable-Pitch FRP Blades: Moves air.",
+     "level": "basic",
+     "part": "fan_rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

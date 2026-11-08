@@ -1,0 +1,600 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "axial_flow_fan",
+ "no": 68,
+ "title": "Axial Flow Fan",
+ "model_title": "Axial Flow Fan (Tube-Axial with Guide Vanes, In-Line Motor)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An axial flow fan moves air along its axis with rotating aerofoil blades. Each blade acts like a wing; the blade pitch sets the flow and pressure. Guide vanes after the rotor remove swirl and recover pressure.",
+   "applications": [
+    "Tunnel and mine ventilation",
+    "Cooling towers and air-cooled condensers",
+    "HVAC supply/exhaust",
+    "Boiler draft (variable-pitch axial fans)"
+   ],
+   "key_points": [
+    "High flow, low-to-medium pressure",
+    "Stall region on the curve — avoid",
+    "Pitch angle sets duty",
+    "Guide vanes improve efficiency"
+   ],
+   "classification": {
+    "family": "Fan (dynamic)",
+    "type": "Vane-axial fan, direct drive, in-line motor"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "An axial flow fan moves air parallel to its shaft. Aerofoil blades on a hub act like small wings: as they turn they push air along the casing. Outlet guide vanes remove the swirl the blades add, turning it into pressure. Axial fans give large flow at low-to-medium pressure and are used for ventilation, cooling towers, tunnels and (with variable-pitch blades) large boiler draft fans."
+  },
+  "model_3d": {
+   "asset": "glb/axial_flow_fan.glb",
+   "metadata": "meta/axial_flow_fan.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8604,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Air enters smoothly through the inlet bell.",
+    "The rotating blades push air axially and add swirl.",
+    "Outlet guide vanes straighten the flow and convert swirl to pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Air enters smoothly through the inlet bell.",
+     "part": "inlet_bell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rotating blades push air axially and add swirl.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Outlet guide vanes straighten the flow and convert swirl to pressure.",
+     "part": "guide_vanes",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The motor sits in the air stream and is cooled by it.",
+     "part": "motor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Steep pressure curve with a stall dip at low flow; power is roughly flat or falls with flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "axial_flow_fan_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/axial_flow_fan.json#components",
+   "key_components": "Bladed hub (adjustable pitch), casing, guide vanes, inlet bell, motor",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Fan Casing (Tube) with Flanges & Supports",
+     "info_ref": "af_casing",
+     "function": "Forms the air passage around the blades with a small tip clearance.",
+     "material": "Steel."
+    },
+    {
+     "id": "inlet_bell",
+     "name": "Inlet Bell (Bellmouth) & Guard Ring",
+     "info_ref": "af_bell",
+     "function": "Smooth inlet for low losses.",
+     "material": "Steel/aluminium."
+    },
+    {
+     "id": "impeller",
+     "name": "Impeller: Hub & 8 Aerofoil Blades (adjustable pitch)",
+     "info_ref": "af_impeller",
+     "function": "Pushes the air axially.",
+     "material": "Cast aluminium, GRP, steel."
+    },
+    {
+     "id": "guide_vanes",
+     "name": "Outlet Guide Vanes (Straighteners)",
+     "info_ref": "af_guide_vanes",
+     "function": "Straighten the swirling air and recover pressure.",
+     "material": "Steel."
+    },
+    {
+     "id": "motor",
+     "name": "In-Line Motor (in the air stream) & Terminal Box",
+     "info_ref": "af_motor",
+     "function": "Drives the impeller directly.",
+     "material": "TEAO motor."
+    },
+    {
+     "id": "swirl",
+     "name": "Air Tracers",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 0.3 – 5 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.5 – 1000+",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "500 – 3000",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "1 – 1000 m³/s",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "pressure": {
+     "typical_range": "100 – 3000",
+     "unit": "Pa"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Provide good inlet conditions: straight duct or bellmouth; avoid elbows close to the inlet (system effect).",
+    "Fit flexible connections at inlet and outlet."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check vibration and noise.",
+     "part": "impeller",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check blade pitch and tightness; clean blades.",
+     "part": "impeller",
+     "interval": "6 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace motor bearings; inspect blade roots.",
+     "part": "motor"
+    }
+   ],
+   "lubrication": [
+    "Motor bearings greased per motor maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Stall / surge",
+     "category": "performance",
+     "symptoms": [
+      "Noise, pulsating flow"
+     ],
+     "causes": [
+      "Operating at too high resistance"
+     ],
+     "remedies": [
+      "Reduce pitch, reduce system resistance"
+     ],
+     "part": "impeller"
+    },
+    {
+     "problem": "Vibration",
+     "category": "vibration",
+     "symptoms": [
+      "High vibration"
+     ],
+     "causes": [
+      "Unequal blade pitch, fouling"
+     ],
+     "remedies": [
+      "Set pitch equally, clean, balance"
+     ],
+     "part": "impeller"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Axial Flow Fan — Introduction",
+    "type": "in_app_tour",
+    "model": "axial_flow_fan.glb",
+    "duration_s": 50.7,
+    "script": [
+     {
+      "narration": "This module introduces the Axial Flow Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An axial flow fan moves air along its axis with rotating aerofoil blades.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Each blade acts like a wing; the blade pitch sets the flow and pressure.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Guide vanes after the rotor remove swirl and recover pressure.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include tunnel and mine ventilation; cooling towers and air-cooled condensers; HVAC supply/exhaust; boiler draft (variable-pitch axial fans).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Fan Casing (Tube) with Flanges & Supports, Inlet Bell (Bellmouth) & Guard Ring, Impeller: Hub & 8 Aerofoil Blades (adjustable pitch).",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Axial Flow Fan — Operation",
+    "type": "in_app_tour",
+    "model": "axial_flow_fan.glb",
+    "duration_s": 25.8,
+    "script": [
+     {
+      "narration": "How the Axial Flow Fan works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Air enters smoothly through the inlet bell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet_bell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rotating blades push air axially and add swirl.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Outlet guide vanes straighten the flow and convert swirl to pressure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "guide_vanes",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The motor sits in the air stream and is cooled by it.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "motor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Axial Flow Fan — Maintenance",
+    "type": "in_app_tour",
+    "model": "axial_flow_fan.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Axial Flow Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check vibration and noise.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check blade pitch and tightness; clean blades.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace motor bearings; inspect blade roots.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "motor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for stall / surge: noise, pulsating flow. Common cause: operating at too high resistance.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for vibration: high vibration. Common cause: unequal blade pitch, fouling.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What sets the duty of an adjustable-pitch axial fan?",
+     "options": [
+      "Blade pitch angle",
+      "Casing colour",
+      "Inlet bell size only",
+      "Number of guide vanes"
+     ],
+     "answer": 0,
+     "explanation": "Pitch changes flow and pressure.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are outlet guide vanes fitted?",
+     "options": [
+      "To heat the air",
+      "To remove swirl and recover pressure",
+      "To support the casing only",
+      "For noise only"
+     ],
+     "answer": 1,
+     "explanation": "Straighteners.",
+     "level": "basic"
+    },
+    {
+     "question": "Operating in the stall region causes…",
+     "options": [
+      "Higher efficiency",
+      "Unstable, noisy flow and blade stress",
+      "Lower noise",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explanation": "Avoid stall.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Forms the air passage around the blades with a small tip clearance.\"",
+     "options": [
+      "Air Tracers",
+      "Impeller: Hub & 8 Aerofoil Blades (adjustable pitch)",
+      "Fan Casing (Tube) with Flanges & Supports",
+      "In-Line Motor (in the air stream) & Terminal Box"
+     ],
+     "answer": 2,
+     "explanation": "Fan Casing (Tube) with Flanges & Supports: Forms the air passage around the blades with a small tip clearance.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Smooth inlet for low losses.\"",
+     "options": [
+      "Fan Casing (Tube) with Flanges & Supports",
+      "Outlet Guide Vanes (Straighteners)",
+      "Air Tracers",
+      "Inlet Bell (Bellmouth) & Guard Ring"
+     ],
+     "answer": 3,
+     "explanation": "Inlet Bell (Bellmouth) & Guard Ring: Smooth inlet for low losses.",
+     "level": "basic",
+     "part": "inlet_bell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Pushes the air axially.\"",
+     "options": [
+      "Inlet Bell (Bellmouth) & Guard Ring",
+      "In-Line Motor (in the air stream) & Terminal Box",
+      "Impeller: Hub & 8 Aerofoil Blades (adjustable pitch)",
+      "Fan Casing (Tube) with Flanges & Supports"
+     ],
+     "answer": 2,
+     "explanation": "Impeller: Hub & 8 Aerofoil Blades (adjustable pitch): Pushes the air axially.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

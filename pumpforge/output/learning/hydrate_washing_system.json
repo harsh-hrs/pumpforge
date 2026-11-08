@@ -1,0 +1,672 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydrate_washing_system",
+ "no": 208,
+ "title": "Hydrate Washing System",
+ "model_title": "Horizontal Vacuum Belt Filter with Counter-Current Hydrate Washing",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A horizontal vacuum belt filter dewaters and washes hydrate. The belt moves over vacuum boxes; hot condensate washes the cake in counter-current stages so soda content is reduced using little water.",
+   "applications": [
+    "Product hydrate washing before calcination",
+    "Washing of chemical and mineral filter cakes"
+   ],
+   "key_points": [
+    "Counter-current washing",
+    "Separate filtrate zones",
+    "Low soda target",
+    "Continuous"
+   ],
+   "classification": {
+    "family": "Filtration / washing",
+    "type": "Horizontal vacuum belt filter"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "A horizontal vacuum belt filter dewaters and washes hydrate with hot condensate in counter-current stages. The belt moves over vacuum boxes; wash liquor from each later zone is used in the zone before, lowering soda in the cake with little water."
+  },
+  "model_3d": {
+   "asset": "glb/hydrate_washing_system.glb",
+   "metadata": "meta/hydrate_washing_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 33308,
+   "parts": 13
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Slurry is fed onto the belt.",
+    "Vacuum boxes form and dewater the cake.",
+    "Wash sprays rinse the cake."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Slurry is fed onto the belt.",
+     "part": "feed_wash",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vacuum boxes form and dewater the cake.",
+     "part": "vacuum_boxes",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Wash sprays rinse the cake.",
+     "part": "cake",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Filtrates collect in separate receivers.",
+     "part": "filtrate_receivers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cake discharges at the head.",
+     "part": "discharge_chute",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Residual soda vs wash ratio (counter-current curve)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydrate_washing_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "hydrate_washing_system_pressure.glb",
+     "title": "Counter-current washing lowers soda in the hydrate",
+     "description": "Fresh hot condensate washes the cake in the last zone; its filtrate is used to wash the previous zone, and so on (counter-current). Soda in the cake falls zone by zone (red → blue) using little water. Low soda in the hydrate is essential because sodium ends up in the smelter-grade alumina product (typical spec ≲ 0.3–0.4 % Na₂O).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/hydrate_washing_system.json#components",
+   "key_components": "Horizontal vacuum belt filter, vacuum boxes, counter-current wash sprays, filtrate receivers",
+   "parts": [
+    {
+     "id": "bfbelt",
+     "name": "Filter Belt (drainage belt + cloth)",
+     "info_ref": "hk_belt",
+     "function": "Filter belt.",
+     "material": "Rubber/PP."
+    },
+    {
+     "id": "bfpulley_1",
+     "name": "Tail Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Drive/tail rolls.",
+     "material": "Steel."
+    },
+    {
+     "id": "bfpulley_2",
+     "name": "Head (Drive) Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Drive/tail rolls.",
+     "material": "Steel."
+    },
+    {
+     "id": "bfmarks",
+     "name": "Filter Belt (drainage belt + cloth) Motion Markers",
+     "info_ref": "hk_belt",
+     "function": "Filter belt.",
+     "material": "Rubber/PP."
+    },
+    {
+     "id": "bfframe",
+     "name": "Filter Belt (drainage belt + cloth) Frame & Idlers (troughing and return)",
+     "info_ref": "hk_idlers",
+     "function": "Frame.",
+     "material": "Steel."
+    },
+    {
+     "id": "vacuum_boxes",
+     "name": "Vacuum Boxes under the Belt & Filtrate Down-Pipes",
+     "info_ref": "hw_vacuum",
+     "function": "Vacuum boxes and receivers.",
+     "material": "Steel."
+    },
+    {
+     "id": "filtrate_receivers",
+     "name": "Filtrate Receivers (separate per zone: mother liquor, wash 1, wash 2, wash 3)",
+     "info_ref": "hw_vacuum",
+     "function": "Vacuum boxes and receivers.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_wash",
+     "name": "Feed Box & Wash Spray Headers (hot condensate, counter-current)",
+     "info_ref": "hw_wash",
+     "function": "Feed and washes.",
+     "material": "Stainless."
+    },
+    {
+     "id": "cake",
+     "name": "Hydrate Cake on the Belt",
+     "info_ref": "hw_cake",
+     "function": "Cake and discharge.",
+     "material": "—"
+    },
+    {
+     "id": "discharge_chute",
+     "name": "Cake Discharge Chute (to calcination)",
+     "info_ref": "hw_cake",
+     "function": "Cake and discharge.",
+     "material": "—"
+    },
+    {
+     "id": "wash_1",
+     "name": "Wash Stage 1 Sprays",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "wash_2",
+     "name": "Wash Stage 2 Sprays",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "wash_3",
+     "name": "Wash Stage 3 Sprays",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Belt ~ 1 – 4 m wide, 10 – 40 m long",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 30 – 150",
+     "unit": "t/h hydrate"
+    },
+    "operating_conditions": {
+     "typical_range": "Wash ~ 90 °C condensate",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "~ 15 – 75 (plus vacuum pumps)",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from cake formation and wash times."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Belt filter maker data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment and product loads; dust-tight enclosures where needed."
+   ],
+   "alignment": [
+    "Align drives and rollers/belts; level chambers and floors."
+   ],
+   "piping": [
+    "Air, water and dust connections with isolation; chutes free of moving parts."
+   ],
+   "commissioning": [
+    "Run empty; check air/water flows, temperatures and interlocks; then product."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check belt tracking and sprays.",
+     "part": "bfbelt",
+     "interval": "per shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Wash cloth; check seals.",
+     "part": "vacuum_boxes",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace cloth/belt.",
+     "part": "bfbelt"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes and bearings: oil/grease to maker schedule; open gears with spray lubrication where fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High soda in cake",
+     "category": "performance",
+     "symptoms": [
+      "Product off-spec"
+     ],
+     "causes": [
+      "Poor washing, cracked cake"
+     ],
+     "remedies": [
+      "Adjust wash; flatten cake"
+     ],
+     "part": "cake"
+    },
+    {
+     "problem": "Belt mistracking",
+     "category": "performance",
+     "symptoms": [
+      "Edge damage"
+     ],
+     "causes": [
+      "Misalignment"
+     ],
+     "remedies": [
+      "Re-track"
+     ],
+     "part": "bfbelt"
+    }
+   ],
+   "safety": [
+    "Moving belt; hot water."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydrate Washing System — Introduction",
+    "type": "in_app_tour",
+    "model": "hydrate_washing_system.glb",
+    "duration_s": 39.9,
+    "script": [
+     {
+      "narration": "This module introduces the Hydrate Washing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A horizontal vacuum belt filter dewaters and washes hydrate.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The belt moves over vacuum boxes; hot condensate washes the cake in counter-current stages so soda content is reduced using little water.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include product hydrate washing before calcination; washing of chemical and mineral filter cakes.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydrate Washing System — Operation",
+    "type": "in_app_tour",
+    "model": "hydrate_washing_system.glb",
+    "duration_s": 38.2,
+    "script": [
+     {
+      "narration": "How the Hydrate Washing System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Slurry is fed onto the belt.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_wash",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vacuum boxes form and dewater the cake.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vacuum_boxes",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Wash sprays rinse the cake.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cake",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Filtrates collect in separate receivers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filtrate_receivers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cake discharges at the head.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "discharge_chute",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Fresh hot condensate washes the cake in the last zone; its filtrate is used to wash the previous zone, and so on (counter-current).",
+      "duration_s": 10.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydrate Washing System — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydrate_washing_system.glb",
+    "duration_s": 32.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydrate Washing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check belt tracking and sprays.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bfbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Wash cloth; check seals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vacuum_boxes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace cloth/belt.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bfbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high soda in cake: product off-spec. Common cause: poor washing, cracked cake.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "cake",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for belt mistracking: edge damage. Common cause: misalignment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bfbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why counter-current wash?",
+     "options": [
+      "Less water for the same soda removal",
+      "Faster belt",
+      "Hotter cake",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Efficiency.",
+     "level": "basic"
+    },
+    {
+     "question": "Where is vacuum applied?",
+     "options": [
+      "Boxes under the belt",
+      "Above",
+      "In the chute",
+      "Nowhere"
+     ],
+     "answer": 0,
+     "explanation": "Vacuum boxes.",
+     "level": "basic"
+    },
+    {
+     "question": "Wash liquid used?",
+     "options": [
+      "Hot condensate",
+      "Caustic",
+      "Oil",
+      "Seawater"
+     ],
+     "answer": 0,
+     "explanation": "Condensate.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Filter belt.\"",
+     "options": [
+      "Wash Stage 3 Sprays",
+      "Filtrate Receivers (separate per zone: mother liquor, wash 1, wash 2, wash 3)",
+      "Filter Belt (drainage belt + cloth)",
+      "Vacuum Boxes under the Belt & Filtrate Down-Pipes"
+     ],
+     "answer": 2,
+     "explanation": "Filter Belt (drainage belt + cloth): Filter belt.",
+     "level": "basic",
+     "part": "bfbelt",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drive/tail rolls.\"",
+     "options": [
+      "Wash Stage 3 Sprays",
+      "Tail Pulley",
+      "Filtrate Receivers (separate per zone: mother liquor, wash 1, wash 2, wash 3)",
+      "Vacuum Boxes under the Belt & Filtrate Down-Pipes"
+     ],
+     "answer": 1,
+     "explanation": "Tail Pulley: Drive/tail rolls.",
+     "level": "basic",
+     "part": "bfpulley_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Frame.\"",
+     "options": [
+      "Filter Belt (drainage belt + cloth) Frame & Idlers (troughing and return)",
+      "Cake Discharge Chute (to calcination)",
+      "Feed Box & Wash Spray Headers (hot condensate, counter-current)",
+      "Wash Stage 2 Sprays"
+     ],
+     "answer": 0,
+     "explanation": "Filter Belt (drainage belt + cloth) Frame & Idlers (troughing and return): Frame.",
+     "level": "basic",
+     "part": "bfframe",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

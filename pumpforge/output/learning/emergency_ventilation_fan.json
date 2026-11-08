@@ -1,0 +1,652 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "emergency_ventilation_fan",
+ "no": 279,
+ "title": "Emergency Ventilation Fan",
+ "model_title": "Emergency Ventilation Fan — Explosion-Proof Axial Wall Fan with Gravity Damper, Triggered by Gas Detection",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An emergency ventilation fan is an explosion-protected axial fan that starts automatically when gas detectors alarm, purging the building to dilute a leak below its flammable range. The impeller and casing are a non-sparking pair, the motor is flameproof, and a gravity damper closes when the fan stops.",
+   "applications": [
+    "Compressor houses, analyser shelters, battery rooms",
+    "Pump houses and enclosed process modules"
+   ],
+   "key_points": [
+    "Auto-start at ≈ 10–20 % LEL",
+    "Ex-rated motor and non-sparking materials",
+    "Gravity back-draught damper",
+    "On essential power"
+   ],
+   "classification": {
+    "family": "Safety",
+    "type": "Ex-rated axial wall fan with gravity damper"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "An emergency ventilation fan is an explosion-protected axial fan that starts automatically on gas detection to purge a building, diluting leaked gas below its flammable limit; a gravity damper closes when it stops."
+  },
+  "model_3d": {
+   "asset": "glb/emergency_ventilation_fan.glb",
+   "metadata": "meta/emergency_ventilation_fan.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4688,
+   "parts": 13
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "A gas detector senses the leak.",
+    "The panel starts the fan.",
+    "The impeller extracts air."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "A gas detector senses the leak.",
+     "part": "detection_control",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The panel starts the fan.",
+     "part": "motor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The impeller extracts air.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Damper blades open with fan pressure.",
+     "part": "damper_blade_3",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Gas concentration decay vs air changes (dilution curve)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "emergency_ventilation_fan_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "emergency_ventilation_fan_pressure.glb",
+     "title": "Start on gas, purge fast, never ignite",
+     "description": "Emergency ventilation runs at high rate when gas detection reaches its first alarm (often ≈ 10–20 % LEL), diluting a leak below its flammable range and venting it outside. Equipment in the air stream must suit the hazardous-area zone (Ex d / Ex e motor, temperature class) and the impeller–casing pair must be non-sparking (e.g. aluminium/bronze vs steel) — a rub must not cause a spark. The gravity damper closes when the fan stops, keeping weather out. Supplies are typically on essential power.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/emergency_ventilation_fan.json#components",
+   "key_components": "Ex axial fan, non-sparking impeller, Ex d motor, gravity damper, gas detector",
+   "parts": [
+    {
+     "id": "wall",
+     "name": "Building Wall (compressor / battery / analyser house)",
+     "info_ref": "ef_wall",
+     "function": "Building.",
+     "material": "—"
+    },
+    {
+     "id": "fan_casing",
+     "name": "Fan Casing (spark-resistant: non-sparking rotor/casing material pair)",
+     "info_ref": "ef_casing",
+     "function": "Fan casing & impeller.",
+     "material": "Steel + aluminium/bronze."
+    },
+    {
+     "id": "motor",
+     "name": "Ex d Flameproof Motor (in the air stream) on Struts",
+     "info_ref": "ef_motor",
+     "function": "Drive.",
+     "material": "—"
+    },
+    {
+     "id": "impeller",
+     "name": "Aluminium / Bronze Axial Impeller (adjustable pitch)",
+     "info_ref": "ef_casing",
+     "function": "Fan casing & impeller.",
+     "material": "Steel + aluminium/bronze."
+    },
+    {
+     "id": "damper_blade_1",
+     "name": "Gravity Back-Draught Damper Blade 1 (opens with fan pressure)",
+     "info_ref": "ef_damper",
+     "function": "Weather/back-draught seal.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "damper_blade_2",
+     "name": "Gravity Back-Draught Damper Blade 2 (opens with fan pressure)",
+     "info_ref": "ef_damper",
+     "function": "Weather/back-draught seal.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "damper_blade_3",
+     "name": "Gravity Back-Draught Damper Blade 3 (opens with fan pressure)",
+     "info_ref": "ef_damper",
+     "function": "Weather/back-draught seal.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "damper_blade_4",
+     "name": "Gravity Back-Draught Damper Blade 4 (opens with fan pressure)",
+     "info_ref": "ef_damper",
+     "function": "Weather/back-draught seal.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "damper_blade_5",
+     "name": "Gravity Back-Draught Damper Blade 5 (opens with fan pressure)",
+     "info_ref": "ef_damper",
+     "function": "Weather/back-draught seal.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "damper_frame_guard",
+     "name": "Damper Frame & Inlet Guard",
+     "info_ref": "ef_damper",
+     "function": "Weather/back-draught seal.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "detection_control",
+     "name": "Gas Detector (low level), Fan Control Panel & Beacon (auto-start at ≈ 20 % LEL)",
+     "info_ref": "ef_controls",
+     "function": "Automatic start.",
+     "material": "—"
+    },
+    {
+     "id": "signal",
+     "name": "Gas alarm signal to the fan starter",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "gas_cloud",
+     "name": "Leaked gas drawn out by the fan",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Fans ≈ 300 – 1500 mm",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 2,000 – 100,000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Zone 1/2, gas group IIA–IIC, T-class",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Purge to < 10 % LEL rapidly (design)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by room volume and purge rate; Ex rating by area classification."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "EN 14986",
+    "IEC 60079"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure for equipment, liquid / dust loads and wind; access platforms for maintenance."
+   ],
+   "alignment": [
+    "Fans and pumps aligned; ducts supported to avoid loads on equipment."
+   ],
+   "piping": [
+    "Corrosion-resistant materials for wet acid service; drains at low points; expansion joints on hot ducts."
+   ],
+   "commissioning": [
+    "Run on air/water; check ΔP, flows and controls; then process gas; emission test against permit."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check standby status and alarms.",
+     "part": "detection_control",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Run test; bump-test detector.",
+     "part": "motor",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect tip clearance, Ex integrity.",
+     "part": "fan_casing"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Fan fails to start",
+     "category": "performance",
+     "symptoms": [
+      "No ventilation on alarm"
+     ],
+     "causes": [
+      "Power / starter fault"
+     ],
+     "remedies": [
+      "Test regularly; essential supply"
+     ],
+     "part": "motor"
+    },
+    {
+     "problem": "Impeller rub",
+     "category": "performance",
+     "symptoms": [
+      "Noise, spark risk"
+     ],
+     "causes": [
+      "Bearing wear"
+     ],
+     "remedies": [
+      "Stop; repair"
+     ],
+     "part": "impeller"
+    }
+   ],
+   "safety": [
+    "Maintain Ex integrity; never defeat interlocks."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Emergency Ventilation Fan — Introduction",
+    "type": "in_app_tour",
+    "model": "emergency_ventilation_fan.glb",
+    "duration_s": 52.4,
+    "script": [
+     {
+      "narration": "This module introduces the Emergency Ventilation Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An emergency ventilation fan is an explosion-protected axial fan that starts automatically when gas detectors alarm, purging the building to dilute a leak below its flammable range.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The impeller and casing are a non-sparking pair, the motor is flameproof, and a gravity damper closes when the fan stops.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include compressor houses, analyser shelters, battery rooms; pump houses and enclosed process modules.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Fan Casing (spark-resistant: non-sparking rotor/casing material pair), Aluminium / Bronze Axial Impeller (adjustable pitch).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Emergency Ventilation Fan — Operation",
+    "type": "in_app_tour",
+    "model": "emergency_ventilation_fan.glb",
+    "duration_s": 35.9,
+    "script": [
+     {
+      "narration": "How the Emergency Ventilation Fan works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "A gas detector senses the leak.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "detection_control",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The panel starts the fan.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "motor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The impeller extracts air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Damper blades open with fan pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "damper_blade_3",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Emergency ventilation runs at high rate when gas detection reaches its first alarm (often ≈ 10–20 % LEL), diluting a leak below its flammable range and venting it outside.",
+      "duration_s": 11.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Emergency Ventilation Fan — Maintenance",
+    "type": "in_app_tour",
+    "model": "emergency_ventilation_fan.glb",
+    "duration_s": 33.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Emergency Ventilation Fan.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check standby status and alarms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "detection_control",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Run test; bump-test detector.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "motor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tip clearance, Ex integrity.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fan fails to start: no ventilation on alarm. Common cause: power / starter fault.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "motor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for impeller rub: noise, spark risk. Common cause: bearing wear.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why non-sparking materials?",
+     "options": [
+      "A rub must not ignite gas",
+      "Lighter",
+      "Cheaper",
+      "Colour"
+     ],
+     "answer": 0,
+     "explanation": "Ignition.",
+     "level": "basic"
+    },
+    {
+     "question": "What starts it?",
+     "options": [
+      "Gas detection alarm",
+      "Timer only",
+      "Temperature only",
+      "Manual only"
+     ],
+     "answer": 0,
+     "explanation": "Gas.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the gravity damper do?",
+     "options": [
+      "Close when fan stops",
+      "Open always",
+      "Control speed",
+      "Filter"
+     ],
+     "answer": 0,
+     "explanation": "Back-draught.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Building.\"",
+     "options": [
+      "Gas alarm signal to the fan starter",
+      "Gravity Back-Draught Damper Blade 2 (opens with fan pressure)",
+      "Building Wall (compressor / battery / analyser house)",
+      "Fan Casing (spark-resistant: non-sparking rotor/casing material pair)"
+     ],
+     "answer": 2,
+     "explanation": "Building Wall (compressor / battery / analyser house): Building.",
+     "level": "basic",
+     "part": "wall",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Fan casing & impeller.\"",
+     "options": [
+      "Gas alarm signal to the fan starter",
+      "Gravity Back-Draught Damper Blade 3 (opens with fan pressure)",
+      "Ex d Flameproof Motor (in the air stream) on Struts",
+      "Fan Casing (spark-resistant: non-sparking rotor/casing material pair)"
+     ],
+     "answer": 3,
+     "explanation": "Fan Casing (spark-resistant: non-sparking rotor/casing material pair): Fan casing & impeller.",
+     "level": "basic",
+     "part": "fan_casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Drive.\"",
+     "options": [
+      "Damper Frame & Inlet Guard",
+      "Ex d Flameproof Motor (in the air stream) on Struts",
+      "Aluminium / Bronze Axial Impeller (adjustable pitch)",
+      "Leaked gas drawn out by the fan"
+     ],
+     "answer": 1,
+     "explanation": "Ex d Flameproof Motor (in the air stream) on Struts: Drive.",
+     "level": "basic",
+     "part": "motor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

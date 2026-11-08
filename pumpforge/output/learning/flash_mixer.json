@@ -1,0 +1,613 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flash_mixer",
+ "no": 219,
+ "title": "Flash Mixer",
+ "model_title": "Flash (Rapid) Mixer for Coagulant Dispersion",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A flash (rapid) mixer disperses coagulant into raw water within seconds. A high-speed turbine impeller creates intense turbulence in a small chamber so the chemical reaches every part of the flow before it reacts, giving uniform coagulation for the flocculation stage that follows.",
+   "applications": [
+    "Coagulant (alum, ferric, PACl) dispersion at water treatment plants",
+    "pH adjustment and polymer dispersion in industrial water and wastewater"
+   ],
+   "key_points": [
+    "High energy: G ≈ 300–1000 s⁻¹",
+    "Short time: ≈ 10–60 s",
+    "Dose point at the impeller",
+    "Feeds the flocculator"
+   ],
+   "classification": {
+    "family": "Water treatment",
+    "type": "Mechanical rapid mixer"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A flash mixer disperses coagulant through the raw water within seconds using a high-speed impeller, so the chemical reacts uniformly before flocculation."
+  },
+  "model_3d": {
+   "asset": "glb/flash_mixer.glb",
+   "metadata": "meta/flash_mixer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4090,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Raw water enters the mixing chamber near the bottom.",
+    "Coagulant is dosed close to the impeller.",
+    "The high-speed impeller spreads the chemical in seconds."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Raw water enters the mixing chamber near the bottom.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Coagulant is dosed close to the impeller.",
+     "part": "piping",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The high-speed impeller spreads the chemical in seconds.",
+     "part": "fm_agitator",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Mixed water overflows to the flocculation tank.",
+     "part": "fm_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Coagulation efficiency vs velocity gradient G — rises then levels off."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flash_mixer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "flash_mixer_pressure.glb",
+     "title": "High velocity gradient, short time",
+     "description": "Coagulants (alum, ferric salts, PACl) react within seconds, so they must be spread through the whole flow almost instantly. Flash mixers use high energy — velocity gradient G ≈ 300–1000 s⁻¹ — with short detention (≈ 10–60 s). Too little mixing wastes chemical; too long or too intense mixing is not useful at this stage.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flash_mixer.json#components",
+   "key_components": "Rapid-mix chamber, high-speed turbine impeller, coagulant dosing point, drive",
+   "parts": [
+    {
+     "id": "fm_tank",
+     "name": "Flash Mixing Tank: Tank, Baffles",
+     "info_ref": "fmx_tank",
+     "function": "Holds liquid.",
+     "material": "Concrete/steel/PE."
+    },
+    {
+     "id": "fm_slurry",
+     "name": "Flash Mixing Tank: Slurry / Liquor",
+     "info_ref": "fmx_slurry",
+     "function": "Process liquid.",
+     "material": "—"
+    },
+    {
+     "id": "fm_agitator",
+     "name": "Flash Mixing Tank: Agitator Shaft & Impeller",
+     "info_ref": "fmx_agitator",
+     "function": "Mixes.",
+     "material": "Stainless/coated."
+    },
+    {
+     "id": "fm_drive",
+     "name": "Flash Mixing Tank: Agitator Drive (motor + gearbox, bridge beam)",
+     "info_ref": "fmx_drive",
+     "function": "Drives agitator.",
+     "material": "—"
+    },
+    {
+     "id": "piping",
+     "name": "Raw-Water Inlet (bottom), Coagulant Metering Pump & Dosing Point (at impeller), Outlet to Flocculation",
+     "info_ref": "fmx_piping",
+     "function": "Inlet, dosing, outlet.",
+     "material": "DI/PVC."
+    },
+    {
+     "id": "foundation",
+     "name": "Concrete Plinth",
+     "info_ref": "fmx_tank",
+     "function": "Holds liquid.",
+     "material": "Concrete/steel/PE."
+    },
+    {
+     "id": "coagulant",
+     "name": "Coagulant dispersed in seconds by the high-speed impeller",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Chamber ≈ 1 – 3 m (side or diameter)",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 100 – 5000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "Detention ≈ 10 – 60 s; G ≈ 300 – 1000 s⁻¹",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 1 – 30",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Power P = G²·μ·V; choose impeller and speed for the target G."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "AWWA",
+    "MWH Water Treatment"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Reinforced-concrete tank on prepared ground; watertightness test before backfill; allow for buoyancy when empty (groundwater)."
+   ],
+   "alignment": [
+    "Weirs and launders levelled to a few millimetres so overflow is even; drive/bridge centred and level."
+   ],
+   "piping": [
+    "Inlet arranged to spread flow without short-circuiting; sludge lines with flushing points; overflow and drain to a safe place."
+   ],
+   "commissioning": [
+    "Fill with clean water, check for leaks; run mechanisms empty and with water; start chemical dosing and tune by jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check impeller running, dose rate and vibration.",
+     "part": "fm_agitator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect impeller for wear and deposits.",
+     "part": "fm_agitator",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Gearbox overhaul.",
+     "part": "fm_drive"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Poor coagulation",
+     "category": "performance",
+     "symptoms": [
+      "Floc forms badly downstream"
+     ],
+     "causes": [
+      "Dose point far from impeller",
+      "Impeller worn/stopped"
+     ],
+     "remedies": [
+      "Move dose to impeller; repair"
+     ],
+     "part": "fm_agitator"
+    },
+    {
+     "problem": "Gearbox noise",
+     "category": "performance",
+     "symptoms": [
+      "Vibration, heat"
+     ],
+     "causes": [
+      "Low oil, worn bearings"
+     ],
+     "remedies": [
+      "Top up, replace bearings"
+     ],
+     "part": "fm_drive"
+    }
+   ],
+   "safety": [
+    "Lock out before entering; guard the coupling."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flash Mixer — Introduction",
+    "type": "in_app_tour",
+    "model": "flash_mixer.glb",
+    "duration_s": 48.7,
+    "script": [
+     {
+      "narration": "This module introduces the Flash Mixer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A flash (rapid) mixer disperses coagulant into raw water within seconds.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A high-speed turbine impeller creates intense turbulence in a small chamber so the chemical reaches every part of the flow before it reacts, giving uniform coagulation for the flocculation stage that follows.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include coagulant (alum, ferric, PACl) dispersion at water treatment plants; pH adjustment and polymer dispersion in industrial water and wastewater.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Flash Mixing Tank: Agitator Shaft & Impeller.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flash Mixer — Operation",
+    "type": "in_app_tour",
+    "model": "flash_mixer.glb",
+    "duration_s": 32.1,
+    "script": [
+     {
+      "narration": "How the Flash Mixer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Raw water enters the mixing chamber near the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Coagulant is dosed close to the impeller.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The high-speed impeller spreads the chemical in seconds.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fm_agitator",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Mixed water overflows to the flocculation tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fm_tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Coagulants (alum, ferric salts, PACl) react within seconds, so they must be spread through the whole flow almost instantly.",
+      "duration_s": 7.9,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flash Mixer — Maintenance",
+    "type": "in_app_tour",
+    "model": "flash_mixer.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flash Mixer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check impeller running, dose rate and vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fm_agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect impeller for wear and deposits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fm_agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Gearbox overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fm_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor coagulation: floc forms badly downstream. Common cause: dose point far from impeller.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "fm_agitator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for gearbox noise: vibration, heat. Common cause: low oil, worn bearings.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "fm_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why must coagulant mix in seconds?",
+     "options": [
+      "It reacts (hydrolyses) almost instantly",
+      "It evaporates",
+      "It is heavy",
+      "It is cold"
+     ],
+     "answer": 0,
+     "explanation": "Fast reaction.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical G in a flash mixer?",
+     "options": [
+      "≈ 300 – 1000 s⁻¹",
+      "≈ 1 s⁻¹",
+      "≈ 10 s⁻¹",
+      "≈ 100,000 s⁻¹"
+     ],
+     "answer": 0,
+     "explanation": "High G.",
+     "level": "basic"
+    },
+    {
+     "question": "What comes after the flash mixer?",
+     "options": [
+      "Flocculation",
+      "Disinfection only",
+      "Boiler",
+      "Discharge"
+     ],
+     "answer": 0,
+     "explanation": "Flocculation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds liquid.\"",
+     "options": [
+      "Flash Mixing Tank: Slurry / Liquor",
+      "Flash Mixing Tank: Agitator Drive (motor + gearbox, bridge beam)",
+      "Flash Mixing Tank: Tank, Baffles",
+      "Coagulant dispersed in seconds by the high-speed impeller"
+     ],
+     "answer": 2,
+     "explanation": "Flash Mixing Tank: Tank, Baffles: Holds liquid.",
+     "level": "basic",
+     "part": "fm_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process liquid.\"",
+     "options": [
+      "Flash Mixing Tank: Agitator Shaft & Impeller",
+      "Flash Mixing Tank: Agitator Drive (motor + gearbox, bridge beam)",
+      "Raw-Water Inlet (bottom), Coagulant Metering Pump & Dosing Point (at impeller), Outlet to Flocculation",
+      "Flash Mixing Tank: Slurry / Liquor"
+     ],
+     "answer": 3,
+     "explanation": "Flash Mixing Tank: Slurry / Liquor: Process liquid.",
+     "level": "basic",
+     "part": "fm_slurry",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mixes.\"",
+     "options": [
+      "Flash Mixing Tank: Slurry / Liquor",
+      "Flash Mixing Tank: Agitator Shaft & Impeller",
+      "Flash Mixing Tank: Agitator Drive (motor + gearbox, bridge beam)",
+      "Raw-Water Inlet (bottom), Coagulant Metering Pump & Dosing Point (at impeller), Outlet to Flocculation"
+     ],
+     "answer": 1,
+     "explanation": "Flash Mixing Tank: Agitator Shaft & Impeller: Mixes.",
+     "level": "basic",
+     "part": "fm_agitator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,650 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "mud_settling_tank",
+ "no": 205,
+ "title": "Mud Settling Tank",
+ "model_title": "Red Mud Settler / High-Rate Thickener (Primary Residue Separation)",
+ "category": "12 · Alumina Refinery (Bayer Process)",
+ "phase": 10,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The mud settler (primary thickener) separates red mud from pregnant liquor after digestion. Flocculant added in the feedwell makes the mud settle quickly; clear liquor overflows to polishing filtration and thickened mud is pumped to the washers.",
+   "applications": [
+    "Primary residue (red mud) separation after digestion",
+    "High-rate thickening in mineral processing"
+   ],
+   "key_points": [
+    "High-rate thickening with flocculant",
+    "Overflow clarity is critical",
+    "Rake drive torque monitored",
+    "Underflow density control"
+   ],
+   "classification": {
+    "family": "Residue separation",
+    "type": "High-rate thickener / settler"
+   },
+   "hi_family": "alumina_refinery",
+   "summary": "The mud settler (primary thickener) separates red mud from the pregnant liquor after digestion. Flocculant helps the mud settle; clear liquor overflows to polishing filtration and the thickened mud is pumped to the washers."
+  },
+  "model_3d": {
+   "asset": "glb/mud_settling_tank.glb",
+   "metadata": "meta/mud_settling_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8340,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Diluted digested slurry enters the feedwell.",
+    "Flocculant forms flocs that settle.",
+    "Clear liquor overflows."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Diluted digested slurry enters the feedwell.",
+     "part": "st_feedwell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flocculant forms flocs that settle.",
+     "part": "st_mud",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clear liquor overflows.",
+     "part": "st_clear",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Rakes move mud to the cone; pump takes underflow.",
+     "part": "st_rakes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The drive turns the rakes slowly.",
+     "part": "st_drive",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Settling flux curve; overflow clarity vs flocculant dose."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "mud_settling_tank_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "mud_settling_tank_pressure.glb",
+     "title": "Clear liquor above, compacted mud below",
+     "description": "Digested slurry is diluted and dosed with flocculant in the feedwell; flocs settle quickly, leaving clear pregnant liquor that overflows to security (polishing) filtration. The mud compacts in the lower zone and the rakes move it to the underflow cone. Overflow clarity (often ≲ 100 mg/L solids) and underflow density are the key performance targets.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/mud_settling_tank.json#components",
+   "key_components": "Settler tank, feedwell, rakes, bridge drive, flocculant line, underflow pump",
+   "parts": [
+    {
+     "id": "st_tank",
+     "name": "Settler: Tank with Conical Floor & Overflow Launder",
+     "info_ref": "ms_tank",
+     "function": "Holds slurry; launder collects overflow.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "st_clear",
+     "name": "Settler: Clear Overflow Zone",
+     "info_ref": "ms_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "st_mud",
+     "name": "Settler: Settling / Compression Zone (mud bed)",
+     "info_ref": "ms_zones",
+     "function": "Clear and mud zones.",
+     "material": "—"
+    },
+    {
+     "id": "st_feedwell",
+     "name": "Settler: Central Feedwell (dissipates feed energy, mixes flocculant)",
+     "info_ref": "ms_feedwell",
+     "function": "Calms feed; mixes flocculant.",
+     "material": "Steel."
+    },
+    {
+     "id": "st_rakes",
+     "name": "Settler: Rake Arms & Blades (move mud to the centre cone)",
+     "info_ref": "ms_rake",
+     "function": "Moves settled mud to the cone; keeps it from setting.",
+     "material": "Steel."
+    },
+    {
+     "id": "st_drive",
+     "name": "Settler: Bridge & Rake Drive (slow, high torque, overload protection)",
+     "info_ref": "ms_drive",
+     "function": "Turns the rakes.",
+     "material": "—"
+    },
+    {
+     "id": "piping",
+     "name": "Feed Line (digested slurry), Flocculant Dosing Line, Underflow Line & Overflow Outlet",
+     "info_ref": "ms_piping",
+     "function": "Feed, flocculant, underflow, overflow.",
+     "material": "Steel."
+    },
+    {
+     "id": "underflow_pump",
+     "name": "Underflow (mud) Pump",
+     "info_ref": "ms_piping",
+     "function": "Feed, flocculant, underflow, overflow.",
+     "material": "Steel."
+    },
+    {
+     "id": "underflow_pump_shaft",
+     "name": "Underflow (mud) Pump — Shaft & Coupling (turning)",
+     "info_ref": "ms_piping",
+     "function": "Feed, flocculant, underflow, overflow.",
+     "material": "Steel."
+    },
+    {
+     "id": "settling",
+     "name": "Flocculated Mud Particles settling",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Settler ~ 20 – 50 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 1000 – 3000",
+     "unit": "m³/h"
+    },
+    "operating_conditions": {
+     "typical_range": "~ 100 °C",
+     "unit": "°C"
+    },
+    "power_rating": {
+     "typical_range": "Rake drive ~ 10 – 50",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Area from settling tests; flocculant type from trials."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_temperature": null,
+     "operating_pressure": null,
+     "solids_or_liquor_composition": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the refinery datasheet / mass balance"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Bayer practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Large ring foundation or concrete tank; centre pier carries the rake drive and torque."
+   ],
+   "alignment": [
+    "Level launders so overflow is even all round; centre the drive and shaft."
+   ],
+   "piping": [
+    "Feed to feedwell with flocculant dosing points; underflow pumps with standby and flushing; overflow to downstream."
+   ],
+   "commissioning": [
+    "Fill with water, run rakes and test torque alarms and lift; start feed and flocculant; build mud bed gradually."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Overflow clarity and torque.",
+     "part": "st_drive",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Flocculant system check.",
+     "part": "piping",
+     "interval": "daily"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect rakes.",
+     "part": "st_rakes"
+    }
+   ],
+   "lubrication": [
+    "Agitator gearbox oil and motor bearings per maker; no lubrication for static parts."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Poor clarity",
+     "category": "performance",
+     "symptoms": [
+      "Solids in overflow"
+     ],
+     "causes": [
+      "Low flocculant, overload"
+     ],
+     "remedies": [
+      "Adjust dose/rate"
+     ],
+     "part": "st_clear"
+    },
+    {
+     "problem": "High torque",
+     "category": "performance",
+     "symptoms": [
+      "Trip"
+     ],
+     "causes": [
+      "Mud build-up"
+     ],
+     "remedies": [
+      "Increase underflow"
+     ],
+     "part": "st_rakes"
+    }
+   ],
+   "safety": [
+    "Hot caustic."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Mud Settling Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "mud_settling_tank.glb",
+    "duration_s": 48.6,
+    "script": [
+     {
+      "narration": "This module introduces the Mud Settling Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The mud settler (primary thickener) separates red mud from pregnant liquor after digestion.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Flocculant added in the feedwell makes the mud settle quickly; clear liquor overflows to polishing filtration and thickened mud is pumped to the washers.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include primary residue (red mud) separation after digestion; high-rate thickening in mineral processing.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Settler: Rake Arms & Blades (move mud to the centre cone), Underflow (mud) Pump, Underflow (mud) Pump — Shaft & Coupling (turning).",
+      "duration_s": 10.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Mud Settling Tank — Operation",
+    "type": "in_app_tour",
+    "model": "mud_settling_tank.glb",
+    "duration_s": 38.2,
+    "script": [
+     {
+      "narration": "How the Mud Settling Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Diluted digested slurry enters the feedwell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_feedwell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flocculant forms flocs that settle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_mud",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clear liquor overflows.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_clear",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Rakes move mud to the cone; pump takes underflow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_rakes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The drive turns the rakes slowly.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_drive",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Digested slurry is diluted and dosed with flocculant in the feedwell; flocs settle quickly, leaving clear pregnant liquor that overflows to security (polishing) filtration.",
+      "duration_s": 10.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Mud Settling Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "mud_settling_tank.glb",
+    "duration_s": 31.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Mud Settling Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Overflow clarity and torque.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Flocculant system check.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piping",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect rakes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "st_rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor clarity: solids in overflow. Common cause: low flocculant, overload.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "st_clear",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high torque: trip. Common cause: mud build-up.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "st_rakes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What overflows?",
+     "options": [
+      "Clear pregnant liquor",
+      "Mud",
+      "Steam",
+      "Sand"
+     ],
+     "answer": 0,
+     "explanation": "Liquor.",
+     "level": "basic"
+    },
+    {
+     "question": "What helps mud settle?",
+     "options": [
+      "Flocculant",
+      "Heat",
+      "Air",
+      "Magnets"
+     ],
+     "answer": 0,
+     "explanation": "Floc.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does the underflow go?",
+     "options": [
+      "To the washers",
+      "To precipitation",
+      "To calcination",
+      "To stack"
+     ],
+     "answer": 0,
+     "explanation": "CCD.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds slurry; launder collects overflow.\"",
+     "options": [
+      "Settler: Settling / Compression Zone (mud bed)",
+      "Settler: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "Settler: Tank with Conical Floor & Overflow Launder",
+      "Settler: Central Feedwell (dissipates feed energy, mixes flocculant)"
+     ],
+     "answer": 2,
+     "explanation": "Settler: Tank with Conical Floor & Overflow Launder: Holds slurry; launder collects overflow.",
+     "level": "basic",
+     "part": "st_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Clear and mud zones.\"",
+     "options": [
+      "Settler: Bridge & Rake Drive (slow, high torque, overload protection)",
+      "Settler: Rake Arms & Blades (move mud to the centre cone)",
+      "Settler: Central Feedwell (dissipates feed energy, mixes flocculant)",
+      "Settler: Clear Overflow Zone"
+     ],
+     "answer": 3,
+     "explanation": "Settler: Clear Overflow Zone: Clear and mud zones.",
+     "level": "basic",
+     "part": "st_clear",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Calms feed; mixes flocculant.\"",
+     "options": [
+      "Settler: Tank with Conical Floor & Overflow Launder",
+      "Underflow (mud) Pump — Shaft & Coupling (turning)",
+      "Settler: Settling / Compression Zone (mud bed)",
+      "Settler: Central Feedwell (dissipates feed energy, mixes flocculant)"
+     ],
+     "answer": 3,
+     "explanation": "Settler: Central Feedwell (dissipates feed energy, mixes flocculant): Calms feed; mixes flocculant.",
+     "level": "basic",
+     "part": "st_feedwell",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

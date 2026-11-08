@@ -1,0 +1,644 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "reclaimer",
+ "no": 133,
+ "title": "Reclaimer",
+ "model_title": "Bucket Wheel Reclaimer (Boom Type)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A bucket wheel reclaimer recovers material from a stockpile. A wheel with buckets turns at the end of a slewing boom. As the boom slews across the pile face, the buckets dig material and tip it onto the boom conveyor, which carries it to the centre of the machine and down onto the yard conveyor. The machine advances along the rails a little after each pass.",
+   "applications": [
+    "Reclaiming coal, ore and limestone from stockpiles",
+    "Feeding power plants, sinter plants and ship loaders",
+    "Blending (bridge or boom types)"
+   ],
+   "key_points": [
+    "Continuous digging by bucket wheel",
+    "Slew + travel + luff to follow the pile face",
+    "Reclaim rate controlled by slew speed and cut depth",
+    "Material flows from wheel → boom belt → centre chute → yard conveyor"
+   ],
+   "classification": {
+    "family": "Bulk handling machine",
+    "type": "Boom-type bucket wheel reclaimer"
+   },
+   "hi_family": "material_handling",
+   "summary": "A bucket wheel reclaimer recovers material from stockpiles. The rotating bucket wheel at the end of the slewing boom digs into the pile face and drops material onto the boom conveyor, which carries it back to the yard conveyor as the machine slews from side to side and advances."
+  },
+  "model_3d": {
+   "asset": "glb/reclaimer.glb",
+   "metadata": "meta/reclaimer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4764,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The bucket wheel turns and its buckets cut into the pile face.",
+    "Buckets tip material onto the boom conveyor.",
+    "The boom slews from side to side across the pile."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The bucket wheel turns and its buckets cut into the pile face.",
+     "part": "bucket_wheel",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Buckets tip material onto the boom conveyor.",
+     "part": "coal",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The boom slews from side to side across the pile.",
+     "part": "superstructure",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The boom belt carries the material back to the centre chute and the yard conveyor.",
+     "part": "yard_conveyor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Reclaim rate rises with slew speed and cut depth; slew speed is varied across the arc to keep the rate constant."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "reclaimer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/reclaimer.json#components",
+   "key_components": "Bucket wheel, boom conveyor, slewing, travel",
+   "parts": [
+    {
+     "id": "rails",
+     "name": "Rails & Sleepers (travel track)",
+     "info_ref": "hm_rails",
+     "function": "Track for travel.",
+     "material": "Steel."
+    },
+    {
+     "id": "portal",
+     "name": "Portal / Travel Carriage with Bogies",
+     "info_ref": "sr_portal",
+     "function": "Carries the machine along the rails.",
+     "material": "Steel."
+    },
+    {
+     "id": "superstructure",
+     "name": "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+     "info_ref": "sr_boom",
+     "function": "Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.",
+     "material": "Steel."
+    },
+    {
+     "id": "bucket_wheel",
+     "name": "Bucket Wheel (digs material and drops it on the boom conveyor)",
+     "info_ref": "sr_wheel",
+     "function": "Digs material from the pile/face and drops it on the boom conveyor.",
+     "material": "Steel; wear teeth/lips."
+    },
+    {
+     "id": "stockpile",
+     "name": "Stockpile",
+     "info_ref": "hm_pile",
+     "function": "Stockpile / face.",
+     "material": "—"
+    },
+    {
+     "id": "coal",
+     "name": "Reclaimed Coal Riding the Boom Conveyor to the Centre Chute",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "yard_conveyor",
+     "name": "Yard (Stockpile) Conveyor alongside the Rails",
+     "info_ref": "hk_belt",
+     "function": "Belt.",
+     "material": "Rubber."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Wheel ~ 4 – 10 m; boom ~ 25 – 60 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 200 – 1500 (total)",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Wheel ~ 5 – 10 rpm",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "~ 500 – 10 000+",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Select wheel diameter and bucket size for rate and material; check digging forces for hard/compact material."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 5049-1",
+    "FEM 2.131/2.132"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rails on a continuous foundation (ballast or concrete beam) to the specified tolerances for gauge, level and straightness; rail joints welded or tight-fished.",
+    "Design for wheel loads including wind and storm conditions; fit storm anchors/rail clamps and end stops with buffers."
+   ],
+   "alignment": [
+    "Align the machine's yard-conveyor interface (tripper or feed chute) with the yard conveyor; check slew bearing level and bolt pre-tension."
+   ],
+   "piping": [
+    "Power and control by cable reel (festoon or motorised reel) along the rail track; anti-collision and boom-to-pile sensors.",
+    "Dust suppression water supply and sprays at transfer points where required."
+   ],
+   "commissioning": [
+    "Test travel, slew, luff and conveyor drives individually, then interlocks (slew limits, anti-collision, overload, wind speed cut-out).",
+    "Load-test the boom conveyor and record power; check stability calculations against the as-built mass."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Inspect buckets, teeth and wheel chute.",
+     "part": "bucket_wheel",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Wheel drive gearbox oil analysis; slew drive inspection.",
+     "part": "superstructure",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bucket lips/teeth; overhaul wheel drive.",
+     "part": "bucket_wheel"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Boom conveyor belt damage",
+     "category": "performance",
+     "symptoms": [
+      "Spillage, belt edge wear"
+     ],
+     "causes": [
+      "Mistracking, material build-up, impact at the transfer"
+     ],
+     "remedies": [
+      "Re-train belt; clean; repair chutes"
+     ],
+     "part": "superstructure"
+    },
+    {
+     "problem": "Slew bearing wear",
+     "category": "wear",
+     "symptoms": [
+      "Rocking, noise, increased tilt clearance"
+     ],
+     "causes": [
+      "Lubrication failure, overload"
+     ],
+     "remedies": [
+      "Measure tilt; grease; replace if limits exceeded"
+     ],
+     "part": "superstructure"
+    },
+    {
+     "problem": "Long-travel misalignment",
+     "category": "vibration",
+     "symptoms": [
+      "Wheel flange wear, crabbing"
+     ],
+     "causes": [
+      "Rail misalignment, uneven wheel diameters"
+     ],
+     "remedies": [
+      "Survey rails; match wheels"
+     ],
+     "part": "portal"
+    },
+    {
+     "problem": "Bucket tooth wear",
+     "category": "wear",
+     "symptoms": [
+      "Falling rate, high wheel power"
+     ],
+     "causes": [
+      "Abrasive material"
+     ],
+     "remedies": [
+      "Replace teeth/lips"
+     ],
+     "part": "bucket_wheel"
+    }
+   ],
+   "safety": [
+    "Exclusion zone at the pile toe (pile collapse); anti-collision; wind limits."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Reclaimer — Introduction",
+    "type": "in_app_tour",
+    "model": "reclaimer.glb",
+    "duration_s": 56.0,
+    "script": [
+     {
+      "narration": "This module introduces the Reclaimer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A bucket wheel reclaimer recovers material from a stockpile.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A wheel with buckets turns at the end of a slewing boom.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "As the boom slews across the pile face, the buckets dig material and tip it onto the boom conveyor, which carries it to the centre of the machine and down onto the yard conveyor.",
+      "duration_s": 14.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include reclaiming coal, ore and limestone from stockpiles; feeding power plants, sinter plants and ship loaders; blending (bridge or boom types).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Bucket Wheel (digs material and drops it on the boom conveyor).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Reclaimer — Operation",
+    "type": "in_app_tour",
+    "model": "reclaimer.glb",
+    "duration_s": 27.6,
+    "script": [
+     {
+      "narration": "How the Reclaimer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The bucket wheel turns and its buckets cut into the pile face.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "bucket_wheel",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Buckets tip material onto the boom conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "coal",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The boom slews from side to side across the pile.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "superstructure",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The boom belt carries the material back to the centre chute and the yard conveyor.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "yard_conveyor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Reclaimer — Maintenance",
+    "type": "in_app_tour",
+    "model": "reclaimer.glb",
+    "duration_s": 43.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Reclaimer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Inspect buckets, teeth and wheel chute.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bucket_wheel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Wheel drive gearbox oil analysis; slew drive inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bucket lips/teeth; overhaul wheel drive.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bucket_wheel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for boom conveyor belt damage: spillage, belt edge wear. Common cause: mistracking, material build-up, impact at the transfer.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for slew bearing wear: rocking, noise, increased tilt clearance. Common cause: lubrication failure, overload.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for long-travel misalignment: wheel flange wear, crabbing. Common cause: rail misalignment, uneven wheel diameters.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "portal",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is reclaim rate mainly controlled?",
+     "options": [
+      "Slew speed and cut depth",
+      "Paint thickness",
+      "Rail size",
+      "Pile colour"
+     ],
+     "answer": 0,
+     "explanation": "Digging parameters.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does the material go after the buckets?",
+     "options": [
+      "Onto the boom conveyor, then to the yard conveyor",
+      "Back to the pile",
+      "Into the counterweight",
+      "Into the cab"
+     ],
+     "answer": 0,
+     "explanation": "Flow path.",
+     "level": "basic"
+    },
+    {
+     "question": "Why does the slew speed vary across the arc?",
+     "options": [
+      "The cut cross-section changes with angle, so speed is adjusted to keep the rate constant",
+      "To make noise",
+      "To cool the wheel",
+      "It does not vary"
+     ],
+     "answer": 0,
+     "explanation": "Constant rate.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Track for travel.\"",
+     "options": [
+      "Portal / Travel Carriage with Bogies",
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+      "Rails & Sleepers (travel track)",
+      "Bucket Wheel (digs material and drops it on the boom conveyor)"
+     ],
+     "answer": 2,
+     "explanation": "Rails & Sleepers (travel track): Track for travel.",
+     "level": "basic",
+     "part": "rails",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the machine along the rails.\"",
+     "options": [
+      "Reclaimed Coal Riding the Boom Conveyor to the Centre Chute",
+      "Portal / Travel Carriage with Bogies",
+      "Rails & Sleepers (travel track)",
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor"
+     ],
+     "answer": 1,
+     "explanation": "Portal / Travel Carriage with Bogies: Carries the machine along the rails.",
+     "level": "basic",
+     "part": "portal",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.\"",
+     "options": [
+      "Bucket Wheel (digs material and drops it on the boom conveyor)",
+      "Stockpile",
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+      "Yard (Stockpile) Conveyor alongside the Rails"
+     ],
+     "answer": 2,
+     "explanation": "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor: Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.",
+     "level": "basic",
+     "part": "superstructure",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

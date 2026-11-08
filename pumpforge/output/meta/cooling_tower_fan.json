@@ -1,0 +1,575 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "cooling_tower_fan",
+  "title": "Induced-Draught Cooling Tower Fan with Velocity-Recovery Stack, Gearbox & Drive Shaft",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 238,
+    "phase": 11,
+    "eq_id": "EQ-316",
+    "subcategory": "Cooling Utilities",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "cooling_tower_fan_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "cooling_tower_fan_pressure.glb",
+      "title": "Fan lifts the air; the stack recovers velocity pressure",
+      "description": "The induced-draught fan draws air through the louvres and fill, so the plenum below the fan is slightly below atmospheric pressure (typically ≈ 100–250 Pa of static pressure duty). Large fans turn slowly (tip speed usually ≤ ≈ 60 m/s for noise) and move very large volumes. The flared stack slows the leaving air, turning part of its velocity pressure back into static pressure, so the fan needs less power. Blade pitch is set to load the motor correctly; tip clearance to the stack should be small and even.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.03,
+      "points": [
+        [
+          -2.0,
+          0.5,
+          -0.0
+        ],
+        [
+          -1.0,
+          0.6,
+          -0.3
+        ],
+        [
+          -0.6,
+          1.5,
+          -0.3
+        ],
+        [
+          -0.6,
+          2.3,
+          -0.3
+        ],
+        [
+          -0.8,
+          3.6,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "air2",
+      "kind": "air",
+      "radius": 0.03,
+      "points": [
+        [
+          2.0,
+          0.5,
+          -0.6
+        ],
+        [
+          1.0,
+          0.6,
+          -0.6
+        ],
+        [
+          0.7,
+          1.5,
+          -0.6
+        ],
+        [
+          0.7,
+          2.3,
+          -0.4
+        ],
+        [
+          0.9,
+          3.6,
+          -0.4
+        ]
+      ]
+    },
+    {
+      "name": "power",
+      "kind": "power",
+      "radius": 0.012,
+      "points": [
+        [
+          2.3,
+          2.2,
+          -0.0
+        ],
+        [
+          0.22,
+          2.2,
+          -0.0
+        ],
+        [
+          0.0,
+          2.3,
+          -0.0
+        ],
+        [
+          0.0,
+          2.45,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 3492,
+    "parts": 8
+  },
+  "summary": "A cooling tower fan is a large, slow axial fan that draws air up through the tower. It sits in a flared fan stack that recovers velocity pressure, and is driven by a motor outside the air stream through a drive shaft and a right-angle gearbox.",
+  "classification": {
+    "family": "Cooling utilities",
+    "type": "Induced-draught axial fan with gearbox drive"
+  },
+  "model_configuration": {
+    "animation": "Fan and drive shaft turn; air rises through the stack"
+  },
+  "standards": [
+    {
+      "id": "CTI ATC-105",
+      "title": "Acceptance test code for water-cooling towers",
+      "relevance": "Thermal performance.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "CTI STD-111 / AGMA 6010-class",
+      "title": "Cooling-tower gear speed reducers",
+      "relevance": "Gearbox selection & service factor.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "CTI guidelines"
+  ],
+  "parts": [
+    {
+      "id": "casing",
+      "name": "Tower Casing (air-inlet openings on two faces)",
+      "group": "structure",
+      "section_role": "split",
+      "nodes": [
+        "casing__back",
+        "casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.65,
+        0.0,
+        -1.65
+      ],
+      "bbox_max": [
+        1.65,
+        2.0,
+        1.65
+      ],
+      "label_anchor": [
+        0.0,
+        1.0,
+        1.65
+      ],
+      "center": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "ctf_structure"
+    },
+    {
+      "id": "fill",
+      "name": "Fill Pack (air passes up through it)",
+      "group": "fill",
+      "section_role": "split",
+      "nodes": [
+        "fill__back",
+        "fill__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.6
+      ],
+      "bbox_min": [
+        -1.55,
+        0.944,
+        -1.55
+      ],
+      "bbox_max": [
+        1.55,
+        1.446,
+        1.55
+      ],
+      "label_anchor": [
+        0.0,
+        1.195,
+        1.55
+      ],
+      "center": [
+        0.0,
+        1.195,
+        -0.0
+      ],
+      "info_ref": "ctf_structure"
+    },
+    {
+      "id": "fan_deck_stack",
+      "name": "Fan Deck & Fan Stack (cylinder with flared velocity-recovery section)",
+      "group": "stack",
+      "section_role": "split",
+      "nodes": [
+        "fan_deck_stack__back",
+        "fan_deck_stack__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.7,
+        2.0,
+        -1.7
+      ],
+      "bbox_max": [
+        1.7,
+        3.4,
+        1.7
+      ],
+      "label_anchor": [
+        0.0,
+        2.7,
+        1.7
+      ],
+      "center": [
+        0.0,
+        2.7,
+        -0.0
+      ],
+      "info_ref": "ctf_stack"
+    },
+    {
+      "id": "handrail",
+      "name": "Fan-Deck Handrail",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "handrail.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.67,
+        2.08,
+        -1.67
+      ],
+      "bbox_max": [
+        1.67,
+        3.02,
+        1.67
+      ],
+      "label_anchor": [
+        0.0,
+        2.55,
+        1.67
+      ],
+      "center": [
+        0.0,
+        2.55,
+        -0.0
+      ],
+      "info_ref": "ctf_structure"
+    },
+    {
+      "id": "fan_rotor",
+      "name": "Axial Fan: Hub & 6 Adjustable-Pitch FRP Blades",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "fan_rotor.001"
+      ],
+      "pivot": [
+        0.0,
+        2.45,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.5
+      ],
+      "bbox_min": [
+        -1.13,
+        2.32,
+        -1.05317
+      ],
+      "bbox_max": [
+        1.13,
+        2.59,
+        1.05317
+      ],
+      "label_anchor": [
+        0.0,
+        2.455,
+        1.05317
+      ],
+      "center": [
+        0.0,
+        2.455,
+        -0.0
+      ],
+      "info_ref": "ctf_fan"
+    },
+    {
+      "id": "gearbox",
+      "name": "Right-Angle Gearbox on Torque Tube, Vibration Switch & Remote Oil Gauge / Fill Line",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "gearbox.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.3
+      ],
+      "bbox_min": [
+        -1.3,
+        1.94,
+        -0.52
+      ],
+      "bbox_max": [
+        1.72,
+        2.32,
+        0.18
+      ],
+      "label_anchor": [
+        0.21,
+        2.13,
+        0.18
+      ],
+      "center": [
+        0.21,
+        2.13,
+        -0.17
+      ],
+      "info_ref": "ctf_gearbox"
+    },
+    {
+      "id": "motor",
+      "name": "Fan Motor (outside the humid air stream)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "motor.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        1.85,
+        2.04,
+        -0.16
+      ],
+      "bbox_max": [
+        2.3,
+        2.36,
+        0.16
+      ],
+      "label_anchor": [
+        2.075,
+        2.2,
+        0.16
+      ],
+      "center": [
+        2.075,
+        2.2,
+        -0.0
+      ],
+      "info_ref": "ctf_motor"
+    },
+    {
+      "id": "drive_shaft",
+      "name": "Drive Shaft (composite tube) with Flexible Couplings",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "drive_shaft.001"
+      ],
+      "pivot": [
+        1.0,
+        2.2,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.22,
+        2.12,
+        -0.08
+      ],
+      "bbox_max": [
+        1.85,
+        2.28,
+        0.08
+      ],
+      "label_anchor": [
+        1.035,
+        2.2,
+        0.08
+      ],
+      "center": [
+        1.035,
+        2.2,
+        -0.0
+      ],
+      "info_ref": "ctf_shaft"
+    }
+  ],
+  "components": {
+    "ctf_structure": {
+      "function": "Casing, fill and deck.",
+      "construction": "Tower structure.",
+      "material": "Concrete/FRP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ctf_stack": {
+      "function": "Shroud and velocity recovery.",
+      "construction": "Fan deck and flared stack.",
+      "material": "FRP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Uneven tip clearance"
+      ],
+      "inspection": [
+        "Measure tip clearance"
+      ]
+    },
+    "ctf_fan": {
+      "function": "Moves air.",
+      "construction": "Hub and adjustable-pitch FRP blades.",
+      "material": "FRP/aluminium.",
+      "operating_conditions": "Tip speed ≲ 60 m/s.",
+      "failure_modes": [
+        "Blade imbalance/cracks",
+        "Pitch mismatch"
+      ],
+      "inspection": [
+        "Vibration, blade pitch check"
+      ]
+    },
+    "ctf_gearbox": {
+      "function": "Reduces speed, turns 90°.",
+      "construction": "Right-angle gearbox on torque tube, vibration switch.",
+      "material": "Cast iron.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Low oil",
+        "Bearing wear"
+      ],
+      "inspection": [
+        "Oil level, vibration"
+      ]
+    },
+    "ctf_motor": {
+      "function": "Drives the fan.",
+      "construction": "TEFC motor, often two-speed or VFD.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ctf_shaft": {
+      "function": "Transmits power to the gearbox.",
+      "construction": "Composite/steel tube with flexible couplings.",
+      "material": "Carbon fibre/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Misalignment",
+        "Coupling element wear"
+      ],
+      "inspection": [
+        "Alignment"
+      ]
+    }
+  }
+}

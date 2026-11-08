@@ -1,0 +1,552 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "membrane_filter",
+  "title": "Plate-and-Frame Membrane Filter (Flat-Sheet Membranes, Cross-Flow)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 176,
+    "phase": 9,
+    "eq_id": "EQ-254",
+    "subcategory": "Membrane separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "membrane_filter_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "membrane_filter_pressure.glb",
+      "title": "Trans-membrane pressure drives permeation",
+      "description": "Feed is held at pressure on one side of each membrane (red); permeate leaves at near-atmospheric pressure (blue). The trans-membrane pressure (TMP) pushes liquid through the pores, while the feed sweeps across the surface (cross-flow) to limit the fouling layer.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.8,
+          0.8,
+          -0.0
+        ],
+        [
+          -0.38,
+          0.8,
+          -0.0
+        ],
+        [
+          -0.015,
+          0.8,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "retentate",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.015,
+          1.2,
+          -0.0
+        ],
+        [
+          -0.38,
+          1.2,
+          -0.0
+        ],
+        [
+          -0.8,
+          1.2,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "permeate",
+      "kind": "water",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.4,
+          0.58,
+          -0.25
+        ],
+        [
+          0.205,
+          0.58,
+          -0.25
+        ],
+        [
+          0.205,
+          0.2,
+          -0.25
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 5496,
+    "parts": 8
+  },
+  "summary": "A plate-and-frame membrane filter stacks flat-sheet membranes between support plates. Feed under pressure sweeps across the membrane surfaces (cross-flow); permeate passes through and drains from each plate, while the concentrated retentate leaves at the end. A hydraulic cylinder clamps the stack.",
+  "classification": {
+    "family": "Membrane filter",
+    "type": "Plate-and-frame flat-sheet module"
+  },
+  "model_configuration": {
+    "plates": 9,
+    "animation": "Cross-flow tracers; permeate drips"
+  },
+  "standards": [
+    {
+      "id": "ASTM D4516",
+      "title": "Standardizing RO performance data",
+      "relevance": "Normalisation of membrane performance (also applied to NF).",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC X",
+      "title": "FRP pressure vessels",
+      "relevance": "Membrane pressure vessels.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Baker — Membrane Technology and Applications"
+  ],
+  "parts": [
+    {
+      "id": "fixed_head",
+      "name": "Fixed Head (feed & retentate ports) & Stand",
+      "group": "frame",
+      "section_role": "split",
+      "nodes": [
+        "fixed_head__back",
+        "fixed_head__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.625,
+        0.0,
+        -0.4
+      ],
+      "bbox_max": [
+        -0.375,
+        1.35,
+        0.4
+      ],
+      "label_anchor": [
+        -0.5,
+        0.675,
+        0.4
+      ],
+      "center": [
+        -0.5,
+        0.675,
+        -0.0
+      ],
+      "info_ref": "mf_frame"
+    },
+    {
+      "id": "plate_stack",
+      "name": "Plate Stack: Support Plates with Flat-Sheet Membranes & Spacers",
+      "group": "filter_media",
+      "section_role": "split",
+      "nodes": [
+        "plate_stack__back",
+        "plate_stack__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.39325,
+        0.7,
+        -0.3
+      ],
+      "bbox_max": [
+        0.0025,
+        1.3,
+        0.3
+      ],
+      "label_anchor": [
+        -0.19537,
+        1.0,
+        0.3
+      ],
+      "center": [
+        -0.19537,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "mf_plates"
+    },
+    {
+      "id": "closure",
+      "name": "Follower Plate, Hydraulic Closing Cylinder & End Stand",
+      "group": "frame",
+      "section_role": "keep",
+      "nodes": [
+        "fl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.005,
+        0.0,
+        -0.4
+      ],
+      "bbox_max": [
+        1.29,
+        1.35,
+        0.4
+      ],
+      "label_anchor": [
+        0.6475,
+        0.675,
+        0.4
+      ],
+      "center": [
+        0.6475,
+        0.675,
+        -0.0
+      ],
+      "info_ref": "mf_closure"
+    },
+    {
+      "id": "side_bars",
+      "name": "Side Bars (carry the plates)",
+      "group": "frame",
+      "section_role": "keep",
+      "nodes": [
+        "side_bars.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.5,
+        1.34,
+        -0.41
+      ],
+      "bbox_max": [
+        1.305,
+        1.42,
+        0.41
+      ],
+      "label_anchor": [
+        0.4025,
+        1.38,
+        0.41
+      ],
+      "center": [
+        0.4025,
+        1.38,
+        -0.0
+      ],
+      "info_ref": "mf_frame"
+    },
+    {
+      "id": "permeate_collection",
+      "name": "Permeate Outlets & Collection Trough",
+      "group": "outlets",
+      "section_role": "keep",
+      "nodes": [
+        "permeate_collection.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.45,
+        0.5,
+        -0.325
+      ],
+      "bbox_max": [
+        0.055,
+        0.7,
+        -0.175
+      ],
+      "label_anchor": [
+        -0.1975,
+        0.6,
+        -0.175
+      ],
+      "center": [
+        -0.1975,
+        0.6,
+        -0.25
+      ],
+      "info_ref": "mf_permeate"
+    },
+    {
+      "id": "ports",
+      "name": "Feed Inlet & Retentate (concentrate) Outlet",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "ports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.77,
+        0.724,
+        -0.076
+      ],
+      "bbox_max": [
+        -0.52,
+        1.276,
+        0.076
+      ],
+      "label_anchor": [
+        -0.645,
+        1.0,
+        0.076
+      ],
+      "center": [
+        -0.645,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "mf_frame"
+    },
+    {
+      "id": "feed_tracers",
+      "name": "Feed Sweeping Across the Membranes (cross-flow)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "feed_tracers_0",
+        "feed_tracers_1",
+        "feed_tracers_2",
+        "feed_tracers_3",
+        "feed_tracers_4",
+        "feed_tracers_5",
+        "feed_tracers_6",
+        "feed_tracers_7",
+        "feed_tracers_8",
+        "feed_tracers_9",
+        "feed_tracers_10",
+        "feed_tracers_11",
+        "feed_tracers_12",
+        "feed_tracers_13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.762,
+        0.73825,
+        -0.062
+      ],
+      "bbox_max": [
+        -0.0055,
+        1.23003,
+        -0.038
+      ],
+      "label_anchor": [
+        -0.38375,
+        0.98414,
+        -0.038
+      ],
+      "center": [
+        -0.38375,
+        0.98414,
+        -0.05
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "permeate",
+      "name": "Permeate Dripping into the Trough",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "permeate0",
+        "permeate1",
+        "permeate2",
+        "permeate3",
+        "permeate4",
+        "permeate5",
+        "permeate6",
+        "permeate7",
+        "permeate8"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.008,
+        -0.008,
+        -0.008
+      ],
+      "bbox_max": [
+        0.008,
+        0.008,
+        0.008
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.008
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "mf_frame": {
+      "function": "Holds plates; feed/retentate ports.",
+      "construction": "Fixed head, stand, side bars.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "mf_plates": {
+      "function": "Support membranes; form flow channels.",
+      "construction": "Plates, flat-sheet membranes, spacers.",
+      "material": "PP / polymer membranes.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling, leaks"
+      ],
+      "inspection": [
+        "Integrity test"
+      ]
+    },
+    "mf_closure": {
+      "function": "Clamps the stack.",
+      "construction": "Follower plate and hydraulic cylinder.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "mf_permeate": {
+      "function": "Collect permeate.",
+      "construction": "Outlets and trough.",
+      "material": "PP/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

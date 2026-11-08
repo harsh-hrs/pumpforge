@@ -1,0 +1,610 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "open_drain_system",
+  "title": "Open Drain System — Drain Hubs, Sealed Drain Boxes, Trench & Oily-Water Sump with Skimmer & Pump",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 271,
+    "phase": 13,
+    "eq_id": "EQ-349",
+    "subcategory": "Drainage",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "open_drain_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "open_drain_system_pressure.glb",
+      "title": "Water seals stop vapour and fire travelling",
+      "description": "Open drains take non-pressurised spills, leaks and rainwater from paved, curbed areas. Each drain hub connects through a liquid seal (P-trap or sealed catch basin) so flammable vapour and flame cannot travel through the drain network from one area to another; seals must be kept topped up. Oily water flows to a sump and on to an oil–water separator; the skimmer removes floating oil.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "trench",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.3,
+          -0.2,
+          0.4
+        ],
+        [
+          1.3,
+          -0.25,
+          0.4
+        ],
+        [
+          1.75,
+          -0.3,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "to_ows",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          1.85,
+          -0.7,
+          0.45
+        ],
+        [
+          1.85,
+          0.3,
+          0.45
+        ],
+        [
+          2.6,
+          0.3,
+          0.45
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 3728,
+    "parts": 10
+  },
+  "summary": "An open drain system collects spills, leaks and rainwater from paved process areas through drain hubs and trenches with liquid seals, to an oily-water sump where oil is skimmed and the water pumped to treatment.",
+  "classification": {
+    "family": "Drainage",
+    "type": "Open drains with water seals and oily-water sump"
+  },
+  "model_configuration": {
+    "animation": "Spills flow through seals; sump level rises"
+  },
+  "standards": [
+    {
+      "id": "API RP 2218 / local codes",
+      "title": "Drainage in process plants",
+      "relevance": "Fire spread via drains (to be verified).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Process plant layout practice"
+  ],
+  "parts": [
+    {
+      "id": "paved_area",
+      "name": "Paved, Sloped & Curbed Process Area",
+      "group": "civil",
+      "section_role": "split",
+      "nodes": [
+        "paved_area__back",
+        "paved_area__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.4
+      ],
+      "bbox_min": [
+        -2.0,
+        -0.15,
+        -1.2
+      ],
+      "bbox_max": [
+        2.0,
+        0.15,
+        1.2
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        1.2
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "od_area"
+    },
+    {
+      "id": "trench_grating",
+      "name": "Drain Trench with Grating (collects spills and rainwater)",
+      "group": "drain",
+      "section_role": "keep",
+      "nodes": [
+        "trench_grating.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -1.4,
+        -0.375,
+        0.15
+      ],
+      "bbox_max": [
+        1.8,
+        0.075,
+        0.65
+      ],
+      "label_anchor": [
+        0.2,
+        -0.15,
+        0.65
+      ],
+      "center": [
+        0.2,
+        -0.15,
+        0.4
+      ],
+      "info_ref": "od_trench"
+    },
+    {
+      "id": "drain_hubs_seals",
+      "name": "Drain Hubs / Funnels under Equipment with Water-Seal (P-trap) Lines to the Trench",
+      "group": "drain",
+      "section_role": "keep",
+      "nodes": [
+        "drain_hubs_seals.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.3
+      ],
+      "bbox_min": [
+        -1.32,
+        -0.78859,
+        -0.72
+      ],
+      "bbox_max": [
+        0.12,
+        0.12,
+        0.32012
+      ],
+      "label_anchor": [
+        -0.6,
+        -0.33429,
+        0.32012
+      ],
+      "center": [
+        -0.6,
+        -0.33429,
+        -0.19994
+      ],
+      "info_ref": "od_hubs"
+    },
+    {
+      "id": "equipment",
+      "name": "Pumps with Drip Pans (spills / leaks)",
+      "group": "equipment",
+      "section_role": "keep",
+      "nodes": [
+        "equipment.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -1.55,
+        0.155,
+        -0.8
+      ],
+      "bbox_max": [
+        0.35,
+        0.5,
+        -0.4
+      ],
+      "label_anchor": [
+        -0.6,
+        0.3275,
+        -0.4
+      ],
+      "center": [
+        -0.6,
+        0.3275,
+        -0.6
+      ],
+      "info_ref": "od_hubs"
+    },
+    {
+      "id": "sump",
+      "name": "Oily-Water Sump (gas-sealed inlet, sloped floor)",
+      "group": "sump",
+      "section_role": "split",
+      "nodes": [
+        "sump__back",
+        "sump__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        1.4,
+        -1.15,
+        -0.1
+      ],
+      "bbox_max": [
+        2.4,
+        0.1,
+        0.9
+      ],
+      "label_anchor": [
+        1.9,
+        -0.525,
+        0.9
+      ],
+      "center": [
+        1.9,
+        -0.525,
+        0.4
+      ],
+      "info_ref": "od_sump"
+    },
+    {
+      "id": "sump_water",
+      "name": "Collected Water with Floating Oil Layer",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sump_water.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.485,
+        -1.06,
+        -0.02
+      ],
+      "bbox_max": [
+        2.315,
+        -0.22,
+        0.4
+      ],
+      "label_anchor": [
+        1.9,
+        -0.64,
+        0.4
+      ],
+      "center": [
+        1.9,
+        -0.64,
+        0.19
+      ],
+      "info_ref": "od_sump"
+    },
+    {
+      "id": "oil_skimmer",
+      "name": "Floating Oil Skimmer → Slop Oil",
+      "group": "separation",
+      "section_role": "keep",
+      "nodes": [
+        "oil_skimmer.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        1.93,
+        -0.28,
+        0.08
+      ],
+      "bbox_max": [
+        2.5,
+        0.32,
+        0.32
+      ],
+      "label_anchor": [
+        2.215,
+        0.02,
+        0.32
+      ],
+      "center": [
+        2.215,
+        0.02,
+        0.2
+      ],
+      "info_ref": "od_skimmer"
+    },
+    {
+      "id": "sump_pump",
+      "name": "Submersible Sump Pump with Float Switch → Oily-Water Separator",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "sump_pump.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.61,
+        -0.95,
+        0.42
+      ],
+      "bbox_max": [
+        2.5,
+        0.33,
+        0.73804
+      ],
+      "label_anchor": [
+        2.055,
+        -0.31,
+        0.73804
+      ],
+      "center": [
+        2.055,
+        -0.31,
+        0.57902
+      ],
+      "info_ref": "od_pump"
+    },
+    {
+      "id": "spill_1",
+      "name": "Spill from pump 1 into the drain hub",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "spill_1_0",
+        "spill_1_1",
+        "spill_1_2"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.218,
+        -0.64783,
+        -0.618
+      ],
+      "bbox_max": [
+        -1.182,
+        0.168,
+        -0.0646
+      ],
+      "label_anchor": [
+        -1.2,
+        -0.23992,
+        -0.0646
+      ],
+      "center": [
+        -1.2,
+        -0.23992,
+        -0.3413
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "spill_2",
+      "name": "Spill from pump 2 into the drain hub",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "spill_2_0",
+        "spill_2_1",
+        "spill_2_2"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.018,
+        -0.64783,
+        -0.618
+      ],
+      "bbox_max": [
+        0.018,
+        0.168,
+        -0.0646
+      ],
+      "label_anchor": [
+        0.0,
+        -0.23992,
+        -0.0646
+      ],
+      "center": [
+        0.0,
+        -0.23992,
+        -0.3413
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "od_area": {
+      "function": "Contain spills.",
+      "construction": "Paved, curbed area.",
+      "material": "Concrete.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "od_trench": {
+      "function": "Collect flow.",
+      "construction": "Trench with grating.",
+      "material": "Concrete/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "od_hubs": {
+      "function": "Receive drips.",
+      "construction": "Drain hubs with P-trap seals.",
+      "material": "Cast iron.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Dry seal → vapour path"
+      ],
+      "inspection": [
+        "Top up seals"
+      ]
+    },
+    "od_sump": {
+      "function": "Collect oily water.",
+      "construction": "Sump with weir.",
+      "material": "Concrete.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "od_skimmer": {
+      "function": "Remove oil.",
+      "construction": "Floating skimmer.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "od_pump": {
+      "function": "Transfer water.",
+      "construction": "Submersible pump with float.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

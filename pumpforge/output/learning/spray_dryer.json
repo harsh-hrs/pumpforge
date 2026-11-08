@@ -1,0 +1,647 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "spray_dryer",
+ "no": 161,
+ "title": "Spray Dryer",
+ "model_title": "Spray Dryer (Rotary Atomiser, Co-Current, Cyclone Collection)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A spray dryer converts a liquid (solution, slurry, emulsion) into a dry powder in one step. A high-speed atomiser wheel or nozzle sprays the liquid into hot air in a large chamber; the fine droplets dry in seconds. Powder falls into the cone and fines are recovered from the exhaust air by a cyclone and/or bag filter.",
+   "applications": [
+    "Milk powder, coffee, food ingredients",
+    "Detergents, ceramics, pigments",
+    "Pharmaceuticals and enzymes"
+   ],
+   "key_points": [
+    "Very short drying time",
+    "Droplets stay near wet-bulb temperature",
+    "Atomisation sets particle size",
+    "Explosion protection for combustible powders"
+   ],
+   "classification": {
+    "family": "Dryer",
+    "type": "Co-current rotary-atomiser spray dryer"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A spray dryer turns a liquid feed into a dry powder in one step. The liquid is atomised into fine droplets by a fast-spinning wheel or nozzles inside a chamber of hot air; the water evaporates in seconds and the dry particles fall to the cone or are collected from the exhaust air by a cyclone."
+  },
+  "model_3d": {
+   "asset": "glb/spray_dryer.glb",
+   "metadata": "meta/spray_dryer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8188,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot air enters through the roof disperser.",
+    "The atomiser wheel flings the feed into a fine spray.",
+    "Droplets dry as they spiral down the chamber."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot air enters through the roof disperser.",
+     "part": "air_disperser",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The atomiser wheel flings the feed into a fine spray.",
+     "part": "atomiser_wheel",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Droplets dry as they spiral down the chamber.",
+     "part": "drying_chamber",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Powder collects in the cone and leaves by rotary valve.",
+     "part": "rotary_valves",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The cyclone recovers fines from the exhaust air.",
+     "part": "cyclone",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Outlet air temperature controls final moisture; higher inlet temperature increases capacity for the same air flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "spray_dryer_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "spray_dryer_temperature.glb",
+     "title": "Air cools as it evaporates the droplets",
+     "description": "Hot inlet air (often ~ 150–250 °C, higher for robust products) meets the spray at the top. Evaporation is very fast because the droplets are tiny (large surface area); the evaporating droplets stay near the wet-bulb temperature, so even heat-sensitive products (milk, enzymes) survive. Outlet air (~ 70–100 °C) sets the final moisture.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/spray_dryer.json#components",
+   "key_components": "Drying chamber, rotary atomiser, hot-air disperser, cone, cyclone, powder outlet",
+   "parts": [
+    {
+     "id": "drying_chamber",
+     "name": "Drying Chamber & Cone",
+     "info_ref": "sd_chamber",
+     "function": "Drying space.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "air_disperser",
+     "name": "Hot-Air Disperser (roof) with Guide Vanes",
+     "info_ref": "sd_disperser",
+     "function": "Directs hot air around the atomiser.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "atomiser_drive",
+     "name": "Rotary Atomiser Drive (high-speed motor / gearbox)",
+     "info_ref": "sd_atomiser",
+     "function": "Creates the spray.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "atomiser_wheel",
+     "name": "Atomiser Wheel (flings feed into a fine spray)",
+     "info_ref": "sd_atomiser",
+     "function": "Creates the spray.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "cyclone",
+     "name": "Cyclone (separates fines from the exhaust air) & Duct",
+     "info_ref": "sd_cyclone",
+     "function": "Collects fines from exhaust air.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "rotary_valves",
+     "name": "Rotary Valves (powder discharge, chamber & cyclone)",
+     "info_ref": "sd_valves",
+     "function": "Discharge powder.",
+     "material": "—"
+    },
+    {
+     "id": "structure",
+     "name": "Support Structure",
+     "info_ref": "sd_chamber",
+     "function": "Drying space.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "spray",
+     "name": "Spray Droplets drying into Powder",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Chamber ~ 1 – 12 m diameter",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.05 – 30",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Inlet ~ 150 – 250; outlet ~ 70 – 100",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Evaporation ~ 5 – 20 000",
+     "unit": "kg/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose atomiser (wheel vs nozzle) for particle size; chamber size for residence time; co-/counter-current for product."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Masters — Spray Drying Handbook",
+    "NFPA 652"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure designed for equipment, product and dynamic loads; explosion venting directed to a safe area."
+   ],
+   "alignment": [
+    "Align fans, rotary valves and drives; level chambers and beds."
+   ],
+   "piping": [
+    "Air/gas ducts with dampers and expansion joints; dust collection (cyclone, bag filter); explosion isolation where required (ATEX/NFPA)."
+   ],
+   "commissioning": [
+    "Air balance; heat-up curve; water trials then product; check outlet temperature/moisture control and interlocks."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check outlet temperature, powder moisture and wall deposits.",
+     "part": "drying_chamber",
+     "interval": "per shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect atomiser wheel wear and vibration.",
+     "part": "atomiser_wheel",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul atomiser; inspect explosion vents.",
+     "part": "atomiser_drive"
+    }
+   ],
+   "lubrication": [
+    "Atomiser oil system per maker (high speed)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wall deposits/burning",
+     "category": "performance",
+     "symptoms": [
+      "Brown/burnt powder, fires"
+     ],
+     "causes": [
+      "Wet spray reaching walls, high inlet temperature"
+     ],
+     "remedies": [
+      "Adjust atomisation, air pattern"
+     ],
+     "part": "drying_chamber"
+    },
+    {
+     "problem": "Atomiser vibration",
+     "category": "vibration",
+     "symptoms": [
+      "Trip, noise"
+     ],
+     "causes": [
+      "Wheel wear/imbalance"
+     ],
+     "remedies": [
+      "Balance/replace wheel"
+     ],
+     "part": "atomiser_wheel"
+    }
+   ],
+   "safety": [
+    "Dust explosion: venting/suppression, isolation (NFPA 652/654, ATEX); fire detection."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Spray Dryer — Introduction",
+    "type": "in_app_tour",
+    "model": "spray_dryer.glb",
+    "duration_s": 50.5,
+    "script": [
+     {
+      "narration": "This module introduces the Spray Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A spray dryer converts a liquid (solution, slurry, emulsion) into a dry powder in one step.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A high-speed atomiser wheel or nozzle sprays the liquid into hot air in a large chamber; the fine droplets dry in seconds.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Powder falls into the cone and fines are recovered from the exhaust air by a cyclone and/or bag filter.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include milk powder, coffee, food ingredients; detergents, ceramics, pigments; pharmaceuticals and enzymes.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Spray Dryer — Operation",
+    "type": "in_app_tour",
+    "model": "spray_dryer.glb",
+    "duration_s": 35.7,
+    "script": [
+     {
+      "narration": "How the Spray Dryer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot air enters through the roof disperser.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_disperser",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The atomiser wheel flings the feed into a fine spray.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "atomiser_wheel",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Droplets dry as they spiral down the chamber.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drying_chamber",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Powder collects in the cone and leaves by rotary valve.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "rotary_valves",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The cyclone recovers fines from the exhaust air.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cyclone",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Hot inlet air (often ~ 150–250 °C, higher for robust products) meets the spray at the top.",
+      "duration_s": 7.1,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Spray Dryer — Maintenance",
+    "type": "in_app_tour",
+    "model": "spray_dryer.glb",
+    "duration_s": 34.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Spray Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check outlet temperature, powder moisture and wall deposits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drying_chamber",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect atomiser wheel wear and vibration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "atomiser_wheel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul atomiser; inspect explosion vents.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "atomiser_drive",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wall deposits/burning: brown/burnt powder, fires. Common cause: wet spray reaching walls, high inlet temperature.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "drying_chamber",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for atomiser vibration: trip, noise. Common cause: wheel wear/imbalance.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "atomiser_wheel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why do heat-sensitive products survive spray drying?",
+     "options": [
+      "Evaporating droplets stay near wet-bulb temperature",
+      "Air is cold",
+      "No heat used",
+      "It is slow"
+     ],
+     "answer": 0,
+     "explanation": "Evaporative cooling.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets particle size?",
+     "options": [
+      "Atomisation (wheel speed, nozzle)",
+      "Cone angle",
+      "Cyclone",
+      "Stack"
+     ],
+     "answer": 0,
+     "explanation": "Droplet size.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the cyclone do?",
+     "options": [
+      "Recovers fines from exhaust air",
+      "Heats air",
+      "Atomises feed",
+      "Cools product"
+     ],
+     "answer": 0,
+     "explanation": "Separation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Drying space.\"",
+     "options": [
+      "Hot-Air Disperser (roof) with Guide Vanes",
+      "Rotary Atomiser Drive (high-speed motor / gearbox)",
+      "Drying Chamber & Cone",
+      "Cyclone (separates fines from the exhaust air) & Duct"
+     ],
+     "answer": 2,
+     "explanation": "Drying Chamber & Cone: Drying space.",
+     "level": "basic",
+     "part": "drying_chamber",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Directs hot air around the atomiser.\"",
+     "options": [
+      "Atomiser Wheel (flings feed into a fine spray)",
+      "Drying Chamber & Cone",
+      "Hot-Air Disperser (roof) with Guide Vanes",
+      "Rotary Atomiser Drive (high-speed motor / gearbox)"
+     ],
+     "answer": 2,
+     "explanation": "Hot-Air Disperser (roof) with Guide Vanes: Directs hot air around the atomiser.",
+     "level": "basic",
+     "part": "air_disperser",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Creates the spray.\"",
+     "options": [
+      "Hot-Air Disperser (roof) with Guide Vanes",
+      "Cyclone (separates fines from the exhaust air) & Duct",
+      "Rotary Valves (powder discharge, chamber & cyclone)",
+      "Rotary Atomiser Drive (high-speed motor / gearbox)"
+     ],
+     "answer": 3,
+     "explanation": "Rotary Atomiser Drive (high-speed motor / gearbox): Creates the spray.",
+     "level": "basic",
+     "part": "atomiser_drive",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

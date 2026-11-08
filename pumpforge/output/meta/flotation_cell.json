@@ -1,0 +1,567 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "flotation_cell",
+  "title": "Mechanical Flotation Cell (Forced-Air, Rotor–Stator)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 184,
+    "phase": 9,
+    "eq_id": "EQ-262",
+    "subcategory": "Flotation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "flotation_cell_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "flotation_cell_pressure.glb",
+      "title": "Hydrophobic vs hydrophilic particles",
+      "description": "Collectors make the wanted mineral surfaces water-repellent (hydrophobic). Those particles attach to air bubbles and rise into the froth (red zone), which overflows into the launder as concentrate. Hydrophilic gangue stays in the pulp (blue) and leaves as tailings. Frothers stabilise the froth.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.2,
+          2.0,
+          -0.0
+        ],
+        [
+          0.0,
+          1.95,
+          -0.0
+        ],
+        [
+          0.0,
+          0.35,
+          -0.0
+        ],
+        [
+          0.35,
+          0.35,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.05,
+          0.6,
+          -0.0
+        ],
+        [
+          -0.2,
+          0.5,
+          -0.05
+        ]
+      ]
+    },
+    {
+      "name": "concentrate_froth",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          0.3,
+          1.4,
+          -0.05
+        ],
+        [
+          0.85,
+          1.5,
+          -0.05
+        ],
+        [
+          0.95,
+          0.9,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "tailings",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          0.4,
+          0.3,
+          -0.05
+        ],
+        [
+          1.05,
+          0.25,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 5632,
+    "parts": 8
+  },
+  "summary": "A mechanical flotation cell separates valuable minerals from waste rock. Air is blown down a hollow shaft and dispersed into fine bubbles by a spinning rotor and stator. Particles made water-repellent by reagents attach to the bubbles and rise to form a froth that overflows into a launder; the rest leaves as tailings.",
+  "classification": {
+    "family": "Flotation",
+    "type": "Forced-air mechanical cell"
+  },
+  "model_configuration": {
+    "animation": "Rotor turns; bubbles rise; froth"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Flotation cell design",
+      "relevance": "Cell volume and mechanism sizing.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Wills' Mineral Processing Technology"
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "Cell Tank & Peripheral Froth Launder",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "tank__back",
+        "tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.0,
+        0.0,
+        -1.0
+      ],
+      "bbox_max": [
+        1.083,
+        1.5,
+        1.0
+      ],
+      "label_anchor": [
+        0.0415,
+        0.75,
+        1.0
+      ],
+      "center": [
+        0.0415,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "fc_tank"
+    },
+    {
+      "id": "pulp",
+      "name": "Pulp (ore slurry with reagents)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "pu"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.745,
+        0.05,
+        -0.745
+      ],
+      "bbox_max": [
+        0.745,
+        1.3,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.675,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.675,
+        -0.3725
+      ],
+      "info_ref": "fc_pulp"
+    },
+    {
+      "id": "froth",
+      "name": "Mineralised Froth Layer",
+      "group": "froth",
+      "section_role": "keep",
+      "nodes": [
+        "fz"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.745,
+        1.3,
+        -0.745
+      ],
+      "bbox_max": [
+        0.745,
+        1.53,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.415,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.415,
+        -0.3725
+      ],
+      "info_ref": "fc_froth"
+    },
+    {
+      "id": "rotor",
+      "name": "Rotor on Hollow Shaft (air enters through the shaft)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "rotor.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.7
+      ],
+      "bbox_min": [
+        -0.2,
+        0.25,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        1.95,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        1.1,
+        0.2
+      ],
+      "center": [
+        0.0,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "fc_mechanism"
+    },
+    {
+      "id": "stator",
+      "name": "Stator (dispersion hood) — shears air into fine bubbles",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "stator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.1,
+        0.5
+      ],
+      "bbox_min": [
+        -0.35826,
+        0.2,
+        -0.35826
+      ],
+      "bbox_max": [
+        0.35826,
+        0.58,
+        0.35826
+      ],
+      "label_anchor": [
+        -0.0,
+        0.39,
+        0.35826
+      ],
+      "center": [
+        -0.0,
+        0.39,
+        -0.0
+      ],
+      "info_ref": "fc_mechanism"
+    },
+    {
+      "id": "drive_bridge",
+      "name": "Bridge, Motor & V-Belt Drive",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "dr"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9,
+        1.74,
+        -0.13
+      ],
+      "bbox_max": [
+        0.9,
+        2.25,
+        0.13
+      ],
+      "label_anchor": [
+        0.0,
+        1.995,
+        0.13
+      ],
+      "center": [
+        0.0,
+        1.995,
+        -0.0
+      ],
+      "info_ref": "fc_drive"
+    },
+    {
+      "id": "air_feed_tailings",
+      "name": "Low-Pressure Air Line, Feed Inlet & Tailings Outlet (level-controlled)",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "air_feed_tailings.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.2,
+        0.117,
+        -0.133
+      ],
+      "bbox_max": [
+        1.05,
+        2.03,
+        0.133
+      ],
+      "label_anchor": [
+        -0.075,
+        1.0735,
+        0.133
+      ],
+      "center": [
+        -0.075,
+        1.0735,
+        -0.0
+      ],
+      "info_ref": "fc_tank"
+    },
+    {
+      "id": "bubbles",
+      "name": "Bubbles carrying Hydrophobic Particles to the Froth",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "bb0",
+        "bb1",
+        "bb2",
+        "bb3",
+        "bb4",
+        "bb5",
+        "bb6",
+        "bb7",
+        "bb8",
+        "bb9",
+        "bb10",
+        "bb11",
+        "bb12",
+        "bb13",
+        "bb14",
+        "bb15"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.01902
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.01902
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01902
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fc_tank": {
+      "function": "Holds the pulp; collects froth.",
+      "construction": "Tank and launder.",
+      "material": "Steel (lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fc_pulp": {
+      "function": "Ore slurry.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fc_froth": {
+      "function": "Mineral-laden froth.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fc_mechanism": {
+      "function": "Disperses air; suspends solids.",
+      "construction": "Rotor & stator.",
+      "material": "Rubber-lined steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear"
+      ],
+      "inspection": [
+        "Measure clearances"
+      ]
+    },
+    "fc_drive": {
+      "function": "Turns rotor.",
+      "construction": "Motor, belts, bridge.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

@@ -1,0 +1,718 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "emergency_ventilation_fan",
+  "title": "Emergency Ventilation Fan — Explosion-Proof Axial Wall Fan with Gravity Damper, Triggered by Gas Detection",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 279,
+    "phase": 13,
+    "eq_id": "EQ-357",
+    "subcategory": "Safety",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "emergency_ventilation_fan_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "emergency_ventilation_fan_pressure.glb",
+      "title": "Start on gas, purge fast, never ignite",
+      "description": "Emergency ventilation runs at high rate when gas detection reaches its first alarm (often ≈ 10–20 % LEL), diluting a leak below its flammable range and venting it outside. Equipment in the air stream must suit the hazardous-area zone (Ex d / Ex e motor, temperature class) and the impeller–casing pair must be non-sparking (e.g. aluminium/bronze vs steel) — a rub must not cause a spark. The gravity damper closes when the fan stops, keeping weather out. Supplies are typically on essential power.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "extract",
+      "kind": "exhaust",
+      "radius": 0.04,
+      "points": [
+        [
+          -1.6,
+          0.6,
+          -0.0
+        ],
+        [
+          -0.6,
+          1.4,
+          -0.0
+        ],
+        [
+          0.0,
+          1.6,
+          -0.0
+        ],
+        [
+          1.2,
+          1.6,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 4688,
+    "parts": 13
+  },
+  "summary": "An emergency ventilation fan is an explosion-protected axial fan that starts automatically on gas detection to purge a building, diluting leaked gas below its flammable limit; a gravity damper closes when it stops.",
+  "classification": {
+    "family": "Safety",
+    "type": "Ex-rated axial wall fan with gravity damper"
+  },
+  "model_configuration": {
+    "animation": "Fan runs, damper blades open, gas drawn out"
+  },
+  "standards": [
+    {
+      "id": "ISO 80079-36/-37 / EN 14986",
+      "title": "Non-electrical equipment / fans for explosive atmospheres",
+      "relevance": "Fan design.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "IEC 60079-0/-1",
+      "title": "Explosive atmospheres — Ex d motors",
+      "relevance": "Motor protection.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "EN 14986"
+  ],
+  "parts": [
+    {
+      "id": "wall",
+      "name": "Building Wall (compressor / battery / analyser house)",
+      "group": "building",
+      "section_role": "split",
+      "nodes": [
+        "wall__back",
+        "wall__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.1,
+        0.0,
+        -1.5
+      ],
+      "bbox_max": [
+        0.1,
+        2.8,
+        1.5
+      ],
+      "label_anchor": [
+        0.0,
+        1.4,
+        1.5
+      ],
+      "center": [
+        0.0,
+        1.4,
+        -0.0
+      ],
+      "info_ref": "ef_wall"
+    },
+    {
+      "id": "fan_casing",
+      "name": "Fan Casing (spark-resistant: non-sparking rotor/casing material pair)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "fan_casing__back",
+        "fan_casing__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.3,
+        0.98,
+        -0.62
+      ],
+      "bbox_max": [
+        0.32,
+        2.22,
+        0.62
+      ],
+      "label_anchor": [
+        0.01,
+        1.6,
+        0.62
+      ],
+      "center": [
+        0.01,
+        1.6,
+        -0.0
+      ],
+      "info_ref": "ef_casing"
+    },
+    {
+      "id": "motor",
+      "name": "Ex d Flameproof Motor (in the air stream) on Struts",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "motor.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.25,
+        1.12085,
+        -0.47915
+      ],
+      "bbox_max": [
+        0.1,
+        2.07915,
+        0.47915
+      ],
+      "label_anchor": [
+        -0.075,
+        1.6,
+        0.47915
+      ],
+      "center": [
+        -0.075,
+        1.6,
+        0.0
+      ],
+      "info_ref": "ef_motor"
+    },
+    {
+      "id": "impeller",
+      "name": "Aluminium / Bronze Axial Impeller (adjustable pitch)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "impeller.001"
+      ],
+      "pivot": [
+        0.15,
+        1.6,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        0.12,
+        1.163,
+        -0.437
+      ],
+      "bbox_max": [
+        0.18,
+        2.037,
+        0.437
+      ],
+      "label_anchor": [
+        0.15,
+        1.6,
+        0.437
+      ],
+      "center": [
+        0.15,
+        1.6,
+        -0.0
+      ],
+      "info_ref": "ef_casing"
+    },
+    {
+      "id": "damper_blade_1",
+      "name": "Gravity Back-Draught Damper Blade 1 (opens with fan pressure)",
+      "group": "damper",
+      "section_role": "keep",
+      "nodes": [
+        "db0"
+      ],
+      "pivot": [
+        0.36,
+        1.41,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        0.355,
+        1.25,
+        -0.55
+      ],
+      "bbox_max": [
+        0.365,
+        1.41,
+        0.55
+      ],
+      "label_anchor": [
+        0.36,
+        1.33,
+        0.55
+      ],
+      "center": [
+        0.36,
+        1.33,
+        -0.0
+      ],
+      "info_ref": "ef_damper"
+    },
+    {
+      "id": "damper_blade_2",
+      "name": "Gravity Back-Draught Damper Blade 2 (opens with fan pressure)",
+      "group": "damper",
+      "section_role": "keep",
+      "nodes": [
+        "db1"
+      ],
+      "pivot": [
+        0.36,
+        1.58,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.1,
+        -0.0
+      ],
+      "bbox_min": [
+        0.355,
+        1.42,
+        -0.55
+      ],
+      "bbox_max": [
+        0.365,
+        1.58,
+        0.55
+      ],
+      "label_anchor": [
+        0.36,
+        1.5,
+        0.55
+      ],
+      "center": [
+        0.36,
+        1.5,
+        -0.0
+      ],
+      "info_ref": "ef_damper"
+    },
+    {
+      "id": "damper_blade_3",
+      "name": "Gravity Back-Draught Damper Blade 3 (opens with fan pressure)",
+      "group": "damper",
+      "section_role": "keep",
+      "nodes": [
+        "db2"
+      ],
+      "pivot": [
+        0.36,
+        1.75,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        0.355,
+        1.59,
+        -0.55
+      ],
+      "bbox_max": [
+        0.365,
+        1.75,
+        0.55
+      ],
+      "label_anchor": [
+        0.36,
+        1.67,
+        0.55
+      ],
+      "center": [
+        0.36,
+        1.67,
+        -0.0
+      ],
+      "info_ref": "ef_damper"
+    },
+    {
+      "id": "damper_blade_4",
+      "name": "Gravity Back-Draught Damper Blade 4 (opens with fan pressure)",
+      "group": "damper",
+      "section_role": "keep",
+      "nodes": [
+        "db3"
+      ],
+      "pivot": [
+        0.36,
+        1.92,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.355,
+        1.76,
+        -0.55
+      ],
+      "bbox_max": [
+        0.365,
+        1.92,
+        0.55
+      ],
+      "label_anchor": [
+        0.36,
+        1.84,
+        0.55
+      ],
+      "center": [
+        0.36,
+        1.84,
+        -0.0
+      ],
+      "info_ref": "ef_damper"
+    },
+    {
+      "id": "damper_blade_5",
+      "name": "Gravity Back-Draught Damper Blade 5 (opens with fan pressure)",
+      "group": "damper",
+      "section_role": "keep",
+      "nodes": [
+        "db4"
+      ],
+      "pivot": [
+        0.36,
+        2.09,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        0.355,
+        1.93,
+        -0.55
+      ],
+      "bbox_max": [
+        0.365,
+        2.09,
+        0.55
+      ],
+      "label_anchor": [
+        0.36,
+        2.01,
+        0.55
+      ],
+      "center": [
+        0.36,
+        2.01,
+        -0.0
+      ],
+      "info_ref": "ef_damper"
+    },
+    {
+      "id": "damper_frame_guard",
+      "name": "Damper Frame & Inlet Guard",
+      "group": "damper",
+      "section_role": "keep",
+      "nodes": [
+        "damper_frame_guard.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.32,
+        1.1,
+        -0.6
+      ],
+      "bbox_max": [
+        0.39,
+        2.1,
+        0.6
+      ],
+      "label_anchor": [
+        0.035,
+        1.6,
+        0.6
+      ],
+      "center": [
+        0.035,
+        1.6,
+        -0.0
+      ],
+      "info_ref": "ef_damper"
+    },
+    {
+      "id": "detection_control",
+      "name": "Gas Detector (low level), Fan Control Panel & Beacon (auto-start at ≈ 20 % LEL)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "detection_control.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -2.1,
+        -0.05,
+        -1.5
+      ],
+      "bbox_max": [
+        0.1,
+        2.46,
+        1.5
+      ],
+      "label_anchor": [
+        -1.0,
+        1.205,
+        1.5
+      ],
+      "center": [
+        -1.0,
+        1.205,
+        -0.0
+      ],
+      "info_ref": "ef_controls"
+    },
+    {
+      "id": "signal",
+      "name": "Gas alarm signal to the fan starter",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "signal_0",
+        "signal_1",
+        "signal_2"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.20774,
+        0.53,
+        -0.92
+      ],
+      "bbox_max": [
+        -0.14,
+        1.29736,
+        0.6094
+      ],
+      "label_anchor": [
+        -0.17387,
+        0.91368,
+        0.6094
+      ],
+      "center": [
+        -0.17387,
+        0.91368,
+        -0.1553
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "gas_cloud",
+      "name": "Leaked gas drawn out by the fan",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "gas_cloud0",
+        "gas_cloud1",
+        "gas_cloud2",
+        "gas_cloud3",
+        "gas_cloud4",
+        "gas_cloud5",
+        "gas_cloud6",
+        "gas_cloud7",
+        "gas_cloud8",
+        "gas_cloud9",
+        "gas_cloud10",
+        "gas_cloud11",
+        "gas_cloud12",
+        "gas_cloud13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.04,
+        -0.04,
+        -0.03804
+      ],
+      "bbox_max": [
+        0.04,
+        0.04,
+        0.03804
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.03804
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ef_wall": {
+      "function": "Building.",
+      "construction": "Wall.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_casing": {
+      "function": "Fan casing & impeller.",
+      "construction": "Non-sparking pair.",
+      "material": "Steel + aluminium/bronze.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Rub → spark risk"
+      ],
+      "inspection": [
+        "Tip clearance check"
+      ]
+    },
+    "ef_motor": {
+      "function": "Drive.",
+      "construction": "Ex d motor.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_damper": {
+      "function": "Weather/back-draught seal.",
+      "construction": "Gravity damper, guard.",
+      "material": "Aluminium.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ef_controls": {
+      "function": "Automatic start.",
+      "construction": "Gas detector, panel, beacon.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Detector fault"
+      ],
+      "inspection": [
+        "Bump test"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

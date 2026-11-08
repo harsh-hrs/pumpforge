@@ -1,0 +1,719 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "steam_generator",
+  "title": "Packaged Steam Generator (3-Pass Dry-Back Fire-Tube Boiler)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 155,
+    "phase": 8,
+    "eq_id": "EQ-233",
+    "subcategory": "Boilers",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "steam_generator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "flue_gas",
+      "kind": "flue_gas",
+      "radius": 0.03,
+      "points": [
+        [
+          -1.1,
+          0.8,
+          -0.05
+        ],
+        [
+          1.6,
+          0.8,
+          -0.05
+        ],
+        [
+          1.7,
+          1.0,
+          -0.45
+        ],
+        [
+          -1.2,
+          1.0,
+          -0.48
+        ],
+        [
+          -1.4,
+          1.15,
+          -0.3
+        ],
+        [
+          -1.2,
+          1.27,
+          -0.22
+        ],
+        [
+          1.7,
+          1.35,
+          -0.2
+        ],
+        [
+          1.7,
+          3.0,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "steam",
+      "kind": "steam",
+      "radius": 0.03,
+      "points": [
+        [
+          0.4,
+          1.55,
+          -0.0
+        ],
+        [
+          0.4,
+          2.1,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "feedwater",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.2,
+          1.25,
+          1.0
+        ],
+        [
+          -0.2,
+          1.25,
+          0.7
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 8876,
+    "parts": 11
+  },
+  "summary": "A packaged steam generator (shell or fire-tube boiler) produces steam for heating and process use. Hot combustion gases from the burner pass through the furnace tube and then through two banks of smoke tubes (three passes), all surrounded by water inside the pressure shell. Steam collects above the water level and leaves via the main steam valve.",
+  "classification": {
+    "family": "Boiler",
+    "type": "3-pass dry-back fire-tube (shell) boiler"
+  },
+  "model_configuration": {
+    "animation": "Flame, boiling bubbles, level"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC Section I",
+      "title": "Rules for construction of power boilers",
+      "relevance": "Boiler design and safety valves.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 12952 / EN 12953",
+      "title": "Water-tube / shell boilers",
+      "relevance": "European boiler codes.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Spirax Sarco — The Steam and Condensate Loop"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Pressure Shell & End Plates (water/steam side)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.2,
+        0.3,
+        -0.75
+      ],
+      "bbox_max": [
+        1.4,
+        1.8,
+        0.75
+      ],
+      "label_anchor": [
+        0.1,
+        1.05,
+        0.75
+      ],
+      "center": [
+        0.1,
+        1.05,
+        -0.0
+      ],
+      "info_ref": "sg_shell"
+    },
+    {
+      "id": "furnace",
+      "name": "Furnace Tube (1st pass, corrugated)",
+      "group": "tubes",
+      "section_role": "split",
+      "nodes": [
+        "furnace__back",
+        "furnace__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.9
+      ],
+      "bbox_min": [
+        -1.2,
+        0.485,
+        -0.315
+      ],
+      "bbox_max": [
+        1.5,
+        1.115,
+        0.315
+      ],
+      "label_anchor": [
+        0.15,
+        0.8,
+        0.315
+      ],
+      "center": [
+        0.15,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "sg_furnace"
+    },
+    {
+      "id": "reversal_chamber",
+      "name": "Rear Reversal Chamber (refractory-lined door: turns gas from furnace into 2nd pass)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "reversal_chamber__back",
+        "reversal_chamber__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.4,
+        0.43,
+        -0.65
+      ],
+      "bbox_max": [
+        1.85,
+        1.15,
+        0.65
+      ],
+      "label_anchor": [
+        1.625,
+        0.79,
+        0.65
+      ],
+      "center": [
+        1.625,
+        0.79,
+        -0.0
+      ],
+      "info_ref": "sg_reversal"
+    },
+    {
+      "id": "smoke_tubes",
+      "name": "Smoke Tubes: 2nd Pass (lower) & 3rd Pass (upper)",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "smoke_tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.6
+      ],
+      "bbox_min": [
+        -1.2,
+        0.895,
+        -0.585
+      ],
+      "bbox_max": [
+        1.45,
+        1.305,
+        0.585
+      ],
+      "label_anchor": [
+        0.125,
+        1.1,
+        0.585
+      ],
+      "center": [
+        0.125,
+        1.1,
+        -0.0
+      ],
+      "info_ref": "sg_tubes"
+    },
+    {
+      "id": "smoke_boxes_stack",
+      "name": "Front Smoke Box (2nd→3rd pass turn), Rear Smoke Box & Stack",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "smoke_boxes_stack__back",
+        "smoke_boxes_stack__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.55,
+        0.675,
+        -0.65
+      ],
+      "bbox_max": [
+        1.86,
+        2.9,
+        0.65
+      ],
+      "label_anchor": [
+        0.155,
+        1.7875,
+        0.65
+      ],
+      "center": [
+        0.155,
+        1.7875,
+        -0.0
+      ],
+      "info_ref": "sg_smokebox"
+    },
+    {
+      "id": "burner",
+      "name": "Forced-Draught Burner (fan, air register, gas train)",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "bn"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.6,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.3,
+        0.58,
+        -0.22
+      ],
+      "bbox_max": [
+        -1.15,
+        1.02,
+        0.22
+      ],
+      "label_anchor": [
+        -1.725,
+        0.8,
+        0.22
+      ],
+      "center": [
+        -1.725,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "sg_burner"
+    },
+    {
+      "id": "flame",
+      "name": "Flame in the Furnace",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "flamef"
+      ],
+      "pivot": [
+        -1.12,
+        0.8,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.12,
+        0.6,
+        -0.2
+      ],
+      "bbox_max": [
+        0.28,
+        1.0,
+        0.2
+      ],
+      "label_anchor": [
+        -0.42,
+        0.8,
+        0.2
+      ],
+      "center": [
+        -0.42,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "sg_burner"
+    },
+    {
+      "id": "water",
+      "name": "Boiler Water (level above the top tubes)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "wt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.18,
+        0.314,
+        -0.736
+      ],
+      "bbox_max": [
+        1.38,
+        1.47,
+        -0.0
+      ],
+      "label_anchor": [
+        0.1,
+        0.892,
+        -0.0
+      ],
+      "center": [
+        0.1,
+        0.892,
+        -0.368
+      ],
+      "info_ref": "sg_water"
+    },
+    {
+      "id": "fittings",
+      "name": "Main Steam Valve, Safety Valves, Level Gauge, Feed Check, Blowdown, Pressure Gauge",
+      "group": "fittings",
+      "section_role": "keep",
+      "nodes": [
+        "fittings.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        0.5
+      ],
+      "bbox_min": [
+        -1.29,
+        0.1,
+        -0.133
+      ],
+      "bbox_max": [
+        1.09,
+        2.31,
+        0.95
+      ],
+      "label_anchor": [
+        -0.1,
+        1.205,
+        0.95
+      ],
+      "center": [
+        -0.1,
+        1.205,
+        0.4085
+      ],
+      "info_ref": "sg_fittings"
+    },
+    {
+      "id": "skid",
+      "name": "Base Skid & Cradles",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "skid.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.5,
+        0.0,
+        -0.56
+      ],
+      "bbox_max": [
+        1.7,
+        0.3,
+        0.56
+      ],
+      "label_anchor": [
+        0.1,
+        0.15,
+        0.56
+      ],
+      "center": [
+        0.1,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "sg_shell"
+    },
+    {
+      "id": "bubbles",
+      "name": "Steam Bubbles from the Heating Surfaces",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "bubbles0",
+        "bubbles1",
+        "bubbles2",
+        "bubbles3",
+        "bubbles4",
+        "bubbles5",
+        "bubbles6",
+        "bubbles7",
+        "bubbles8",
+        "bubbles9",
+        "bubbles10",
+        "bubbles11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "sg_shell": {
+      "function": "Pressure shell containing water and steam.",
+      "construction": "Rolled shell with stayed end plates.",
+      "material": "Boiler-quality steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Corrosion, scale"
+      ],
+      "inspection": [
+        "Statutory inspection"
+      ]
+    },
+    "sg_furnace": {
+      "function": "First pass: combustion chamber.",
+      "construction": "Corrugated furnace tube.",
+      "material": "Boiler steel.",
+      "operating_conditions": "Highest heat flux.",
+      "failure_modes": [
+        "Overheating from scale"
+      ],
+      "inspection": [
+        "Internal inspection"
+      ]
+    },
+    "sg_reversal": {
+      "function": "Turns gases from the furnace into the 2nd pass.",
+      "construction": "Refractory-lined rear reversal chamber (dry-back); wet-back designs use a water-cooled chamber instead.",
+      "material": "Steel/refractory.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Refractory cracking, gas leakage"
+      ],
+      "inspection": [
+        "Inspect refractory"
+      ]
+    },
+    "sg_tubes": {
+      "function": "2nd and 3rd pass heat transfer.",
+      "construction": "Smoke tubes.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Soot fouling, leaks"
+      ],
+      "inspection": [
+        "Brush, inspect"
+      ]
+    },
+    "sg_smokebox": {
+      "function": "Gas turning boxes and stack.",
+      "construction": "Smoke boxes, stack.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sg_burner": {
+      "function": "Mixes and burns fuel with air.",
+      "construction": "Forced-draught burner with fan and gas train.",
+      "material": "—",
+      "operating_conditions": "Flame safeguard & purge sequence.",
+      "failure_modes": [
+        "Flame failure"
+      ],
+      "inspection": [
+        "Combustion analysis"
+      ]
+    },
+    "sg_water": {
+      "function": "Boiler water (level animated).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sg_fittings": {
+      "function": "Safety and control fittings.",
+      "construction": "Valves, gauges, level controls.",
+      "material": "—",
+      "operating_conditions": "Low-water cut-out tested regularly.",
+      "failure_modes": [
+        "Stuck safety valve"
+      ],
+      "inspection": [
+        "Test"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

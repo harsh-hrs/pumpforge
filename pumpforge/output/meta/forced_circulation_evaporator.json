@@ -1,0 +1,703 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "forced_circulation_evaporator",
+  "title": "Forced Circulation Evaporator (Heater + Flash Separator + Circulation Pump)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 159,
+    "phase": 8,
+    "eq_id": "EQ-237",
+    "subcategory": "Evaporation",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "forced_circulation_evaporator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "forced_circulation_evaporator_temperature.glb",
+      "title": "Hydrostatic head suppresses boiling in the tubes",
+      "description": "The circulation pump drives liquid through the tubes at high velocity (typically ~ 1.5–3 m/s). The static head above the tubes keeps the liquid under enough pressure that it is only heated (a few °C) without boiling; it flashes when it reaches the separator. Suppressing boiling at the wall prevents scaling and crystal deposition — ideal for crystallising, scaling or viscous liquids.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "circulation",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          0.3,
+          0.35,
+          -0.0
+        ],
+        [
+          0.0,
+          0.35,
+          -0.0
+        ],
+        [
+          0.0,
+          2.3,
+          -0.0
+        ],
+        [
+          0.0,
+          2.55,
+          -0.0
+        ],
+        [
+          0.5,
+          2.55,
+          -0.0
+        ],
+        [
+          0.7,
+          2.15,
+          -0.0
+        ],
+        [
+          1.2,
+          2.1,
+          -0.0
+        ],
+        [
+          1.2,
+          1.45,
+          -0.0
+        ],
+        [
+          1.2,
+          0.35,
+          -0.0
+        ],
+        [
+          0.45,
+          0.35,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "vapour",
+      "kind": "steam",
+      "radius": 0.03,
+      "points": [
+        [
+          1.2,
+          2.4,
+          -0.1
+        ],
+        [
+          1.2,
+          3.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "heating_steam",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          1.9,
+          0.58
+        ],
+        [
+          0.0,
+          1.85,
+          0.15
+        ],
+        [
+          0.0,
+          0.8,
+          0.15
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 16404,
+    "parts": 11
+  },
+  "summary": "A forced circulation evaporator pumps liquid at high velocity through a heat exchanger and then into a separator. Static head keeps the liquid from boiling in the tubes; it flashes in the separator. This prevents scaling and suits crystallising or viscous liquids.",
+  "classification": {
+    "family": "Evaporator",
+    "type": "Forced circulation (suppressed boiling)"
+  },
+  "model_configuration": {
+    "animation": "Liquid circulates round the loop"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Shells under pressure/vacuum.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "TEMA",
+      "title": "Tubular exchanger standards",
+      "relevance": "Calandria/heater design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Perry's Handbook — Evaporators"
+  ],
+  "parts": [
+    {
+      "id": "heater",
+      "name": "Heat Exchanger Shell (steam side)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "heater__back",
+        "heater__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.31,
+        0.67,
+        -0.31
+      ],
+      "bbox_max": [
+        0.31,
+        2.13,
+        0.31
+      ],
+      "label_anchor": [
+        0.0,
+        1.4,
+        0.31
+      ],
+      "center": [
+        0.0,
+        1.4,
+        -0.0
+      ],
+      "info_ref": "fc_heater"
+    },
+    {
+      "id": "heater_tubes",
+      "name": "Heater Tubes (liquid pumped through at high velocity — no boiling in the tubes)",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "heater_tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.21958,
+        0.67,
+        -0.21958
+      ],
+      "bbox_max": [
+        0.21958,
+        2.13,
+        0.21958
+      ],
+      "label_anchor": [
+        0.0,
+        1.4,
+        0.21958
+      ],
+      "center": [
+        0.0,
+        1.4,
+        -0.0
+      ],
+      "info_ref": "fc_heater"
+    },
+    {
+      "id": "heads",
+      "name": "Inlet & Outlet Heads",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "heads__back",
+        "heads__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.28,
+        0.27,
+        -0.28
+      ],
+      "bbox_max": [
+        0.28,
+        2.53,
+        0.28
+      ],
+      "label_anchor": [
+        0.0,
+        1.4,
+        0.28
+      ],
+      "center": [
+        0.0,
+        1.4,
+        -0.0
+      ],
+      "info_ref": "fc_heater"
+    },
+    {
+      "id": "separator",
+      "name": "Flash Separator (liquid boils here as pressure falls)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "separator__back",
+        "separator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        -0.5
+      ],
+      "bbox_min": [
+        0.7,
+        1.4,
+        -0.5
+      ],
+      "bbox_max": [
+        1.7,
+        3.05,
+        0.5
+      ],
+      "label_anchor": [
+        1.2,
+        2.225,
+        0.5
+      ],
+      "center": [
+        1.2,
+        2.225,
+        -0.0
+      ],
+      "info_ref": "fc_separator"
+    },
+    {
+      "id": "separator_liquid",
+      "name": "Circulating Liquid in the Separator",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "sl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        0.712,
+        1.412,
+        -0.488
+      ],
+      "bbox_max": [
+        1.688,
+        2.25,
+        -0.0
+      ],
+      "label_anchor": [
+        1.2,
+        1.831,
+        -0.0
+      ],
+      "center": [
+        1.2,
+        1.831,
+        -0.244
+      ],
+      "info_ref": "fc_separator"
+    },
+    {
+      "id": "circulation_loop",
+      "name": "Circulation Loop: Heater Outlet → Separator → Downcomer → Pump",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "circulation_loop.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.114,
+        0.27,
+        -0.228
+      ],
+      "bbox_max": [
+        1.55,
+        3.3,
+        0.53
+      ],
+      "label_anchor": [
+        0.718,
+        1.785,
+        0.53
+      ],
+      "center": [
+        0.718,
+        1.785,
+        0.151
+      ],
+      "info_ref": "fc_loop"
+    },
+    {
+      "id": "circulation_pump",
+      "name": "Axial/Mixed-Flow Circulation Pump & Motor (high flow, low head)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "cp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.5
+      ],
+      "bbox_min": [
+        0.1,
+        0.15,
+        -1.0
+      ],
+      "bbox_max": [
+        0.5,
+        0.55,
+        0.08
+      ],
+      "label_anchor": [
+        0.3,
+        0.35,
+        0.08
+      ],
+      "center": [
+        0.3,
+        0.35,
+        -0.46
+      ],
+      "info_ref": "fc_pump"
+    },
+    {
+      "id": "pump_impeller",
+      "name": "Pump Impeller",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "cpi"
+      ],
+      "pivot": [
+        0.3,
+        0.35,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        0.14,
+        0.19,
+        -0.006
+      ],
+      "bbox_max": [
+        0.46,
+        0.51,
+        0.006
+      ],
+      "label_anchor": [
+        0.3,
+        0.35,
+        0.006
+      ],
+      "center": [
+        0.3,
+        0.35,
+        -0.0
+      ],
+      "info_ref": "fc_pump"
+    },
+    {
+      "id": "structure",
+      "name": "Support Steel",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "structure.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.76,
+        0.0,
+        -0.44
+      ],
+      "bbox_max": [
+        1.64,
+        1.9,
+        0.44
+      ],
+      "label_anchor": [
+        1.2,
+        0.95,
+        0.44
+      ],
+      "center": [
+        1.2,
+        0.95,
+        -0.0
+      ],
+      "info_ref": "fc_separator"
+    },
+    {
+      "id": "circulating",
+      "name": "Liquid Circulating round the Loop",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "circulating_0",
+        "circulating_1",
+        "circulating_2",
+        "circulating_3",
+        "circulating_4",
+        "circulating_5",
+        "circulating_6",
+        "circulating_7",
+        "circulating_8",
+        "circulating_9",
+        "circulating_10",
+        "circulating_11",
+        "circulating_12",
+        "circulating_13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        0.325,
+        -0.075
+      ],
+      "bbox_max": [
+        1.225,
+        2.575,
+        -0.025
+      ],
+      "label_anchor": [
+        0.6,
+        1.45,
+        -0.025
+      ],
+      "center": [
+        0.6,
+        1.45,
+        -0.05
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "flash_vapour",
+      "name": "Vapour Flashing in the Separator",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "flash_vapour0",
+        "flash_vapour1",
+        "flash_vapour2",
+        "flash_vapour3",
+        "flash_vapour4",
+        "flash_vapour5",
+        "flash_vapour6",
+        "flash_vapour7",
+        "flash_vapour8",
+        "flash_vapour9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fc_heater": {
+      "function": "Heats the circulating liquid.",
+      "construction": "Vertical shell & tube heater.",
+      "material": "Stainless/titanium.",
+      "operating_conditions": "High tube velocity.",
+      "failure_modes": [
+        "Scaling, erosion"
+      ],
+      "inspection": [
+        "ΔP, U trend"
+      ]
+    },
+    "fc_separator": {
+      "function": "Liquid flashes and vapour separates.",
+      "construction": "Vessel.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fc_loop": {
+      "function": "Circulation piping.",
+      "construction": "Large-bore pipes.",
+      "material": "Stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fc_pump": {
+      "function": "Circulates large flow at low head.",
+      "construction": "Axial/mixed-flow pump.",
+      "material": "Duplex/stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear from crystals, cavitation"
+      ],
+      "inspection": [
+        "Vibration"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

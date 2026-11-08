@@ -1,0 +1,852 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "digestion_autoclave",
+  "title": "Digestion Autoclave Train (Agitated Pressure Vessels in Series, Live-Steam Injection)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {},
+  "overlays": {
+    "flow": {
+      "file": "digestion_autoclave_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "digestion_autoclave_pressure.glb",
+      "title": "High temperature and pressure dissolve the alumina",
+      "description": "In digestion hot caustic liquor dissolves the alumina minerals: Al(OH)₃ + NaOH → NaAl(OH)₄. Gibbsitic bauxite digests at about 140–150 °C; boehmitic/diaspore bauxites need ~ 230–270 °C, which means pressures up to roughly 30–35 bar. Vessels in series give the residence time needed while keeping the slurry hot and well mixed.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "slurry",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          -2.25,
+          0.9,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.0,
+          -0.05
+        ],
+        [
+          -1.4,
+          2.2,
+          -0.05
+        ],
+        [
+          -0.75,
+          2.2,
+          -0.0
+        ],
+        [
+          -0.75,
+          0.9,
+          -0.0
+        ],
+        [
+          0.0,
+          1.0,
+          -0.05
+        ],
+        [
+          0.0,
+          2.2,
+          -0.05
+        ],
+        [
+          0.65,
+          2.2,
+          -0.0
+        ],
+        [
+          0.65,
+          0.9,
+          -0.0
+        ],
+        [
+          1.4,
+          2.2,
+          -0.05
+        ],
+        [
+          2.25,
+          2.2,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "live_steam",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          -2.1,
+          3.3,
+          0.6
+        ],
+        [
+          -1.65,
+          3.3,
+          0.6
+        ],
+        [
+          -1.65,
+          1.0,
+          0.6
+        ],
+        [
+          -1.65,
+          1.0,
+          0.4
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 24568,
+    "parts": 15
+  },
+  "summary": "Digestion autoclaves are agitated pressure vessels in series where hot caustic liquor dissolves the alumina from bauxite. Live steam heats the slurry to digestion temperature, and the vessels give the residence time needed.",
+  "classification": {
+    "family": "Digestion",
+    "type": "Agitated autoclaves in series (high-temperature digestion)"
+  },
+  "model_configuration": {
+    "vessels": 3,
+    "animation": "Agitators turn; steam injected"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "ac1_tank",
+      "name": "Autoclave 1: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "ac1_tank__back",
+        "ac1_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -1.85,
+        0.6,
+        -0.45
+      ],
+      "bbox_max": [
+        -0.95,
+        2.625,
+        0.45
+      ],
+      "label_anchor": [
+        -1.4,
+        1.6125,
+        0.45
+      ],
+      "center": [
+        -1.4,
+        1.6125,
+        -0.0
+      ],
+      "info_ref": "da_tank"
+    },
+    {
+      "id": "ac1_slurry",
+      "name": "Autoclave 1: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ac1_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -1.845,
+        0.63,
+        -0.445
+      ],
+      "bbox_max": [
+        -0.955,
+        2.13,
+        -0.0
+      ],
+      "label_anchor": [
+        -1.4,
+        1.38,
+        -0.0
+      ],
+      "center": [
+        -1.4,
+        1.38,
+        -0.2225
+      ],
+      "info_ref": "da_slurry"
+    },
+    {
+      "id": "ac1_agitator",
+      "name": "Autoclave 1: Agitator Shaft & Impellers",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "ac1_agitator.001"
+      ],
+      "pivot": [
+        -1.4,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -1.6025,
+        1.09,
+        -0.2025
+      ],
+      "bbox_max": [
+        -1.1975,
+        2.875,
+        0.2025
+      ],
+      "label_anchor": [
+        -1.4,
+        1.9825,
+        0.2025
+      ],
+      "center": [
+        -1.4,
+        1.9825,
+        -0.0
+      ],
+      "info_ref": "da_agitator"
+    },
+    {
+      "id": "ac1_drive",
+      "name": "Autoclave 1: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "ac1_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.6,
+        2.575,
+        -0.2
+      ],
+      "bbox_max": [
+        -1.2,
+        3.375,
+        0.2
+      ],
+      "label_anchor": [
+        -1.4,
+        2.975,
+        0.2
+      ],
+      "center": [
+        -1.4,
+        2.975,
+        -0.0
+      ],
+      "info_ref": "da_drive"
+    },
+    {
+      "id": "ac2_tank",
+      "name": "Autoclave 2: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "ac2_tank__back",
+        "ac2_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        -0.45,
+        0.6,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        2.625,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.6125,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.6125,
+        -0.0
+      ],
+      "info_ref": "da_tank"
+    },
+    {
+      "id": "ac2_slurry",
+      "name": "Autoclave 2: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ac2_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.445,
+        0.63,
+        -0.445
+      ],
+      "bbox_max": [
+        0.445,
+        2.13,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.38,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.38,
+        -0.2225
+      ],
+      "info_ref": "da_slurry"
+    },
+    {
+      "id": "ac2_agitator",
+      "name": "Autoclave 2: Agitator Shaft & Impellers",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "ac2_agitator.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.2025,
+        1.09,
+        -0.2025
+      ],
+      "bbox_max": [
+        0.2025,
+        2.875,
+        0.2025
+      ],
+      "label_anchor": [
+        0.0,
+        1.9825,
+        0.2025
+      ],
+      "center": [
+        0.0,
+        1.9825,
+        -0.0
+      ],
+      "info_ref": "da_agitator"
+    },
+    {
+      "id": "ac2_drive",
+      "name": "Autoclave 2: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "ac2_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2,
+        2.575,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        3.375,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        2.975,
+        0.2
+      ],
+      "center": [
+        0.0,
+        2.975,
+        -0.0
+      ],
+      "info_ref": "da_drive"
+    },
+    {
+      "id": "ac3_tank",
+      "name": "Autoclave 3: Tank, Baffles",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "ac3_tank__back",
+        "ac3_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.7
+      ],
+      "bbox_min": [
+        0.95,
+        0.6,
+        -0.45
+      ],
+      "bbox_max": [
+        1.85,
+        2.625,
+        0.45
+      ],
+      "label_anchor": [
+        1.4,
+        1.6125,
+        0.45
+      ],
+      "center": [
+        1.4,
+        1.6125,
+        -0.0
+      ],
+      "info_ref": "da_tank"
+    },
+    {
+      "id": "ac3_slurry",
+      "name": "Autoclave 3: Slurry / Liquor",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ac3_lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.955,
+        0.63,
+        -0.445
+      ],
+      "bbox_max": [
+        1.845,
+        2.13,
+        -0.0
+      ],
+      "label_anchor": [
+        1.4,
+        1.38,
+        -0.0
+      ],
+      "center": [
+        1.4,
+        1.38,
+        -0.2225
+      ],
+      "info_ref": "da_slurry"
+    },
+    {
+      "id": "ac3_agitator",
+      "name": "Autoclave 3: Agitator Shaft & Impellers",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "ac3_agitator.001"
+      ],
+      "pivot": [
+        1.4,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.0,
+        0.2
+      ],
+      "bbox_min": [
+        1.1975,
+        1.09,
+        -0.2025
+      ],
+      "bbox_max": [
+        1.6025,
+        2.875,
+        0.2025
+      ],
+      "label_anchor": [
+        1.4,
+        1.9825,
+        0.2025
+      ],
+      "center": [
+        1.4,
+        1.9825,
+        -0.0
+      ],
+      "info_ref": "da_agitator"
+    },
+    {
+      "id": "ac3_drive",
+      "name": "Autoclave 3: Agitator Drive (motor + gearbox, mounting nozzle)",
+      "group": "drive",
+      "section_role": "keep",
+      "nodes": [
+        "ac3_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "bbox_min": [
+        1.2,
+        2.575,
+        -0.2
+      ],
+      "bbox_max": [
+        1.6,
+        3.375,
+        0.2
+      ],
+      "label_anchor": [
+        1.4,
+        2.975,
+        0.2
+      ],
+      "center": [
+        1.4,
+        2.975,
+        -0.0
+      ],
+      "info_ref": "da_drive"
+    },
+    {
+      "id": "transfer_steam",
+      "name": "Slurry Transfer Lines (overflow → bottom of next), Live-Steam Header & Injectors, Gauges",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "transfer_steam.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.15,
+        0.805,
+        -0.315
+      ],
+      "bbox_max": [
+        2.15,
+        3.35,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        2.0775,
+        0.65
+      ],
+      "center": [
+        0.0,
+        2.0775,
+        0.1675
+      ],
+      "info_ref": "da_piping"
+    },
+    {
+      "id": "supports",
+      "name": "Support Legs",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.7812,
+        0.0,
+        -0.3812
+      ],
+      "bbox_max": [
+        1.7812,
+        0.6,
+        0.3812
+      ],
+      "label_anchor": [
+        0.0,
+        0.3,
+        0.3812
+      ],
+      "center": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "da_piping"
+    },
+    {
+      "id": "steam_bubbles",
+      "name": "Live Steam Condensing in the Slurry",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "steam_bubbles0",
+        "steam_bubbles1",
+        "steam_bubbles2",
+        "steam_bubbles3",
+        "steam_bubbles4",
+        "steam_bubbles5",
+        "steam_bubbles6",
+        "steam_bubbles7",
+        "steam_bubbles8",
+        "steam_bubbles9",
+        "steam_bubbles10",
+        "steam_bubbles11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "da_tank": {
+      "function": "Holds the slurry.",
+      "construction": "Tank with baffles/draft tube.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "da_slurry": {
+      "function": "Process slurry/liquor.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "da_agitator": {
+      "function": "Mixes and suspends solids.",
+      "construction": "Shaft and impellers.",
+      "material": "Carbon steel (often rubber-lined).",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Blade wear, scale"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "da_drive": {
+      "function": "Drives the agitator.",
+      "construction": "Motor and gearbox.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "da_piping": {
+      "function": "Transfer and steam lines.",
+      "construction": "Pipes, steam injectors, gauges.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Erosion, scaling"
+      ],
+      "inspection": [
+        "Thickness"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

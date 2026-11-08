@@ -1,0 +1,610 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "shuttle_conveyor",
+ "no": 136,
+ "title": "Shuttle Conveyor",
+ "model_title": "Reversible Shuttle Conveyor on a Travelling Carriage",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A shuttle conveyor is a short, reversible belt conveyor mounted on a travelling carriage. Material falls onto it from a fixed feed chute. By running the belt one way or the other and moving the carriage, it can discharge from either end along a row of bins, so one feed point can fill many bins on both sides.",
+   "applications": [
+    "Bin and silo filling where a tripper would be too long",
+    "Coal and coke bunker distribution",
+    "Grain and fertiliser storage"
+   ],
+   "key_points": [
+    "Reversible belt + travelling carriage",
+    "Discharges from either end",
+    "Shorter than a tripper system",
+    "Interlocks prevent discharge with no bin below"
+   ],
+   "classification": {
+    "family": "Conveyor",
+    "type": "Reversible shuttle conveyor"
+   },
+   "hi_family": "material_handling",
+   "summary": "A shuttle conveyor is a short reversible belt conveyor on a travelling carriage. By running the belt in either direction and moving the carriage, it distributes material from a fixed feed point into many bins on both sides."
+  },
+  "model_3d": {
+   "asset": "glb/shuttle_conveyor.glb",
+   "metadata": "meta/shuttle_conveyor.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3804,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material falls from the fixed feed chute onto the belt.",
+    "The belt runs towards the end above the bin being filled.",
+    "The carriage travels so the discharging end moves along the bins."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material falls from the fixed feed chute onto the belt.",
+     "part": "feed_chute",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The belt runs towards the end above the bin being filled.",
+     "part": "scbelt",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The carriage travels so the discharging end moves along the bins.",
+     "part": "carriage",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The belt reverses to fill the bins on the other side.",
+     "part": "scpulley_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Coverage length ≈ carriage travel + belt length; rate equals the feed rate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "shuttle_conveyor_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/shuttle_conveyor.json#components",
+   "key_components": "Reversible belt on travelling carriage, rails",
+   "parts": [
+    {
+     "id": "scbelt",
+     "name": "Reversible Shuttle Belt",
+     "info_ref": "hk_belt",
+     "function": "Belt.",
+     "material": "Rubber."
+    },
+    {
+     "id": "scpulley_1",
+     "name": "Tail Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "scpulley_2",
+     "name": "Head (Drive) Pulley",
+     "info_ref": "hk_pulley",
+     "function": "Pulleys.",
+     "material": "Steel."
+    },
+    {
+     "id": "scframe",
+     "name": "Reversible Shuttle Belt Frame & Idlers (troughing and return)",
+     "info_ref": "hk_idlers",
+     "function": "Idlers.",
+     "material": "Steel."
+    },
+    {
+     "id": "carriage",
+     "name": "Travelling Carriage with Wheels & Travel Drive",
+     "info_ref": "shc_carriage",
+     "function": "Carries the conveyor along the rails.",
+     "material": "Steel."
+    },
+    {
+     "id": "rails_bins",
+     "name": "Rails & Bins being Filled",
+     "info_ref": "shc_bins",
+     "function": "Rails and bins.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_chute",
+     "name": "Fixed Feed Chute (centre)",
+     "info_ref": "shc_feed",
+     "function": "Fixed feed point.",
+     "material": "Steel."
+    },
+    {
+     "id": "coal",
+     "name": "Material Lumps: Chute → Belt → End Discharge into Bins",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Belt ~ 0.5 – 1.6 m wide, 3 – 30 m long",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 3 – 75",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Belt ~ 1 – 3 m/s",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 50 – 2000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size carriage travel and belt length to cover the bin row; use reversible belt cleaners and trainers."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CEMA — Belt Conveyors for Bulk Materials"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support the conveyor stringers and drive frames on steelwork or plinths designed for belt tension, material load and drive torque."
+   ],
+   "alignment": [
+    "Survey the structure so all pulleys and idlers are square to the centre line; train the belt empty, then loaded."
+   ],
+   "piping": [
+    "Chutes designed for the material trajectory to centre-load the belt; skirts and dust seals at loading points; belt cleaners and plough at the discharge."
+   ],
+   "commissioning": [
+    "Check pull-wire emergency stops, belt-drift and speed switches; run empty and loaded; record take-up position and motor current."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check belt tracking in both directions.",
+     "part": "scbelt",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check carriage wheels and rails.",
+     "part": "carriage",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace belt, pulleys and bearings.",
+     "part": "scpulley_2"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Mistracking after reversal",
+     "category": "performance",
+     "symptoms": [
+      "Belt runs off"
+     ],
+     "causes": [
+      "Directional training idlers, misalignment"
+     ],
+     "remedies": [
+      "Use reversible trainers; align"
+     ],
+     "part": "scbelt"
+    },
+    {
+     "problem": "Overfill of a bin",
+     "category": "performance",
+     "symptoms": [
+      "Spillage"
+     ],
+     "causes": [
+      "Failed level sensor/interlock"
+     ],
+     "remedies": [
+      "Test level probes; interlocks"
+     ],
+     "part": "rails_bins"
+    }
+   ],
+   "safety": [
+    "Travel limit switches and end stops; level interlocks; guarding."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Shuttle Conveyor — Introduction",
+    "type": "in_app_tour",
+    "model": "shuttle_conveyor.glb",
+    "duration_s": 54.1,
+    "script": [
+     {
+      "narration": "This module introduces the Shuttle Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A shuttle conveyor is a short, reversible belt conveyor mounted on a travelling carriage.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material falls onto it from a fixed feed chute.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "By running the belt one way or the other and moving the carriage, it can discharge from either end along a row of bins, so one feed point can fill many bins on both sides.",
+      "duration_s": 14.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include bin and silo filling where a tripper would be too long; coal and coke bunker distribution; grain and fertiliser storage.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Shuttle Conveyor — Operation",
+    "type": "in_app_tour",
+    "model": "shuttle_conveyor.glb",
+    "duration_s": 26.2,
+    "script": [
+     {
+      "narration": "How the Shuttle Conveyor works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material falls from the fixed feed chute onto the belt.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "feed_chute",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The belt runs towards the end above the bin being filled.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "scbelt",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The carriage travels so the discharging end moves along the bins.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "carriage",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The belt reverses to fill the bins on the other side.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "scpulley_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Shuttle Conveyor — Maintenance",
+    "type": "in_app_tour",
+    "model": "shuttle_conveyor.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Shuttle Conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check belt tracking in both directions.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "scbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check carriage wheels and rails.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "carriage",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace belt, pulleys and bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "scpulley_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for mistracking after reversal: belt runs off. Common cause: directional training idlers, misalignment.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "scbelt",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overfill of a bin: spillage. Common cause: failed level sensor/interlock.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rails_bins",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What allows a shuttle conveyor to fill bins on both sides?",
+     "options": [
+      "Reversible belt and travelling carriage",
+      "Two motors on the bins",
+      "A crusher",
+      "Gravity only"
+     ],
+     "answer": 0,
+     "explanation": "Reversing + travel.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does material enter?",
+     "options": [
+      "From a fixed central feed chute",
+      "From the bins",
+      "From the rails",
+      "From the motor"
+     ],
+     "answer": 0,
+     "explanation": "Fixed feed.",
+     "level": "basic"
+    },
+    {
+     "question": "Compared with a tripper, a shuttle conveyor…",
+     "options": [
+      "Is shorter and discharges from its ends",
+      "Uses an S-loop",
+      "Cannot move",
+      "Has no belt"
+     ],
+     "answer": 0,
+     "explanation": "End discharge.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Belt.\"",
+     "options": [
+      "Travelling Carriage with Wheels & Travel Drive",
+      "Tail Pulley",
+      "Reversible Shuttle Belt Frame & Idlers (troughing and return)",
+      "Reversible Shuttle Belt"
+     ],
+     "answer": 3,
+     "explanation": "Reversible Shuttle Belt: Belt.",
+     "level": "basic",
+     "part": "scbelt",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Pulleys.\"",
+     "options": [
+      "Tail Pulley",
+      "Fixed Feed Chute (centre)",
+      "Material Lumps: Chute → Belt → End Discharge into Bins",
+      "Reversible Shuttle Belt"
+     ],
+     "answer": 0,
+     "explanation": "Tail Pulley: Pulleys.",
+     "level": "basic",
+     "part": "scpulley_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Idlers.\"",
+     "options": [
+      "Reversible Shuttle Belt Frame & Idlers (troughing and return)",
+      "Material Lumps: Chute → Belt → End Discharge into Bins",
+      "Reversible Shuttle Belt",
+      "Tail Pulley"
+     ],
+     "answer": 0,
+     "explanation": "Reversible Shuttle Belt Frame & Idlers (troughing and return): Idlers.",
+     "level": "basic",
+     "part": "scframe",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

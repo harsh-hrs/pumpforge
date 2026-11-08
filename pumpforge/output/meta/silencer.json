@@ -1,0 +1,412 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "silencer",
+  "title": "Combination (Reactive + Absorptive) Silencer for Gas/Steam Vent or Engine Exhaust",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 112,
+    "phase": 6,
+    "eq_id": "EQ-190",
+    "subcategory": "Noise Control",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "silencer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "noise": {
+      "file": "silencer_noise.glb",
+      "title": "Sound level through the silencer",
+      "description": "Large rings = loud. Chambers and baffles reflect low-frequency sound back (reactive); the packing around the perforated tube absorbs high frequencies (absorptive). Insertion loss is typically 20–40 dB(A).",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "Inlet: loud pulsating gas",
+          "anchor": [
+            -1.4,
+            1.0,
+            -0.0
+          ]
+        },
+        {
+          "text": "Outlet: much quieter",
+          "anchor": [
+            1.4,
+            0.85,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "gas",
+      "kind": "exhaust",
+      "radius": 0.012,
+      "points": [
+        [
+          -1.5,
+          0.55,
+          -0.0
+        ],
+        [
+          -0.4,
+          0.55,
+          0.13
+        ],
+        [
+          -0.35,
+          0.55,
+          0.13
+        ],
+        [
+          -0.3,
+          0.55,
+          -0.0
+        ],
+        [
+          0.3,
+          0.55,
+          -0.0
+        ],
+        [
+          0.35,
+          0.55,
+          -0.13
+        ],
+        [
+          0.4,
+          0.55,
+          -0.13
+        ],
+        [
+          1.5,
+          0.55,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 4156,
+    "parts": 5
+  },
+  "summary": "A silencer reduces noise from gas flow (engine exhausts, blow-offs, vents). Reactive chambers and baffles reflect low-frequency sound back toward the source; absorptive packing behind a perforated tube converts high-frequency sound into heat. Combined designs cover a wide frequency range with low pressure drop.",
+  "classification": {
+    "family": "Noise control",
+    "type": "Combination reactive/absorptive silencer"
+  },
+  "model_configuration": {
+    "chambers": 3,
+    "packing": "Mineral wool"
+  },
+  "standards": [
+    {
+      "id": "ISO 7235",
+      "title": "Acoustics — Laboratory measurement of ducted silencers",
+      "relevance": "Insertion loss.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 11820",
+      "title": "Acoustics — Measurements on silencers in situ",
+      "relevance": "Field tests.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Beranek & Vér, Noise and Vibration Control Engineering"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Silencer Shell with Inlet & Outlet Cones",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.15039,
+        0.25,
+        -0.3
+      ],
+      "bbox_max": [
+        1.15039,
+        0.85,
+        0.3
+      ],
+      "label_anchor": [
+        0.0,
+        0.55,
+        0.3
+      ],
+      "center": [
+        0.0,
+        0.55,
+        -0.0
+      ],
+      "info_ref": "si_shell"
+    },
+    {
+      "id": "baffles",
+      "name": "Reactive Baffles (expansion chambers reflect low-frequency sound)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "baffles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.354,
+        0.256,
+        -0.294
+      ],
+      "bbox_max": [
+        0.354,
+        0.844,
+        0.294
+      ],
+      "label_anchor": [
+        0.0,
+        0.55,
+        0.294
+      ],
+      "center": [
+        0.0,
+        0.55,
+        -0.0
+      ],
+      "info_ref": "si_baffles"
+    },
+    {
+      "id": "absorptive_section",
+      "name": "Perforated Tube & Absorptive Packing (mineral wool) — high-frequency absorption",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "absorptive_section.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.35,
+        0.26,
+        -0.29
+      ],
+      "bbox_max": [
+        0.35,
+        0.84,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.55,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.55,
+        -0.145
+      ],
+      "info_ref": "si_absorptive"
+    },
+    {
+      "id": "connections",
+      "name": "Inlet & Outlet Flanges",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "connections.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.5,
+        0.398,
+        -0.152
+      ],
+      "bbox_max": [
+        1.5,
+        0.702,
+        0.152
+      ],
+      "label_anchor": [
+        0.0,
+        0.55,
+        0.152
+      ],
+      "center": [
+        0.0,
+        0.55,
+        -0.0
+      ],
+      "info_ref": "si_connections"
+    },
+    {
+      "id": "supports",
+      "name": "Supports",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "sd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.66,
+        0.0,
+        -0.3
+      ],
+      "bbox_max": [
+        0.66,
+        0.397,
+        0.3
+      ],
+      "label_anchor": [
+        0.0,
+        0.1985,
+        0.3
+      ],
+      "center": [
+        0.0,
+        0.1985,
+        -0.0
+      ],
+      "info_ref": "si_supports"
+    }
+  ],
+  "components": {
+    "si_shell": {
+      "function": "Pressure shell.",
+      "construction": "Welded shell with cones.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "si_baffles": {
+      "function": "Create chambers that reflect sound.",
+      "construction": "Baffle plates.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "si_absorptive": {
+      "function": "Absorb high-frequency noise.",
+      "construction": "Perforated tube with packing.",
+      "material": "Steel, mineral wool.",
+      "operating_conditions": "Packing must be retained (cloth).",
+      "failure_modes": [
+        "Packing loss"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "si_connections": {
+      "function": "Flanges.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "si_supports": {
+      "function": "Supports.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

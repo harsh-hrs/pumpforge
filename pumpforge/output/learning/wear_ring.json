@@ -1,0 +1,614 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "wear_ring",
+ "no": 254,
+ "title": "Wear Ring",
+ "model_title": "Pump Wear Rings — Impeller (Rotating) & Casing (Stationary) with Running Clearance",
+ "category": "14 · Mechanical Components & Maintenance",
+ "phase": 12,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "Wear rings are renewable rings — one on the impeller eye, one in the casing — forming a small running clearance between the high-pressure discharge side and the low-pressure eye. They limit internal recirculation and are the sacrificial parts that wear instead of the impeller and casing.",
+   "applications": [
+    "Closed-impeller centrifugal pumps",
+    "Multistage pumps (also interstage bushings)"
+   ],
+   "key_points": [
+    "Clearance controls internal leakage",
+    "Replace at ≈ 2× new clearance",
+    "Dissimilar, galling-resistant materials",
+    "API 610 sets minimum clearances"
+   ],
+   "classification": {
+    "family": "Pump components",
+    "type": "Impeller & casing wear rings"
+   },
+   "hi_family": "mechanical_components",
+   "summary": "Wear rings are renewable rings on the impeller eye and in the casing that form a small running clearance between high- and low-pressure zones, limiting internal leakage."
+  },
+  "model_3d": {
+   "asset": "glb/wear_ring.glb",
+   "metadata": "meta/wear_ring.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 15340,
+   "parts": 5
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Discharge pressure acts in front of the shroud.",
+    "Leakage passes the narrow wear-ring clearance.",
+    "It re-enters the eye, wasting energy."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Discharge pressure acts in front of the shroud.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Leakage passes the narrow wear-ring clearance.",
+     "part": "casing_wear_ring",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "It re-enters the eye, wasting energy.",
+     "part": "impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rings wear instead of the impeller.",
+     "part": "impeller_wear_ring",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pump efficiency vs wear-ring clearance."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "wear_ring_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "wear_ring_pressure.glb",
+     "title": "Clearance separates high and low pressure",
+     "description": "The impeller discharge pressure acts in the gap between the front shroud and the casing; only the narrow wear-ring clearance separates it from the low-pressure eye. Leakage through the clearance is recirculated inside the pump, wasting energy: as rings wear and clearance doubles, efficiency can fall several points. Typical diametral clearance ≈ 0.25–0.5 mm for 50–150 mm rings (API 610 sets minimums by diameter and material). Replace rings when clearance reaches about twice the new value.",
+     "render": "normal",
+     "annotations": []
+    },
+    "wear": {
+     "file": "wear_ring_wear.glb",
+     "title": "Rubbing surfaces",
+     "description": "Wear rings are the sacrificial surfaces: dissimilar, galling-resistant materials and hardness differences are used.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/wear_ring.json#components",
+   "key_components": "Impeller wear ring, casing wear ring, running clearance, suction cover",
+   "parts": [
+    {
+     "id": "impeller",
+     "name": "Closed Impeller (turning)",
+     "info_ref": "wr_impeller",
+     "function": "Adds energy.",
+     "material": "Bronze/stainless."
+    },
+    {
+     "id": "impeller_wear_ring",
+     "name": "Impeller Wear Ring (shrunk on the eye neck, turning)",
+     "info_ref": "wr_rings",
+     "function": "Limit leakage.",
+     "material": "Dissimilar hard materials."
+    },
+    {
+     "id": "casing_wear_ring",
+     "name": "Casing Wear Ring (stationary; clearance exaggerated)",
+     "info_ref": "wr_rings",
+     "function": "Limit leakage.",
+     "material": "Dissimilar hard materials."
+    },
+    {
+     "id": "casing",
+     "name": "Suction Cover & Casing (section)",
+     "info_ref": "wr_casing",
+     "function": "Pressure boundary.",
+     "material": "Cast iron/steel."
+    },
+    {
+     "id": "recirculation",
+     "name": "Leakage from the high-pressure side back to the eye through the wear-ring clearance",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ring ≈ 50 – 600 mm diameter",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "As pump",
+     "unit": "rpm"
+    },
+    "load_capacity": {
+     "typical_range": "Pressure difference = stage head",
+     "unit": "—"
+    },
+    "operating_conditions": {
+     "typical_range": "Diametral clearance ≈ 0.25 – 0.5 mm (API 610 table)",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Clearance and materials per API 610 for temperature and service."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "part_number": null,
+    "datasheet": null,
+    "rated_point": {
+     "speed_rpm": null,
+     "load_or_torque": null,
+     "temperature": null,
+     "pressure": null
+    },
+    "status": "empty — fill from the component datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "API 610"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Component is installed in its machine: housing bores, shaft fits and shoulders to drawing tolerances; clean, burr-free surfaces."
+   ],
+   "alignment": [
+    "Concentricity and squareness checked with dial indicators (runout, face run-out) to maker limits."
+   ],
+   "piping": [
+    "Lubrication / flush / buffer connections clean and flushed before first run; correct orientation of ports."
+   ],
+   "commissioning": [
+    "Hand-turn first; run at low speed, check temperature, leakage and vibration; record baselines."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Trend pump performance (flow/head/power).",
+     "part": "impeller",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure clearance at overhaul.",
+     "part": "casing_wear_ring",
+     "interval": "at overhaul"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace rings when ≈ 2× new clearance.",
+     "part": "impeller_wear_ring"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Excess clearance",
+     "category": "performance",
+     "symptoms": [
+      "Lower head and efficiency"
+     ],
+     "causes": [
+      "Abrasive wear, erosion"
+     ],
+     "remedies": [
+      "Replace rings"
+     ],
+     "part": "casing_wear_ring"
+    },
+    {
+     "problem": "Galling / seizure",
+     "category": "performance",
+     "symptoms": [
+      "Pump locks, damage"
+     ],
+     "causes": [
+      "Same materials, tight clearance, dry run"
+     ],
+     "remedies": [
+      "Use dissimilar materials; correct clearance"
+     ],
+     "part": "impeller_wear_ring"
+    }
+   ],
+   "safety": [
+    "Seizure can shatter rings — follow minimum clearance rules."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Wear Ring — Introduction",
+    "type": "in_app_tour",
+    "model": "wear_ring.glb",
+    "duration_s": 46.1,
+    "script": [
+     {
+      "narration": "This module introduces the Wear Ring.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Wear rings are renewable rings — one on the impeller eye, one in the casing — forming a small running clearance between the high-pressure discharge side and the low-pressure eye.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "They limit internal recirculation and are the sacrificial parts that wear instead of the impeller and casing.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include closed-impeller centrifugal pumps; multistage pumps (also interstage bushings).",
+      "duration_s": 5.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Closed Impeller (turning), Suction Cover & Casing (section).",
+      "duration_s": 5.4,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Wear Ring — Operation",
+    "type": "in_app_tour",
+    "model": "wear_ring.glb",
+    "duration_s": 42.1,
+    "script": [
+     {
+      "narration": "How the Wear Ring works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Discharge pressure acts in front of the shroud.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Leakage passes the narrow wear-ring clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing_wear_ring",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "It re-enters the eye, wasting energy.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rings wear instead of the impeller.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_wear_ring",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The impeller discharge pressure acts in the gap between the front shroud and the casing; only the narrow wear-ring clearance separates it from the low-pressure eye.",
+      "duration_s": 11.7,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Wear rings are the sacrificial surfaces: dissimilar, galling-resistant materials and hardness differences are used.",
+      "duration_s": 6.2,
+      "action": {
+       "overlay": "wear",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Wear Ring — Maintenance",
+    "type": "in_app_tour",
+    "model": "wear_ring.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Wear Ring.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Trend pump performance (flow/head/power).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure clearance at overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing_wear_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace rings when ≈ 2× new clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "impeller_wear_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for excess clearance: lower head and efficiency. Common cause: abrasive wear, erosion.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "casing_wear_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for galling / seizure: pump locks, damage. Common cause: same materials, tight clearance, dry run.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "impeller_wear_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does the clearance separate?",
+     "options": [
+      "High-pressure discharge from low-pressure eye",
+      "Oil from water",
+      "Motor from pump",
+      "Air from gas"
+     ],
+     "answer": 0,
+     "explanation": "Pressure zones.",
+     "level": "basic"
+    },
+    {
+     "question": "When to replace?",
+     "options": [
+      "At about twice new clearance",
+      "Never",
+      "Every day",
+      "When painted"
+     ],
+     "answer": 0,
+     "explanation": "2×.",
+     "level": "basic"
+    },
+    {
+     "question": "Why dissimilar materials?",
+     "options": [
+      "Avoid galling",
+      "Colour",
+      "Weight",
+      "Cost only"
+     ],
+     "answer": 0,
+     "explanation": "Galling.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Adds energy.\"",
+     "options": [
+      "Closed Impeller (turning)",
+      "Impeller Wear Ring (shrunk on the eye neck, turning)",
+      "Leakage from the high-pressure side back to the eye through the wear-ring clearance",
+      "Casing Wear Ring (stationary; clearance exaggerated)"
+     ],
+     "answer": 0,
+     "explanation": "Closed Impeller (turning): Adds energy.",
+     "level": "basic",
+     "part": "impeller",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Limit leakage.\"",
+     "options": [
+      "Leakage from the high-pressure side back to the eye through the wear-ring clearance",
+      "Closed Impeller (turning)",
+      "Suction Cover & Casing (section)",
+      "Impeller Wear Ring (shrunk on the eye neck, turning)"
+     ],
+     "answer": 3,
+     "explanation": "Impeller Wear Ring (shrunk on the eye neck, turning): Limit leakage.",
+     "level": "basic",
+     "part": "impeller_wear_ring",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Pressure boundary.\"",
+     "options": [
+      "Casing Wear Ring (stationary; clearance exaggerated)",
+      "Impeller Wear Ring (shrunk on the eye neck, turning)",
+      "Suction Cover & Casing (section)",
+      "Closed Impeller (turning)"
+     ],
+     "answer": 2,
+     "explanation": "Suction Cover & Casing (section): Pressure boundary.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

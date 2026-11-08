@@ -1,0 +1,645 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "chlorination_system",
+ "no": 222,
+ "title": "Chlorination System",
+ "model_title": "Gas Chlorination System (Vacuum-Operated Chlorinator, Ejector, Diffuser)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A gas chlorination system disinfects water with chlorine drawn from ton containers. The whole system works under vacuum: the ejector creates suction, the vacuum regulator on the container valve lets gas flow only while vacuum exists, the chlorinator meters the dose, and the ejector dissolves the gas into a water stream that is injected into a baffled contact tank.",
+   "applications": [
+    "Drinking-water disinfection and residual in distribution",
+    "Cooling-water biocide and wastewater effluent disinfection"
+   ],
+   "key_points": [
+    "Vacuum operation: a broken line draws in air, it does not leak gas",
+    "Dose by rotameter (kg/day)",
+    "Disinfection = C × t",
+    "Leak detection and scrubbers in the chlorine room"
+   ],
+   "classification": {
+    "family": "Disinfection",
+    "type": "Vacuum gas chlorination"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A gas chlorination system draws chlorine from ton containers under vacuum. The chlorinator meters the gas, an ejector dissolves it into a water stream, and the solution is injected into the contact tank to disinfect the water."
+  },
+  "model_3d": {
+   "asset": "glb/chlorination_system.glb",
+   "metadata": "meta/chlorination_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3610,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Containers sit on a scale so usage is measured.",
+    "Vacuum regulators open only under ejector vacuum.",
+    "The chlorinator meters the gas rate."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Containers sit on a scale so usage is measured.",
+     "part": "containers_scale",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vacuum regulators open only under ejector vacuum.",
+     "part": "vacuum_regulators",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The chlorinator meters the gas rate.",
+     "part": "chlorinator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The ejector dissolves chlorine into motive water.",
+     "part": "ejector_lines",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The diffuser spreads the solution into the contact tank.",
+     "part": "diffuser",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Residual chlorine vs dose (breakpoint curve)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "chlorination_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "chlorination_system_pressure.glb",
+     "title": "Vacuum operation is a safety feature",
+     "description": "Gas is drawn from the container by vacuum created at the ejector. If the vacuum is lost (line break, ejector failure) the vacuum regulator at the container valve closes automatically, so chlorine gas under pressure never travels through the building. Dose is set on the rotameter (e.g. kg/day); disinfection depends on C·t (residual × contact time).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/chlorination_system.json#components",
+   "key_components": "Chlorine ton containers, vacuum regulator, chlorinator, ejector, contact tank, leak detector",
+   "parts": [
+    {
+     "id": "containers_scale",
+     "name": "Chlorine Ton Containers on Trunnion Rollers & Weighing Scale",
+     "info_ref": "cl_containers",
+     "function": "Chlorine storage.",
+     "material": "Steel."
+    },
+    {
+     "id": "vacuum_regulators",
+     "name": "Vacuum Regulators on the Container Valves & Automatic Switchover",
+     "info_ref": "cl_regulator",
+     "function": "Converts to vacuum; auto switchover.",
+     "material": "PVC/Hastelloy."
+    },
+    {
+     "id": "chlorinator",
+     "name": "Chlorinator Panel: Rotameter, Rate Valve & Differential Regulator",
+     "info_ref": "cl_chlorinator",
+     "function": "Meters gas.",
+     "material": "PVC."
+    },
+    {
+     "id": "ejector_lines",
+     "name": "Ejector (water-jet vacuum source), Vacuum Line, Motive Water & Solution Line",
+     "info_ref": "cl_ejector",
+     "function": "Creates vacuum; dissolves gas.",
+     "material": "PVC."
+    },
+    {
+     "id": "contact_tank",
+     "name": "Chlorine Contact Tank (serpentine baffles give contact time)",
+     "info_ref": "cl_contact",
+     "function": "Contact time.",
+     "material": "Concrete."
+    },
+    {
+     "id": "diffuser",
+     "name": "Solution Diffuser (perforated pipe across the inlet)",
+     "info_ref": "cl_contact",
+     "function": "Contact time.",
+     "material": "Concrete."
+    },
+    {
+     "id": "ct_water",
+     "name": "Water in the Contact Tank",
+     "info_ref": "cl_contact",
+     "function": "Contact time.",
+     "material": "Concrete."
+    },
+    {
+     "id": "detector",
+     "name": "Chlorine Gas Leak Detector & Alarm",
+     "info_ref": "cl_safety",
+     "function": "Detects leaks.",
+     "material": "—"
+    },
+    {
+     "id": "solution",
+     "name": "Chlorine Solution dispersed from the Diffuser",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ton containers ≈ 900 kg; chlorinator ≈ 1 – 200 kg/day",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 1 – 200",
+     "unit": "kg Cl₂/day"
+    },
+    "operating_conditions": {
+     "typical_range": "Vacuum operation; contact time ≥ ≈ 30 min typical",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Booster pump ≈ 1 – 10",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from flow × dose; contact tank volume from required C·t."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "WHO GDWQ",
+    "Chlorine Institute pamphlets"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth; anchor the skid; bund or drain for chemical / oil spills."
+   ],
+   "alignment": [
+    "Skid level; check pump–motor alignment where not close-coupled; supports so piping loads do not reach equipment nozzles."
+   ],
+   "piping": [
+    "Isolation valves and bypass for maintenance; drains and vents; correct materials for the chemical; label lines and flow direction."
+   ],
+   "commissioning": [
+    "Pressure-test piping; flush; check rotation and interlocks; calibrate instruments; run on water before chemicals."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check residual, gas usage and vacuum.",
+     "part": "chlorinator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Test leak detector and alarms.",
+     "part": "detector",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul regulators and ejector check valves.",
+     "part": "vacuum_regulators"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of vacuum",
+     "category": "performance",
+     "symptoms": [
+      "No feed, alarm"
+     ],
+     "causes": [
+      "Ejector blocked, low motive water pressure"
+     ],
+     "remedies": [
+      "Clean ejector; restore water pressure"
+     ],
+     "part": "ejector_lines"
+    },
+    {
+     "problem": "Chlorine leak",
+     "category": "leakage",
+     "symptoms": [
+      "Detector alarm, odour"
+     ],
+     "causes": [
+      "Damaged gasket at container valve"
+     ],
+     "remedies": [
+      "Evacuate, use SCBA, follow emergency plan"
+     ],
+     "part": "containers_scale"
+    }
+   ],
+   "safety": [
+    "Toxic gas: leak detection, ventilation/scrubber, SCBA, emergency kits; trained staff only."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Chlorination System — Introduction",
+    "type": "in_app_tour",
+    "model": "chlorination_system.glb",
+    "duration_s": 51.8,
+    "script": [
+     {
+      "narration": "This module introduces the Chlorination System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A gas chlorination system disinfects water with chlorine drawn from ton containers.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The whole system works under vacuum: the ejector creates suction, the vacuum regulator on the container valve lets gas flow only while vacuum exists, the chlorinator meters the dose, and the ejector dissolves the gas into a water stream that is injected into a baffled contact tank.",
+      "duration_s": 19.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include drinking-water disinfection and residual in distribution; cooling-water biocide and wastewater effluent disinfection.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Chlorination System — Operation",
+    "type": "in_app_tour",
+    "model": "chlorination_system.glb",
+    "duration_s": 33.2,
+    "script": [
+     {
+      "narration": "How the Chlorination System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Containers sit on a scale so usage is measured.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "containers_scale",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vacuum regulators open only under ejector vacuum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vacuum_regulators",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The chlorinator meters the gas rate.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chlorinator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The ejector dissolves chlorine into motive water.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ejector_lines",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The diffuser spreads the solution into the contact tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffuser",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Gas is drawn from the container by vacuum created at the ejector.",
+      "duration_s": 5.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Chlorination System — Maintenance",
+    "type": "in_app_tour",
+    "model": "chlorination_system.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Chlorination System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check residual, gas usage and vacuum.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "chlorinator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test leak detector and alarms.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "detector",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul regulators and ejector check valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "vacuum_regulators",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of vacuum: no feed, alarm. Common cause: ejector blocked, low motive water pressure.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "ejector_lines",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for chlorine leak: detector alarm, odour. Common cause: damaged gasket at container valve.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "containers_scale",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is gas chlorination vacuum-operated?",
+     "options": [
+      "A line break draws in air instead of leaking chlorine",
+      "It is cheaper",
+      "It heats water",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Safety.",
+     "level": "basic"
+    },
+    {
+     "question": "Disinfection effectiveness depends on…",
+     "options": [
+      "C × t (residual × contact time)",
+      "Pipe colour",
+      "Motor speed",
+      "Container size"
+     ],
+     "answer": 0,
+     "explanation": "C·t.",
+     "level": "basic"
+    },
+    {
+     "question": "What creates the vacuum?",
+     "options": [
+      "The water ejector",
+      "The container",
+      "The scale",
+      "The tank"
+     ],
+     "answer": 0,
+     "explanation": "Ejector.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Chlorine storage.\"",
+     "options": [
+      "Solution Diffuser (perforated pipe across the inlet)",
+      "Chlorine Ton Containers on Trunnion Rollers & Weighing Scale",
+      "Chlorine Gas Leak Detector & Alarm",
+      "Chlorine Contact Tank (serpentine baffles give contact time)"
+     ],
+     "answer": 1,
+     "explanation": "Chlorine Ton Containers on Trunnion Rollers & Weighing Scale: Chlorine storage.",
+     "level": "basic",
+     "part": "containers_scale",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts to vacuum; auto switchover.\"",
+     "options": [
+      "Chlorine Contact Tank (serpentine baffles give contact time)",
+      "Ejector (water-jet vacuum source), Vacuum Line, Motive Water & Solution Line",
+      "Chlorinator Panel: Rotameter, Rate Valve & Differential Regulator",
+      "Vacuum Regulators on the Container Valves & Automatic Switchover"
+     ],
+     "answer": 3,
+     "explanation": "Vacuum Regulators on the Container Valves & Automatic Switchover: Converts to vacuum; auto switchover.",
+     "level": "basic",
+     "part": "vacuum_regulators",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Meters gas.\"",
+     "options": [
+      "Chlorine Contact Tank (serpentine baffles give contact time)",
+      "Ejector (water-jet vacuum source), Vacuum Line, Motive Water & Solution Line",
+      "Vacuum Regulators on the Container Valves & Automatic Switchover",
+      "Chlorinator Panel: Rotameter, Rate Valve & Differential Regulator"
+     ],
+     "answer": 3,
+     "explanation": "Chlorinator Panel: Rotameter, Rate Valve & Differential Regulator: Meters gas.",
+     "level": "basic",
+     "part": "chlorinator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

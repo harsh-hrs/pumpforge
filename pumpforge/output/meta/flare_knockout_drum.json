@@ -1,0 +1,640 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "flare_knockout_drum",
+  "title": "Flare Knockout Drum (Horizontal, Split Entry) with Pump-Out Pumps & Heating Coil",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 273,
+    "phase": 13,
+    "eq_id": "EQ-351",
+    "subcategory": "Gas Disposal",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "flare_knockout_drum_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "flare_knockout_drum_pressure.glb",
+      "title": "Slow the gas so liquid drops out",
+      "description": "Relief streams often carry liquid; a burning liquid rain from the flare is dangerous. The KO drum is sized (API 521 method) so the vapour velocity is low enough for droplets of ≈ 300–600 µm to settle in the travel time between inlet and outlet, and with hold-up volume for the liquid from the largest relief case for ≈ 20–30 min. It operates near atmospheric pressure, so pressure drop is kept small; pump-out pumps empty it.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "relief_gas",
+      "kind": "flue_gas",
+      "radius": 0.04,
+      "points": [
+        [
+          0.0,
+          2.4,
+          1.7
+        ],
+        [
+          0.0,
+          2.4,
+          0.55
+        ],
+        [
+          -1.6,
+          2.4,
+          0.55
+        ],
+        [
+          -1.6,
+          2.1,
+          -0.0
+        ],
+        [
+          -1.6,
+          1.4,
+          -0.05
+        ],
+        [
+          0.0,
+          1.4,
+          -0.05
+        ],
+        [
+          0.0,
+          3.1,
+          -0.0
+        ],
+        [
+          2.7,
+          3.1,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "pump_out",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          1.0,
+          0.4,
+          -0.05
+        ],
+        [
+          1.0,
+          0.6,
+          -0.0
+        ],
+        [
+          2.6,
+          0.6,
+          0.4
+        ],
+        [
+          2.6,
+          0.37,
+          0.4
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 18544,
+    "parts": 10
+  },
+  "summary": "A flare knockout drum removes liquid from relief gas before it reaches the flare, so burning liquid cannot rain down. The large horizontal drum slows the gas so droplets settle, and pump-out pumps remove the liquid.",
+  "classification": {
+    "family": "Gas disposal",
+    "type": "Horizontal split-entry KO drum"
+  },
+  "model_configuration": {
+    "animation": "Droplets fall out; liquid collects and is pumped away"
+  },
+  "standards": [
+    {
+      "id": "API 520 Pt I / II",
+      "title": "Sizing, selection and installation of pressure-relieving devices",
+      "relevance": "PSV sizing and installation.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 521 / ISO 23251",
+      "title": "Pressure-relieving and depressuring systems",
+      "relevance": "Relief, flare and KO drum design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 521"
+  ],
+  "parts": [
+    {
+      "id": "drum",
+      "name": "Flare KO Drum (sized so liquid droplets ≥ ≈ 300–600 µm drop out)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "drum__back",
+        "drum__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -2.375,
+        0.0,
+        -0.75
+      ],
+      "bbox_max": [
+        2.375,
+        1.75,
+        0.75
+      ],
+      "label_anchor": [
+        0.0,
+        0.875,
+        0.75
+      ],
+      "center": [
+        0.0,
+        0.875,
+        -0.0
+      ],
+      "info_ref": "fko_drum"
+    },
+    {
+      "id": "liquid",
+      "name": "Collected Hydrocarbon Liquid & Water",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "kl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -2.0,
+        0.262,
+        -0.64928
+      ],
+      "bbox_max": [
+        2.0,
+        0.65,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.456,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.456,
+        -0.32464
+      ],
+      "info_ref": "fko_drum"
+    },
+    {
+      "id": "nozzles_piping",
+      "name": "Split-Entry Inlets (both ends) & Central Vapour Outlet to the Flare",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles_piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.75,
+        1.74,
+        -0.18
+      ],
+      "bbox_max": [
+        2.6,
+        3.28,
+        1.6
+      ],
+      "label_anchor": [
+        0.425,
+        2.51,
+        1.6
+      ],
+      "center": [
+        0.425,
+        2.51,
+        0.71
+      ],
+      "info_ref": "fko_piping"
+    },
+    {
+      "id": "heating_coil",
+      "name": "Steam Heating Coil (prevents freezing / keeps heavy liquids fluid)",
+      "group": "thermal",
+      "section_role": "keep",
+      "nodes": [
+        "heating_coil.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -2.2,
+        0.375,
+        -0.325
+      ],
+      "bbox_max": [
+        1.50125,
+        0.425,
+        -0.125
+      ],
+      "label_anchor": [
+        -0.34938,
+        0.4,
+        -0.125
+      ],
+      "center": [
+        -0.34938,
+        0.4,
+        -0.225
+      ],
+      "info_ref": "fko_coil"
+    },
+    {
+      "id": "pump_out_1",
+      "name": "Pump-Out Pump 1 (duty, auto on level)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_out_1b"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        2.45,
+        0.075,
+        0.25
+      ],
+      "bbox_max": [
+        3.35,
+        0.37,
+        0.55
+      ],
+      "label_anchor": [
+        2.9,
+        0.2225,
+        0.55
+      ],
+      "center": [
+        2.9,
+        0.2225,
+        0.4
+      ],
+      "info_ref": "fko_pumps"
+    },
+    {
+      "id": "pump_out_1_shaft",
+      "name": "Pump-Out Pump 1 (duty, auto on level) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_out_1c"
+      ],
+      "pivot": [
+        2.84,
+        0.25,
+        0.4
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        2.78,
+        0.23,
+        0.35
+      ],
+      "bbox_max": [
+        2.9,
+        0.27,
+        0.45
+      ],
+      "label_anchor": [
+        2.84,
+        0.25,
+        0.45
+      ],
+      "center": [
+        2.84,
+        0.25,
+        0.4
+      ],
+      "info_ref": "fko_pumps"
+    },
+    {
+      "id": "pump_out_2",
+      "name": "Pump-Out Pump 2 (standby, auto on level)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_out_2b"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        2.45,
+        0.075,
+        -0.55
+      ],
+      "bbox_max": [
+        3.35,
+        0.37,
+        -0.25
+      ],
+      "label_anchor": [
+        2.9,
+        0.2225,
+        -0.25
+      ],
+      "center": [
+        2.9,
+        0.2225,
+        -0.4
+      ],
+      "info_ref": "fko_pumps"
+    },
+    {
+      "id": "pump_out_2_shaft",
+      "name": "Pump-Out Pump 2 (standby, auto on level) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_out_2c"
+      ],
+      "pivot": [
+        2.84,
+        0.25,
+        -0.4
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        2.78,
+        0.23,
+        -0.45
+      ],
+      "bbox_max": [
+        2.9,
+        0.27,
+        -0.35
+      ],
+      "label_anchor": [
+        2.84,
+        0.25,
+        -0.35
+      ],
+      "center": [
+        2.84,
+        0.25,
+        -0.4
+      ],
+      "info_ref": "fko_pumps"
+    },
+    {
+      "id": "pump_lines_level",
+      "name": "Pump Suction Lines & Level Transmitter / Gauge (high-high level alarm)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "pump_lines_level.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.2,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.54,
+        0.26,
+        -0.45
+      ],
+      "bbox_max": [
+        2.65,
+        1.065,
+        0.87
+      ],
+      "label_anchor": [
+        1.055,
+        0.6625,
+        0.87
+      ],
+      "center": [
+        1.055,
+        0.6625,
+        0.21
+      ],
+      "info_ref": "fko_level"
+    },
+    {
+      "id": "droplets",
+      "name": "Liquid droplets falling out of the slow-moving gas",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "droplets0",
+        "droplets1",
+        "droplets2",
+        "droplets3",
+        "droplets4",
+        "droplets5",
+        "droplets6",
+        "droplets7",
+        "droplets8",
+        "droplets9",
+        "droplets10",
+        "droplets11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        -0.025,
+        -0.02378
+      ],
+      "bbox_max": [
+        0.025,
+        0.025,
+        0.02378
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02378
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "fko_drum": {
+      "function": "Separate liquid.",
+      "construction": "Horizontal drum.",
+      "material": "Carbon steel / LTCS.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fko_piping": {
+      "function": "Inlets and outlet.",
+      "construction": "Split-entry nozzles.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fko_coil": {
+      "function": "Prevent freezing.",
+      "construction": "Steam coil.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fko_pumps": {
+      "function": "Empty drum.",
+      "construction": "Duty/standby pumps.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fko_level": {
+      "function": "Monitor level.",
+      "construction": "Level instruments, suction lines.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "High level carry-over"
+      ],
+      "inspection": [
+        "Alarm test"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

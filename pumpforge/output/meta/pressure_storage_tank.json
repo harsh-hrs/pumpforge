@@ -1,0 +1,432 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "pressure_storage_tank",
+  "title": "Spherical Pressure Storage Tank (Horton Sphere) for LPG/Butane",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 117,
+    "phase": 6,
+    "eq_id": "EQ-195",
+    "subcategory": "Storage Equipment",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "pressure_storage_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "liquid",
+      "kind": "hydraulic_oil",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          1.0,
+          -0.05
+        ],
+        [
+          0.0,
+          0.3,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "vapour_to_relief",
+      "kind": "air",
+      "radius": 0.02,
+      "points": [
+        [
+          0.15,
+          3.9,
+          -0.2
+        ],
+        [
+          0.15,
+          4.4,
+          -0.2
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6676,
+    "parts": 6
+  },
+  "summary": "A spherical pressure tank (Horton sphere) stores liquefied gases such as butane or propane under pressure. A sphere carries pressure with the least wall thickness for its volume. It stands on columns around the equator with bracing, and has relief valves, deluge cooling and level instruments.",
+  "classification": {
+    "family": "Pressure storage",
+    "type": "Sphere on equatorial columns"
+  },
+  "model_configuration": {
+    "animation": "Liquid level changes"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC Section VIII Div. 1",
+      "title": "Rules for Construction of Pressure Vessels",
+      "relevance": "Design, fabrication, inspection.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 13445",
+      "title": "Unfired pressure vessels",
+      "relevance": "European design code.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 2510",
+      "title": "LPG installations",
+      "relevance": "Design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 2510"
+  ],
+  "parts": [
+    {
+      "id": "sphere",
+      "name": "Spherical Shell (welded petals)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "sphere__back",
+        "sphere__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.62,
+        0.78,
+        -1.62
+      ],
+      "bbox_max": [
+        1.62,
+        4.02,
+        1.62
+      ],
+      "label_anchor": [
+        0.0,
+        2.4,
+        1.62
+      ],
+      "center": [
+        0.0,
+        2.4,
+        -0.0
+      ],
+      "info_ref": "ps_sphere"
+    },
+    {
+      "id": "liquid",
+      "name": "Liquefied Gas (level animated)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -1.597,
+        0.803,
+        -1.597
+      ],
+      "bbox_max": [
+        1.597,
+        2.6,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        1.7015,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        1.7015,
+        -0.7985
+      ],
+      "info_ref": "ps_liquid"
+    },
+    {
+      "id": "legs",
+      "name": "Support Columns (equatorial) & Cross Bracing",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "legs.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.68,
+        0.0,
+        -1.68
+      ],
+      "bbox_max": [
+        1.68,
+        2.4,
+        1.68
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        1.68
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "ps_legs"
+    },
+    {
+      "id": "fittings",
+      "name": "Safety Valves, Top Platform, Bottom Liquid Nozzle & Level Transmitter",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "fittings.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.71,
+        0.3,
+        -0.71
+      ],
+      "bbox_max": [
+        0.71,
+        4.55,
+        0.71
+      ],
+      "label_anchor": [
+        0.0,
+        2.425,
+        0.71
+      ],
+      "center": [
+        0.0,
+        2.425,
+        -0.0
+      ],
+      "info_ref": "ps_fittings"
+    },
+    {
+      "id": "stairway",
+      "name": "Access Ladder & Walkway to Top Platform",
+      "group": "access",
+      "section_role": "keep",
+      "nodes": [
+        "stair"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        0.6,
+        0.0,
+        -0.26
+      ],
+      "bbox_max": [
+        2.162,
+        4.565,
+        0.25
+      ],
+      "label_anchor": [
+        1.381,
+        2.2825,
+        0.25
+      ],
+      "center": [
+        1.381,
+        2.2825,
+        -0.005
+      ],
+      "info_ref": "ps_stair"
+    },
+    {
+      "id": "deluge",
+      "name": "Water Spray (Deluge) Ring",
+      "group": "fire_protection",
+      "section_role": "keep",
+      "nodes": [
+        "dl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.775,
+        3.495,
+        -1.775
+      ],
+      "bbox_max": [
+        1.77495,
+        3.545,
+        1.775
+      ],
+      "label_anchor": [
+        -3e-05,
+        3.52,
+        1.775
+      ],
+      "center": [
+        -3e-05,
+        3.52,
+        -0.0
+      ],
+      "info_ref": "ps_deluge"
+    }
+  ],
+  "components": {
+    "ps_sphere": {
+      "function": "Contains the liquefied gas.",
+      "construction": "Welded petal plates.",
+      "material": "Carbon steel (impact tested).",
+      "operating_conditions": "Post-weld heat treatment.",
+      "failure_modes": [
+        "Cracking"
+      ],
+      "inspection": [
+        "Internal inspection"
+      ]
+    },
+    "ps_liquid": {
+      "function": "Liquid.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ps_legs": {
+      "function": "Support the sphere.",
+      "construction": "Columns and bracing.",
+      "material": "Steel; fireproofed.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ps_fittings": {
+      "function": "Relief, platform, nozzles, level.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ps_stair": {
+      "function": "Access.",
+      "construction": "Stairway.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ps_deluge": {
+      "function": "Fire cooling.",
+      "construction": "Spray ring.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

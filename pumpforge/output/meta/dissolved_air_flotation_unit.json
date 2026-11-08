@@ -1,0 +1,698 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "dissolved_air_flotation_unit",
+  "title": "Dissolved Air Flotation (DAF) Unit with Recycle Saturation",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 185,
+    "phase": 9,
+    "eq_id": "EQ-263",
+    "subcategory": "Flotation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "dissolved_air_flotation_unit_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "dissolved_air_flotation_unit_pressure.glb",
+      "title": "Pressure release creates micro-bubbles",
+      "description": "Part of the clarified water is pumped to the saturator at about 4–6 bar, where air dissolves into it (Henry's law: more gas dissolves at higher pressure). At the release valve the pressure drops to atmospheric and the excess air comes out of solution as micro-bubbles, which attach to flocs and float them to the surface.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.95,
+          0.35,
+          -0.0
+        ],
+        [
+          -1.1,
+          0.35,
+          -0.1
+        ],
+        [
+          -1.1,
+          0.9,
+          -0.1
+        ],
+        [
+          -0.8,
+          0.9,
+          -0.1
+        ]
+      ]
+    },
+    {
+      "name": "clarified",
+      "kind": "water",
+      "radius": 0.02,
+      "points": [
+        [
+          -0.6,
+          0.5,
+          -0.1
+        ],
+        [
+          1.0,
+          0.15,
+          -0.1
+        ],
+        [
+          1.9,
+          0.2,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "recycle",
+      "kind": "air",
+      "radius": 0.015,
+      "points": [
+        [
+          1.9,
+          0.25,
+          0.6
+        ],
+        [
+          2.3,
+          0.6,
+          -0.0
+        ],
+        [
+          2.3,
+          1.6,
+          -0.0
+        ],
+        [
+          -1.3,
+          1.6,
+          -0.0
+        ],
+        [
+          -1.3,
+          0.25,
+          -0.0
+        ],
+        [
+          -1.15,
+          0.25,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 11672,
+    "parts": 11
+  },
+  "summary": "A dissolved air flotation (DAF) unit removes suspended solids, oil and grease from water. Part of the clarified water is pressurised and saturated with air; when the pressure is released in the tank, micro-bubbles form and float the flocs to the surface, where a skimmer removes them as sludge.",
+  "classification": {
+    "family": "Flotation",
+    "type": "Rectangular DAF with recycle pressurisation"
+  },
+  "model_configuration": {
+    "animation": "Micro-bubbles; skimmer flights move"
+  },
+  "standards": [
+    {
+      "id": "WEF/ASCE MOP 8",
+      "title": "Design of Water Resource Recovery Facilities",
+      "relevance": "Flotation and separation in wastewater.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Metcalf & Eddy — Wastewater Engineering"
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "DAF Tank with Contact-Zone Baffle",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "tank__back",
+        "tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.63,
+        0.0,
+        -0.48
+      ],
+      "bbox_max": [
+        1.63,
+        1.1,
+        0.48
+      ],
+      "label_anchor": [
+        0.0,
+        0.55,
+        0.48
+      ],
+      "center": [
+        0.0,
+        0.55,
+        -0.0
+      ],
+      "info_ref": "daf_tank"
+    },
+    {
+      "id": "water",
+      "name": "Water in the Tank",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "wt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.595,
+        0.03,
+        -0.445
+      ],
+      "bbox_max": [
+        1.595,
+        0.93,
+        -0.005
+      ],
+      "label_anchor": [
+        0.0,
+        0.48,
+        -0.005
+      ],
+      "center": [
+        0.0,
+        0.48,
+        -0.225
+      ],
+      "info_ref": "daf_tank"
+    },
+    {
+      "id": "float_layer",
+      "name": "Float (sludge) Blanket on the Surface",
+      "group": "froth",
+      "section_role": "keep",
+      "nodes": [
+        "fl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -1.15,
+        0.93,
+        -0.445
+      ],
+      "bbox_max": [
+        1.55,
+        1.01,
+        -0.005
+      ],
+      "label_anchor": [
+        0.2,
+        0.97,
+        -0.005
+      ],
+      "center": [
+        0.2,
+        0.97,
+        -0.225
+      ],
+      "info_ref": "daf_float"
+    },
+    {
+      "id": "skimmer",
+      "name": "Chain-and-Flight Surface Skimmer",
+      "group": "skimmer",
+      "section_role": "keep",
+      "nodes": [
+        "sf0",
+        "sf1",
+        "sf2",
+        "sf3",
+        "sf4",
+        "sf5",
+        "sf6",
+        "sf7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.015,
+        -0.06,
+        -0.43
+      ],
+      "bbox_max": [
+        0.015,
+        0.06,
+        0.43
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.43
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "daf_skimmer"
+    },
+    {
+      "id": "skimmer_frame",
+      "name": "Skimmer Sprockets & Rails",
+      "group": "skimmer",
+      "section_role": "keep",
+      "nodes": [
+        "skimmer_frame.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.88,
+        1.22,
+        -0.5
+      ],
+      "bbox_max": [
+        1.38,
+        1.38,
+        0.5
+      ],
+      "label_anchor": [
+        0.25,
+        1.3,
+        0.5
+      ],
+      "center": [
+        0.25,
+        1.3,
+        -0.0
+      ],
+      "info_ref": "daf_skimmer"
+    },
+    {
+      "id": "sludge_hopper",
+      "name": "Float Sludge Beach & Hopper",
+      "group": "tank",
+      "section_role": "keep",
+      "nodes": [
+        "sludge_hopper.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        0.9,
+        0.775,
+        -0.45
+      ],
+      "bbox_max": [
+        1.65,
+        1.225,
+        0.45
+      ],
+      "label_anchor": [
+        1.275,
+        1.0,
+        0.45
+      ],
+      "center": [
+        1.275,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "daf_float"
+    },
+    {
+      "id": "saturator",
+      "name": "Air Saturator (recycle water dissolved with air at ~ 4–6 bar)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "saturator__back",
+        "saturator__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.5,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        2.1,
+        0.2,
+        -0.2
+      ],
+      "bbox_max": [
+        2.5,
+        1.3,
+        0.2
+      ],
+      "label_anchor": [
+        2.3,
+        0.75,
+        0.2
+      ],
+      "center": [
+        2.3,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "daf_saturator"
+    },
+    {
+      "id": "recycle_pump",
+      "name": "Recycle Pump (pressurises clarified water)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recycle_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.75,
+        0.075,
+        0.45
+      ],
+      "bbox_max": [
+        2.65,
+        0.37,
+        0.75
+      ],
+      "label_anchor": [
+        2.2,
+        0.2225,
+        0.75
+      ],
+      "center": [
+        2.2,
+        0.2225,
+        0.6
+      ],
+      "info_ref": "daf_saturator"
+    },
+    {
+      "id": "recycle_pump_shaft",
+      "name": "Recycle Pump (pressurises clarified water) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "recycle_pumpc"
+      ],
+      "pivot": [
+        2.14,
+        0.25,
+        0.6
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        2.08,
+        0.23,
+        0.55
+      ],
+      "bbox_max": [
+        2.2,
+        0.27,
+        0.65
+      ],
+      "label_anchor": [
+        2.14,
+        0.25,
+        0.65
+      ],
+      "center": [
+        2.14,
+        0.25,
+        0.6
+      ],
+      "info_ref": "daf_saturator"
+    },
+    {
+      "id": "recycle_piping",
+      "name": "Recycle Line, Pressure-Release Valve / Nozzles, Inlet & Clarified Outlet",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "recycle_piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.9,
+        0.086,
+        -0.114
+      ],
+      "bbox_max": [
+        2.33,
+        1.63,
+        0.62496
+      ],
+      "label_anchor": [
+        0.215,
+        0.858,
+        0.62496
+      ],
+      "center": [
+        0.215,
+        0.858,
+        0.25548
+      ],
+      "info_ref": "daf_release"
+    },
+    {
+      "id": "microbubbles",
+      "name": "Micro-bubbles (≈ 30–100 µm) attaching to Flocs",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "microbubbles0",
+        "microbubbles1",
+        "microbubbles2",
+        "microbubbles3",
+        "microbubbles4",
+        "microbubbles5",
+        "microbubbles6",
+        "microbubbles7",
+        "microbubbles8",
+        "microbubbles9",
+        "microbubbles10",
+        "microbubbles11",
+        "microbubbles12",
+        "microbubbles13",
+        "microbubbles14",
+        "microbubbles15"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "daf_tank": {
+      "function": "Contact and separation zones.",
+      "construction": "Tank with baffle.",
+      "material": "Stainless/coated steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "daf_float": {
+      "function": "Float sludge and hopper.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "daf_skimmer": {
+      "function": "Removes float.",
+      "construction": "Chain-and-flight skimmer.",
+      "material": "PP flights, steel chain.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Chain wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "daf_saturator": {
+      "function": "Dissolves air into recycle water.",
+      "construction": "Pressure vessel, recycle pump.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "daf_release": {
+      "function": "Releases pressure → micro-bubbles.",
+      "construction": "Valves/nozzles, piping.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

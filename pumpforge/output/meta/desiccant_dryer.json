@@ -1,0 +1,640 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "desiccant_dryer",
+  "title": "Heatless (Pressure-Swing) Twin-Tower Desiccant Air Dryer",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 190,
+    "phase": 9,
+    "eq_id": "EQ-268",
+    "subcategory": "Compressed air treatment",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "desiccant_dryer_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "desiccant_dryer_pressure.glb",
+      "title": "Pressure swing: adsorb at high pressure, desorb at low",
+      "description": "The drying tower works at line pressure (red); the desiccant adsorbs water vapour. The other tower is vented to atmosphere (blue) and swept by a small part of the dry air (purge, typically ~ 15–20 % for heatless dryers) which carries the water out through the silencer. Towers switch every few minutes. Typical pressure dew point −40 °C (−70 °C with molecular sieve).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "drying_left",
+      "kind": "air",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.85,
+          0.49,
+          -0.0
+        ],
+        [
+          -0.35,
+          0.34,
+          -0.0
+        ],
+        [
+          -0.35,
+          2.06,
+          -0.0
+        ],
+        [
+          0.85,
+          2.06,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "purge_right",
+      "kind": "steam",
+      "radius": 0.012,
+      "points": [
+        [
+          0.0,
+          2.06,
+          -0.08
+        ],
+        [
+          0.35,
+          1.96,
+          -0.05
+        ],
+        [
+          0.35,
+          0.39,
+          -0.05
+        ],
+        [
+          0.35,
+          0.3,
+          0.25
+        ]
+      ],
+      "active": [
+        [
+          0.0,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "drying_right",
+      "kind": "air",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.85,
+          0.49,
+          -0.0
+        ],
+        [
+          0.35,
+          0.34,
+          -0.0
+        ],
+        [
+          0.35,
+          2.06,
+          -0.0
+        ],
+        [
+          0.85,
+          2.06,
+          -0.0
+        ]
+      ],
+      "active": [
+        [
+          0.5,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "purge_left",
+      "kind": "steam",
+      "radius": 0.012,
+      "points": [
+        [
+          0.0,
+          2.06,
+          -0.08
+        ],
+        [
+          -0.35,
+          1.96,
+          -0.05
+        ],
+        [
+          -0.35,
+          0.39,
+          -0.05
+        ],
+        [
+          -0.35,
+          0.3,
+          0.25
+        ]
+      ],
+      "active": [
+        [
+          0.5,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 26640,
+    "parts": 9
+  },
+  "summary": "A heatless desiccant dryer dries compressed air by pressure-swing adsorption. One tower dries the air at line pressure while the other is depressurised and purged with part of the dried air; the towers switch every few minutes.",
+  "classification": {
+    "family": "Compressed air dryer",
+    "type": "Heatless twin-tower PSA"
+  },
+  "model_configuration": {
+    "animation": "Towers alternate; shuttle valve moves"
+  },
+  "standards": [
+    {
+      "id": "ISO 8573-1",
+      "title": "Compressed air — contaminants and purity classes",
+      "relevance": "Dew point classes.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 7183",
+      "title": "Compressed air dryers — specifications and testing",
+      "relevance": "Performance.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "ISO 8573-1"
+  ],
+  "parts": [
+    {
+      "id": "tower_left",
+      "name": "Left Tower (drying — under line pressure)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "tower_left__back",
+        "tower_left__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.53,
+        0.46,
+        -0.18
+      ],
+      "bbox_max": [
+        -0.17,
+        1.94,
+        0.18
+      ],
+      "label_anchor": [
+        -0.35,
+        1.2,
+        0.18
+      ],
+      "center": [
+        -0.35,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "dd_towers"
+    },
+    {
+      "id": "tower_left_bed",
+      "name": "Left Tower Desiccant (activated alumina / molecular sieve)",
+      "group": "media",
+      "section_role": "keep",
+      "nodes": [
+        "tower_left_bed.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.518,
+        0.57,
+        -0.168
+      ],
+      "bbox_max": [
+        -0.182,
+        1.77,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.35,
+        1.17,
+        -0.0
+      ],
+      "center": [
+        -0.35,
+        1.17,
+        -0.084
+      ],
+      "info_ref": "dd_desiccant"
+    },
+    {
+      "id": "tower_right",
+      "name": "Right Tower (regenerating — depressurised, purged)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "tower_right__back",
+        "tower_right__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        0.17,
+        0.46,
+        -0.18
+      ],
+      "bbox_max": [
+        0.53,
+        1.94,
+        0.18
+      ],
+      "label_anchor": [
+        0.35,
+        1.2,
+        0.18
+      ],
+      "center": [
+        0.35,
+        1.2,
+        -0.0
+      ],
+      "info_ref": "dd_towers"
+    },
+    {
+      "id": "tower_right_bed",
+      "name": "Right Tower Desiccant",
+      "group": "media",
+      "section_role": "keep",
+      "nodes": [
+        "tower_right_bed.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        0.182,
+        0.57,
+        -0.168
+      ],
+      "bbox_max": [
+        0.518,
+        1.77,
+        -0.0
+      ],
+      "label_anchor": [
+        0.35,
+        1.17,
+        -0.0
+      ],
+      "center": [
+        0.35,
+        1.17,
+        -0.084
+      ],
+      "info_ref": "dd_desiccant"
+    },
+    {
+      "id": "valve_manifolds",
+      "name": "Inlet Shuttle/Switching Valves, Outlet Check Valves, Purge Orifice & Exhaust Silencers",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "valve_manifolds.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.5,
+        0.0,
+        -0.092
+      ],
+      "bbox_max": [
+        0.5,
+        2.12,
+        0.32
+      ],
+      "label_anchor": [
+        0.0,
+        1.06,
+        0.32
+      ],
+      "center": [
+        0.0,
+        1.06,
+        0.114
+      ],
+      "info_ref": "dd_valves"
+    },
+    {
+      "id": "shuttle",
+      "name": "Inlet Shuttle Spool (switches towers)",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "sp"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -0.08,
+        0.305,
+        0.045
+      ],
+      "bbox_max": [
+        0.08,
+        0.375,
+        0.115
+      ],
+      "label_anchor": [
+        0.0,
+        0.34,
+        0.115
+      ],
+      "center": [
+        0.0,
+        0.34,
+        0.08
+      ],
+      "info_ref": "dd_valves"
+    },
+    {
+      "id": "filters",
+      "name": "Coalescing Pre-Filter & Particulate After-Filter",
+      "group": "filters",
+      "section_role": "keep",
+      "nodes": [
+        "filters.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.92,
+        0.24,
+        -0.07
+      ],
+      "bbox_max": [
+        0.92,
+        2.09,
+        0.07
+      ],
+      "label_anchor": [
+        0.0,
+        1.165,
+        0.07
+      ],
+      "center": [
+        0.0,
+        1.165,
+        -0.0
+      ],
+      "info_ref": "dd_filters"
+    },
+    {
+      "id": "controller",
+      "name": "Controller (timer or dew-point dependent switching)",
+      "group": "controls",
+      "section_role": "keep",
+      "nodes": [
+        "ct"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -0.15,
+        1.025,
+        -0.41
+      ],
+      "bbox_max": [
+        0.15,
+        1.375,
+        -0.29
+      ],
+      "label_anchor": [
+        0.0,
+        1.2,
+        -0.29
+      ],
+      "center": [
+        0.0,
+        1.2,
+        -0.35
+      ],
+      "info_ref": "dd_controller"
+    },
+    {
+      "id": "frame",
+      "name": "Frame",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "frame.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.625,
+        0.0,
+        -0.25
+      ],
+      "bbox_max": [
+        0.625,
+        1.9,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        0.95,
+        0.25
+      ],
+      "center": [
+        0.0,
+        0.95,
+        -0.0
+      ],
+      "info_ref": "dd_towers"
+    }
+  ],
+  "components": {
+    "dd_towers": {
+      "function": "Contain desiccant.",
+      "construction": "Aluminium/steel towers.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dd_desiccant": {
+      "function": "Adsorbs water vapour.",
+      "construction": "Activated alumina / molecular sieve.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Oil contamination, dusting"
+      ],
+      "inspection": [
+        "Dew point"
+      ]
+    },
+    "dd_valves": {
+      "function": "Switch towers; purge.",
+      "construction": "Shuttle/switching valves, orifice, silencers.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dd_filters": {
+      "function": "Protect desiccant and downstream.",
+      "construction": "Pre/after filters.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dd_controller": {
+      "function": "Controls cycle.",
+      "construction": "Timer / dew-point control.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

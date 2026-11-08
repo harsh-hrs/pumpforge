@@ -1,0 +1,656 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "hydraulic_cylinder",
+ "no": 145,
+ "title": "Hydraulic Cylinder",
+ "model_title": "Double-Acting Hydraulic Cylinder (Tie-Rod / Welded)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A hydraulic cylinder converts fluid pressure into straight-line force and motion. In a double-acting cylinder, oil fed to the cap end pushes the piston and extends the rod; oil fed to the rod end retracts it. Seals on the piston separate the two chambers; rod seals and a wiper in the gland keep oil in and dirt out.",
+   "applications": [
+    "Excavators, loaders and cranes",
+    "Presses and injection moulding machines",
+    "Gate, valve and damper actuation",
+    "Steel and paper mills"
+   ],
+   "key_points": [
+    "F_extend = p × π D²/4",
+    "F_retract = p × π (D² − d²)/4 (smaller)",
+    "Speed v = Q / A",
+    "Check rod buckling for long strokes"
+   ],
+   "classification": {
+    "family": "Hydraulic actuator",
+    "type": "Double-acting cylinder"
+   },
+   "hi_family": "material_handling",
+   "summary": "A double-acting hydraulic cylinder turns oil pressure into straight-line force. Oil into port A pushes the piston and extends the rod; oil into port B retracts it. Force = pressure × area (the rod side has less area, so retract force is lower)."
+  },
+  "model_3d": {
+   "asset": "glb/hydraulic_cylinder.glb",
+   "metadata": "meta/hydraulic_cylinder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3060,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Oil enters the cap-end port A.",
+    "Pressure on the full piston area pushes the piston and rod out.",
+    "Oil in the rod-end annulus returns through port B."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Oil enters the cap-end port A.",
+     "part": "ports",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pressure on the full piston area pushes the piston and rod out.",
+     "part": "piston_rod",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil in the rod-end annulus returns through port B.",
+     "part": "oil_rod_side",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Reversing the ports retracts the rod.",
+     "part": "oil_cap_side",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Force ∝ pressure × area; speed ∝ flow / area — retract is faster than extend for the same flow because the annulus area is smaller."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "hydraulic_cylinder_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "hydraulic_cylinder_pressure.glb",
+     "title": "Pressure while extending",
+     "description": "Extending: port A feeds the cap end (red, system pressure) and port B returns oil from the rod end (blue, low). Push force F = p × A_bore. Retracting reverses the ports: the pull force is p × (A_bore − A_rod), smaller, but the rod moves faster for the same pump flow because the annulus volume is smaller.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Cap end: F_extend = p · π D²/4",
+       "anchor": [
+        -0.45,
+        0.12,
+        -0.0
+       ]
+      },
+      {
+       "text": "Rod end (annulus): F_retract = p · π (D² − d²)/4",
+       "anchor": [
+        0.35,
+        0.5,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/hydraulic_cylinder.json#components",
+   "key_components": "Barrel, piston, rod, seals, end caps",
+   "parts": [
+    {
+     "id": "barrel",
+     "name": "Barrel (honed tube)",
+     "info_ref": "hc_barrel",
+     "function": "Contains the oil and piston.",
+     "material": "Steel."
+    },
+    {
+     "id": "end_caps",
+     "name": "Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper",
+     "info_ref": "hc_caps",
+     "function": "Close the ends; mount; seal the rod.",
+     "material": "Steel, PU/NBR."
+    },
+    {
+     "id": "piston_rod",
+     "name": "Piston (with seals) & Chrome-Plated Rod",
+     "info_ref": "hc_piston",
+     "function": "Separates chambers and transmits force.",
+     "material": "Steel, chrome."
+    },
+    {
+     "id": "ports",
+     "name": "Ports A (cap end) & B (rod end)",
+     "info_ref": "hc_ports",
+     "function": "Oil connections.",
+     "material": "Steel."
+    },
+    {
+     "id": "oil_cap_side",
+     "name": "Oil in Cap-End Chamber (fills on extend)",
+     "info_ref": "hc_oil",
+     "function": "Oil.",
+     "material": "—"
+    },
+    {
+     "id": "oil_rod_side",
+     "name": "Oil in Rod-End (annulus) Chamber (fills on retract)",
+     "info_ref": "hc_oil",
+     "function": "Oil.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bore ~ 25 – 500 mm; stroke up to several m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Set by the HPU (p × Q)",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Rod speed ~ 0.05 – 0.5 typical",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "Force ~ 1 – 10 000+",
+     "unit": "kN"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size bore for the force at the available pressure with margin; check rod buckling; choose mounting and cushioning."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 6020/ISO 6022 — Hydraulic cylinder mounting dimensions",
+    "ISO 4413"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a level, rigid base with access for filters, gauges and fill; drip tray/bund under the reservoir."
+   ],
+   "alignment": [
+    "Align motor and pump with the bell housing and coupling; mount cylinders so the rod is not side-loaded (use spherical bearings/clevises)."
+   ],
+   "piping": [
+    "Clean (pickled/flushed) pipework sized for velocity (typical guide: suction ≲ 1.2 m/s, pressure 3–6 m/s, return ≲ 3 m/s); hoses not twisted or rubbing; correct fittings for pressure.",
+    "Fit pressure gauges/test points, and relief protection on every pressure source."
+   ],
+   "commissioning": [
+    "Fill through a filter with the specified oil; flush the system to the target cleanliness (ISO 4406 code).",
+    "Bleed air; start with relief valves backed off, then set pressures; check for leaks, temperatures and noise."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check rod for scoring and leaks at the gland.",
+     "part": "end_caps",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check mounting pins and bushes.",
+     "part": "barrel",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Re-seal; re-chrome or replace rod; hone barrel.",
+     "part": "piston_rod"
+    }
+   ],
+   "lubrication": [
+    "Grease clevis pins and spherical bearings."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Rod seal leak",
+     "category": "leakage",
+     "symptoms": [
+      "Oil on rod"
+     ],
+     "causes": [
+      "Scored rod, worn seal, contamination"
+     ],
+     "remedies": [
+      "Replace seals; repair rod; improve wiper"
+     ],
+     "part": "end_caps"
+    },
+    {
+     "problem": "Internal leakage (piston seal)",
+     "category": "leakage",
+     "symptoms": [
+      "Drift under load, slow"
+     ],
+     "causes": [
+      "Worn piston seal, scored barrel"
+     ],
+     "remedies": [
+      "Re-seal; hone barrel"
+     ],
+     "part": "piston_rod"
+    },
+    {
+     "problem": "Rod buckling/bending",
+     "category": "performance",
+     "symptoms": [
+      "Bent rod, seal damage"
+     ],
+     "causes": [
+      "Side load, long stroke under compression"
+     ],
+     "remedies": [
+      "Check Euler buckling; add guides"
+     ],
+     "part": "piston_rod"
+    }
+   ],
+   "safety": [
+    "Support loads mechanically before working on cylinders; release pressure; beware of trapped pressure (pressure intensification in the rod end if the port is blocked)."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Cylinder — Introduction",
+    "type": "in_app_tour",
+    "model": "hydraulic_cylinder.glb",
+    "duration_s": 60.7,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Cylinder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A hydraulic cylinder converts fluid pressure into straight-line force and motion.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a double-acting cylinder, oil fed to the cap end pushes the piston and extends the rod; oil fed to the rod end retracts it.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Seals on the piston separate the two chambers; rod seals and a wiper in the gland keep oil in and dirt out.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include excavators, loaders and cranes; presses and injection moulding machines; gate, valve and damper actuation; steel and paper mills.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Barrel (honed tube), Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper, Piston (with seals) & Chrome-Plated Rod.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Cylinder — Operation",
+    "type": "in_app_tour",
+    "model": "hydraulic_cylinder.glb",
+    "duration_s": 34.2,
+    "script": [
+     {
+      "narration": "How the Hydraulic Cylinder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Oil enters the cap-end port A.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "ports",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pressure on the full piston area pushes the piston and rod out.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "piston_rod",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil in the rod-end annulus returns through port B.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "oil_rod_side",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Reversing the ports retracts the rod.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_cap_side",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Extending: port A feeds the cap end (red, system pressure) and port B returns oil from the rod end (blue, low).",
+      "duration_s": 8.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Cylinder — Maintenance",
+    "type": "in_app_tour",
+    "model": "hydraulic_cylinder.glb",
+    "duration_s": 42.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Cylinder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check rod for scoring and leaks at the gland.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "end_caps",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check mounting pins and bushes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "barrel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Re-seal; re-chrome or replace rod; hone barrel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "piston_rod",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rod seal leak: oil on rod. Common cause: scored rod, worn seal, contamination.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "end_caps",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for internal leakage (piston seal): drift under load, slow. Common cause: worn piston seal, scored barrel.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "piston_rod",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rod buckling/bending: bent rod, seal damage. Common cause: side load, long stroke under compression.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "piston_rod",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is the retract force smaller than extend force?",
+     "options": [
+      "The rod reduces the effective area on the rod side",
+      "Oil is thinner",
+      "Gravity",
+      "Seals"
+     ],
+     "answer": 0,
+     "explanation": "Annulus area.",
+     "level": "basic"
+    },
+    {
+     "question": "Extension speed equals…",
+     "options": [
+      "Flow / bore area",
+      "Pressure × area",
+      "Force / flow",
+      "Stroke × pressure"
+     ],
+     "answer": 0,
+     "explanation": "v = Q/A.",
+     "level": "basic"
+    },
+    {
+     "question": "Force from a 100 mm bore at 100 bar is about…",
+     "options": [
+      "~ 7.9 kN",
+      "~ 79 kN",
+      "~ 790 kN",
+      "~ 0.79 kN"
+     ],
+     "answer": 1,
+     "explanation": "10 MPa × 0.00785 m² ≈ 78.5 kN.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the oil and piston.\"",
+     "options": [
+      "Oil in Cap-End Chamber (fills on extend)",
+      "Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper",
+      "Barrel (honed tube)",
+      "Ports A (cap end) & B (rod end)"
+     ],
+     "answer": 2,
+     "explanation": "Barrel (honed tube): Contains the oil and piston.",
+     "level": "basic",
+     "part": "barrel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Close the ends; mount; seal the rod.\"",
+     "options": [
+      "Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper",
+      "Barrel (honed tube)",
+      "Ports A (cap end) & B (rod end)",
+      "Oil in Rod-End (annulus) Chamber (fills on retract)"
+     ],
+     "answer": 0,
+     "explanation": "Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper: Close the ends; mount; seal the rod.",
+     "level": "basic",
+     "part": "end_caps",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates chambers and transmits force.\"",
+     "options": [
+      "Oil in Rod-End (annulus) Chamber (fills on retract)",
+      "Cap End (clevis mount) & Rod-End Gland with Rod Seals / Wiper",
+      "Piston (with seals) & Chrome-Plated Rod",
+      "Oil in Cap-End Chamber (fills on extend)"
+     ],
+     "answer": 2,
+     "explanation": "Piston (with seals) & Chrome-Plated Rod: Separates chambers and transmits force.",
+     "level": "basic",
+     "part": "piston_rod",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

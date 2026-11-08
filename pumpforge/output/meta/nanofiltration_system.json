@@ -1,0 +1,558 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "nanofiltration_system",
+  "title": "Nanofiltration Unit (Spiral-Wound Elements, 2:1 Array)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 179,
+    "phase": 9,
+    "eq_id": "EQ-257",
+    "subcategory": "Membrane separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "nanofiltration_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "nanofiltration_system_pressure.glb",
+      "title": "Feed pressure overcomes osmotic pressure",
+      "description": "Nanofiltration needs a feed pressure of roughly 5–20 bar (between UF and reverse osmosis). Water and most monovalent ions pass; divalent ions (hardness, sulphate) and organics above ~ 200–1000 Da are largely rejected. Pressure falls slightly along each vessel; stage 2 treats the stage 1 concentrate to raise recovery.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.015,
+      "points": [
+        [
+          -2.0,
+          0.8,
+          -0.0
+        ],
+        [
+          -1.6,
+          0.3,
+          -0.0
+        ],
+        [
+          -0.95,
+          0.3,
+          -0.0
+        ],
+        [
+          -0.95,
+          0.6,
+          0.15
+        ],
+        [
+          0.8,
+          0.6,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "concentrate",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          0.8,
+          1.0,
+          -0.0
+        ],
+        [
+          1.15,
+          1.0,
+          -0.0
+        ],
+        [
+          1.15,
+          0.2,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "permeate",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          0.8,
+          1.25,
+          -0.4
+        ],
+        [
+          -1.2,
+          1.25,
+          -0.4
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 21102,
+    "parts": 8
+  },
+  "summary": "A nanofiltration unit forces feed water at moderate pressure through spiral-wound membrane elements. NF removes hardness, sulphate, colour and many organics while letting most monovalent salts pass. Elements sit in pressure vessels arranged in stages to raise recovery.",
+  "classification": {
+    "family": "Membrane system",
+    "type": "Spiral-wound NF, 2:1 array"
+  },
+  "model_configuration": {
+    "vessels": 3,
+    "animation": "Feed tracers through stages"
+  },
+  "standards": [
+    {
+      "id": "ASTM D4516",
+      "title": "Standardizing RO performance data",
+      "relevance": "Normalisation of membrane performance (also applied to NF).",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC X",
+      "title": "FRP pressure vessels",
+      "relevance": "Membrane pressure vessels.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Membrane manufacturer design guides (e.g. DuPont FilmTec)"
+  ],
+  "parts": [
+    {
+      "id": "pressure_vessels",
+      "name": "FRP Pressure Vessels (stage 1: two, stage 2: one)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "pressure_vessels__back",
+        "pressure_vessels__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.85,
+        0.485,
+        -0.265
+      ],
+      "bbox_max": [
+        0.85,
+        1.115,
+        0.265
+      ],
+      "label_anchor": [
+        0.0,
+        0.8,
+        0.265
+      ],
+      "center": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "nf_vessels"
+    },
+    {
+      "id": "spiral_elements",
+      "name": "Spiral-Wound Membrane Elements (membrane leaves, feed spacers, permeate tube)",
+      "group": "filter_media",
+      "section_role": "keep",
+      "nodes": [
+        "spiral_elements.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.6
+      ],
+      "bbox_min": [
+        -0.8,
+        0.51,
+        -0.24
+      ],
+      "bbox_max": [
+        0.8,
+        1.09,
+        0.24
+      ],
+      "label_anchor": [
+        0.0,
+        0.8,
+        0.24
+      ],
+      "center": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "nf_elements"
+    },
+    {
+      "id": "piping",
+      "name": "Feed Manifold, Interstage, Concentrate Line (with control valve) & Permeate Header",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "piping.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.6,
+        0.2,
+        -0.43
+      ],
+      "bbox_max": [
+        1.2,
+        1.28,
+        0.17967
+      ],
+      "label_anchor": [
+        -0.2,
+        0.74,
+        0.17967
+      ],
+      "center": [
+        -0.2,
+        0.74,
+        -0.12516
+      ],
+      "info_ref": "nf_piping"
+    },
+    {
+      "id": "cartridge_prefilter",
+      "name": "Cartridge Pre-Filter (≈ 5 µm, protects the elements)",
+      "group": "filter_media",
+      "section_role": "keep",
+      "nodes": [
+        "cf"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.12,
+        0.19,
+        -0.12
+      ],
+      "bbox_max": [
+        -1.88,
+        0.75,
+        0.12
+      ],
+      "label_anchor": [
+        -2.0,
+        0.47,
+        0.12
+      ],
+      "center": [
+        -2.0,
+        0.47,
+        -0.0
+      ],
+      "info_ref": "nf_prefilter"
+    },
+    {
+      "id": "hp_pump",
+      "name": "High-Pressure Feed Pump (multistage)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "hp_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -1.55,
+        0.125,
+        -0.15
+      ],
+      "bbox_max": [
+        -0.65,
+        0.42,
+        0.15
+      ],
+      "label_anchor": [
+        -1.1,
+        0.2725,
+        0.15
+      ],
+      "center": [
+        -1.1,
+        0.2725,
+        -0.0
+      ],
+      "info_ref": "nf_pump"
+    },
+    {
+      "id": "hp_pump_shaft",
+      "name": "High-Pressure Feed Pump (multistage) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "hp_pumpc"
+      ],
+      "pivot": [
+        -1.16,
+        0.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -1.22,
+        0.28,
+        -0.05
+      ],
+      "bbox_max": [
+        -1.1,
+        0.32,
+        0.05
+      ],
+      "label_anchor": [
+        -1.16,
+        0.3,
+        0.05
+      ],
+      "center": [
+        -1.16,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "nf_pump"
+    },
+    {
+      "id": "rack",
+      "name": "Pressure-Vessel Rack",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "rack.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.1,
+        0.0,
+        -0.325
+      ],
+      "bbox_max": [
+        1.1,
+        1.2,
+        0.325
+      ],
+      "label_anchor": [
+        0.0,
+        0.6,
+        0.325
+      ],
+      "center": [
+        0.0,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "nf_vessels"
+    },
+    {
+      "id": "feed_tracers",
+      "name": "Feed flowing along the Element Spacers",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "feed_tracers_0",
+        "feed_tracers_1",
+        "feed_tracers_2",
+        "feed_tracers_3",
+        "feed_tracers_4",
+        "feed_tracers_5",
+        "feed_tracers_6",
+        "feed_tracers_7",
+        "feed_tracers_8",
+        "feed_tracers_9",
+        "feed_tracers_10",
+        "feed_tracers_11"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.012,
+        0.588,
+        -0.072
+      ],
+      "bbox_max": [
+        0.87867,
+        1.012,
+        -0.048
+      ],
+      "label_anchor": [
+        -0.06667,
+        0.8,
+        -0.048
+      ],
+      "center": [
+        -0.06667,
+        0.8,
+        -0.06
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "nf_vessels": {
+      "function": "Contain elements under pressure.",
+      "construction": "FRP pressure vessels.",
+      "material": "FRP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "nf_elements": {
+      "function": "Separate solutes.",
+      "construction": "Spiral-wound polyamide elements.",
+      "material": "Polyamide TFC.",
+      "operating_conditions": "≈ 5–20 bar.",
+      "failure_modes": [
+        "Scaling, fouling"
+      ],
+      "inspection": [
+        "Normalised flux/ΔP"
+      ]
+    },
+    "nf_piping": {
+      "function": "Manifolds and control.",
+      "construction": "Pipes, concentrate valve, gauges.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "nf_prefilter": {
+      "function": "Protects elements.",
+      "construction": "Cartridge filter.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "nf_pump": {
+      "function": "Provides feed pressure.",
+      "construction": "High-pressure pump.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

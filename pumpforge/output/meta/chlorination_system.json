@@ -1,0 +1,608 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "chlorination_system",
+  "title": "Gas Chlorination System (Vacuum-Operated Chlorinator, Ejector, Diffuser)",
+  "category": "13 · Water Treatment & Utilities",
+  "library": {
+    "no": 222,
+    "phase": 11,
+    "eq_id": "EQ-300",
+    "subcategory": "Disinfection",
+    "hi_family": "water_utilities",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "chlorination_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "chlorination_system_pressure.glb",
+      "title": "Vacuum operation is a safety feature",
+      "description": "Gas is drawn from the container by vacuum created at the ejector. If the vacuum is lost (line break, ejector failure) the vacuum regulator at the container valve closes automatically, so chlorine gas under pressure never travels through the building. Dose is set on the rotameter (e.g. kg/day); disinfection depends on C·t (residual × contact time).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "chlorine_gas_vacuum",
+      "kind": "air",
+      "radius": 0.012,
+      "points": [
+        [
+          1.15,
+          0.75,
+          0.5
+        ],
+        [
+          1.6,
+          1.2,
+          -0.0
+        ],
+        [
+          2.4,
+          1.45,
+          -0.0
+        ],
+        [
+          2.4,
+          1.0,
+          -0.0
+        ],
+        [
+          2.95,
+          1.0,
+          -0.0
+        ],
+        [
+          2.95,
+          0.65,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "motive_water",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          2.1,
+          0.6,
+          -0.4
+        ],
+        [
+          2.7,
+          0.6,
+          -0.4
+        ],
+        [
+          2.7,
+          0.6,
+          -0.0
+        ],
+        [
+          3.6,
+          0.6,
+          -0.0
+        ],
+        [
+          3.6,
+          0.0,
+          -0.0
+        ],
+        [
+          4.6,
+          -0.45,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 3610,
+    "parts": 9
+  },
+  "summary": "A gas chlorination system draws chlorine from ton containers under vacuum. The chlorinator meters the gas, an ejector dissolves it into a water stream, and the solution is injected into the contact tank to disinfect the water.",
+  "classification": {
+    "family": "Disinfection",
+    "type": "Vacuum gas chlorination"
+  },
+  "model_configuration": {
+    "animation": "Solution dispersed; rotameter float"
+  },
+  "standards": [
+    {
+      "id": "Chlorine Institute Pamphlets",
+      "title": "Chlorine handling and equipment",
+      "relevance": "Safe practice.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "AWWA B301",
+      "title": "Liquid chlorine",
+      "relevance": "Product.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "White's Handbook of Chlorination"
+  ],
+  "parts": [
+    {
+      "id": "containers_scale",
+      "name": "Chlorine Ton Containers on Trunnion Rollers & Weighing Scale",
+      "group": "storage",
+      "section_role": "keep",
+      "nodes": [
+        "containers_scale.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.1,
+        0.0,
+        -0.95
+      ],
+      "bbox_max": [
+        1.1,
+        0.93,
+        0.95
+      ],
+      "label_anchor": [
+        0.0,
+        0.465,
+        0.95
+      ],
+      "center": [
+        0.0,
+        0.465,
+        -0.0
+      ],
+      "info_ref": "cl_containers"
+    },
+    {
+      "id": "vacuum_regulators",
+      "name": "Vacuum Regulators on the Container Valves & Automatic Switchover",
+      "group": "control",
+      "section_role": "keep",
+      "nodes": [
+        "vacuum_regulators.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        1.06,
+        0.66,
+        -0.57
+      ],
+      "bbox_max": [
+        1.8,
+        1.35,
+        0.57
+      ],
+      "label_anchor": [
+        1.43,
+        1.005,
+        0.57
+      ],
+      "center": [
+        1.43,
+        1.005,
+        -0.0
+      ],
+      "info_ref": "cl_regulator"
+    },
+    {
+      "id": "chlorinator",
+      "name": "Chlorinator Panel: Rotameter, Rate Valve & Differential Regulator",
+      "group": "control",
+      "section_role": "keep",
+      "nodes": [
+        "pn"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        2.15,
+        1.0,
+        -0.075
+      ],
+      "bbox_max": [
+        2.65,
+        1.8,
+        0.112
+      ],
+      "label_anchor": [
+        2.4,
+        1.4,
+        0.112
+      ],
+      "center": [
+        2.4,
+        1.4,
+        0.0185
+      ],
+      "info_ref": "cl_chlorinator"
+    },
+    {
+      "id": "ejector_lines",
+      "name": "Ejector (water-jet vacuum source), Vacuum Line, Motive Water & Solution Line",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "ejector_lines.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        1.59636,
+        -0.03,
+        -0.43
+      ],
+      "bbox_max": [
+        4.0,
+        1.21455,
+        0.05
+      ],
+      "label_anchor": [
+        2.79818,
+        0.59228,
+        0.05
+      ],
+      "center": [
+        2.79818,
+        0.59228,
+        -0.19
+      ],
+      "info_ref": "cl_ejector"
+    },
+    {
+      "id": "contact_tank",
+      "name": "Chlorine Contact Tank (serpentine baffles give contact time)",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "contact_tank__back",
+        "contact_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        3.75,
+        -0.6,
+        -0.5
+      ],
+      "bbox_max": [
+        5.65,
+        0.3,
+        0.5
+      ],
+      "label_anchor": [
+        4.7,
+        -0.15,
+        0.5
+      ],
+      "center": [
+        4.7,
+        -0.15,
+        -0.0
+      ],
+      "info_ref": "cl_contact"
+    },
+    {
+      "id": "diffuser",
+      "name": "Solution Diffuser (perforated pipe across the inlet)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "df"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        3.9,
+        -0.475,
+        -0.025
+      ],
+      "bbox_max": [
+        4.6,
+        -0.425,
+        0.025
+      ],
+      "label_anchor": [
+        4.25,
+        -0.45,
+        0.025
+      ],
+      "center": [
+        4.25,
+        -0.45,
+        -0.0
+      ],
+      "info_ref": "cl_contact"
+    },
+    {
+      "id": "ct_water",
+      "name": "Water in the Contact Tank",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ctw"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        3.805,
+        -0.55,
+        -0.445
+      ],
+      "bbox_max": [
+        5.595,
+        0.2,
+        -0.005
+      ],
+      "label_anchor": [
+        4.7,
+        -0.175,
+        -0.005
+      ],
+      "center": [
+        4.7,
+        -0.175,
+        -0.225
+      ],
+      "info_ref": "cl_contact"
+    },
+    {
+      "id": "detector",
+      "name": "Chlorine Gas Leak Detector & Alarm",
+      "group": "safety",
+      "section_role": "keep",
+      "nodes": [
+        "dt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -1.275,
+        0.15,
+        -0.94
+      ],
+      "bbox_max": [
+        -1.125,
+        0.4,
+        -0.86
+      ],
+      "label_anchor": [
+        -1.2,
+        0.275,
+        -0.86
+      ],
+      "center": [
+        -1.2,
+        0.275,
+        -0.9
+      ],
+      "info_ref": "cl_safety"
+    },
+    {
+      "id": "solution",
+      "name": "Chlorine Solution dispersed from the Diffuser",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "solution0",
+        "solution1",
+        "solution2",
+        "solution3",
+        "solution4",
+        "solution5",
+        "solution6",
+        "solution7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "cl_containers": {
+      "function": "Chlorine storage.",
+      "construction": "Ton containers on scale.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cl_regulator": {
+      "function": "Converts to vacuum; auto switchover.",
+      "construction": "Vacuum regulators.",
+      "material": "PVC/Hastelloy.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Leaks"
+      ],
+      "inspection": [
+        "Ammonia test"
+      ]
+    },
+    "cl_chlorinator": {
+      "function": "Meters gas.",
+      "construction": "Rotameter panel.",
+      "material": "PVC.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cl_ejector": {
+      "function": "Creates vacuum; dissolves gas.",
+      "construction": "Ejector and lines.",
+      "material": "PVC.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cl_contact": {
+      "function": "Contact time.",
+      "construction": "Baffled tank, diffuser.",
+      "material": "Concrete.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "cl_safety": {
+      "function": "Detects leaks.",
+      "construction": "Gas detector.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Sensor drift"
+      ],
+      "inspection": [
+        "Bump test"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

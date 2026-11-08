@@ -1,0 +1,449 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "hydraulic_accumulator",
+  "title": "Bladder-Type Hydraulic Accumulator",
+  "category": "9 · Material Handling & Heavy Mechanical Equipment",
+  "library": {
+    "no": 146,
+    "phase": 7,
+    "eq_id": "EQ-224",
+    "subcategory": "Hydraulic Equipment",
+    "hi_family": "material_handling",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "hydraulic_accumulator_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "hydraulic_accumulator_pressure.glb",
+      "title": "Gas and oil at the same pressure",
+      "description": "The bladder separates nitrogen from oil but transmits pressure, so gas and oil are always at the same pressure. Before any oil enters, the gas is at the pre-charge pressure p₀ (bladder type: typically about 90 % of the minimum system pressure). Oil enters as the system pressure rises, compressing the gas (p·V = constant for slow, isothermal changes; p·V^1.4 for fast, adiabatic ones). The usable oil volume is the gas volume change between maximum and minimum system pressure.",
+      "render": "normal",
+      "annotations": [
+        {
+          "text": "N₂ pre-charge p₀ ≈ 0.9 × p_min (bladder, rule of thumb)",
+          "anchor": [
+            0.0,
+            0.99,
+            -0.0
+          ]
+        },
+        {
+          "text": "ΔV = V₁ − V₂ between p_min and p_max",
+          "anchor": [
+            0.17,
+            0.27,
+            -0.0
+          ]
+        }
+      ]
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "oil_in_out",
+      "kind": "hydraulic_oil",
+      "radius": 0.008,
+      "points": [
+        [
+          0.3,
+          0.05,
+          -0.0
+        ],
+        [
+          0.0,
+          0.05,
+          -0.0
+        ],
+        [
+          0.0,
+          0.17,
+          -0.0
+        ],
+        [
+          0.0,
+          0.3,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 9126,
+    "parts": 6
+  },
+  "summary": "A hydraulic accumulator stores energy in compressed gas. In this bladder type a nitrogen-filled bladder sits inside a steel shell; when system pressure rises, oil enters and squeezes the bladder; when pressure falls, the gas pushes the oil back out. Used for energy storage, pulsation damping and emergency power.",
+  "classification": {
+    "family": "Hydraulic equipment",
+    "type": "Bladder accumulator"
+  },
+  "model_configuration": {
+    "animation": "Oil enters, bladder compresses, then oil returns"
+  },
+  "standards": [
+    {
+      "id": "ISO 4413",
+      "title": "Hydraulic fluid power — General rules and safety requirements",
+      "relevance": "System safety.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 4406",
+      "title": "Hydraulic fluid power — Fluids — Contamination code",
+      "relevance": "Cleanliness.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "PED / ASME VIII",
+      "title": "Pressure vessel rules",
+      "relevance": "Shell certification.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "HYDAC accumulator guides"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Forged Steel Shell (pressure vessel)",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -0.12,
+        0.13,
+        -0.12
+      ],
+      "bbox_max": [
+        0.12,
+        0.87,
+        0.12
+      ],
+      "label_anchor": [
+        0.0,
+        0.5,
+        0.12
+      ],
+      "center": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "info_ref": "ha_shell"
+    },
+    {
+      "id": "bladder",
+      "name": "Elastomer Bladder pre-charged with Nitrogen",
+      "group": "bladder",
+      "section_role": "keep",
+      "nodes": [
+        "bl"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -0.102,
+        -0.546,
+        -0.102
+      ],
+      "bbox_max": [
+        0.102,
+        0.0,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        -0.273,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        -0.273,
+        -0.051
+      ],
+      "info_ref": "ha_bladder"
+    },
+    {
+      "id": "gas_valve",
+      "name": "Gas (Nitrogen) Charging Valve",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "gv"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.025,
+        0.86,
+        -0.025
+      ],
+      "bbox_max": [
+        0.025,
+        0.96,
+        0.025
+      ],
+      "label_anchor": [
+        0.0,
+        0.91,
+        0.025
+      ],
+      "center": [
+        0.0,
+        0.91,
+        -0.0
+      ],
+      "info_ref": "ha_gas_valve"
+    },
+    {
+      "id": "oil_port",
+      "name": "Oil Port with Anti-Extrusion Poppet Valve",
+      "group": "valves",
+      "section_role": "keep",
+      "nodes": [
+        "pv"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.04,
+        0.11,
+        -0.04
+      ],
+      "bbox_max": [
+        0.04,
+        0.19,
+        0.04
+      ],
+      "label_anchor": [
+        0.0,
+        0.15,
+        0.04
+      ],
+      "center": [
+        0.0,
+        0.15,
+        -0.0
+      ],
+      "info_ref": "ha_poppet"
+    },
+    {
+      "id": "oil",
+      "name": "Hydraulic Oil (enters as the system pressure rises)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "oil"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.107,
+        0.145,
+        -0.107
+      ],
+      "bbox_max": [
+        0.107,
+        0.37,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.2575,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.2575,
+        -0.0535
+      ],
+      "info_ref": "ha_oil"
+    },
+    {
+      "id": "mounting",
+      "name": "Mounting Clamp & Base",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "mounting.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.2,
+        0.0,
+        -0.2
+      ],
+      "bbox_max": [
+        0.2,
+        0.37,
+        0.2
+      ],
+      "label_anchor": [
+        0.0,
+        0.185,
+        0.2
+      ],
+      "center": [
+        0.0,
+        0.185,
+        -0.0
+      ],
+      "info_ref": "ha_mount"
+    }
+  ],
+  "components": {
+    "ha_shell": {
+      "function": "Pressure vessel.",
+      "construction": "Forged shell.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ha_bladder": {
+      "function": "Separates gas from oil.",
+      "construction": "Elastomer bladder with nitrogen.",
+      "material": "NBR/ECO.",
+      "operating_conditions": "Pre-charge ~ 0.9 × min pressure (typical).",
+      "failure_modes": [
+        "Bladder rupture"
+      ],
+      "inspection": [
+        "Pre-charge check"
+      ]
+    },
+    "ha_gas_valve": {
+      "function": "Charges nitrogen.",
+      "construction": "Gas valve.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ha_poppet": {
+      "function": "Stops the bladder extruding into the port.",
+      "construction": "Poppet valve.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ha_oil": {
+      "function": "Oil.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ha_mount": {
+      "function": "Mounting.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    }
+  }
+}

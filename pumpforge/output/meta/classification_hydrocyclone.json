@@ -1,0 +1,449 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "classification_hydrocyclone",
+  "title": "Classification Hydrocyclone Cluster (Radial Manifold)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 203,
+    "phase": 10,
+    "eq_id": "EQ-281",
+    "subcategory": "Classification",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "classification_hydrocyclone_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "classification_hydrocyclone_pressure.glb",
+      "title": "Centrifugal classification",
+      "description": "Feed enters tangentially under pressure (typically ~ 0.5–2 bar), forming an outer downward vortex and an inner upward vortex. Coarse/dense particles are thrown to the wall and leave at the apex; fines and most of the liquid leave through the vortex finder. The d50 cut size falls with smaller diameter and higher pressure; apex size controls the underflow density (avoid \"roping\").",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "feed",
+      "kind": "flow_discharge",
+      "radius": 0.025,
+      "points": [
+        [
+          -1.6,
+          0.3,
+          -0.0
+        ],
+        [
+          -1.5,
+          1.0,
+          -0.0
+        ],
+        [
+          0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          0.0,
+          1.8,
+          -0.0
+        ],
+        [
+          0.38891,
+          1.9,
+          -0.43891
+        ]
+      ]
+    },
+    {
+      "name": "overflow",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          0.38891,
+          1.7,
+          -0.38891
+        ],
+        [
+          0.38891,
+          2.35,
+          -0.38891
+        ]
+      ]
+    },
+    {
+      "name": "underflow",
+      "kind": "sand",
+      "radius": 0.015,
+      "points": [
+        [
+          0.38891,
+          0.8,
+          -0.38891
+        ],
+        [
+          0.38891,
+          0.55,
+          -0.38891
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 9114,
+    "parts": 6
+  },
+  "summary": "Hydrocyclones classify hydrate (or other slurries) by particle size using centrifugal force. Fed tangentially under pressure, coarse particles move to the wall and exit at the apex, fines leave through the vortex finder.",
+  "classification": {
+    "family": "Classification",
+    "type": "Hydrocyclone cluster"
+  },
+  "model_configuration": {
+    "cyclones": 4,
+    "animation": "Outer and inner vortex particles"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Mineral processing equipment",
+      "relevance": "Mill/drum design and liners.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Svarovsky — Hydrocyclones"
+  ],
+  "parts": [
+    {
+      "id": "cyclones",
+      "name": "Hydrocyclones: Inlet Head, Cylinder, Cone & Apex (rubber/ceramic lined)",
+      "group": "separator",
+      "section_role": "split",
+      "nodes": [
+        "cyclones__back",
+        "cyclones__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.53891,
+        0.75,
+        -0.53391
+      ],
+      "bbox_max": [
+        0.53391,
+        2.25,
+        0.53391
+      ],
+      "label_anchor": [
+        -0.0025,
+        1.5,
+        0.53391
+      ],
+      "center": [
+        -0.0025,
+        1.5,
+        -0.0
+      ],
+      "info_ref": "hc_cyclone"
+    },
+    {
+      "id": "distributor",
+      "name": "Feed Distributor (radial manifold) & Feed Line",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "distributor.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.57,
+        0.3,
+        -0.33234
+      ],
+      "bbox_max": [
+        0.45,
+        1.95,
+        0.33234
+      ],
+      "label_anchor": [
+        -0.56,
+        1.125,
+        0.33234
+      ],
+      "center": [
+        -0.56,
+        1.125,
+        0.0
+      ],
+      "info_ref": "hc_manifold"
+    },
+    {
+      "id": "launders",
+      "name": "Overflow Launder (fines) & Underflow Launder (coarse)",
+      "group": "launders",
+      "section_role": "split",
+      "nodes": [
+        "launders__back",
+        "launders__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.85,
+        0.45,
+        -0.85
+      ],
+      "bbox_max": [
+        0.85,
+        2.45,
+        0.85
+      ],
+      "label_anchor": [
+        0.0,
+        1.45,
+        0.85
+      ],
+      "center": [
+        0.0,
+        1.45,
+        -0.0
+      ],
+      "info_ref": "hc_launders"
+    },
+    {
+      "id": "structure",
+      "name": "Support Structure",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "structure.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.64,
+        0.0,
+        -0.64
+      ],
+      "bbox_max": [
+        0.64,
+        2.45,
+        0.64
+      ],
+      "label_anchor": [
+        0.0,
+        1.225,
+        0.64
+      ],
+      "center": [
+        0.0,
+        1.225,
+        -0.0
+      ],
+      "info_ref": "hc_launders"
+    },
+    {
+      "id": "coarse",
+      "name": "Coarse Particles spiralling down the Wall to the Apex (underflow)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "coarse0",
+        "coarse1",
+        "coarse2",
+        "coarse3",
+        "coarse4",
+        "coarse5",
+        "coarse6",
+        "coarse7",
+        "coarse8",
+        "coarse9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.014,
+        -0.014,
+        -0.01331
+      ],
+      "bbox_max": [
+        0.014,
+        0.014,
+        0.01331
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.01331
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "fines",
+      "name": "Fine Particles carried up the Central Vortex to the Overflow",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "fines0",
+        "fines1",
+        "fines2",
+        "fines3",
+        "fines4",
+        "fines5",
+        "fines6",
+        "fines7"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.01,
+        -0.01,
+        -0.00951
+      ],
+      "bbox_max": [
+        0.01,
+        0.01,
+        0.00951
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.00951
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hc_cyclone": {
+      "function": "Classify by size.",
+      "construction": "Lined cyclones.",
+      "material": "PU/rubber/ceramic.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Apex and cone wear"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "hc_manifold": {
+      "function": "Distribute feed.",
+      "construction": "Radial manifold.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hc_launders": {
+      "function": "Collect products.",
+      "construction": "Overflow and underflow launders.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

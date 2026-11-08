@@ -1,0 +1,665 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "alternator",
+ "no": 82,
+ "title": "Alternator",
+ "model_title": "Brushless Synchronous Alternator (4-Pole, Self-Excited)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An alternator is a synchronous AC generator. A DC-excited rotor (here 4 salient poles) turns inside a 3-phase stator winding; its moving magnetic field induces AC voltage. A brushless exciter with rotating diodes supplies the field current, controlled by the AVR.",
+   "applications": [
+    "Diesel and gas generating sets",
+    "Hydro and steam turbine generators",
+    "Marine and rail power",
+    "Wind turbines (synchronous types)"
+   ],
+   "key_points": [
+    "Frequency = poles × rpm / 120",
+    "Brushless excitation — no slip rings",
+    "AVR holds voltage",
+    "Insulation class sets temperature limit"
+   ],
+   "classification": {
+    "family": "Electrical machine",
+    "type": "Brushless synchronous generator, salient 4-pole rotor"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "An alternator (synchronous AC generator) produces alternating current when its rotor field turns inside the stator winding. In a brushless design a small exciter on the same shaft generates AC that rotating diodes rectify to feed the main rotor poles — no brushes or slip rings. The AVR adjusts the exciter field to hold the output voltage constant."
+  },
+  "model_3d": {
+   "asset": "glb/alternator.glb",
+   "metadata": "meta/alternator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10318,
+   "parts": 7
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The exciter produces AC that the rotating rectifier turns into DC for the field coils.",
+    "The excited rotor poles form a rotating magnetic field.",
+    "The field sweeps the stator conductors and induces 3-phase AC voltage."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The prime mover turns the rotor through the drive hub.",
+     "part": "drive_hub",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The exciter produces AC that the rotating rectifier turns into DC for the field coils.",
+     "part": "a_exciter",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The excited rotor poles form a rotating magnetic field.",
+     "part": "a_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "magnetic_field",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The field sweeps the stator conductors and induces 3-phase AC voltage.",
+     "part": "a_stator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The AVR measures output voltage and adjusts the exciter field.",
+     "part": "avr",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Open-circuit (magnetisation) curve and capability (P–Q) chart."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "alternator_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "magnetic_field": {
+     "file": "alternator_magnetic_field.glb",
+     "title": "Rotating magnetic field",
+     "description": "DC in the field coils makes the rotor poles alternately N and S. As the rotor turns, this field sweeps past the stator conductors and induces a 3-phase AC voltage. Frequency = poles × rpm / 120 (4 poles at 1500 rpm → 50 Hz).",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Flux crosses the air gap pole → stator → next pole",
+       "anchor": [
+        0.0,
+        0.85,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/alternator.json#components",
+   "key_components": "Stator core & windings, salient-pole rotor, exciter, rotating rectifier, bearings",
+   "parts": [
+    {
+     "id": "a_frame",
+     "name": "Alternator – Frame, End Shields & Terminal Box",
+     "info_ref": "gen_frame",
+     "function": "Supports the stator, holds the bearings and protects the windings.",
+     "material": "Steel."
+    },
+    {
+     "id": "a_stator",
+     "name": "Alternator – Stator Core & 3-Phase Armature Winding",
+     "info_ref": "gen_stator",
+     "function": "Carries the 3-phase armature winding in which the voltage is induced.",
+     "material": "Electrical steel; copper; class F/H insulation."
+    },
+    {
+     "id": "a_rotor",
+     "name": "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+     "info_ref": "gen_rotor",
+     "function": "Produces the magnetic field (DC excited) and is turned by the prime mover.",
+     "material": "Steel; copper."
+    },
+    {
+     "id": "a_exciter",
+     "name": "Alternator – Exciter Stator & Cover",
+     "info_ref": "gen_exciter",
+     "function": "Brushless exciter: supplies the rotor field current via rotating diodes.",
+     "material": "Steel, copper."
+    },
+    {
+     "id": "bearings",
+     "name": "Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "avr",
+     "name": "Automatic Voltage Regulator (AVR) in Terminal Box",
+     "info_ref": "alt_avr",
+     "function": "Measures output voltage and adjusts the exciter field current.",
+     "material": "Electronics."
+    },
+    {
+     "id": "drive_hub",
+     "name": "Drive Hub / Coupling Disc (from prime mover)",
+     "info_ref": "alt_hub",
+     "function": "Connects the alternator to the prime mover.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Frames ~ 5 kVA – 1500 MVA",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "5 – 1 500 000",
+     "unit": "kVA"
+    },
+    "speed": {
+     "typical_range": "1500/1800 (4-pole); 3000/3600 (2-pole)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Voltage 230 V – 27 kV",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "power_factor": {
+     "typical_range": "0.8 lagging (rated, typical)",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Cable termination sized for rated current; earthing of frame and neutral per system design."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check voltage, current balance, temperatures.",
+     "part": "a_stator",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Insulation resistance / polarisation index test.",
+     "part": "a_stator",
+     "interval": "annual"
+    },
+    {
+     "task": "Test rotating diodes.",
+     "part": "a_exciter",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Clean windings, replace bearings.",
+     "part": "bearings"
+    }
+   ],
+   "lubrication": [
+    "Bearing grease per nameplate interval."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Loss of voltage",
+     "category": "performance",
+     "symptoms": [
+      "No output"
+     ],
+     "causes": [
+      "Failed diode, AVR fault, loss of residual magnetism"
+     ],
+     "remedies": [
+      "Test diodes/AVR; flash field"
+     ],
+     "part": "a_exciter"
+    },
+    {
+     "problem": "Winding insulation failure",
+     "category": "performance",
+     "symptoms": [
+      "Earth fault trip"
+     ],
+     "causes": [
+      "Moisture, overheating, ageing"
+     ],
+     "remedies": [
+      "Dry out, rewind"
+     ],
+     "part": "a_stator"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Alternator — Introduction",
+    "type": "in_app_tour",
+    "model": "alternator.glb",
+    "duration_s": 51.4,
+    "script": [
+     {
+      "narration": "This module introduces the Alternator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An alternator is a synchronous AC generator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A DC-excited rotor (here 4 salient poles) turns inside a 3-phase stator winding; its moving magnetic field induces AC voltage.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A brushless exciter with rotating diodes supplies the field current, controlled by the AVR.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include diesel and gas generating sets; hydro and steam turbine generators; marine and rail power; wind turbines (synchronous types).",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Alternator — Operation",
+    "type": "in_app_tour",
+    "model": "alternator.glb",
+    "duration_s": 37.2,
+    "script": [
+     {
+      "narration": "How the Alternator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The prime mover turns the rotor through the drive hub.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "drive_hub",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The exciter produces AC that the rotating rectifier turns into DC for the field coils.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "a_exciter",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The excited rotor poles form a rotating magnetic field.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "a_rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "magnetic_field",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The field sweeps the stator conductors and induces 3-phase AC voltage.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "a_stator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The AVR measures output voltage and adjusts the exciter field.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "avr",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "DC in the field coils makes the rotor poles alternately N and S.",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "magnetic_field",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Alternator — Maintenance",
+    "type": "in_app_tour",
+    "model": "alternator.glb",
+    "duration_s": 38.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Alternator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check voltage, current balance, temperatures.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "a_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Insulation resistance / polarisation index test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "a_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test rotating diodes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "a_exciter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean windings, replace bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for loss of voltage: no output. Common cause: failed diode, avr fault, loss of residual magnetism.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "a_exciter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for winding insulation failure: earth fault trip. Common cause: moisture, overheating, ageing.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "a_stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "A 4-pole alternator at 1500 rpm produces…",
+     "options": [
+      "25 Hz",
+      "50 Hz",
+      "60 Hz",
+      "100 Hz"
+     ],
+     "answer": 1,
+     "explanation": "4 × 1500 / 120 = 50.",
+     "level": "basic"
+    },
+    {
+     "question": "Why \"brushless\"?",
+     "options": [
+      "No bearings",
+      "Field current comes from a shaft-mounted exciter and rotating diodes",
+      "No stator",
+      "No field"
+     ],
+     "answer": 1,
+     "explanation": "No slip rings/brushes.",
+     "level": "basic"
+    },
+    {
+     "question": "Which part has the 3-phase output winding?",
+     "options": [
+      "Rotor",
+      "Stator",
+      "Exciter rotor",
+      "Fan"
+     ],
+     "answer": 1,
+     "explanation": "Armature on the stator.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Supports the stator, holds the bearings and protects the windings.\"",
+     "options": [
+      "Bearings (DE & NDE)",
+      "Alternator – Stator Core & 3-Phase Armature Winding",
+      "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+      "Alternator – Frame, End Shields & Terminal Box"
+     ],
+     "answer": 3,
+     "explanation": "Alternator – Frame, End Shields & Terminal Box: Supports the stator, holds the bearings and protects the windings.",
+     "level": "basic",
+     "part": "a_frame",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the 3-phase armature winding in which the voltage is induced.\"",
+     "options": [
+      "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+      "Alternator – Stator Core & 3-Phase Armature Winding",
+      "Alternator – Exciter Stator & Cover",
+      "Automatic Voltage Regulator (AVR) in Terminal Box"
+     ],
+     "answer": 1,
+     "explanation": "Alternator – Stator Core & 3-Phase Armature Winding: Carries the 3-phase armature winding in which the voltage is induced.",
+     "level": "basic",
+     "part": "a_stator",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Produces the magnetic field (DC excited) and is turned by the prime mover.\"",
+     "options": [
+      "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier",
+      "Drive Hub / Coupling Disc (from prime mover)",
+      "Bearings (DE & NDE)",
+      "Alternator – Frame, End Shields & Terminal Box"
+     ],
+     "answer": 0,
+     "explanation": "Alternator – Rotor: 4 Salient Poles with Field Coils, Exciter Armature & Rotating Rectifier: Produces the magnetic field (DC excited) and is turned by the prime mover.",
+     "level": "basic",
+     "part": "a_rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

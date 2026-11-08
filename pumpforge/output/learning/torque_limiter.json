@@ -1,0 +1,618 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "torque_limiter",
+ "no": 87,
+ "title": "Torque Limiter",
+ "model_title": "Friction Torque Limiter (Slip Clutch) with Chain Sprocket",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A torque limiter protects a drive from overload. In a friction type, disc springs clamp the driven member (sprocket) between friction facings; below the set torque it drives normally, above it the facings slip and the jam does not damage motor or gearbox.",
+   "applications": [
+    "Conveyors and feeders",
+    "Packaging and printing machines",
+    "Crushers and mixers",
+    "Agricultural machinery"
+   ],
+   "key_points": [
+    "Set by spring force (adjusting nut)",
+    "Slips on overload, re-engages automatically",
+    "Keep facings dry",
+    "Slip detection sensor recommended"
+   ],
+   "classification": {
+    "family": "Overload protection device",
+    "type": "Friction slip clutch with chain sprocket"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A torque limiter protects machines from overload. In this friction type, disc springs clamp a sprocket between friction facings on a hub. Up to the set torque everything turns together; if the driven machine jams, the facings slip so the motor and gearbox are not damaged. The slip torque is set by tightening the adjusting nut."
+  },
+  "model_3d": {
+   "asset": "glb/torque_limiter.glb",
+   "metadata": "meta/torque_limiter.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 8580,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The hub on the driving shaft turns the pressure plate and springs.",
+    "Spring force clamps the sprocket between the friction facings.",
+    "Below the set torque the sprocket turns with the hub and drives the chain."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The hub on the driving shaft turns the pressure plate and springs.",
+     "part": "hub",
+     "cut": true,
+     "operate": true,
+     "overlay": "torque",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Spring force clamps the sprocket between the friction facings.",
+     "part": "pressure_plate",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Below the set torque the sprocket turns with the hub and drives the chain.",
+     "part": "sprocket",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "On a jam the load torque exceeds the setting — the facings slip and the sprocket stops.",
+     "part": "friction_facings",
+     "cut": true,
+     "operate": true,
+     "overlay": "torque",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Transmitted torque rises with load until the slip torque, then stays roughly constant while slipping."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "torque_limiter_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "torque": {
+     "file": "torque_limiter_torque.glb",
+     "title": "Driving torque vs load torque",
+     "description": "Disc springs clamp the sprocket between the friction facings. While the load torque (red) is below the set slip torque, the friction transmits the drive torque (magenta) and everything turns together. On a jam the load torque exceeds the setting: the facings slip, the hub keeps turning and the sprocket stops — protecting the drive. Tighten the nut to raise the setting.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Normal: hub and sprocket turn together",
+       "anchor": [
+        0.15,
+        0.45,
+        -0.0
+       ]
+      },
+      {
+       "text": "Overload: sprocket stops, facings slip",
+       "anchor": [
+        -0.1,
+        -0.05,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/torque_limiter.json#components",
+   "key_components": "Hub, friction facings, sprocket, pressure plate, disc springs, adjusting nut",
+   "parts": [
+    {
+     "id": "hub",
+     "name": "Hub on Driving Shaft (with marker)",
+     "info_ref": "tl_hub",
+     "function": "Mounted on the driving shaft; carries the friction facings and springs.",
+     "material": "Steel."
+    },
+    {
+     "id": "friction_facings",
+     "name": "Friction Facings (linings)",
+     "info_ref": "tl_facings",
+     "function": "Transmit torque by friction and slip on overload.",
+     "material": "Non-asbestos organic / sintered."
+    },
+    {
+     "id": "sprocket",
+     "name": "Sprocket (driven member, free on a bush) — stops on overload",
+     "info_ref": "tl_sprocket",
+     "function": "Driven member that transmits power to the chain.",
+     "material": "Steel."
+    },
+    {
+     "id": "pressure_plate",
+     "name": "Pressure Plate, Disc (Belleville) Springs & Adjusting Nut",
+     "info_ref": "tl_springs",
+     "function": "Provide the clamping force that sets the slip torque.",
+     "material": "Spring steel."
+    },
+    {
+     "id": "chain",
+     "name": "Roller Chain to Driven Machine (stalls on jam)",
+     "info_ref": "tl_chain",
+     "function": "Carries power to the driven machine.",
+     "material": "Steel."
+    },
+    {
+     "id": "bearings",
+     "name": "Shaft Bearings",
+     "info_ref": "tl_bearings",
+     "function": "Support the shaft.",
+     "material": "Cast iron."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bore ~ 10 – 150 mm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "Depends on speed",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Up to ~ 1500 (friction type)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Slip torque ~ 2 Nm – 20 kNm",
+     "unit": "Nm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount driver and driven machines on a rigid common base so centre distances and alignment stay fixed."
+   ],
+   "alignment": [
+    "Align shafts parallel and the wheels/hubs in the same plane (straight-edge or laser); misalignment is the main cause of early wear."
+   ],
+   "piping": [
+    "Fit guards that fully enclose moving parts but allow inspection and lubrication."
+   ],
+   "commissioning": [
+    "Set the nut to the maker's chart for the required slip torque; run in the facings; verify slip with a torque wrench."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check for signs of slipping (heat, dust).",
+     "part": "friction_facings",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Verify slip torque.",
+     "part": "pressure_plate",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace facings and bush.",
+     "part": "friction_facings"
+    }
+   ],
+   "lubrication": [
+    "No lubrication of facings; grease the sprocket bush only if specified."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Nuisance slipping",
+     "category": "performance",
+     "symptoms": [
+      "Slips under normal load"
+     ],
+     "causes": [
+      "Setting too low, worn/oily facings"
+     ],
+     "remedies": [
+      "Re-set, replace facings"
+     ],
+     "part": "friction_facings"
+    },
+    {
+     "problem": "No slip on jam",
+     "category": "performance",
+     "symptoms": [
+      "Damage to drive"
+     ],
+     "causes": [
+      "Rusted/seized facings, over-tightened"
+     ],
+     "remedies": [
+      "Free, re-set, test"
+     ],
+     "part": "pressure_plate"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Torque Limiter — Introduction",
+    "type": "in_app_tour",
+    "model": "torque_limiter.glb",
+    "duration_s": 50.1,
+    "script": [
+     {
+      "narration": "This module introduces the Torque Limiter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A torque limiter protects a drive from overload.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a friction type, disc springs clamp the driven member (sprocket) between friction facings; below the set torque it drives normally, above it the facings slip and the jam does not damage motor or gearbox.",
+      "duration_s": 14.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include conveyors and feeders; packaging and printing machines; crushers and mixers; agricultural machinery.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Hub on Driving Shaft (with marker), Sprocket (driven member, free on a bush) — stops on overload.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Torque Limiter — Operation",
+    "type": "in_app_tour",
+    "model": "torque_limiter.glb",
+    "duration_s": 33.7,
+    "script": [
+     {
+      "narration": "How the Torque Limiter works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The hub on the driving shaft turns the pressure plate and springs.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "hub",
+       "cut": true,
+       "operate": true,
+       "overlay": "torque",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Spring force clamps the sprocket between the friction facings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pressure_plate",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Below the set torque the sprocket turns with the hub and drives the chain.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "sprocket",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "On a jam the load torque exceeds the setting — the facings slip and the sprocket stops.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "friction_facings",
+       "cut": true,
+       "operate": true,
+       "overlay": "torque",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Disc springs clamp the sprocket between the friction facings.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "torque",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Torque Limiter — Maintenance",
+    "type": "in_app_tour",
+    "model": "torque_limiter.glb",
+    "duration_s": 35.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Torque Limiter.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check for signs of slipping (heat, dust).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "friction_facings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Verify slip torque.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pressure_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace facings and bush.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "friction_facings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for nuisance slipping: slips under normal load. Common cause: setting too low, worn/oily facings.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "friction_facings",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for no slip on jam: damage to drive. Common cause: rusted/seized facings, over-tightened.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "pressure_plate",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is the slip torque set?",
+     "options": [
+      "By chain length",
+      "By the spring force via the adjusting nut",
+      "By motor speed",
+      "By oil"
+     ],
+     "answer": 1,
+     "explanation": "More preload → higher torque.",
+     "level": "basic"
+    },
+    {
+     "question": "During an overload the sprocket…",
+     "options": [
+      "Speeds up",
+      "Stops while the hub keeps turning",
+      "Reverses",
+      "Breaks"
+     ],
+     "answer": 1,
+     "explanation": "Slip.",
+     "level": "basic"
+    },
+    {
+     "question": "Why keep facings free of oil?",
+     "options": [
+      "Oil lowers friction → slip torque falls",
+      "Oil raises torque",
+      "No reason",
+      "Colour"
+     ],
+     "answer": 0,
+     "explanation": "Friction coefficient.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Mounted on the driving shaft; carries the friction facings and springs.\"",
+     "options": [
+      "Roller Chain to Driven Machine (stalls on jam)",
+      "Friction Facings (linings)",
+      "Pressure Plate, Disc (Belleville) Springs & Adjusting Nut",
+      "Hub on Driving Shaft (with marker)"
+     ],
+     "answer": 3,
+     "explanation": "Hub on Driving Shaft (with marker): Mounted on the driving shaft; carries the friction facings and springs.",
+     "level": "basic",
+     "part": "hub",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transmit torque by friction and slip on overload.\"",
+     "options": [
+      "Hub on Driving Shaft (with marker)",
+      "Pressure Plate, Disc (Belleville) Springs & Adjusting Nut",
+      "Shaft Bearings",
+      "Friction Facings (linings)"
+     ],
+     "answer": 3,
+     "explanation": "Friction Facings (linings): Transmit torque by friction and slip on overload.",
+     "level": "basic",
+     "part": "friction_facings",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Driven member that transmits power to the chain.\"",
+     "options": [
+      "Sprocket (driven member, free on a bush) — stops on overload",
+      "Friction Facings (linings)",
+      "Roller Chain to Driven Machine (stalls on jam)",
+      "Hub on Driving Shaft (with marker)"
+     ],
+     "answer": 0,
+     "explanation": "Sprocket (driven member, free on a bush) — stops on overload: Driven member that transmits power to the chain.",
+     "level": "basic",
+     "part": "sprocket",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

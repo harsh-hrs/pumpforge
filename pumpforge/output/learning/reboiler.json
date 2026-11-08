@@ -1,0 +1,662 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "reboiler",
+ "no": 150,
+ "title": "Reboiler",
+ "model_title": "Kettle Reboiler (U-Tube Bundle, Overflow Weir)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A reboiler supplies heat to the bottom of a distillation column to boil part of the bottom liquid. The vapour produced rises up the column and drives the separation. In a kettle reboiler, the liquid floods a horizontal tube bundle inside an enlarged shell; steam or hot oil inside the tubes boils the liquid. Vapour leaves from the top; unvaporised liquid spills over a weir and leaves as bottom product.",
+   "applications": [
+    "Distillation columns in refineries and chemical plants",
+    "Gas plants (amine regenerators, stabilisers)",
+    "Duties with wide boiling ranges or high vaporisation fraction"
+   ],
+   "key_points": [
+    "Kettle = pool boiling around a submerged bundle",
+    "Weir keeps the bundle covered",
+    "Enlarged shell gives vapour–liquid disengagement",
+    "Heat duty sets the column boil-up"
+   ],
+   "classification": {
+    "family": "Heat exchanger",
+    "type": "Kettle reboiler (TEMA K-shell, U-tube bundle)"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A kettle reboiler supplies the vapour that drives a distillation column. Liquid from the column bottom floods a horizontal tube bundle inside an enlarged shell; steam or hot oil inside the tubes boils part of the liquid. Vapour rises to the column through the top nozzles; the remaining liquid spills over a weir and leaves as bottom product."
+  },
+  "model_3d": {
+   "asset": "glb/reboiler.glb",
+   "metadata": "meta/reboiler.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10388,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Bottom liquid from the column enters the kettle shell.",
+    "Steam enters the channel and condenses inside the U-tubes.",
+    "The submerged tube bundle boils the liquid; vapour bubbles rise."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Bottom liquid from the column enters the kettle shell.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam enters the channel and condenses inside the U-tubes.",
+     "part": "channel_head",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The submerged tube bundle boils the liquid; vapour bubbles rise.",
+     "part": "tube_bundle",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The weir keeps the bundle flooded; overflow liquid leaves as product.",
+     "part": "weir",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vapour returns to the column through the top nozzles.",
+     "part": "shell",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Boiling heat flux vs wall superheat (pool-boiling curve): duty rises steeply with ΔT up to the critical heat flux — designs stay well below it."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "reboiler_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/reboiler.json#components",
+   "key_components": "Kettle shell, U-tube bundle, weir, vapour outlet, steam/condensate nozzles",
+   "parts": [
+    {
+     "id": "shell",
+     "name": "Kettle Shell (enlarged vapour space) & Bundle Neck",
+     "info_ref": "rb_shell",
+     "function": "Holds the boiling pool and gives vapour space for disengagement.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "channel_head",
+     "name": "Channel Head with Pass Partition & Tubesheet",
+     "info_ref": "rb_channel",
+     "function": "Distributes heating medium into the tubes and collects condensate.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "tube_bundle",
+     "name": "U-Tube Bundle with Support Plates (heating medium inside)",
+     "info_ref": "rb_bundle",
+     "function": "Transfers heat from steam to the boiling liquid.",
+     "material": "Carbon/stainless steel."
+    },
+    {
+     "id": "weir",
+     "name": "Overflow Weir (keeps the bundle submerged)",
+     "info_ref": "rb_weir",
+     "function": "Keeps the bundle submerged.",
+     "material": "Steel."
+    },
+    {
+     "id": "boiling_liquid",
+     "name": "Boiling Liquid Pool (bundle submerged)",
+     "info_ref": "rb_liquid",
+     "function": "Process liquid (boiling pool / product).",
+     "material": "—"
+    },
+    {
+     "id": "product_liquid",
+     "name": "Liquid Product beyond the Weir",
+     "info_ref": "rb_liquid",
+     "function": "Process liquid (boiling pool / product).",
+     "material": "—"
+    },
+    {
+     "id": "nozzles",
+     "name": "Nozzles: Vapour Outlets, Liquid Feed, Product, Steam In, Condensate Out",
+     "info_ref": "rb_nozzles",
+     "function": "Vapour, feed, product, steam and condensate connections.",
+     "material": "Steel."
+    },
+    {
+     "id": "saddles",
+     "name": "Saddle Supports",
+     "info_ref": "rb_saddles",
+     "function": "Supports.",
+     "material": "Steel."
+    },
+    {
+     "id": "bubbles",
+     "name": "Vapour Bubbles rising from the Bundle",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Shell ~ 1 – 3 m diameter; bundle ~ 3 – 8 m long",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.5 – 30+",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Process side up to ~ 350; steam ~ 120 – 250",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Vapour ~ 5 – 300",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Kettle for high vaporisation or wide boiling range; thermosyphon reboilers for lower cost and fouling-prone duties where head allows."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "TEMA Standards",
+    "API 660",
+    "Kister — Distillation Operation"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on saddles or structure designed for the operating and full-of-water (hydro-test) weight; bolt one saddle and slot the other for thermal expansion."
+   ],
+   "alignment": [
+    "Level the unit (or set the specified slope for drainage); leave tube-bundle pull-out space equal to the bundle length."
+   ],
+   "piping": [
+    "Connect nozzles without forcing (check allowable nozzle loads); fit vents at high points and drains at low points on both sides.",
+    "Steam-heated units: install a steam trap or level-controlled drain and a vacuum breaker so condensate cannot back up."
+   ],
+   "commissioning": [
+    "Hydro-test both sides per code; vent air; introduce the cold fluid first, then the hot fluid gradually to avoid thermal shock."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor steam flow vs boil-up and condensate drainage.",
+     "part": "channel_head",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Trend U-value; check for tube leaks (process in condensate).",
+     "part": "tube_bundle",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Pull and clean the bundle; inspect tubes (eddy current); replace gaskets.",
+     "part": "tube_bundle"
+    }
+   ],
+   "lubrication": [
+    "No lubrication for the static parts — lubricate valve stems, rotating parts and drives per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Fouling of the bundle",
+     "category": "performance",
+     "symptoms": [
+      "Falling duty, higher steam pressure needed"
+     ],
+     "causes": [
+      "Polymerisation, salts, coke"
+     ],
+     "remedies": [
+      "Clean; lower wall temperature; antifoulant"
+     ],
+     "part": "tube_bundle"
+    },
+    {
+     "problem": "Condensate backing up",
+     "category": "performance",
+     "symptoms": [
+      "Low duty, hammering"
+     ],
+     "causes": [
+      "Faulty trap, low steam pressure (stall)"
+     ],
+     "remedies": [
+      "Pump-trap or level-controlled drain"
+     ],
+     "part": "channel_head"
+    },
+    {
+     "problem": "Liquid entrainment",
+     "category": "performance",
+     "symptoms": [
+      "Liquid carried to column"
+     ],
+     "causes": [
+      "Vapour space too small, foaming"
+     ],
+     "remedies": [
+      "Reduce boil-up; demister"
+     ],
+     "part": "shell"
+    }
+   ],
+   "safety": [
+    "Relief protection for blocked outlet and tube rupture cases (API 521); isolate and drain before opening."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Reboiler — Introduction",
+    "type": "in_app_tour",
+    "model": "reboiler.glb",
+    "duration_s": 56.5,
+    "script": [
+     {
+      "narration": "This module introduces the Reboiler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A reboiler supplies heat to the bottom of a distillation column to boil part of the bottom liquid.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The vapour produced rises up the column and drives the separation.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In a kettle reboiler, the liquid floods a horizontal tube bundle inside an enlarged shell; steam or hot oil inside the tubes boils the liquid.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include distillation columns in refineries and chemical plants; gas plants (amine regenerators, stabilisers); duties with wide boiling ranges or high vaporisation fraction.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Kettle Shell (enlarged vapour space) & Bundle Neck, Channel Head with Pass Partition & Tubesheet.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Reboiler — Operation",
+    "type": "in_app_tour",
+    "model": "reboiler.glb",
+    "duration_s": 29.2,
+    "script": [
+     {
+      "narration": "How the Reboiler works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Bottom liquid from the column enters the kettle shell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam enters the channel and condenses inside the U-tubes.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "channel_head",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The submerged tube bundle boils the liquid; vapour bubbles rise.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tube_bundle",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The weir keeps the bundle flooded; overflow liquid leaves as product.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "weir",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vapour returns to the column through the top nozzles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shell",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Reboiler — Maintenance",
+    "type": "in_app_tour",
+    "model": "reboiler.glb",
+    "duration_s": 43.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Reboiler.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor steam flow vs boil-up and condensate drainage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "channel_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Trend U-value; check for tube leaks (process in condensate).",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pull and clean the bundle; inspect tubes (eddy current); replace gaskets.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fouling of the bundle: falling duty, higher steam pressure needed. Common cause: polymerisation, salts, coke.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for condensate backing up: low duty, hammering. Common cause: faulty trap, low steam pressure (stall).",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "channel_head",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for liquid entrainment: liquid carried to column. Common cause: vapour space too small, foaming.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "shell",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the purpose of the weir in a kettle reboiler?",
+     "options": [
+      "Keeps the tube bundle submerged",
+      "Separates steam from condensate",
+      "Supports the shell",
+      "Measures flow"
+     ],
+     "answer": 0,
+     "explanation": "Bundle must stay flooded.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is the kettle shell enlarged above the bundle?",
+     "options": [
+      "Vapour–liquid disengagement space",
+      "Decoration",
+      "To store steam",
+      "To reduce weight"
+     ],
+     "answer": 0,
+     "explanation": "Lets droplets drop out.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does the heating steam flow?",
+     "options": [
+      "Inside the tubes",
+      "In the shell",
+      "Through the weir",
+      "In the column"
+     ],
+     "answer": 0,
+     "explanation": "Tube side.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the boiling pool and gives vapour space for disengagement.\"",
+     "options": [
+      "Liquid Product beyond the Weir",
+      "Saddle Supports",
+      "Kettle Shell (enlarged vapour space) & Bundle Neck",
+      "Nozzles: Vapour Outlets, Liquid Feed, Product, Steam In, Condensate Out"
+     ],
+     "answer": 2,
+     "explanation": "Kettle Shell (enlarged vapour space) & Bundle Neck: Holds the boiling pool and gives vapour space for disengagement.",
+     "level": "basic",
+     "part": "shell",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distributes heating medium into the tubes and collects condensate.\"",
+     "options": [
+      "Saddle Supports",
+      "Channel Head with Pass Partition & Tubesheet",
+      "Nozzles: Vapour Outlets, Liquid Feed, Product, Steam In, Condensate Out",
+      "Boiling Liquid Pool (bundle submerged)"
+     ],
+     "answer": 1,
+     "explanation": "Channel Head with Pass Partition & Tubesheet: Distributes heating medium into the tubes and collects condensate.",
+     "level": "basic",
+     "part": "channel_head",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transfers heat from steam to the boiling liquid.\"",
+     "options": [
+      "Saddle Supports",
+      "U-Tube Bundle with Support Plates (heating medium inside)",
+      "Nozzles: Vapour Outlets, Liquid Feed, Product, Steam In, Condensate Out",
+      "Boiling Liquid Pool (bundle submerged)"
+     ],
+     "answer": 1,
+     "explanation": "U-Tube Bundle with Support Plates (heating medium inside): Transfers heat from steam to the boiling liquid.",
+     "level": "basic",
+     "part": "tube_bundle",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

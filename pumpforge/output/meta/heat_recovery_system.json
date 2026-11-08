@@ -1,0 +1,541 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "heat_recovery_system",
+  "title": "Run-Around Coil Heat Recovery System (Exhaust → Supply Air)",
+  "category": "10 · Thermal & Process Equipment",
+  "library": {
+    "no": 171,
+    "phase": 8,
+    "eq_id": "EQ-249",
+    "subcategory": "Heat recovery",
+    "hi_family": "thermal_process",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "heat_recovery_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "heat_recovery_system_temperature.glb",
+      "title": "Air temperatures across the coils",
+      "description": "Warm exhaust air (orange) is cooled by the exhaust coil (blue after the coil), the glycol loop carries that heat to the supply coil, where cold fresh air is warmed. The two airstreams never mix — useful where cross-contamination is not allowed (labs, hospitals). Typical sensible effectiveness is about 45–65 %.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "exhaust_air",
+      "kind": "exhaust",
+      "radius": 0.03,
+      "points": [
+        [
+          -2.0,
+          2.0,
+          -0.0
+        ],
+        [
+          2.0,
+          2.0,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "supply_air",
+      "kind": "air",
+      "radius": 0.03,
+      "points": [
+        [
+          2.0,
+          0.8,
+          -0.0
+        ],
+        [
+          -2.0,
+          0.8,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "glycol",
+      "kind": "hydraulic_oil",
+      "radius": 0.012,
+      "points": [
+        [
+          0.22,
+          2.12,
+          -0.85
+        ],
+        [
+          0.22,
+          0.92,
+          -0.85
+        ],
+        [
+          0.6,
+          0.68,
+          -0.65
+        ],
+        [
+          0.6,
+          1.88,
+          -0.65
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 12856,
+    "parts": 8
+  },
+  "summary": "A run-around coil heat recovery system recovers heat from building or process exhaust air. A finned coil in the exhaust duct heats a water–glycol loop; a pump carries it to a second coil in the supply duct, which preheats the incoming fresh air. The airstreams never mix.",
+  "classification": {
+    "family": "Heat recovery",
+    "type": "Run-around coil loop"
+  },
+  "model_configuration": {
+    "animation": "Fans turn; glycol circulates"
+  },
+  "standards": [
+    {
+      "id": "AHRI 410",
+      "title": "Forced-circulation air-cooling and air-heating coils",
+      "relevance": "Coil rating.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASHRAE Handbook — HVAC Systems and Equipment",
+      "title": "Coils and heat recovery",
+      "relevance": "Design guidance.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "ASHRAE Handbook — Air-to-air energy recovery"
+  ],
+  "parts": [
+    {
+      "id": "ducts",
+      "name": "Exhaust Air Duct (top) & Supply Air Duct (bottom)",
+      "group": "ducts",
+      "section_role": "split",
+      "nodes": [
+        "ducts__back",
+        "ducts__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.8,
+        0.475,
+        -0.425
+      ],
+      "bbox_max": [
+        1.8,
+        2.325,
+        0.425
+      ],
+      "label_anchor": [
+        0.0,
+        1.4,
+        0.425
+      ],
+      "center": [
+        0.0,
+        1.4,
+        -0.0
+      ],
+      "info_ref": "hx_ducts"
+    },
+    {
+      "id": "exhaust_coil",
+      "name": "Exhaust-Air Coil (picks up heat) — finned tubes",
+      "group": "coils",
+      "section_role": "keep",
+      "nodes": [
+        "exhaust_coil.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.6
+      ],
+      "bbox_min": [
+        -0.2,
+        1.71,
+        -0.65
+      ],
+      "bbox_max": [
+        0.25,
+        2.29,
+        0.4
+      ],
+      "label_anchor": [
+        0.025,
+        2.0,
+        0.4
+      ],
+      "center": [
+        0.025,
+        2.0,
+        -0.125
+      ],
+      "info_ref": "hx_coils"
+    },
+    {
+      "id": "supply_coil",
+      "name": "Supply-Air Coil (releases heat) — finned tubes",
+      "group": "coils",
+      "section_role": "keep",
+      "nodes": [
+        "supply_coil.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        0.6
+      ],
+      "bbox_min": [
+        -0.2,
+        0.51,
+        -0.65
+      ],
+      "bbox_max": [
+        0.25,
+        1.09,
+        0.4
+      ],
+      "label_anchor": [
+        0.025,
+        0.8,
+        0.4
+      ],
+      "center": [
+        0.025,
+        0.8,
+        -0.125
+      ],
+      "info_ref": "hx_coils"
+    },
+    {
+      "id": "glycol_loop",
+      "name": "Glycol Loop Piping & Expansion Tank",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "glycol_loop.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        0.19,
+        0.65,
+        -0.88
+      ],
+      "bbox_max": [
+        0.7,
+        2.4,
+        -0.55
+      ],
+      "label_anchor": [
+        0.445,
+        1.525,
+        -0.55
+      ],
+      "center": [
+        0.445,
+        1.525,
+        -0.715
+      ],
+      "info_ref": "hx_loop"
+    },
+    {
+      "id": "loop_pump",
+      "name": "Circulating Pump (in-line)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pm"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        0.52,
+        1.33,
+        -0.73
+      ],
+      "bbox_max": [
+        0.68,
+        1.7,
+        -0.57
+      ],
+      "label_anchor": [
+        0.6,
+        1.515,
+        -0.57
+      ],
+      "center": [
+        0.6,
+        1.515,
+        -0.65
+      ],
+      "info_ref": "hx_pump"
+    },
+    {
+      "id": "exhaust_fan",
+      "name": "Exhaust Fan Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "exhaust_fan.001"
+      ],
+      "pivot": [
+        1.2,
+        2.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        1.17,
+        1.753,
+        -0.23186
+      ],
+      "bbox_max": [
+        1.23,
+        2.247,
+        0.23186
+      ],
+      "label_anchor": [
+        1.2,
+        2.0,
+        0.23186
+      ],
+      "center": [
+        1.2,
+        2.0,
+        -0.0
+      ],
+      "info_ref": "hx_fans"
+    },
+    {
+      "id": "supply_fan",
+      "name": "Supply Fan Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "supply_fan.001"
+      ],
+      "pivot": [
+        -1.2,
+        0.8,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -1.23,
+        0.553,
+        -0.23186
+      ],
+      "bbox_max": [
+        -1.17,
+        1.047,
+        0.23186
+      ],
+      "label_anchor": [
+        -1.2,
+        0.8,
+        0.23186
+      ],
+      "center": [
+        -1.2,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "hx_fans"
+    },
+    {
+      "id": "glycol",
+      "name": "Glycol circulating (dots)",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "glycol0",
+        "glycol1",
+        "glycol2",
+        "glycol3",
+        "glycol4",
+        "glycol5"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hx_ducts": {
+      "function": "Air paths.",
+      "construction": "Ducts.",
+      "material": "Galvanised steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hx_coils": {
+      "function": "Exchange heat between air and glycol.",
+      "construction": "Finned copper/aluminium coils.",
+      "material": "Cu/Al.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Fouling, freezing"
+      ],
+      "inspection": [
+        "Clean"
+      ]
+    },
+    "hx_loop": {
+      "function": "Carries glycol.",
+      "construction": "Pipes and expansion tank.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hx_pump": {
+      "function": "Circulates glycol.",
+      "construction": "In-line pump.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hx_fans": {
+      "function": "Move the air.",
+      "construction": "Fans.",
+      "material": "Aluminium/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

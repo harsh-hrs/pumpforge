@@ -1,0 +1,611 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "dynamic_balancing_machine",
+ "no": 264,
+ "title": "Dynamic Balancing Machine",
+ "model_title": "Horizontal Dynamic Balancing Machine (Soft-Bearing) with Fan Rotor — Two-Plane Balancing",
+ "category": "14 · Mechanical Components & Maintenance",
+ "phase": 12,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A dynamic balancing machine spins a rotor on sensitive pedestals, measures the once-per-revolution vibration caused by unbalance and its phase (from a reference mark), and computes the mass and angle of correction in two planes so both static and couple unbalance are removed to the required grade.",
+   "applications": [
+    "Fan rotors, pump impellers, motor rotors after repair",
+    "Turbine and compressor rotors, rolls and crankshafts"
+   ],
+   "key_points": [
+    "F = m·e·ω² rises with speed²",
+    "Two planes cancel static + couple",
+    "Grade G per ISO 21940-11",
+    "Reference mark gives angle"
+   ],
+   "classification": {
+    "family": "Maintenance tools",
+    "type": "Horizontal soft-bearing balancing machine"
+   },
+   "hi_family": "mechanical_components",
+   "summary": "A dynamic balancing machine spins a rotor on sensitive pedestals, measures the vibration caused by unbalance and its phase, and tells the operator how much mass to add or remove, and where, in two correction planes."
+  },
+  "model_3d": {
+   "asset": "glb/dynamic_balancing_machine.glb",
+   "metadata": "meta/dynamic_balancing_machine.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3272,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The drive spins the rotor.",
+    "Unbalance shakes the pedestals once per turn.",
+    "Pick-ups and photo-cell measure amplitude and phase."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The drive spins the rotor.",
+     "part": "drive_shaft",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Unbalance shakes the pedestals once per turn.",
+     "part": "pedestal_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Pick-ups and photo-cell measure amplitude and phase.",
+     "part": "console_sensors",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Correction weights are fitted in two planes.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Permissible residual unbalance vs speed for G2.5 / G6.3."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "dynamic_balancing_machine_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "dynamic_balancing_machine_pressure.glb",
+     "title": "Two correction planes cancel static and couple unbalance",
+     "description": "An unbalanced rotor's heavy spot creates a rotating centrifugal force F = m·e·ω², which shakes the soft pedestals at once per revolution. The pick-ups measure amplitude; the photo-cell gives the phase, so the console calculates the correction mass and angle for each of two planes (dynamic unbalance = static + couple). Residual unbalance is checked against the required grade, e.g. ISO 21940-11 G6.3 for fans and pump impellers or G2.5 for turbine rotors: U_per = G·m / ω (g·mm).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/dynamic_balancing_machine.json#components",
+   "key_components": "Bed, soft-bearing pedestals, pick-ups, drive, photo-cell, console",
+   "parts": [
+    {
+     "id": "bed",
+     "name": "Machine Bed",
+     "info_ref": "db_bed",
+     "function": "Base.",
+     "material": "Cast/fabricated steel."
+    },
+    {
+     "id": "pedestal_1",
+     "name": "Pedestal 1: Roller Carriage on Spring Suspension & Vibration Pick-up",
+     "info_ref": "db_pedestals",
+     "function": "Support and sense.",
+     "material": "—"
+    },
+    {
+     "id": "pedestal_2",
+     "name": "Pedestal 2: Roller Carriage on Spring Suspension & Vibration Pick-up",
+     "info_ref": "db_pedestals",
+     "function": "Support and sense.",
+     "material": "—"
+    },
+    {
+     "id": "rotor",
+     "name": "Fan Rotor on Arbor: Heavy Spot (red) & Correction Weight (green), Reflective Reference Mark",
+     "info_ref": "db_rotor",
+     "function": "Workpiece.",
+     "material": "Steel."
+    },
+    {
+     "id": "drive_head",
+     "name": "Drive Head (motor, end-drive)",
+     "info_ref": "db_drive",
+     "function": "Spin rotor.",
+     "material": "—"
+    },
+    {
+     "id": "drive_shaft",
+     "name": "Universal-Joint Drive Shaft",
+     "info_ref": "db_drive",
+     "function": "Spin rotor.",
+     "material": "—"
+    },
+    {
+     "id": "console_sensors",
+     "name": "Measuring Console (amount & angle per plane) & Photo-Cell Reference Sensor",
+     "info_ref": "db_console",
+     "function": "Measure and display.",
+     "material": "—"
+    },
+    {
+     "id": "signals",
+     "name": "Pick-up and reference signals to the console",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Rotor mass ≈ 1 kg – 50 t",
+     "unit": ""
+    },
+    "speed": {
+     "typical_range": "Balancing speed ≈ 300 – 3000",
+     "unit": "rpm"
+    },
+    "load_capacity": {
+     "typical_range": "Residual U_per = G·m / ω",
+     "unit": "g·mm"
+    },
+    "operating_conditions": {
+     "typical_range": "Soft- or hard-bearing machines",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "By rotor mass, size, speed and required grade."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "part_number": null,
+    "datasheet": null,
+    "rated_point": {
+     "speed_rpm": null,
+     "load_or_torque": null,
+     "temperature": null,
+     "pressure": null
+    },
+    "status": "empty — fill from the component datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 21940-11",
+    "ISO 21940-21"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Machine on a stable base; for alignment, check and correct soft foot before measuring."
+   ],
+   "alignment": [
+    "Mount brackets / sensors rigidly and square; check bracket sag (dial) or warm-up (laser)."
+   ],
+   "piping": [
+    "Cables / wireless links routed safely away from rotating parts."
+   ],
+   "commissioning": [
+    "Verify sensor function and calibration; record as-found and as-left values."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check rollers and sensors.",
+     "part": "pedestal_1",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Verify with test rotor.",
+     "part": "console_sensors",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Calibration per ISO 21940-21.",
+     "part": "console_sensors"
+    }
+   ],
+   "lubrication": [
+    "Oil or grease to maker specification; change on condition (oil analysis) or interval."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Non-repeatable results",
+     "category": "performance",
+     "symptoms": [
+      "Readings vary"
+     ],
+     "causes": [
+      "Loose parts on rotor, worn rollers"
+     ],
+     "remedies": [
+      "Fix rotor; replace rollers"
+     ],
+     "part": "pedestal_1"
+    },
+    {
+     "problem": "Wrong angle",
+     "category": "performance",
+     "symptoms": [
+      "Correction worsens"
+     ],
+     "causes": [
+      "Reference mark / sensor misread"
+     ],
+     "remedies": [
+      "Re-check reference"
+     ],
+     "part": "console_sensors"
+    }
+   ],
+   "safety": [
+    "Guards / enclosure around spinning rotors; secure weights."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Dynamic Balancing Machine — Introduction",
+    "type": "in_app_tour",
+    "model": "dynamic_balancing_machine.glb",
+    "duration_s": 53.6,
+    "script": [
+     {
+      "narration": "This module introduces the Dynamic Balancing Machine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A dynamic balancing machine spins a rotor on sensitive pedestals, measures the once-per-revolution vibration caused by unbalance and its phase (from a reference mark), and computes the mass and angle of correction in two planes so both static and couple unbalance are removed to the required grade.",
+      "duration_s": 20.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include fan rotors, pump impellers, motor rotors after repair; turbine and compressor rotors, rolls and crankshafts.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Fan Rotor on Arbor: Heavy Spot (red) & Correction Weight (green), Reflective Reference Mark, Universal-Joint Drive Shaft.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Dynamic Balancing Machine — Operation",
+    "type": "in_app_tour",
+    "model": "dynamic_balancing_machine.glb",
+    "duration_s": 34.2,
+    "script": [
+     {
+      "narration": "How the Dynamic Balancing Machine works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The drive spins the rotor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "drive_shaft",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Unbalance shakes the pedestals once per turn.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pedestal_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Pick-ups and photo-cell measure amplitude and phase.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "console_sensors",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Correction weights are fitted in two planes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "An unbalanced rotor's heavy spot creates a rotating centrifugal force F = m·e·ω², which shakes the soft pedestals at once per revolution.",
+      "duration_s": 10.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Dynamic Balancing Machine — Maintenance",
+    "type": "in_app_tour",
+    "model": "dynamic_balancing_machine.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Dynamic Balancing Machine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check rollers and sensors.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pedestal_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Verify with test rotor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "console_sensors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Calibration per ISO 21940-21.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "console_sensors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for non-repeatable results: readings vary. Common cause: loose parts on rotor, worn rollers.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "pedestal_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wrong angle: correction worsens. Common cause: reference mark / sensor misread.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "console_sensors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Unbalance force grows with…",
+     "options": [
+      "Speed squared",
+      "Speed",
+      "Constant",
+      "Temperature"
+     ],
+     "answer": 0,
+     "explanation": "ω².",
+     "level": "basic"
+    },
+    {
+     "question": "Why two planes?",
+     "options": [
+      "Remove static and couple unbalance",
+      "Faster",
+      "Cheaper",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "Dynamic.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical grade for pump impellers?",
+     "options": [
+      "G6.3",
+      "G400",
+      "G0.4",
+      "G40"
+     ],
+     "answer": 0,
+     "explanation": "G6.3.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Base.\"",
+     "options": [
+      "Pedestal 1: Roller Carriage on Spring Suspension & Vibration Pick-up",
+      "Fan Rotor on Arbor: Heavy Spot (red) & Correction Weight (green), Reflective Reference Mark",
+      "Drive Head (motor, end-drive)",
+      "Machine Bed"
+     ],
+     "answer": 3,
+     "explanation": "Machine Bed: Base.",
+     "level": "basic",
+     "part": "bed",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support and sense.\"",
+     "options": [
+      "Pick-up and reference signals to the console",
+      "Pedestal 1: Roller Carriage on Spring Suspension & Vibration Pick-up",
+      "Machine Bed",
+      "Fan Rotor on Arbor: Heavy Spot (red) & Correction Weight (green), Reflective Reference Mark"
+     ],
+     "answer": 1,
+     "explanation": "Pedestal 1: Roller Carriage on Spring Suspension & Vibration Pick-up: Support and sense.",
+     "level": "basic",
+     "part": "pedestal_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Workpiece.\"",
+     "options": [
+      "Fan Rotor on Arbor: Heavy Spot (red) & Correction Weight (green), Reflective Reference Mark",
+      "Machine Bed",
+      "Pedestal 1: Roller Carriage on Spring Suspension & Vibration Pick-up",
+      "Drive Head (motor, end-drive)"
+     ],
+     "answer": 0,
+     "explanation": "Fan Rotor on Arbor: Heavy Spot (red) & Correction Weight (green), Reflective Reference Mark: Workpiece.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,651 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "gas_scrubbing_system",
+ "no": 274,
+ "title": "Gas Scrubbing System",
+ "model_title": "Gas Scrubbing System — Packed Caustic Absorber, Recirculation, pH-Controlled Dosing, ID Fan & Stack",
+ "category": "15 · Safety & Environmental",
+ "phase": 13,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A gas scrubbing system removes acid or toxic gases (H₂S, HCl, SO₂, Cl₂, NH₃) from a vent stream by absorbing them into a circulating liquid — here dilute caustic — in a packed tower. pH-controlled dosing keeps the liquor strong; an ID fan draws the gas through and discharges it up a stack.",
+   "applications": [
+    "Process vents, tank vents and odour control",
+    "Emergency chlorine / ammonia scrubbers"
+   ],
+   "key_points": [
+    "Counter-current packed absorber",
+    "pH control keeps removal high",
+    "Removal > 99 % possible",
+    "Bleed spent liquor"
+   ],
+   "classification": {
+    "family": "Environmental",
+    "type": "Packed caustic absorber system"
+   },
+   "hi_family": "safety_environmental",
+   "summary": "A gas scrubbing system removes acid or toxic gases from a vent stream by absorbing them into a circulating caustic solution in a packed tower, with pH-controlled dosing, a fan and a stack."
+  },
+  "model_3d": {
+   "asset": "glb/gas_scrubbing_system.glb",
+   "metadata": "meta/gas_scrubbing_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14052,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Contaminated gas enters below the packing.",
+    "Liquor flows down over the packing.",
+    "The gas dissolves and reacts with caustic."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Contaminated gas enters below the packing.",
+     "part": "gas_path",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquor flows down over the packing.",
+     "part": "distributor_demister",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The gas dissolves and reacts with caustic.",
+     "part": "packing",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Clean gas leaves via fan and stack.",
+     "part": "fan_impeller",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dosing holds pH; spent liquor is bled.",
+     "part": "liquor_circuit",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Removal efficiency vs liquid/gas ratio and pH."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "gas_scrubbing_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "gas_scrubbing_system_pressure.glb",
+     "title": "Pollutant falls as gas rises through the packing",
+     "description": "Acid gases (e.g. H₂S, HCl, SO₂, Cl₂) are absorbed into the liquor and neutralised by caustic (e.g. H₂S + 2 NaOH → Na₂S + 2 H₂O). Counter-current flow keeps the strongest liquor meeting the cleanest gas, so removal can exceed 99 %. Design uses liquid-to-gas ratio, packing height (NTU × HTU) and pH control; spent liquor is bled off and fresh caustic added.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/gas_scrubbing_system.json#components",
+   "key_components": "Packed absorber, recirculation pump, caustic dosing, ID fan, stack",
+   "parts": [
+    {
+     "id": "absorber",
+     "name": "Absorber Tower (FRP) with Integral Sump",
+     "info_ref": "gs_tower",
+     "function": "Contact gas and liquor.",
+     "material": "FRP / PP."
+    },
+    {
+     "id": "packing",
+     "name": "Random Packing (gas–liquid contact area)",
+     "info_ref": "gs_packing",
+     "function": "Transfer area.",
+     "material": "PP."
+    },
+    {
+     "id": "distributor_demister",
+     "name": "Liquid Distributor / Spray Header & Mist Eliminator",
+     "info_ref": "gs_distributor",
+     "function": "Spread liquor; stop mist.",
+     "material": "PP / steel."
+    },
+    {
+     "id": "scrubbing_liquor",
+     "name": "Scrubbing Liquor (dilute caustic, pH ≈ 8–10)",
+     "info_ref": "gs_tower",
+     "function": "Contact gas and liquor.",
+     "material": "FRP / PP."
+    },
+    {
+     "id": "recirc_pump",
+     "name": "Recirculation Pump",
+     "info_ref": "gs_pump",
+     "function": "Recirculate liquor.",
+     "material": "—"
+    },
+    {
+     "id": "recirc_pump_shaft",
+     "name": "Recirculation Pump — Shaft & Coupling (turning)",
+     "info_ref": "gs_pump",
+     "function": "Recirculate liquor.",
+     "material": "—"
+    },
+    {
+     "id": "liquor_circuit",
+     "name": "Recirculation Line, Caustic Day Tank & Metering Pump (pH control), Blowdown of Spent Liquor",
+     "info_ref": "gs_dosing",
+     "function": "Control pH.",
+     "material": "PE/PP."
+    },
+    {
+     "id": "gas_path",
+     "name": "Gas Inlet Duct, Outlet Duct, ID Fan & Discharge Stack",
+     "info_ref": "gs_fan",
+     "function": "Move gas.",
+     "material": "FRP/steel."
+    },
+    {
+     "id": "fan_impeller",
+     "name": "ID Fan Impeller",
+     "info_ref": "gs_fan",
+     "function": "Move gas.",
+     "material": "FRP/steel."
+    },
+    {
+     "id": "liquor_rain",
+     "name": "Liquor trickling down through the packing",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Towers ≈ 0.5 – 4 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 500 – 100,000",
+     "unit": "m³/h gas"
+    },
+    "operating_conditions": {
+     "typical_range": "pH ≈ 8–10 (caustic)",
+     "unit": "—"
+    },
+    "performance": {
+     "typical_range": "Removal ≈ 95 – 99.9 %",
+     "unit": "—"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "From gas flow, composition and emission limit; packing height by NTU/HTU."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "performance_guarantee": null
+    },
+    "status": "empty — fill from the equipment datasheet / safety study"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Perry's Handbook"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Structure for equipment, liquid / dust loads and wind; access platforms for maintenance."
+   ],
+   "alignment": [
+    "Fans and pumps aligned; ducts supported to avoid loads on equipment."
+   ],
+   "piping": [
+    "Corrosion-resistant materials for wet acid service; drains at low points; expansion joints on hot ducts."
+   ],
+   "commissioning": [
+    "Run on air/water; check ΔP, flows and controls; then process gas; emission test against permit."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pH, ΔP and recirculation flow.",
+     "part": "liquor_circuit",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean packing / distributor.",
+     "part": "packing",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace packing / pump parts.",
+     "part": "recirc_pump"
+    }
+   ],
+   "lubrication": [
+    "Fan / pump bearings and gearboxes per maker schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Breakthrough",
+     "category": "performance",
+     "symptoms": [
+      "Odour / emission"
+     ],
+     "causes": [
+      "Low pH, low liquor flow"
+     ],
+     "remedies": [
+      "Dose caustic; restore flow"
+     ],
+     "part": "liquor_circuit"
+    },
+    {
+     "problem": "Packing fouling",
+     "category": "performance",
+     "symptoms": [
+      "ΔP rise"
+     ],
+     "causes": [
+      "Salts / solids"
+     ],
+     "remedies": [
+      "Wash / replace"
+     ],
+     "part": "packing"
+    }
+   ],
+   "safety": [
+    "Caustic handling; H₂S / Cl₂ toxicity; fan failure alarms."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Gas Scrubbing System — Introduction",
+    "type": "in_app_tour",
+    "model": "gas_scrubbing_system.glb",
+    "duration_s": 50.2,
+    "script": [
+     {
+      "narration": "This module introduces the Gas Scrubbing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A gas scrubbing system removes acid or toxic gases (H₂S, HCl, SO₂, Cl₂, NH₃) from a vent stream by absorbing them into a circulating liquid — here dilute caustic — in a packed tower.",
+      "duration_s": 13.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "pH-controlled dosing keeps the liquor strong; an ID fan draws the gas through and discharges it up a stack.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process vents, tank vents and odour control; emergency chlorine / ammonia scrubbers.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Recirculation Pump, Recirculation Pump — Shaft & Coupling (turning), ID Fan Impeller.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Gas Scrubbing System — Operation",
+    "type": "in_app_tour",
+    "model": "gas_scrubbing_system.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "How the Gas Scrubbing System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Contaminated gas enters below the packing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gas_path",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquor flows down over the packing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor_demister",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The gas dissolves and reacts with caustic.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "packing",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Clean gas leaves via fan and stack.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_impeller",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dosing holds pH; spent liquor is bled.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquor_circuit",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Acid gases (e.g.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Gas Scrubbing System — Maintenance",
+    "type": "in_app_tour",
+    "model": "gas_scrubbing_system.glb",
+    "duration_s": 31.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Gas Scrubbing System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pH, ΔP and recirculation flow.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "liquor_circuit",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean packing / distributor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace packing / pump parts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "recirc_pump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for breakthrough: odour / emission. Common cause: low ph, low liquor flow.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "liquor_circuit",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for packing fouling: δp rise. Common cause: salts / solids.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why counter-current?",
+     "options": [
+      "Strongest liquor meets cleanest gas",
+      "Cheaper",
+      "Less fan power",
+      "No reason"
+     ],
+     "answer": 0,
+     "explanation": "Driving force.",
+     "level": "basic"
+    },
+    {
+     "question": "What controls caustic dosing?",
+     "options": [
+      "pH",
+      "Temperature",
+      "Colour",
+      "Noise"
+     ],
+     "answer": 0,
+     "explanation": "pH.",
+     "level": "basic"
+    },
+    {
+     "question": "Why bleed liquor?",
+     "options": [
+      "Remove dissolved salts",
+      "Lower level only",
+      "Add caustic",
+      "Cool"
+     ],
+     "answer": 0,
+     "explanation": "Salts.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contact gas and liquor.\"",
+     "options": [
+      "Recirculation Line, Caustic Day Tank & Metering Pump (pH control), Blowdown of Spent Liquor",
+      "Recirculation Pump",
+      "Liquid Distributor / Spray Header & Mist Eliminator",
+      "Absorber Tower (FRP) with Integral Sump"
+     ],
+     "answer": 3,
+     "explanation": "Absorber Tower (FRP) with Integral Sump: Contact gas and liquor.",
+     "level": "basic",
+     "part": "absorber",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Transfer area.\"",
+     "options": [
+      "Scrubbing Liquor (dilute caustic, pH ≈ 8–10)",
+      "Random Packing (gas–liquid contact area)",
+      "Recirculation Line, Caustic Day Tank & Metering Pump (pH control), Blowdown of Spent Liquor",
+      "Liquid Distributor / Spray Header & Mist Eliminator"
+     ],
+     "answer": 1,
+     "explanation": "Random Packing (gas–liquid contact area): Transfer area.",
+     "level": "basic",
+     "part": "packing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Spread liquor; stop mist.\"",
+     "options": [
+      "ID Fan Impeller",
+      "Scrubbing Liquor (dilute caustic, pH ≈ 8–10)",
+      "Liquid Distributor / Spray Header & Mist Eliminator",
+      "Recirculation Line, Caustic Day Tank & Metering Pump (pH control), Blowdown of Spent Liquor"
+     ],
+     "answer": 2,
+     "explanation": "Liquid Distributor / Spray Header & Mist Eliminator: Spread liquor; stop mist.",
+     "level": "basic",
+     "part": "distributor_demister",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

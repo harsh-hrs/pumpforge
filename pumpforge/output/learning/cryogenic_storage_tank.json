@@ -1,0 +1,624 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "cryogenic_storage_tank",
+ "no": 115,
+ "title": "Cryogenic Storage Tank",
+ "model_title": "Full-Containment Cryogenic (LNG) Storage Tank",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A full-containment LNG tank stores liquefied natural gas at about −162 °C. A 9 % nickel inner tank holds the liquid, thick insulation limits heat leak, and a pre-stressed concrete outer tank can contain liquid and vapour if the inner tank fails. In-tank pumps send LNG out through the roof; boil-off gas is recovered.",
+   "applications": [
+    "LNG import/export terminals",
+    "Peak-shaving plants",
+    "Liquid nitrogen/oxygen/argon storage (smaller, vacuum-insulated)",
+    "Ethylene storage"
+   ],
+   "key_points": [
+    "Boil-off ~ 0.05 %/day (large tanks, typical)",
+    "No bottom penetrations",
+    "Materials ductile at cryogenic temperature",
+    "Rollover and stratification risk"
+   ],
+   "classification": {
+    "family": "Cryogenic storage",
+    "type": "Full-containment LNG tank with suspended deck"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A full-containment LNG tank stores liquefied natural gas at about −162 °C. An inner tank of 9 % nickel steel holds the liquid; thick insulation limits heat leak; an outer pre-stressed concrete wall and roof can contain the liquid and vapour if the inner tank leaks. Pumps in columns send LNG out from the top, and boil-off gas is removed and recovered."
+  },
+  "model_3d": {
+   "asset": "glb/cryogenic_storage_tank.glb",
+   "metadata": "meta/cryogenic_storage_tank.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4542,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "LNG is held in the 9 % Ni inner tank.",
+    "Insulation and the suspended deck limit heat entering.",
+    "Heat leak causes boil-off gas, removed at the roof."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "LNG is held in the 9 % Ni inner tank.",
+     "part": "inner_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Insulation and the suspended deck limit heat entering.",
+     "part": "insulation",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heat leak causes boil-off gas, removed at the roof.",
+     "part": "roof_platform",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "In-tank pumps send LNG out through the columns.",
+     "part": "in_tank_pumps",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The concrete outer tank provides secondary containment.",
+     "part": "outer_tank",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Boil-off rate vs heat leak; level/density profiles for rollover monitoring."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "cryogenic_storage_tank_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/cryogenic_storage_tank.json#components",
+   "key_components": "Inner 9% Ni tank, insulation, outer concrete wall, suspended deck, in-tank pumps",
+   "parts": [
+    {
+     "id": "outer_tank",
+     "name": "Outer Pre-stressed Concrete Wall & Dome Roof (secondary containment)",
+     "info_ref": "cr_outer",
+     "function": "Secondary containment and weather enclosure.",
+     "material": "Concrete."
+    },
+    {
+     "id": "liner",
+     "name": "Carbon-Steel Vapour Liner",
+     "info_ref": "cr_liner",
+     "function": "Vapour barrier.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "insulation",
+     "name": "Annular Perlite Insulation & Base Insulation (cellular glass)",
+     "info_ref": "cr_insulation",
+     "function": "Limits heat leak and boil-off.",
+     "material": "Insulation."
+    },
+    {
+     "id": "inner_tank",
+     "name": "Inner Tank — 9 % Nickel Steel (primary containment)",
+     "info_ref": "cr_inner",
+     "function": "Holds the cryogenic liquid.",
+     "material": "9 % Ni steel."
+    },
+    {
+     "id": "suspended_deck",
+     "name": "Insulated Suspended Deck (hung from the roof)",
+     "info_ref": "cr_deck",
+     "function": "Insulated deck hung from the roof.",
+     "material": "Aluminium."
+    },
+    {
+     "id": "lng",
+     "name": "LNG at about −162 °C",
+     "info_ref": "cr_lng",
+     "function": "LNG.",
+     "material": "—"
+    },
+    {
+     "id": "in_tank_pumps",
+     "name": "In-Tank Submerged Pumps in Pump Columns (no bottom penetrations)",
+     "info_ref": "cr_pumps",
+     "function": "Send LNG out without bottom penetrations.",
+     "material": "—"
+    },
+    {
+     "id": "roof_platform",
+     "name": "Roof Platform, Boil-off Gas Outlet & Top Fill Line",
+     "info_ref": "cr_roof",
+     "function": "Roof connections.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø ~ 70 – 90 m; 50 000 – 270 000 m³",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "~ 0.25 (slightly above atmospheric)",
+     "unit": "bar(g)"
+    },
+    "design_temperature": {
+     "typical_range": "-165 to ambient",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Working volume",
+     "unit": "m³"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Elevated pile cap or heated slab to prevent frost heave."
+   ],
+   "alignment": [
+    "Check shell plumbness and roundness after erection (API 650 tolerances)."
+   ],
+   "piping": [
+    "Flexible connections at shell nozzles to absorb settlement; fire protection and bunding per code."
+   ],
+   "commissioning": [
+    "Hydrostatic test with settlement survey; calibrate level gauges and overfill protection."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor level, temperature/density profiles, BOG.",
+     "part": "lng",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Test in-tank pumps (pull via columns).",
+     "part": "in_tank_pumps",
+     "interval": "per hours"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspection at decommissioning only (rare).",
+     "part": "inner_tank"
+    }
+   ],
+   "lubrication": [
+    "Pump bearings lubricated by LNG."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Rollover",
+     "category": "performance",
+     "symptoms": [
+      "Sudden large BOG release"
+     ],
+     "causes": [
+      "Stratification of different-density LNG"
+     ],
+     "remedies": [
+      "Mixing/top-bottom filling"
+     ],
+     "part": "lng"
+    },
+    {
+     "problem": "Cold spots on outer wall",
+     "category": "performance",
+     "symptoms": [
+      "Thermography anomaly"
+     ],
+     "causes": [
+      "Insulation defect"
+     ],
+     "remedies": [
+      "Investigate"
+     ],
+     "part": "insulation"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Cryogenic Storage Tank — Introduction",
+    "type": "in_app_tour",
+    "model": "cryogenic_storage_tank.glb",
+    "duration_s": 54.8,
+    "script": [
+     {
+      "narration": "This module introduces the Cryogenic Storage Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A full-containment LNG tank stores liquefied natural gas at about −162 °C.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A 9 % nickel inner tank holds the liquid, thick insulation limits heat leak, and a pre-stressed concrete outer tank can contain liquid and vapour if the inner tank fails.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "In-tank pumps send LNG out through the roof; boil-off gas is recovered.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include LNG import/export terminals; peak-shaving plants; liquid nitrogen/oxygen/argon storage (smaller, vacuum-insulated); ethylene storage.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: In-Tank Submerged Pumps in Pump Columns (no bottom penetrations).",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Cryogenic Storage Tank — Operation",
+    "type": "in_app_tour",
+    "model": "cryogenic_storage_tank.glb",
+    "duration_s": 28.4,
+    "script": [
+     {
+      "narration": "How the Cryogenic Storage Tank works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "LNG is held in the 9 % Ni inner tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inner_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Insulation and the suspended deck limit heat entering.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "insulation",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heat leak causes boil-off gas, removed at the roof.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "roof_platform",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "In-tank pumps send LNG out through the columns.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "in_tank_pumps",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The concrete outer tank provides secondary containment.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "outer_tank",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Cryogenic Storage Tank — Maintenance",
+    "type": "in_app_tour",
+    "model": "cryogenic_storage_tank.glb",
+    "duration_s": 33.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Cryogenic Storage Tank.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor level, temperature/density profiles, BOG.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "lng",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Test in-tank pumps (pull via columns).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "in_tank_pumps",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspection at decommissioning only (rare).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inner_tank",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rollover: sudden large bog release. Common cause: stratification of different-density lng.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "lng",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cold spots on outer wall: thermography anomaly. Common cause: insulation defect.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "insulation",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why 9 % nickel steel for the inner tank?",
+     "options": [
+      "Cheap",
+      "Remains tough (ductile) at −162 °C",
+      "Magnetic",
+      "Light"
+     ],
+     "answer": 1,
+     "explanation": "Cryogenic toughness.",
+     "level": "basic"
+    },
+    {
+     "question": "What is boil-off gas?",
+     "options": [
+      "Leaked LNG",
+      "Vapour formed by heat leak into the tank",
+      "Nitrogen",
+      "Exhaust"
+     ],
+     "answer": 1,
+     "explanation": "Heat ingress.",
+     "level": "basic"
+    },
+    {
+     "question": "Why no bottom nozzles?",
+     "options": [
+      "Cheaper",
+      "Avoid a leak path below the liquid",
+      "Easier painting",
+      "Pumps need them"
+     ],
+     "answer": 1,
+     "explanation": "Full containment safety.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Secondary containment and weather enclosure.\"",
+     "options": [
+      "LNG at about −162 °C",
+      "Carbon-Steel Vapour Liner",
+      "Annular Perlite Insulation & Base Insulation (cellular glass)",
+      "Outer Pre-stressed Concrete Wall & Dome Roof (secondary containment)"
+     ],
+     "answer": 3,
+     "explanation": "Outer Pre-stressed Concrete Wall & Dome Roof (secondary containment): Secondary containment and weather enclosure.",
+     "level": "basic",
+     "part": "outer_tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Vapour barrier.\"",
+     "options": [
+      "Carbon-Steel Vapour Liner",
+      "Annular Perlite Insulation & Base Insulation (cellular glass)",
+      "Outer Pre-stressed Concrete Wall & Dome Roof (secondary containment)",
+      "Inner Tank — 9 % Nickel Steel (primary containment)"
+     ],
+     "answer": 0,
+     "explanation": "Carbon-Steel Vapour Liner: Vapour barrier.",
+     "level": "basic",
+     "part": "liner",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Limits heat leak and boil-off.\"",
+     "options": [
+      "Outer Pre-stressed Concrete Wall & Dome Roof (secondary containment)",
+      "Carbon-Steel Vapour Liner",
+      "Annular Perlite Insulation & Base Insulation (cellular glass)",
+      "Inner Tank — 9 % Nickel Steel (primary containment)"
+     ],
+     "answer": 2,
+     "explanation": "Annular Perlite Insulation & Base Insulation (cellular glass): Limits heat leak and boil-off.",
+     "level": "basic",
+     "part": "insulation",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,618 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "bucket_wheel_excavator",
+ "no": 149,
+ "title": "Bucket Wheel Excavator",
+ "model_title": "Bucket Wheel Excavator (Crawler-Mounted, Surface Mining)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A bucket wheel excavator (BWE) is a continuous mining machine used in large open-cast mines. A rotating wheel of buckets on the end of a boom cuts overburden, lignite or coal from the bench as the boom slews. The material falls onto the boom conveyor and is transferred through the machine to the discharge boom, which loads the mine's belt conveyor system. Crawler tracks move the machine.",
+   "applications": [
+    "Lignite and brown-coal open-cast mines",
+    "Overburden removal",
+    "Large earth-moving projects in soft-to-medium material"
+   ],
+   "key_points": [
+    "Continuous digging — high output",
+    "Crawler-mounted, slewing upper structure",
+    "Suited to soft/medium, non-blocky material",
+    "Feeds mine conveyor systems"
+   ],
+   "classification": {
+    "family": "Heavy mining machinery",
+    "type": "Compact crawler bucket wheel excavator"
+   },
+   "hi_family": "material_handling",
+   "summary": "A bucket wheel excavator (BWE) is a giant continuous mining machine. Buckets on the rotating wheel cut material from the bench as the boom slews; the material drops onto belt conveyors in the boom and leaves via the discharge boom to the mine conveyor system. Crawlers move the machine."
+  },
+  "model_3d": {
+   "asset": "glb/bucket_wheel_excavator.glb",
+   "metadata": "meta/bucket_wheel_excavator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 4404,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The bucket wheel turns and cuts into the bench.",
+    "Material falls onto the boom conveyor and travels to the centre.",
+    "The superstructure slews to sweep the wheel across the face."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The bucket wheel turns and cuts into the bench.",
+     "part": "bucket_wheel",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Material falls onto the boom conveyor and travels to the centre.",
+     "part": "spoil",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The superstructure slews to sweep the wheel across the face.",
+     "part": "superstructure",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The discharge boom loads the material onto the mine conveyor; crawlers advance the machine.",
+     "part": "discharge_boom",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Theoretical output = bucket volume × discharges per minute × fill factor ÷ swell factor; actual output depends on digging resistance and slew technique."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "bucket_wheel_excavator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/bucket_wheel_excavator.json#components",
+   "key_components": "Bucket wheel, boom, superstructure, crawlers, discharge boom",
+   "parts": [
+    {
+     "id": "track_left",
+     "name": "Crawler Track Shoes (left)",
+     "info_ref": "bw_crawler",
+     "function": "Moves the machine on soft ground.",
+     "material": "Steel."
+    },
+    {
+     "id": "track_right",
+     "name": "Crawler Track Shoes (right)",
+     "info_ref": "bw_crawler",
+     "function": "Moves the machine on soft ground.",
+     "material": "Steel."
+    },
+    {
+     "id": "crawlers",
+     "name": "Crawler Undercarriage (track frames)",
+     "info_ref": "bw_crawler",
+     "function": "Moves the machine on soft ground.",
+     "material": "Steel."
+    },
+    {
+     "id": "base",
+     "name": "Lower Structure & Slew Ring",
+     "info_ref": "bw_base",
+     "function": "Lower structure and slew ring.",
+     "material": "Steel."
+    },
+    {
+     "id": "superstructure",
+     "name": "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+     "info_ref": "sr_boom",
+     "function": "Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.",
+     "material": "Steel."
+    },
+    {
+     "id": "bucket_wheel",
+     "name": "Bucket Wheel (digs material and drops it on the boom conveyor)",
+     "info_ref": "sr_wheel",
+     "function": "Digs material from the pile/face and drops it on the boom conveyor.",
+     "material": "Steel; wear teeth/lips."
+    },
+    {
+     "id": "discharge_boom",
+     "name": "Discharge Boom (loads trucks/conveyors)",
+     "info_ref": "bw_discharge",
+     "function": "Discharges to conveyors.",
+     "material": "Steel."
+    },
+    {
+     "id": "mine_face",
+     "name": "Mine Bench / Face (overburden, coal, lignite)",
+     "info_ref": "hm_pile",
+     "function": "Stockpile / face.",
+     "material": "—"
+    },
+    {
+     "id": "spoil",
+     "name": "Excavated Material on the Boom Conveyor",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Compact BWE wheel ~ 3 – 8 m; giant BWEs wheel ~ 20 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 0.5 – 15+ (MW range for large units)",
+     "unit": "MW"
+    },
+    "speed": {
+     "typical_range": "Wheel ~ 3 – 10 rpm",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "~ 500 – 10 000+",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Check digging resistance (cutting force per cm of cutting edge), bench geometry and required output."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Surface mining engineering handbooks (SME)",
+    "Manufacturer BWE data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Prepared, levelled bench with adequate ground-bearing capacity for crawler pressure; drainage of the working level."
+   ],
+   "alignment": [
+    "Plan bench height and block width to match wheel diameter and boom reach."
+   ],
+   "piping": [
+    "Power by trailing cable from a mine substation via cable reel; communications with conveyor control."
+   ],
+   "commissioning": [
+    "Assemble and test each drive; check slew/luff brakes, wheel overload protection and collision sensors; trial digging."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Inspect bucket teeth and lips, wheel chute and belts.",
+     "part": "bucket_wheel",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect crawler pads, rollers and drive.",
+     "part": "crawlers",
+     "interval": "weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Structural inspections (NDT) of boom and mast; slew bearing.",
+     "part": "superstructure"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tooth/bucket wear",
+     "category": "wear",
+     "symptoms": [
+      "High wheel power, falling output"
+     ],
+     "causes": [
+      "Abrasive or hard material"
+     ],
+     "remedies": [
+      "Change teeth; adjust cutting technique"
+     ],
+     "part": "bucket_wheel"
+    },
+    {
+     "problem": "Crawler damage",
+     "category": "performance",
+     "symptoms": [
+      "Broken pads, track derailing"
+     ],
+     "causes": [
+      "Soft ground, rocks"
+     ],
+     "remedies": [
+      "Improve bench preparation; replace pads"
+     ],
+     "part": "crawlers"
+    }
+   ],
+   "safety": [
+    "Exclusion zones; slope stability; trailing-cable management; lightning and wind limits."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Bucket Wheel Excavator — Introduction",
+    "type": "in_app_tour",
+    "model": "bucket_wheel_excavator.glb",
+    "duration_s": 58.7,
+    "script": [
+     {
+      "narration": "This module introduces the Bucket Wheel Excavator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A bucket wheel excavator (BWE) is a continuous mining machine used in large open-cast mines.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A rotating wheel of buckets on the end of a boom cuts overburden, lignite or coal from the bench as the boom slews.",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The material falls onto the boom conveyor and is transferred through the machine to the discharge boom, which loads the mine's belt conveyor system.",
+      "duration_s": 10.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include lignite and brown-coal open-cast mines; overburden removal; large earth-moving projects in soft-to-medium material.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Bucket Wheel (digs material and drops it on the boom conveyor).",
+      "duration_s": 7.1,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Bucket Wheel Excavator — Operation",
+    "type": "in_app_tour",
+    "model": "bucket_wheel_excavator.glb",
+    "duration_s": 26.8,
+    "script": [
+     {
+      "narration": "How the Bucket Wheel Excavator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The bucket wheel turns and cuts into the bench.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bucket_wheel",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Material falls onto the boom conveyor and travels to the centre.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "spoil",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The superstructure slews to sweep the wheel across the face.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "superstructure",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The discharge boom loads the material onto the mine conveyor; crawlers advance the machine.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "discharge_boom",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Bucket Wheel Excavator — Maintenance",
+    "type": "in_app_tour",
+    "model": "bucket_wheel_excavator.glb",
+    "duration_s": 34.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Bucket Wheel Excavator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Inspect bucket teeth and lips, wheel chute and belts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bucket_wheel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect crawler pads, rollers and drive.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "crawlers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Structural inspections (NDT) of boom and mast; slew bearing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tooth/bucket wear: high wheel power, falling output. Common cause: abrasive or hard material.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "bucket_wheel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for crawler damage: broken pads, track derailing. Common cause: soft ground, rocks.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "crawlers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the main advantage of a BWE?",
+     "options": [
+      "Continuous high output digging",
+      "It can dig hard granite easily",
+      "It needs no power",
+      "It is small"
+     ],
+     "answer": 0,
+     "explanation": "Continuous excavation.",
+     "level": "basic"
+    },
+    {
+     "question": "How does material leave the BWE?",
+     "options": [
+      "Via boom and discharge conveyors to the mine belt system",
+      "By trucks loaded by hand",
+      "Through a pipe",
+      "It stays on the wheel"
+     ],
+     "answer": 0,
+     "explanation": "Conveyor loading.",
+     "level": "basic"
+    },
+    {
+     "question": "BWEs are best suited to…",
+     "options": [
+      "Soft-to-medium materials like lignite and overburden",
+      "Blasted hard rock only",
+      "Liquids",
+      "Fine powders in silos"
+     ],
+     "answer": 0,
+     "explanation": "Digging resistance limits.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Moves the machine on soft ground.\"",
+     "options": [
+      "Discharge Boom (loads trucks/conveyors)",
+      "Mine Bench / Face (overburden, coal, lignite)",
+      "Excavated Material on the Boom Conveyor",
+      "Crawler Track Shoes (left)"
+     ],
+     "answer": 3,
+     "explanation": "Crawler Track Shoes (left): Moves the machine on soft ground.",
+     "level": "basic",
+     "part": "track_left",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Lower structure and slew ring.\"",
+     "options": [
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+      "Lower Structure & Slew Ring",
+      "Crawler Track Shoes (left)",
+      "Excavated Material on the Boom Conveyor"
+     ],
+     "answer": 1,
+     "explanation": "Lower Structure & Slew Ring: Lower structure and slew ring.",
+     "level": "basic",
+     "part": "base",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.\"",
+     "options": [
+      "Bucket Wheel (digs material and drops it on the boom conveyor)",
+      "Lower Structure & Slew Ring",
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+      "Crawler Track Shoes (left)"
+     ],
+     "answer": 2,
+     "explanation": "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor: Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.",
+     "level": "basic",
+     "part": "superstructure",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

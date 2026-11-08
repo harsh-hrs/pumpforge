@@ -1,0 +1,467 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "alumina_cooler",
+  "title": "Rotary Alumina Cooler (Indirect, External Water-Spray Cooling)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 210,
+    "phase": 10,
+    "eq_id": "EQ-288",
+    "subcategory": "Cooling",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "alumina_cooler_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "alumina_cooler_temperature.glb",
+      "title": "Indirect cooling through the shell",
+      "description": "Hot alumina tumbles inside while water sprays and runs over the outside of the shell, removing heat through the steel wall (no contact between water and product). Lifters improve contact with the cooled wall. Shell temperature differences and scaling of the external surface reduce performance.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "alumina_flow",
+      "kind": "sand",
+      "radius": 0.025,
+      "points": [
+        [
+          -1.75,
+          1.55,
+          -0.0
+        ],
+        [
+          -1.4,
+          0.55,
+          -0.05
+        ],
+        [
+          1.5,
+          0.55,
+          -0.05
+        ],
+        [
+          1.75,
+          0.3,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 7376,
+    "parts": 7
+  },
+  "summary": "A rotary alumina cooler is a slowly rotating drum whose outside is sprayed with water. Hot alumina tumbles inside and is cooled through the shell without ever touching the water.",
+  "classification": {
+    "family": "Cooling",
+    "type": "Indirect rotary drum cooler"
+  },
+  "model_configuration": {
+    "animation": "Tyres turn; alumina tumbles; sprays"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Rotary cooler design",
+      "relevance": "Shell and drive.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Process cooler literature"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Cooler Drum: Shell with Liners / Lifters (rotates)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.5,
+        0.42,
+        -0.58
+      ],
+      "bbox_max": [
+        1.5,
+        1.58,
+        0.58
+      ],
+      "label_anchor": [
+        0.0,
+        1.0,
+        0.58
+      ],
+      "center": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "ac_shell"
+    },
+    {
+      "id": "girth_tyres",
+      "name": "Cooler Drum: Riding Tyres & Girth Gear (turn with the shell)",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "girth_tyres.001"
+      ],
+      "pivot": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.9
+      ],
+      "bbox_min": [
+        -1.31,
+        0.26,
+        -0.74
+      ],
+      "bbox_max": [
+        1.31,
+        1.74,
+        0.74
+      ],
+      "label_anchor": [
+        0.0,
+        1.0,
+        0.74
+      ],
+      "center": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "ac_drive"
+    },
+    {
+      "id": "spray_system",
+      "name": "External Water-Spray Header & Collecting Pan",
+      "group": "water",
+      "section_role": "keep",
+      "nodes": [
+        "spray_system.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.4
+      ],
+      "bbox_min": [
+        -1.35,
+        0.15,
+        -0.75
+      ],
+      "bbox_max": [
+        1.05,
+        1.83,
+        0.75
+      ],
+      "label_anchor": [
+        -0.15,
+        0.99,
+        0.75
+      ],
+      "center": [
+        -0.15,
+        0.99,
+        -0.0
+      ],
+      "info_ref": "ac_spray"
+    },
+    {
+      "id": "hoods",
+      "name": "Inlet Hood (hot alumina feed) & Discharge Hood",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "hoods__back",
+        "hoods__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -2.0,
+        0.2,
+        -0.45
+      ],
+      "bbox_max": [
+        2.0,
+        1.55,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        0.875,
+        0.45
+      ],
+      "center": [
+        0.0,
+        0.875,
+        -0.0
+      ],
+      "info_ref": "ac_hoods"
+    },
+    {
+      "id": "supports_drive",
+      "name": "Support Rollers & Drive",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports_drive.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.45,
+        0.0,
+        -1.7
+      ],
+      "bbox_max": [
+        1.45,
+        0.8,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        0.65
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.525
+      ],
+      "info_ref": "ac_drive"
+    },
+    {
+      "id": "alumina",
+      "name": "Alumina tumbling against the Cooled Shell",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "alumina0",
+        "alumina1",
+        "alumina2",
+        "alumina3",
+        "alumina4",
+        "alumina5",
+        "alumina6",
+        "alumina7",
+        "alumina8",
+        "alumina9",
+        "alumina10",
+        "alumina11",
+        "alumina12",
+        "alumina13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.03,
+        -0.03,
+        -0.02853
+      ],
+      "bbox_max": [
+        0.03,
+        0.03,
+        0.02853
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02853
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "spray",
+      "name": "Cooling Water running over the Shell",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "spray0",
+        "spray1",
+        "spray2",
+        "spray3",
+        "spray4",
+        "spray5",
+        "spray6",
+        "spray7",
+        "spray8",
+        "spray9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "ac_shell": {
+      "function": "Cooling drum.",
+      "construction": "Shell with lifters.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ac_drive": {
+      "function": "Rotation.",
+      "construction": "Tyres, gear, rollers, motor.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ac_spray": {
+      "function": "External cooling.",
+      "construction": "Spray header and pan.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ac_hoods": {
+      "function": "Feed and discharge.",
+      "construction": "Hoods.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

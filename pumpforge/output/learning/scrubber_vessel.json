@@ -1,0 +1,632 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "scrubber_vessel",
+ "no": 109,
+ "title": "Scrubber Vessel",
+ "model_title": "Packed Wet Scrubber (Counter-Current, Recirculated Liquor)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A wet scrubber removes pollutants from gas by contact with a liquid. Gas flows up through a packed bed while scrubbing liquor trickles down; acids, dust or odours dissolve or react. A mist eliminator catches droplets before the clean gas leaves.",
+   "applications": [
+    "Acid gas removal (HCl, SO₂, NH₃)",
+    "Odour control",
+    "Process vent treatment",
+    "Dust removal (venturi/packed)"
+   ],
+   "key_points": [
+    "Counter-current contact",
+    "Liquid-to-gas ratio and pH control",
+    "Flooding limits gas rate",
+    "Mist eliminator prevents carry-over"
+   ],
+   "classification": {
+    "family": "Gas treatment",
+    "type": "Packed-bed counter-current wet scrubber"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A wet scrubber removes acid gases, dust or odours from a gas stream by contact with a scrubbing liquid. Gas flows up through a packed bed while liquor from spray nozzles trickles down over the packing; pollutants dissolve or react in the liquid. A mist eliminator stops droplets leaving with the gas."
+  },
+  "model_3d": {
+   "asset": "glb/scrubber_vessel.glb",
+   "metadata": "meta/scrubber_vessel.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 9204,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Dirty gas enters near the bottom.",
+    "Liquor is sprayed on top of the packing.",
+    "Gas and liquid contact on the packing surface; pollutants transfer to the liquid."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Dirty gas enters near the bottom.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquor is sprayed on top of the packing.",
+     "part": "spray_header",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas and liquid contact on the packing surface; pollutants transfer to the liquid.",
+     "part": "packing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The mist eliminator removes droplets; clean gas exits.",
+     "part": "mist_eliminator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Liquor collects in the sump and is recirculated.",
+     "part": "recirculation_pump",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Removal efficiency vs L/G ratio and packing height (NTU × HTU)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "scrubber_vessel_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/scrubber_vessel.json#components",
+   "key_components": "Packed bed, spray header, mist eliminator, sump, recirculation",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Scrubber Tower (FRP/PP)",
+     "info_ref": "sc_vessel",
+     "function": "Contains the packing and contact zone.",
+     "material": "FRP / PP / lined steel."
+    },
+    {
+     "id": "sump",
+     "name": "Liquor Sump",
+     "info_ref": "sc_sump",
+     "function": "Holds liquor.",
+     "material": "—"
+    },
+    {
+     "id": "packing",
+     "name": "Random Packing Bed on Support Grid (gas–liquid contact area)",
+     "info_ref": "sc_packing",
+     "function": "Large wetted surface for gas–liquid contact.",
+     "material": "PP/ceramic/metal."
+    },
+    {
+     "id": "spray_header",
+     "name": "Liquid Distributor / Spray Header",
+     "info_ref": "sc_spray",
+     "function": "Distributes liquor evenly.",
+     "material": "PP."
+    },
+    {
+     "id": "mist_eliminator",
+     "name": "Mist Eliminator (chevron/mesh)",
+     "info_ref": "sc_mist",
+     "function": "Removes entrained droplets.",
+     "material": "PP/stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Gas Inlet, Gas Outlet & Recirculation Line",
+     "info_ref": "sc_nozzles",
+     "function": "Gas and liquor connections.",
+     "material": "—"
+    },
+    {
+     "id": "recirculation_pump",
+     "name": "Recirculation Pump",
+     "info_ref": "sc_pump",
+     "function": "Recirculates liquor.",
+     "material": "—"
+    },
+    {
+     "id": "supports",
+     "name": "Base",
+     "info_ref": "sc_supports",
+     "function": "Base.",
+     "material": "—"
+    },
+    {
+     "id": "liquor",
+     "name": "Scrubbing Liquor Trickling Down (tracers)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 0.3 – 5 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Near atmospheric",
+     "unit": "mbar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 80 (plastics)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Gas flow",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pH, recirculation flow, ΔP.",
+     "part": "sump",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean spray nozzles; check packing.",
+     "part": "spray_header",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace packing/mist eliminator.",
+     "part": "packing"
+    }
+   ],
+   "lubrication": [
+    "Pump bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Flooding",
+     "category": "performance",
+     "symptoms": [
+      "High ΔP, liquid carry-over"
+     ],
+     "causes": [
+      "Too much gas or liquid, fouled packing"
+     ],
+     "remedies": [
+      "Reduce load; clean packing"
+     ],
+     "part": "packing"
+    },
+    {
+     "problem": "Low efficiency",
+     "category": "performance",
+     "symptoms": [
+      "Emissions high"
+     ],
+     "causes": [
+      "Low pH/flow, blocked nozzles"
+     ],
+     "remedies": [
+      "Restore chemistry; clean"
+     ],
+     "part": "spray_header"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Scrubber Vessel — Introduction",
+    "type": "in_app_tour",
+    "model": "scrubber_vessel.glb",
+    "duration_s": 44.7,
+    "script": [
+     {
+      "narration": "This module introduces the Scrubber Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A wet scrubber removes pollutants from gas by contact with a liquid.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gas flows up through a packed bed while scrubbing liquor trickles down; acids, dust or odours dissolve or react.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A mist eliminator catches droplets before the clean gas leaves.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include acid gas removal (HCl, SO₂, NH₃); odour control; process vent treatment; dust removal (venturi/packed).",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Scrubber Vessel — Operation",
+    "type": "in_app_tour",
+    "model": "scrubber_vessel.glb",
+    "duration_s": 29.6,
+    "script": [
+     {
+      "narration": "How the Scrubber Vessel works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Dirty gas enters near the bottom.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquor is sprayed on top of the packing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spray_header",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas and liquid contact on the packing surface; pollutants transfer to the liquid.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "packing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The mist eliminator removes droplets; clean gas exits.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mist_eliminator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Liquor collects in the sump and is recirculated.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "recirculation_pump",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Scrubber Vessel — Maintenance",
+    "type": "in_app_tour",
+    "model": "scrubber_vessel.glb",
+    "duration_s": 34.7,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Scrubber Vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pH, recirculation flow, ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sump",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean spray nozzles; check packing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "spray_header",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace packing/mist eliminator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for flooding: high δp, liquid carry-over. Common cause: too much gas or liquid, fouled packing.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "packing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low efficiency: emissions high. Common cause: low ph/flow, blocked nozzles.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "spray_header",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Counter-current means gas and liquid flow…",
+     "options": [
+      "The same way",
+      "In opposite directions",
+      "Sideways",
+      "Not at all"
+     ],
+     "answer": 1,
+     "explanation": "Gas up, liquid down.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is packing used?",
+     "options": [
+      "Weight",
+      "Large contact surface",
+      "Colour",
+      "Noise"
+     ],
+     "answer": 1,
+     "explanation": "Mass transfer area.",
+     "level": "basic"
+    },
+    {
+     "question": "Flooding happens when…",
+     "options": [
+      "Flow too low",
+      "Gas/liquid loads too high",
+      "pH high",
+      "Fan off"
+     ],
+     "answer": 1,
+     "explanation": "Hydraulic limit.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contains the packing and contact zone.\"",
+     "options": [
+      "Random Packing Bed on Support Grid (gas–liquid contact area)",
+      "Scrubber Tower (FRP/PP)",
+      "Liquor Sump",
+      "Scrubbing Liquor Trickling Down (tracers)"
+     ],
+     "answer": 1,
+     "explanation": "Scrubber Tower (FRP/PP): Contains the packing and contact zone.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Holds liquor.\"",
+     "options": [
+      "Random Packing Bed on Support Grid (gas–liquid contact area)",
+      "Liquor Sump",
+      "Scrubber Tower (FRP/PP)",
+      "Scrubbing Liquor Trickling Down (tracers)"
+     ],
+     "answer": 1,
+     "explanation": "Liquor Sump: Holds liquor.",
+     "level": "basic",
+     "part": "sump",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Large wetted surface for gas–liquid contact.\"",
+     "options": [
+      "Recirculation Pump",
+      "Random Packing Bed on Support Grid (gas–liquid contact area)",
+      "Gas Inlet, Gas Outlet & Recirculation Line",
+      "Mist Eliminator (chevron/mesh)"
+     ],
+     "answer": 1,
+     "explanation": "Random Packing Bed on Support Grid (gas–liquid contact area): Large wetted surface for gas–liquid contact.",
+     "level": "basic",
+     "part": "packing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

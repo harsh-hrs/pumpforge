@@ -1,0 +1,662 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "ozonation_system",
+ "no": 224,
+ "title": "Ozonation System",
+ "model_title": "Ozonation System (O₂ Feed, Ozone Generator, Diffuser Contactor, Off-Gas Destructor)",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An ozonation system produces ozone on site by passing oxygen through a corona discharge (3 O₂ → 2 O₃) and bubbles it into water through fine diffusers in a covered contact tank. Ozone is a very strong oxidant: it disinfects and removes colour, taste, odour and micro-pollutants. Leftover ozone in the off-gas is destroyed before venting.",
+   "applications": [
+    "Drinking-water oxidation and disinfection",
+    "Bottled water, cooling water, wastewater reuse and pulp bleaching"
+   ],
+   "key_points": [
+    "Made on site (unstable)",
+    "Corona discharge in dielectric tubes",
+    "Fine bubbles and depth give transfer",
+    "Off-gas destructor — ozone is toxic"
+   ],
+   "classification": {
+    "family": "Disinfection / oxidation",
+    "type": "Corona-discharge ozone with diffuser contactor"
+   },
+   "hi_family": "water_utilities",
+   "summary": "An ozonation system produces ozone on site by passing oxygen through a corona discharge, then bubbles it through water in a contact tank. Ozone disinfects and oxidises colour, taste/odour compounds and micro-pollutants; off-gas ozone is destroyed before venting."
+  },
+  "model_3d": {
+   "asset": "glb/ozonation_system.glb",
+   "metadata": "meta/ozonation_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 19502,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Oxygen is supplied from LOX or a PSA unit.",
+    "Corona discharge in the generator forms ozone.",
+    "Ozone gas bubbles through ceramic diffusers."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Oxygen is supplied from LOX or a PSA unit.",
+     "part": "oxygen_supply",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Corona discharge in the generator forms ozone.",
+     "part": "dielectric_tubes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Ozone gas bubbles through ceramic diffusers.",
+     "part": "diffusers",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water flows under and over the baffles to get contact time.",
+     "part": "contactor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The destructor converts off-gas ozone back to oxygen.",
+     "part": "off_gas_destructor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Ozone production vs power and gas flow; transfer efficiency vs bubble size."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "ozonation_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "ozonation_system_pressure.glb",
+     "title": "Strong oxidant, no lasting residual",
+     "description": "Ozone is a very strong oxidant: it disinfects (including Cryptosporidium at higher C·t), removes colour, taste and odour, and oxidises iron, manganese and micro-pollutants. It is made on site because it decomposes quickly. Transfer into water depends on bubble size and contact depth; leftover ozone in the off-gas is destroyed before venting because it is toxic (workplace limits ~ 0.1 ppm).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/ozonation_system.json#components",
+   "key_components": "Oxygen feed, ozone generator, diffusers, contact tank, off-gas ozone destructor",
+   "parts": [
+    {
+     "id": "oxygen_supply",
+     "name": "Oxygen Supply (LOX tank & vaporiser, or PSA oxygen)",
+     "info_ref": "oz_oxygen",
+     "function": "Oxygen feed.",
+     "material": "—"
+    },
+    {
+     "id": "generator_vessel",
+     "name": "Ozone Generator Vessel (cooled shell)",
+     "info_ref": "oz_generator",
+     "function": "Makes ozone.",
+     "material": "Stainless/glass."
+    },
+    {
+     "id": "dielectric_tubes",
+     "name": "Dielectric Tubes / Electrodes (corona discharge: 3 O₂ → 2 O₃)",
+     "info_ref": "oz_generator",
+     "function": "Makes ozone.",
+     "material": "Stainless/glass."
+    },
+    {
+     "id": "corona",
+     "name": "Corona Discharge Glow",
+     "info_ref": "oz_generator",
+     "function": "Makes ozone.",
+     "material": "Stainless/glass."
+    },
+    {
+     "id": "power_supply",
+     "name": "Medium-Frequency Power Supply Unit",
+     "info_ref": "oz_power",
+     "function": "HV/MF power.",
+     "material": "—"
+    },
+    {
+     "id": "contactor",
+     "name": "Ozone Contact Tank (covered; under/over baffles; counter-current first cell), Inlet & Outlet",
+     "info_ref": "oz_contactor",
+     "function": "Contact.",
+     "material": "Concrete."
+    },
+    {
+     "id": "water",
+     "name": "Water in the Contactor",
+     "info_ref": "oz_contactor",
+     "function": "Contact.",
+     "material": "Concrete."
+    },
+    {
+     "id": "diffusers",
+     "name": "Ozone Gas Line & Fine-Bubble Ceramic Diffusers",
+     "info_ref": "oz_diffusers",
+     "function": "Fine bubbles.",
+     "material": "Ceramic/PTFE."
+    },
+    {
+     "id": "off_gas_destructor",
+     "name": "Off-Gas Ozone Destructor (thermal/catalytic → O₂)",
+     "info_ref": "oz_destructor",
+     "function": "Destroys off-gas ozone.",
+     "material": "Stainless."
+    },
+    {
+     "id": "bubbles",
+     "name": "Ozone Bubbles rising and dissolving",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Generators ≈ 0.1 – 100 kg O₃/h",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 0.1 – 100",
+     "unit": "kg O₃/h"
+    },
+    "operating_conditions": {
+     "typical_range": "O₃ ≈ 6 – 12 wt % in O₂; dose ≈ 1 – 5 mg/L",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "≈ 8 – 12 kWh per kg O₃ (generator)",
+     "unit": "kWh/kg"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size by dose × flow with transfer efficiency; contactor volume by C·t."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "IOA guidance",
+    "WHO GDWQ"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level concrete plinth; anchor the skid; bund or drain for chemical / oil spills."
+   ],
+   "alignment": [
+    "Skid level; check pump–motor alignment where not close-coupled; supports so piping loads do not reach equipment nozzles."
+   ],
+   "piping": [
+    "Isolation valves and bypass for maintenance; drains and vents; correct materials for the chemical; label lines and flow direction."
+   ],
+   "commissioning": [
+    "Pressure-test piping; flush; check rotation and interlocks; calibrate instruments; run on water before chemicals."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check ozone output, dew point of feed gas and residual.",
+     "part": "generator_vessel",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect dielectrics; check destructor.",
+     "part": "dielectric_tubes",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace dielectrics/diffusers as needed.",
+     "part": "diffusers"
+    }
+   ],
+   "lubrication": [
+    "No routine lubrication on static parts; lubricate valve stems and actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Low ozone output",
+     "category": "performance",
+     "symptoms": [
+      "Low residual"
+     ],
+     "causes": [
+      "Wet feed gas",
+      "Dielectric failure",
+      "Cooling water problem"
+     ],
+     "remedies": [
+      "Dry gas; replace tube; restore cooling"
+     ],
+     "part": "dielectric_tubes"
+    },
+    {
+     "problem": "Ozone leak",
+     "category": "leakage",
+     "symptoms": [
+      "Monitor alarm, smell"
+     ],
+     "causes": [
+      "Gasket failure"
+     ],
+     "remedies": [
+      "Stop generator, ventilate, repair"
+     ],
+     "part": "off_gas_destructor"
+    }
+   ],
+   "safety": [
+    "Ambient ozone monitors and interlocks; oxygen-rich areas — no oil/ignition; high voltage."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Ozonation System — Introduction",
+    "type": "in_app_tour",
+    "model": "ozonation_system.glb",
+    "duration_s": 51.0,
+    "script": [
+     {
+      "narration": "This module introduces the Ozonation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An ozonation system produces ozone on site by passing oxygen through a corona discharge (3 O₂ → 2 O₃) and bubbles it into water through fine diffusers in a covered contact tank.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Ozone is a very strong oxidant: it disinfects and removes colour, taste, odour and micro-pollutants.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Leftover ozone in the off-gas is destroyed before venting.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include drinking-water oxidation and disinfection; bottled water, cooling water, wastewater reuse and pulp bleaching.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Ozonation System — Operation",
+    "type": "in_app_tour",
+    "model": "ozonation_system.glb",
+    "duration_s": 39.6,
+    "script": [
+     {
+      "narration": "How the Ozonation System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Oxygen is supplied from LOX or a PSA unit.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oxygen_supply",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Corona discharge in the generator forms ozone.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dielectric_tubes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Ozone gas bubbles through ceramic diffusers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffusers",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water flows under and over the baffles to get contact time.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "contactor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The destructor converts off-gas ozone back to oxygen.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "off_gas_destructor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Ozone is a very strong oxidant: it disinfects (including Cryptosporidium at higher C·t), removes colour, taste and odour, and oxidises iron, manganese and micro-pollutants.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Ozonation System — Maintenance",
+    "type": "in_app_tour",
+    "model": "ozonation_system.glb",
+    "duration_s": 32.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Ozonation System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check ozone output, dew point of feed gas and residual.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "generator_vessel",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect dielectrics; check destructor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dielectric_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace dielectrics/diffusers as needed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "diffusers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for low ozone output: low residual. Common cause: wet feed gas.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "dielectric_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for ozone leak: monitor alarm, smell. Common cause: gasket failure.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "off_gas_destructor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is ozone made on site?",
+     "options": [
+      "It decomposes quickly",
+      "It is illegal to transport only",
+      "It is a liquid",
+      "It is too heavy"
+     ],
+     "answer": 0,
+     "explanation": "Unstable.",
+     "level": "basic"
+    },
+    {
+     "question": "What converts O₂ to O₃?",
+     "options": [
+      "Corona discharge",
+      "UV only",
+      "A pump",
+      "A filter"
+     ],
+     "answer": 0,
+     "explanation": "Corona.",
+     "level": "basic"
+    },
+    {
+     "question": "Why destroy off-gas?",
+     "options": [
+      "Ozone is toxic",
+      "It is valuable",
+      "It is flammable",
+      "It smells nice"
+     ],
+     "answer": 0,
+     "explanation": "Toxic.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Oxygen feed.\"",
+     "options": [
+      "Medium-Frequency Power Supply Unit",
+      "Ozone Bubbles rising and dissolving",
+      "Corona Discharge Glow",
+      "Oxygen Supply (LOX tank & vaporiser, or PSA oxygen)"
+     ],
+     "answer": 3,
+     "explanation": "Oxygen Supply (LOX tank & vaporiser, or PSA oxygen): Oxygen feed.",
+     "level": "basic",
+     "part": "oxygen_supply",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Makes ozone.\"",
+     "options": [
+      "Medium-Frequency Power Supply Unit",
+      "Oxygen Supply (LOX tank & vaporiser, or PSA oxygen)",
+      "Ozone Contact Tank (covered; under/over baffles; counter-current first cell), Inlet & Outlet",
+      "Ozone Generator Vessel (cooled shell)"
+     ],
+     "answer": 3,
+     "explanation": "Ozone Generator Vessel (cooled shell): Makes ozone.",
+     "level": "basic",
+     "part": "generator_vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"HV/MF power.\"",
+     "options": [
+      "Off-Gas Ozone Destructor (thermal/catalytic → O₂)",
+      "Ozone Contact Tank (covered; under/over baffles; counter-current first cell), Inlet & Outlet",
+      "Medium-Frequency Power Supply Unit",
+      "Oxygen Supply (LOX tank & vaporiser, or PSA oxygen)"
+     ],
+     "answer": 2,
+     "explanation": "Medium-Frequency Power Supply Unit: HV/MF power.",
+     "level": "basic",
+     "part": "power_supply",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

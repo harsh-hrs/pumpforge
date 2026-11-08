@@ -1,0 +1,646 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "flotation_cell",
+ "no": 184,
+ "title": "Flotation Cell",
+ "model_title": "Mechanical Flotation Cell (Forced-Air, Rotor–Stator)",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A mechanical flotation cell separates valuable mineral particles from waste. Reagents make the wanted mineral surfaces water-repellent. Air enters down a hollow shaft and a spinning rotor–stator breaks it into fine bubbles; the hydrophobic particles attach to the bubbles and rise into a froth, which overflows into the launder as concentrate.",
+   "applications": [
+    "Copper, lead, zinc, gold and phosphate concentration",
+    "Coal fines cleaning",
+    "De-inking of paper pulp"
+   ],
+   "key_points": [
+    "Separation by surface chemistry (hydrophobicity)",
+    "Rotor suspends solids and disperses air",
+    "Froth depth and air rate control grade/recovery",
+    "Cells in banks: rougher, scavenger, cleaner"
+   ],
+   "classification": {
+    "family": "Flotation",
+    "type": "Forced-air mechanical cell"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A mechanical flotation cell separates valuable minerals from waste rock. Air is blown down a hollow shaft and dispersed into fine bubbles by a spinning rotor and stator. Particles made water-repellent by reagents attach to the bubbles and rise to form a froth that overflows into a launder; the rest leaves as tailings."
+  },
+  "model_3d": {
+   "asset": "glb/flotation_cell.glb",
+   "metadata": "meta/flotation_cell.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 5632,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Conditioned pulp enters the cell.",
+    "Air flows down the hollow shaft.",
+    "Rotor and stator create fine bubbles."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Conditioned pulp enters the cell.",
+     "part": "air_feed_tailings",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Air flows down the hollow shaft.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Rotor and stator create fine bubbles.",
+     "part": "stator",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Hydrophobic particles ride bubbles into the froth.",
+     "part": "froth",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Froth overflows into the launder.",
+     "part": "tank",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Grade–recovery curve: higher recovery usually means lower concentrate grade."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "flotation_cell_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "flotation_cell_pressure.glb",
+     "title": "Hydrophobic vs hydrophilic particles",
+     "description": "Collectors make the wanted mineral surfaces water-repellent (hydrophobic). Those particles attach to air bubbles and rise into the froth (red zone), which overflows into the launder as concentrate. Hydrophilic gangue stays in the pulp (blue) and leaves as tailings. Frothers stabilise the froth.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/flotation_cell.json#components",
+   "key_components": "Tank, rotor–stator mechanism, hollow shaft air supply, froth launder, drive, tailings box",
+   "parts": [
+    {
+     "id": "tank",
+     "name": "Cell Tank & Peripheral Froth Launder",
+     "info_ref": "fc_tank",
+     "function": "Holds the pulp; collects froth.",
+     "material": "Steel (lined)."
+    },
+    {
+     "id": "pulp",
+     "name": "Pulp (ore slurry with reagents)",
+     "info_ref": "fc_pulp",
+     "function": "Ore slurry.",
+     "material": "—"
+    },
+    {
+     "id": "froth",
+     "name": "Mineralised Froth Layer",
+     "info_ref": "fc_froth",
+     "function": "Mineral-laden froth.",
+     "material": "—"
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor on Hollow Shaft (air enters through the shaft)",
+     "info_ref": "fc_mechanism",
+     "function": "Disperses air; suspends solids.",
+     "material": "Rubber-lined steel."
+    },
+    {
+     "id": "stator",
+     "name": "Stator (dispersion hood) — shears air into fine bubbles",
+     "info_ref": "fc_mechanism",
+     "function": "Disperses air; suspends solids.",
+     "material": "Rubber-lined steel."
+    },
+    {
+     "id": "drive_bridge",
+     "name": "Bridge, Motor & V-Belt Drive",
+     "info_ref": "fc_drive",
+     "function": "Turns rotor.",
+     "material": "—"
+    },
+    {
+     "id": "air_feed_tailings",
+     "name": "Low-Pressure Air Line, Feed Inlet & Tailings Outlet (level-controlled)",
+     "info_ref": "fc_tank",
+     "function": "Holds the pulp; collects froth.",
+     "material": "Steel (lined)."
+    },
+    {
+     "id": "bubbles",
+     "name": "Bubbles carrying Hydrophobic Particles to the Froth",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Cell ~ 1 – 600 m³",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 5000",
+     "unit": "m³/h pulp"
+    },
+    "operating_pressure": {
+     "typical_range": "Air ~ 0.2 – 0.5 bar g at rotor",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "Recovery typically ~ 80 – 95 %",
+     "unit": "%"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size cell volume from residence time (lab kinetics × scale-up); choose forced-air or self-aspirated."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Wills' Mineral Processing Technology"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Tanks on level foundations; access walkways for inspection and skimmer maintenance."
+   ],
+   "alignment": [
+    "Weirs and launders set level so flow and overflow are even."
+   ],
+   "piping": [
+    "Inlet distribution to avoid short-circuiting; sludge/float lines sized for thick material; chemical dosing points upstream."
+   ],
+   "commissioning": [
+    "Fill with water and check levels; start air/recycle; optimise chemical dosing with jar tests."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check froth, air flow and level.",
+     "part": "froth",
+     "interval": "per shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect rotor/stator wear.",
+     "part": "rotor",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace rotor/stator.",
+     "part": "stator"
+    }
+   ],
+   "lubrication": [
+    "Drive bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Poor recovery",
+     "category": "performance",
+     "symptoms": [
+      "Mineral in tailings"
+     ],
+     "causes": [
+      "Wrong reagent dose, coarse particles, low air"
+     ],
+     "remedies": [
+      "Optimise reagents and air"
+     ],
+     "part": "froth"
+    },
+    {
+     "problem": "Rotor wear",
+     "category": "wear",
+     "symptoms": [
+      "Bubble size grows"
+     ],
+     "causes": [
+      "Abrasion"
+     ],
+     "remedies": [
+      "Replace"
+     ],
+     "part": "rotor"
+    }
+   ],
+   "safety": [
+    "Reagent handling; guard drives; slippery froth areas."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Flotation Cell — Introduction",
+    "type": "in_app_tour",
+    "model": "flotation_cell.glb",
+    "duration_s": 52.6,
+    "script": [
+     {
+      "narration": "This module introduces the Flotation Cell.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A mechanical flotation cell separates valuable mineral particles from waste.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Reagents make the wanted mineral surfaces water-repellent.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Air enters down a hollow shaft and a spinning rotor–stator breaks it into fine bubbles; the hydrophobic particles attach to the bubbles and rise into a froth, which overflows into the launder as concentrate.",
+      "duration_s": 14.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include copper, lead, zinc, gold and phosphate concentration; coal fines cleaning; de-inking of paper pulp.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rotor on Hollow Shaft (air enters through the shaft).",
+      "duration_s": 6.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Flotation Cell — Operation",
+    "type": "in_app_tour",
+    "model": "flotation_cell.glb",
+    "duration_s": 32.2,
+    "script": [
+     {
+      "narration": "How the Flotation Cell works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Conditioned pulp enters the cell.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "air_feed_tailings",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Air flows down the hollow shaft.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Rotor and stator create fine bubbles.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stator",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Hydrophobic particles ride bubbles into the froth.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "froth",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Froth overflows into the launder.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tank",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Collectors make the wanted mineral surfaces water-repellent (hydrophobic).",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Flotation Cell — Maintenance",
+    "type": "in_app_tour",
+    "model": "flotation_cell.glb",
+    "duration_s": 33.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Flotation Cell.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check froth, air flow and level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "froth",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect rotor/stator wear.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace rotor/stator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for poor recovery: mineral in tailings. Common cause: wrong reagent dose, coarse particles, low air.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "froth",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for rotor wear: bubble size grows. Common cause: abrasion.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Particles float because they are…",
+     "options": [
+      "Hydrophobic and attached to bubbles",
+      "Lighter than water",
+      "Magnetic",
+      "Hot"
+     ],
+     "answer": 0,
+     "explanation": "Surface chemistry.",
+     "level": "basic"
+    },
+    {
+     "question": "Collectors are added to…",
+     "options": [
+      "Make target mineral surfaces hydrophobic",
+      "Make froth",
+      "Raise pH only",
+      "Cool pulp"
+     ],
+     "answer": 0,
+     "explanation": "Collectors.",
+     "level": "basic"
+    },
+    {
+     "question": "Higher recovery usually means…",
+     "options": [
+      "Lower grade",
+      "Higher grade always",
+      "No change",
+      "No froth"
+     ],
+     "answer": 0,
+     "explanation": "Trade-off.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the pulp; collects froth.\"",
+     "options": [
+      "Pulp (ore slurry with reagents)",
+      "Mineralised Froth Layer",
+      "Cell Tank & Peripheral Froth Launder",
+      "Rotor on Hollow Shaft (air enters through the shaft)"
+     ],
+     "answer": 2,
+     "explanation": "Cell Tank & Peripheral Froth Launder: Holds the pulp; collects froth.",
+     "level": "basic",
+     "part": "tank",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Ore slurry.\"",
+     "options": [
+      "Mineralised Froth Layer",
+      "Pulp (ore slurry with reagents)",
+      "Cell Tank & Peripheral Froth Launder",
+      "Rotor on Hollow Shaft (air enters through the shaft)"
+     ],
+     "answer": 1,
+     "explanation": "Pulp (ore slurry with reagents): Ore slurry.",
+     "level": "basic",
+     "part": "pulp",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Mineral-laden froth.\"",
+     "options": [
+      "Mineralised Froth Layer",
+      "Low-Pressure Air Line, Feed Inlet & Tailings Outlet (level-controlled)",
+      "Cell Tank & Peripheral Froth Launder",
+      "Pulp (ore slurry with reagents)"
+     ],
+     "answer": 0,
+     "explanation": "Mineralised Froth Layer: Mineral-laden froth.",
+     "level": "basic",
+     "part": "froth",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

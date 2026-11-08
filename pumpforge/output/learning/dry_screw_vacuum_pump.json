@@ -1,0 +1,723 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "dry_screw_vacuum_pump",
+ "no": 79,
+ "title": "Dry Screw Vacuum Pump",
+ "model_title": "Dry Screw Vacuum Pump (Variable-Pitch Screws, Timing Gears)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A dry screw vacuum pump uses two non-contacting screw rotors, synchronised by timing gears, to carry gas from the inlet to the exhaust. Variable pitch compresses the gas internally. There is no oil or liquid in the gas path, so the process is not contaminated.",
+   "applications": [
+    "Chemical and pharmaceutical processes (distillation, drying)",
+    "Semiconductor and solar manufacturing",
+    "Vacuum degassing, coating",
+    "Solvent recovery"
+   ],
+   "key_points": [
+    "No contamination, no waste oil",
+    "Handles condensables with purge and temperature control",
+    "Variable pitch reduces power",
+    "Watch for deposits"
+   ],
+   "classification": {
+    "family": "Positive-displacement vacuum pump (dry)",
+    "type": "Twin screw, variable pitch, water-cooled"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A dry screw vacuum pump has two parallel screw rotors that mesh without touching, synchronised by timing gears. Gas trapped in the threads is moved from the inlet (vacuum side) to the exhaust; a shorter pitch toward the exhaust compresses it internally. No oil or water is in the gas path, so the gas is not contaminated — ideal for chemical, pharmaceutical and semiconductor processes."
+  },
+  "model_3d": {
+   "asset": "glb/dry_screw_vacuum_pump.glb",
+   "metadata": "meta/dry_screw_vacuum_pump.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 68806,
+   "parts": 16
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Gas enters the inlet at the vacuum end.",
+    "Gas trapped in the threads is moved along by the counter-rotating screws.",
+    "Shorter pitch near the exhaust compresses the gas internally."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Gas enters the inlet at the vacuum end.",
+     "part": "casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas trapped in the threads is moved along by the counter-rotating screws.",
+     "part": "screw_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Shorter pitch near the exhaust compresses the gas internally.",
+     "part": "screw_2",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Timing gears keep the screws in step without contact.",
+     "part": "timing_gear_1",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas exhausts near atmospheric pressure.",
+     "part": "connections",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pumping speed high over a wide range; ultimate pressure ~ 10⁻²–10⁻³ mbar class (design-specific)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "dry_screw_vacuum_pump_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "dry_screw_vacuum_pump_pressure.glb",
+     "title": "Pressure along the screws",
+     "description": "Gas trapped in the screw threads is carried from the vacuum (inlet) end to the exhaust; the shorter pitch near the exhaust compresses it internally up to slightly above atmospheric pressure. No oil or liquid is in the compression chamber.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Inlet: deep vacuum (e.g. < 1 mbar)",
+       "anchor": [
+        -0.25,
+        0.75,
+        -0.0
+       ]
+      },
+      {
+       "text": "Exhaust: ~ atmospheric",
+       "anchor": [
+        0.3,
+        0.15,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/dry_screw_vacuum_pump.json#components",
+   "key_components": "Variable-pitch screws, timing gears, water-cooled casing",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Stator Casing (water-cooled) — Inlet top, Exhaust bottom",
+     "info_ref": "ds_casing",
+     "function": "Encloses the screws with tight clearances; water jacket removes heat.",
+     "material": "Cast iron (often coated)."
+    },
+    {
+     "id": "screw_1",
+     "name": "Drive Screw Rotor (pitch decreases toward exhaust)",
+     "info_ref": "ds_screw",
+     "function": "Carry gas from inlet to exhaust and compress it.",
+     "material": "Steel, coated."
+    },
+    {
+     "id": "screw_2",
+     "name": "Driven Screw Rotor (pitch decreases toward exhaust)",
+     "info_ref": "ds_screw",
+     "function": "Carry gas from inlet to exhaust and compress it.",
+     "material": "Steel, coated."
+    },
+    {
+     "id": "timing_gear_1",
+     "name": "Timing Gear 1",
+     "info_ref": "ds_gears",
+     "function": "Keep the screws synchronised.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "timing_gear_2",
+     "name": "Timing Gear 2",
+     "info_ref": "ds_gears",
+     "function": "Keep the screws synchronised.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "gearbox",
+     "name": "Gear Case (oil-lubricated, sealed from the gas)",
+     "info_ref": "ds_gears",
+     "function": "Keep the screws synchronised.",
+     "material": "Hardened steel."
+    },
+    {
+     "id": "coupling",
+     "name": "Flexible Coupling",
+     "info_ref": "coupling_flex",
+     "function": "Transmits torque between motor and pump while accommodating small misalignment and allowing separation for maintenance.",
+     "material": "Steel or cast iron hubs; elastomer or stainless-steel disc elements."
+    },
+    {
+     "id": "coupling_guard",
+     "name": "Coupling Guard",
+     "info_ref": "coupling_guard",
+     "function": "Prevents contact with rotating parts.",
+     "material": "Steel, aluminium or non-sparking brass for hazardous areas."
+    },
+    {
+     "id": "m_motor_frame",
+     "name": "Electric Motor – Frame & End Shields",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "m_stator",
+     "name": "Electric Motor – Stator",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "m_rotor",
+     "name": "Electric Motor – Rotor & Shaft",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "m_motor_bearings",
+     "name": "Electric Motor – Bearings (DE & NDE)",
+     "info_ref": "motor_bearings",
+     "function": "Support the motor rotor at drive and non-drive ends.",
+     "material": "Bearing steel; grease lubricated."
+    },
+    {
+     "id": "m_motor_fan",
+     "name": "Electric Motor – Cooling Fan",
+     "info_ref": "motor_fan",
+     "function": "Draws cooling air over the finned frame.",
+     "material": "Polymer, aluminium or steel."
+    },
+    {
+     "id": "m_fan_cover",
+     "name": "Electric Motor – Fan Cover",
+     "info_ref": "fan_cover",
+     "function": "Guards the fan and directs air along the fins.",
+     "material": "Steel or polymer."
+    },
+    {
+     "id": "baseplate",
+     "name": "Baseplate",
+     "info_ref": "baseplate",
+     "function": "Provides a rigid common mounting for pump and driver, maintains alignment and transfers loads to the foundation.",
+     "material": "Carbon steel, painted; stainless steel for hygienic or corrosive areas."
+    },
+    {
+     "id": "connections",
+     "name": "Inlet Flange & Exhaust Line (with silencer/check valve downstream)",
+     "info_ref": "ds_connections",
+     "function": "Inlet and exhaust connections.",
+     "material": "Stainless."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Inlet DN 25 – 250",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "1.5 – 75",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "3000 – 6000 (VFD)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "25 – 2000 m³/h",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "ultimate_pressure": {
+     "typical_range": "~ 0.001 – 0.05",
+     "unit": "mbar"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Fit inlet trap/condenser for heavy vapour loads; provide nitrogen purge and cooling water."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check cooling water and purge flow; motor current trend.",
+     "part": "casing",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Flush with solvent if deposits are expected.",
+     "part": "screw_1",
+     "interval": "per process"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bearings and gear oil; inspect screws.",
+     "part": "gearbox"
+    }
+   ],
+   "lubrication": [
+    "Gear case oil (separated from the gas by seals)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Deposits / seizure",
+     "category": "performance",
+     "symptoms": [
+      "Rising current, trips"
+     ],
+     "causes": [
+      "Process polymerises or condenses inside"
+     ],
+     "remedies": [
+      "Raise temperature, solvent flushing"
+     ],
+     "part": "screw_1"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "High casing temperature"
+     ],
+     "causes": [
+      "Cooling-water loss"
+     ],
+     "remedies": [
+      "Restore cooling"
+     ],
+     "part": "casing"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Dry Screw Vacuum Pump — Introduction",
+    "type": "in_app_tour",
+    "model": "dry_screw_vacuum_pump.glb",
+    "duration_s": 56.0,
+    "script": [
+     {
+      "narration": "This module introduces the Dry Screw Vacuum Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A dry screw vacuum pump uses two non-contacting screw rotors, synchronised by timing gears, to carry gas from the inlet to the exhaust.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Variable pitch compresses the gas internally.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "There is no oil or liquid in the gas path, so the process is not contaminated.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include chemical and pharmaceutical processes (distillation, drying); semiconductor and solar manufacturing; vacuum degassing, coating; solvent recovery.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Stator Casing (water-cooled) — Inlet top, Exhaust bottom, Drive Screw Rotor (pitch decreases toward exhaust), Driven Screw Rotor (pitch decreases toward exhaust).",
+      "duration_s": 11.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Dry Screw Vacuum Pump — Operation",
+    "type": "in_app_tour",
+    "model": "dry_screw_vacuum_pump.glb",
+    "duration_s": 42.5,
+    "script": [
+     {
+      "narration": "How the Dry Screw Vacuum Pump works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gas enters the inlet at the vacuum end.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas trapped in the threads is moved along by the counter-rotating screws.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "screw_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Shorter pitch near the exhaust compresses the gas internally.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw_2",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Timing gears keep the screws in step without contact.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "timing_gear_1",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas exhausts near atmospheric pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "connections",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Gas trapped in the screw threads is carried from the vacuum (inlet) end to the exhaust; the shorter pitch near the exhaust compresses it internally up to slightly above atmospheric pressure.",
+      "duration_s": 12.9,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Dry Screw Vacuum Pump — Maintenance",
+    "type": "in_app_tour",
+    "model": "dry_screw_vacuum_pump.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Dry Screw Vacuum Pump.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check cooling water and purge flow; motor current trend.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Flush with solvent if deposits are expected.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "screw_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bearings and gear oil; inspect screws.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "gearbox",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for deposits / seizure: rising current, trips. Common cause: process polymerises or condenses inside.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "screw_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: high casing temperature. Common cause: cooling-water loss.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "casing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is it called \"dry\"?",
+     "options": [
+      "It is air cooled",
+      "No oil or liquid in the compression chamber",
+      "It pumps only dry gas",
+      "It has no bearings"
+     ],
+     "answer": 1,
+     "explanation": "Clean vacuum.",
+     "level": "basic"
+    },
+    {
+     "question": "Why do the screws have variable pitch?",
+     "options": [
+      "Appearance",
+      "To compress gas internally and reduce power",
+      "For balance",
+      "To reduce weight"
+     ],
+     "answer": 1,
+     "explanation": "Internal compression.",
+     "level": "basic"
+    },
+    {
+     "question": "What keeps the screws from touching?",
+     "options": [
+      "Oil film",
+      "Timing gears",
+      "Springs",
+      "Gas pressure"
+     ],
+     "answer": 1,
+     "explanation": "Synchronisation.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the screws with tight clearances; water jacket removes heat.\"",
+     "options": [
+      "Electric Motor – Frame & End Shields",
+      "Stator Casing (water-cooled) — Inlet top, Exhaust bottom",
+      "Drive Screw Rotor (pitch decreases toward exhaust)",
+      "Coupling Guard"
+     ],
+     "answer": 1,
+     "explanation": "Stator Casing (water-cooled) — Inlet top, Exhaust bottom: Encloses the screws with tight clearances; water jacket removes heat.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carry gas from inlet to exhaust and compress it.\"",
+     "options": [
+      "Timing Gear 1",
+      "Electric Motor – Stator",
+      "Stator Casing (water-cooled) — Inlet top, Exhaust bottom",
+      "Drive Screw Rotor (pitch decreases toward exhaust)"
+     ],
+     "answer": 3,
+     "explanation": "Drive Screw Rotor (pitch decreases toward exhaust): Carry gas from inlet to exhaust and compress it.",
+     "level": "basic",
+     "part": "screw_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Keep the screws synchronised.\"",
+     "options": [
+      "Electric Motor – Bearings (DE & NDE)",
+      "Timing Gear 1",
+      "Inlet Flange & Exhaust Line (with silencer/check valve downstream)",
+      "Electric Motor – Cooling Fan"
+     ],
+     "answer": 1,
+     "explanation": "Timing Gear 1: Keep the screws synchronised.",
+     "level": "basic",
+     "part": "timing_gear_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

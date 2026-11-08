@@ -1,0 +1,554 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "foam_firefighting_system",
+  "title": "Foam Firefighting System — Bladder Tank, Ratio Proportioner, Deluge Valve & Foam Chambers on a Storage Tank",
+  "category": "15 · Safety & Environmental",
+  "library": {
+    "no": 282,
+    "phase": 13,
+    "eq_id": "EQ-360",
+    "subcategory": "Fire Protection",
+    "hi_family": "safety_environmental",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "foam_firefighting_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "foam_firefighting_system_pressure.glb",
+      "title": "Foam smothers, cools and seals the surface",
+      "description": "Water drawn through the ratio controller picks up foam concentrate at a fixed percentage (e.g. 3 %); the foam chambers aspirate air to expand it and pour it gently down the tank wall. The blanket spreads across the burning liquid, separating fuel from air, cooling it and suppressing vapour. Design follows NFPA 11 application rates (e.g. ≈ 4.1 L/min·m² for hydrocarbons with fixed outlets, longer times for some fuels — verify edition); polar solvents need alcohol-resistant foam.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "water",
+      "kind": "water",
+      "radius": 0.03,
+      "points": [
+        [
+          -4.3,
+          0.3,
+          -2.3
+        ],
+        [
+          -1.4,
+          0.3,
+          -2.3
+        ]
+      ]
+    },
+    {
+      "name": "concentrate",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          -3.6,
+          0.3,
+          -2.3
+        ],
+        [
+          -3.6,
+          0.7,
+          -3.2
+        ],
+        [
+          -1.83,
+          0.7,
+          -3.2
+        ],
+        [
+          -1.4,
+          0.7,
+          -3.2
+        ],
+        [
+          -1.4,
+          0.45,
+          -2.3
+        ]
+      ]
+    },
+    {
+      "name": "foam_solution",
+      "kind": "sand",
+      "radius": 0.03,
+      "points": [
+        [
+          -1.4,
+          0.3,
+          -2.3
+        ],
+        [
+          0.0,
+          0.3,
+          -2.3
+        ],
+        [
+          -0.46,
+          0.3,
+          -1.77
+        ],
+        [
+          -0.46,
+          1.9,
+          -1.77
+        ],
+        [
+          -0.42,
+          1.8,
+          -1.6
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 14622,
+    "parts": 8
+  },
+  "summary": "A foam firefighting system mixes foam concentrate into fire water at a fixed ratio, expands it with air and applies it to a burning liquid surface, where the foam blanket smothers and cools the fire and suppresses vapours.",
+  "classification": {
+    "family": "Fire protection",
+    "type": "Bladder tank proportioning + fixed foam chambers"
+  },
+  "model_configuration": {
+    "animation": "Foam blanket spreads; fire dies down; bladder empties"
+  },
+  "standards": [
+    {
+      "id": "NFPA 11",
+      "title": "Low-, medium- and high-expansion foam",
+      "relevance": "Foam systems.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "NFPA 72 / IEC 61511",
+      "title": "Fire alarm / safety instrumented systems",
+      "relevance": "F&G systems.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "NFPA 24",
+      "title": "Private fire service mains",
+      "relevance": "Hydrants & monitors.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "NFPA 11"
+  ],
+  "parts": [
+    {
+      "id": "storage_tank",
+      "name": "Fixed-Roof Hydrocarbon Storage Tank",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "storage_tank__back",
+        "storage_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.8
+      ],
+      "bbox_min": [
+        -1.62,
+        0.0,
+        -1.62
+      ],
+      "bbox_max": [
+        1.62,
+        2.55,
+        1.62
+      ],
+      "label_anchor": [
+        0.0,
+        1.275,
+        1.62
+      ],
+      "center": [
+        0.0,
+        1.275,
+        -0.0
+      ],
+      "info_ref": "ff_tank"
+    },
+    {
+      "id": "hydrocarbon",
+      "name": "Stored Hydrocarbon",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "lq"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "bbox_min": [
+        -1.595,
+        0.02,
+        -1.595
+      ],
+      "bbox_max": [
+        1.595,
+        1.6,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.81,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.81,
+        -0.7975
+      ],
+      "info_ref": "ff_tank"
+    },
+    {
+      "id": "foam_blanket",
+      "name": "Foam Blanket spreading over the burning surface",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "fb"
+      ],
+      "pivot": [
+        1.52,
+        1.6,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -1.59,
+        1.6,
+        -1.59
+      ],
+      "bbox_max": [
+        1.59,
+        1.75,
+        -0.0
+      ],
+      "label_anchor": [
+        -0.0,
+        1.675,
+        -0.0
+      ],
+      "center": [
+        -0.0,
+        1.675,
+        -0.795
+      ],
+      "info_ref": "ff_foam"
+    },
+    {
+      "id": "tank_fire",
+      "name": "Surface Fire (extinguished as the foam covers it)",
+      "group": "combustion",
+      "section_role": "keep",
+      "nodes": [
+        "flm"
+      ],
+      "pivot": [
+        0.0,
+        1.6,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.3
+      ],
+      "bbox_min": [
+        -1.28,
+        1.6,
+        -1.28
+      ],
+      "bbox_max": [
+        1.28,
+        2.6,
+        1.28
+      ],
+      "label_anchor": [
+        0.0,
+        2.1,
+        1.28
+      ],
+      "center": [
+        0.0,
+        2.1,
+        -0.0
+      ],
+      "info_ref": "ff_tank"
+    },
+    {
+      "id": "foam_chambers",
+      "name": "Foam Chambers / Makers on the Tank Shell (air inlet, vapour seal, deflector) & Risers",
+      "group": "foam",
+      "section_role": "keep",
+      "nodes": [
+        "foam_chambers.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.5
+      ],
+      "bbox_min": [
+        -0.94961,
+        0.25,
+        -2.10944
+      ],
+      "bbox_max": [
+        0.94961,
+        2.4,
+        -1.31058
+      ],
+      "label_anchor": [
+        0.0,
+        1.325,
+        -1.31058
+      ],
+      "center": [
+        0.0,
+        1.325,
+        -1.71001
+      ],
+      "info_ref": "ff_chambers"
+    },
+    {
+      "id": "bladder_tank",
+      "name": "Bladder Tank (foam concentrate inside a rubber bladder; water outside squeezes it out)",
+      "group": "foam",
+      "section_role": "split",
+      "nodes": [
+        "bladder_tank__back"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -3.4,
+        0.0,
+        -3.6
+      ],
+      "bbox_max": [
+        -1.6,
+        1.1,
+        -2.8
+      ],
+      "label_anchor": [
+        -2.5,
+        0.55,
+        -2.8
+      ],
+      "center": [
+        -2.5,
+        0.55,
+        -3.2
+      ],
+      "info_ref": "ff_bladder"
+    },
+    {
+      "id": "bladder_concentrate",
+      "name": "Bladder with AFFF / AR-AFFF Concentrate (1 % / 3 %)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "bl"
+      ],
+      "pivot": [
+        -2.5,
+        0.7,
+        -3.2
+      ],
+      "explode_offset": [
+        -0.4,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -3.15,
+        0.37,
+        -3.53
+      ],
+      "bbox_max": [
+        -1.85,
+        1.03,
+        -3.2
+      ],
+      "label_anchor": [
+        -2.5,
+        0.7,
+        -3.2
+      ],
+      "center": [
+        -2.5,
+        0.7,
+        -3.365
+      ],
+      "info_ref": "ff_bladder"
+    },
+    {
+      "id": "proportioning",
+      "name": "Fire Water Main, Deluge Valve, Ratio Controller (proportioner) & Concentrate Line",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "proportioning.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.3
+      ],
+      "bbox_min": [
+        -4.2,
+        0.175,
+        -3.23
+      ],
+      "bbox_max": [
+        0.08,
+        0.73,
+        -1.56293
+      ],
+      "label_anchor": [
+        -2.06,
+        0.4525,
+        -1.56293
+      ],
+      "center": [
+        -2.06,
+        0.4525,
+        -2.39647
+      ],
+      "info_ref": "ff_proportioner"
+    }
+  ],
+  "components": {
+    "ff_tank": {
+      "function": "Protected tank.",
+      "construction": "Fixed-roof tank.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ff_foam": {
+      "function": "Extinguish.",
+      "construction": "Foam blanket.",
+      "material": "AFFF / AR-AFFF / fluorine-free.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "ff_chambers": {
+      "function": "Make and apply foam.",
+      "construction": "Foam chambers on shell.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Vapour seal broken"
+      ],
+      "inspection": [
+        "Inspection"
+      ]
+    },
+    "ff_bladder": {
+      "function": "Store concentrate.",
+      "construction": "Bladder tank.",
+      "material": "Steel + elastomer.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Bladder leak"
+      ],
+      "inspection": [
+        "Annual check"
+      ]
+    },
+    "ff_proportioner": {
+      "function": "Mix at fixed ratio.",
+      "construction": "Ratio controller, deluge valve, main.",
+      "material": "Bronze/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wrong ratio"
+      ],
+      "inspection": [
+        "Proportioning test"
+      ]
+    }
+  }
+}

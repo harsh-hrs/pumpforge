@@ -1,0 +1,653 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "expander_turbine",
+ "no": 76,
+ "title": "Expander Turbine",
+ "model_title": "Turboexpander–Compressor (Radial-Inflow Expander, Variable Nozzles)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A turboexpander is a radial-inflow turbine through which high-pressure gas expands. Because the gas does work on the wheel, its temperature drops far more than across a valve (near-isentropic expansion). The power is recovered in a compressor wheel on the same shaft or a generator.",
+   "applications": [
+    "Natural-gas processing (NGL recovery, dew-point control)",
+    "Air separation (cryogenic)",
+    "LNG and hydrogen liquefaction",
+    "Pressure letdown energy recovery"
+   ],
+   "key_points": [
+    "Large temperature drop → refrigeration",
+    "Variable nozzles control flow",
+    "Very high speed",
+    "Seal gas keeps oil out of the process"
+   ],
+   "classification": {
+    "family": "Turbine (expander)",
+    "type": "Radial-inflow turboexpander–compressor, overhung wheels"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A turboexpander lets high-pressure gas expand through a radial-inflow turbine wheel. Because the gas does work on the wheel, its temperature drops far more than in a valve — the basis of gas processing, air separation and LNG refrigeration. The recovered power drives a compressor wheel on the same shaft (or a generator). Variable inlet guide vanes control the flow."
+  },
+  "model_3d": {
+   "asset": "glb/expander_turbine.glb",
+   "metadata": "meta/expander_turbine.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10128,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "High-pressure gas enters the inlet scroll.",
+    "Variable nozzles accelerate it onto the wheel and control the flow.",
+    "The gas expands through the expander wheel, cooling strongly and driving the shaft."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "High-pressure gas enters the inlet scroll.",
+     "part": "expander_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Variable nozzles accelerate it onto the wheel and control the flow.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The gas expands through the expander wheel, cooling strongly and driving the shaft.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The same shaft drives the compressor wheel, which recompresses gas.",
+     "part": "compressor_casing",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Tilting-pad bearings and seals in the centre housing support the high-speed rotor.",
+     "part": "bearing_housing",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Isentropic efficiency ~ 80–90 % at design; nozzle opening varies flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "expander_turbine_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "expander_turbine_pressure.glb",
+     "title": "Expander: pressure and temperature drop",
+     "description": "High-pressure gas enters the scroll, accelerates through the nozzles and expands through the wheel, doing work on it. Pressure and temperature fall sharply (refrigeration effect); the power drives the compressor (or a generator) on the same shaft.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Expander inlet: high P, ambient T",
+       "anchor": [
+        -0.27,
+        1.1,
+        -0.0
+       ]
+      },
+      {
+       "text": "Exhaust: low P, very cold",
+       "anchor": [
+        -0.65,
+        0.42,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/expander_turbine.json#components",
+   "key_components": "Radial-inflow expander wheel, variable nozzles, compressor wheel, bearings, scrolls",
+   "parts": [
+    {
+     "id": "rotor",
+     "name": "Rotor: Expander Wheel, Shaft & Compressor Wheel",
+     "info_ref": "ex_rotor",
+     "function": "Extracts energy from the expanding gas and drives the compressor.",
+     "material": "Aluminium alloy or titanium wheels; steel shaft."
+    },
+    {
+     "id": "bearing_housing",
+     "name": "Centre Bearing Housing (oil-lubricated tilting-pad bearings, seals)",
+     "info_ref": "ex_bearings",
+     "function": "Support the high-speed shaft and carry thrust.",
+     "material": "Steel/babbitt."
+    },
+    {
+     "id": "expander_casing",
+     "name": "Expander Inlet Scroll & Axial Exhaust (cold gas out)",
+     "info_ref": "ex_expander_casing",
+     "function": "Leads gas through the inlet scroll to the nozzles and out the axial exhaust.",
+     "material": "Stainless (cryogenic)."
+    },
+    {
+     "id": "nozzles",
+     "name": "Variable Inlet Guide Vanes (Nozzles) — adjust gas flow",
+     "info_ref": "ex_nozzles",
+     "function": "Accelerate the gas onto the wheel and control flow.",
+     "material": "Stainless."
+    },
+    {
+     "id": "compressor_casing",
+     "name": "Compressor (Brake) Casing: Axial Inlet, Diffuser & Volute",
+     "info_ref": "ex_compressor_casing",
+     "function": "Collects compressed gas from the compressor wheel.",
+     "material": "Steel."
+    },
+    {
+     "id": "skid",
+     "name": "Skid / Baseplate",
+     "info_ref": "ex_skid",
+     "function": "Supports the machine.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Wheel Ø ~ 50 – 600 mm",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "50 – 20 000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "10 000 – 100 000+ (size dependent)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Gas flow ~ 1 – 400 MMSCFD",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "temperature_drop": {
+     "typical_range": "Tens of °C or more (process dependent)",
+     "unit": "°C"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Fit inlet strainers (fine screens) to protect the wheel; liquids/solids must be removed upstream."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor speed, vibration, bearing temperatures and seal-gas ΔP.",
+     "part": "bearing_housing",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean inlet screen; check nozzle actuator.",
+     "part": "nozzles",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace bearings and seals; inspect wheels.",
+     "part": "rotor"
+    }
+   ],
+   "lubrication": [
+    "Pressurised lube-oil system (or active magnetic bearings with no oil)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Wheel erosion",
+     "category": "wear",
+     "symptoms": [
+      "Efficiency loss, vibration"
+     ],
+     "causes": [
+      "Liquid droplets or solids"
+     ],
+     "remedies": [
+      "Improve separation upstream; replace wheel"
+     ],
+     "part": "rotor"
+    },
+    {
+     "problem": "Oil contamination of process",
+     "category": "performance",
+     "symptoms": [
+      "Oil in cold box"
+     ],
+     "causes": [
+      "Seal-gas failure"
+     ],
+     "remedies": [
+      "Restore seal gas, replace seals"
+     ],
+     "part": "bearing_housing"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Expander Turbine — Introduction",
+    "type": "in_app_tour",
+    "model": "expander_turbine.glb",
+    "duration_s": 56.4,
+    "script": [
+     {
+      "narration": "This module introduces the Expander Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A turboexpander is a radial-inflow turbine through which high-pressure gas expands.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Because the gas does work on the wheel, its temperature drops far more than across a valve (near-isentropic expansion).",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The power is recovered in a compressor wheel on the same shaft or a generator.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include natural-gas processing (NGL recovery, dew-point control); air separation (cryogenic); LNG and hydrogen liquefaction; pressure letdown energy recovery.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Rotor: Expander Wheel, Shaft & Compressor Wheel, Expander Inlet Scroll & Axial Exhaust (cold gas out), Compressor (Brake) Casing: Axial Inlet, Diffuser & Volute.",
+      "duration_s": 11.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Expander Turbine — Operation",
+    "type": "in_app_tour",
+    "model": "expander_turbine.glb",
+    "duration_s": 40.1,
+    "script": [
+     {
+      "narration": "How the Expander Turbine works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "High-pressure gas enters the inlet scroll.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "expander_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Variable nozzles accelerate it onto the wheel and control the flow.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The gas expands through the expander wheel, cooling strongly and driving the shaft.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The same shaft drives the compressor wheel, which recompresses gas.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "compressor_casing",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Tilting-pad bearings and seals in the centre housing support the high-speed rotor.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "bearing_housing",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "High-pressure gas enters the scroll, accelerates through the nozzles and expands through the wheel, doing work on it.",
+      "duration_s": 7.9,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Expander Turbine — Maintenance",
+    "type": "in_app_tour",
+    "model": "expander_turbine.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Expander Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor speed, vibration, bearing temperatures and seal-gas ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bearing_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean inlet screen; check nozzle actuator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace bearings and seals; inspect wheels.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wheel erosion: efficiency loss, vibration. Common cause: liquid droplets or solids.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oil contamination of process: oil in cold box. Common cause: seal-gas failure.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "bearing_housing",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does gas cool more in an expander than across a valve?",
+     "options": [
+      "The expander adds heat",
+      "The gas does work on the wheel (near-isentropic)",
+      "Valves heat gas",
+      "It does not"
+     ],
+     "answer": 1,
+     "explanation": "Work extraction.",
+     "level": "basic"
+    },
+    {
+     "question": "What usually absorbs the expander power?",
+     "options": [
+      "A brake compressor or generator on the same shaft",
+      "The bearings",
+      "The nozzles",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Expander-compressor.",
+     "level": "basic"
+    },
+    {
+     "question": "Variable nozzles are used to…",
+     "options": [
+      "Seal the shaft",
+      "Control flow through the expander",
+      "Lubricate",
+      "Measure speed"
+     ],
+     "answer": 1,
+     "explanation": "Capacity control.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Extracts energy from the expanding gas and drives the compressor.\"",
+     "options": [
+      "Centre Bearing Housing (oil-lubricated tilting-pad bearings, seals)",
+      "Variable Inlet Guide Vanes (Nozzles) — adjust gas flow",
+      "Rotor: Expander Wheel, Shaft & Compressor Wheel",
+      "Skid / Baseplate"
+     ],
+     "answer": 2,
+     "explanation": "Rotor: Expander Wheel, Shaft & Compressor Wheel: Extracts energy from the expanding gas and drives the compressor.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support the high-speed shaft and carry thrust.\"",
+     "options": [
+      "Rotor: Expander Wheel, Shaft & Compressor Wheel",
+      "Centre Bearing Housing (oil-lubricated tilting-pad bearings, seals)",
+      "Variable Inlet Guide Vanes (Nozzles) — adjust gas flow",
+      "Skid / Baseplate"
+     ],
+     "answer": 1,
+     "explanation": "Centre Bearing Housing (oil-lubricated tilting-pad bearings, seals): Support the high-speed shaft and carry thrust.",
+     "level": "basic",
+     "part": "bearing_housing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Leads gas through the inlet scroll to the nozzles and out the axial exhaust.\"",
+     "options": [
+      "Centre Bearing Housing (oil-lubricated tilting-pad bearings, seals)",
+      "Expander Inlet Scroll & Axial Exhaust (cold gas out)",
+      "Compressor (Brake) Casing: Axial Inlet, Diffuser & Volute",
+      "Rotor: Expander Wheel, Shaft & Compressor Wheel"
+     ],
+     "answer": 1,
+     "explanation": "Expander Inlet Scroll & Axial Exhaust (cold gas out): Leads gas through the inlet scroll to the nozzles and out the axial exhaust.",
+     "level": "basic",
+     "part": "expander_casing",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

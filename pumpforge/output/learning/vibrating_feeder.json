@@ -1,0 +1,603 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "vibrating_feeder",
+ "no": 119,
+ "title": "Vibrating Feeder",
+ "model_title": "Electromechanical Vibrating Feeder (Twin Unbalanced Motors)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A vibrating feeder moves bulk material along a tray by vibration. Two unbalanced (exciter) motors turn in opposite directions; their forces cancel sideways and add in one direction, so the tray moves along a straight line at an angle. Each stroke throws the particles slightly up and forward, so the material \"hops\" along. Springs isolate the vibrating tray from the hopper support.",
+   "applications": [
+    "Feeding crushers, screens and conveyors from hoppers",
+    "Controlled feeding of aggregates, coal, ore, food products",
+    "Batching and dosing (variable frequency)"
+   ],
+   "key_points": [
+    "Linear motion from twin counter-rotating exciters",
+    "Feed rate set by amplitude and frequency (VFD)",
+    "Springs isolate vibration",
+    "No moving parts in contact with material except the liner"
+   ],
+   "classification": {
+    "family": "Feeder",
+    "type": "Electromechanical (twin unbalanced motor) vibrating feeder"
+   },
+   "hi_family": "material_handling",
+   "summary": "A vibrating feeder moves bulk material by vibrating a tray. Two counter-rotating unbalanced motors create a straight-line vibration at an angle; each stroke throws the particles slightly forward and up, so they hop along the tray at a rate set by amplitude and frequency."
+  },
+  "model_3d": {
+   "asset": "glb/vibrating_feeder.glb",
+   "metadata": "meta/vibrating_feeder.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7004,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material from the hopper rests on the tray.",
+    "The counter-rotating exciters create a straight-line vibration at about 30° to the tray.",
+    "Each stroke throws particles up and forward, so they progress along the tray."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material from the hopper rests on the tray.",
+     "part": "hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The counter-rotating exciters create a straight-line vibration at about 30° to the tray.",
+     "part": "exciters",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Each stroke throws particles up and forward, so they progress along the tray.",
+     "part": "tray",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Coil springs isolate the tray from the support so little vibration reaches the structure.",
+     "part": "springs",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Feed rate rises with amplitude and frequency until particles leave the tray (throw number); most feeders run below that point for control."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "vibrating_feeder_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/vibrating_feeder.json#components",
+   "key_components": "Tray, twin unbalanced motors, springs, hopper",
+   "parts": [
+    {
+     "id": "tray",
+     "name": "Feeder Tray (pan) with Liners",
+     "info_ref": "vf_tray",
+     "function": "Carries and conveys material.",
+     "material": "Steel, wear liners."
+    },
+    {
+     "id": "exciters",
+     "name": "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+     "info_ref": "vf_exciter",
+     "function": "Generate the vibration.",
+     "material": "—"
+    },
+    {
+     "id": "springs",
+     "name": "Coil-Spring Isolators",
+     "info_ref": "vf_springs",
+     "function": "Isolate vibration from the structure.",
+     "material": "Spring steel."
+    },
+    {
+     "id": "support",
+     "name": "Support Brackets",
+     "info_ref": "vf_support",
+     "function": "Support.",
+     "material": "Steel."
+    },
+    {
+     "id": "hopper",
+     "name": "Feed Hopper (bin outlet)",
+     "info_ref": "vf_hopper",
+     "function": "Feed hopper.",
+     "material": "Steel."
+    },
+    {
+     "id": "ore",
+     "name": "Material Moving by Micro-Throws",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tray width ~ 0.3 – 2.5 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 0.2 – 30 (exciter motors)",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 750 – 1500 rpm exciters (~ 12 – 25 Hz)",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "~ 5 – 2000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size the tray width and length for the required rate and the hopper opening; select exciters for the vibrating mass and the head load from the hopper."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer vibrating feeder data",
+    "CEMA — Bulk material handling practice"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support on steelwork or a concrete plinth designed for the hopper/bin load on the feeder plus impact and dynamic loads.",
+    "Isolate vibrating machines from the structure with their springs/rubber mounts — never weld or rigidly bolt the vibrating body to the structure."
+   ],
+   "alignment": [
+    "Set the feeder at the designed slope and centre it under the hopper outlet; set skirt boards and the hopper gate to the design bed depth.",
+    "Align drive and driven shafts (laser or dial gauge) or set the exciter motors as the maker specifies."
+   ],
+   "piping": [
+    "Chutes and skirts: allow a gap that widens in the direction of travel so material does not jam; fit dust seals and connect dust extraction where required.",
+    "Leave clear access for liner change and for the hopper shut-off gate."
+   ],
+   "commissioning": [
+    "Run empty first: check direction, amplitude/speed, temperatures and noise.",
+    "Load gradually, check the material bed is even and the discharge rate matches the set-point; record motor current as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check feed, noise and that the tray is free (no contact with chutes).",
+     "part": "tray",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect springs and liners; check exciter bolts and weight settings.",
+     "part": "springs",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace exciter bearings, liners and springs as needed.",
+     "part": "exciters"
+    }
+   ],
+   "lubrication": [
+    "Bearings: grease or oil to the maker's schedule and quantity — do not over-grease vibrating-machine bearings (heat)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Uneven or reduced feed",
+     "category": "performance",
+     "symptoms": [
+      "Feed rate drops, material builds up"
+     ],
+     "causes": [
+      "Sticky material",
+      "Lost amplitude (exciter fault, loose weights)",
+      "Springs broken"
+     ],
+     "remedies": [
+      "Clean liners; check eccentric weights and spring condition"
+     ],
+     "part": "exciters"
+    },
+    {
+     "problem": "Cracks in tray or body",
+     "category": "performance",
+     "symptoms": [
+      "Visible cracks near stiffeners"
+     ],
+     "causes": [
+      "Fatigue from long running at high amplitude",
+      "Resonance"
+     ],
+     "remedies": [
+      "Repair to maker's procedure; check amplitude and isolators"
+     ],
+     "part": "tray"
+    }
+   ],
+   "safety": [
+    "Lock out exciter motors; beware stored energy in springs and hanging material in the hopper."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Vibrating Feeder — Introduction",
+    "type": "in_app_tour",
+    "model": "vibrating_feeder.glb",
+    "duration_s": 51.8,
+    "script": [
+     {
+      "narration": "This module introduces the Vibrating Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A vibrating feeder moves bulk material along a tray by vibration.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Two unbalanced (exciter) motors turn in opposite directions; their forces cancel sideways and add in one direction, so the tray moves along a straight line at an angle.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Each stroke throws the particles slightly up and forward, so the material \"hops\" along.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include feeding crushers, screens and conveyors from hoppers; controlled feeding of aggregates, coal, ore, food products; batching and dosing (variable frequency).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Vibrating Feeder — Operation",
+    "type": "in_app_tour",
+    "model": "vibrating_feeder.glb",
+    "duration_s": 29.6,
+    "script": [
+     {
+      "narration": "How the Vibrating Feeder works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material from the hopper rests on the tray.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "hopper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The counter-rotating exciters create a straight-line vibration at about 30° to the tray.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "exciters",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Each stroke throws particles up and forward, so they progress along the tray.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "tray",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Coil springs isolate the tray from the support so little vibration reaches the structure.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "springs",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Vibrating Feeder — Maintenance",
+    "type": "in_app_tour",
+    "model": "vibrating_feeder.glb",
+    "duration_s": 38.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Vibrating Feeder.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check feed, noise and that the tray is free (no contact with chutes).",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "tray",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect springs and liners; check exciter bolts and weight settings.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "springs",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace exciter bearings, liners and springs as needed.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "exciters",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for uneven or reduced feed: feed rate drops, material builds up. Common cause: sticky material.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "exciters",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for cracks in tray or body: visible cracks near stiffeners. Common cause: fatigue from long running at high amplitude.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "tray",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How do two counter-rotating exciters produce straight-line vibration?",
+     "options": [
+      "Their forces add in all directions",
+      "Sideways components cancel, components along one line add",
+      "They spin at different speeds",
+      "They are magnetic"
+     ],
+     "answer": 1,
+     "explanation": "Opposite rotation cancels the cross-components.",
+     "level": "basic"
+    },
+    {
+     "question": "What do the springs do?",
+     "options": [
+      "Push the material",
+      "Isolate vibration from the structure",
+      "Heat the tray",
+      "Measure weight"
+     ],
+     "answer": 1,
+     "explanation": "Vibration isolation.",
+     "level": "basic"
+    },
+    {
+     "question": "How is feed rate commonly adjusted?",
+     "options": [
+      "Change hopper colour",
+      "Vary frequency (VFD) or exciter weight setting",
+      "Change spring colour",
+      "Tilt the motor"
+     ],
+     "answer": 1,
+     "explanation": "Amplitude and frequency set the rate.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries and conveys material.\"",
+     "options": [
+      "Coil-Spring Isolators",
+      "Feed Hopper (bin outlet)",
+      "Feeder Tray (pan) with Liners",
+      "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)"
+     ],
+     "answer": 2,
+     "explanation": "Feeder Tray (pan) with Liners: Carries and conveys material.",
+     "level": "basic",
+     "part": "tray",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Generate the vibration.\"",
+     "options": [
+      "Feeder Tray (pan) with Liners",
+      "Support Brackets",
+      "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+      "Material Moving by Micro-Throws"
+     ],
+     "answer": 2,
+     "explanation": "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration): Generate the vibration.",
+     "level": "basic",
+     "part": "exciters",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Isolate vibration from the structure.\"",
+     "options": [
+      "Coil-Spring Isolators",
+      "Twin Unbalanced-Motor Exciters (counter-rotating → straight-line vibration)",
+      "Feed Hopper (bin outlet)",
+      "Feeder Tray (pan) with Liners"
+     ],
+     "answer": 0,
+     "explanation": "Coil-Spring Isolators: Isolate vibration from the structure.",
+     "level": "basic",
+     "part": "springs",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

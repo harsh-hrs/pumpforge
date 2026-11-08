@@ -1,0 +1,666 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "cooling_water_distribution_system",
+ "no": 174,
+ "title": "Cooling Water Distribution System",
+ "model_title": "Cooling Water Distribution System (Tower, Pumps, Headers, Users)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A cooling water distribution system circulates water between a cooling tower and the plant's heat users. Pumps draw cold water from the tower basin and send it through supply headers to exchangers and condensers; warmed water returns to the tower, where a small part evaporates and cools the rest.",
+   "applications": [
+    "Power plants and refineries",
+    "Chemical and manufacturing plants",
+    "HVAC chilled-water condensers"
+   ],
+   "key_points": [
+    "Range = return − supply temperature",
+    "Approach = supply − wet-bulb temperature",
+    "Make-up replaces evaporation, drift and blowdown",
+    "Water treatment controls scale, corrosion and biology"
+   ],
+   "classification": {
+    "family": "Utility system",
+    "type": "Open recirculating cooling water system"
+   },
+   "hi_family": "thermal_process",
+   "summary": "A cooling water distribution system circulates water from a cooling tower to the plant's heat users and back. Pumps draw cold water from the tower basin and push it through a supply header to coolers and condensers; the warmed water returns to the tower, where evaporation cools it again."
+  },
+  "model_3d": {
+   "asset": "glb/cooling_water_distribution_system.glb",
+   "metadata": "meta/cooling_water_distribution_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 23700,
+   "parts": 12
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Cold water collects in the tower basin.",
+    "CW pumps send it into the supply header.",
+    "Users (coolers, condensers) pick up heat."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Cold water collects in the tower basin.",
+     "part": "basin_water",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "CW pumps send it into the supply header.",
+     "part": "cw_pump_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Users (coolers, condensers) pick up heat.",
+     "part": "users",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Warm water returns to the tower distribution.",
+     "part": "headers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water falls through the fill; the fan draws air up and evaporation cools it.",
+     "part": "tower_fan",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Tower performance curve: cold-water temperature vs wet-bulb for given range and flow."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "cooling_water_distribution_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "cooling_water_distribution_system_temperature.glb",
+     "title": "Supply (cool) and return (warm) water",
+     "description": "Water leaves the basin cool, picks up heat in the users and returns warmer to the tower. The temperature difference supply–return is the range (often ≈ 5–10 °C); how close the cold water gets to the air's wet-bulb temperature is the approach (often ≈ 3–6 °C). Evaporation, drift and blowdown losses are replaced by make-up water.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/cooling_water_distribution_system.json#components",
+   "key_components": "Cooling tower, basin, CW pumps, supply & return headers, users (exchangers), strainer",
+   "parts": [
+    {
+     "id": "cooling_tower",
+     "name": "Induced-Draught Cooling Tower (casing, air inlets, fan stack)",
+     "info_ref": "cw_tower",
+     "function": "Cools the water by evaporation.",
+     "material": "FRP/concrete/steel."
+    },
+    {
+     "id": "fill_distribution",
+     "name": "Film Fill, Hot-Water Distribution & Drift Eliminators",
+     "info_ref": "cw_fill",
+     "function": "Spreads water into films for contact with air.",
+     "material": "PVC/PP."
+    },
+    {
+     "id": "tower_fan",
+     "name": "Tower Fan",
+     "info_ref": "cw_tower",
+     "function": "Cools the water by evaporation.",
+     "material": "FRP/concrete/steel."
+    },
+    {
+     "id": "basin",
+     "name": "Cold-Water Basin",
+     "info_ref": "cw_tower",
+     "function": "Cools the water by evaporation.",
+     "material": "FRP/concrete/steel."
+    },
+    {
+     "id": "basin_water",
+     "name": "Cold Water in the Basin",
+     "info_ref": "cw_tower",
+     "function": "Cools the water by evaporation.",
+     "material": "FRP/concrete/steel."
+    },
+    {
+     "id": "cw_pump_1",
+     "name": "CW Pump 1 (duty)",
+     "info_ref": "cw_pumps",
+     "function": "Circulate the water.",
+     "material": "—"
+    },
+    {
+     "id": "cw_pump_1_shaft",
+     "name": "CW Pump 1 (duty) — Shaft & Coupling (turning)",
+     "info_ref": "cw_pumps",
+     "function": "Circulate the water.",
+     "material": "—"
+    },
+    {
+     "id": "cw_pump_2",
+     "name": "CW Pump 2 (standby)",
+     "info_ref": "cw_pumps",
+     "function": "Circulate the water.",
+     "material": "—"
+    },
+    {
+     "id": "cw_pump_2_shaft",
+     "name": "CW Pump 2 (standby) — Shaft & Coupling (turning)",
+     "info_ref": "cw_pumps",
+     "function": "Circulate the water.",
+     "material": "—"
+    },
+    {
+     "id": "headers",
+     "name": "Suction Line, Supply Header (with strainer) & Return Header",
+     "info_ref": "cw_headers",
+     "function": "Distribute water.",
+     "material": "Steel/HDPE."
+    },
+    {
+     "id": "users",
+     "name": "Heat Users (process coolers / condensers)",
+     "info_ref": "cw_users",
+     "function": "Heat users.",
+     "material": "—"
+    },
+    {
+     "id": "tower_rain",
+     "name": "Water Falling through the Fill (cooled by air)",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Header ~ 100 – 2000 mm; tower cells ~ 1 – 20",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.5 – 1000+",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Supply ~ 25 – 32; return ~ 35 – 42",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "~ 100 – 100 000",
+     "unit": "m³/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size tower for heat load, design wet-bulb and approach; pumps for flow and header losses with standby."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "CTI ATC-105",
+    "ASHRAE Handbook — Cooling towers"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Tower basin and pump pits on reinforced foundations; pumps on plinths with adequate submergence."
+   ],
+   "alignment": [
+    "Align pump–motor sets; level tower fans and gear drives."
+   ],
+   "piping": [
+    "Size headers for velocity ≈ 1.5–3 m/s; strainers before users; balancing valves; air release at high points."
+   ],
+   "commissioning": [
+    "Flush system; passivate; set chemical treatment; balance flows to users; test standby pump auto-start."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check pumps, basin level, conductivity and chemical dosing.",
+     "part": "cw_pump_1",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean strainers; inspect fill and drift eliminators.",
+     "part": "fill_distribution",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Overhaul pumps and fan gearboxes; inspect tower structure.",
+     "part": "tower_fan"
+    }
+   ],
+   "lubrication": [
+    "Pump bearings, fan gearbox oil per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Scaling/fouling of users",
+     "category": "performance",
+     "symptoms": [
+      "Rising approach temperatures at exchangers"
+     ],
+     "causes": [
+      "High cycles of concentration, poor treatment"
+     ],
+     "remedies": [
+      "Adjust blowdown and chemicals"
+     ],
+     "part": "users"
+    },
+    {
+     "problem": "Legionella risk",
+     "category": "performance",
+     "symptoms": [
+      "Positive samples"
+     ],
+     "causes": [
+      "Stagnant water, warm temperatures, poor biocide control"
+     ],
+     "remedies": [
+      "Biocide programme, cleaning, risk assessment"
+     ],
+     "part": "cooling_tower"
+    }
+   ],
+   "safety": [
+    "Legionella control; lock out fans before entering; chemical handling."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Cooling Water Distribution System — Introduction",
+    "type": "in_app_tour",
+    "model": "cooling_water_distribution_system.glb",
+    "duration_s": 52.8,
+    "script": [
+     {
+      "narration": "This module introduces the Cooling Water Distribution System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A cooling water distribution system circulates water between a cooling tower and the plant's heat users.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Pumps draw cold water from the tower basin and send it through supply headers to exchangers and condensers; warmed water returns to the tower, where a small part evaporates and cools the rest.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include power plants and refineries; chemical and manufacturing plants; HVAC chilled-water condensers.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Tower Fan, CW Pump 1 (duty), CW Pump 1 (duty) — Shaft & Coupling (turning), CW Pump 2 (standby).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Cooling Water Distribution System — Operation",
+    "type": "in_app_tour",
+    "model": "cooling_water_distribution_system.glb",
+    "duration_s": 37.1,
+    "script": [
+     {
+      "narration": "How the Cooling Water Distribution System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Cold water collects in the tower basin.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "basin_water",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "CW pumps send it into the supply header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cw_pump_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Users (coolers, condensers) pick up heat.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "users",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Warm water returns to the tower distribution.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "headers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water falls through the fill; the fan draws air up and evaporation cools it.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "tower_fan",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Water leaves the basin cool, picks up heat in the users and returns warmer to the tower.",
+      "duration_s": 7.1,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Cooling Water Distribution System — Maintenance",
+    "type": "in_app_tour",
+    "model": "cooling_water_distribution_system.glb",
+    "duration_s": 36.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Cooling Water Distribution System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check pumps, basin level, conductivity and chemical dosing.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cw_pump_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean strainers; inspect fill and drift eliminators.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fill_distribution",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Overhaul pumps and fan gearboxes; inspect tower structure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tower_fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for scaling/fouling of users: rising approach temperatures at exchangers. Common cause: high cycles of concentration, poor treatment.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "users",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for legionella risk: positive samples. Common cause: stagnant water, warm temperatures, poor biocide control.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "cooling_tower",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is the cooling tower \"range\"?",
+     "options": [
+      "Return minus supply temperature",
+      "Supply minus wet-bulb",
+      "Fan speed",
+      "Basin depth"
+     ],
+     "answer": 0,
+     "explanation": "Range.",
+     "level": "basic"
+    },
+    {
+     "question": "What is \"approach\"?",
+     "options": [
+      "Supply temperature minus air wet-bulb temperature",
+      "Return minus supply",
+      "Pump head",
+      "Fill height"
+     ],
+     "answer": 0,
+     "explanation": "Approach.",
+     "level": "basic"
+    },
+    {
+     "question": "Make-up water replaces…",
+     "options": [
+      "Evaporation, drift and blowdown",
+      "Only drift",
+      "Nothing",
+      "Steam"
+     ],
+     "answer": 0,
+     "explanation": "Losses.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Cools the water by evaporation.\"",
+     "options": [
+      "Suction Line, Supply Header (with strainer) & Return Header",
+      "CW Pump 1 (duty)",
+      "Induced-Draught Cooling Tower (casing, air inlets, fan stack)",
+      "Film Fill, Hot-Water Distribution & Drift Eliminators"
+     ],
+     "answer": 2,
+     "explanation": "Induced-Draught Cooling Tower (casing, air inlets, fan stack): Cools the water by evaporation.",
+     "level": "basic",
+     "part": "cooling_tower",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Spreads water into films for contact with air.\"",
+     "options": [
+      "Suction Line, Supply Header (with strainer) & Return Header",
+      "CW Pump 2 (standby) — Shaft & Coupling (turning)",
+      "Film Fill, Hot-Water Distribution & Drift Eliminators",
+      "Cold-Water Basin"
+     ],
+     "answer": 2,
+     "explanation": "Film Fill, Hot-Water Distribution & Drift Eliminators: Spreads water into films for contact with air.",
+     "level": "basic",
+     "part": "fill_distribution",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Circulate the water.\"",
+     "options": [
+      "Suction Line, Supply Header (with strainer) & Return Header",
+      "Film Fill, Hot-Water Distribution & Drift Eliminators",
+      "CW Pump 1 (duty)",
+      "Induced-Draught Cooling Tower (casing, air inlets, fan stack)"
+     ],
+     "answer": 2,
+     "explanation": "CW Pump 1 (duty): Circulate the water.",
+     "level": "basic",
+     "part": "cw_pump_1",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

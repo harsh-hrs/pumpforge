@@ -1,0 +1,623 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "stacker",
+ "no": 132,
+ "title": "Stacker",
+ "model_title": "Rail-Mounted Slewing & Luffing Boom Stacker",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A stacker builds stockpiles of bulk material such as coal, iron ore and limestone. It travels on rails beside the yard conveyor. A tripper on the yard conveyor raises the material onto the stacker's boom conveyor; the boom can slew (rotate) and luff (raise and lower) to place the material where it is needed on the pile. A counterweight balances the boom.",
+   "applications": [
+    "Coal stockyards at power plants and ports",
+    "Iron ore and limestone blending beds",
+    "Bulk export/import terminals"
+   ],
+   "key_points": [
+    "Travel, slew and luff motions",
+    "Boom conveyor discharges at the tip",
+    "Stacking methods: cone shell, chevron, windrow (for blending)",
+    "Counterweight keeps the machine stable"
+   ],
+   "classification": {
+    "family": "Bulk handling machine",
+    "type": "Rail-mounted slewing/luffing boom stacker"
+   },
+   "hi_family": "material_handling",
+   "summary": "A stacker builds stockpiles of bulk material (coal, ore, limestone). It travels on rails alongside the yard conveyor; a tripper lifts material off that conveyor onto the boom conveyor, which slews and luffs to place it on the pile in layers (chevron or windrow stacking)."
+  },
+  "model_3d": {
+   "asset": "glb/stacker.glb",
+   "metadata": "meta/stacker.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 3204,
+   "parts": 6
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material arrives on the yard conveyor.",
+    "The portal travels along the rails to the stacking position.",
+    "The boom conveyor carries material to the boom tip; the superstructure slews to spread it."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material arrives on the yard conveyor.",
+     "part": "yard_conveyor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The portal travels along the rails to the stacking position.",
+     "part": "portal",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The boom conveyor carries material to the boom tip; the superstructure slews to spread it.",
+     "part": "superstructure",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Material falls from the tip and builds the stockpile.",
+     "part": "stockpile",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Stacking rate equals the yard conveyor rate; pile capacity ∝ pile length × cross-section (angle of repose)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "stacker_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/stacker.json#components",
+   "key_components": "Boom conveyor, luffing & slewing, travel, tripper car",
+   "parts": [
+    {
+     "id": "rails",
+     "name": "Rails & Sleepers (travel track)",
+     "info_ref": "hm_rails",
+     "function": "Track for travel.",
+     "material": "Steel."
+    },
+    {
+     "id": "portal",
+     "name": "Portal / Travel Carriage with Bogies",
+     "info_ref": "sr_portal",
+     "function": "Carries the machine along the rails.",
+     "material": "Steel."
+    },
+    {
+     "id": "superstructure",
+     "name": "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+     "info_ref": "sr_boom",
+     "function": "Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.",
+     "material": "Steel."
+    },
+    {
+     "id": "stockpile",
+     "name": "Stockpile",
+     "info_ref": "hm_pile",
+     "function": "Stockpile / face.",
+     "material": "—"
+    },
+    {
+     "id": "coal",
+     "name": "Coal on the Boom Belt & Leaving the Tip",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    },
+    {
+     "id": "yard_conveyor",
+     "name": "Yard (Stockpile) Conveyor alongside the Rails",
+     "info_ref": "hk_belt",
+     "function": "Belt.",
+     "material": "Rubber."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Boom ~ 20 – 60 m",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 100 – 1000 (total connected)",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Boom belt ~ 2 – 5 m/s; travel ~ 0.1 – 0.5 m/s",
+     "unit": "m/s"
+    },
+    "capacity": {
+     "typical_range": "~ 500 – 10 000+",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose boom length and height from pile width/height; capacity from the yard conveyor rate; consider wind and seismic design."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 5049-1 — Mobile equipment for continuous handling of bulk materials (design rules)",
+    "FEM 2.131/2.132 — Design rules for mobile equipment for continuous handling of bulk materials"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Rails on a continuous foundation (ballast or concrete beam) to the specified tolerances for gauge, level and straightness; rail joints welded or tight-fished.",
+    "Design for wheel loads including wind and storm conditions; fit storm anchors/rail clamps and end stops with buffers."
+   ],
+   "alignment": [
+    "Align the machine's yard-conveyor interface (tripper or feed chute) with the yard conveyor; check slew bearing level and bolt pre-tension."
+   ],
+   "piping": [
+    "Power and control by cable reel (festoon or motorised reel) along the rail track; anti-collision and boom-to-pile sensors.",
+    "Dust suppression water supply and sprays at transfer points where required."
+   ],
+   "commissioning": [
+    "Test travel, slew, luff and conveyor drives individually, then interlocks (slew limits, anti-collision, overload, wind speed cut-out).",
+    "Load-test the boom conveyor and record power; check stability calculations against the as-built mass."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Walk-down: belt, chutes, spillage, cable reel.",
+     "part": "superstructure",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check rails, wheels and buffers.",
+     "part": "rails",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Slew bearing inspection; boom structure NDT; conveyor pulleys.",
+     "part": "superstructure"
+    }
+   ],
+   "lubrication": [
+    "Gearboxes: oil to grade and change interval; open gears and slew bearing: grease to schedule.",
+    "Wheels and pulley bearings: grease to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Boom conveyor belt damage",
+     "category": "performance",
+     "symptoms": [
+      "Spillage, belt edge wear"
+     ],
+     "causes": [
+      "Mistracking, material build-up, impact at the transfer"
+     ],
+     "remedies": [
+      "Re-train belt; clean; repair chutes"
+     ],
+     "part": "superstructure"
+    },
+    {
+     "problem": "Slew bearing wear",
+     "category": "wear",
+     "symptoms": [
+      "Rocking, noise, increased tilt clearance"
+     ],
+     "causes": [
+      "Lubrication failure, overload"
+     ],
+     "remedies": [
+      "Measure tilt; grease; replace if limits exceeded"
+     ],
+     "part": "superstructure"
+    },
+    {
+     "problem": "Long-travel misalignment",
+     "category": "vibration",
+     "symptoms": [
+      "Wheel flange wear, crabbing"
+     ],
+     "causes": [
+      "Rail misalignment, uneven wheel diameters"
+     ],
+     "remedies": [
+      "Survey rails; match wheels"
+     ],
+     "part": "portal"
+    }
+   ],
+   "safety": [
+    "Anti-collision with other machines; wind speed limits and storm pins; exclusion zone around the boom and pile."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Stacker — Introduction",
+    "type": "in_app_tour",
+    "model": "stacker.glb",
+    "duration_s": 53.2,
+    "script": [
+     {
+      "narration": "This module introduces the Stacker.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A stacker builds stockpiles of bulk material such as coal, iron ore and limestone.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It travels on rails beside the yard conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A tripper on the yard conveyor raises the material onto the stacker's boom conveyor; the boom can slew (rotate) and luff (raise and lower) to place the material where it is needed on the pile.",
+      "duration_s": 15.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include coal stockyards at power plants and ports; iron ore and limestone blending beds; bulk export/import terminals.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Stacker — Operation",
+    "type": "in_app_tour",
+    "model": "stacker.glb",
+    "duration_s": 26.6,
+    "script": [
+     {
+      "narration": "How the Stacker works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material arrives on the yard conveyor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "yard_conveyor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The portal travels along the rails to the stacking position.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "portal",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The boom conveyor carries material to the boom tip; the superstructure slews to spread it.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "superstructure",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Material falls from the tip and builds the stockpile.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stockpile",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Stacker — Maintenance",
+    "type": "in_app_tour",
+    "model": "stacker.glb",
+    "duration_s": 43.4,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Stacker.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Walk-down: belt, chutes, spillage, cable reel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check rails, wheels and buffers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rails",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Slew bearing inspection; boom structure NDT; conveyor pulleys.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for boom conveyor belt damage: spillage, belt edge wear. Common cause: mistracking, material build-up, impact at the transfer.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for slew bearing wear: rocking, noise, increased tilt clearance. Common cause: lubrication failure, overload.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "superstructure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for long-travel misalignment: wheel flange wear, crabbing. Common cause: rail misalignment, uneven wheel diameters.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "portal",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which motion rotates the boom about a vertical axis?",
+     "options": [
+      "Luffing",
+      "Slewing",
+      "Travelling",
+      "Tripping"
+     ],
+     "answer": 1,
+     "explanation": "Slew = rotate.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the job of the counterweight?",
+     "options": [
+      "Balance the boom and keep the machine stable",
+      "Weigh the coal",
+      "Drive the belt",
+      "Cool the motors"
+     ],
+     "answer": 0,
+     "explanation": "Stability.",
+     "level": "basic"
+    },
+    {
+     "question": "Chevron/windrow stacking is used to…",
+     "options": [
+      "Blend material of varying quality",
+      "Save paint",
+      "Increase dust",
+      "Stop the belt"
+     ],
+     "answer": 0,
+     "explanation": "Blending beds.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Track for travel.\"",
+     "options": [
+      "Coal on the Boom Belt & Leaving the Tip",
+      "Rails & Sleepers (travel track)",
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+      "Yard (Stockpile) Conveyor alongside the Rails"
+     ],
+     "answer": 1,
+     "explanation": "Rails & Sleepers (travel track): Track for travel.",
+     "level": "basic",
+     "part": "rails",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the machine along the rails.\"",
+     "options": [
+      "Rails & Sleepers (travel track)",
+      "Portal / Travel Carriage with Bogies",
+      "Stockpile",
+      "Coal on the Boom Belt & Leaving the Tip"
+     ],
+     "answer": 1,
+     "explanation": "Portal / Travel Carriage with Bogies: Carries the machine along the rails.",
+     "level": "basic",
+     "part": "portal",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.\"",
+     "options": [
+      "Coal on the Boom Belt & Leaving the Tip",
+      "Portal / Travel Carriage with Bogies",
+      "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor",
+      "Yard (Stockpile) Conveyor alongside the Rails"
+     ],
+     "answer": 2,
+     "explanation": "Slewing Superstructure: Machinery House, Cab, Mast, Counterweight & Boom Conveyor: Slews/luffs the boom conveyor over the stockpile; houses machinery and counterweight.",
+     "level": "basic",
+     "part": "superstructure",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

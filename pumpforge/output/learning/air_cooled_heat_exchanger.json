@@ -1,0 +1,627 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "air_cooled_heat_exchanger",
+ "no": 94,
+ "title": "Air Cooled Heat Exchanger",
+ "model_title": "Air-Cooled Heat Exchanger (Forced Draft, Finned-Tube Bundle)",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An air-cooled heat exchanger (fin-fan) cools or condenses a process stream with ambient air. The fluid flows through finned tubes between header boxes; axial fans force air across the bundle. It removes the need for cooling water.",
+   "applications": [
+    "Refinery and gas-plant product coolers and condensers",
+    "Compressor inter/after-coolers",
+    "Power-plant air-cooled condensers",
+    "Remote sites without water"
+   ],
+   "key_points": [
+    "No cooling water needed",
+    "Outlet limited to ~ 10–15 °C above ambient",
+    "Fins increase air-side area 15–25×",
+    "Fan pitch/VFD/louvres control"
+   ],
+   "classification": {
+    "family": "Air-cooled heat exchanger",
+    "type": "Forced draft, plug-type headers, two fans"
+   },
+   "hi_family": "static_equipment",
+   "summary": "An air-cooled heat exchanger (fin-fan cooler) cools or condenses a process fluid using ambient air instead of water. The fluid flows through finned tubes between header boxes; axial fans blow (forced draft) or pull (induced draft) air across the bundle. It saves cooling water and is common in refineries and gas plants."
+  },
+  "model_3d": {
+   "asset": "glb/air_cooled_heat_exchanger.glb",
+   "metadata": "meta/air_cooled_heat_exchanger.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7940,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Hot fluid enters the inlet header and is spread over the tubes.",
+    "Fans push ambient air up through the finned bundle.",
+    "Heat passes from the fluid through the tube and fins into the air."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Hot fluid enters the inlet header and is spread over the tubes.",
+     "part": "headers",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fans push ambient air up through the finned bundle.",
+     "part": "fan_1",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Heat passes from the fluid through the tube and fins into the air.",
+     "part": "tube_bundle",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Cooled fluid leaves through the outlet header nozzle.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Duty falls as ambient air temperature rises; design on summer ambient."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "air_cooled_heat_exchanger_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/air_cooled_heat_exchanger.json#components",
+   "key_components": "Finned-tube bundle, header boxes, axial fans, plenum, structure",
+   "parts": [
+    {
+     "id": "tube_bundle",
+     "name": "Finned-Tube Bundle (aluminium fins on carbon-steel tubes)",
+     "info_ref": "ac_bundle",
+     "function": "Transfers heat from the process fluid to air.",
+     "material": "Carbon steel tubes, aluminium fins."
+    },
+    {
+     "id": "headers",
+     "name": "Plug-Type Header Boxes (inlet/return; pass partition)",
+     "info_ref": "ac_headers",
+     "function": "Distribute the fluid to the tubes and turn it between passes.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "nozzles",
+     "name": "Process Inlet (top) & Outlet (bottom) Nozzles",
+     "info_ref": "ac_nozzles",
+     "function": "Process connections.",
+     "material": "Steel."
+    },
+    {
+     "id": "plenum",
+     "name": "Fan Plenum & Fan Rings",
+     "info_ref": "ac_plenum",
+     "function": "Guides air from the fans to the whole bundle.",
+     "material": "Steel."
+    },
+    {
+     "id": "fan_1",
+     "name": "Axial Fan 1 (adjustable-pitch blades)",
+     "info_ref": "ac_fan",
+     "function": "Move cooling air across the bundle.",
+     "material": "Aluminium/FRP blades."
+    },
+    {
+     "id": "drive_1",
+     "name": "Fan Drive 1 (motor & shaft)",
+     "info_ref": "ac_drive",
+     "function": "Drive the fans.",
+     "material": "Steel."
+    },
+    {
+     "id": "fan_2",
+     "name": "Axial Fan 2 (adjustable-pitch blades)",
+     "info_ref": "ac_fan",
+     "function": "Move cooling air across the bundle.",
+     "material": "Aluminium/FRP blades."
+    },
+    {
+     "id": "drive_2",
+     "name": "Fan Drive 2 (motor & shaft)",
+     "info_ref": "ac_drive",
+     "function": "Drive the fans.",
+     "material": "Steel."
+    },
+    {
+     "id": "structure",
+     "name": "Support Structure & Drive Beams",
+     "info_ref": "ac_structure",
+     "function": "Supports bundle, fans and drives.",
+     "material": "Galvanised steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Bundles up to ~ 12 m long, 3–4 m wide",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 200+",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 350 (fin type limited)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "0.1 – 50 MW per bay",
+     "unit": "MW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Elevate on structure with free air inlet; avoid hot-air recirculation and nearby obstructions."
+   ],
+   "alignment": [
+    "Provide pull-out space for tube bundles or plates; align nozzles to piping without strain."
+   ],
+   "piping": [
+    "Install vents and drains on both sides; fit strainers where fouling solids are expected.",
+    "Arrange counter-current connections as designed."
+   ],
+   "commissioning": [
+    "Pressure-test each side; vent air; bring flows on gradually to avoid thermal shock."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check fan vibration and belt/drive.",
+     "part": "fan_1",
+     "interval": "weekly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Wash fins (low-pressure water).",
+     "part": "tube_bundle",
+     "interval": "6–12 months"
+    },
+    {
+     "task": "Check fan pitch and tip clearance.",
+     "part": "fan_2",
+     "interval": "annual"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Remove plugs; clean and inspect tubes.",
+     "part": "headers"
+    }
+   ],
+   "lubrication": [
+    "Grease fan shaft bearings; lubricate gearboxes if fitted."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Fin fouling",
+     "category": "performance",
+     "symptoms": [
+      "High outlet temperature"
+     ],
+     "causes": [
+      "Dust, insects, fibres"
+     ],
+     "remedies": [
+      "Clean fins"
+     ],
+     "part": "tube_bundle"
+    },
+    {
+     "problem": "Fan failure",
+     "category": "performance",
+     "symptoms": [
+      "Loss of capacity, vibration"
+     ],
+     "causes": [
+      "Bearing/belt failure"
+     ],
+     "remedies": [
+      "Repair drive"
+     ],
+     "part": "drive_1"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Air Cooled Heat Exchanger — Introduction",
+    "type": "in_app_tour",
+    "model": "air_cooled_heat_exchanger.glb",
+    "duration_s": 52.7,
+    "script": [
+     {
+      "narration": "This module introduces the Air Cooled Heat Exchanger.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An air-cooled heat exchanger (fin-fan) cools or condenses a process stream with ambient air.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The fluid flows through finned tubes between header boxes; axial fans force air across the bundle.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It removes the need for cooling water.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include refinery and gas-plant product coolers and condensers; compressor inter/after-coolers; power-plant air-cooled condensers; remote sites without water.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Fan Plenum & Fan Rings, Axial Fan 1 (adjustable-pitch blades), Axial Fan 2 (adjustable-pitch blades).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Air Cooled Heat Exchanger — Operation",
+    "type": "in_app_tour",
+    "model": "air_cooled_heat_exchanger.glb",
+    "duration_s": 26.6,
+    "script": [
+     {
+      "narration": "How the Air Cooled Heat Exchanger works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Hot fluid enters the inlet header and is spread over the tubes.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "headers",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fans push ambient air up through the finned bundle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_1",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Heat passes from the fluid through the tube and fins into the air.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "tube_bundle",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Cooled fluid leaves through the outlet header nozzle.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Air Cooled Heat Exchanger — Maintenance",
+    "type": "in_app_tour",
+    "model": "air_cooled_heat_exchanger.glb",
+    "duration_s": 36.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Air Cooled Heat Exchanger.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check fan vibration and belt/drive.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Wash fins (low-pressure water).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check fan pitch and tip clearance.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fan_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Remove plugs; clean and inspect tubes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "headers",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fin fouling: high outlet temperature. Common cause: dust, insects, fibres.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "tube_bundle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for fan failure: loss of capacity, vibration. Common cause: bearing/belt failure.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "drive_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What limits the outlet temperature of an air cooler?",
+     "options": [
+      "Tube length only",
+      "Ambient air temperature",
+      "Fan colour",
+      "Header size"
+     ],
+     "answer": 1,
+     "explanation": "Approach to ambient.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are the tubes finned?",
+     "options": [
+      "Strength",
+      "Air has a low heat-transfer coefficient — fins add area",
+      "Noise",
+      "Weight"
+     ],
+     "answer": 1,
+     "explanation": "Extended surface.",
+     "level": "basic"
+    },
+    {
+     "question": "Forced draft means the fans are…",
+     "options": [
+      "Above the bundle pulling air",
+      "Below the bundle pushing air",
+      "Inside the tubes",
+      "Absent"
+     ],
+     "answer": 1,
+     "explanation": "Induced draft pulls from above.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Transfers heat from the process fluid to air.\"",
+     "options": [
+      "Finned-Tube Bundle (aluminium fins on carbon-steel tubes)",
+      "Fan Drive 1 (motor & shaft)",
+      "Axial Fan 1 (adjustable-pitch blades)",
+      "Fan Plenum & Fan Rings"
+     ],
+     "answer": 0,
+     "explanation": "Finned-Tube Bundle (aluminium fins on carbon-steel tubes): Transfers heat from the process fluid to air.",
+     "level": "basic",
+     "part": "tube_bundle",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distribute the fluid to the tubes and turn it between passes.\"",
+     "options": [
+      "Fan Drive 2 (motor & shaft)",
+      "Axial Fan 2 (adjustable-pitch blades)",
+      "Support Structure & Drive Beams",
+      "Plug-Type Header Boxes (inlet/return; pass partition)"
+     ],
+     "answer": 3,
+     "explanation": "Plug-Type Header Boxes (inlet/return; pass partition): Distribute the fluid to the tubes and turn it between passes.",
+     "level": "basic",
+     "part": "headers",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Process connections.\"",
+     "options": [
+      "Plug-Type Header Boxes (inlet/return; pass partition)",
+      "Process Inlet (top) & Outlet (bottom) Nozzles",
+      "Finned-Tube Bundle (aluminium fins on carbon-steel tubes)",
+      "Fan Drive 2 (motor & shaft)"
+     ],
+     "answer": 1,
+     "explanation": "Process Inlet (top) & Outlet (bottom) Nozzles: Process connections.",
+     "level": "basic",
+     "part": "nozzles",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

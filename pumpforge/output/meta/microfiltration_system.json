@@ -1,0 +1,634 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "microfiltration_system",
+  "title": "Submerged Hollow-Fibre Microfiltration System (Membrane Tank, Permeate Pump, Air Scour)",
+  "category": "11 · Filtration & Separation Equipment",
+  "library": {
+    "no": 177,
+    "phase": 9,
+    "eq_id": "EQ-255",
+    "subcategory": "Membrane separation",
+    "hi_family": "filtration_separation",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "microfiltration_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "microfiltration_system_pressure.glb",
+      "title": "Suction-driven filtration (low TMP)",
+      "description": "The permeate pump applies a gentle suction inside the fibres (trans-membrane pressure typically only ~ 0.1–0.5 bar), drawing clean water in through the pores while solids stay outside. Air scouring and periodic back-pulsing keep the fibre surfaces clean.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "permeate",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          0.0,
+          0.9,
+          -0.0
+        ],
+        [
+          0.0,
+          1.8,
+          -0.0
+        ],
+        [
+          1.5,
+          1.8,
+          -0.0
+        ],
+        [
+          1.5,
+          0.5,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "air",
+      "kind": "air",
+      "radius": 0.015,
+      "points": [
+        [
+          -1.4,
+          0.62,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.7,
+          -0.0
+        ],
+        [
+          -0.8,
+          1.7,
+          -0.0
+        ],
+        [
+          -0.8,
+          0.15,
+          -0.0
+        ],
+        [
+          0.5,
+          0.15,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "feed",
+      "kind": "flow_suction",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.1,
+          1.4,
+          -0.3
+        ],
+        [
+          -0.7,
+          1.2,
+          -0.3
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 6168,
+    "parts": 10
+  },
+  "summary": "A submerged hollow-fibre microfiltration system immerses bundles of porous fibres in the feed tank. A permeate pump applies a gentle suction so clean water passes into the fibres while particles and bacteria stay outside. Air bubbles from diffusers scour the fibres to limit fouling.",
+  "classification": {
+    "family": "Membrane system",
+    "type": "Submerged hollow-fibre MF (e.g. MBR)"
+  },
+  "model_configuration": {
+    "animation": "Air scour bubbles; permeate pump"
+  },
+  "standards": [
+    {
+      "id": "ASTM D4516",
+      "title": "Standardizing RO performance data",
+      "relevance": "Normalisation of membrane performance (also applied to NF).",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ASME BPVC X",
+      "title": "FRP pressure vessels",
+      "relevance": "Membrane pressure vessels.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Judd — The MBR Book"
+  ],
+  "parts": [
+    {
+      "id": "membrane_tank",
+      "name": "Membrane Tank (open, concrete or steel)",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "membrane_tank__back",
+        "membrane_tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.93,
+        0.0,
+        -0.48
+      ],
+      "bbox_max": [
+        0.93,
+        1.5,
+        0.48
+      ],
+      "label_anchor": [
+        0.0,
+        0.75,
+        0.48
+      ],
+      "center": [
+        0.0,
+        0.75,
+        -0.0
+      ],
+      "info_ref": "mfs_tank"
+    },
+    {
+      "id": "mixed_liquor",
+      "name": "Feed / Mixed Liquor in the Tank",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "wt"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -0.895,
+        0.03,
+        -0.445
+      ],
+      "bbox_max": [
+        0.895,
+        1.28,
+        -0.005
+      ],
+      "label_anchor": [
+        0.0,
+        0.655,
+        -0.005
+      ],
+      "center": [
+        0.0,
+        0.655,
+        -0.225
+      ],
+      "info_ref": "mfs_tank"
+    },
+    {
+      "id": "membrane_cassette",
+      "name": "Membrane Cassette: Hollow Fibres (≈ 0.1–0.4 µm pores) between Potted Headers",
+      "group": "filter_media",
+      "section_role": "keep",
+      "nodes": [
+        "membrane_cassette.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.6,
+        0.7
+      ],
+      "bbox_min": [
+        -0.64,
+        0.26,
+        -0.25
+      ],
+      "bbox_max": [
+        0.64,
+        1.18,
+        0.25
+      ],
+      "label_anchor": [
+        0.0,
+        0.72,
+        0.25
+      ],
+      "center": [
+        0.0,
+        0.72,
+        -0.0
+      ],
+      "info_ref": "mfs_fibres"
+    },
+    {
+      "id": "air_diffuser",
+      "name": "Air-Scour Diffuser & Air Line",
+      "group": "aeration",
+      "section_role": "keep",
+      "nodes": [
+        "air_diffuser.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.43,
+        0.12,
+        -0.03
+      ],
+      "bbox_max": [
+        0.6,
+        1.73,
+        0.03
+      ],
+      "label_anchor": [
+        -0.415,
+        0.925,
+        0.03
+      ],
+      "center": [
+        -0.415,
+        0.925,
+        -0.0
+      ],
+      "info_ref": "mfs_air"
+    },
+    {
+      "id": "blower",
+      "name": "Air-Scour Blower Housing",
+      "group": "aeration",
+      "section_role": "keep",
+      "nodes": [
+        "blh"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.62,
+        0.18,
+        -0.12
+      ],
+      "bbox_max": [
+        -1.18,
+        0.62,
+        0.12
+      ],
+      "label_anchor": [
+        -1.4,
+        0.4,
+        0.12
+      ],
+      "center": [
+        -1.4,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "mfs_air"
+    },
+    {
+      "id": "blower_rotor",
+      "name": "Blower Impeller",
+      "group": "rotating_element",
+      "section_role": "keep",
+      "nodes": [
+        "blower_rotor.001"
+      ],
+      "pivot": [
+        -1.4,
+        0.4,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.3
+      ],
+      "bbox_min": [
+        -1.552,
+        0.25699,
+        -0.03
+      ],
+      "bbox_max": [
+        -1.248,
+        0.54301,
+        0.03
+      ],
+      "label_anchor": [
+        -1.4,
+        0.4,
+        0.03
+      ],
+      "center": [
+        -1.4,
+        0.4,
+        -0.0
+      ],
+      "info_ref": "mfs_air"
+    },
+    {
+      "id": "permeate_line",
+      "name": "Permeate Header & Line (under suction)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "pm"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.035,
+        0.45,
+        -0.035
+      ],
+      "bbox_max": [
+        1.535,
+        1.835,
+        0.035
+      ],
+      "label_anchor": [
+        0.75,
+        1.1425,
+        0.035
+      ],
+      "center": [
+        0.75,
+        1.1425,
+        -0.0
+      ],
+      "info_ref": "mfs_permeate"
+    },
+    {
+      "id": "permeate_pump",
+      "name": "Permeate Pump (reversible for backpulse)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "permeate_pumpb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.35,
+        0.125,
+        -0.15
+      ],
+      "bbox_max": [
+        2.25,
+        0.42,
+        0.15
+      ],
+      "label_anchor": [
+        1.8,
+        0.2725,
+        0.15
+      ],
+      "center": [
+        1.8,
+        0.2725,
+        -0.0
+      ],
+      "info_ref": "mfs_permeate"
+    },
+    {
+      "id": "permeate_pump_shaft",
+      "name": "Permeate Pump (reversible for backpulse) — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "permeate_pumpc"
+      ],
+      "pivot": [
+        1.74,
+        0.3,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.68,
+        0.28,
+        -0.05
+      ],
+      "bbox_max": [
+        1.8,
+        0.32,
+        0.05
+      ],
+      "label_anchor": [
+        1.74,
+        0.3,
+        0.05
+      ],
+      "center": [
+        1.74,
+        0.3,
+        -0.0
+      ],
+      "info_ref": "mfs_permeate"
+    },
+    {
+      "id": "air_bubbles",
+      "name": "Coarse Air Bubbles scouring the Fibres",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "air_bubbles0",
+        "air_bubbles1",
+        "air_bubbles2",
+        "air_bubbles3",
+        "air_bubbles4",
+        "air_bubbles5",
+        "air_bubbles6",
+        "air_bubbles7",
+        "air_bubbles8",
+        "air_bubbles9",
+        "air_bubbles10",
+        "air_bubbles11",
+        "air_bubbles12",
+        "air_bubbles13",
+        "air_bubbles14",
+        "air_bubbles15"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.02,
+        -0.02,
+        -0.02
+      ],
+      "bbox_max": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.02
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "mfs_tank": {
+      "function": "Holds the feed and the cassettes.",
+      "construction": "Tank.",
+      "material": "Concrete/steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "mfs_fibres": {
+      "function": "Separate solids from water.",
+      "construction": "Hollow fibres potted in headers.",
+      "material": "PVDF/PES.",
+      "operating_conditions": "TMP ~ 0.1–0.5 bar.",
+      "failure_modes": [
+        "Fouling, fibre breakage"
+      ],
+      "inspection": [
+        "Integrity (pressure decay) test"
+      ]
+    },
+    "mfs_air": {
+      "function": "Scour fibres.",
+      "construction": "Blower, diffusers.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "mfs_permeate": {
+      "function": "Draw permeate.",
+      "construction": "Header, line, pump.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

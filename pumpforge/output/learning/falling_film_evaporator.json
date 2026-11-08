@@ -1,0 +1,669 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "falling_film_evaporator",
+ "no": 158,
+ "title": "Falling Film Evaporator",
+ "model_title": "Falling Film Evaporator (Calandria + Vapour–Liquid Separator)",
+ "category": "10 · Thermal & Process Equipment",
+ "phase": 8,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "In a falling film evaporator, liquid is spread at the top of long vertical tubes and flows down the inside walls as a thin film, while steam condenses on the outside. The liquid evaporates from the film surface; vapour and concentrate leave at the bottom and are split in a separator. Residence time is short and the temperature difference small.",
+   "applications": [
+    "Dairy (milk concentration), juices, sugar",
+    "Pharmaceuticals and heat-sensitive chemicals",
+    "Mechanical vapour recompression (MVR) systems"
+   ],
+   "key_points": [
+    "Thin film → high heat transfer at low ΔT",
+    "Short residence time — gentle on products",
+    "Distribution must wet every tube",
+    "Recirculation keeps the minimum wetting rate"
+   ],
+   "classification": {
+    "family": "Evaporator",
+    "type": "Falling film with recirculation"
+   },
+   "hi_family": "thermal_process",
+   "summary": "In a falling film evaporator the liquid is distributed at the top of long vertical tubes and flows down the inside walls as a thin film, heated by steam condensing outside. Vapour and concentrate leave at the bottom and are split in a separator. Short residence time and small temperature differences suit heat-sensitive products."
+  },
+  "model_3d": {
+   "asset": "glb/falling_film_evaporator.glb",
+   "metadata": "meta/falling_film_evaporator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 23100,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Feed enters the top head and the distributor wets every tube.",
+    "A thin liquid film falls down inside the tubes.",
+    "Steam condenses on the outside of the tubes."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Feed enters the top head and the distributor wets every tube.",
+     "part": "distributor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "A thin liquid film falls down inside the tubes.",
+     "part": "calandria_tubes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Steam condenses on the outside of the tubes.",
+     "part": "calandria",
+     "cut": true,
+     "operate": true,
+     "overlay": "temperature",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Vapour and concentrate separate in the separator.",
+     "part": "separator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The recirculation pump returns liquid to the top.",
+     "part": "recirc_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Heat-transfer coefficient vs film Reynolds number; dry patches form below the minimum wetting rate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "falling_film_evaporator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "temperature": {
+     "file": "falling_film_evaporator_temperature.glb",
+     "title": "Small temperature difference, short residence time",
+     "description": "Steam condenses outside the tubes while a thin film of liquid flows down the inside walls by gravity and evaporates from its surface. Because the film is thin and there is no hydrostatic head, it works with small temperature differences and very short residence time — ideal for heat-sensitive products such as milk, juices and pharmaceuticals.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/falling_film_evaporator.json#components",
+   "key_components": "Calandria with vertical tubes, liquid distributor, steam chest, separator, recirculation",
+   "parts": [
+    {
+     "id": "calandria",
+     "name": "Calandria Shell (steam chest) & Tubesheets",
+     "info_ref": "ff_calandria",
+     "function": "Steam chest and tubes.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "calandria_tubes",
+     "name": "Long Vertical Tubes (liquid film inside, steam outside)",
+     "info_ref": "ff_calandria",
+     "function": "Steam chest and tubes.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "heads",
+     "name": "Top Head (feed chamber) & Bottom Head",
+     "info_ref": "ff_calandria",
+     "function": "Steam chest and tubes.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "distributor",
+     "name": "Liquid Distributor Plate (wets every tube evenly)",
+     "info_ref": "ff_distributor",
+     "function": "Spreads liquid evenly into every tube.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "separator",
+     "name": "Vapour–Liquid Separator",
+     "info_ref": "ff_separator",
+     "function": "Separates vapour from concentrate.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "separator_liquid",
+     "name": "Concentrate in the Separator",
+     "info_ref": "ff_separator",
+     "function": "Separates vapour from concentrate.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "piping",
+     "name": "Bottom Link to Separator, Recirculation Line, Steam In, Condensate Out, Vapour Out",
+     "info_ref": "ff_piping",
+     "function": "Links, steam and condensate.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "recirc_pump",
+     "name": "Recirculation Pump",
+     "info_ref": "ff_pump",
+     "function": "Recirculates liquid to keep tubes wetted.",
+     "material": "—"
+    },
+    {
+     "id": "recirc_pump_shaft",
+     "name": "Recirculation Pump — Shaft & Coupling (turning)",
+     "info_ref": "ff_pump",
+     "function": "Recirculates liquid to keep tubes wetted.",
+     "material": "—"
+    },
+    {
+     "id": "structure",
+     "name": "Support Steel",
+     "info_ref": "ff_calandria",
+     "function": "Steam chest and tubes.",
+     "material": "Stainless steel."
+    },
+    {
+     "id": "films",
+     "name": "Liquid Film Falling down Inside the Tubes",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Tubes ~ 25 – 50 mm, 6 – 12 m long",
+     "unit": ""
+    },
+    "heat_duty": {
+     "typical_range": "~ 0.5 – 50",
+     "unit": "MW"
+    },
+    "operating_temperature": {
+     "typical_range": "Boiling ~ 40 – 100 (often under vacuum)",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Evaporation ~ 1 – 100",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size tube length/number for wetting rate and heat flux; use with vapour recompression for energy savings."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "heat_duty_kW": null,
+     "flow_or_capacity": null,
+     "inlet_outlet_temperatures": null,
+     "design_pressure": null,
+     "fuel_or_heating_medium": null
+    },
+    "status": "empty — fill from the equipment datasheet / thermal design (TEMA sheet, boiler data sheet)"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Perry's Handbook — Evaporators",
+    "GEA/Alfa Laval evaporator guides"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Support vessels on structure/legs designed for operating and flooded weights; allow thermal growth of calandrias and vapour lines."
+   ],
+   "alignment": [
+    "Vertical calandrias plumb (falling-film distribution depends on it); slope liquor lines for drainage."
+   ],
+   "piping": [
+    "Vapour lines sized for low ΔP; condensate drained by traps or level control; vents for non-condensables on each steam chest.",
+    "Vacuum system (condenser + vacuum pump/ejector) for the last effect."
+   ],
+   "commissioning": [
+    "Leak/vacuum test; water trials (wetting, levels); bring steam on slowly; set levels and densities; CIP routine."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor ΔT, wetting rate and product concentration.",
+     "part": "calandria",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "CIP cleaning of tubes and distributor.",
+     "part": "distributor",
+     "interval": "daily/weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect tubes; check distributor holes.",
+     "part": "calandria_tubes"
+    }
+   ],
+   "lubrication": [
+    "Pump bearings and seals per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Dry patches/fouling",
+     "category": "thermal",
+     "symptoms": [
+      "Burnt deposits, falling capacity"
+     ],
+     "causes": [
+      "Poor distribution, low wetting rate"
+     ],
+     "remedies": [
+      "Clean distributor; increase recirculation"
+     ],
+     "part": "distributor"
+    },
+    {
+     "problem": "Entrainment losses",
+     "category": "performance",
+     "symptoms": [
+      "Product in condensate"
+     ],
+     "causes": [
+      "Separator overloaded"
+     ],
+     "remedies": [
+      "Reduce rate; improve separator"
+     ],
+     "part": "separator"
+    }
+   ],
+   "safety": [
+    "Hot surfaces and steam; vacuum vessels must be rated for full vacuum."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Falling Film Evaporator — Introduction",
+    "type": "in_app_tour",
+    "model": "falling_film_evaporator.glb",
+    "duration_s": 58.8,
+    "script": [
+     {
+      "narration": "This module introduces the Falling Film Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "In a falling film evaporator, liquid is spread at the top of long vertical tubes and flows down the inside walls as a thin film, while steam condenses on the outside.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The liquid evaporates from the film surface; vapour and concentrate leave at the bottom and are split in a separator.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Residence time is short and the temperature difference small.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include dairy (milk concentration), juices, sugar; pharmaceuticals and heat-sensitive chemicals; mechanical vapour recompression (MVR) systems.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Calandria Shell (steam chest) & Tubesheets, Top Head (feed chamber) & Bottom Head, Recirculation Pump, Recirculation Pump — Shaft & Coupling (turning).",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Falling Film Evaporator — Operation",
+    "type": "in_app_tour",
+    "model": "falling_film_evaporator.glb",
+    "duration_s": 38.4,
+    "script": [
+     {
+      "narration": "How the Falling Film Evaporator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Feed enters the top head and the distributor wets every tube.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "distributor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "A thin liquid film falls down inside the tubes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "calandria_tubes",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Steam condenses on the outside of the tubes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "calandria",
+       "cut": true,
+       "operate": true,
+       "overlay": "temperature",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Vapour and concentrate separate in the separator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "separator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The recirculation pump returns liquid to the top.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "recirc_pump",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Steam condenses outside the tubes while a thin film of liquid flows down the inside walls by gravity and evaporates from its surface.",
+      "duration_s": 9.6,
+      "action": {
+       "overlay": "temperature",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Falling Film Evaporator — Maintenance",
+    "type": "in_app_tour",
+    "model": "falling_film_evaporator.glb",
+    "duration_s": 33.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Falling Film Evaporator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor ΔT, wetting rate and product concentration.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "calandria",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "CIP cleaning of tubes and distributor.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "distributor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect tubes; check distributor holes.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "calandria_tubes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dry patches/fouling: burnt deposits, falling capacity. Common cause: poor distribution, low wetting rate.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "distributor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for entrainment losses: product in condensate. Common cause: separator overloaded.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "separator",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why are falling film evaporators good for heat-sensitive products?",
+     "options": [
+      "Short residence time and small ΔT",
+      "They use flames",
+      "Long hold-up",
+      "High pressure"
+     ],
+     "answer": 0,
+     "explanation": "Gentle evaporation.",
+     "level": "basic"
+    },
+    {
+     "question": "What is critical at the top of the tubes?",
+     "options": [
+      "Even liquid distribution",
+      "Paint",
+      "Noise",
+      "Air"
+     ],
+     "answer": 0,
+     "explanation": "Wetting.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does steam condense?",
+     "options": [
+      "Outside the tubes in the calandria",
+      "Inside the tubes",
+      "In the separator",
+      "In the pump"
+     ],
+     "answer": 0,
+     "explanation": "Shell side.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Steam chest and tubes.\"",
+     "options": [
+      "Concentrate in the Separator",
+      "Liquid Distributor Plate (wets every tube evenly)",
+      "Vapour–Liquid Separator",
+      "Calandria Shell (steam chest) & Tubesheets"
+     ],
+     "answer": 3,
+     "explanation": "Calandria Shell (steam chest) & Tubesheets: Steam chest and tubes.",
+     "level": "basic",
+     "part": "calandria",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Spreads liquid evenly into every tube.\"",
+     "options": [
+      "Recirculation Pump — Shaft & Coupling (turning)",
+      "Liquid Distributor Plate (wets every tube evenly)",
+      "Long Vertical Tubes (liquid film inside, steam outside)",
+      "Vapour–Liquid Separator"
+     ],
+     "answer": 1,
+     "explanation": "Liquid Distributor Plate (wets every tube evenly): Spreads liquid evenly into every tube.",
+     "level": "basic",
+     "part": "distributor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates vapour from concentrate.\"",
+     "options": [
+      "Calandria Shell (steam chest) & Tubesheets",
+      "Support Steel",
+      "Vapour–Liquid Separator",
+      "Top Head (feed chamber) & Bottom Head"
+     ],
+     "answer": 2,
+     "explanation": "Vapour–Liquid Separator: Separates vapour from concentrate.",
+     "level": "basic",
+     "part": "separator",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

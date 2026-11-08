@@ -1,0 +1,503 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "digestion_heater",
+  "title": "Digestion Slurry Heater (Vertical Shell & Tube, Flash-Vapour Heated)",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 198,
+    "phase": 10,
+    "eq_id": "EQ-276",
+    "subcategory": "Heat Transfer",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "digestion_heater_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "temperature": {
+      "file": "digestion_heater_temperature.glb",
+      "title": "Regenerative heating with flash vapour",
+      "description": "Vapour flashed from the hot digested slurry (multi-stage flash) is condensed in these heaters to preheat the incoming slurry — recovering most of the heat. Desilication product scale (sodalite) and titanate deposits build up inside the tubes and cut heat transfer, so heaters are taken off-line for descaling (hydro-blasting or acid) in rotation.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "vapour",
+      "kind": "steam",
+      "radius": 0.02,
+      "points": [
+        [
+          0.0,
+          2.5,
+          0.7
+        ],
+        [
+          0.0,
+          2.45,
+          0.2
+        ],
+        [
+          0.0,
+          1.1,
+          0.2
+        ],
+        [
+          0.0,
+          0.95,
+          0.65
+        ]
+      ]
+    },
+    {
+      "name": "slurry_path",
+      "kind": "flow_discharge",
+      "radius": 0.015,
+      "points": [
+        [
+          -0.25,
+          0.05,
+          -0.0
+        ],
+        [
+          -0.25,
+          3.0,
+          -0.0
+        ],
+        [
+          0.25,
+          3.0,
+          -0.0
+        ],
+        [
+          0.25,
+          0.05,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 15704,
+    "parts": 7
+  },
+  "summary": "Digestion heaters preheat the slurry before digestion using flash vapour from the multi-stage flash tanks. The slurry passes several times through the tubes while vapour condenses on the outside.",
+  "classification": {
+    "family": "Heat transfer",
+    "type": "Vertical multi-pass shell & tube slurry heater"
+  },
+  "model_configuration": {
+    "animation": "Slurry tracers; condensate"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC VIII-1",
+      "title": "Pressure vessels",
+      "relevance": "Autoclaves, flash tanks, heaters.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "API 650",
+      "title": "Welded tanks for oil storage",
+      "relevance": "Atmospheric tank construction (adopted practice; to be verified for caustic service).",
+      "edition": "to be verified"
+    },
+    {
+      "id": "TEMA",
+      "title": "Tubular exchanger standards",
+      "relevance": "Design.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids",
+    "Authier-Martin et al. / TMS Light Metals proceedings (Bayer process practice)"
+  ],
+  "parts": [
+    {
+      "id": "shell",
+      "name": "Shell (vapour side) & Tubesheets",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "shell__back",
+        "shell__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.6
+      ],
+      "bbox_min": [
+        -0.45,
+        0.76,
+        -0.45
+      ],
+      "bbox_max": [
+        0.45,
+        2.84,
+        0.45
+      ],
+      "label_anchor": [
+        0.0,
+        1.8,
+        0.45
+      ],
+      "center": [
+        0.0,
+        1.8,
+        -0.0
+      ],
+      "info_ref": "dh_shell"
+    },
+    {
+      "id": "channel_heads",
+      "name": "Top & Bottom Channel Heads with Pass Partitions (slurry makes several passes)",
+      "group": "casing",
+      "section_role": "split",
+      "nodes": [
+        "channel_heads__back",
+        "channel_heads__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.4,
+        0.31,
+        -0.4
+      ],
+      "bbox_max": [
+        0.4,
+        3.29,
+        0.4
+      ],
+      "label_anchor": [
+        0.0,
+        1.8,
+        0.4
+      ],
+      "center": [
+        0.0,
+        1.8,
+        -0.0
+      ],
+      "info_ref": "dh_heads"
+    },
+    {
+      "id": "tubes",
+      "name": "Tube Bundle (slurry inside) with Scale Layer shown in Some Tubes",
+      "group": "tubes",
+      "section_role": "keep",
+      "nodes": [
+        "tubes.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.6
+      ],
+      "bbox_min": [
+        -0.292,
+        0.76,
+        -0.27092
+      ],
+      "bbox_max": [
+        0.292,
+        2.84,
+        0.27092
+      ],
+      "label_anchor": [
+        0.0,
+        1.8,
+        0.27092
+      ],
+      "center": [
+        0.0,
+        1.8,
+        -0.0
+      ],
+      "info_ref": "dh_tubes"
+    },
+    {
+      "id": "nozzles",
+      "name": "Flash-Vapour Inlet, Condensate Outlet, Non-Condensable Vent, Slurry In/Out",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.345,
+        0.06,
+        -0.51
+      ],
+      "bbox_max": [
+        0.345,
+        2.738,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        1.399,
+        0.65
+      ],
+      "center": [
+        0.0,
+        1.399,
+        0.07
+      ],
+      "info_ref": "dh_nozzles"
+    },
+    {
+      "id": "supports",
+      "name": "Support Lugs & Structure",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "supports.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.6,
+        0.0,
+        -0.6
+      ],
+      "bbox_max": [
+        0.6,
+        1.8,
+        0.6
+      ],
+      "label_anchor": [
+        0.0,
+        0.9,
+        0.6
+      ],
+      "center": [
+        0.0,
+        0.9,
+        -0.0
+      ],
+      "info_ref": "dh_shell"
+    },
+    {
+      "id": "condensate",
+      "name": "Vapour Condensing on the Tubes",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "condensate0",
+        "condensate1",
+        "condensate2",
+        "condensate3",
+        "condensate4",
+        "condensate5",
+        "condensate6",
+        "condensate7",
+        "condensate8",
+        "condensate9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "slurry",
+      "name": "Slurry making Passes through the Tubes",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "slurry_0",
+        "slurry_1",
+        "slurry_2",
+        "slurry_3",
+        "slurry_4",
+        "slurry_5",
+        "slurry_6",
+        "slurry_7",
+        "slurry_8",
+        "slurry_9"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.268,
+        0.382,
+        -0.078
+      ],
+      "bbox_max": [
+        0.21795,
+        2.92518,
+        -0.042
+      ],
+      "label_anchor": [
+        -0.02502,
+        1.65359,
+        -0.042
+      ],
+      "center": [
+        -0.02502,
+        1.65359,
+        -0.06
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "dh_shell": {
+      "function": "Vapour side.",
+      "construction": "Shell and tubesheets.",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dh_heads": {
+      "function": "Direct slurry passes.",
+      "construction": "Heads with partitions.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "dh_tubes": {
+      "function": "Heat transfer.",
+      "construction": "Tubes (scale shown).",
+      "material": "Carbon steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "DSP/titanate scale"
+      ],
+      "inspection": [
+        "ΔT, U trend"
+      ]
+    },
+    "dh_nozzles": {
+      "function": "Connections.",
+      "construction": "Nozzles.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

@@ -1,0 +1,625 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "three_phase_separator",
+ "no": 108,
+ "title": "Three-Phase Separator",
+ "model_title": "Horizontal Three-Phase Separator (Gas / Oil / Water) with Weir",
+ "category": "8 · Static Equipment – Additional Equipment",
+ "phase": 6,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A three-phase separator splits well fluid into gas, oil and water. Gas rises; liquid settles into water below oil. Oil spills over a weir into a compartment; water is drawn from beneath the oil. Level and interface controllers set each outlet.",
+   "applications": [
+    "Oil & gas production",
+    "Refinery desalter feed / slop oil",
+    "Produced-water treatment front end"
+   ],
+   "key_points": [
+    "Retention time for oil–water separation",
+    "Weir sets interface",
+    "Emulsions slow separation",
+    "Sand drains/jetting"
+   ],
+   "classification": {
+    "family": "Separator",
+    "type": "Horizontal three-phase separator with weir"
+   },
+   "hi_family": "static_equipment",
+   "summary": "A three-phase separator splits well fluid into gas, oil and water. Gas rises to the top; the liquid settles into a water layer below an oil layer. The oil spills over a weir into a separate compartment; water is drawn from under the oil. Interface and level controllers set each outlet."
+  },
+  "model_3d": {
+   "asset": "glb/three_phase_separator.glb",
+   "metadata": "meta/three_phase_separator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 10568,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Well fluid enters and hits the inlet diverter.",
+    "Gas separates and leaves through the mist eliminator.",
+    "Water droplets fall out of the oil to the bottom."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Well fluid enters and hits the inlet diverter.",
+     "part": "internals",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Gas separates and leaves through the mist eliminator.",
+     "part": "mist_eliminator",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water droplets fall out of the oil to the bottom.",
+     "part": "water_layer",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Oil spills over the weir into the oil bucket.",
+     "part": "oil_layer",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water and oil leave through separate outlets.",
+     "part": "nozzles",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Separation vs retention time (typically 3–10+ min, oil gravity/emulsion dependent)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "three_phase_separator_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/three_phase_separator.json#components",
+   "key_components": "Inlet diverter, weir, oil bucket, interface, demister",
+   "parts": [
+    {
+     "id": "vessel",
+     "name": "Separator Vessel",
+     "info_ref": "tp_vessel",
+     "function": "Holds the separation volumes.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "saddles",
+     "name": "Saddle Supports (one fixed, one sliding)",
+     "info_ref": "sv_saddles",
+     "function": "Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "material": "Carbon steel."
+    },
+    {
+     "id": "water_layer",
+     "name": "Free Water Layer (heaviest, at the bottom)",
+     "info_ref": "tp_water",
+     "function": "Free water layer.",
+     "material": "—"
+    },
+    {
+     "id": "oil_layer",
+     "name": "Oil Layer (floats on water, spills over the weir)",
+     "info_ref": "tp_oil",
+     "function": "Oil layer.",
+     "material": "—"
+    },
+    {
+     "id": "internals",
+     "name": "Inlet Diverter & Oil Weir",
+     "info_ref": "tp_internals",
+     "function": "Inlet diverter and oil weir.",
+     "material": "Stainless."
+    },
+    {
+     "id": "mist_eliminator",
+     "name": "Vane-Pack / Mesh Mist Eliminator",
+     "info_ref": "tp_mesh",
+     "function": "Removes mist from gas.",
+     "material": "Stainless."
+    },
+    {
+     "id": "nozzles",
+     "name": "Gas, Oil and Water Outlets & Sand Drain",
+     "info_ref": "tp_nozzles",
+     "function": "Gas, oil, water outlets and sand drain.",
+     "material": "Steel."
+    },
+    {
+     "id": "wdrops",
+     "name": "Water Droplets Falling Out of the Oil",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Ø 1 – 4 m; length 3 – 20 m",
+     "unit": ""
+    },
+    "design_pressure": {
+     "typical_range": "Up to ~ 100",
+     "unit": "bar"
+    },
+    "design_temperature": {
+     "typical_range": "Up to ~ 120",
+     "unit": "°C"
+    },
+    "capacity": {
+     "typical_range": "Liquid retention time",
+     "unit": "min"
+    }
+   },
+   "additional": {},
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "design_pressure": null,
+     "design_temperature": null,
+     "duty_or_volume": null,
+     "material": null
+    },
+    "status": "empty — fill from the equipment datasheet / U-1A or nameplate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Set on a level foundation designed for operating, hydro-test and wind/seismic loads; grout base plates; anchor bolts per drawing."
+   ],
+   "alignment": [
+    "Check verticality (vertical vessels) or level and slope (horizontal); one saddle bolted, the other slotted for thermal expansion."
+   ],
+   "piping": [
+    "Connect nozzles without forcing — check allowable nozzle loads; support piping independently.",
+    "Fit the required pressure relief device and isolation as per code."
+   ],
+   "commissioning": [
+    "Hydro/pneumatic test per code; inspect internals before closing; purge and leak test; commission instruments and relief valves."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check levels and interface.",
+     "part": "water_layer",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Sand jetting/draining.",
+     "part": "nozzles",
+     "interval": "as needed"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect weir and internals.",
+     "part": "internals"
+    }
+   ],
+   "lubrication": [
+    "No lubrication — static equipment (lubricate valve stems and manway hinges only)."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Oil in water outlet",
+     "category": "performance",
+     "symptoms": [
+      "Oily produced water"
+     ],
+     "causes": [
+      "Interface too low, emulsion"
+     ],
+     "remedies": [
+      "Adjust interface; chemicals"
+     ],
+     "part": "water_layer"
+    },
+    {
+     "problem": "Water in oil",
+     "category": "performance",
+     "symptoms": [
+      "High BS&W"
+     ],
+     "causes": [
+      "Short retention, emulsion"
+     ],
+     "remedies": [
+      "Demulsifier, heat"
+     ],
+     "part": "oil_layer"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Three-Phase Separator — Introduction",
+    "type": "in_app_tour",
+    "model": "three_phase_separator.glb",
+    "duration_s": 42.0,
+    "script": [
+     {
+      "narration": "This module introduces the Three-Phase Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A three-phase separator splits well fluid into gas, oil and water.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Gas rises; liquid settles into water below oil.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Oil spills over a weir into a compartment; water is drawn from beneath the oil.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include oil & gas production; refinery desalter feed / slop oil; produced-water treatment front end.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Three-Phase Separator — Operation",
+    "type": "in_app_tour",
+    "model": "three_phase_separator.glb",
+    "duration_s": 28.4,
+    "script": [
+     {
+      "narration": "How the Three-Phase Separator works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Well fluid enters and hits the inlet diverter.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "internals",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Gas separates and leaves through the mist eliminator.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "mist_eliminator",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water droplets fall out of the oil to the bottom.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "water_layer",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Oil spills over the weir into the oil bucket.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "oil_layer",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water and oil leave through separate outlets.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Three-Phase Separator — Maintenance",
+    "type": "in_app_tour",
+    "model": "three_phase_separator.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Three-Phase Separator.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check levels and interface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "water_layer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Sand jetting/draining.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "nozzles",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect weir and internals.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "internals",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oil in water outlet: oily produced water. Common cause: interface too low, emulsion.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "water_layer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for water in oil: high bs&w. Common cause: short retention, emulsion.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "oil_layer",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why does oil float on water?",
+     "options": [
+      "It is hotter",
+      "Lower density",
+      "It is a gas",
+      "Magnetism"
+     ],
+     "answer": 1,
+     "explanation": "Density difference.",
+     "level": "basic"
+    },
+    {
+     "question": "The weir…",
+     "options": [
+      "Heats oil",
+      "Lets oil spill into its own compartment while water stays behind",
+      "Measures gas",
+      "Supports vessel"
+     ],
+     "answer": 1,
+     "explanation": "Oil bucket.",
+     "level": "basic"
+    },
+    {
+     "question": "Emulsions make separation…",
+     "options": [
+      "Faster",
+      "Slower",
+      "Unchanged",
+      "Impossible always"
+     ],
+     "answer": 1,
+     "explanation": "Stable droplets.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Holds the separation volumes.\"",
+     "options": [
+      "Saddle Supports (one fixed, one sliding)",
+      "Free Water Layer (heaviest, at the bottom)",
+      "Oil Layer (floats on water, spills over the weir)",
+      "Separator Vessel"
+     ],
+     "answer": 3,
+     "explanation": "Separator Vessel: Holds the separation volumes.",
+     "level": "basic",
+     "part": "vessel",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Support a horizontal vessel; one saddle slides to allow thermal expansion.\"",
+     "options": [
+      "Vane-Pack / Mesh Mist Eliminator",
+      "Saddle Supports (one fixed, one sliding)",
+      "Separator Vessel",
+      "Free Water Layer (heaviest, at the bottom)"
+     ],
+     "answer": 1,
+     "explanation": "Saddle Supports (one fixed, one sliding): Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+     "level": "basic",
+     "part": "saddles",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Free water layer.\"",
+     "options": [
+      "Separator Vessel",
+      "Saddle Supports (one fixed, one sliding)",
+      "Oil Layer (floats on water, spills over the weir)",
+      "Free Water Layer (heaviest, at the bottom)"
+     ],
+     "answer": 3,
+     "explanation": "Free Water Layer (heaviest, at the bottom): Free water layer.",
+     "level": "basic",
+     "part": "water_layer",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

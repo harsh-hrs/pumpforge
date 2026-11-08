@@ -1,0 +1,384 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "boiler_feedwater_tank",
+  "title": "Boiler Feedwater Tank (Horizontal, Atmospheric/Low Pressure)",
+  "category": "8 · Static Equipment – Additional Equipment",
+  "library": {
+    "no": 103,
+    "phase": 6,
+    "eq_id": "EQ-181",
+    "subcategory": "Storage Equipment",
+    "hi_family": "static_equipment",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "boiler_feedwater_tank_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "makeup",
+      "kind": "water",
+      "radius": 0.01,
+      "points": [
+        [
+          -0.8,
+          1.7,
+          -0.0
+        ],
+        [
+          -0.8,
+          0.85,
+          -0.02
+        ],
+        [
+          0.7,
+          0.6,
+          -0.02
+        ],
+        [
+          0.7,
+          -0.1,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "condensate_return",
+      "kind": "flow_discharge",
+      "radius": 0.009,
+      "points": [
+        [
+          -0.2,
+          1.7,
+          -0.0
+        ],
+        [
+          -0.2,
+          0.85,
+          -0.02
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 10926,
+    "parts": 5
+  },
+  "summary": "A boiler feedwater tank collects condensate returns and treated make-up water and holds a reserve for the boiler feed pumps. Keeping it hot (steam sparger) drives off oxygen and reduces corrosion and chemical dosing.",
+  "classification": {
+    "family": "Storage vessel",
+    "type": "Horizontal atmospheric/low-pressure feed tank"
+  },
+  "model_configuration": {
+    "animation": "Level rises and falls with make-up and demand"
+  },
+  "standards": [
+    {
+      "id": "ASME BPVC Section VIII Div. 1",
+      "title": "Rules for Construction of Pressure Vessels",
+      "relevance": "Design, fabrication, inspection.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "EN 13445",
+      "title": "Unfired pressure vessels",
+      "relevance": "European design code.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "Spirax Sarco — Boiler feedtanks"
+  ],
+  "parts": [
+    {
+      "id": "tank",
+      "name": "Tank Shell & Dished Heads",
+      "group": "vessel",
+      "section_role": "split",
+      "nodes": [
+        "tank__back",
+        "tank__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.5,
+        0.2,
+        -0.6
+      ],
+      "bbox_max": [
+        1.5,
+        1.4,
+        0.6
+      ],
+      "label_anchor": [
+        0.0,
+        0.8,
+        0.6
+      ],
+      "center": [
+        0.0,
+        0.8,
+        -0.0
+      ],
+      "info_ref": "fw_tank"
+    },
+    {
+      "id": "saddles",
+      "name": "Saddle Supports (one fixed, one sliding)",
+      "group": "structure",
+      "section_role": "keep",
+      "nodes": [
+        "tanksd"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.84,
+        0.0,
+        -0.6
+      ],
+      "bbox_max": [
+        0.84,
+        0.494,
+        0.6
+      ],
+      "label_anchor": [
+        0.0,
+        0.247,
+        0.6
+      ],
+      "center": [
+        0.0,
+        0.247,
+        -0.0
+      ],
+      "info_ref": "sv_saddles"
+    },
+    {
+      "id": "water",
+      "name": "Feedwater (level rises and falls with make-up/demand)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "waterc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.3
+      ],
+      "bbox_min": [
+        -1.4655,
+        0.21,
+        -0.59
+      ],
+      "bbox_max": [
+        1.4655,
+        0.9,
+        -0.0
+      ],
+      "label_anchor": [
+        0.0,
+        0.555,
+        -0.0
+      ],
+      "center": [
+        0.0,
+        0.555,
+        -0.295
+      ],
+      "info_ref": "fw_water"
+    },
+    {
+      "id": "nozzles",
+      "name": "Make-up, Condensate Return, Vent, Manway, Pump Suction, Overflow, Drain & Level Gauge",
+      "group": "nozzles",
+      "section_role": "keep",
+      "nodes": [
+        "nozzles.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.9475,
+        -0.05,
+        -0.38
+      ],
+      "bbox_max": [
+        1.62,
+        1.65,
+        0.72
+      ],
+      "label_anchor": [
+        0.33625,
+        0.8,
+        0.72
+      ],
+      "center": [
+        0.33625,
+        0.8,
+        0.17
+      ],
+      "info_ref": "fw_nozzles"
+    },
+    {
+      "id": "steam_sparger",
+      "name": "Steam Sparger (pre-heating / deaeration assist)",
+      "group": "internals",
+      "section_role": "keep",
+      "nodes": [
+        "spg"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.4
+      ],
+      "bbox_min": [
+        -1.0,
+        0.42288,
+        -0.018
+      ],
+      "bbox_max": [
+        1.0,
+        0.45712,
+        0.018
+      ],
+      "label_anchor": [
+        0.0,
+        0.44,
+        0.018
+      ],
+      "center": [
+        0.0,
+        0.44,
+        -0.0
+      ],
+      "info_ref": "fw_sparger"
+    }
+  ],
+  "components": {
+    "fw_tank": {
+      "function": "Holds feedwater.",
+      "construction": "Horizontal tank with dished heads.",
+      "material": "Carbon/stainless steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "sv_saddles": {
+      "function": "Support a horizontal vessel; one saddle slides to allow thermal expansion.",
+      "construction": "Welded saddles with wear plates.",
+      "material": "Carbon steel.",
+      "operating_conditions": "Zick analysis for saddle stresses.",
+      "failure_modes": [
+        "Corrosion under wear plate"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    },
+    "fw_water": {
+      "function": "Feedwater (animated level).",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fw_nozzles": {
+      "function": "Connections and level gauge.",
+      "construction": "Nozzles.",
+      "material": "Steel.",
+      "operating_conditions": "Pump suction low, returns high.",
+      "failure_modes": [
+        "Leaks"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "fw_sparger": {
+      "function": "Injects steam to heat the water (~85–90 °C) to reduce dissolved oxygen.",
+      "construction": "Perforated pipe.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Noise/hammer"
+      ],
+      "inspection": [
+        "Inspect"
+      ]
+    }
+  }
+}

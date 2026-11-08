@@ -1,0 +1,648 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "ultrafiltration_system",
+ "no": 178,
+ "title": "Ultrafiltration System",
+ "model_title": "Pressurised Hollow-Fibre Ultrafiltration Skid",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "An ultrafiltration system pumps water through pressurised modules packed with hollow fibres with very fine pores. Water and dissolved salts pass through; suspended solids, colloids, bacteria and most viruses are held back. Short backwashes with filtrate restore flux every 20–60 minutes.",
+   "applications": [
+    "Drinking-water treatment",
+    "Pre-treatment before reverse osmosis",
+    "Industrial process water and wastewater reuse"
+   ],
+   "key_points": [
+    "Pores ≈ 0.01–0.1 µm",
+    "Barrier to pathogens",
+    "Backwash and CEB cleaning cycles",
+    "Integrity testing proves the barrier"
+   ],
+   "classification": {
+    "family": "Membrane system",
+    "type": "Pressurised hollow-fibre UF skid"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "An ultrafiltration system pumps water through pressurised modules of hollow fibres with very fine pores. Water and dissolved salts pass; suspended solids, colloids, bacteria and viruses are retained. Frequent short backwashes with filtrate restore performance."
+  },
+  "model_3d": {
+   "asset": "glb/ultrafiltration_system.glb",
+   "metadata": "meta/ultrafiltration_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 7660,
+   "parts": 11
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The feed pump supplies water through the strainer.",
+    "Water enters the modules and passes through the fibres.",
+    "Filtrate collects in the top header and tank."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "The feed pump supplies water through the strainer.",
+     "part": "feed_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Water enters the modules and passes through the fibres.",
+     "part": "fibres",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Filtrate collects in the top header and tank.",
+     "part": "headers",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Periodically the backwash pump reverses flow to clean the fibres.",
+     "part": "backwash_pump",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "TMP vs time saw-tooth: rises during filtration, drops after each backwash."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "ultrafiltration_system_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "ultrafiltration_system_pressure.glb",
+     "title": "Moderate trans-membrane pressure",
+     "description": "UF modules typically run at a trans-membrane pressure of roughly 0.2–2 bar. Water and dissolved salts pass; suspended solids, colloids, bacteria and most viruses are retained. Every 20–60 min a short backwash (and sometimes chemically enhanced backwash) restores the flux.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/ultrafiltration_system.json#components",
+   "key_components": "Pressurised hollow-fibre modules, rack & headers, feed pump, backwash pump, CIP tank, strainer",
+   "parts": [
+    {
+     "id": "modules",
+     "name": "UF Modules (pressure housings)",
+     "info_ref": "uf_modules",
+     "function": "House the fibres.",
+     "material": "PVC/FRP."
+    },
+    {
+     "id": "fibres",
+     "name": "Hollow Fibres (≈ 0.01–0.1 µm; inside-out or outside-in)",
+     "info_ref": "uf_fibres",
+     "function": "Filtration barrier.",
+     "material": "PVDF/PES."
+    },
+    {
+     "id": "headers",
+     "name": "Feed (blue), Filtrate (green) & Concentrate/Backwash (red) Headers",
+     "info_ref": "uf_headers",
+     "function": "Distribute flows.",
+     "material": "PVC/stainless."
+    },
+    {
+     "id": "skid_frame",
+     "name": "Skid Frame",
+     "info_ref": "uf_modules",
+     "function": "House the fibres.",
+     "material": "PVC/FRP."
+    },
+    {
+     "id": "feed_pump",
+     "name": "Feed Pump",
+     "info_ref": "uf_pumps",
+     "function": "Feed and backwash.",
+     "material": "—"
+    },
+    {
+     "id": "feed_pump_shaft",
+     "name": "Feed Pump — Shaft & Coupling (turning)",
+     "info_ref": "uf_pumps",
+     "function": "Feed and backwash.",
+     "material": "—"
+    },
+    {
+     "id": "strainer",
+     "name": "Self-Cleaning Pre-Strainer (protects fibres)",
+     "info_ref": "uf_headers",
+     "function": "Distribute flows.",
+     "material": "PVC/stainless."
+    },
+    {
+     "id": "backwash_tank",
+     "name": "Filtrate / Backwash & CIP Tank",
+     "info_ref": "uf_tank",
+     "function": "Filtrate/backwash/CIP storage.",
+     "material": "PE."
+    },
+    {
+     "id": "tank_water",
+     "name": "Filtrate in Tank",
+     "info_ref": "uf_tank",
+     "function": "Filtrate/backwash/CIP storage.",
+     "material": "PE."
+    },
+    {
+     "id": "backwash_pump",
+     "name": "Backwash Pump",
+     "info_ref": "uf_pumps",
+     "function": "Feed and backwash.",
+     "material": "—"
+    },
+    {
+     "id": "backwash_pump_shaft",
+     "name": "Backwash Pump — Shaft & Coupling (turning)",
+     "info_ref": "uf_pumps",
+     "function": "Feed and backwash.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Modules ~ 20 – 80 m² each",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 100 000",
+     "unit": "m³/d"
+    },
+    "operating_pressure": {
+     "typical_range": "TMP ~ 0.2 – 2",
+     "unit": "bar"
+    },
+    "separation_performance": {
+     "typical_range": "~ 0.01 – 0.1 µm; > 4-log virus removal (validated)",
+     "unit": "µm"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size for flux, recovery and backwash losses; select inside-out or outside-in fibres."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "AWWA M53"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Skid or tank on level foundation; room for module removal and CIP equipment."
+   ],
+   "alignment": [
+    "Modules/vessels square and supported without strain on ports."
+   ],
+   "piping": [
+    "Pre-treatment (strainer/cartridge filter) ahead of membranes; sampling points for feed, permeate and concentrate; CIP connections."
+   ],
+   "commissioning": [
+    "Flush preservative; integrity test; start at low flux; set recovery; record normalised flux, ΔP and rejection baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Trend TMP and permeability.",
+     "part": "modules",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Pressure-decay integrity test.",
+     "part": "fibres",
+     "interval": "daily/weekly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Recovery CIP; replace modules.",
+     "part": "modules"
+    }
+   ],
+   "lubrication": [
+    "Pump bearings per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Integrity failure",
+     "category": "performance",
+     "symptoms": [
+      "Pressure-decay test fails"
+     ],
+     "causes": [
+      "Broken fibres"
+     ],
+     "remedies": [
+      "Pin/repair fibres"
+     ],
+     "part": "fibres"
+    },
+    {
+     "problem": "Irreversible fouling",
+     "category": "performance",
+     "symptoms": [
+      "Low permeability after cleaning"
+     ],
+     "causes": [
+      "Organics, iron/manganese"
+     ],
+     "remedies": [
+      "Optimise pre-treatment and CIP"
+     ],
+     "part": "modules"
+    }
+   ],
+   "safety": [
+    "Chemical dosing safety; pressure parts."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Ultrafiltration System — Introduction",
+    "type": "in_app_tour",
+    "model": "ultrafiltration_system.glb",
+    "duration_s": 48.7,
+    "script": [
+     {
+      "narration": "This module introduces the Ultrafiltration System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "An ultrafiltration system pumps water through pressurised modules packed with hollow fibres with very fine pores.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Water and dissolved salts pass through; suspended solids, colloids, bacteria and most viruses are held back.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Short backwashes with filtrate restore flux every 20–60 minutes.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include drinking-water treatment; pre-treatment before reverse osmosis; industrial process water and wastewater reuse.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: UF Modules (pressure housings), Feed Pump, Feed Pump — Shaft & Coupling (turning), Backwash Pump.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Ultrafiltration System — Operation",
+    "type": "in_app_tour",
+    "model": "ultrafiltration_system.glb",
+    "duration_s": 30.6,
+    "script": [
+     {
+      "narration": "How the Ultrafiltration System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The feed pump supplies water through the strainer.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Water enters the modules and passes through the fibres.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fibres",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Filtrate collects in the top header and tank.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "headers",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Periodically the backwash pump reverses flow to clean the fibres.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "backwash_pump",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "UF modules typically run at a trans-membrane pressure of roughly 0.2–2 bar.",
+      "duration_s": 6.2,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Ultrafiltration System — Maintenance",
+    "type": "in_app_tour",
+    "model": "ultrafiltration_system.glb",
+    "duration_s": 32.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Ultrafiltration System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Trend TMP and permeability.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "modules",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pressure-decay integrity test.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "fibres",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Recovery CIP; replace modules.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "modules",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for integrity failure: pressure-decay test fails. Common cause: broken fibres.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "fibres",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for irreversible fouling: low permeability after cleaning. Common cause: organics, iron/manganese.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "modules",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does UF remove that MF may not fully remove?",
+     "options": [
+      "Viruses and fine colloids",
+      "Salts",
+      "Dissolved gases",
+      "Nothing"
+     ],
+     "answer": 0,
+     "explanation": "Smaller pores.",
+     "level": "basic"
+    },
+    {
+     "question": "Why backwash?",
+     "options": [
+      "To remove the fouling layer",
+      "To add salt",
+      "To heat",
+      "To test pumps"
+     ],
+     "answer": 0,
+     "explanation": "Flux recovery.",
+     "level": "basic"
+    },
+    {
+     "question": "How is membrane integrity checked?",
+     "options": [
+      "Pressure-decay test",
+      "By colour",
+      "By noise",
+      "Not possible"
+     ],
+     "answer": 0,
+     "explanation": "PDT.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"House the fibres.\"",
+     "options": [
+      "Backwash Pump — Shaft & Coupling (turning)",
+      "Filtrate in Tank",
+      "Feed Pump — Shaft & Coupling (turning)",
+      "UF Modules (pressure housings)"
+     ],
+     "answer": 3,
+     "explanation": "UF Modules (pressure housings): House the fibres.",
+     "level": "basic",
+     "part": "modules",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Filtration barrier.\"",
+     "options": [
+      "Hollow Fibres (≈ 0.01–0.1 µm; inside-out or outside-in)",
+      "Skid Frame",
+      "Feed (blue), Filtrate (green) & Concentrate/Backwash (red) Headers",
+      "Backwash Pump"
+     ],
+     "answer": 0,
+     "explanation": "Hollow Fibres (≈ 0.01–0.1 µm; inside-out or outside-in): Filtration barrier.",
+     "level": "basic",
+     "part": "fibres",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Distribute flows.\"",
+     "options": [
+      "Feed Pump",
+      "UF Modules (pressure housings)",
+      "Feed (blue), Filtrate (green) & Concentrate/Backwash (red) Headers",
+      "Backwash Pump"
+     ],
+     "answer": 2,
+     "explanation": "Feed (blue), Filtrate (green) & Concentrate/Backwash (red) Headers: Distribute flows.",
+     "level": "basic",
+     "part": "headers",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

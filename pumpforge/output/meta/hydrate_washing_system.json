@@ -1,0 +1,777 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "hydrate_washing_system",
+  "title": "Horizontal Vacuum Belt Filter with Counter-Current Hydrate Washing",
+  "category": "12 · Alumina Refinery (Bayer Process)",
+  "library": {
+    "no": 208,
+    "phase": 10,
+    "eq_id": "EQ-286",
+    "subcategory": "Filtration",
+    "hi_family": "alumina_refinery",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "hydrate_washing_system_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "hydrate_washing_system_pressure.glb",
+      "title": "Counter-current washing lowers soda in the hydrate",
+      "description": "Fresh hot condensate washes the cake in the last zone; its filtrate is used to wash the previous zone, and so on (counter-current). Soda in the cake falls zone by zone (red → blue) using little water. Low soda in the hydrate is essential because sodium ends up in the smelter-grade alumina product (typical spec ≲ 0.3–0.4 % Na₂O).",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "slurry",
+      "kind": "flow_discharge",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.4,
+          1.7,
+          -0.0
+        ],
+        [
+          -1.4,
+          1.22,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "wash_cascade",
+      "kind": "water",
+      "radius": 0.015,
+      "points": [
+        [
+          1.0,
+          0.4,
+          -0.55
+        ],
+        [
+          1.0,
+          1.7,
+          -0.7
+        ],
+        [
+          0.3,
+          1.7,
+          -0.7
+        ],
+        [
+          0.3,
+          0.4,
+          -0.55
+        ],
+        [
+          0.3,
+          1.8,
+          -0.8
+        ],
+        [
+          -0.4,
+          1.8,
+          -0.8
+        ]
+      ]
+    },
+    {
+      "name": "cake",
+      "kind": "sand",
+      "radius": 0.02,
+      "points": [
+        [
+          -1.3,
+          1.2,
+          -0.0
+        ],
+        [
+          1.8,
+          1.2,
+          -0.0
+        ],
+        [
+          2.15,
+          0.4,
+          -0.0
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 33308,
+    "parts": 13
+  },
+  "summary": "A horizontal vacuum belt filter dewaters and washes hydrate with hot condensate in counter-current stages. The belt moves over vacuum boxes; wash liquor from each later zone is used in the zone before, lowering soda in the cake with little water.",
+  "classification": {
+    "family": "Filtration / washing",
+    "type": "Horizontal vacuum belt filter"
+  },
+  "model_configuration": {
+    "animation": "Belt moves; sprays"
+  },
+  "standards": [
+    {
+      "id": "Maker standards",
+      "title": "Belt filter design",
+      "relevance": "Area by cake formation and wash time.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "TMS Light Metals proceedings — Bayer process practice",
+    "Hind, Bhargava & Grocott — The surface chemistry of Bayer process solids"
+  ],
+  "parts": [
+    {
+      "id": "bfbelt",
+      "name": "Filter Belt (drainage belt + cloth)",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfbelt.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.96,
+        0.84,
+        -0.35
+      ],
+      "bbox_max": [
+        1.96,
+        1.16,
+        0.35
+      ],
+      "label_anchor": [
+        0.0,
+        1.0,
+        0.35
+      ],
+      "center": [
+        0.0,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "hk_belt"
+    },
+    {
+      "id": "bfpulley_1",
+      "name": "Tail Pulley",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfp0"
+      ],
+      "pivot": [
+        -1.8,
+        1.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.2,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.948,
+        0.852,
+        -0.43
+      ],
+      "bbox_max": [
+        -1.652,
+        1.148,
+        0.43
+      ],
+      "label_anchor": [
+        -1.8,
+        1.0,
+        0.43
+      ],
+      "center": [
+        -1.8,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "hk_pulley"
+    },
+    {
+      "id": "bfpulley_2",
+      "name": "Head (Drive) Pulley",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfp1"
+      ],
+      "pivot": [
+        1.8,
+        1.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.2,
+        0.2,
+        -0.0
+      ],
+      "bbox_min": [
+        1.652,
+        0.852,
+        -0.43
+      ],
+      "bbox_max": [
+        1.948,
+        1.148,
+        0.43
+      ],
+      "label_anchor": [
+        1.8,
+        1.0,
+        0.43
+      ],
+      "center": [
+        1.8,
+        1.0,
+        -0.0
+      ],
+      "info_ref": "hk_pulley"
+    },
+    {
+      "id": "bfmarks",
+      "name": "Filter Belt (drainage belt + cloth) Motion Markers",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfmk0",
+        "bfmk1",
+        "bfmk2",
+        "bfmk3",
+        "bfmk4",
+        "bfmk5",
+        "bfmk6",
+        "bfmk7",
+        "bfmk8",
+        "bfmk9",
+        "bfmk10",
+        "bfmk11",
+        "bfmk12",
+        "bfmk13"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.3
+      ],
+      "bbox_min": [
+        -0.01,
+        -0.002,
+        -0.315
+      ],
+      "bbox_max": [
+        0.01,
+        0.002,
+        0.315
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.315
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "hk_belt"
+    },
+    {
+      "id": "bfframe",
+      "name": "Filter Belt (drainage belt + cloth) Frame & Idlers (troughing and return)",
+      "group": "conveyor",
+      "section_role": "keep",
+      "nodes": [
+        "bfframe.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.25,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.8,
+        0.0,
+        -0.43
+      ],
+      "bbox_max": [
+        1.8,
+        1.04,
+        0.43
+      ],
+      "label_anchor": [
+        0.0,
+        0.52,
+        0.43
+      ],
+      "center": [
+        0.0,
+        0.52,
+        -0.0
+      ],
+      "info_ref": "hk_idlers"
+    },
+    {
+      "id": "vacuum_boxes",
+      "name": "Vacuum Boxes under the Belt & Filtrate Down-Pipes",
+      "group": "vacuum",
+      "section_role": "split",
+      "nodes": [
+        "vacuum_boxes__back",
+        "vacuum_boxes__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.4,
+        0.3,
+        -0.175
+      ],
+      "bbox_max": [
+        1.3,
+        1.12,
+        0.175
+      ],
+      "label_anchor": [
+        -0.05,
+        0.71,
+        0.175
+      ],
+      "center": [
+        -0.05,
+        0.71,
+        -0.0
+      ],
+      "info_ref": "hw_vacuum"
+    },
+    {
+      "id": "filtrate_receivers",
+      "name": "Filtrate Receivers (separate per zone: mother liquor, wash 1, wash 2, wash 3)",
+      "group": "vacuum",
+      "section_role": "keep",
+      "nodes": [
+        "filtrate_receivers.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.5
+      ],
+      "bbox_min": [
+        -1.22,
+        0.09,
+        -0.67
+      ],
+      "bbox_max": [
+        1.12,
+        0.56,
+        -0.43
+      ],
+      "label_anchor": [
+        -0.05,
+        0.325,
+        -0.43
+      ],
+      "center": [
+        -0.05,
+        0.325,
+        -0.55
+      ],
+      "info_ref": "hw_vacuum"
+    },
+    {
+      "id": "feed_wash",
+      "name": "Feed Box & Wash Spray Headers (hot condensate, counter-current)",
+      "group": "water",
+      "section_role": "keep",
+      "nodes": [
+        "feed_wash.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        0.4
+      ],
+      "bbox_min": [
+        -1.6,
+        1.2,
+        -0.45
+      ],
+      "bbox_max": [
+        1.025,
+        1.525,
+        0.45
+      ],
+      "label_anchor": [
+        -0.2875,
+        1.3625,
+        0.45
+      ],
+      "center": [
+        -0.2875,
+        1.3625,
+        -0.0
+      ],
+      "info_ref": "hw_wash"
+    },
+    {
+      "id": "cake",
+      "name": "Hydrate Cake on the Belt",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "ck"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.3,
+        0.4
+      ],
+      "bbox_min": [
+        -1.3,
+        1.16,
+        -0.335
+      ],
+      "bbox_max": [
+        1.7,
+        1.2,
+        -0.005
+      ],
+      "label_anchor": [
+        0.2,
+        1.18,
+        -0.005
+      ],
+      "center": [
+        0.2,
+        1.18,
+        -0.17
+      ],
+      "info_ref": "hw_cake"
+    },
+    {
+      "id": "discharge_chute",
+      "name": "Cake Discharge Chute (to calcination)",
+      "group": "discharge",
+      "section_role": "keep",
+      "nodes": [
+        "dc"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        1.95,
+        0.35,
+        -0.4
+      ],
+      "bbox_max": [
+        2.35,
+        0.85,
+        0.4
+      ],
+      "label_anchor": [
+        2.15,
+        0.6,
+        0.4
+      ],
+      "center": [
+        2.15,
+        0.6,
+        -0.0
+      ],
+      "info_ref": "hw_cake"
+    },
+    {
+      "id": "wash_1",
+      "name": "Wash Stage 1 Sprays",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "wash_10",
+        "wash_11",
+        "wash_12"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "wash_2",
+      "name": "Wash Stage 2 Sprays",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "wash_20",
+        "wash_21",
+        "wash_22"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    },
+    {
+      "id": "wash_3",
+      "name": "Wash Stage 3 Sprays",
+      "group": "flow_tracers",
+      "section_role": "keep",
+      "nodes": [
+        "wash_30",
+        "wash_31",
+        "wash_32"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.012,
+        -0.012,
+        -0.012
+      ],
+      "bbox_max": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "label_anchor": [
+        0.0,
+        0.0,
+        0.012
+      ],
+      "center": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "info_ref": "flow_tracers"
+    }
+  ],
+  "components": {
+    "hk_belt": {
+      "function": "Filter belt.",
+      "construction": "Drainage belt with cloth.",
+      "material": "Rubber/PP.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hk_pulley": {
+      "function": "Drive/tail rolls.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hk_idlers": {
+      "function": "Frame.",
+      "construction": "—",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hw_vacuum": {
+      "function": "Vacuum boxes and receivers.",
+      "construction": "Boxes, receivers.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hw_wash": {
+      "function": "Feed and washes.",
+      "construction": "Feed box, spray headers.",
+      "material": "Stainless.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "hw_cake": {
+      "function": "Cake and discharge.",
+      "construction": "—",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "flow_tracers": {
+      "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+      "construction": "Small spheres moving along the main flow path during the Operate animation.",
+      "material": "—",
+      "operating_conditions": "Visible in cutaway view.",
+      "failure_modes": [],
+      "inspection": []
+    }
+  }
+}

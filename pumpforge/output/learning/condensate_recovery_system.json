@@ -1,0 +1,681 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "condensate_recovery_system",
+ "no": 236,
+ "title": "Condensate Recovery System",
+ "model_title": "Condensate Recovery System: Flash Vessel, Vented Receiver & Condensate Pump Set",
+ "category": "13 · Water Treatment & Utilities",
+ "phase": 11,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A condensate recovery system returns hot condensate from steam users to the boiler. High-pressure condensate enters a flash vessel, where part of it flashes to low-pressure steam that is reused; the remaining condensate drains to a vented receiver, and duty/standby pumps return it to the boiler feed tank when the level switch calls.",
+   "applications": [
+    "Process plants and boiler houses",
+    "Heat-exchanger and tracer condensate collection"
+   ],
+   "key_points": [
+    "Flash fraction = (h_f,HP − h_f,LP)/h_fg,LP",
+    "Saves fuel, water and chemicals",
+    "Receiver raised for pump NPSH",
+    "Vented receiver at atmospheric pressure"
+   ],
+   "classification": {
+    "family": "Steam utilities",
+    "type": "Flash vessel + vented receiver + duplex pump set"
+   },
+   "hi_family": "water_utilities",
+   "summary": "A condensate recovery system collects hot condensate from steam users and returns it to the boiler. A flash vessel releases low-pressure flash steam for reuse; the remaining condensate drains to a vented receiver and condensate pumps send it back to the boiler feed tank."
+  },
+  "model_3d": {
+   "asset": "glb/condensate_recovery_system.glb",
+   "metadata": "meta/condensate_recovery_system.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 25168,
+   "parts": 14
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "HP condensate enters the flash vessel.",
+    "Flash steam leaves the top to the LP header.",
+    "Condensate drains to the vented receiver."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "HP condensate enters the flash vessel.",
+     "part": "flash_vessel",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flash steam leaves the top to the LP header.",
+     "part": "flash_vessel",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Condensate drains to the vented receiver.",
+     "part": "receiver",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The float starts a pump at high level.",
+     "part": "level_float",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The pump returns condensate to the boiler.",
+     "part": "pump_piping",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Flash fraction vs pressure drop."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "condensate_recovery_system_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "pressure": {
+     "file": "condensate_recovery_system_pressure.glb",
+     "title": "Recover heat, water and chemicals",
+     "description": "High-pressure condensate entering a lower pressure partly flashes to steam: flash fraction = (h_f,high − h_f,low) / h_fg,low (≈ 10–15 % from ~10 bar to atmosphere). The flash vessel sends this steam to the LP header; the remaining hot condensate (already treated water, ≈ 90–100 °C) returns to the boiler, saving fuel, make-up water and treatment chemicals. Pumps handling near-boiling water need generous NPSH, which is why the receiver is raised above them.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/condensate_recovery_system.json#components",
+   "key_components": "Vented receiver, condensate pumps, float switches, flash vessel, return line",
+   "parts": [
+    {
+     "id": "receiver",
+     "name": "Vented Condensate Receiver (horizontal)",
+     "info_ref": "cr_receiver",
+     "function": "Collects condensate at atmospheric pressure.",
+     "material": "Stainless/carbon steel."
+    },
+    {
+     "id": "receiver_supports",
+     "name": "Receiver Stand (raised to give the pumps NPSH)",
+     "info_ref": "cr_receiver",
+     "function": "Collects condensate at atmospheric pressure.",
+     "material": "Stainless/carbon steel."
+    },
+    {
+     "id": "condensate",
+     "name": "Hot Condensate (≈ 95–100 °C)",
+     "info_ref": "cr_receiver",
+     "function": "Collects condensate at atmospheric pressure.",
+     "material": "Stainless/carbon steel."
+    },
+    {
+     "id": "level_switch_rod",
+     "name": "Float-Switch Guide Rod (pump start/stop)",
+     "info_ref": "cr_controls",
+     "function": "Start/stop pumps.",
+     "material": "—"
+    },
+    {
+     "id": "level_float",
+     "name": "Level Float (rises → pump starts; falls → pump stops)",
+     "info_ref": "cr_controls",
+     "function": "Start/stop pumps.",
+     "material": "—"
+    },
+    {
+     "id": "flash_vessel",
+     "name": "Flash Vessel (releases flash steam from high-pressure condensate)",
+     "info_ref": "cr_flash",
+     "function": "Separates flash steam.",
+     "material": "Steel."
+    },
+    {
+     "id": "piping",
+     "name": "HP Condensate Inlet, Flash-Steam Outlet (to LP header), LP Condensate Returns, Atmospheric Vent, Overflow & Gauge Glass",
+     "info_ref": "cr_piping",
+     "function": "Inlets, vent, overflow, returns.",
+     "material": "Steel."
+    },
+    {
+     "id": "pump_1",
+     "name": "Condensate Pump 1 (duty)",
+     "info_ref": "cr_pumps",
+     "function": "Return condensate.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "pump_1_shaft",
+     "name": "Condensate Pump 1 (duty) — Shaft & Coupling (turning)",
+     "info_ref": "cr_pumps",
+     "function": "Return condensate.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "pump_2",
+     "name": "Condensate Pump 2 (standby)",
+     "info_ref": "cr_pumps",
+     "function": "Return condensate.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "pump_2_shaft",
+     "name": "Condensate Pump 2 (standby) — Shaft & Coupling (turning)",
+     "info_ref": "cr_pumps",
+     "function": "Return condensate.",
+     "material": "Cast iron/stainless."
+    },
+    {
+     "id": "pump_piping",
+     "name": "Pump Suction Lines, Discharge Check Valves & Return Main to the Boiler Feed Tank",
+     "info_ref": "cr_piping",
+     "function": "Inlets, vent, overflow, returns.",
+     "material": "Steel."
+    },
+    {
+     "id": "control_panel",
+     "name": "Pump Control Panel (alternating duty, high-level alarm)",
+     "info_ref": "cr_controls",
+     "function": "Start/stop pumps.",
+     "material": "—"
+    },
+    {
+     "id": "flash_steam",
+     "name": "Flash steam released as pressure drops",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Receivers ≈ 0.2 – 10 m³",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "≈ 0.5 – 100",
+     "unit": "t/h condensate"
+    },
+    "operating_conditions": {
+     "typical_range": "≈ 90 – 100 °C; atmospheric receiver",
+     "unit": "—"
+    },
+    "power_rating": {
+     "typical_range": "Pumps ≈ 1 – 30",
+     "unit": "kW"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size flash vessel for steam velocity; receiver for pump cycling; pumps for NPSH."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "operating_pressure": null,
+     "operating_temperature": null,
+     "water_or_gas_quality": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Spirax Sarco",
+    "ASME B31.1"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Supports designed for operating, test and wind/seismic loads; allow thermal movement of connected piping."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; nozzles and supports loaded within limits."
+   ],
+   "piping": [
+    "Relief protection per code, drains at low points, isolations for inspection; slope lines to drains."
+   ],
+   "commissioning": [
+    "Pressure test; set and seal relief valves; check instruments and drains; register with the authority where required."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check level, pump cycling and vent.",
+     "part": "level_float",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Inspect pump seals and check valves.",
+     "part": "pump_1",
+     "interval": "quarterly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Inspect receiver internally.",
+     "part": "receiver"
+    }
+   ],
+   "lubrication": [
+    "Motor and drive bearings greased / oiled to maker schedule; gearbox oil changed by hours or oil analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Pump cavitation",
+     "category": "cavitation",
+     "symptoms": [
+      "Noise, low flow"
+     ],
+     "causes": [
+      "Low NPSH (hot condensate, low head)"
+     ],
+     "remedies": [
+      "Raise receiver; cool condensate; NPSH-suitable pump"
+     ],
+     "part": "pump_1"
+    },
+    {
+     "problem": "Receiver overflow",
+     "category": "performance",
+     "symptoms": [
+      "Hot water at overflow"
+     ],
+     "causes": [
+      "Pump/float failure"
+     ],
+     "remedies": [
+      "Repair; check alarms"
+     ],
+     "part": "level_float"
+    }
+   ],
+   "safety": [
+    "Hot water and flash steam — vent to safe location; burns."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Condensate Recovery System — Introduction",
+    "type": "in_app_tour",
+    "model": "condensate_recovery_system.glb",
+    "duration_s": 56.9,
+    "script": [
+     {
+      "narration": "This module introduces the Condensate Recovery System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A condensate recovery system returns hot condensate from steam users to the boiler.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "High-pressure condensate enters a flash vessel, where part of it flashes to low-pressure steam that is reused; the remaining condensate drains to a vented receiver, and duty/standby pumps return it to the boiler feed tank when the level switch calls.",
+      "duration_s": 17.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include process plants and boiler houses; heat-exchanger and tracer condensate collection.",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Condensate Pump 1 (duty), Condensate Pump 1 (duty) — Shaft & Coupling (turning), Condensate Pump 2 (standby), Condensate Pump 2 (standby) — Shaft & Coupling (turning).",
+      "duration_s": 11.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Condensate Recovery System — Operation",
+    "type": "in_app_tour",
+    "model": "condensate_recovery_system.glb",
+    "duration_s": 39.0,
+    "script": [
+     {
+      "narration": "How the Condensate Recovery System works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "HP condensate enters the flash vessel.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_vessel",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flash steam leaves the top to the LP header.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "flash_vessel",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Condensate drains to the vented receiver.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "receiver",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The float starts a pump at high level.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "level_float",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The pump returns condensate to the boiler.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_piping",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "High-pressure condensate entering a lower pressure partly flashes to steam: flash fraction = (h_f,high − h_f,low) / h_fg,low (≈ 10–15 % from ~10 bar to atmosphere).",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Condensate Recovery System — Maintenance",
+    "type": "in_app_tour",
+    "model": "condensate_recovery_system.glb",
+    "duration_s": 33.8,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Condensate Recovery System.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check level, pump cycling and vent.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "level_float",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect pump seals and check valves.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "pump_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Inspect receiver internally.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "receiver",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for pump cavitation: noise, low flow. Common cause: low npsh (hot condensate, low head).",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "pump_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for receiver overflow: hot water at overflow. Common cause: pump/float failure.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "level_float",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What is flash steam?",
+     "options": [
+      "Steam formed when hot condensate drops in pressure",
+      "Boiler steam",
+      "Superheated steam",
+      "Steam from a leak only"
+     ],
+     "answer": 0,
+     "explanation": "Flash.",
+     "level": "basic"
+    },
+    {
+     "question": "Why raise the receiver?",
+     "options": [
+      "NPSH for pumps handling near-boiling water",
+      "For looks",
+      "Easier painting",
+      "Less steam"
+     ],
+     "answer": 0,
+     "explanation": "NPSH.",
+     "level": "basic"
+    },
+    {
+     "question": "Benefits of returning condensate?",
+     "options": [
+      "Fuel, water and chemical savings",
+      "More blowdown",
+      "Lower boiler efficiency",
+      "None"
+     ],
+     "answer": 0,
+     "explanation": "Savings.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Collects condensate at atmospheric pressure.\"",
+     "options": [
+      "Float-Switch Guide Rod (pump start/stop)",
+      "Vented Condensate Receiver (horizontal)",
+      "Condensate Pump 2 (standby) — Shaft & Coupling (turning)",
+      "Condensate Pump 1 (duty)"
+     ],
+     "answer": 1,
+     "explanation": "Vented Condensate Receiver (horizontal): Collects condensate at atmospheric pressure.",
+     "level": "basic",
+     "part": "receiver",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Start/stop pumps.\"",
+     "options": [
+      "Condensate Pump 1 (duty)",
+      "Flash steam released as pressure drops",
+      "Float-Switch Guide Rod (pump start/stop)",
+      "Condensate Pump 1 (duty) — Shaft & Coupling (turning)"
+     ],
+     "answer": 2,
+     "explanation": "Float-Switch Guide Rod (pump start/stop): Start/stop pumps.",
+     "level": "basic",
+     "part": "level_switch_rod",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Separates flash steam.\"",
+     "options": [
+      "Flash Vessel (releases flash steam from high-pressure condensate)",
+      "Vented Condensate Receiver (horizontal)",
+      "Condensate Pump 1 (duty) — Shaft & Coupling (turning)",
+      "Float-Switch Guide Rod (pump start/stop)"
+     ],
+     "answer": 0,
+     "explanation": "Flash Vessel (releases flash steam from high-pressure condensate): Separates flash steam.",
+     "level": "basic",
+     "part": "flash_vessel",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

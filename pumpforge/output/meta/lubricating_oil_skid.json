@@ -1,0 +1,699 @@
+{
+  "schema": "pumpforge.model/1.1",
+  "pump_id": "lubricating_oil_skid",
+  "title": "Lubricating Oil Skid (Pressure-Fed, API 614 style) for a Turbomachine",
+  "category": "14 · Mechanical Components & Maintenance",
+  "library": {
+    "no": 259,
+    "phase": 12,
+    "eq_id": "EQ-337",
+    "subcategory": "Lubrication",
+    "hi_family": "mechanical_components",
+    "flagship": false
+  },
+  "overlays": {
+    "flow": {
+      "file": "lubricating_oil_skid_flow.glb",
+      "title": "Flow path",
+      "description": "Suction and discharge flow paths with direction arrows.",
+      "annotations": []
+    },
+    "pressure": {
+      "file": "lubricating_oil_skid_pressure.glb",
+      "title": "Clean, cool oil at controlled pressure",
+      "description": "The main pump delivers more oil than the machine needs; the pressure-control valve spills the excess back to the reservoir to hold header pressure (typically ≈ 1–2.5 bar(g) at the bearings). Coolers keep supply ≈ 40–50 °C; duplex filters (≈ 10 µm) can be switched on-line. The standby pump starts automatically on falling pressure, and the accumulator / rundown tank covers the switch-over and coast-down so bearings are never starved.",
+      "render": "normal",
+      "annotations": []
+    }
+  },
+  "flow_paths": [
+    {
+      "name": "oil_circuit",
+      "kind": "hydraulic_oil",
+      "radius": 0.012,
+      "points": [
+        [
+          -0.6,
+          0.3,
+          0.25
+        ],
+        [
+          -0.6,
+          1.3,
+          0.25
+        ],
+        [
+          -0.15,
+          1.3,
+          0.25
+        ],
+        [
+          -0.15,
+          1.5,
+          0.2
+        ],
+        [
+          0.25,
+          1.5,
+          0.2
+        ],
+        [
+          0.25,
+          1.5,
+          -0.2
+        ],
+        [
+          0.65,
+          1.42,
+          -0.2
+        ],
+        [
+          0.65,
+          1.1,
+          -0.2
+        ],
+        [
+          0.65,
+          0.98,
+          -0.0
+        ],
+        [
+          1.25,
+          0.98,
+          -0.0
+        ],
+        [
+          1.25,
+          1.6,
+          -0.0
+        ],
+        [
+          1.7,
+          1.6,
+          -0.0
+        ]
+      ]
+    },
+    {
+      "name": "return",
+      "kind": "hydraulic_oil",
+      "radius": 0.015,
+      "points": [
+        [
+          1.7,
+          0.95,
+          -0.35
+        ],
+        [
+          0.8,
+          0.95,
+          -0.35
+        ],
+        [
+          0.6,
+          0.6,
+          -0.3
+        ]
+      ]
+    },
+    {
+      "name": "cooling_water",
+      "kind": "water",
+      "radius": 0.008,
+      "points": [
+        [
+          -0.75,
+          1.8,
+          0.2
+        ],
+        [
+          -0.3,
+          1.8,
+          0.2
+        ],
+        [
+          -0.3,
+          1.62,
+          0.2
+        ]
+      ]
+    }
+  ],
+  "units": "metre",
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification.",
+  "animations": {
+    "Operate": {
+      "duration_s": 2.0,
+      "loop": true
+    },
+    "Explode": {
+      "duration_s": 1.0,
+      "loop": false,
+      "note": "Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset."
+    }
+  },
+  "cutaway": {
+    "hide_section_roles": [
+      "front",
+      "hide"
+    ],
+    "plane": "XY (glTF), section faces use material \"section\""
+  },
+  "stats": {
+    "triangles": 24686,
+    "parts": 11
+  },
+  "summary": "A lubricating oil skid supplies clean, cool oil at controlled pressure to the bearings (and often seals and controls) of a turbine, compressor or large pump, with main and standby pumps, coolers, duplex filters and a reservoir.",
+  "classification": {
+    "family": "Lubrication",
+    "type": "Pressure-fed lube oil console"
+  },
+  "model_configuration": {
+    "animation": "Pumps run; oil circulates; level varies"
+  },
+  "standards": [
+    {
+      "id": "API 614",
+      "title": "Lubrication, shaft-sealing and oil-control systems and auxiliaries",
+      "relevance": "Lube oil systems.",
+      "edition": "to be verified"
+    },
+    {
+      "id": "ISO 4406",
+      "title": "Hydraulic fluid power — solid particle contamination code",
+      "relevance": "Oil cleanliness.",
+      "edition": "to be verified"
+    }
+  ],
+  "references": [
+    "API 614"
+  ],
+  "parts": [
+    {
+      "id": "reservoir",
+      "name": "Oil Reservoir (≈ 3–8 min of flow; sloped bottom, baffles)",
+      "group": "tank",
+      "section_role": "split",
+      "nodes": [
+        "reservoir__back",
+        "reservoir__front"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        -0.2,
+        -0.6
+      ],
+      "bbox_min": [
+        -1.15,
+        0.0,
+        -0.65
+      ],
+      "bbox_max": [
+        1.15,
+        0.93,
+        0.65
+      ],
+      "label_anchor": [
+        0.0,
+        0.465,
+        0.65
+      ],
+      "center": [
+        0.0,
+        0.465,
+        -0.0
+      ],
+      "info_ref": "lo_reservoir"
+    },
+    {
+      "id": "oil",
+      "name": "Lube Oil (ISO VG 32/46 turbine oil)",
+      "group": "fluid",
+      "section_role": "keep",
+      "nodes": [
+        "oil"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.4
+      ],
+      "bbox_min": [
+        -0.965,
+        0.125,
+        -0.4655
+      ],
+      "bbox_max": [
+        0.965,
+        0.675,
+        -0.0005
+      ],
+      "label_anchor": [
+        0.0,
+        0.4,
+        -0.0005
+      ],
+      "center": [
+        0.0,
+        0.4,
+        -0.233
+      ],
+      "info_ref": "lo_reservoir"
+    },
+    {
+      "id": "heater",
+      "name": "Immersion Heater (keeps oil warm for start-up)",
+      "group": "thermal",
+      "section_role": "keep",
+      "nodes": [
+        "heater.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        -0.3,
+        0.0,
+        -0.0
+      ],
+      "bbox_min": [
+        -1.12,
+        0.16,
+        -0.31
+      ],
+      "bbox_max": [
+        -0.4,
+        0.28,
+        -0.19
+      ],
+      "label_anchor": [
+        -0.76,
+        0.22,
+        -0.19
+      ],
+      "center": [
+        -0.76,
+        0.22,
+        -0.25
+      ],
+      "info_ref": "lo_reservoir"
+    },
+    {
+      "id": "pump_main",
+      "name": "Main Lube Oil Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_mainb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.75,
+        0.875,
+        0.1
+      ],
+      "bbox_max": [
+        0.15,
+        1.17,
+        0.4
+      ],
+      "label_anchor": [
+        -0.3,
+        1.0225,
+        0.4
+      ],
+      "center": [
+        -0.3,
+        1.0225,
+        0.25
+      ],
+      "info_ref": "lo_pumps"
+    },
+    {
+      "id": "pump_main_shaft",
+      "name": "Main Lube Oil Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_mainc"
+      ],
+      "pivot": [
+        -0.36,
+        1.05,
+        0.25
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        -0.42,
+        1.03,
+        0.2
+      ],
+      "bbox_max": [
+        -0.3,
+        1.07,
+        0.3
+      ],
+      "label_anchor": [
+        -0.36,
+        1.05,
+        0.3
+      ],
+      "center": [
+        -0.36,
+        1.05,
+        0.25
+      ],
+      "info_ref": "lo_pumps"
+    },
+    {
+      "id": "pump_standby",
+      "name": "Standby (auto-start on low pressure) Lube Oil Pump",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_standbyb"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        0.15,
+        0.875,
+        0.1
+      ],
+      "bbox_max": [
+        1.05,
+        1.17,
+        0.4
+      ],
+      "label_anchor": [
+        0.6,
+        1.0225,
+        0.4
+      ],
+      "center": [
+        0.6,
+        1.0225,
+        0.25
+      ],
+      "info_ref": "lo_pumps"
+    },
+    {
+      "id": "pump_standby_shaft",
+      "name": "Standby (auto-start on low pressure) Lube Oil Pump — Shaft & Coupling (turning)",
+      "group": "pumps",
+      "section_role": "keep",
+      "nodes": [
+        "pump_standbyc"
+      ],
+      "pivot": [
+        0.54,
+        1.05,
+        0.25
+      ],
+      "explode_offset": [
+        0.0,
+        0.2,
+        0.4
+      ],
+      "bbox_min": [
+        0.48,
+        1.03,
+        0.2
+      ],
+      "bbox_max": [
+        0.6,
+        1.07,
+        0.3
+      ],
+      "label_anchor": [
+        0.54,
+        1.05,
+        0.3
+      ],
+      "center": [
+        0.54,
+        1.05,
+        0.25
+      ],
+      "info_ref": "lo_pumps"
+    },
+    {
+      "id": "pump_suctions",
+      "name": "Pump Suction Lines (from reservoir)",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "pump_suctions.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "bbox_min": [
+        -0.63,
+        0.25,
+        0.22
+      ],
+      "bbox_max": [
+        0.33,
+        0.93,
+        0.28
+      ],
+      "label_anchor": [
+        -0.15,
+        0.59,
+        0.28
+      ],
+      "center": [
+        -0.15,
+        0.59,
+        0.25
+      ],
+      "info_ref": "lo_pumps"
+    },
+    {
+      "id": "coolers",
+      "name": "Twin Oil Coolers (shell & tube; one in service)",
+      "group": "heat_exchange",
+      "section_role": "keep",
+      "nodes": [
+        "coolers.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.0,
+        0.5,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.7,
+        0.93,
+        -0.32
+      ],
+      "bbox_max": [
+        0.25,
+        1.82,
+        0.32
+      ],
+      "label_anchor": [
+        -0.225,
+        1.375,
+        0.32
+      ],
+      "center": [
+        -0.225,
+        1.375,
+        -0.0
+      ],
+      "info_ref": "lo_coolers"
+    },
+    {
+      "id": "filters",
+      "name": "Duplex Filters with Six-Way Transfer Valve & ΔP Indicator",
+      "group": "filters",
+      "section_role": "keep",
+      "nodes": [
+        "filters.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.3,
+        0.4,
+        -0.0
+      ],
+      "bbox_min": [
+        0.55,
+        0.93,
+        -0.3
+      ],
+      "bbox_max": [
+        0.81,
+        1.59,
+        0.3
+      ],
+      "label_anchor": [
+        0.68,
+        1.26,
+        0.3
+      ],
+      "center": [
+        0.68,
+        1.26,
+        -0.0
+      ],
+      "info_ref": "lo_filters"
+    },
+    {
+      "id": "header_controls",
+      "name": "Discharge Header, Pressure-Control Valve (spill-back), Accumulator, Supply to Machine & Return Line, Gauges / Transmitters",
+      "group": "piping",
+      "section_role": "keep",
+      "nodes": [
+        "header_controls.001"
+      ],
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "explode_offset": [
+        0.4,
+        0.3,
+        -0.0
+      ],
+      "bbox_min": [
+        -0.625,
+        0.9,
+        -0.4
+      ],
+      "bbox_max": [
+        1.6,
+        2.15,
+        0.275
+      ],
+      "label_anchor": [
+        0.4875,
+        1.525,
+        0.275
+      ],
+      "center": [
+        0.4875,
+        1.525,
+        -0.0625
+      ],
+      "info_ref": "lo_controls"
+    }
+  ],
+  "components": {
+    "lo_reservoir": {
+      "function": "Store and de-aerate oil.",
+      "construction": "Stainless reservoir with heater and baffles.",
+      "material": "Stainless steel.",
+      "operating_conditions": "Retention ≈ 3–8 min.",
+      "failure_modes": [
+        "Water ingress",
+        "Foaming"
+      ],
+      "inspection": [
+        "Oil analysis"
+      ]
+    },
+    "lo_pumps": {
+      "function": "Deliver oil.",
+      "construction": "Main + auto-start standby pumps.",
+      "material": "—",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "Wear, cavitation"
+      ],
+      "inspection": [
+        "Auto-start test"
+      ]
+    },
+    "lo_coolers": {
+      "function": "Remove heat.",
+      "construction": "Twin coolers with transfer valve.",
+      "material": "Steel/copper alloy.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "—"
+      ],
+      "inspection": [
+        "Visual"
+      ]
+    },
+    "lo_filters": {
+      "function": "Clean oil.",
+      "construction": "Duplex filters ≈ 10 µm, transfer valve, ΔP.",
+      "material": "Steel.",
+      "operating_conditions": "—",
+      "failure_modes": [
+        "High ΔP"
+      ],
+      "inspection": [
+        "Change elements on ΔP"
+      ]
+    },
+    "lo_controls": {
+      "function": "Control pressure; protect.",
+      "construction": "PCV, accumulator, gauges, transmitters, piping.",
+      "material": "Stainless.",
+      "operating_conditions": "≈ 1–2.5 bar(g) at bearings.",
+      "failure_modes": [
+        "PCV hunting"
+      ],
+      "inspection": [
+        "Trip test"
+      ]
+    }
+  }
+}

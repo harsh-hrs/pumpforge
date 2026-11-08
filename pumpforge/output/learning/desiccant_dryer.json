@@ -1,0 +1,654 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "desiccant_dryer",
+ "no": 190,
+ "title": "Desiccant Dryer",
+ "model_title": "Heatless (Pressure-Swing) Twin-Tower Desiccant Air Dryer",
+ "category": "11 · Filtration & Separation Equipment",
+ "phase": 9,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A heatless desiccant dryer dries compressed air by pressure-swing adsorption. One tower dries the air at line pressure while the other is depressurised and swept by a small part of the dried air (purge) that carries away the adsorbed water. The towers switch every few minutes.",
+   "applications": [
+    "Instrument air",
+    "Pharmaceutical and food air",
+    "Outdoor air lines in freezing climates"
+   ],
+   "key_points": [
+    "Pressure swing: adsorb high, desorb low",
+    "Purge air ≈ 15–20 % (heatless)",
+    "Dew point −40 °C (alumina) or −70 °C (mol sieve)",
+    "Pre-filter protects desiccant from oil"
+   ],
+   "classification": {
+    "family": "Compressed air dryer",
+    "type": "Heatless twin-tower PSA"
+   },
+   "hi_family": "filtration_separation",
+   "summary": "A heatless desiccant dryer dries compressed air by pressure-swing adsorption. One tower dries the air at line pressure while the other is depressurised and purged with part of the dried air; the towers switch every few minutes."
+  },
+  "model_3d": {
+   "asset": "glb/desiccant_dryer.glb",
+   "metadata": "meta/desiccant_dryer.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 26640,
+   "parts": 9
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Wet compressed air passes the pre-filter.",
+    "The shuttle valve directs it into the drying tower.",
+    "Desiccant adsorbs the water vapour."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Wet compressed air passes the pre-filter.",
+     "part": "filters",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The shuttle valve directs it into the drying tower.",
+     "part": "shuttle",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Desiccant adsorbs the water vapour.",
+     "part": "tower_left_bed",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Dry air purges the other tower at low pressure.",
+     "part": "tower_right",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The controller switches towers.",
+     "part": "controller",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Pressure dew point vs inlet temperature and flow; purge consumption vs cycle control (dew-point demand saves purge)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "desiccant_dryer_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "desiccant_dryer_pressure.glb",
+     "title": "Pressure swing: adsorb at high pressure, desorb at low",
+     "description": "The drying tower works at line pressure (red); the desiccant adsorbs water vapour. The other tower is vented to atmosphere (blue) and swept by a small part of the dry air (purge, typically ~ 15–20 % for heatless dryers) which carries the water out through the silencer. Towers switch every few minutes. Typical pressure dew point −40 °C (−70 °C with molecular sieve).",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/desiccant_dryer.json#components",
+   "key_components": "Twin towers, desiccant, shuttle valves, purge orifice, silencers, pre/after filters, controller",
+   "parts": [
+    {
+     "id": "tower_left",
+     "name": "Left Tower (drying — under line pressure)",
+     "info_ref": "dd_towers",
+     "function": "Contain desiccant.",
+     "material": "—"
+    },
+    {
+     "id": "tower_left_bed",
+     "name": "Left Tower Desiccant (activated alumina / molecular sieve)",
+     "info_ref": "dd_desiccant",
+     "function": "Adsorbs water vapour.",
+     "material": "—"
+    },
+    {
+     "id": "tower_right",
+     "name": "Right Tower (regenerating — depressurised, purged)",
+     "info_ref": "dd_towers",
+     "function": "Contain desiccant.",
+     "material": "—"
+    },
+    {
+     "id": "tower_right_bed",
+     "name": "Right Tower Desiccant",
+     "info_ref": "dd_desiccant",
+     "function": "Adsorbs water vapour.",
+     "material": "—"
+    },
+    {
+     "id": "valve_manifolds",
+     "name": "Inlet Shuttle/Switching Valves, Outlet Check Valves, Purge Orifice & Exhaust Silencers",
+     "info_ref": "dd_valves",
+     "function": "Switch towers; purge.",
+     "material": "—"
+    },
+    {
+     "id": "shuttle",
+     "name": "Inlet Shuttle Spool (switches towers)",
+     "info_ref": "dd_valves",
+     "function": "Switch towers; purge.",
+     "material": "—"
+    },
+    {
+     "id": "filters",
+     "name": "Coalescing Pre-Filter & Particulate After-Filter",
+     "info_ref": "dd_filters",
+     "function": "Protect desiccant and downstream.",
+     "material": "—"
+    },
+    {
+     "id": "controller",
+     "name": "Controller (timer or dew-point dependent switching)",
+     "info_ref": "dd_controller",
+     "function": "Controls cycle.",
+     "material": "—"
+    },
+    {
+     "id": "frame",
+     "name": "Frame",
+     "info_ref": "dd_towers",
+     "function": "Contain desiccant.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Towers ~ 0.1 – 1 m diameter",
+     "unit": ""
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 10 000",
+     "unit": "Nm³/h"
+    },
+    "operating_pressure": {
+     "typical_range": "~ 4 – 16",
+     "unit": "bar g"
+    },
+    "separation_performance": {
+     "typical_range": "PDP −40 °C (Class 2) to −70 °C (Class 1) per ISO 8573-1",
+     "unit": "°C"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Size from flow, inlet temperature and pressure; choose dew point class."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "flow": null,
+     "operating_pressure": null,
+     "cut_size_or_rejection": null,
+     "feed_solids_or_contaminant": null,
+     "power_kW": null
+    },
+    "status": "empty — fill from the equipment datasheet / performance guarantee"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "ISO 8573-1",
+    "ISO 7183"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Level foundation/skid for operating (full) weight; access for element/media change and lifting."
+   ],
+   "alignment": [
+    "Vertical vessels plumb; skids level; align pumps/drives."
+   ],
+   "piping": [
+    "Isolation and bypass valves; vents and drains; pressure gauges or ΔP transmitter across the unit; relief protection where the vessel can be over-pressured."
+   ],
+   "commissioning": [
+    "Leak/pressure test; flush lines before installing elements/media; bring flow on gradually; record clean ΔP and performance baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check dew point and filter ΔP.",
+     "part": "filters",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Replace filter elements; check silencers.",
+     "part": "valve_manifolds",
+     "interval": "6–12 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace desiccant (≈ 3–5 years).",
+     "part": "tower_left_bed"
+    }
+   ],
+   "lubrication": [
+    "No lubrication of static parts; lubricate pumps, drives and valve actuators per maker."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "High dew point",
+     "category": "performance",
+     "symptoms": [
+      "Moisture downstream"
+     ],
+     "causes": [
+      "Oil-fouled desiccant, low purge, valve fault"
+     ],
+     "remedies": [
+      "Replace filters/desiccant; check valves"
+     ],
+     "part": "tower_left_bed"
+    },
+    {
+     "problem": "Silencer blockage",
+     "category": "blockage",
+     "symptoms": [
+      "Slow depressurisation"
+     ],
+     "causes": [
+      "Desiccant dust"
+     ],
+     "remedies": [
+      "Replace silencer"
+     ],
+     "part": "valve_manifolds"
+    }
+   ],
+   "safety": [
+    "Pressure; loud depressurisation (silencers)."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Desiccant Dryer — Introduction",
+    "type": "in_app_tour",
+    "model": "desiccant_dryer.glb",
+    "duration_s": 47.4,
+    "script": [
+     {
+      "narration": "This module introduces the Desiccant Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A heatless desiccant dryer dries compressed air by pressure-swing adsorption.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "One tower dries the air at line pressure while the other is depressurised and swept by a small part of the dried air (purge) that carries away the adsorbed water.",
+      "duration_s": 12.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The towers switch every few minutes.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include instrument air; pharmaceutical and food air; outdoor air lines in freezing climates.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Desiccant Dryer — Operation",
+    "type": "in_app_tour",
+    "model": "desiccant_dryer.glb",
+    "duration_s": 33.6,
+    "script": [
+     {
+      "narration": "How the Desiccant Dryer works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Wet compressed air passes the pre-filter.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filters",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The shuttle valve directs it into the drying tower.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "shuttle",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Desiccant adsorbs the water vapour.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tower_left_bed",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Dry air purges the other tower at low pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tower_right",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The controller switches towers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "controller",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The drying tower works at line pressure (red); the desiccant adsorbs water vapour.",
+      "duration_s": 5.4,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Desiccant Dryer — Maintenance",
+    "type": "in_app_tour",
+    "model": "desiccant_dryer.glb",
+    "duration_s": 33.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Desiccant Dryer.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check dew point and filter ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "filters",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace filter elements; check silencers.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "valve_manifolds",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace desiccant (≈ 3–5 years).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "tower_left_bed",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for high dew point: moisture downstream. Common cause: oil-fouled desiccant, low purge, valve fault.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "tower_left_bed",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for silencer blockage: slow depressurisation. Common cause: desiccant dust.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "valve_manifolds",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How is the desiccant regenerated in a heatless dryer?",
+     "options": [
+      "Depressurising and purging with dry air",
+      "Electric heater",
+      "Replacing",
+      "Water wash"
+     ],
+     "answer": 0,
+     "explanation": "PSA.",
+     "level": "basic"
+    },
+    {
+     "question": "Typical purge consumption?",
+     "options": [
+      "~ 15–20 % of rated flow",
+      "~ 1 %",
+      "~ 80 %",
+      "0 %"
+     ],
+     "answer": 0,
+     "explanation": "Heatless.",
+     "level": "basic"
+    },
+    {
+     "question": "Why a coalescing pre-filter?",
+     "options": [
+      "Oil and liquid would foul the desiccant",
+      "For noise",
+      "For heating",
+      "Not needed"
+     ],
+     "answer": 0,
+     "explanation": "Protection.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Contain desiccant.\"",
+     "options": [
+      "Left Tower (drying — under line pressure)",
+      "Right Tower Desiccant",
+      "Inlet Shuttle Spool (switches towers)",
+      "Left Tower Desiccant (activated alumina / molecular sieve)"
+     ],
+     "answer": 0,
+     "explanation": "Left Tower (drying — under line pressure): Contain desiccant.",
+     "level": "basic",
+     "part": "tower_left",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Adsorbs water vapour.\"",
+     "options": [
+      "Left Tower Desiccant (activated alumina / molecular sieve)",
+      "Inlet Shuttle Spool (switches towers)",
+      "Left Tower (drying — under line pressure)",
+      "Inlet Shuttle/Switching Valves, Outlet Check Valves, Purge Orifice & Exhaust Silencers"
+     ],
+     "answer": 0,
+     "explanation": "Left Tower Desiccant (activated alumina / molecular sieve): Adsorbs water vapour.",
+     "level": "basic",
+     "part": "tower_left_bed",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Switch towers; purge.\"",
+     "options": [
+      "Controller (timer or dew-point dependent switching)",
+      "Left Tower (drying — under line pressure)",
+      "Left Tower Desiccant (activated alumina / molecular sieve)",
+      "Inlet Shuttle/Switching Valves, Outlet Check Valves, Purge Orifice & Exhaust Silencers"
+     ],
+     "answer": 3,
+     "explanation": "Inlet Shuttle/Switching Valves, Outlet Check Valves, Purge Orifice & Exhaust Silencers: Switch towers; purge.",
+     "level": "basic",
+     "part": "valve_manifolds",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

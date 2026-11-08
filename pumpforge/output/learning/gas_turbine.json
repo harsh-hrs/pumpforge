@@ -1,0 +1,741 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "gas_turbine",
+ "no": 74,
+ "title": "Gas Turbine",
+ "model_title": "Industrial Gas Turbine (Single Shaft, Can-Annular Combustors)",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A gas turbine compresses air, burns fuel in it and expands the hot gas through a turbine (Brayton cycle). Part of the turbine power drives the compressor; the rest drives a generator or compressor. The hot exhaust can raise steam in a heat-recovery boiler (combined cycle).",
+   "applications": [
+    "Power generation (simple and combined cycle)",
+    "Mechanical drive for pipeline compressors",
+    "Offshore platforms",
+    "Aircraft and marine propulsion (aero-derivatives)"
+   ],
+   "key_points": [
+    "Compressor uses roughly half of turbine work",
+    "Efficiency rises with pressure ratio and firing temperature",
+    "Inlet air temperature strongly affects output",
+    "Hot-gas-path parts limit life"
+   ],
+   "classification": {
+    "family": "Turbine (gas)",
+    "type": "Industrial heavy-duty, single shaft, can-annular combustion"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A gas turbine works on the Brayton cycle: an axial compressor squeezes air, fuel is burned in the combustors at nearly constant pressure, and the hot gas expands through the turbine. The turbine drives the compressor and has power left over for a generator or compressor. The hot exhaust is often used in a heat-recovery boiler (combined cycle)."
+  },
+  "model_3d": {
+   "asset": "glb/gas_turbine.glb",
+   "metadata": "meta/gas_turbine.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 64820,
+   "parts": 10
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Air enters through the inlet bellmouth.",
+    "The axial compressor raises the air pressure stage by stage.",
+    "Fuel burns in the combustors at nearly constant pressure."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Air enters through the inlet bellmouth.",
+     "part": "inlet",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The axial compressor raises the air pressure stage by stage.",
+     "part": "rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Fuel burns in the combustors at nearly constant pressure.",
+     "part": "combustors",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Hot gas expands through the turbine stages, turning the rotor.",
+     "part": "stator_vanes",
+     "cut": true,
+     "operate": true,
+     "overlay": "pressure",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Exhaust leaves through the diffuser near atmospheric pressure.",
+     "part": "exhaust",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Output and heat rate vs compressor inlet temperature: output falls roughly 0.5–0.9 % per °C rise (typical, design-specific)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "gas_turbine_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "pressure": {
+     "file": "gas_turbine_pressure.glb",
+     "title": "Pressure through the gas turbine (Brayton cycle)",
+     "description": "The axial compressor raises air pressure stage by stage; fuel burns at nearly constant pressure in the combustors; the hot gas expands through the turbine stages, which drive the compressor and the load; it leaves through the exhaust near atmospheric pressure.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Compression",
+       "anchor": [
+        -0.35,
+        1.25,
+        -0.0
+       ]
+      },
+      {
+       "text": "Combustion (≈ constant pressure)",
+       "anchor": [
+        0.05,
+        1.25,
+        -0.0
+       ]
+      },
+      {
+       "text": "Expansion",
+       "anchor": [
+        0.4,
+        1.25,
+        -0.0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/gas_turbine.json#components",
+   "key_components": "Axial compressor, combustors, turbine stages, shaft, exhaust diffuser",
+   "parts": [
+    {
+     "id": "casing",
+     "name": "Compressor, Combustor & Turbine Casings",
+     "info_ref": "gt_casing",
+     "function": "Encloses the compressor, combustion section and turbine.",
+     "material": "Cast/fabricated steel; nickel alloys in hot section."
+    },
+    {
+     "id": "inlet",
+     "name": "Air Inlet Bellmouth",
+     "info_ref": "gt_inlet",
+     "function": "Brings filtered air smoothly into the compressor.",
+     "material": "Steel."
+    },
+    {
+     "id": "rotor",
+     "name": "Rotor: Compressor & Turbine Blading on a Single Shaft",
+     "info_ref": "gt_rotor",
+     "function": "Compresses air and extracts power from the hot gas.",
+     "material": "Steel; nickel superalloy turbine blades (coated, cooled)."
+    },
+    {
+     "id": "stator_vanes",
+     "name": "Compressor Stator Vanes & Turbine Nozzle Guide Vanes",
+     "info_ref": "gt_stators",
+     "function": "Turn the flow between rotor stages; first-stage nozzles accelerate the hot gas.",
+     "material": "Steel; nickel/cobalt alloys."
+    },
+    {
+     "id": "combustors",
+     "name": "Combustion Cans (6) with Fuel Nozzles",
+     "info_ref": "gt_combustors",
+     "function": "Mix fuel and air and burn it.",
+     "material": "Nickel alloys with thermal barrier coatings."
+    },
+    {
+     "id": "flame",
+     "name": "Flame Zone",
+     "info_ref": "gt_flame",
+     "function": "Flame region (visual).",
+     "material": "—"
+    },
+    {
+     "id": "exhaust",
+     "name": "Exhaust Diffuser & Collector",
+     "info_ref": "gt_exhaust",
+     "function": "Slows the exhaust to recover pressure and leads it to the stack or HRSG.",
+     "material": "Steel, insulated."
+    },
+    {
+     "id": "bearings",
+     "name": "Journal & Thrust Bearings",
+     "info_ref": "gt_bearings",
+     "function": "Support and locate the rotor.",
+     "material": "Babbitt/steel."
+    },
+    {
+     "id": "accessory_gearbox",
+     "name": "Accessory Gearbox & Starter",
+     "info_ref": "gt_accessories",
+     "function": "Drives lube oil and fuel pumps and starts the turbine.",
+     "material": "Steel."
+    },
+    {
+     "id": "skid",
+     "name": "Base Skid",
+     "info_ref": "gt_skid",
+     "function": "Supports the turbine.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Industrial frames ~ 1 – 500+ MW",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "1000 – 500 000",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "3000/3600 (single shaft); higher for small units",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "Exhaust flow ~ 5 – 900 kg/s",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "pressure_ratio": {
+     "typical_range": "~ 10 – 25 (industrial); higher for aero-derivatives",
+     "unit": ""
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a rigid, level foundation or grouted baseplate sized for the machine mass and dynamic loads (typically ≥3–5 × machine mass for reciprocating machines).",
+    "Check for soft foot before final bolting."
+   ],
+   "alignment": [
+    "Align driver and driven shafts with a laser or dial-indicator method to the coupling maker's tolerances; re-check hot alignment where thermal growth is significant."
+   ],
+   "piping": [
+    "Inlet filtration house, exhaust stack/HRSG, fuel gas conditioning; fire protection in the enclosure."
+   ],
+   "commissioning": [
+    "Check rotation direction with the coupling disconnected.",
+    "Fill lubricant to the correct level and grade.",
+    "Start unloaded where possible; record vibration, temperatures, current and pressures as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Monitor exhaust temperature spread, vibration, compressor ΔP.",
+     "part": "exhaust",
+     "interval": "continuous"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Online/offline compressor wash.",
+     "part": "rotor",
+     "interval": "as fouling dictates"
+    },
+    {
+     "task": "Combustion inspection.",
+     "part": "combustors",
+     "interval": "8000–12 000 h (typical)"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Hot-gas-path inspection; major overhaul.",
+     "part": "stator_vanes",
+     "interval": "24 000–48 000 h (typical)"
+    }
+   ],
+   "lubrication": [
+    "Forced lube-oil system for bearings; accessory gearbox."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Compressor fouling",
+     "category": "performance",
+     "symptoms": [
+      "Lower output, higher heat rate"
+     ],
+     "causes": [
+      "Dirty inlet air"
+     ],
+     "remedies": [
+      "Wash; improve filtration"
+     ],
+     "part": "rotor"
+    },
+    {
+     "problem": "Combustion problems",
+     "category": "performance",
+     "symptoms": [
+      "Exhaust temperature spread, flame-out"
+     ],
+     "causes": [
+      "Nozzle fouling, liner cracks"
+     ],
+     "remedies": [
+      "Combustion inspection"
+     ],
+     "part": "combustors"
+    },
+    {
+     "problem": "Hot-gas-path damage",
+     "category": "performance",
+     "symptoms": [
+      "Borescope findings"
+     ],
+     "causes": [
+      "Over-firing, coating loss"
+     ],
+     "remedies": [
+      "Repair/replace blades & vanes"
+     ],
+     "part": "stator_vanes"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Gas Turbine — Introduction",
+    "type": "in_app_tour",
+    "model": "gas_turbine.glb",
+    "duration_s": 54.8,
+    "script": [
+     {
+      "narration": "This module introduces the Gas Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A gas turbine compresses air, burns fuel in it and expands the hot gas through a turbine (Brayton cycle).",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Part of the turbine power drives the compressor; the rest drives a generator or compressor.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The hot exhaust can raise steam in a heat-recovery boiler (combined cycle).",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include power generation (simple and combined cycle); mechanical drive for pipeline compressors; offshore platforms; aircraft and marine propulsion (aero-derivatives).",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Compressor, Combustor & Turbine Casings, Air Inlet Bellmouth, Rotor: Compressor & Turbine Blading on a Single Shaft, Exhaust Diffuser & Collector.",
+      "duration_s": 10.0,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Gas Turbine — Operation",
+    "type": "in_app_tour",
+    "model": "gas_turbine.glb",
+    "duration_s": 45.7,
+    "script": [
+     {
+      "narration": "How the Gas Turbine works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Air enters through the inlet bellmouth.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "inlet",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The axial compressor raises the air pressure stage by stage.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Fuel burns in the combustors at nearly constant pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "combustors",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Hot gas expands through the turbine stages, turning the rotor.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "stator_vanes",
+       "cut": true,
+       "operate": true,
+       "overlay": "pressure",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Exhaust leaves through the diffuser near atmospheric pressure.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "exhaust",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The axial compressor raises air pressure stage by stage; fuel burns at nearly constant pressure in the combustors; the hot gas expands through the turbine stages, which drive the compressor and the load; it leaves through the exhaust near atmospheric pressure.",
+      "duration_s": 17.1,
+      "action": {
+       "overlay": "pressure",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Gas Turbine — Maintenance",
+    "type": "in_app_tour",
+    "model": "gas_turbine.glb",
+    "duration_s": 44.0,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Gas Turbine.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Monitor exhaust temperature spread, vibration, compressor ΔP.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "exhaust",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Online/offline compressor wash.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Combustion inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "combustors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Hot-gas-path inspection; major overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "stator_vanes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for compressor fouling: lower output, higher heat rate. Common cause: dirty inlet air.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "rotor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for combustion problems: exhaust temperature spread, flame-out. Common cause: nozzle fouling, liner cracks.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "combustors",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hot-gas-path damage: borescope findings. Common cause: over-firing, coating loss.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "stator_vanes",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which thermodynamic cycle does a gas turbine follow?",
+     "options": [
+      "Rankine",
+      "Brayton",
+      "Otto",
+      "Diesel"
+     ],
+     "answer": 1,
+     "explanation": "Compression–heat addition–expansion.",
+     "level": "basic"
+    },
+    {
+     "question": "About how much of the turbine work drives the compressor?",
+     "options": [
+      "5 %",
+      "50–60 %",
+      "100 %",
+      "None"
+     ],
+     "answer": 1,
+     "explanation": "Back-work ratio is high.",
+     "level": "basic"
+    },
+    {
+     "question": "On a hot day, gas turbine output…",
+     "options": [
+      "Rises",
+      "Falls",
+      "Is unchanged",
+      "Doubles"
+     ],
+     "answer": 1,
+     "explanation": "Lower air density.",
+     "level": "basic"
+    },
+    {
+     "question": "Combined cycle uses the exhaust to…",
+     "options": [
+      "Heat the inlet air",
+      "Raise steam for a steam turbine",
+      "Cool the blades",
+      "Drive the starter"
+     ],
+     "answer": 1,
+     "explanation": "HRSG + steam turbine.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Encloses the compressor, combustion section and turbine.\"",
+     "options": [
+      "Exhaust Diffuser & Collector",
+      "Compressor, Combustor & Turbine Casings",
+      "Combustion Cans (6) with Fuel Nozzles",
+      "Rotor: Compressor & Turbine Blading on a Single Shaft"
+     ],
+     "answer": 1,
+     "explanation": "Compressor, Combustor & Turbine Casings: Encloses the compressor, combustion section and turbine.",
+     "level": "basic",
+     "part": "casing",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Brings filtered air smoothly into the compressor.\"",
+     "options": [
+      "Exhaust Diffuser & Collector",
+      "Combustion Cans (6) with Fuel Nozzles",
+      "Air Inlet Bellmouth",
+      "Rotor: Compressor & Turbine Blading on a Single Shaft"
+     ],
+     "answer": 2,
+     "explanation": "Air Inlet Bellmouth: Brings filtered air smoothly into the compressor.",
+     "level": "basic",
+     "part": "inlet",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Compresses air and extracts power from the hot gas.\"",
+     "options": [
+      "Rotor: Compressor & Turbine Blading on a Single Shaft",
+      "Flame Zone",
+      "Compressor Stator Vanes & Turbine Nozzle Guide Vanes",
+      "Compressor, Combustor & Turbine Casings"
+     ],
+     "answer": 0,
+     "explanation": "Rotor: Compressor & Turbine Blading on a Single Shaft: Compresses air and extracts power from the hot gas.",
+     "level": "basic",
+     "part": "rotor",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,633 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "roller_crusher",
+ "no": 131,
+ "title": "Roller Crusher",
+ "model_title": "Double Roll Crusher (Toothed Rolls, Spring Relief)",
+ "category": "9 · Material Handling & Heavy Mechanical Equipment",
+ "phase": 7,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A double roll crusher has two rolls turning towards each other. Material is drawn into the gap (nip) between them and crushed by compression and, with toothed rolls, by shearing. One roll is held by springs so it can move back and let uncrushable objects through. The gap between the rolls sets the product size, and fines are low.",
+   "applications": [
+    "Coal and coke crushing",
+    "Secondary crushing of soft-to-medium ores, salt, limestone",
+    "Producing a product with few fines"
+   ],
+   "key_points": [
+    "Compression (and shear) between rolls",
+    "Gap sets product size",
+    "Spring relief protects against tramp",
+    "Low fines; reduction ratio about 3–4 : 1 for smooth rolls"
+   ],
+   "classification": {
+    "family": "Crusher (compression)",
+    "type": "Double toothed roll crusher"
+   },
+   "hi_family": "material_handling",
+   "summary": "A roll crusher nips material between two counter-rotating rolls. Teeth grip and break it as it is drawn down through the gap, which sets the product size. One roll is spring-loaded so uncrushable tramp material can pass without damage."
+  },
+  "model_3d": {
+   "asset": "glb/roller_crusher.glb",
+   "metadata": "meta/roller_crusher.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6084,
+   "parts": 8
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Material from the feed hopper falls onto the rolls.",
+    "The two rolls turn towards each other and nip the lumps.",
+    "Lumps are crushed in the gap; the floating roll is held by springs."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Material from the feed hopper falls onto the rolls.",
+     "part": "feed_hopper",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The two rolls turn towards each other and nip the lumps.",
+     "part": "roll_1",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Lumps are crushed in the gap; the floating roll is held by springs.",
+     "part": "relief_springs",
+     "cut": true,
+     "operate": true,
+     "overlay": "wear",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Product falls from the bottom of the gap.",
+     "part": "roll_2",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Nip condition: a lump is gripped only if the nip angle is below twice the friction angle; bigger rolls nip bigger lumps for the same gap."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "roller_crusher_flow.glb",
+   "tracers_in_model": true,
+   "other_overlays": {
+    "wear": {
+     "file": "roller_crusher_wear.glb",
+     "title": "Roll wear pattern",
+     "description": "Feed tends to concentrate at the centre of the rolls, so the teeth wear fastest there (purple) and the rolls become \"hollow\" — the gap opens in the middle and the product coarsens. Spreading the feed across the full width (feeder width, chute design) and rebuilding or re-profiling the teeth keeps the gap even.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/roller_crusher.json#components",
+   "key_components": "Toothed rolls, relief springs, frame, hopper",
+   "parts": [
+    {
+     "id": "roll_1",
+     "name": "Fixed Roll",
+     "info_ref": "rc_roll",
+     "function": "Crush material in the nip.",
+     "material": "Manganese/alloy steel."
+    },
+    {
+     "id": "roll_2",
+     "name": "Floating Roll (spring-loaded)",
+     "info_ref": "rc_roll",
+     "function": "Crush material in the nip.",
+     "material": "Manganese/alloy steel."
+    },
+    {
+     "id": "frame",
+     "name": "Frame with Bearing Housings",
+     "info_ref": "rc_frame",
+     "function": "Frame & bearings.",
+     "material": "Steel."
+    },
+    {
+     "id": "relief_springs",
+     "name": "Relief Springs (let tramp metal pass)",
+     "info_ref": "rc_springs",
+     "function": "Allow the roll to retreat for tramp metal.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed_hopper",
+     "name": "Feed Hopper",
+     "info_ref": "rc_hopper",
+     "function": "Feed hopper.",
+     "material": "Steel."
+    },
+    {
+     "id": "drive",
+     "name": "Drive (motor, gears/belts)",
+     "info_ref": "rc_drive",
+     "function": "Drive.",
+     "material": "—"
+    },
+    {
+     "id": "stand",
+     "name": "Support Stand",
+     "info_ref": "rc_frame",
+     "function": "Frame & bearings.",
+     "material": "Steel."
+    },
+    {
+     "id": "rocks",
+     "name": "Material Nipped Between the Rolls",
+     "info_ref": "flow_tracers",
+     "function": "Animated markers that show the direction and path of flow (visual aid only, not a physical part).",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Roll ~ 0.4 – 1.5 m diameter, 0.3 – 2 m wide",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "~ 10 – 300",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "~ 50 – 300",
+     "unit": "rpm"
+    },
+    "capacity": {
+     "typical_range": "~ 10 – 1000",
+     "unit": "t/h"
+    }
+   },
+   "additional": {},
+   "selection_notes": [
+    "Choose roll diameter from the largest feed lump and gap (nip condition); toothed rolls for coal and softer material."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "material_and_bulk_density": null,
+     "speed": null,
+     "power_kW": null,
+     "lump_size_or_load": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / duty specification"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)",
+    "Manufacturer roll crusher data"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Mount on a massive reinforced-concrete foundation or steel structure designed for the crusher's dynamic loads (maker's load data); use anti-vibration mounts where specified.",
+    "Allow crane access and lay-down space for liner and wear-part changes."
+   ],
+   "alignment": [
+    "Align motor and crusher sheaves or coupling; set V-belt tension to the maker's figure.",
+    "Set the closed-side setting (CSS) or gap with the maker's gauge/lead-ball method."
+   ],
+   "piping": [
+    "Feed with a controlled feeder (choke or regulated feed as designed); avoid segregated or one-sided feed.",
+    "Fit a tramp-metal magnet or metal detector ahead of the crusher and dust extraction at transfer points.",
+    "Lubrication system: connect oil supply/return, cooler and filter; check flow and pressure switches."
+   ],
+   "commissioning": [
+    "Check lubrication flows and temperatures before starting; run empty to check direction, vibration and current.",
+    "Introduce feed gradually; measure product size and adjust the setting; record power draw as a baseline."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check gap, spring tension and roll surface.",
+     "part": "relief_springs",
+     "interval": "daily"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure roll wear across the width.",
+     "part": "roll_1",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Rebuild teeth/shell and replace bearings.",
+     "part": "roll_2"
+    }
+   ],
+   "lubrication": [
+    "Roll bearings and drive gears: lubricate to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Hollow (uneven) roll wear",
+     "category": "wear",
+     "symptoms": [
+      "Gap opens in the centre, product coarse"
+     ],
+     "causes": [
+      "Feed concentrated at the centre"
+     ],
+     "remedies": [
+      "Spread feed; re-profile rolls"
+     ],
+     "part": "roll_1"
+    },
+    {
+     "problem": "Spring fatigue",
+     "category": "performance",
+     "symptoms": [
+      "Gap opens under load"
+     ],
+     "causes": [
+      "Fatigue, wrong pre-load"
+     ],
+     "remedies": [
+      "Replace springs, re-set pre-load"
+     ],
+     "part": "relief_springs"
+    }
+   ],
+   "safety": [
+    "Guard the in-running nip; lock out before clearing; never feed by hand."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Roller Crusher — Introduction",
+    "type": "in_app_tour",
+    "model": "roller_crusher.glb",
+    "duration_s": 51.2,
+    "script": [
+     {
+      "narration": "This module introduces the Roller Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A double roll crusher has two rolls turning towards each other.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material is drawn into the gap (nip) between them and crushed by compression and, with toothed rolls, by shearing.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "One roll is held by springs so it can move back and let uncrushable objects through.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include coal and coke crushing; secondary crushing of soft-to-medium ores, salt, limestone; producing a product with few fines.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Fixed Roll, Floating Roll (spring-loaded), Frame with Bearing Housings.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Roller Crusher — Operation",
+    "type": "in_app_tour",
+    "model": "roller_crusher.glb",
+    "duration_s": 39.5,
+    "script": [
+     {
+      "narration": "How the Roller Crusher works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Material from the feed hopper falls onto the rolls.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed_hopper",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The two rolls turn towards each other and nip the lumps.",
+      "duration_s": 4.6,
+      "action": {
+       "highlight": "roll_1",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Lumps are crushed in the gap; the floating roll is held by springs.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "relief_springs",
+       "cut": true,
+       "operate": true,
+       "overlay": "wear",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Product falls from the bottom of the gap.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "roll_2",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "Feed tends to concentrate at the centre of the rolls, so the teeth wear fastest there (purple) and the rolls become \"hollow\" — the gap opens in the middle and the product coarsens.",
+      "duration_s": 13.3,
+      "action": {
+       "overlay": "wear",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Roller Crusher — Maintenance",
+    "type": "in_app_tour",
+    "model": "roller_crusher.glb",
+    "duration_s": 36.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Roller Crusher.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check gap, spring tension and roll surface.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "relief_springs",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure roll wear across the width.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "roll_1",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rebuild teeth/shell and replace bearings.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "roll_2",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hollow (uneven) roll wear: gap opens in the centre, product coarse. Common cause: feed concentrated at the centre.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "roll_1",
+       "view": "part",
+       "cut": true,
+       "overlay": "wear"
+      }
+     },
+     {
+      "narration": "Watch for spring fatigue: gap opens under load. Common cause: fatigue, wrong pre-load.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "relief_springs",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is one roll spring-loaded?",
+     "options": [
+      "To let tramp metal pass without damage",
+      "To make it spin faster",
+      "To heat the roll",
+      "For alignment only"
+     ],
+     "answer": 0,
+     "explanation": "Tramp relief.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets product size?",
+     "options": [
+      "Gap between the rolls",
+      "Hopper volume",
+      "Spring colour",
+      "Motor speed only"
+     ],
+     "answer": 0,
+     "explanation": "Gap.",
+     "level": "basic"
+    },
+    {
+     "question": "An advantage of roll crushers is…",
+     "options": [
+      "Low fines production",
+      "Very high reduction ratio",
+      "No wear",
+      "No drive needed"
+     ],
+     "answer": 0,
+     "explanation": "Single-pass compression, little re-crushing.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Crush material in the nip.\"",
+     "options": [
+      "Relief Springs (let tramp metal pass)",
+      "Feed Hopper",
+      "Drive (motor, gears/belts)",
+      "Fixed Roll"
+     ],
+     "answer": 3,
+     "explanation": "Fixed Roll: Crush material in the nip.",
+     "level": "basic",
+     "part": "roll_1",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Frame & bearings.\"",
+     "options": [
+      "Fixed Roll",
+      "Relief Springs (let tramp metal pass)",
+      "Frame with Bearing Housings",
+      "Feed Hopper"
+     ],
+     "answer": 2,
+     "explanation": "Frame with Bearing Housings: Frame & bearings.",
+     "level": "basic",
+     "part": "frame",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Allow the roll to retreat for tramp metal.\"",
+     "options": [
+      "Relief Springs (let tramp metal pass)",
+      "Drive (motor, gears/belts)",
+      "Fixed Roll",
+      "Frame with Bearing Housings"
+     ],
+     "answer": 0,
+     "explanation": "Relief Springs (let tramp metal pass): Allow the roll to retreat for tramp metal.",
+     "level": "basic",
+     "part": "relief_springs",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

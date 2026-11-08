@@ -1,0 +1,753 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "variable_frequency_drive",
+ "no": 84,
+ "title": "Variable Frequency Drive (VFD)",
+ "model_title": "Variable Frequency Drive (VFD) — 6-Pulse Rectifier, DC Link, IGBT Inverter",
+ "category": "7 · Rotating Equipment – Additional Machinery",
+ "phase": 5,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "A variable frequency drive controls an AC motor's speed by changing the frequency and voltage it supplies. A rectifier makes DC, a DC link smooths it and an IGBT inverter switches it with pulse-width modulation (PWM) to synthesise AC of any frequency.",
+   "applications": [
+    "Pumps and fans (energy saving)",
+    "Conveyors and process lines",
+    "Compressors",
+    "Cranes and hoists (with braking)"
+   ],
+   "key_points": [
+    "Speed ≈ 120·f / poles",
+    "Energy: P ∝ N³ for pumps/fans",
+    "Harmonics and EMC need attention",
+    "Soft start and controlled stop built in"
+   ],
+   "classification": {
+    "family": "Power electronic motor drive",
+    "type": "Voltage-source inverter, 6-pulse diode front end, IGBT PWM"
+   },
+   "hi_family": "rotating_machinery",
+   "summary": "A variable frequency drive (VFD, inverter) controls the speed of an AC motor by changing the frequency and voltage it supplies. The rectifier turns mains AC into DC, the DC link capacitors smooth it, and the IGBT inverter switches the DC rapidly (PWM) to build a new AC waveform of any frequency. Running pumps and fans at reduced speed instead of throttling saves a lot of energy (affinity laws: power ∝ speed³)."
+  },
+  "model_3d": {
+   "asset": "glb/variable_frequency_drive.glb",
+   "metadata": "meta/variable_frequency_drive.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 6278,
+   "parts": 14
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "Mains AC passes the line reactor into the rectifier, which turns it into DC.",
+    "The DC link capacitors smooth the DC voltage.",
+    "IGBTs switch the DC thousands of times per second (PWM) to build a sine-like AC of the chosen frequency."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 2.0,
+   "steps": [
+    {
+     "text": "Mains AC passes the line reactor into the rectifier, which turns it into DC.",
+     "part": "rectifier",
+     "cut": true,
+     "operate": true,
+     "overlay": "waveforms",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The DC link capacitors smooth the DC voltage.",
+     "part": "dc_bus",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "IGBTs switch the DC thousands of times per second (PWM) to build a sine-like AC of the chosen frequency.",
+     "part": "inverter",
+     "cut": true,
+     "operate": true,
+     "overlay": "waveforms",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The motor speed follows the output frequency — watch the motor ramp up and down.",
+     "part": "motor_rotor",
+     "cut": true,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The control board sets speed, ramps and protection; the fan cools the heatsink.",
+     "part": "control",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Constant V/f (or vector control) up to base speed; field weakening above. Pump/fan power falls with the cube of speed."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "variable_frequency_drive_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "waveforms": {
+     "file": "variable_frequency_drive_waveforms.glb",
+     "title": "Waveforms: AC → DC → PWM → motor",
+     "description": "The rectifier turns fixed-frequency AC into DC; the capacitors smooth it. The IGBTs switch the DC on and off thousands of times per second (PWM) so the average voltage follows a sine wave of any chosen frequency. Motor speed ≈ 120 × f / poles, so changing f changes speed.",
+     "render": "normal",
+     "annotations": [
+      {
+       "text": "Mains AC: fixed 50/60 Hz",
+       "anchor": [
+        -0.45,
+        2.21,
+        0.25
+       ]
+      },
+      {
+       "text": "DC link (smoothed)",
+       "anchor": [
+        -0.45,
+        2.03,
+        0.25
+       ]
+      },
+      {
+       "text": "PWM pulses",
+       "anchor": [
+        -0.45,
+        1.85,
+        0.25
+       ]
+      },
+      {
+       "text": "Motor current at set frequency",
+       "anchor": [
+        -0.45,
+        1.67,
+        0.25
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "source": "meta/variable_frequency_drive.json#components",
+   "key_components": "Rectifier, DC bus capacitors, IGBT inverter, heatsink & fan, control board",
+   "parts": [
+    {
+     "id": "enclosure",
+     "name": "Drive Enclosure (IP-rated cabinet)",
+     "info_ref": "vfd_enclosure",
+     "function": "Protects the electronics and guides cooling air.",
+     "material": "Steel."
+    },
+    {
+     "id": "door",
+     "name": "Front Door (hidden in cutaway)",
+     "info_ref": "vfd_enclosure",
+     "function": "Protects the electronics and guides cooling air.",
+     "material": "Steel."
+    },
+    {
+     "id": "line_reactor",
+     "name": "Input Line Reactor (choke) — limits harmonics & inrush",
+     "info_ref": "vfd_reactor",
+     "function": "Reduces line harmonics and protects against surges.",
+     "material": "Steel laminations, copper."
+    },
+    {
+     "id": "rectifier",
+     "name": "Rectifier Module (6 diodes: AC → DC)",
+     "info_ref": "vfd_rectifier",
+     "function": "Converts AC to DC.",
+     "material": "Silicon on ceramic."
+    },
+    {
+     "id": "dc_bus",
+     "name": "DC Link: Capacitor Bank & Bus Bars",
+     "info_ref": "vfd_dc_link",
+     "function": "Stores energy and smooths the DC voltage.",
+     "material": "Aluminium electrolytic, copper."
+    },
+    {
+     "id": "inverter",
+     "name": "IGBT Inverter Modules (DC → variable-frequency AC) on Heatsink",
+     "info_ref": "vfd_inverter",
+     "function": "Switches DC to make variable-frequency AC.",
+     "material": "Silicon, copper, aluminium."
+    },
+    {
+     "id": "cooling_fan",
+     "name": "Heatsink Cooling Fan",
+     "info_ref": "vfd_fan",
+     "function": "Cools the heatsink.",
+     "material": "Plastic."
+    },
+    {
+     "id": "control",
+     "name": "Control Board (PWM modulator, protection) & Keypad",
+     "info_ref": "vfd_control",
+     "function": "Generates PWM, controls speed/torque, protects motor and drive.",
+     "material": "Electronics."
+    },
+    {
+     "id": "terminals",
+     "name": "Line (L1–L3) & Motor (U–V–W) Terminals",
+     "info_ref": "vfd_terminals",
+     "function": "Connect mains and motor.",
+     "material": "Copper."
+    },
+    {
+     "id": "motor_cable",
+     "name": "Screened Motor Cable",
+     "info_ref": "vfd_terminals",
+     "function": "Connect mains and motor.",
+     "material": "Copper."
+    },
+    {
+     "id": "motor_frame",
+     "name": "Motor (speed follows the VFD) – Frame",
+     "info_ref": "motor_frame_h",
+     "function": "Encloses the stator and supports the bearings; feet or flange mount the motor to the baseplate or pump.",
+     "material": "Cast iron or aluminium frame; steel fasteners."
+    },
+    {
+     "id": "motor_stator",
+     "name": "Motor (speed follows the VFD) – Stator & Windings",
+     "info_ref": "stator",
+     "function": "Produces the rotating magnetic field.",
+     "material": "Silicon electrical steel, copper magnet wire, Class F/H insulation (typical)."
+    },
+    {
+     "id": "motor_rotor",
+     "name": "Motor (speed follows the VFD) – Rotor, Shaft & Speed Marker Disc",
+     "info_ref": "rotor",
+     "function": "Converts the rotating field into shaft torque (squirrel-cage induction rotor).",
+     "material": "Electrical steel, die-cast aluminium or copper."
+    },
+    {
+     "id": "plinth",
+     "name": "Plinth",
+     "info_ref": "vfd_enclosure",
+     "function": "Protects the electronics and guides cooling air.",
+     "material": "Steel."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Typical published range for this design class (not a rating of the 3-D model or of any specific product). Verify against the selected manufacturer datasheet and performance curve; fill reference_model when a specific product is chosen.",
+   "status": "to be verified",
+   "parameters": {
+    "size": {
+     "typical_range": "Frames 0.2 kW – several MW",
+     "unit": ""
+    },
+    "power_rating": {
+     "typical_range": "0.2 – 10 000+",
+     "unit": "kW"
+    },
+    "speed": {
+     "typical_range": "Output 0 – 60/120 Hz (application dependent)",
+     "unit": "Hz"
+    },
+    "capacity": {
+     "typical_range": "Rated output current (A) per frame",
+     "unit": ""
+    }
+   },
+   "additional": {
+    "efficiency": {
+     "typical_range": "~ 96 – 98",
+     "unit": "%"
+    }
+   },
+   "selection_notes": [],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "capacity": null,
+     "pressure_or_head": null,
+     "speed_rpm": null,
+     "power_kW": null,
+     "efficiency_pct": null
+    },
+    "status": "empty — fill from the selected manufacturer datasheet / test certificate"
+   },
+   "sources": [
+    "Hydraulic Institute — ANSI/HI pump standards and Pump Types guidance",
+    "KSB Pump Lexicon / KSB Centrifugal Pump Design",
+    "US DOE — Improving Pumping System Performance: A Sourcebook for Industry",
+    "Karassik et al., Pump Handbook (4th ed.)",
+    "Manufacturer catalogue envelopes (generic; to be verified)"
+   ]
+  },
+  "installation": {
+   "foundation": [
+    "Install on a level plinth or wall in a clean, dry, ventilated room within the rated ambient temperature."
+   ],
+   "alignment": [
+    "Keep the specified clearances above and below for cooling air; mount vertically as the maker requires."
+   ],
+   "piping": [
+    "Cabling: size cables for current and voltage drop; use screened (EMC) motor cable where required and bond the screen 360° at both ends.",
+    "Segregate power and control cables; fit the correct glands to keep the IP rating."
+   ],
+   "commissioning": [
+    "Check supply voltage, earthing and insulation resistance of the motor and cables before energising.",
+    "Enter motor nameplate data and protection settings; run an identification/auto-tune if available.",
+    "Check direction of rotation and record currents."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Check fan and heatsink temperature; read fault log.",
+     "part": "cooling_fan",
+     "interval": "monthly"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Clean filters and heatsink; check terminal torque.",
+     "part": "enclosure",
+     "interval": "6–12 months"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Replace cooling fans and DC capacitors (end of life).",
+     "part": "dc_bus",
+     "interval": "~ 5–10 years"
+    }
+   ],
+   "lubrication": [
+    "No lubrication; fan bearings are sealed."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Overcurrent / overvoltage trips",
+     "category": "performance",
+     "symptoms": [
+      "Drive trips"
+     ],
+     "causes": [
+      "Too-short ramps, motor fault, regenerative load"
+     ],
+     "remedies": [
+      "Lengthen ramps; braking resistor"
+     ],
+     "part": "inverter"
+    },
+    {
+     "problem": "Overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Over-temperature trip"
+     ],
+     "causes": [
+      "Blocked filters, failed fan, high ambient"
+     ],
+     "remedies": [
+      "Clean, replace fan"
+     ],
+     "part": "cooling_fan"
+    },
+    {
+     "problem": "DC-link capacitor failure",
+     "category": "performance",
+     "symptoms": [
+      "Ripple, bus faults"
+     ],
+     "causes": [
+      "Age, heat"
+     ],
+     "remedies": [
+      "Replace capacitors"
+     ],
+     "part": "dc_bus"
+    }
+   ],
+   "safety": []
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Variable Frequency Drive (VFD) — Introduction",
+    "type": "in_app_tour",
+    "model": "variable_frequency_drive.glb",
+    "duration_s": 48.6,
+    "script": [
+     {
+      "narration": "This module introduces the Variable Frequency Drive (VFD).",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "A variable frequency drive controls an AC motor's speed by changing the frequency and voltage it supplies.",
+      "duration_s": 7.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A rectifier makes DC, a DC link smooths it and an IGBT inverter switches it with pulse-width modulation (PWM) to synthesise AC of any frequency.",
+      "duration_s": 10.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include pumps and fans (energy saving); conveyors and process lines; compressors; cranes and hoists (with braking).",
+      "duration_s": 7.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Motor (speed follows the VFD) – Rotor, Shaft & Speed Marker Disc.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Variable Frequency Drive (VFD) — Operation",
+    "type": "in_app_tour",
+    "model": "variable_frequency_drive.glb",
+    "duration_s": 42.5,
+    "script": [
+     {
+      "narration": "How the Variable Frequency Drive (VFD) works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "Mains AC passes the line reactor into the rectifier, which turns it into DC.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "rectifier",
+       "cut": true,
+       "operate": true,
+       "overlay": "waveforms",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The DC link capacitors smooth the DC voltage.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dc_bus",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "IGBTs switch the DC thousands of times per second (PWM) to build a sine-like AC of the chosen frequency.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "inverter",
+       "cut": true,
+       "operate": true,
+       "overlay": "waveforms",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The motor speed follows the output frequency — watch the motor ramp up and down.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "motor_rotor",
+       "cut": true,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The control board sets speed, ramps and protection; the fan cools the heatsink.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "control",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The flow overlay traces the liquid from suction to discharge.",
+      "duration_s": 4.2,
+      "action": {
+       "overlay": "flow",
+       "cut": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The rectifier turns fixed-frequency AC into DC; the capacitors smooth it.",
+      "duration_s": 5.0,
+      "action": {
+       "overlay": "waveforms",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Variable Frequency Drive (VFD) — Maintenance",
+    "type": "in_app_tour",
+    "model": "variable_frequency_drive.glb",
+    "duration_s": 40.1,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Variable Frequency Drive (VFD).",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Check fan and heatsink temperature; read fault log.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "cooling_fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean filters and heatsink; check terminal torque.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "enclosure",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Replace cooling fans and DC capacitors (end of life).",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "dc_bus",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overcurrent / overvoltage trips: drive trips. Common cause: too-short ramps, motor fault, regenerative load.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "inverter",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for overheating: over-temperature trip. Common cause: blocked filters, failed fan, high ambient.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "cooling_fan",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for dc-link capacitor failure: ripple, bus faults. Common cause: age, heat.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "dc_bus",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "A pump slowed to 80 % speed by a VFD uses about…",
+     "options": [
+      "80 % power",
+      "64 % power",
+      "51 % power",
+      "100 % power"
+     ],
+     "answer": 2,
+     "explanation": "Cube law.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the DC link do?",
+     "options": [
+      "Converts DC to AC",
+      "Stores energy and smooths the rectified voltage",
+      "Measures speed",
+      "Cools the IGBTs"
+     ],
+     "answer": 1,
+     "explanation": "Capacitor bank.",
+     "level": "basic"
+    },
+    {
+     "question": "PWM means the output voltage is made of…",
+     "options": [
+      "Pure sine from a transformer",
+      "Fast on/off pulses whose average follows a sine",
+      "DC only",
+      "Random noise"
+     ],
+     "answer": 1,
+     "explanation": "Pulse-width modulation.",
+     "level": "basic"
+    },
+    {
+     "question": "To run a 4-pole motor at about 750 rpm, the VFD outputs roughly…",
+     "options": [
+      "12.5 Hz",
+      "25 Hz",
+      "50 Hz",
+      "100 Hz"
+     ],
+     "answer": 1,
+     "explanation": "n = 120 f / p → f = 25 Hz.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Protects the electronics and guides cooling air.\"",
+     "options": [
+      "Heatsink Cooling Fan",
+      "Input Line Reactor (choke) — limits harmonics & inrush",
+      "Drive Enclosure (IP-rated cabinet)",
+      "Screened Motor Cable"
+     ],
+     "answer": 2,
+     "explanation": "Drive Enclosure (IP-rated cabinet): Protects the electronics and guides cooling air.",
+     "level": "basic",
+     "part": "enclosure",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Reduces line harmonics and protects against surges.\"",
+     "options": [
+      "Screened Motor Cable",
+      "Input Line Reactor (choke) — limits harmonics & inrush",
+      "DC Link: Capacitor Bank & Bus Bars",
+      "Motor (speed follows the VFD) – Frame"
+     ],
+     "answer": 1,
+     "explanation": "Input Line Reactor (choke) — limits harmonics & inrush: Reduces line harmonics and protects against surges.",
+     "level": "basic",
+     "part": "line_reactor",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Converts AC to DC.\"",
+     "options": [
+      "Motor (speed follows the VFD) – Rotor, Shaft & Speed Marker Disc",
+      "Rectifier Module (6 diodes: AC → DC)",
+      "Control Board (PWM modulator, protection) & Keypad",
+      "Plinth"
+     ],
+     "answer": 1,
+     "explanation": "Rectifier Module (6 diodes: AC → DC): Converts AC to DC.",
+     "level": "basic",
+     "part": "rectifier",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}
