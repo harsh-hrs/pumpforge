@@ -348,7 +348,7 @@ Engineering parameters are **typical published ranges for the design class**, ma
 Per-model triangle counts and file sizes are listed in [docs/ANDROID_INTEGRATION.md](docs/ANDROID_INTEGRATION.md#performance).
 
 ## Learning player (v1.1)
-`viewer/library.html` is the full player and the source of the Android app. On top of orbit / tap-to-inspect / explode / cutaway / operate it adds:
+`viewer/library.html` is the full web player and the reference for the native Android app. On top of orbit / tap-to-inspect / explode / cutaway / operate it adds:
 
 | Feature | What it does |
 |---|---|
@@ -360,8 +360,15 @@ Per-model triangle counts and file sizes are listed in [docs/ANDROID_INTEGRATION
 
 Progress, bookmarks, notes and datasheets are stored on the device only.
 
-## Android app (APK)
-`python3 android/build_apk.py --version-name 1.8.0 --version-code 9` builds `android/build/PumpForge-<version>.apk`. It is an offline app that contains all 282 modules, overlays, tours (with text-to-speech), quizzes and the player features. See [android/README.md](android/README.md).
+## Android app (APK) — fully native since v2.0
+`python3 native/tools/build_apk.py --version-name 2.1.0 --version-code 13` builds `native/build/PumpForge-2.1.0-native.apk` (≈ 22.6 MB).
+The app is **fully native**: C++17 + OpenGL ES 3.0 on `android.app.NativeActivity`, with no WebView, no JavaScript and no Java code.
+It contains all 282 modules in a compact native model format (16-bit positions, 8-bit normals; 18 MB instead of 56 MB),
+every lesson section, quiz, tour (with text-to-speech) and engineering tool of the web library. Phones use a stacked
+layout and tablets a side-by-side layout, with light and dark themes. v2.1 redesigns the interface: Home, Catalog,
+3D Viewer, Bookmarks and More screens with bottom navigation, live 3-D thumbnails, Learning Paths, Compare and Settings. See [native/README.md](native/README.md).
+An Android Studio (Gradle + CMake/NDK) project for the same sources is in [native/android-studio](native/android-studio/README.md).
+The earlier WebView app (v1.x) is still buildable with `python3 android/build_apk.py` ([android/README.md](android/README.md)).
 
 ## Repository layout
 ```
@@ -394,7 +401,8 @@ catalog.json             282 modules (with departments): family, phase, EQ numbe
 docs/MODEL_SPEC.md       file format, node naming, cutaway/explode/animation contract
 docs/ANDROID_INTEGRATION.md  how to use the models in Android (SceneView/Filament)
 PROGRESS.md              status and continuation checklist
-android/                 offline Android app (WebView shell, smali sources, build_apk.py)
+android/                 v1.x offline Android app (WebView shell, smali sources, build_apk.py) + signing key
+native/                  v2.x fully native Android app: C++ sources, compact model converter, build tools, Android Studio project
 ```
 
 ## Build

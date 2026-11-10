@@ -81,6 +81,28 @@ All requested sections (EQ-118 … EQ-360) are complete. Instrumentation & Contr
 
 Phases follow the requested roadmap. Phase 1 has 12 core modules, phase 2 has 12 intermediate modules, phase 3 holds the specialist and application modules, and phase 4 the valves & piping items (see `catalog.json`).
 
+## v2.0 — fully native Android app
+- `native/`: C++17 + OpenGL ES 3.0 app on NativeActivity (no WebView/JS/Java). Feature parity with `viewer/library.html`:
+  viewer (orbit/pinch, Operate, Cutaway, X-ray, Live flow, explode, overlays + labels, tap-to-inspect, isolate/hide, measure),
+  department library (search, bookmarks, progress), picker, 13 lesson sections in 7 tabs, How-it-works player, tours with TTS,
+  quizzes with best score, 50 calculators, datasheet (copy as JSON), notes, compare.
+- Models: `.pfm` (quantised, delta/byte-plane coded) — 18.2 MB zipped vs 55.6 MB `.glb`; converter verifies every file.
+- Verified with the desktop harness: all 282 modules swept (every tab, overlay, step, tour, inspector), calculators
+  byte-identical to the web JS, calculator order identical for all modules, screenshots compared with the web viewer.
+- Build: `python3 native/tools/build_apk.py --version-name 2.0.0 --version-code 12`; Android Studio: `native/android-studio`.
+
+## v2.1 — redesigned native interface
+- Navy/electric-blue design system with amber accents (dark default, light, follow system); bottom navigation
+  Home · Catalog · 3D Viewer (centre button) · Bookmarks · More. No features removed.
+- Home (live rotating hero model, stats, continue learning, categories, featured carousel, quick access); Catalog (search,
+  chips, department grid, module cards); Bookmarks (All / Recent / Progress); More with Learning Paths, Compare Models,
+  Engineering Calculators, Training & Tutorials, Settings (theme, narration, live flow, markers, reset), Help, About.
+- Viewer: header card, segment bar (3D View / Exploded / Cutaway / X-ray), stage rendered to an MSAA texture with side
+  buttons and full screen, How-it-works player on the model, numbered markers, pill tabs that stick while scrolling.
+- Live 3-D thumbnails rendered by the app (offscreen MSAA, one per frame, only visible cards, LRU 72); model picker search.
+- Verified: smoke script over every screen (phone 392 dp, tablet 1280 dp, dark + light), 282-module sweep, all three ABIs
+  pass the NDK symbol allow-list. Build: `python3 native/tools/build_apk.py --version-name 2.1.0 --version-code 13`.
+
 ## Open items needing data from you
 - **WPIL WVT-30-18:** fill `engineering_parameters.reference_model` in `content/rotodynamic_a.py` from the WPIL datasheet or GA drawing. If you want the geometry matched (stages, bowl diameter, column), the model can be re-proportioned in `pumps/vertical_turbine_pump.py`.
 - **Specific products for other modules:** add a `reference_model={...}` entry to the module's `params` dict and rebuild with `python3 build_content.py`.

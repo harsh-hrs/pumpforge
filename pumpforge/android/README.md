@@ -1,4 +1,7 @@
-# PumpForge Android app
+# PumpForge Android app (v1.x, WebView)
+
+> Since **v2.0** the Android app is fully native (C++ / OpenGL ES 3, no WebView): see [../native/README.md](../native/README.md).
+> This folder keeps the v1.x WebView build and the signing key that both builds use.
 
 An offline Android app containing the whole 282-module Industrial Engineering Equipment Library (v1.8: arranged & numbered by department; v1.7: mechanical components, safety & environmental; v1.6: water & utilities; v1.5: departments, alumina refinery; X-ray, live flow particles, How-it-works step player, search / bookmarks / progress, engineering tools).
 - A full-screen WebView loads the learning-library player and every model from the APK's own assets, served at `https://appassets.androidplatform.net/www/…`. No internet connection is needed.
