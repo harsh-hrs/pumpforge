@@ -438,7 +438,7 @@ static void module_card(App& a, ImDrawList* dl, int i, float cw, float ch) {
     card_bg(dl, p, q, px(16), held ? T.surface2 : T.surface);
     float ih = ch * 0.56f;
     thumb_tile(a, dl, i, ImVec2(p.x + px(6), p.y + px(6)), ImVec2(q.x - px(6), p.y + ih), px(12), true);
-    text_at(dl, a.f_monom, 11, ImVec2(p.x + px(14), p.y + px(12)), IM_COL32(255, 255, 255, 210), Str::f("#%d", m.no));
+    text_at(dl, a.f_monom, 11, ImVec2(p.x + px(14), p.y + px(12)), IM_COL32(255, 255, 255, 210), m.m2p ? Str(m.eq_id) : Str::f("#%d", m.no));
     const Store::Entry* e = a.store.find(m.id);
     bool starred = e && e->star;
     // bookmark toggle
@@ -472,9 +472,31 @@ void App::ui_catalog(float x, float y, float w, float h) {
         ImVec2 p = ImGui::GetCursorScreenPos();
         if (nav_stack.n) { ImGui::SetCursorScreenPos(p); if (round_icon("cback", IC_BACK, 40, T.surface2, T.ink, true)) back(); ImGui::SetCursorScreenPos(ImVec2(p.x + px(52), p.y)); }
         ImVec2 q = ImGui::GetCursorScreenPos();
+        int nlib = 0; for (const ModInfo& m : mods) nlib += !m.m2p;
         text_at(dl, f_bold, 30, q, T.ink, cat_dept >= 0 ? depts[cat_dept].name.c() : "Catalog");
-        text_at(dl, f_body, 14, ImVec2(q.x, q.y + px(40)), T.muted, cat_dept >= 0 ? Str::f("Department %d · %d models", cat_dept + 1, depts[cat_dept].modules).c() : Str::f("Explore %d 3D models", mods.n).c());
+        text_at(dl, f_body, 14, ImVec2(q.x, q.y + px(40)), T.muted, cat_dept >= 0 ? Str::f("Department %d · %d models", cat_dept + 1, depts[cat_dept].modules).c() : Str::f("Explore %d 3D models", nlib).c());
         ImGui::SetCursorScreenPos(ImVec2(p.x, p.y + px(70)));
+    }
+    // collection switch: Equipment Library | Mine to Port
+    if (areas.n && cat_dept < 0) {
+        indent_to(w, cw);
+        ImVec2 p = ImGui::GetCursorScreenPos(); float hh = px(44), sw = cw / 2;
+        dl->AddRectFilled(p, ImVec2(p.x + cw, p.y + hh), T.surface, px(14)); dl->AddRect(p, ImVec2(p.x + cw, p.y + hh), T.border, px(14), px(1));
+        const char* L[2] = {"Equipment Library", "Mine to Port"}; int I[2] = {IC_GRID, IC_FLOW};
+        for (int k = 0; k < 2; k++) {
+            ImGui::SetCursorScreenPos(ImVec2(p.x + sw * k, p.y)); ImGui::PushID(k);
+            if (ImGui::InvisibleButton("##coll", ImVec2(sw, hh)) && cat_coll != k) { cat_coll = k; m2p_area = -1; page_scroll_reset = 0; }
+            ImVec2 a0(p.x + sw * k + px(4), p.y + px(4)), a1(p.x + sw * (k + 1) - px(4), p.y + hh - px(4));
+            bool on = cat_coll == k;
+            if (on) grad_rect(dl, a0, a1, px(10), T.accent, T.accent2);
+            ImU32 fg = on ? T.accent_ink : T.ink;
+            float lw = text_size(on ? f_semi : f_med, 13.5f, L[k]).x + px(24), sx = (a0.x + a1.x - lw) / 2;
+            draw_icon(dl, I[k], ImVec2(sx + px(8), (a0.y + a1.y) / 2), px(15), fg);
+            text_at(dl, on ? f_semi : f_med, 13.5f, ImVec2(sx + px(22), (a0.y + a1.y) / 2 - px(9)), fg, L[k]);
+            ImGui::PopID();
+        }
+        ImGui::SetCursorScreenPos(ImVec2(p.x, p.y + hh)); spacer(12);
+        if (cat_coll == 1) { ui_m2p(x, y, w, cw); spacer(24); ImGui::End(); return; }
     }
     indent_to(w, cw);
     if (field("csearch", cat_query, "Search by name, EQ number, component…", cw, IC_SEARCH, 46)) begin_text(2, "", "Search equipment", cat_query, plat::TEXT);
@@ -491,7 +513,7 @@ void App::ui_catalog(float x, float y, float w, float h) {
     ImGui::BeginChild("##cchips", ImVec2(cw, px(38)), 0, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
     if (pill("All", cat_dept < 0 && !cat_saved, 0, "all")) { cat_dept = -1; cat_saved = false; }
     ImGui::SameLine(); if (pill("Saved", cat_saved, IC_BOOKMARK, "saved")) { cat_saved = !cat_saved; }
-    for (int d = 0; d < depts.n; d++) if (depts[d].modules) {
+    for (int d = 0; d < depts.n; d++) if (depts[d].modules && !depts[d].m2p) {
         ImGui::SameLine();
         ImGui::PushID(d);
         if (pill(depts[d].name, cat_dept == d, 0, "d")) cat_dept = cat_dept == d ? -1 : d;
@@ -510,6 +532,7 @@ void App::ui_catalog(float x, float y, float w, float h) {
         float bw = (cw - gap * (cols - 1)) / cols, bh = bw * 1.08f;
         int k = 0;
         for (int d = 0; d < depts.n; d++) {
+            if (depts[d].m2p) continue;
             if (k % cols == 0) indent_to(w, cw); else ImGui::SameLine(0, gap);
             ImGui::PushID(d);
             ImVec2 a = ImGui::GetCursorScreenPos();
@@ -540,6 +563,7 @@ void App::ui_catalog(float x, float y, float w, float h) {
         for (int i = 0; i < mods.n; i++) {
             const ModInfo& m = mods[i];
             if (cat_dept >= 0 && m.dept != cat_dept) continue;
+            if (m.m2p && cat_dept < 0 && !cat_saved && words.empty()) continue;
             if (cat_saved) { const Store::Entry* e = store.find(m.id); if (!(e && e->star)) continue; }
             if (!mod_match(m, words)) continue;
             if (m.dept != last_dept && cat_dept < 0) {
@@ -569,6 +593,166 @@ void App::ui_catalog(float x, float y, float w, float h) {
     }
     spacer(24);
     ImGui::End();
+}
+
+// ================================================================== Mine to Port (inside the Catalog page)
+static ImU32 area_col(int k, int which) {
+    static const int G[20] = {0, 0, 0, 3, 3, 5, 5, 6, 6, 7, 8, 8, 9, 9, 10, 10, 1, 2, 2, 4};   // process groups share a hue
+    return dept_color(G[k % 20], which);
+}
+
+void App::ui_m2p(float x, float y, float w, float cw) {
+    (void)x; (void)y;
+    ImDrawList* dl = ImGui::GetWindowDrawList();
+    const JV& R = m2p.root ? *m2p.root : JNULL;
+    int cols = g_wide ? (w / dp > 1200 ? 5 : 4) : 2;
+    float gap = px(12);
+    if (m2p_area < 0 || m2p_area >= areas.n) {
+        m2p_area = -1;
+        // ---- hero: whole plant
+        indent_to(w, cw);
+        ImVec2 a = ImGui::GetCursorScreenPos(); float hh = g_wide ? px(190) : px(170);
+        int site = R["site_model"].truthy() ? mod_index(R["site_model"].str()) : -1;
+        bool click = ImGui::InvisibleButton("##site", ImVec2(cw, hh));
+        grad_rect(dl, a, ImVec2(a.x + cw, a.y + hh), px(18), T.dark ? IM_COL32(0x12, 0x3a, 0x8a, 255) : IM_COL32(0xdc, 0xe8, 0xff, 255), T.dark ? IM_COL32(0x0a, 0x18, 0x38, 255) : IM_COL32(0xf6, 0xf9, 0xff, 255));
+        dl->AddRect(a, ImVec2(a.x + cw, a.y + hh), T.border, px(18), px(1));
+        // process strip drawn as a stylised flow: mine → refinery → port
+        float sx0 = a.x + px(18), sy = a.y + hh - px(40), sx1 = a.x + cw - px(18);
+        dl->AddLine(ImVec2(sx0, sy), ImVec2(sx1, sy), T.dark ? IM_COL32(255, 255, 255, 60) : IM_COL32(0x1f, 0x56, 0xb3, 80), px(3));
+        for (int k = 0; k < areas.n; k++) {
+            float xx = sx0 + (sx1 - sx0) * k / fmaxf(1, areas.n - 1);
+            dl->AddCircleFilled(ImVec2(xx, sy), px(areas[k].modules ? 6 : 4), areas[k].modules ? T.amber : (T.dark ? IM_COL32(255, 255, 255, 110) : IM_COL32(0x1f, 0x56, 0xb3, 110)), 16);
+        }
+        ImU32 ink = T.dark ? IM_COL32_WHITE : T.ink;
+        text_at(dl, f_semi, 11.5f, ImVec2(a.x + px(18), a.y + px(16)), T.amber, "ALUMINA REFINERY · BAYER PROCESS");
+        text_at(dl, f_bold, 22, ImVec2(a.x + px(18), a.y + px(34)), ink, "Mine to Port");
+        text_at(dl, f_body, 13, ImVec2(a.x + px(18), a.y + px(66)), T.dark ? IM_COL32(255, 255, 255, 190) : T.muted, R["subtitle"].str(), cw - px(36));
+        Str lbl = site >= 0 ? Str("View the whole plant in 3D  ›") : Str("Whole-plant 3D view: built once all areas are modelled");
+        text_at(dl, f_semi, 13, ImVec2(a.x + px(18), sy - px(34)), site >= 0 ? T.amber : (T.dark ? IM_COL32(255, 255, 255, 150) : T.muted), lbl);
+        text_at(dl, f_med, 10.5f, ImVec2(sx0, sy + px(10)), ink, "Mine");
+        ImVec2 ps = text_size(f_med, 10.5f, "Port"); text_at(dl, f_med, 10.5f, ImVec2(sx1 - ps.x, sy + px(10)), ink, "Port");
+        if (click && site >= 0) open_module(site);
+        spacer(10);
+        // ---- progress line
+        int done = 0, nm = 0; for (const AreaInfo& ar : areas) { done += ar.modules > 0; nm += ar.modules; }
+        indent_to(w, cw);
+        { ImVec2 p = ImGui::GetCursorScreenPos();
+          text_at(dl, f_semi, 13, p, T.ink, Str::f("%d of %d areas modelled · %d detailed models", done, areas.n, nm));
+          progress(dl, ImVec2(p.x, p.y + px(24)), cw, px(6), (float)done / fmaxf(1, areas.n), T.amber, T.line);
+          ImGui::Dummy(ImVec2(cw, px(36))); }
+        // ---- areas in process order
+        indent_to(w, cw); section_header("Plant areas in process order", nullptr);
+        float bw = (cw - gap * (cols - 1)) / cols, bh = bw * 0.82f;
+        for (int k = 0; k < areas.n; k++) {
+            if (k % cols == 0) indent_to(w, cw); else ImGui::SameLine(0, gap);
+            ImGui::PushID(k);
+            ImVec2 p = ImGui::GetCursorScreenPos(), q(p.x + bw, p.y + bh);
+            bool c2 = ImGui::InvisibleButton("##ar", ImVec2(bw, bh));
+            bool has = areas[k].modules > 0;
+            grad_rect(dl, p, q, px(16), area_col(k, 0), area_col(k, 1));
+            dl->AddRect(p, q, (area_col(k, 2) & 0x00ffffff) | 0x50000000, px(16), px(1));
+            if (ImGui::IsItemActive()) dl->AddRectFilled(p, q, IM_COL32(255, 255, 255, 20), px(16));
+            int first = -1; for (int i = 0; i < mods.n; i++) if (mods[i].area_idx == k) { first = i; break; }
+            if (first >= 0) thumb_tile(*this, dl, first, ImVec2(p.x + bw * 0.32f, p.y + px(6)), ImVec2(q.x - px(6), p.y + bh * 0.58f), 0, false);
+            ImU32 tc = T.dark ? IM_COL32_WHITE : T.ink;
+            text_at(dl, f_monom, 11, ImVec2(p.x + px(12), p.y + px(12)), T.dark ? IM_COL32(255, 255, 255, 190) : ((area_col(k, 2) & 0x00ffffff) | 0xd0000000), areas[k].id);
+            text_at(dl, f_bold, 14, ImVec2(p.x + px(12), p.y + bh * 0.58f), tc, areas[k].name, bw - px(20));
+            Str sub = has ? Str::f("%d model%s  ›", areas[k].modules, areas[k].modules == 1 ? "" : "s") : Str("In development  ›");
+            text_at(dl, f_med, 11.5f, ImVec2(p.x + px(12), q.y - px(24)), has ? ((area_col(k, 2) & 0x00ffffff) | 0xff000000) : T.muted, sub);
+            if (c2) { m2p_area = k; page_scroll_reset = 0; }
+            ImGui::PopID();
+            if (k % cols == cols - 1) spacer(gap / dp);
+        }
+        if (areas.n % cols) spacer(gap / dp);
+        // ---- plant basis
+        spacer(6); indent_to(w, cw); section_header("Reference-plant basis", nullptr);
+        indent_to(w, cw);
+        ImGui::BeginChild("##m2pbasis", ImVec2(cw, 0), ImGuiChildFlags_AutoResizeY, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBackground);
+        card_begin("##bn");
+        para(R["basis_note"].str());
+        card_end();
+        int np = 0;
+        for (const JV& pr : R["plant"]) {
+            if (np++ >= 14) break;
+            ImGui::PushID(np);
+            card_begin("##pp");
+            text(f_semi, 13, T.muted, pr["parameter"].str());
+            text(f_med, 13.5f, T.ink, pr["value"].str());
+            card_end();
+            ImGui::PopID();
+        }
+        ImGui::EndChild();
+        return;
+    }
+    // ---- one plant area
+    const AreaInfo& ar = areas[m2p_area];
+    const JV& A = R["areas"][m2p_area];
+    indent_to(w, cw);
+    { ImVec2 p = ImGui::GetCursorScreenPos();
+      if (round_icon("aback", IC_BACK, 40, T.surface2, T.ink, true)) { m2p_area = -1; page_scroll_reset = 0; }
+      text_at(dl, f_monom, 12, ImVec2(p.x + px(52), p.y + px(2)), T.amber, Str::f("%s · AREA %d OF %d", ar.id.c(), m2p_area + 1, areas.n));
+      text_at(dl, f_bold, 20, ImVec2(p.x + px(52), p.y + px(18)), T.ink, ar.name, cw - px(52));
+      ImGui::SetCursorScreenPos(ImVec2(p.x, p.y + px(52))); }
+    // prev / next area
+    indent_to(w, cw);
+    { float bw2 = (cw - px(8)) / 2;
+      if (m2p_area > 0) { if (tool(Str::f("‹  %s", areas[m2p_area - 1].name.c()), false, bw2, "pa")) { m2p_area--; page_scroll_reset = 0; } }
+      else ImGui::Dummy(ImVec2(bw2, px(36)));
+      ImGui::SameLine(0, px(8));
+      if (m2p_area < areas.n - 1) { if (tool(Str::f("%s  ›", areas[m2p_area + 1].name.c()), false, bw2, "na")) { m2p_area++; page_scroll_reset = 0; } } }
+    spacer(10);
+    // equipment models
+    indent_to(w, cw); section_header(ar.modules ? "Detailed 3D models" : "Detailed 3D models — in development", nullptr);
+    if (ar.modules) {
+        float bw = (cw - gap * (cols - 1)) / cols, bh = bw * 1.2f;
+        int k = 0;
+        for (int i = 0; i < mods.n; i++) {
+            if (mods[i].area_idx != m2p_area) continue;
+            if (k % cols == 0) indent_to(w, cw); else ImGui::SameLine(0, gap);
+            module_card(*this, dl, i, bw, bh);
+            k++;
+            if (k % cols == 0) spacer(gap / dp);
+        }
+        if (k % cols) spacer(gap / dp);
+    }
+    indent_to(w, cw);
+    ImGui::BeginChild("##m2parea", ImVec2(cw, 0), ImGuiChildFlags_AutoResizeY, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBackground);
+    if (A["purpose"].truthy()) { h3("Purpose"); para(A["purpose"].str()); }
+    if (A["process_steps"].size()) {
+        h3("Process");
+        int n = 0;
+        for (const JV& st : A["process_steps"]) {
+            ImVec2 p = ImGui::GetCursorScreenPos();
+            dl = ImGui::GetWindowDrawList();
+            dl->AddCircleFilled(ImVec2(p.x + px(12), p.y + px(11)), px(11), T.chip, 20);
+            Str num = Str::f("%d", ++n); ImVec2 ts = text_size(f_bold, 11.5f, num);
+            text_at(dl, f_bold, 11.5f, ImVec2(p.x + px(12) - ts.x / 2, p.y + px(11) - ts.y / 2), T.chip_ink, num);
+            ImGui::Indent(px(32)); para(st.str()); ImGui::Unindent(px(32));
+            spacer(4);
+        }
+    } else if (A["process_description"].truthy()) { h3("Process"); para(A["process_description"].str()); }
+    if (A["streams"].size()) {
+        h3("Key streams");
+        int si = 0;
+        for (const JV& st : A["streams"]) {
+            ImGui::PushID(si++);
+            card_begin("##st");
+            text(f_semi, 13.5f, T.ink, st["name"].str());
+            if (st["from_to"].truthy()) text(f_body, 12.5f, T.muted, st["from_to"].str());
+            Str v = Str::f("%s", st["flow"].str());
+            if (st["temperature"].truthy()) v.addf(" · %s", st["temperature"].str());
+            if (st["pressure"].truthy()) v.addf(" · %s", st["pressure"].str());
+            text(f_med, 12.5f, T.ink, v);
+            if (st["composition"].truthy()) text(f_body, 12, T.muted, st["composition"].str());
+            card_end();
+            ImGui::PopID();
+        }
+    }
+    if (A["equipment_planned"].size()) { h3("Equipment in this area"); bullets(A["equipment_planned"]); }
+    if (A["interfaces"].size()) { h3("Interfaces"); bullets(A["interfaces"]); }
+    if (A["layout_notes"].truthy()) { h3("Layout"); para(A["layout_notes"].str()); }
+    spacer(8); muted(R["basis_note"].str(), 12);
+    ImGui::EndChild();
 }
 
 // ================================================================== Bookmarks

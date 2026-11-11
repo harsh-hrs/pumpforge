@@ -1,0 +1,993 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "m2p_hydraulic_excavator",
+ "no": 1002,
+ "title": "Hydraulic Backhoe Excavator (~200 t class)",
+ "model_title": "Hydraulic Backhoe Excavator (~200 t class, diesel)",
+ "category": "m2p_a01 · A01 · Mine",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The ~200 t diesel-hydraulic backhoe excavator is the primary loading unit of the bauxite pit. It sits on top of the bench, digs the friable gibbsitic ore (and blasted caprock) below or at track level with an ~11–12 m³ bucket, swings and loads ~90 t trucks in about five to six passes. High-precision GPS guidance shows the operator the ore/waste and grade-bin boundaries so that dilution is kept low.",
+   "applications": [
+    "Loading run-of-mine bauxite into ~90 t haul trucks",
+    "Selective mining along ore/waste and grade boundaries (GPS bucket guidance)",
+    "Loading blasted caprock and overburden for backfill"
+   ],
+   "key_points": [
+    "~200 t operating weight, ~11–12 m³ bucket, ~700 kW diesel",
+    "All motions hydraulic: boom, arm and bucket cylinders, swing and travel motors",
+    "Digs below its own track level (backhoe) — ideal for thin flat ore bodies",
+    "Truck spotted on the operator side at a short swing angle (~45–70°); double-side loading where possible",
+    "Stairway is interlocked: no swing or travel while it is lowered",
+    "Ground-engaging tools (teeth) are monitored — a lost tooth can wreck the sizer"
+   ],
+   "classification": {
+    "family": "Mining — load & haul",
+    "type": "Hydraulic backhoe excavator, ~200 t class, diesel"
+   },
+   "hi_family": "mine_to_port",
+   "summary": "The ~200 t diesel-hydraulic backhoe excavator is the primary loading unit in the bauxite pit. It digs the friable ore (and blasted caprock) with an ~11–12 m³ bucket, swings and loads ~90 t trucks in about five to six passes. Everything moves hydraulically: the diesel drives piston pumps; joysticks pilot the control valves that feed the boom, arm and bucket cylinders, swing motors and travel motors.",
+   "plant": {
+    "area": "A01",
+    "tag": "01-EX-001…003",
+    "qty": "3 (2 on ore, 1 on caprock/waste)",
+    "interfaces": [
+     "Loads 01-HT haul trucks",
+     "Works to grade-control polygons from the 01-RC drill programme"
+    ]
+   }
+  },
+  "model_3d": {
+   "asset": "glb/m2p_hydraulic_excavator.glb",
+   "metadata": "meta/m2p_hydraulic_excavator.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 17912,
+   "parts": 18
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": []
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 30.0,
+   "steps": [
+    {
+     "text": "The diesel drives several variable piston pumps; the joysticks pilot the control valves.",
+     "part": "power_module",
+     "cut": false,
+     "operate": false,
+     "overlay": "hydraulics",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At start-up, after the operator is in the cab, the access stairway is raised; the interlock then releases swing, travel and attachment motions. It stays up for the whole shift.",
+     "part": "access_stair",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The arm reaches out and the boom lowers to drive the teeth into the bench ahead of the machine; the cut is made downward and back toward the tracks, finishing on the design floor (GNSS shows the clay contact).",
+     "part": "boomcyl_barrel",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The arm cylinder crowds the arm in, dragging the teeth through the ore while the bucket cylinder, through the side links and H-link, curls the bucket to fill it.",
+     "part": "arm",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The boom raises the full bucket above the truck body while the swing motors turn the upper about 65° on the swing circle (peak below ~4 rpm — the ~200 t upper has large inertia).",
+     "part": "swing_ring",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The bucket opens (uncurls) to dump evenly into the body, then the machine swings back to the face for the next pass.",
+     "part": "bucket",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Productivity = payload per pass × passes per truck ÷ (passes × cycle time + truck exchange) × operating efficiency; e.g. 11.5 m³ × 0.9 × 1.45 t/m³ ≈ 15 t/pass; 6 passes × 30 s + ~40 s exchange ≈ 220 s per 90 t truck → ~1,470 t/h instantaneous × 0.75 ≈ 1,100 t/h effective (engineering estimate; design basis 900–1,200 t/h)."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "m2p_hydraulic_excavator_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "hydraulics": {
+     "file": "m2p_hydraulic_excavator_hydraulics.glb",
+     "title": "Hydraulic power: engine → pumps → control valves → cylinders & motors",
+     "description": "The diesel drives several variable-displacement piston pumps. The operator's joysticks pilot the main control valves, which send oil at up to ~30–32 MPa to the boom, arm and bucket cylinders, the swing motors and the travel motors. Pump output is shared electronically so the engine is never overloaded.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/m2p_hydraulic_excavator.json#components",
+   "key_components": "Undercarriage, swing circle, revolving upper, power module, hydraulic pumps, boom, arm, bucket, linkage, boom/arm/bucket cylinders",
+   "parts": [
+    {
+     "id": "undercarriage",
+     "name": "Undercarriage: carbody, track frames, idlers, rollers, sprockets, final drives & track chains",
+     "info_ref": "ex_undercarriage",
+     "function": "Carries the machine and lets it travel and stand on soft pit floors.",
+     "material": "Cast and forged steel."
+    },
+    {
+     "id": "swing_ring",
+     "name": "Swing Circle: large slewing bearing with internal ring gear",
+     "info_ref": "ex_swing",
+     "function": "Lets the upper structure rotate 360° on the undercarriage.",
+     "material": "Forged bearing steel."
+    },
+    {
+     "id": "upper",
+     "name": "Revolving Upper Structure: frame, counterweight, power module (engine & pumps), coolers, tanks, walkways",
+     "info_ref": "ex_upper",
+     "function": "Carries the power module, cab, tanks and counterweight; balances the loaded front attachment.",
+     "material": "Steel."
+    },
+    {
+     "id": "power_module",
+     "name": "Power Module: diesel engine (~700–800 kW class), pump drive, main hydraulic pumps, control valves, swing motors & reducers",
+     "info_ref": "ex_power",
+     "function": "Produces and controls the hydraulic power.",
+     "material": "Cast iron, steel."
+    },
+    {
+     "id": "access_stair",
+     "name": "Hydraulically Lowered Access Stairway (swing locked while lowered)",
+     "info_ref": "ex_access",
+     "function": "Safe access from the ground to the machine.",
+     "material": "Steel, grating."
+    },
+    {
+     "id": "boom",
+     "name": "Boom (welded box section, banana shape)",
+     "info_ref": "ex_boom",
+     "function": "Lifts the arm and bucket.",
+     "material": "High-strength steel."
+    },
+    {
+     "id": "arm",
+     "name": "Arm (stick) with crowd lever",
+     "info_ref": "ex_arm",
+     "function": "Pulls the bucket through the dig (crowd) and reaches out.",
+     "material": "High-strength steel."
+    },
+    {
+     "id": "bucket",
+     "name": "Bucket (~11–12 m³ heaped) with cast lip, adapters, teeth and wear plates",
+     "info_ref": "ex_bucket",
+     "function": "Digs and carries the bauxite.",
+     "material": "Abrasion-resistant steel; cast teeth."
+    },
+    {
+     "id": "bucket_load",
+     "name": "Bucket load (~15–17 t of bauxite per pass)",
+     "info_ref": "ex_load",
+     "function": "Bauxite carried each pass.",
+     "material": "Bauxite."
+    },
+    {
+     "id": "side_links",
+     "name": "Bucket Side Links (arm to linkage joint)",
+     "info_ref": "ex_linkage",
+     "function": "Turns the bucket cylinder stroke into a large bucket rotation.",
+     "material": "Steel, pins and bushes."
+    },
+    {
+     "id": "h_link",
+     "name": "H-Link (power link to the bucket)",
+     "info_ref": "ex_linkage",
+     "function": "Turns the bucket cylinder stroke into a large bucket rotation.",
+     "material": "Steel, pins and bushes."
+    },
+    {
+     "id": "boomcyl_barrel",
+     "name": "Boom Cylinders (2) (barrel)",
+     "info_ref": "ex_cylinders",
+     "function": "Move the boom, arm and bucket.",
+     "material": "Steel barrels, chrome-plated rods."
+    },
+    {
+     "id": "boomcyl_rod",
+     "name": "Boom Cylinders (2) (rod)",
+     "info_ref": "ex_cylinders",
+     "function": "Move the boom, arm and bucket.",
+     "material": "Steel barrels, chrome-plated rods."
+    },
+    {
+     "id": "armcyl_barrel",
+     "name": "Arm (Stick) Cylinder (barrel)",
+     "info_ref": "ex_cylinders",
+     "function": "Move the boom, arm and bucket.",
+     "material": "Steel barrels, chrome-plated rods."
+    },
+    {
+     "id": "armcyl_rod",
+     "name": "Arm (Stick) Cylinder (rod)",
+     "info_ref": "ex_cylinders",
+     "function": "Move the boom, arm and bucket.",
+     "material": "Steel barrels, chrome-plated rods."
+    },
+    {
+     "id": "bktcyl_barrel",
+     "name": "Bucket Cylinder (barrel)",
+     "info_ref": "ex_cylinders",
+     "function": "Move the boom, arm and bucket.",
+     "material": "Steel barrels, chrome-plated rods."
+    },
+    {
+     "id": "bktcyl_rod",
+     "name": "Bucket Cylinder (rod)",
+     "info_ref": "ex_cylinders",
+     "function": "Move the boom, arm and bucket.",
+     "material": "Steel barrels, chrome-plated rods."
+    },
+    {
+     "id": "bench",
+     "name": "Working bench (ore horizon) — the backhoe digs below its own track level",
+     "info_ref": "ex_bench",
+     "function": "Ground the machine stands and digs on.",
+     "material": "Bauxite / clay floor."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Reference-plant values: typical published envelope for this equipment class plus engineering estimates from the Mine-to-Port design basis (generic 2 Mt/yr low-temperature Bayer refinery). Knowledge-based — not verified against a live source; confirm with the selected OEM specification and your site data before use.",
+   "status": "to be verified",
+   "parameters": {
+    "operating_weight": {
+     "typical_range": "≈ 190 – 210",
+     "unit": "t",
+     "note": "Class envelope"
+    },
+    "bucket_capacity_heaped": {
+     "typical_range": "≈ 11 – 12",
+     "unit": "m³",
+     "note": "Backhoe bucket, bauxite (class envelope)"
+    },
+    "engine_power": {
+     "typical_range": "≈ 700 – 800",
+     "unit": "kW",
+     "note": "Diesel, typically V12/V16 (class envelope)"
+    },
+    "hydraulic_system_pressure": {
+     "typical_range": "≈ 30 – 32",
+     "unit": "MPa",
+     "note": "Main relief (class typical)"
+    },
+    "max_digging_depth": {
+     "typical_range": "≈ 8 – 9",
+     "unit": "m",
+     "note": "Below track level (class envelope); the animation shows a ~3 m cut"
+    },
+    "max_digging_reach": {
+     "typical_range": "≈ 14.5 – 15.5",
+     "unit": "m",
+     "note": "At ground level (class envelope)"
+    },
+    "max_dump_height": {
+     "typical_range": "≈ 7.5 – 8.5",
+     "unit": "m",
+     "note": "Must clear the ~4.5–5 m loaded truck body plus the bucket height"
+    },
+    "swing_speed": {
+     "typical_range": "≈ 4 – 5 (max)",
+     "unit": "rpm",
+     "note": "Class envelope"
+    },
+    "tail_swing_radius": {
+     "typical_range": "≈ 5.3 – 5.6",
+     "unit": "m",
+     "note": "Keep-clear zone"
+    },
+    "cycle_time": {
+     "typical_range": "≈ 28 – 35",
+     "unit": "s",
+     "note": "Dig–swing–dump–return, 90° swing (engineering estimate)"
+    },
+    "passes_per_90t_truck": {
+     "typical_range": "5 – 6",
+     "unit": "",
+     "note": "Pass matching: ~15–17 t per pass (design basis)"
+    },
+    "fleet_reference_plant": {
+     "typical_range": "3 (2 on ore, 1 on caprock/waste)",
+     "unit": "",
+     "note": "Reference-plant design basis"
+    }
+   },
+   "additional": {},
+   "title": "Operating parameters",
+   "selection_notes": [
+    "Size the bucket to the truck (about 5–6 passes of ~15–17 t in bauxite) and to the required tonnes per hour; diesel suits a moving plateau pit (no trailing cable).",
+    "Backhoe configuration for thin, flat, selective ore; face shovel for high benches of massive ore."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "operating_weight_t": null,
+     "bucket_m3": null,
+     "engine_kW": null,
+     "max_reach_m": null
+    },
+    "status": "empty — fill from the selected OEM specification sheet"
+   },
+   "sources": [
+    "PumpForge Mine-to-Port reference-plant design basis (m2p/basis), multi-agent SME reviewed",
+    "SME Mining Engineering Handbook, 3rd ed. (2011)",
+    "OEM performance handbooks for the equipment class (generic envelope)",
+    "Hydraulic excavator class specifications (OEM, generic envelope)",
+    "Hustrulid, Kuchta & Martin — Open Pit Mine Planning and Design, 3rd ed."
+   ]
+  },
+  "installation": {
+   "site_assembly": [
+    "Delivered in modules (undercarriage, upper, boom, arm, bucket, counterweight) and assembled on a level hardstand with cranes; pins, bolted joints and hoses to the OEM procedure."
+   ],
+   "working_bench_preparation": [
+    "Level, drained working floor; bench height matched to the digging depth; room for the truck to spot on the operator side.",
+    "Edge protection and exclusion zones around the swing radius."
+   ],
+   "commissioning": [
+    "Hydraulic flushing to the cleanliness target; relief and stall tests; cycle-time and swing-brake tests; stairway interlock and fire-suppression checks; GPS guidance calibration."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Walk-around: teeth and adapters, hoses, leaks, track tension, stairway interlock, fire extinguishers.",
+     "part": "bucket",
+     "interval": "every shift"
+    },
+    {
+     "task": "Check auto-lube supply to all front-attachment pins and the swing ring gear.",
+     "part": "side_links",
+     "interval": "every shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Engine and hydraulic oil sampling, filter changes, cooler cleaning.",
+     "part": "power_module",
+     "interval": "250–500 h"
+    },
+    {
+     "task": "Final-drive and swing-reducer gear-oil change; swing-bearing bolt torque check.",
+     "part": "swing_ring",
+     "interval": "1,000–2,000 h"
+    },
+    {
+     "task": "Undercarriage measurement (pins, bushes, rollers, idlers, sprockets).",
+     "part": "undercarriage",
+     "interval": "500 h"
+    },
+    {
+     "task": "Structural crack inspection of boom foot, cylinder bosses and arm.",
+     "part": "boom",
+     "interval": "1,000 h"
+    },
+    {
+     "task": "Swing bearing rock (tilt) measurement and bolt checks.",
+     "part": "swing_ring",
+     "interval": "2,000 h"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Planned component change-out by life hours (typ. engine ~15,000–20,000 h, main pumps ~12,000–15,000 h; OEM/site data govern).",
+     "part": "power_module"
+    },
+    {
+     "task": "Bucket and lip rebuild; boom/arm structural repairs.",
+     "part": "bucket"
+    }
+   ],
+   "lubrication": [
+    "Centralised auto-lube for all pins, the swing bearing and the swing ring gear; gear oil in final drives and swing reducers to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Lost bucket tooth",
+     "category": "wear",
+     "symptoms": [
+      "Gap in the tooth row",
+      "GET-monitoring alarm"
+     ],
+     "causes": [
+      "Worn adapter or pin",
+      "Impact with caprock"
+     ],
+     "remedies": [
+      "Stop loading; check the truck being loaded and the dig face; radio the sizing-station operator to watch for the tooth. The overband magnet and metal detector are AFTER the sizer and protect only the overland belt — the sizer itself is not protected. Replace the tooth and pin/retainer with the correct parts; check adapter wear"
+     ],
+     "part": "bucket"
+    },
+    {
+     "problem": "Hydraulic hose/fitting failure → oil-spray fire",
+     "category": "hydraulics",
+     "symptoms": [
+      "Sudden pressure loss, oil mist, smoke, fire-suppression alarm"
+     ],
+     "causes": [
+      "Chafed or aged hoses, loose clamps, missing hose shields, oil-soaked insulation"
+     ],
+     "remedies": [
+      "Shut down, actuate fire suppression, evacuate via the stairway or emergency egress; replace hoses preventively by hours/condition, keep heat shields and clamps intact, clean oil residue"
+     ],
+     "part": "power_module"
+    },
+    {
+     "problem": "Slow hydraulic cycles",
+     "category": "hydraulics",
+     "symptoms": [
+      "Longer cycle times",
+      "Overheating oil"
+     ],
+     "causes": [
+      "Pump wear",
+      "Contamination",
+      "Blocked coolers"
+     ],
+     "remedies": [
+      "Oil analysis, pressure tests, clean coolers, change filters"
+     ],
+     "part": "power_module"
+    },
+    {
+     "problem": "Boom or arm fatigue cracks",
+     "category": "structure",
+     "symptoms": [
+      "Visible cracks, paint lines"
+     ],
+     "causes": [
+      "Fatigue loading, hard digging"
+     ],
+     "remedies": [
+      "NDT at known sites; approved weld repairs"
+     ],
+     "part": "boom"
+    },
+    {
+     "problem": "Cylinder drift",
+     "category": "hydraulics",
+     "symptoms": [
+      "Boom or bucket creeps down"
+     ],
+     "causes": [
+      "Piston seal leakage",
+      "Load-holding valve fault"
+     ],
+     "remedies": [
+      "Drift test and reseal"
+     ],
+     "part": "boomcyl_barrel"
+    },
+    {
+     "problem": "Undercarriage wear",
+     "category": "wear",
+     "symptoms": [
+      "Track sag, scalloped rollers"
+     ],
+     "causes": [
+      "Abrasive floor, high travel distances"
+     ],
+     "remedies": [
+      "Measure and rotate/replace components; minimise travel"
+     ],
+     "part": "undercarriage"
+    }
+   ],
+   "safety": [
+    "Swing radius exclusion; positive communication with truck drivers (horn signals, radio).",
+    "Never swing the bucket over the truck cab or over people; the truck driver remains in the cab with the park brake applied during loading.",
+    "Do not undercut the face or leave caprock overhangs; keep within the face-height limit.",
+    "Never stand under a raised bucket or boom; lower attachments and release pressure before maintenance.",
+    "Fire suppression and extinguishers; hot-surface and high-pressure-oil injection hazards."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Hydraulic Backhoe Excavator (~200 t class) — Introduction",
+    "type": "in_app_tour",
+    "model": "m2p_hydraulic_excavator.glb",
+    "duration_s": 60.0,
+    "script": [
+     {
+      "narration": "This module introduces the Hydraulic Backhoe Excavator (~200 t class).",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The ~200 t diesel-hydraulic backhoe excavator is the primary loading unit of the bauxite pit.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It sits on top of the bench, digs the friable gibbsitic ore (and blasted caprock) below or at track level with an ~11–12 m³ bucket, swings and loads ~90 t trucks in about five to six passes.",
+      "duration_s": 15.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "High-precision GPS guidance shows the operator the ore/waste and grade-bin boundaries so that dilution is kept low.",
+      "duration_s": 8.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include loading run-of-mine bauxite into ~90 t haul trucks; selective mining along ore/waste and grade boundaries (GPS bucket guidance); loading blasted caprock and overburden for backfill.",
+      "duration_s": 12.9,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Hydraulic Backhoe Excavator (~200 t class) — Operation",
+    "type": "in_app_tour",
+    "model": "m2p_hydraulic_excavator.glb",
+    "duration_s": 91.3,
+    "script": [
+     {
+      "narration": "How the Hydraulic Backhoe Excavator (~200 t class) works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The diesel drives several variable piston pumps; the joysticks pilot the control valves.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "power_module",
+       "cut": false,
+       "operate": false,
+       "overlay": "hydraulics",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At start-up, after the operator is in the cab, the access stairway is raised; the interlock then releases swing, travel and attachment motions. It stays up for the whole shift.",
+      "duration_s": 12.9,
+      "action": {
+       "highlight": "access_stair",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The arm reaches out and the boom lowers to drive the teeth into the bench ahead of the machine; the cut is made downward and back toward the tracks, finishing on the design floor (GNSS shows the clay contact).",
+      "duration_s": 16.2,
+      "action": {
+       "highlight": "boomcyl_barrel",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The arm cylinder crowds the arm in, dragging the teeth through the ore while the bucket cylinder, through the side links and H-link, curls the bucket to fill it.",
+      "duration_s": 12.5,
+      "action": {
+       "highlight": "arm",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The boom raises the full bucket above the truck body while the swing motors turn the upper about 65° on the swing circle (peak below ~4 rpm — the ~200 t upper has large inertia).",
+      "duration_s": 14.2,
+      "action": {
+       "highlight": "swing_ring",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The bucket opens (uncurls) to dump evenly into the body, then the machine swings back to the face for the next pass.",
+      "duration_s": 9.2,
+      "action": {
+       "highlight": "bucket",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The overlay shows the material path: face → bucket → truck. Ore is dug at the face below track level, carried in the bucket and dumped into the truck on the operator side.",
+      "duration_s": 12.9,
+      "action": {
+       "overlay": "flow",
+       "cut": false,
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The diesel drives several variable-displacement piston pumps.",
+      "duration_s": 4.0,
+      "action": {
+       "overlay": "hydraulics",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Hydraulic Backhoe Excavator (~200 t class) — Maintenance",
+    "type": "in_app_tour",
+    "model": "m2p_hydraulic_excavator.glb",
+    "duration_s": 70.9,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Hydraulic Backhoe Excavator (~200 t class).",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Walk-around: teeth and adapters, hoses, leaks, track tension, stairway interlock, fire extinguishers.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "bucket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check auto-lube supply to all front-attachment pins and the swing ring gear.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "side_links",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Engine and hydraulic oil sampling, filter changes, cooler cleaning.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "power_module",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Final-drive and swing-reducer gear-oil change; swing-bearing bolt torque check.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "swing_ring",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Planned component change-out by life hours (typ. engine ~15,000–20,000 h, main pumps ~12,000–15,000 h; OEM/site data govern).",
+      "duration_s": 10.4,
+      "action": {
+       "highlight": "power_module",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Bucket and lip rebuild; boom/arm structural repairs.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "bucket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for lost bucket tooth: gap in the tooth row. Common cause: worn adapter or pin.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "bucket",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hydraulic hose/fitting failure → oil-spray fire: sudden pressure loss, oil mist, smoke, fire-suppression alarm. Common cause: chafed or aged hoses, loose clamps, missing hose shields, oil-soaked insulation.",
+      "duration_s": 13.3,
+      "action": {
+       "highlight": "power_module",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for slow hydraulic cycles: longer cycle times. Common cause: pump wear.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "power_module",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — wear, temperatures, pressures, leaks and performance — can be compared over time.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is a backhoe (not a face shovel) favoured for thin, flat bauxite ore?",
+     "options": [
+      "It is always cheaper",
+      "It cannot swing",
+      "It needs no trucks",
+      "It digs below its own track level and can select along the ore boundary"
+     ],
+     "answer": 3,
+     "explanation": "A backhoe sits on the bench and digs down into the thin ore horizon.",
+     "level": "basic"
+    },
+    {
+     "question": "What pilots the main control valves?",
+     "options": [
+      "The counterweight",
+      "The operator's joysticks",
+      "The bucket teeth",
+      "The tracks"
+     ],
+     "answer": 1,
+     "explanation": "Joysticks send pilot signals that shift the main control valves.",
+     "level": "basic"
+    },
+    {
+     "question": "What turns the bucket cylinder stroke into a large bucket rotation?",
+     "options": [
+      "The swing circle",
+      "The final drive",
+      "The counterweight",
+      "The side links and H-link four-bar linkage"
+     ],
+     "answer": 3,
+     "explanation": "The linkage multiplies the bucket rotation.",
+     "level": "basic"
+    },
+    {
+     "question": "Why must the stairway be raised before swinging?",
+     "options": [
+      "The interlock prevents swing/travel while it is lowered — it would strike people or the tracks",
+      "It increases engine power",
+      "To fill the bucket",
+      "It is not necessary"
+     ],
+     "answer": 0,
+     "explanation": "Access systems are interlocked with motion.",
+     "level": "basic"
+    },
+    {
+     "question": "About how many passes should fill a ~90 t truck with this machine in bauxite?",
+     "options": [
+      "10 – 12",
+      "20",
+      "5 – 6",
+      "2 – 3"
+     ],
+     "answer": 2,
+     "explanation": "Pass matching: ~15–17 t per pass into a ~90 t body.",
+     "level": "basic"
+    },
+    {
+     "question": "Productivity rises most when the operator…",
+     "options": [
+      "Half-fills the bucket",
+      "Keeps cycle time short with the truck spotted at a short swing angle (~45–70°)",
+      "Swings 180° every pass",
+      "Travels between passes"
+     ],
+     "answer": 1,
+     "explanation": "Short swing angle, full bucket and well-spotted trucks.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the tail-swing hazard?",
+     "options": [
+      "Noise only",
+      "The counterweight sweeps a circle of ~5 m radius behind the machine",
+      "The bucket teeth are sharp",
+      "The tracks are hot"
+     ],
+     "answer": 1,
+     "explanation": "People and vehicles must stay outside the swing radius.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Carries the machine and lets it travel and stand on soft pit floors.\"",
+     "options": [
+      "Boom Cylinders (2) (barrel)",
+      "Bucket Cylinder (rod)",
+      "Power Module: diesel engine (~700–800 kW class), pump drive, main hydraulic pumps, control valves, swing motors & reducers",
+      "Undercarriage: carbody, track frames, idlers, rollers, sprockets, final drives & track chains"
+     ],
+     "answer": 3,
+     "explanation": "Undercarriage: carbody, track frames, idlers, rollers, sprockets, final drives & track chains: Carries the machine and lets it travel and stand on soft pit floors.",
+     "level": "basic",
+     "part": "undercarriage",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Lets the upper structure rotate 360° on the undercarriage.\"",
+     "options": [
+      "Revolving Upper Structure: frame, counterweight, power module (engine & pumps), coolers, tanks, walkways",
+      "Bucket Side Links (arm to linkage joint)",
+      "Swing Circle: large slewing bearing with internal ring gear",
+      "H-Link (power link to the bucket)"
+     ],
+     "answer": 2,
+     "explanation": "Swing Circle: large slewing bearing with internal ring gear: Lets the upper structure rotate 360° on the undercarriage.",
+     "level": "basic",
+     "part": "swing_ring",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the power module, cab, tanks and counterweight; balances the loaded front attachment.\"",
+     "options": [
+      "Revolving Upper Structure: frame, counterweight, power module (engine & pumps), coolers, tanks, walkways",
+      "Arm (Stick) Cylinder (barrel)",
+      "Hydraulically Lowered Access Stairway (swing locked while lowered)",
+      "Working bench (ore horizon) — the backhoe digs below its own track level"
+     ],
+     "answer": 0,
+     "explanation": "Revolving Upper Structure: frame, counterweight, power module (engine & pumps), coolers, tanks, walkways: Carries the power module, cab, tanks and counterweight; balances the loaded front attachment.",
+     "level": "basic",
+     "part": "upper",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  },
+  "operation": {
+   "controls": [
+    "Two joysticks (ISO pattern: left — swing and arm, right — boom and bucket)",
+    "Travel pedals/levers, swing brake, stairway switch, monitoring display with GPS guidance",
+    "Pilot-control lockout (safety) lever: LOCK before starting, before leaving the seat and before lowering the stairway"
+   ],
+   "pre_start": [
+    "Walk-around (teeth, hoses, leaks, track tension, fire extinguisher)",
+    "Check fluid levels; confirm the face and working floor are safe"
+   ],
+   "start_up": [
+    "Confirm nobody is on the decks or within the swing radius; sound the horn; start with the lockout lever locked",
+    "Warm up at low idle and cycle functions slowly until the hydraulic oil reaches the OEM minimum (typ. ~20–30 °C); raise the stairway; test the swing brake and all controls"
+   ],
+   "normal": [
+    "Position the machine with the travel motors/sprockets at the rear, away from the face, and the tracks square to the edge",
+    "Truck spotting on the operator side, swing ~45–70°; first pass at the front of the body; never over the cab",
+    "Dig along the GPS ore/waste line; keep the floor level for the trucks",
+    "Watch for oversize or tramp steel; report lost teeth immediately"
+   ],
+   "shut_down": [
+    "Park on level ground clear of faces and drainage lines, bucket on the ground; idle 3–5 min to cool the turbos; stop the engine",
+    "Operate the controls to release residual pilot/accumulator pressure; LOCK the pilot lever; lower the stairway; isolate and lock out"
+   ],
+   "alarms_interlocks": [
+    "Pilot-control lockout (engine start only when locked; all motions dead when locked)",
+    "Stairway-down interlock: no swing, travel or attachment motion while lowered",
+    "Emergency engine stops in the cab, on the upper deck and at ground level",
+    "Travel/swing warning alarm and beacon; swing brake applied when swing is idle/parked",
+    "Hydraulic oil temperature/level",
+    "Engine coolant temperature",
+    "Fire-suppression actuation",
+    "GET (tooth) loss alarm where fitted"
+   ],
+   "tips": [
+    "Load the truck evenly — centre the load over the axles",
+    "Do not use the bucket to push or travel with a loaded bucket",
+    "Keep the swing short and smooth"
+   ]
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,792 @@
+[
+ {
+  "key": "drill",
+  "review": {
+   "score_0_10": 8,
+   "summary": "Round-2 review of m2p_blasthole_drill and the overview's drill and blast pattern. Web search was unavailable, so practice numbers come from my own knowledge. I checked geometry by computing coordinates from pumps/_eq_m2p_mine.py. I also read the GLB node transforms: the rest pose is the frame-1 tramming pose, with the feed node rotated 105° and retracted, so the rest pose does not clash. I read all five round-2 renders.\n\nAll 18 per-model findings in findings_3.txt are dealt with. 15 are fully fixed and 3 are partly fixed (flow path, cross-section look-fors, overview pattern wording). The 6 drill-related area findings are fixed or nearly fixed; only the stemming key point is still missing.\n\nWhat is now right:\n- Safety content: misfires and butts, charged patterns, lightning, power lines, crest, silica and noise, LOTO and whip checks, with exclusion numbers.\n- Pattern is 3.0 × 3.5 m in the builder, META, content and overview. Powder factor checks out: 26.25 m³ per hole needs about 8–16 kg, which is 0.6–1.3 m of 115 mm emulsion at about 12.5 kg/m, leaving about 1.7–2.4 m of stemming.\n- Boom and cradle: PIV is at (3.9, 0, 2.0), the collar at x 4.3 (2.3 m ahead of the tracks), and feed extension is 0.6 m.\n- Drill string is 0.40 m in front of the beam, with GT60 r 0.03 rods, a 6.1 m single-pass rod and a 115 mm bit.\n- Bench is 2.5 m of caprock over 1.0 m of ore, with HD = 3.0 m (0.5 m sub-drill). The bit reaches −2.98 and the holes go to −3.0.\n- Animation: the tramming attitude is 105° with the foot about 0.6 m clear and the mast top at 8.95 m (matches '~9 m'). The string spins at about 0.8 rev/s. The cycle is labelled ≈30× time-compressed: 3 m in 6.24 s is 29 m/min, against about 3 min real at 1 m/min.\n- Fleet is 2 + 1. Lesson JSON matches content.\n\nWhat is still wrong (all minor):\n- The overview rig faces away from the crest, with its drilled rows behind it. This is the opposite of the standalone model and of the lesson's crest rule.\n- The pivot pin passes through the sliding feed beam.\n- The boom lift cylinder is buried inside the boom and frame.\n- The dust hoses do not join (static hose_s against the moving hose_f).\n- The spare rods are hidden inside a solid rack box.\n- The flushing-air overlay passes through the cab.\n- The dust_hose part borrows the chassis META entry (steel, 'carries the power and air').\n- Three wording mismatches: overview '4 × 4' against the drill lesson's burden of at most 3.5 m; hole depth 1.5–5 m against caprock 0.5–3 m; feed 'raised' against 'lowered'.\n- The stemming key point is still missing, and the cross-section look-fors have one item where round 1 asked for two.",
+   "findings": [
+    {
+     "status": "fixed",
+     "severity": "critical",
+     "where": "content/m2p_mine.py MODULES['m2p_blasthole_drill'].safety, operation.normal, quiz, failures (findings_3 #1; findings_area critical drill safety)",
+     "issue": "Missing drill-and-blast hazards: butts/misfires, charged pattern, power lines, crest, silica/noise, stored energy, lightning, whip checks, exclusion numbers.",
+     "correction": "Fixed. All 8 proposed bullets are in, plus lightning and whip checks. 'Check the collar for old sockets…' is first in operation.normal. Added: misfire/butt F(), socket quiz question, exclusion '≥300–500 m people / ≥100–200 m equipment'. Small tidy-up: whip checks now appear in both safety[6] and safety[9]; merge them into safety[6] ('…whip checks on all air couplings, depressurise before breaking a connection')."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content params.pattern_burden_x_spacing, key_points[0], powder_factor; META summary/dr_pattern; builder blast_pattern (HX+i*3.0, -7.0+j*3.5); part name (findings_3 #2)",
+     "issue": "4 × 4 m pattern conflicted with the basis 3.0 × 3.5 m.",
+     "correction": "Fixed everywhere in the drill model. Check: 3.0×3.5×2.5 m = 26.25 m³ per hole. At 0.3–0.6 kg/m³ that is 7.9–15.8 kg, or 0.63–1.26 m of 115 mm emulsion (~12.5 kg/m) in a 3.0 m hole, leaving 1.7–2.4 m stemming (15–21 × d). This agrees with the basis."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "_eq_m2p_mine.py m2p_blasthole_drill: m.flow('air', [(-1.6,0.6,2.2),(2.3,0.3,2.3),(HX,0.3,6.0),(HX,0,5.5),(HX,0,-HD+0.1)]) (findings_3 #3)",
+     "issue": "The air route is now right: compressor → rock drill → rod bore → bit, with cuttings returning to the hood and dust collector, and the overlay text is fixed. But the first air segment runs straight through the operator cab (MK.cab x 0.55–2.05, y 0.15–1.15, z 1.35–3.45). At x 0.55 it is at y 0.44, z 2.26; at x 2.05 it is at y 0.32, z 2.29. It also grazes the top of the hydraulic tank (z ≤ 2.25).",
+     "correction": "Route the air along the deck centreline, which is clear of the cab (y ≥ 0.15), the hydraulic tank (y 0.3–1.0) and the dust collector (y ≤ −0.3): (-1.6,0.0,2.2) → (0.5,0.0,1.55) → (2.3,0.0,1.6) → (3.0,0.0,1.9) → (HX,0.3,6.0) → (HX,0,5.5) → (HX,0,-HD+0.1)."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "builder boom/cradle: PIV=(3.9,0,2.0), K.bar('boom',(2.2,0,1.5),(3.6,0,1.94)), EXT=0.6, feed_ext(); META dr_boom (findings_3 #4)",
+     "issue": "There was no boom, and the feed pivoted on the frame front.",
+     "correction": "Fixed. Boom, cradle, dump cylinder and feed extension are all added. In the drilling pose the beam is at x 3.74–4.06, clear of the frame front at x 2.6. The collar is at x 4.3, 2.3 m ahead of the track front at x 2.0. The code comment '~1.5 m ahead of the tracks' should read '~1.9 m (collar 2.3 m)'."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "builder RX=0.40 applied to hm, rod_, cent, hood; rdc carriage plate (findings_3 #5)",
+     "issue": "The drill string ran on the feed-beam centreline.",
+     "correction": "Fixed. The string is at world x = PIV.x + 0.40 = 4.3. The rock-drill box spans 0.125–0.675 m in front of the beam axis, overlapping the beam front face (0.16) by only 3.5 cm."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "builder stowed/rest pose vs MK.cab (findings_3 #6)",
+     "issue": "The stowed feed foot and centraliser intersected the cab.",
+     "correction": "Fixed. The GLB rest TRS equals frame 1, the tramming pose: the feed.001 quaternion (0,0,0.793,0.609) is a 105° rotation with a 0.6 m retract. The foot plate is at x ≈ 3.7–4.6, z ≈ 0.6–0.83 and the hood bottom at z ≈ 0.80. Nothing clashes with the cab, and the tramming render confirms this."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "builder feed_ang/feed_ext/drill_s/spin; META model_configuration.animation; principle step 6 (findings_3 #7; findings_area drill animation)",
+     "issue": "The drilling speed was unlabelled and about 30× too fast, the feed was laid flat between holes, and the string did not rotate.",
+     "correction": "Fixed. Drilling 3.0 m takes 0.52×12 = 6.24 s (≈29 m/min), labelled '≈30×' (1 m/min gives 180/6.24 ≈ 29×). The native viewer shows model_configuration in its spec list. The cycle returns to A_TR = 105° (tilted back, foot lifted) and the string spins 6 rev over 7.6 s. The sequence is correct: withdrawn by t 0.83, foot lifted by t 0.91, back to tramming by t 1.0."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "builder bench (cap 2.5 m + ore_layer 1.0 m, section='split'), HD=3.0; lesson cross_section.what_to_look_for (findings_3 #8)",
+     "issue": "The two-layer bench, the 3.0 m hole and the section view are all fixed, and the section render shows the hole and its 0.5 m sub-drill into the ore. But cross_section.what_to_look_for holds only the auto-copied step-5 sentence. Collar, stemming zone and charge column are neither shown nor described.",
+     "correction": "Add an explicit what_to_look_for list: ['Hole through ~2.5 m caprock and ~0.5 m sub-drill into soft ore', 'Upper ~2 m of the hole is stemming (crushed aggregate); the charge column (~1 m emulsion) sits in the lower caprock and sub-drill']. Optionally draw one completed hole on the section line with a 2.0 m grey stemming band and a 1.0 m orange charge band (cyl r 0.0575, z −3.0…−2.0 'explosive', −2.0…0 'gravel'), labelled as 'after charging'."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content params.hole_depth, fleet_reference_plant, plant.qty (findings_3 #9; findings_area fleet)",
+     "issue": "Hole depth and fleet numbers did not match the basis or the tag.",
+     "correction": "Fixed. Hole depth is 1.5–5 m, fleet is '2 operating + 1 standby (3)' and qty matches 01-DR-001…003. The overview fleet parameter shows 'DR 2 + 1'. A remaining inconsistency is reported separately as a new issue."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content params compressor_flushing_air, penetration_rate, percussion_frequency, rotation_speed; key_points[6] (findings_3 #10; findings_area minor compressor)",
+     "issue": "Only top-hammer air was given; no penetration rate; no ANFO wet-hole warning.",
+     "correction": "Fixed. Sanity check: 115 mm hole with a 51–60 mm rod gives an annulus of ≈0.0075–0.0083 m², so 0.2 m³/s FAD gives about 24–27 m/s up-hole. That matches the stated ≥15–25 m/s."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content failures; key_points[4] (findings_3 #11)",
+     "issue": "Hole collapse and wet holes were missing.",
+     "correction": "Fixed. Both F() entries and the hole-log key point are added."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content operation.alarms_interlocks, shut_down, start_up (findings_3 #12)",
+     "issue": "Drilling protections, compressor blow-down and parking rules were missing.",
+     "correction": "Fixed, word for word as proposed."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content maint (findings_3 #13)",
+     "issue": "Maintenance intervals were vague.",
+     "correction": "Fixed. Bit regrind at 1/3 wear flat (20–80 m), accumulator check every 40–100 h, reseal at 400–600 h, overhaul at 1,000–1,500 h, all marked 'per OEM'."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content definition, principle step 2 (findings_3 #14)",
+     "issue": "The definition and step 2 said 'centraliser' where they meant the feed foot.",
+     "correction": "Fixed. 'Feed foot' is pressed down, and the centraliser is described as the rod guide. A new wording mismatch is reported separately."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "builder rod r 0.03, bit r 0.0575, carousel rods 6.1 m (findings_3 #15)",
+     "issue": "The rod was oversize and the carousel rod length did not match the string.",
+     "correction": "Fixed. A new visibility problem with the spare rods is reported separately."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "builder hood, hose_f, hose_s, exh, gnss_c, gnss_f, bcn (findings_3 #16)",
+     "issue": "Collar hood, suction hose, GNSS antennas, exhaust stack and beacon were missing.",
+     "correction": "Fixed. A new problem with the hose connection is reported separately."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content quiz (findings_3 #17)",
+     "issue": "Q3–Q5 wording, trivial distractors, and the correct answer always at index 0.",
+     "correction": "Fixed. Generated answers are now shuffled (indices 1, 1, 2, 1, 1, 0…)."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content applications[1] (findings_3 #18)",
+     "issue": "Pre-split and trim drilling do not apply to 1–4 m caprock benches.",
+     "correction": "Fixed. Replaced with secondary drilling of oversize boulders and hard ore lenses."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "m2p_mine_overview: _Rig('m2p_blasthole_drill').posed(..., 6.0, T(38.7,-24,-1.3)); inst_static('drill', ..., 'mn_drill'); principle step 3 part 'drill'; muck zone (findings_3 overview 'no blast-hole drill; collars on muck'; findings_area 'drill and loader not placed')",
+     "issue": "There was no drill in the overview, and blast-hole collars were drawn on top of the blasted muck.",
+     "correction": "Fixed. A drill instance sits on the stripped caprock (z −1.3) and the pattern is at x 28–49 on the stripped zone. The muck zone (x 12–25, top −0.85 = 1.3× swell of 1.5 m) has no collars. The rig is posed at t = 6 s, with the string about 1.85 m deep and the bit at −3.15, about 0.35 m into the ore. A new orientation issue is reported separately."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "content MODULES['m2p_mine_overview'] principle step 3 and params.blast_pattern ('≈ 3 × 3.5 (thin caprock) to 4 × 4 (thick caprock)'); META mn_blasted ('up to ~4 × 4 m in thicker caprock') (findings_3 overview minor '~4 × 4'; findings_area pattern)",
+     "issue": "The overview geometry is now 3.0 × 3.5 m. But the overview text still teaches 'up to 4 × 4 m', which contradicts the drill lesson's burden range of 2.5–3.5 m. The area-level fix asked for one '~3 × 3.5 m' figure.",
+     "correction": "Align with the drill lesson. Overview params.blast_pattern → P('burden ≈ 2.5–3.5 × spacing ≈ 3.0–4.0 (nominal 3.0 × 3.5)', 'm', 'Reference-plant design basis'). Step 3 and mn_blasted → '~3.0 × 3.5 m pattern (burden × spacing) set by the blast design; tighter in thin caprock'."
+    },
+    {
+     "status": "not_fixed",
+     "severity": "minor",
+     "where": "content MODULES['m2p_blasthole_drill'].key_points (findings_area pattern finding: 'Add a key point: Short benches: stemming…')",
+     "issue": "The stemming and flyrock key point asked for at area level was not added. 'Stemming' appears only inside a failure remedy, yet stemming length is the main flyrock control on 1.5–3.5 m holes.",
+     "correction": "Add key point: 'Short holes: stemming ~2 m (≈ 17–25 × hole diameter) of crushed aggregate leaves only ~1 m of charge; too little stemming causes flyrock and cratering — follow the blast design and the hole log.'"
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "m2p_mine_overview: drill pose Matrix.Translation((38.7,-24.0,-1.3)) (faces +x); pattern loop 'if x < 43: cones else pegs' and skip 'abs(y+24)<3 and 31<=x<=44'",
+     "issue": "The free face/crest is at x = 25 (blasted zone x 12–25). The overview rig faces +x, away from the crest. Its drilled rows (x 28–40) lie behind it, so it must have trammed through and straddled its own drilled row: holes at (37,−24) and (40,−24) were deleted to make room. Holes at x 31 and 34 are deleted too, although the rig's rear is at x 35.6. This contradicts the standalone model (drilled holes ahead of the feed, rig on undrilled ground) and the lesson rule 'Position the rig at right angles to the crest'. Tramming over drilled collars also pushes cuttings back into holes, causing the blocked holes the lesson lists as a failure.",
+     "correction": "Turn the rig to face the crest: Matrix.Translation((47.3,-24.0,-1.3)) @ Matrix.Rotation(D(180),4,'Z'), which keeps the collar at x 47.3 − 4.3 = 43.0. Keep drilled cones for x ≤ 40 on every row, including y = −24. Change the skip to 'abs(y+24) < 3 and 43 <= x <= 51' (active hole plus pegs under the rig). Relabel the part 'drilled rows toward the free face, pegged collars behind the rig'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "builder boom: cyl('ppin', 0.07, -0.33, 0.33, axis='Y', center=PIV) with feed beam box (0.32, 0.42, FL) on the same axis and feed_ext() sliding the beam 0.6 m",
+     "issue": "The feed-dump pivot pin lies on the feed-beam centreline and passes right through the beam (y ±0.21). Yet the beam slides 0.6 m along its axis in the cradle. This is kinematically impossible: the pin must be in the cradle, not the sliding feed. A 1 cm overlap between the cradle (y ±0.25) and the cheeks (y 0.24–0.28) shows the same mismatch.",
+     "correction": "Make the cradle a U that wraps the beam: side plates box (0.5, 0.03, 1.8) at local (−0.05, ±0.235, 0) plus the rear guide. Replace ppin with two stub pins: cyl r 0.07 from y ±0.25 to ±0.33 at PIV. Narrow the cheeks to y ±(0.29–0.33). Alternatively, offset the beam and everything on it by local x +0.45 so the pivot sits on the cradle behind the beam."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "builder MK.hydraulic_cylinder('blift', (1.6,0,1.15), (3.0,0,1.78), 0.07)",
+     "issue": "The boom lift cylinder is invisible. It starts inside the frame (z 0.95–1.35) and passes through the boom-foot block bmft (x 2.0–2.5, z 1.30–1.60) at z ≈ 1.44. From x 2.5 to 3.0 it runs along the boom centreline (boom centre z at x 3.0 = 1.75, against the cylinder's 1.78), entirely inside the 0.35 m boom. The lesson names 'lift, swing and feed-dump cylinders', but only the dump cylinder can be seen.",
+     "correction": "Use two lift cylinders beside the boom: for s in (−1, 1): MK.hydraulic_cylinder(f'blift{s}', (2.35, s*0.27, 1.35), (3.2, s*0.27, 1.80), 0.06), with small lug boxes on the frame deck and the boom sides. Or put one cylinder under the boom from (2.55, 0, 1.25) to (3.25, 0, 1.55), checking clearance to the dump-cylinder base pin at (2.85, 0, 1.55)."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "builder sweep_tube('hose_f', …, (-0.05,-0.38,-0.1)) on the feed and static sweep_tube('hose_s', [(PIV.x-0.1,-0.38,PIV.z+0.05), …])",
+     "issue": "The two dust-hose segments never meet. hose_f moves with the feed and hose_s is static. In the drilling pose, hose_f ends at (3.85, −0.38, 1.90) and hose_s starts at (3.80, −0.38, 2.05), a 0.16 m gap visible in drill_boom_closeup.png. In the tramming pose (105°, retracted) the hose_f end moves to about (3.72, −0.38, 2.47), 0.43 m off and crossing hose_s (drill_tramming_side.png).",
+     "correction": "Run hose_f up to a fixed point on the cradle side rather than on the sliding beam, and give the gap a slack loop. Make hose_f part of the 'cradle' part (keyed with MC), ending at cradle-local (−0.3, −0.38, 0.0), which is PIV + 0.3 m behind the pivot. Start hose_s exactly at the stowed equivalent of that point, rotated about PIV by A_TR. A 0.6 m slack loop from the hood to the cradle can stay on the feed. Or add per-frame hose rebuilds as for the cylinders."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "builder fd: box('rodr', (0.45,0.5,6.3), (0,0.55,Z0F+3.4)) and rod{k} at x −0.12…0.0, y 0.55–0.63",
+     "issue": "The five spare 6.1 m rods sit entirely inside the solid grey rod-rack box (x ±0.225, y 0.30–0.80), so they cannot be seen. The rack reads as a plain grey slab in drill_drilling_iso.png.",
+     "correction": "Replace the solid box with an open rack: two end plates box (0.45, 0.5, 0.08) at Z0F+0.3 and Z0F+6.5, plus a backplate box (0.04, 0.5, 6.3) at local x −0.21. Keep the rods at y 0.55–0.63 so they are visible."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "builder P(m,'dust_hose', …, ref='dr_chassis'); lesson components; catalog.json key_components",
+     "issue": "The dust_hose part borrows the chassis META entry, so the lesson shows a rubber suction hose with function 'Carries the power and air' and material 'Steel.'. catalog.json key_components ('Crawler undercarriage, power pack, …, cab') also leaves out the new boom/cradle and collar hood.",
+     "correction": "Add META component 'dr_dust': _c('Carries dust-laden air from the collar hood to the dust collector.', 'Flexible wear-resistant rubber suction hose (~125–150 mm) from the collar hood up the feed and boom to the dust-collector inlet.', 'Rubber, wire-reinforced.', '—', ['Wear-through, blockage, hood not sealing'], ['Inspect for holes/blockage each shift']). Set ref='dr_dust' on dust_hose. Change key_components to '… dust collector, boom and feed cradle, feed with collar hood, rock drill, drill rods, button bit, cab'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "content params.hole_depth ('≈ 1.5–5 m') vs key_points[0] ('caprock 0.5–3 m thick') and META mn_blasted 'Caprock ~0.5–3 m thick'",
+     "issue": "Caprock up to 3 m plus 0.3–0.5 m sub-drill gives holes of at most about 3.5 m. The 5 m upper bound in hole_depth implies about 4.5 m of caprock, which the lessons do not mention.",
+     "correction": "hole_depth → P('Caprock thickness + ~0.3–0.5 m sub-drill: ≈ 1.5–3.5 m typical; up to ~5 m where hard ore bands are blasted with the cap (basis)', '', 'Reference-plant design basis'). Or widen the caprock range in key_points[0] to the basis bench range of 1–4 m."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "content definition ('raises the feed to the design angle'), principle step 2 ('the feed is raised to vertical'); META model_configuration.animation ('Feed lowered from the tramming position to vertical'); part 'rock_drill' name ('on its cradle')",
+     "issue": "The rig trams with the feed tilted about 15° back (A_TR = 105°), so the feed is neither raised nor lowered to vertical, and the lesson and META say opposite things. 'Cradle' is also used for both the feed cradle (part 'cradle') and the rock-drill carriage. META dr_hammer correctly says 'carriage'.",
+     "correction": "Use one phrase in all three places: 'the feed is tilted forward from the tramming position to the design angle (here vertical)'. Rename the rock_drill part to 'Rock drill (hydraulic top hammer) on its carriage, riding the feed guides'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "m2p_mine_overview: blast_pattern part ref='mn_blasted'; gc_drilling grid (27+10i, −55+10j) vs pattern (28+3i, −52+3.5j)",
+     "issue": "(1) The pre-blast pattern on the stripped zone links to mn_blasted, which describes post-blast muck ('broken muck swelled ~1.3× … loaded as ore'). (2) Grade-control collars land on blast holes at (37,−45) and (37,25), so a white RC collar sits inside a blast-hole cuttings cone.",
+     "correction": "(1) Add META 'mn_pattern': _c('Holes ready for charging.', 'Blast pattern ~3.0 × 3.5 m (burden × spacing) drilled through the caprock with ~0.3–0.5 m sub-drill; holes logged and dipped before charging.', 'Caprock.', 'Front row ~3 m (one burden) from the free face.'). Set ref='mn_pattern'. (2) Skip GC collars within 1 m of any blast-hole position, or offset the GC grid to y = −50 + 10j."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "META['m2p_blasthole_drill'].standards[0] {'code':'ISO 18758','title':'Rock drilling and foundation drilling rigs — Safety'}",
+     "issue": "The title is wrong; it mixes up two standards. To my knowledge (unverified, no web access), ISO 18758-1 is 'Mining and earth-moving machinery — Rock drill rigs and rock reinforcement rigs — Part 1: Safety requirements'. 'Drilling and foundation equipment — Safety' is EN 16228.",
+     "correction": "Change to {'code':'ISO 18758-1','title':'Mining and earth-moving machinery — Rock drill rigs and rock reinforcement rigs — Part 1: Safety requirements','relevance':'Rig safety (guards, interlocks, noise/dust, stability)'}. Verify the edition before release."
+    }
+   ]
+  }
+ },
+ {
+  "key": "loader",
+  "review": {
+   "score_0_10": 6.5,
+   "summary": "Round-2 review of m2p_wheel_loader (pumps/_eq_m2p_mine.py m2p_wheel_loader, META['m2p_wheel_loader'], content MODULES['m2p_wheel_loader']). I checked every number by re-running the builder's kinematics in plain Python. Web search was unavailable, so class figures (992K / WA900) come from my own knowledge.\n\nWhat is fixed:\n- **Z-bar linkage solves over the whole cycle.** |B0–D| stays between 1.913 and 3.116 m, inside the reachable band of 1.401–3.398 m, so _circ_int never clamps. Point C moves at most 0.016 m per frame, so there is no branch flip. The bell crank swings −16.7° to +61.1°, and the angle at C stays between 50° and 128°.\n- **Bucket now dumps.** World bucket angle is +45° in the pile, +55° while lifting and −45° at dump. The load slides out between −15° and −45°.\n- **Full-lift height is in class.** The hinge pin reaches 6.96 m. At a 45° dump the tooth tips are 4.76 m above ground and the cutting edge is 4.98 m. Reach to the teeth is 2.05 m from the front tyre. The lift cylinder goes from 2.915 to 4.221 m (ratio 1.45).\n- **Machine travel and articulation work.** The articulated path matches the no-slip formula θ' = (v·sinφ − a·φ')/(a + b·cosφ), and the loop closes exactly. Peak speed is 7.7 km/h and peak articulation rate is 25°/s.\n- **Lesson content.** Engine, fleet, safety, operation, failures, maintenance, key points and quiz are all fixed.\n\nWhat is still wrong:\n- **Steering cylinders are animated but cannot exist as built.** Pin-to-pin length runs 1.11–2.27 m, a ratio of 2.05, so the stroke is longer than the closed length. The 1.55 m barrel is longer than the shortest pin distance, and the rod pokes out about 0.44 m behind the barrel.\n- **Tilt cylinder clashes with the cross-tube.** From t≈0.17 to 0.47 the tilt-cylinder barrel passes through the bell-crank cross-tube by about 0.08 m.\n- **Bucket is still about 8–10 % over its label.** The profile gives 12.7–13.0 m³ heaped (ISO 7546) against the 11–12 m³ label.\n- **Access stairway is about 69°.** That is ladder steepness, and the treads overlap.\n- **Bucket payload density does not match the truck lesson.** The loader assumes 1.6 t/m³ loose; the truck lesson implies about 1.45 t/m³.\n- **Area safety is only partly done.** Reversing and ROM-pad traffic rules, hopper tipping rules and CAS are missing.\n- **Model metadata file is stale.** output/meta/m2p_wheel_loader.json still says '13 s' and 'About 20 t'.\n\nNew issue from the wheel-stop change: raising the station wheel stop to 1.55 m creates a clash in the overview. The truck stops 1 m short of the stop, and at 48° tip the dump-body tail cuts 0.09 m into it. The station metadata (ps_civil) still says ~1.35 m. The loader's reach into the hopper over the 1.55 m stop also leaves very little margin.",
+   "findings": [
+    {
+     "status": "fixed",
+     "severity": "critical",
+     "where": "_eq_m2p_mine.py m2p_wheel_loader POSES + load-scale block (absb)",
+     "issue": "R1: The bucket never dumped (+92° at carry, +4° at the dump pose) and the load shrank in a level bucket.",
+     "correction": "Verified. World angle alpha+kap is 0° at t=0–0.12, +45° at 0.24–0.29, +55° at 0.42–0.55 and −45° at 0.62–0.66 (D(80)+D(−125)). The load scale is tied to the world bucket angle: 1.0 until −15°, falling to 0.02 at −45°. Nothing further needed."
+    },
+    {
+     "status": "fixed",
+     "severity": "critical",
+     "where": "m2p_wheel_loader B0=(4.55,2.75), C0=(3.81,2.08), D0=(6.15,1.55), R_BC=0.998, R_CD=2.399, pick",
+     "issue": "R1: The Z-bar four-bar could not reach the dump range, and _circ_int clamped silently.",
+     "correction": "Verified numerically over all 1200 frames. |B0–D| = 1.913–3.116 m, inside the solvable band 1.401–3.398 m, so there is no clamp and at least 0.28 m of margin. C moves at most 0.016 m per frame, so no branch flip. The bell crank rotates −16.7° to +61.1°. The angle at C is 49.8–128.1°. Rack-back extends the tilt cylinder (head side), which is correct Z-bar behaviour. See the separate minor finding on toggle at D and the fragile pick."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "m2p_wheel_loader A=(2.3,3.4), H=(6.35,0.95), POSES alpha max D(80), LA/LB",
+     "issue": "R1: The 46° lift gave only about 4.6 m hinge pin height and about 2.4 m dump clearance.",
+     "correction": "Verified. At alpha=80° the hinge pin is at (5.42, 6.96) m. At the −45° dump the tooth tips are at z=4.76 m and the cutting edge at z=4.98 m, matching the class 4.5–5 m and wl_arms '~4.7 m'. Reach from the front-tyre front (x=4.34) is 2.05 m to the teeth and 1.71 m to the edge. The lift cylinder runs 2.915 to 4.221 m (stroke 1.31, ratio 1.45), and the rod stays inside the barrel."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "m2p_wheel_loader bpts=[(8.2,0.05),(6.8,0.05),(6.6,0.3),(6.6,1.5),(6.85,1.85),(7.3,1.95)], WB=2.55; comment 'struck ≈ 10 m³, heaped ≈ 11.5–12'; part label '~11–12 m³ heaped'",
+     "issue": "R1: The bucket was about 70 % oversized. It is now about 8–10 % over the label. Shoelace area of bpts is 2.069 m², so struck volume is 10.3 m³ (inside width 4.98 m) to 10.55 m³ (5.1 m). The strike line is L=2.10 m, so the ISO 7546 2:1 heap adds L²W/8 − L³/24 = 2.43 m³. Heaped volume is therefore 12.7–13.0 m³, not 11.5–12. The load mesh 'lode' (centre 7.3, semi-axis 0.81 m) also pokes 0.06 m behind the back plate at x=6.6.",
+     "correction": "Option 1: scale bpts, the 'wear' and 'lip' boxes and the teeth by s=0.96 about the heel (6.8, 0.05). That gives about 11.8 m³ heaped. Then re-check that D0 and the bhbr/bdbr brackets still sit on the back plate. Option 2: keep the geometry and change the label, wl_bucket and bucket_capacity to '~12.5–13 m³ heaped'. Either way, move lode's centre to x=7.4 so it stays inside the back plate."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "m2p_wheel_loader SC0=(-0.9,0.85,1.55), SC1=(0.9,0.85,1.55), MK.hydraulic_cylinder(... stages=1) built at rest length 1.80",
+     "issue": "R1: The steering cylinders were static. They are now keyframed (barrel pinned to MR, rod eye to MF), but the geometry cannot exist. At φ=±40° the inside cylinder is 1.110 m pin-to-pin and the outside one 2.272 m. That is a stroke of 1.16 m and a ratio of 2.05, so the closed length minus stroke is −0.05 m (a real cylinder needs about +0.35–0.5 m). The barrel is built 1.55 m long (L−0.25), so at L=1.11 it reaches 0.44 m past the rod-eye pin into the front frame. The rod, modelled from 0.25 to L−0.12 at rest, moves back 0.69 m and sticks out 0.44 m behind the barrel pin. The barrel pin at y=0.85 also sits 0.07 m inside the rframe box (y ±0.8, radius 0.12).",
+     "correction": "Set SC0=(-1.8, ±0.95, 1.55) and SC1=(1.0, ±0.95, 1.55). At φ=−40°/0/+40° that gives 3.29 / 2.80 / 2.00 m: stroke 1.29 m, ratio 1.65, closed length minus stroke 0.71 m, and it clears both frame boxes. Build each cylinder in its retracted pose: call MK.hydraulic_cylinder(p0, p0+(2.00,0,0)), then key the rod translation as d.normalized()*(d.length − 2.00) instead of (SC1[0]−SC0[0]). That keeps the rod inside the barrel over the full stroke."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "content params.bucket_payload_bauxite '≈ 16 – 18' (1.6 t/m³); key_points[0]; META wl_load; part 'Bucket load (~17 t bauxite)'; truck lesson payload '~90 t ≈ 60–64 m³'",
+     "issue": "R1 and the area finding: payload figures did not agree. The lesson, META source and part label now agree on 16–18 t. But the loose density of ~1.6 t/m³ conflicts with the A01 truck model, where 90 t over 60–64 m³ implies about 1.40–1.50 t/m³. The area finding asked for 15–17 t. At 11.5 m³ × 0.95 fill × 1.45 the pass is about 15.8 t.",
+     "correction": "Change it to P('≈ 15 – 17', 't per pass', '11–12 m³ × ~0.95 fill × ~1.45–1.55 t/m³ loose (same density as the haul-truck lesson); volume-limited'). Update key_points[0], wl_load and the part label to '~16 t of bauxite'. Leave rated_payload at 20–22 t."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content params.engine_power; META wl_rear; rear_frame label",
+     "issue": "R1: Three different engine powers were given.",
+     "correction": "Verified: '≈ 600–700 kW (net–gross)' in the lesson and '~650 kW class' in META and the label. Nothing further needed."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content plant.qty, params.fleet_reference_plant",
+     "issue": "R1 and the area finding: the fleet was given as 1 unit while the tag range covers two.",
+     "correction": "Verified: '2 installed (1 operating + 1 standby)' and P('2 (1 operating + 1 standby)'), consistent with 01-FL-001…002."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "content selection[0] '~4–5 passes … about 5 passes into a 90 t truck'",
+     "issue": "R1: The pass count was wrong. It is now mostly fixed, but at 16–18 t a 90 t truck takes 5.0–5.6 passes. Volume-wise, the 60–64 m³ body divided by about 10.9 m³ per pass is 5.5–5.9. So 'about 5' is optimistic, and the area finding asked to keep 5–6.",
+     "correction": "Change it to: 'Match the loader to the truck in ~4–5 passes at rated payload. In bauxite (~1.45–1.55 t/m³ loose) an 11–12 m³ rock bucket carries ~15–17 t, so a 90 t / ~62 m³ truck takes about 5–6 passes. A ~13–14 m³ light-material bucket brings this back to ~4–5.'"
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content MODULES['m2p_wheel_loader'].safety",
+     "issue": "R1 (per-model): The safety section was too thin (tyres, raised arms, fire, access, edges).",
+     "correction": "Verified: all five requested items are present in the content and in output/learning JSON."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "content MODULES['m2p_wheel_loader'].safety / operation.normal / operation.alarms_interlocks",
+     "issue": "Area finding: reversing-collision controls, ROM-pad traffic rules, hopper tipping rules and CAS. Still missing are the explicit reversing rule, the ROM-pad one-way loop and loader-side rule, and the hopper rules (green light, square to the wheel stop, never while the rock breaker works). alarms_interlocks still has no 'Proximity detection / CAS'. 'Secondary-steering activation' covers only part of steering pressure. The only related line is the generic 'Large blind spots; proximity detection'.",
+     "correction": "Add to safety: 'Reversing is the main loader hazard: camera/radar and CAS, never reverse into a truck lane; on the ROM pad trucks use a one-way loop and the loader works only on its marked side'. Also add 'At the dump hopper: tip only on green, approach square with the frames straight, stop with the tyres at the wheel stop, never tip while the rock breaker is working'. Add to alarms_interlocks: 'Proximity detection / CAS', 'Low steering pressure → secondary steering'. Mirror the hopper rule in operation.normal[0]."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content operation.pre_start/start_up/shut_down/alarms_interlocks",
+     "issue": "R1: The operating steps were too thin for training.",
+     "correction": "Verified: all requested items are present."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "content failures[]",
+     "issue": "R1: Fire, power-train overheating and structural cracking were missing.",
+     "correction": "Verified: three new F() entries."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "m2p_wheel_loader RT=1.44; fenders RT*2+0.15=3.03; params.tyres",
+     "issue": "R1: The tyre was 7 % oversized.",
+     "correction": "Verified: OD 2.88 m and '45/65R45 class, ~2.9 m'."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "m2p_wheel_loader K.stair('ast', (-0.5,1.95,0.55), (-1.35,1.95,2.75), width=0.6)",
+     "issue": "R1: The stair was moved from the rear to the left side, but it is now unusable as a stair. Rise 2.20 m over run 0.85 m is about 69°, which is ladder steepness (ISO 2867 stairways are roughly 50° or less, from memory). K.stair puts 12 treads 0.27 m deep on a 0.071 m going, so the treads overlap by about 0.2 m. A shallower stair cannot fit between the tyres at y=1.95: the front tyre at +40° reaches x≈0.03 at y≈1.7, and the rear tyre front is at x=−1.46. My round-1 proposal of (−0.8,1.9,0.6)→(−2.4,1.6,2.75) would itself cut into the rear tyre around x≈−2.0, z≈2.2.",
+     "correction": "Model it honestly as an inclined access ladder: label it 'inclined access ladder (~70°) with handrails both sides', use K.ladder-style rungs at 0.25–0.30 m pitch, or K.stair with treads ≤ 0.07 m deep. Alternatively, splay it outward diagonally from (−0.6, 2.9, 0.55) to (−1.25, 1.75, 2.75) (about 57°, clear of the rear tyre whose outer face is y=2.375) and add a lower swing-down step."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content key_points[2]; quiz Q2",
+     "issue": "R1: The Z-bar 'racks back as it lifts' wording was misleading.",
+     "correction": "Verified."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content key_points[4]; operation.normal[1]",
+     "issue": "R1: No number was given for load-and-carry distance.",
+     "correction": "Verified: ≤ 100–150 m, TKPH, bucket at ~0.5 m."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content maint.periodic/routine",
+     "issue": "R1: Service intervals were lumped together.",
+     "correction": "Verified: split into 250/500/2,000/4,000 h plus fire-suppression checks."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "m2p_wheel_loader FR=1200, SEG + integration; META model_configuration.animation",
+     "issue": "R1 and the area finding (FR): the machine never travelled, and the 13 s loop was compressed without a label.",
+     "correction": "Verified. 40 s real time with +2 m into the pile, −9 m reverse while articulating to +40°, then +4 m forward. I re-integrated the rear-axle path with the same no-slip law (dθ = (ds·sinφ − a·dφ)/(a + b·cosφ), a=b=2.9). The loop closes to 0.000 m and 0.0°. Peak hitch speed is 2.1 m/s (7.7 km/h) and peak articulation rate 25°/s. The source META text is correct, but see the stale-META finding."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "content quiz[]",
+     "issue": "R1: The quiz had only recall questions with obvious distractors.",
+     "correction": "Verified: Q4 has plausible distractors and a frame-lock question was added."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "m2p_primary_sizing_station ws boxes (12.5×0.6×1.55 at y=±5.0); content wheel_stop_height; basis final_00_mining; META ps_civil",
+     "issue": "Area finding: the wheel stop was sized for trucks only. The builder now uses 1.55 m (≥ ½ × 2.88 m loader tyre = 1.44 m, so there is margin). The lesson parameter, key point, quiz and basis say 'largest machine … ~1.55 m'. But META components ps_civil (line ~2286, also in output/meta/m2p_primary_sizing_station.json) still says 'concrete wheel-stop bunds ≥ half tyre height (~1.35 m)'.",
+     "correction": "Change ps_civil construction to '… concrete wheel-stop bunds ≥ ½ the wheel height of the largest machine using the dump (1.55 m; the 45/65R45 wheel loader also tips here) …'. Optionally change the lesson key point to '≥ 1.45 m for the ~2.9 m loader tyre; 1.55 m adopted'. Then rebuild the station META."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "m2p_mine_overview DUMP = sl(0.0, -9.95) with the raised ws (top ZD+1.55, inner face |y|=4.7); m2p_haul_truck PIV=(-3.55,2.15), ZFL=2.95, TMAX=48°",
+     "issue": "The higher wheel stop introduced a clash in the overview. The truck stops with its rear tyres 1.0 m short of the 1.55 m bund. At θ=48° the dump-body underside and tail corner (local (−5.35…−5.05, 2.95)) swing down to z=1.46 m at the bund's inner top edge (station y=−4.70). That is 0.09 m inside the bund for the whole hold (t≈0.50–0.62 of the dump clip). The old 1.35 m bund was cleared by about 0.11 m. The overview_tipping render shows the tail sitting on the bund.",
+     "correction": "Set DUMP = sl(0.0, −9.6): rear tyres 0.65 m short, with a computed minimum clearance of 0.30 m over the bund at 48°. Or use sl(0.0, −9.3): 0.35 m short, 0.63 m clearance. Update the comment '(rear tyres ~1 m short of the bund)', and move PRE by the same 0.35 m so the reverse leg length is kept."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "m2p_wheel_loader F=(2.8,3.3), E0=B0+0.7·unit(B0−C0)=(5.07,3.22), tilt cylinder r=0.22 (barrel Lb=2.02), xtube r=0.20 at B0",
+     "issue": "The tilt-cylinder barrel passes through the bell-crank cross-tube for about 12 s of each cycle (t≈0.17–0.47, while racked back and lifting). Closest axis-to-axis distance is 0.338 m at t=0.36, but the radii add to 0.42 m (0.44 m at the barrel head ring). The closest point is 1.80–1.93 m from F, inside the barrel (Lb=2.02 m), so the overlap is about 0.08–0.10 m. Also, the builder comment 'tilt cylinder 2.17–2.66 m (ratio 1.23)' does not match the cycle, which runs 2.122–2.658 m (ratio 1.25).",
+     "correction": "Move F to (2.75, 3.6) (move the 'tfb' boss with it) and lengthen the crank top to 0.8 m: E0 = B0 + (B0−C0)·0.8/R_BC ≈ (5.14, 3.29). Over the cycle the tilt cylinder then runs 1.85–2.55 m (ratio 1.38) with 0.454 m axis clearance to the cross-tube. The rest length (2.41 m) is then no longer the minimum, so build the cylinder at its minimum length: hydraulic_cylinder(F, F+(E0−F)·1.85/2.41). Key the rod as (L − 1.85). Update the comment."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "output/meta/m2p_wheel_loader.json (timestamp 04:57, older than the builder edit at 05:04)",
+     "issue": "The exported model metadata is stale and contradicts the lesson and the builder META source. model_configuration.animation still says '… return (13 s)', components.wl_load.construction 'About 20 t.', and wl_arms 'Dump clearance ~4.5–5 m' without the ~80° arm rotation or hinge-pin text. Meanwhile animations.Operate.duration_s is already 40.0. The output/learning JSON does match the content.",
+     "correction": "Re-run the m2p_wheel_loader build (BUILDERS['m2p_wheel_loader']) so output/meta is regenerated from META['m2p_wheel_loader']. Add a check that output/meta/*.json model_configuration and components match the source META."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "m2p_wheel_loader SEG segments 4–6 (0.42–0.78): articulation +40° → −40°, held at −40° during the dump",
+     "issue": "The loader lifts to full height and dumps at full lock (φ=−40°, front heading −43.8°). The lesson tells the operator to approach a truck or hopper square to the wheel stop. Dumping at full lift while fully articulated also reduces tipping margin and is not what trainees should copy.",
+     "correction": "Straighten the frames over the last ~2 m. For example: (0.40,0.50, 3.0, 40°, −40°), (0.50,0.55, 2.0, −40°, 0), (0.55,0.66, 0, 0, 0), (0.66,0.71, −2.0, 0, −40°), (0.71,0.80, −3.0, −40°, 40°), with the S4/S7 windows trimmed to match. The retrace still closes the loop exactly; I checked it gives front heading ≈ −32° at the dump. Keep peak articulation rate ≤ ~25°/s (lock to lock ≥ 3.5 s) by spreading the segments as needed."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "Station ws (0.6 m thick, inner face 0.4 m behind hopper edge HW=4.3) vs loader reach; content wheel-loader principle step 3 / operation.normal",
+     "issue": "With the 1.55 m bund, a loader with its front tyres touching the outer bund face (|y|=5.3) puts the cutting edge at |y|≈3.59 and the teeth at ≈3.25 at a 45° dump. That is only 0.7–1.05 m inside the hopper edge. If the loader stops 1 m short (as the overview truck does), the edge lands at |y|≈4.59, over the deck strip between hopper edge and bund, and ore spills onto the deck. Neither lesson tells the loader operator how to tip at this hopper.",
+     "correction": "In the loader lesson, operation.normal: 'At the hopper: frames straight, approach square, front tyres against the wheel stop, dump at full lift'. In the station lesson add: 'loader tips with the tyres at the bund; a dedicated loader tip point with a thinner bund set closer to the edge is preferred'. Optionally make the ws 0.5 m thick with a 0.3 m set-back."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "m2p_wheel_loader linkage (D0 0.63 m from H, R_CD=2.40), pick = lambda p: p[1] < B0[1]; comment 'bell-crank / link angle 50–130°'",
+     "issue": "The bucket-side link angle (link C–D to crank D–H) is near toggle at both ends of the cycle: 172.8° at the carry rack-back (t=0.24–0.29) and 8.3° at the dump (t=0.62–0.66). The effective lever is |DH|·sin(angle) = 0.08–0.09 m, against 0.54 m at dig. The comment's 50–130° applies only to the angle at C. Over a 170° relative bucket rotation this is partly unavoidable; I searched a grid of alternatives and did not find much better. Separately, at t≈0.62–0.67 both circle intersections lie below B0, so the pick only works because s1 happens to be the right one. At the dump the bucket back plate also grazes the arm ends (0.26–0.27 m from the arm centreline vs about 0.27 m arm half-width) in the y=±1.2 slab.",
+     "correction": "Make the pick follow the side of line B0–D that C0 was on, e.g. pick = lambda p: cross(D−B0, p−B0) has the same sign as at rest, so it cannot flip. Update the comment to 'angle at C 50–128°, at the bucket pin 8–173° (near toggle at full dump and full rack-back; dump stops take the load)'. Mention bucket dump/rack-back stops in wl_zbar. Optionally trim the carry rack-back to +40° relative (abs ≈ +46°) to come off the 173° toggle."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "m2p_wheel_loader K.ladder('rld', (-6.15,1.25,0.65), 3.74) vs K.handrail('rhr', … (-5.4, ±2.2, 3.74) …) and rdeck x −5.6…−1.6",
+     "issue": "The rear engine-deck ladder arrives 0.55 m behind the deck edge (x −6.15 vs −5.6), and the deck handrail at x=−5.4 runs straight across the ladder head with no gate or opening. There is no safe transfer from the ladder to the deck.",
+     "correction": "Add a 0.6 m landing at the ladder head (box 0.6×0.8 at x≈−5.9, y=1.25, z=3.74) and break rhr at y 0.9–1.6 with a self-closing gate. Alternatively, remove the rear ladder and rely on the side access."
+    }
+   ]
+  }
+ },
+ {
+  "key": "overview",
+  "review": {
+   "score_0_10": 7,
+   "summary": "Round-2 review of m2p_mine_overview. Web search was not available, so class values come from my own knowledge (medium confidence). Geometry, kinematics and timing were recomputed from the code in pure Python (a copy of _fillet, speeds, timed, truck_state, ik and the PASSK interpolation) and checked against the round2 renders.\n\nThe rework is substantial and most round-1 items are fixed:\n- The pit ramp is now a 27 m box cut at 10 % that meets the plateau at z = 0. Lanes are keep-left: x = -37 for loaded trucks and x = -26 for empties, and road lanes are y 156.5 / 145.5. No truck spins in place.\n- Truck speeds are realistic: 10.8 km/h loaded up the ramp, 32 to 40 km/h on the flat, 5.4 km/h reversing. The cycle runs in real time at about 7 min (T = 427 s; circuit A 421 s, circuit B 400 s).\n- At the hopper the truck reverses straight for 14.75 m. Its rear tyres stop 1.02 m short of the 1.55 m wheel stop, then it plays the 30 s tip clip.\n- Trucks never overlap. The closest approach between footprints is 4.4 m, where loaded and empty trucks pass on the station ramp.\n- Each truck takes 6 passes of 30 s and the excavator clip is synchronised with the truck dwell.\n- The ROM pad is 3 ha with five fingers of about 9 kt each at 35° (about 2.7 days of ROM). It no longer touches the station ramps.\n- Backfill (2.5 m at 37°) and rehabilitation (surface at -4.25 m, 15.8° landform walls) now balance with the waste removed.\n- The model now has grade control (collars, RC rig, grade-bin polygons), the drill on a pegged 3.0 x 3.5 m pattern, the loader, light vehicles, a water cart, a sump and pump, the safety, start-up and shut-down text, and area-specific narration.\n\nRemaining problems:\n1. The ore excavator's dig pose takes the bucket teeth 0.53 m below the grade-control clay floor (z -7.53). On the return swing the bucket comes within 0 to 0.1 m of the truck's tail corner. The swing is only 17.6°, while the excavator lesson teaches 45 to 70°.\n2. The station-ramp windrows sit 2.25 m outside the ramp edges, so they float beside an embankment up to 10 m high. The tipping-deck outer edges have only 1.1 m handrails.\n3. Light vehicle no. 0 is fully buried in the sediment-pond bank. The pond water slab floats about 4.8 m inside the banks, and the banks are 1.9:1, not the 3:1 the label claims.\n4. The ROM pad is about 400 m of load-and-carry (including a 10 m climb) from the hopper. The loader lesson limits load-and-carry to 100 to 150 m.\n5. The final basis m2p/basis/final_00_mining.json (written 05:05) now fixes an India East Coast deposit: 10–30 m ore on 5–8 m drill-and-blast benches, ramps no steeper than 8 %, 20–45 ha/yr. The overview still shows a 4.2 m free-dig ore flitch.\n6. The built outputs are stale again. The truck and dozer GLBs (05:42) are newer than the overview GLB (05:04), and the learning JSON (05:03) predates content/m2p_mine.py (05:05).\n\nOverall the model is close to trainee-ready once the excavator poses, the windrows and deck bunds, the light-vehicle and pond clash and the basis alignment are fixed.",
+   "findings": [
+    {
+     "status": "fixed",
+     "severity": "critical",
+     "where": "_eq_m2p_mine.py m2p_mine_overview: ramp/rws extrude_poly YZ y 60–130, x -45…-18; g1/g2/g4/g5/g6 plateau columns",
+     "issue": "R1 critical: the pit ramp's open pit-side edge had no windrow.",
+     "correction": "Fixed. The ramp is now a box cut with ground on both sides, so the running surface (x -44…-19) has no drop-off edge. Leftover point (see the box-cut finding): the crests of the box-cut walls at x = -45 and x = -18 for y 60–125 (cut depth 0.5–7 m) have no bund. Extend wr_rt1 and wr_rt2 down to y = 60, or fence those crests."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "pramp/pramps (27 m cut, 25 m running surface); loaded lane x=-37, empty lane x=-26",
+     "issue": "R1: the ramp was 12 m wide and single-lane, sat inside the mined block, and had a 1.3 m step at the top.",
+     "correction": "Fixed. The ramp is 25 m wide (4.5 × truck width), lanes are 11 m apart (4.9 m between trucks), it lies outside the mined block (y 60–130), and its top meets the plateau at z = 0 with keep-left lanes."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "truck_state/speeds/timed, SCHED, clearance(); FR = 12810 (T = 427 s)",
+     "issue": "R1: head-on passing, 108 km/h, no dwell.",
+     "correction": "Fixed. Recomputed values: circuit A loaded 464 m in 127 s, empty 390 m in 88 s; circuit B 392 m / 114 s and 359 m / 81 s. Loading dwell is 164 s, reverse 12 s, tip 30 s. The minimum gap between truck footprints is 4.4 m (passing on the station ramp at t ≈ 139 s). No overlaps and no 180° spins."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "rd sr_east/sr_west extrude y 170→256 (0→8.6 m) plus station stub 256→270; PRE = sl(0,-24.7), DUMP = sl(0,-9.95)",
+     "issue": "R1: trucks climbed a 75 % slope onto the deck and never reversed or tipped.",
+     "correction": "Fixed. The station ramps are 100 m at 10 %. The truck turns at R 11 to PRE (54.7, 290), reverses 14.75 m square to the hopper and stops with its rear tyre back edge at x = 36.32, 1.02 m short of the wheel-stop face (x = 35.3). It then plays the truck's own 30 s tip clip. Deck clearances: truck front at PRE is 3.0 m from the deck edge (x = 62.7); the outer corner on the empty turn reaches x = 57.2 and y = 293.5, both inside the deck."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "rp: rompad box 200×150 at (-110,260); _hipped fingers 22×80→2×60×7 m",
+     "issue": "R1: ROM pad too small, ellipse fingers, overlapping the station ramps.",
+     "correction": "Fixed. 3.0 ha. Each finger is 6,113 m³ by the prismatoid formula, about 9.2–9.8 kt at 1.5–1.6 t/m³. Five fingers hold about 47 kt, roughly 2.7 days at 17.3 kt/d. Side slopes are 35°. The pad edge (x ≤ -10) is clear of the west ramp (x ≥ -2.7). The new load-and-carry distance problem is reported separately."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "bf 'bfo' (2.5 m, toe offset 3.3 m), rh 'rho' 2.5 m + 'rht' 0.25 m, 'rhw'/'rhn' batters",
+     "issue": "R1: mass balance and the vertical backfill wall.",
+     "correction": "Fixed. Waste is (1.05 m overburden + 0.75 m of waste caprock) × 1.25 swell ≈ 2.25 m, consistent with 2.5 m of backfill. The batter is atan(2.5/3.3) = 37°, landform walls are atan(4.25/15) = 15.8°, and the rehabilitated surface is at -4.25 m. Cosmetic: 'rhn' starts at z -4.25 over the backfill strip x -100…-70, whose top is -4.5. Use -4.5 there or end 'rhn' at x = -100."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "MODULES['m2p_mine_overview'].definition; quiz Q7",
+     "issue": "R1: the definition described the mining advance direction backwards.",
+     "correction": "Fixed, and a quiz question has been added."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "gc_drilling, grade_bins, contact() heightfields, principle step 0, META mn_gc",
+     "issue": "R1: no grade-control element.",
+     "correction": "Fixed. Minor leftovers are reported in the RC-rig and grade-polygon findings."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "inst drill: rg.posed(..., 6.0, T(38.7,-24,-1.3)); pattern 3.0 × 3.5 at x 28–49; muck box top -0.85",
+     "issue": "R1: no drill in the model, and collars drawn on the blasted muck.",
+     "correction": "Fixed. Collars sit on the stripped caprock (drilled holes x < 43, pegs at x ≥ 43). The rig's active hole at x ≈ 43.0 lines up with the pegged row. Muck is swelled 1.3× (1.95 m on 1.5 m)."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "EXC pos (7.3, ±, -2.8); SPOT A/B (-5.3, -15.9 / 22.1); SWING = atan2(4.0, 12.6) = 17.6°",
+     "issue": "R1 excavator placement. Fixed: the track front (MK.crawler_track x1 = 3.3) is 4.0 m from the crest, the final drives are at the rear, the truck is on the operator side and the bucket never passes over the truck cab (at dump the bucket's y range is -12.1…-15.8; the canopy starts at y -17.3). Still open: the loaded swing is only 17.6°. That contradicts the excavator lesson (quiz: 'short swing angle ~45–70°'; Operate clip 65°) and the basis ('best swing angle ~45–70°'). The truck's tail (body x -5.35 → world y -10.55) also reaches the excavator's dig line (y = -10 ± 1.55). Both follow from the boom length: _ex_geom gives L1 + L2 = 7.99 + 3.6 = 11.59 m from the boom foot, about 1.4 m short of a 200 t class backhoe (my estimate, medium confidence), so the truck body centre already sits at r = 13.2 m.",
+     "correction": "Move the dig zone away from the truck instead of moving the truck. Give the face poses a negative swing (sf = -0.68 ≈ -12° at PASSK t = 0, 17, 20, 26 and 30). The loaded swing then becomes about 30° and the dig band moves to y ≈ -6.6…-9.8. Add a return key above the rail, (14.0, 0.0, 9.0, 3.6, 30, 0). Also move SPOT A to (-5.3, -17.4) and SPOT B to (-5.3, 20.6) and set SWING = atan2(5.5, 12.6) = 23.6°. Better still, lengthen the boom in _ex_geom: KN segment 4.8 → ~5.9 m, giving B0→A0 ≈ 9.1 m (class value). Update the mn_excavator text to 'swinging ~30–45° to the side of the body'."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "output/learning/m2p_mine_overview.json video_tutorials; MODULES narration; META overlays.flow",
+     "issue": "R1: generic pump narration, lower-cased chemical formulas and an exploded view that did nothing.",
+     "correction": "Fixed. The narration is mine-specific, Al₂O₃ and SiO₂ keep their case, the profile layers explode 1.5–7.5 m, and cross_section.what_to_look_for is filled. Leftover: cut = true in the Operation intro and every Maintenance step does nothing, because no part has section 'front' or 'hide'. Set cut = false or give the forest profile parts section = 'front'."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "operation.start_up / shut_down / alarms_interlocks",
+     "issue": "R1: start-up and shut-down missing.",
+     "correction": "Fixed as proposed."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "MODULES safety (8 items)",
+     "issue": "R1: the safety list was one generic line.",
+     "correction": "Fixed with the round-1 list. The gaps raised at area level are reported in the area-safety finding."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "params.ore_thickness, rehabilitation_rate; LAY ore -2.8…-7.0; m2p/basis/final_00_mining.json (05:05)",
+     "issue": "R1: two deposit types mixed. The parameters were widened (4–15 m, 30–75 ha/yr) and the forest label made generic, but the model and steps still teach a thin (4.2 m) Darling Range-type deposit dug free in one flitch. The final basis written at 05:05 now fixes the deposit as India East Coast type: 10–30 m ore mined on 5–8 m drill-and-blast benches, ramps no steeper than 8 %, about 5.9 Mt/yr wet, strip ratio 0.1–0.4, 20–45 ha/yr, haul 2–6 km, and a 4–6 ha ROM pad with 10–30 kt fingers beside the dump station.",
+     "correction": "Pick one option. (a) Keep the thin-ore scene and label it in META model_configuration and the definition: 'Illustration uses a thin (~4 m) ore column for clarity; the reference plant (East Coast type) mines 10–30 m of ore on 5–8 m drill-and-blast benches.' Then align the params with the basis: rom_ore_mined '≈ 5.9 Mt/yr wet', strip_ratio '≈ 0.1–0.4', rehabilitation_rate '≈ 20–45 ha/yr (East Coast); ~60–110 ha/yr Darling Range-type', haul_distance '2–6 km', ramp '≤ 8 % sustained (10 % short ramps)', rom_pad '4–6 ha, fingers 10–30 kt'. (b) Or rebuild the block with two 5–8 m ore benches."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "META mn_cleared",
+     "issue": "R1: clearing-time contradiction.",
+     "correction": "Fixed."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "META standards",
+     "issue": "R1: GISTM was listed.",
+     "correction": "Fixed (ICMM 2019, LPSDP 2016, local closure plan)."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "key_points[1], quiz Q1",
+     "issue": "R1: the ore was called always free-digging.",
+     "correction": "Fixed."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "principle step 3, META mn_blasted, params.blast_pattern, builder pat 3.0 × 3.5",
+     "issue": "R1: 4 × 4 m pattern.",
+     "correction": "Fixed in the builder. Small inconsistency: the overview text says 'up to ~4 × 4 m' while the drill lesson uses 2.5–3.5 × 3.0–4.0. Change params.blast_pattern to '≈ 2.5–3.5 × 3.0–4.0 (nominal 3.0 × 3.5)' and use the same wording in step 3 and mn_blasted."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "topsoil_stockpile label",
+     "issue": "R1: the topsoil label contradicted itself.",
+     "correction": "Fixed."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "sediment_pond: _hipped banks (bx 12.5 → tx 3, h 2.5) on z 0; pwt 38 × 22 at z 1.95; spw boxes",
+     "issue": "Material, spillway, sump pump, HDPE line and diversion drain are added. Still wrong: (1) the banks are (12.5 − 3)/2 = 4.75 m per 2.5 m, i.e. 1.9H:1V, not the '3:1' in the label and mn_pond; (2) at z = 2.0 the inner bank face is 3.8 m outside the 40 × 24 toe, so the 38 × 22 water slab leaves a ~4.8 m gap and floats 2 m above a dry floor; (3) the pond is an above-ground ring dam on a flat plateau, which cannot take gravity runoff; (4) the spillway boxes at x -118, -120.5 and -123 are mostly buried in the west bank, so there is no crest notch.",
+     "correction": "Make it an excavated basin: floor at -2.5 m, inner batters 3:1 (7.5 m run), water at -0.5 m. Size the water plane to the batter at that level, e.g. (PW + 2×6) × (PL + 2×6) if the crest is at z 0. Otherwise keep the ring dam, change the label to '~1.9:1', and set pwt to 47.6 × 31.6. Cut a spillway notch 0.5 m below the crest in the west bank and line it with the armour boxes."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "_windrow trapezoid; road 'rew' at z 0 on the plateau",
+     "issue": "R1: box berms and a floating road.",
+     "correction": "Fixed. Leftover: no crossfall or table drain is modelled on the haul road; add a 1 m drain box along y = 138.5 and y = 163.5."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "maint dict",
+     "issue": "R1: maintenance gaps.",
+     "correction": "Fixed."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "failures",
+     "issue": "R1: missing ore-loss and wet-season failures.",
+     "correction": "Fixed."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "prof_names / overview_profile_face.png",
+     "issue": "R1: layer naming and face framing.",
+     "correction": "Fixed. The face render now shows all five layers in the forest block."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "excavators keyed per frame from ex_state; step 5 text",
+     "issue": "R1: static excavators and the ROM wording.",
+     "correction": "Fixed. The pass dumps at t = 1 + 30p + 9 s match the payload increments."
+    },
+    {
+     "status": "not_fixed",
+     "severity": "major",
+     "where": "output/glb (overview 05:04; m2p_haul_truck and m2p_crawler_dozer 05:42); output/learning/m2p_mine_overview.json (05:03) vs content/m2p_mine.py (05:05)",
+     "issue": "Area finding (stale builds) has recurred. _Rig and _import_glb bake the truck and dozer GLBs into the overview when it is built, so the overview embeds truck and dozer geometry older than the current GLBs. The learning JSON predates the content: it shows 'HT 9 + 2' where the content now says 'HT 9–10 + 2'.",
+     "correction": "Rebuild all BUILDERS except m2p_mine_overview, then m2p_mine_overview last, then regenerate output/meta and output/learning and the round-2 renders. Make the build script enforce this order."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "META model_configuration.animation",
+     "issue": "Area finding (speed): fixed in real time. The requested note on compressed distances is missing: the modelled haul is 0.36–0.46 km one way against 2–6 (basis) or 2–8 km (lesson).",
+     "correction": "Append to the animation text: 'Distances compressed: real one-way haul 2–6 km (reference plant), real cycle ≈ 25–30 min.'"
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "zone_orebench, exC at (19.5, 42, -0.85) with ik(9.0, -0.6, D(-20)); EXC dig PASSK t = 20 (8.6, -1.9, 10°)",
+     "issue": "Area finding (selective mining). Added: an ore bench at -2.8 and a caprock excavator on the muck. Still wrong: (1) the caprock excavator's bucket teeth reach z -3.82 at x 10–12, about 1 m into the ore bench, i.e. it digs caprock and ore together; (2) it has no truck and no caprock route to the sizer or backfill; (3) there is no access ramp from the floor onto the ore bench.",
+     "correction": "Change exC to ik(9.0, 0.4, D(-20)), which puts the teeth at -2.82, on the ore surface. Add a static, posed truck beside it at about (12.0, 28, -2.8), loading from the ore bench, labelled 'caprock: to sizer if GC ore, else backfill'. Add a 10 % access ramp from the floor to the bench (e.g. x -10…0, y 45–58)."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "inst drill, wheel_loader, light_vehicles, water_cart",
+     "issue": "Area finding: drill, loader and light vehicles were missing.",
+     "correction": "Fixed. The light-vehicle bay clash is reported separately."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "major",
+     "where": "MODULES safety / alarms_interlocks",
+     "issue": "Area finding (area safety). The list now has 8 items, but key area hazards from the area finding are still missing: drowning in sumps and ponds (the model now shows both), stop-work on exposed benches and decks during lightning or storms (the alarm covers explosives only), lower speed limits on wet roads, brake tests and escape lanes on long downgrades, traffic-management plan rules (right-of-way, radio call-up, one-way loops), and tipping rules at the ROM fingers.",
+     "correction": "Add these lines: 'Sumps and ponds: fenced and signed, life rings, no lone work near water'; 'Lightning/storm alert: stop work on exposed benches, decks and ramps and clear charged patterns'; 'Wet roads: reduced speed limits; never over-water ramps and intersections'; 'Brake test before descending; escape lanes or arrester berms on long downgrades'; 'Traffic management plan: heavy vehicles have right of way, radio call-up before entering haul roads, keep-left one-way loops'; 'Hopper: tip only on green, square to the wheel stop; ROM fingers and dumps: tip short and let the dozer push'. Add 'Fatigue alarm' and 'FMS overspeed alarm' to alarms_interlocks."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "key_points[3], step 4, META mn_blasted",
+     "issue": "Area finding: the caprock rule was inconsistent across lessons.",
+     "correction": "Fixed. The same sentence is used here and in the truck and excavator lessons."
+    },
+    {
+     "status": "fixed",
+     "severity": "major",
+     "where": "params.fleet_reference_plant",
+     "issue": "Area finding: the overview had no fleet summary.",
+     "correction": "Fixed in the content (EX 3 · HT 9–10 + 2 · DZ 3 + 1 · DR 2 + 1 · FL 1 + 1 · GR 1–2 · WC 2 · RC 1–2). Regenerate the learning JSON, which still shows 'HT 9 + 2'."
+    },
+    {
+     "status": "partly_fixed",
+     "severity": "minor",
+     "where": "A01 catalogue",
+     "issue": "Area finding: missing machines and processes. The RC rig, water cart, light vehicles and sump pump are now static props in the overview, but there is still no grader anywhere (it controls rolling resistance) and no ROM-pad or blasting-cycle lessons.",
+     "correction": "Add a posed motor grader on the haul road at about (-130, 145.5, 0) heading -x, ref 'mn_grader'. Keep the ROM/blending, RC and MMU lessons on the backlog."
+    },
+    {
+     "status": "fixed",
+     "severity": "minor",
+     "where": "labels['forest'], mn_cleared, payload hidden on empty legs, key_points[2]",
+     "issue": "Area finding: forest label, clearing time, payload on return, and the definition of available Al₂O₃.",
+     "correction": "Fixed."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "m2p_mine_overview PASSK (20.0, 0, 8.6, -1.9, 10, 0) and (17.0, 0, 8.4, 1.4, 30, 0); SPOT A/B",
+     "issue": "Computed from _ex_geom and the eased PASSK, with the bucket wrap and tooth tip. (1) At t = 20 s the lowest bucket point is z -7.53, 0.53 m below the GC clay floor (-7.0). This contradicts the selective-mining text and the basis rule 'stay 0.1–0.3 m above the clay'. (2) The dig starts at x -2.45…-0.42, i.e. in the truck lane in front of the face (crest at x = 0), not in the bench. (3) At t ≈ 17–18.5 s the bucket reaches x -2.72 to -2.55 with y -10.55…-11.55 and z -4.7…-4.3. That touches the truck body's right rear corner (body x ≤ -2.55, tail y = -10.55) with 0–0.1 m clearance. On the return swing (t ≈ 13.4) the bucket passes the tail at rail height (z -2.46).",
+     "correction": "Use the swing changes in the excavator-placement finding (dig swing -12°, return key at t = 14 above the rail). Set the dig key to (20.0, f, 8.6, -1.2, 10, 0) and (26.0, f, 7.4, -0.3, -50, 0.6), which gives a lowest point of -6.83 (0.17 m above the clay) and teeth up to x +2.76 inside the bench. Re-run a bucket-vs-truck clearance check (target ≥ 0.5 m) after moving the SPOTs 1.5 m along -y."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "m2p_mine_overview: for name, xa, xb in (('east', 34.7, 62.7), ('west', -2.7, 25.3)): xe in (xa - 2.25, xb + 2.25)",
+     "issue": "The station-ramp windrows are centred 2.25 m outside the ramp fill (east ramp x 34.7–62.7; windrows at 32.45 and 64.95, each 4.5 m wide), but their base follows the ramp grade up to 10 m. They float beside an embankment up to 10 m high, and the real ramp edges have no windrow.",
+     "correction": "Put them on the running surface: xe in (xa + 2.25, xb - 2.25), i.e. 36.95 / 60.45 and -0.45 / 23.05. The running width becomes 23.5 m, still ≥ 3.5 × 5.5 m. The loaded lane at x = 43.7 then has 1.7 m between its wheels and the windrow toe; shift the lanes to 44.5 / 54.0 if more margin is wanted."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "Station civil 'dhr' handrail (1.1 m) on the tipping-deck outer edges, used by the overview truck route (PRE at x 54.7, front 59.6; deck edge 62.7)",
+     "issue": "Trucks turn on a 10 m high deck within 3 m of an edge protected only by a 1.1 m pedestrian handrail. A handrail is not a vehicle barrier. This contradicts the overview's own safety line ('windrows ≥ half the largest tyre height on every open edge, ramp and tip head').",
+     "correction": "In m2p_primary_sizing_station add a concrete or earth bund 1.55 m high, about 1.5 m wide, along the outer deck edges: local y = ±(HW + 27.5) for x -20…12 and x = 12 for |y| 4.7…32.7. Keep the handrail behind it for pedestrians. Rebuild the station, then the overview."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "light_vehicles: lvbay (-62.5, 123), LVs at x0 = -67, -62.5, -58; sediment_pond east bank _hipped(cx = -68.75, bx 12.5 → x -75…-62.5, y 103…127, h 2.5)",
+     "issue": "The light-vehicle bay sits inside the pond's east embankment. At x = -67 the bank surface is z ≈ 2.37, so LV no. 0 (top z 2.08) is completely buried. LV no. 1 is 0.5 m into the bank toe, and the lvbund windrow at x = -71.5 lies on the bank crest. overview_ramp.png shows 3 flags but only 2 vehicles. Separately, windrow wr_s1 (y 135.5–140) cuts into the pond's north bank (y 127–139.5).",
+     "correction": "Move the light-vehicle bay clear of the pond and the box-cut crest, e.g. lvbay centre (-30, 175) north of the haul road with a short access stub and the bund on the road side. Or shift the pond: PX = -110, PY = 108, so the banks end at x ≥ -77 and y ≤ 132.5."
+    },
+    {
+     "status": "new_issue",
+     "severity": "major",
+     "where": "rom_pad at x -210…-10, y 185…335, z 0.3; hopper at world (30, 290, 10); wheel_loader at (-115, 307); loader lesson 'load-and-carry ≤ 100–150 m (ROM-pad fingers laid out within this distance of the hopper)'",
+     "issue": "The loader reclaiming finger 2 would have to carry about 130 m to the west ramp foot, 100 m up the 10 % ramp and about 30 m across the deck, roughly 260–400 m loaded. That is 2–3 times the limit in the loader lesson, and it contradicts the basis ('ROM pad sits beside the dump station').",
+     "correction": "Either build the pad at deck level beside the west tipping deck (a pad at +10 m next to world x -2.7…25.3, y 270–302, with the fingers within 100–150 m of the hopper), or keep it at grade and show the loader loading a truck that hauls to the hopper. In that case change mn_rompad and mn_loader to 'reclaimed by wheel loader into trucks (or load-and-carry ≤ 150 m where the pad adjoins the deck)'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "_windrow default h = 1.4 on haul road and station ramps; station wheel stop 1.55 m; label 'Safety windrows (≥ half the largest tyre height, ~1.4 m)'",
+     "issue": "The wheel stop was raised to 1.55 m because the wheel loader (tyre about 2.9–3.1 m) uses the station. The loader also uses the station ramps and the ROM access, where the 1.4 m windrows are below half its tyre height (1.45–1.55 m).",
+     "correction": "Use h = 1.55 (base about 5.0 m) on the station ramps, deck approaches and ROM-pad access. Change the windrows label to '≥ ½ the tyre height of the largest machine using the road (1.4 m trucks; 1.55 m where the loader travels)'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "trees_forest (explode 0) vs profile_topsoil explode (0, 0, 7.5)",
+     "issue": "In the exploded view the 0.25 m topsoil slab of the forest block rises to z 7.25–7.5 and cuts through the trunks of the 80 forest trees (12–22 m tall) standing at z 0.",
+     "correction": "Give trees_forest explode = (0, 0, 7.5), the same as profile_topsoil, so the trees ride on the lifted topsoil."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "water_cart: tank box (6.6, 4.0, 2.4) at truck-local (-2.3, 0, 3.4); wcM = T(-100, 151, 0)",
+     "issue": "The tank bottom (z 2.2) is below the rear tyre tops (2.69, inner duals at |y| 1.06–1.83), the frame kick-up (2.5) and the body pads (2.6), so the tyres pass about 0.5 m into the tank. The cart is also parked on the road centreline (y = 151) facing west, not in the keep-left lane.",
+     "correction": "Raise the tank to sit on the body pads: centre z 4.2 (bottom 3.0, top 5.4), and move the cannon and its pedestal up by 0.8. Place the cart at (-100, 145.5, 0) in the westbound left lane."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "gc collars grid (27 + 10i, -55 + 10j) vs rcj at (66, -38) rotated 90°; META mn_gc op",
+     "issue": "The collar at (67, -35) intersects the RC rig's rear right tyre (y -35.1 ± 0.55, x 67–67.45). The mast (local x -3.6 → world (66, -41.6)) stands over no collar, so the rig is not drilling a grid hole. mn_gc says 'Drilled ahead of clearing/stripping' while the rig stands on cleared ground.",
+     "correction": "Skip collars inside the rig footprint (x 64.5–67.5, y -42.5…-33.5), or move the rig so the mast is over a grid point: rig origin (67, -41.4), mast at (67, -45). Change mn_gc op to 'Drilled after clearing, ahead of stripping'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "grade_bins k = 3: grey 'waste' polygon (-68…-40, -58…-5) at z -6.95 on the mined-out pit floor",
+     "issue": "A waste polygon on a floor that is already mined to the clay contact means nothing and confuses the ore/waste concept. Haul lane x = -37 runs along its edge.",
+     "correction": "Move the waste polygon onto the ore bench (e.g. a high-SiO₂ pod at x 1–11, y 40–58) or onto the stripped caprock as a 'waste caprock' polygon. Relabel the floor outline 'GC floor (clay) — do not dig below'."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "diversion_drain dd1/dd1b at y = 104 (ending at x -46 and -17), dd2 at x = 146, y -56…104",
+     "issue": "dd2 floats over empty space for y < 60, because the forest block ends at x = 140 and the plateau g2 starts at y = 60. dd1 and dd1b end at the box-cut crests, so diverted water would discharge into the ramp and the pit, which defeats their purpose. The drain does not run round the west or south of the pit.",
+     "correction": "Move dd2 to x = 138 (on the forest block) or extend the plateau to x 150 for y -60…60. Route dd1 and dd1b round the ramp head (north of y = 165) to the pond or to a natural outfall, and add a short drain segment along the west of the backfill."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "truck_state 'load' with wait = T − circ_T (A 6.2 s, B 27.0 s); ex_state waiting pose",
+     "issue": "Every cycle the truck sits spotted under the excavator for 6–27 s while the excavator holds a full bucket at the face. Both machines wait for each other, which is the opposite of good truck-loader practice.",
+     "correction": "Put the wait before the spot (hold the truck about 30 m back on the approach leg at (-5.3, -7) for A and (-5.3, 31) for B) and start loading as soon as the truck is spotted, or let the excavator do clean-up passes during the wait."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "overview truck front_wheels keyed only with spin (Rotation(dist/RT, 'Y')); fillet radii 10–20 m",
+     "issue": "The front wheels never steer, although trucks take R 10–20 m turns, roughly 13–25° of wheel angle for a 4.57 m wheelbase. Steering is a component the truck lesson teaches.",
+     "correction": "Add a yaw about each front kingpin (truck-local (2.285, ±2.08)) of δ = atan(4.57 / R), with R taken from the heading change over the dense path; use 0 on straights."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "principle step 5 text",
+     "issue": "'…to the primary sizing station (or to a ROM-pad grade-bin finger …), reverse to the wheel stop and tip' tells trainees to reverse to a wheel stop at the ROM fingers. That conflicts with the tip-and-push rule in the truck lesson (normal[3], quiz).",
+     "correction": "Change it to: '…to the primary sizing station, reverse square to the wheel stop and tip (at a ROM-pad finger: tip short of the crest and let the dozer push).'"
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "m.flow('ore', [(6, -10, 1.0), (-5.5, -13, -1.0)] + …)",
+     "issue": "The ore overlay starts above the excavator house at (6, -10, 1.0), not at the dig face. The narration says 'from the excavator bucket'.",
+     "correction": "Start at the face and bucket: [(-0.5, -9.0, -4.5), (-4.7, -13.8, -0.5)] + pts. With the proposed negative dig swing, the first point becomes (-0.5, -8.2, -4.5)."
+    },
+    {
+     "status": "new_issue",
+     "severity": "minor",
+     "where": "empty lane x = 53.7 (y 155.5–162) vs road 'rew' x -160…55; box-cut walls (g1/g2/g4/g5 vertical 0–7 m faces at x -45 / -18)",
+     "issue": "(1) On the straight down from the station, the empty truck's left wheels run 1.5 m off the gravel road (x up to 56.5 against an edge at 55). (2) The ramp box-cut walls are vertical 7 m faces in overburden, soft ore and clay, which is not stable practice, and their crests are unbunded for y 60–125.",
+     "correction": "Extend 'rew' to x = 62.7 (box 222.7 × 22 centred at -48.65). Batter the box-cut walls (about 45° in overburden and ore, 60–70° in caprock), e.g. by extruding the cut as a trapezoid, and extend wr_rt1 and wr_rt2 down to y = 60, or fence those crests."
+    }
+   ]
+  }
+ }
+]

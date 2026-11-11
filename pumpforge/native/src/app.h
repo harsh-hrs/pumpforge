@@ -28,8 +28,10 @@ struct Store {
 };
 
 // ------------------------------------------------------------------ catalogue
-struct ModInfo { Str id, title, category, department, eq_id, subcategory, hay; int no = 0, phase = 0, dept = -1, tours = 0, quizq = 0; bool flagship = false; };
-struct DeptInfo { Str id, name, status; int modules = 0; };
+struct ModInfo { Str id, title, category, department, eq_id, subcategory, hay, area; int no = 0, phase = 0, dept = -1, tours = 0, quizq = 0, area_idx = -1; bool flagship = false, m2p = false; };
+struct DeptInfo { Str id, name, status; int modules = 0; bool m2p = false; };
+// Mine-to-Port catalog: plant areas in process order (from learning/m2p.json)
+struct AreaInfo { Str id, name, icon; int modules = 0; };
 
 // ------------------------------------------------------------------ orbit camera (three.js OrbitControls behaviour)
 struct Orbit {
@@ -49,7 +51,7 @@ struct Overlay { Str kind; Model* m = nullptr; bool xray = false; bool on = fals
 struct Label { Str kind, text; V3 p; };
 struct Flow { Vec<V3> pts; Vec<float> cum, speed, u; Vec<float> active; float L = 0, r = 0, base = 0; int n = 0; V3 color; bool on = true; };
 
-enum Tab { TAB_OVERVIEW, TAB_PARTS, TAB_WORKING, TAB_PARAMS, TAB_CARE, TAB_FAILURES, TAB_TOURS, TAB_QUIZ, TAB_TOOLS, TAB_COUNT };
+enum Tab { TAB_OVERVIEW, TAB_PARTS, TAB_WORKING, TAB_OPERATION, TAB_PARAMS, TAB_CARE, TAB_FAILURES, TAB_TOURS, TAB_QUIZ, TAB_TOOLS, TAB_COUNT };
 enum Screen { SCR_HOME, SCR_CATALOG, SCR_VIEWER, SCR_BOOKMARKS, SCR_MORE };
 enum MorePage { MP_NONE, MP_PATHS, MP_COMPARE, MP_CALCS, MP_TRAINING, MP_SETTINGS, MP_HELP, MP_ABOUT };
 
@@ -101,6 +103,9 @@ struct App {
     bool picker_open = false, fullscreen = false, markers = true; int picker_mode = 0;   // 0 open, 1 compare (tools), 2/3 compare page A/B
     Str pick_query;   // picker search (name, EQ number, component…)
     Str cat_query; int cat_dept = -1; bool cat_saved = false; // catalog filters (-1 = all departments)
+    int cat_coll = 0;                                    // 0 Equipment Library, 1 Mine to Port
+    int m2p_area = -1;                                   // open plant area page (-1 = Mine-to-Port overview)
+    JDoc m2p; Vec<AreaInfo> areas;                       // Mine-to-Port overview data
     int bm_tab = 0; int path_open = -1; int cmp_a = -1;
     Vec<int> quiz;                                       // answer per question (-1 = none)
     int cmp_mod = -1; JDoc cmp_learn; JDoc cmp_learn_a;
@@ -188,6 +193,8 @@ struct App {
     void ui_nav(float x, float y, float w, float h);
     void ui_home(float x, float y, float w, float h);
     void ui_catalog(float x, float y, float w, float h);
+    void ui_m2p(float x, float y, float w, float h);
+    bool has_tab(int t);
     void ui_bookmarks(float x, float y, float w, float h);
     void ui_more(float x, float y, float w, float h);
     void ui_more_page(float x, float y, float w, float h);

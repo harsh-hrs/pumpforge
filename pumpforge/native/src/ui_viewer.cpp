@@ -10,8 +10,8 @@ extern bool g_wide;
 Str dept_label(const App& a, int d);
 void thumb_tile(App& a, ImDrawList* dl, int mod, ImVec2 p0, ImVec2 p1, float r, bool gradient);
 
-static const char* TAB_NAMES[TAB_COUNT] = {"Overview", "Parts", "Working", "Specs", "Care", "Failures", "Tours", "Quiz", "Tools"};
-static const int TAB_ICONS[TAB_COUNT] = {IC_INFO, IC_TAG, IC_GEAR, IC_GAUGE, IC_WRENCH, IC_ALERT, IC_PLAYCIRCLE, IC_CHECK, IC_CALC};
+static const char* TAB_NAMES[TAB_COUNT] = {"Overview", "Parts", "Working", "Operation", "Specs", "Care", "Failures", "Tours", "Quiz", "Tools"};
+static const int TAB_ICONS[TAB_COUNT] = {IC_INFO, IC_TAG, IC_GEAR, IC_HAND, IC_GAUGE, IC_WRENCH, IC_ALERT, IC_PLAYCIRCLE, IC_CHECK, IC_CALC};
 static ImU32 marker_col(int i) {
     static const uint32_t P[8] = {0x4d9bff, 0xffb21e, 0x3ddc97, 0xff6b6b, 0xb38cff, 0x41d1f0, 0xff9a52, 0xe86ad6};
     uint32_t c = P[i % 8]; return IM_COL32((c >> 16) & 255, (c >> 8) & 255, c & 255, 255);
@@ -55,7 +55,7 @@ static void header_card(App& a, float cw) {
     text_clipped(dl, a.f_bold, 18, ImVec2(tx, p.y + px(12)), tw, T.ink, m.title, 2);
     float th = fminf(text_size(a.f_bold, 18, m.title, tw).y, px(18 * 1.25f * 2));
     text_clipped(dl, a.f_body, 12.5f, ImVec2(tx, p.y + px(16) + th), tw, T.muted, Str::f("%s · %s", m.eq_id.empty() ? Str::f("Module %d", m.no).c() : m.eq_id.c(), m.subcategory.empty() ? m.category.c() : m.subcategory.c()));
-    text_at(dl, a.f_med, 11.5f, ImVec2(tx, q.y - px(24)), (dept_color(m.dept, 2) & 0x00ffffff) | 0xff000000, Str::f("%d / %d · %s", m.no, a.mods.n, m.department.c()));
+    text_at(dl, a.f_med, 11.5f, ImVec2(tx, q.y - px(24)), (dept_color(m.dept, 2) & 0x00ffffff) | 0xff000000, m.m2p && m.area_idx >= 0 ? Str::f("Mine to Port · %s %s", a.areas[m.area_idx].id.c(), a.areas[m.area_idx].name.c()) : Str::f("%d / %d · %s", m.no, a.mods.n, m.department.c()));
     // previous / next module
     ImGui::SetCursorScreenPos(ImVec2(q.x - px(88), p.y + (hh - px(38)) / 2));
     if (round_icon("vprev", IC_PREV, 38, T.surface2, T.ink, true)) a.request_load((mi - 1 + a.mods.n) % a.mods.n);
@@ -331,11 +331,21 @@ static void step_card(App& a, float cw) {
     (void)cw;
 }
 
+// tabs shown for the loaded module (Operation only where the lesson has operating guidance — Mine-to-Port equipment)
+bool App::has_tab(int t) {
+    if (t == TAB_OPERATION) return loaded() && S()["operation"].isObj();
+    return true;
+}
+
 void App::ui_tabs_bar(float w, bool sticky) {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(px(8), 0));
     ImGui::BeginChild(sticky ? "##tabs2" : "##tabs", ImVec2(w, px(42)), 0, ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoBackground);
+    if (!has_tab(tab)) tab = TAB_OVERVIEW;
+    bool first = true;
     for (int t = 0; t < TAB_COUNT; t++) {
-        if (t) ImGui::SameLine();
+        if (!has_tab(t)) continue;
+        if (!first) ImGui::SameLine();
+        first = false;
         ImGui::PushID(t);
         if (pill(TAB_NAMES[t], tab == t, TAB_ICONS[t], "tab", 38)) { if (tab != t) { tab = t; g_tab_clicked = true; } }
         if (tab == t && (g_tab_clicked || ImGui::IsWindowAppearing())) ImGui::SetScrollHereX(0.5f);
@@ -545,6 +555,20 @@ void App::ui_tab(int t) {
     if (t == TAB_OVERVIEW) {
         const JV& i = s["introduction"];
         key_specs(*this);
+        if (i["plant"].isObj()) {                     // Mine-to-Port: where this equipment sits in the reference plant
+            const JV& pl = i["plant"];
+            card_begin("##plant");
+            sub_label(*this, "In the reference plant", IC_FLOW, T.amber);
+            int ai = -1; for (int k = 0; k < areas.n; k++) if (areas[k].id.eq(pl["area"].str())) ai = k;
+            Vec<Str> k, v;
+            if (ai >= 0) { k.push(Str("Area")); v.push(Str::f("%s · %s", areas[ai].id.c(), areas[ai].name.c())); }
+            if (pl["tag"].truthy()) { k.push(Str("Tag")); v.push(Str(pl["tag"].str())); }
+            if (pl["qty"].truthy()) { k.push(Str("Quantity")); v.push(Str(pl["qty"].str())); }
+            spec_list(k, v);
+            if (pl["interfaces"].size()) { spacer(4); bullets(pl["interfaces"]); }
+            if (ai >= 0) { spacer(4); if (link(Str::f("Open area %s in the Mine-to-Port catalog  ›", areas[ai].id.c()), "goarea")) { cat_coll = 1; m2p_area = ai; page_scroll_reset = 0; go(SCR_CATALOG); } }
+            card_end();
+        }
         h3("Introduction"); para(i["definition"].str());
         h3("Applications"); bullets(i["applications"]);
         if (i["key_points"].size()) { h3("Key points"); bullets(i["key_points"]); }
@@ -664,7 +688,7 @@ void App::ui_tab(int t) {
             text_at(dl, f_body, 12.5f, ImVec2(p.x + px(34), p.y + px(10)), T.chip_ink, e["basis"].str(), cw - px(44));
             ImGui::Dummy(ImVec2(cw, th));
         }
-        h3("Design-class ranges");
+        h3(e["title"].truthy() ? e["title"].str() : "Design-class ranges");
         {
             float cw = ImGui::GetContentRegionAvail().x; int k = 0;
             auto row = [&](const JV& v) {
@@ -696,11 +720,13 @@ void App::ui_tab(int t) {
     } else if (t == TAB_CARE) {
         const JV& I = s["installation"]; const JV& Mt = s["maintenance"];
         card_begin("##inst");
-        text(f_bold, 16, T.ink, "Installation", false); spacer(4);
-        sub_label(*this, "Foundation", IC_LAYERS, T.accent); bullets(I["foundation"]);
-        sub_label(*this, "Alignment", IC_TARGET, T.accent); bullets(I["alignment"]);
-        sub_label(*this, "Piping", IC_FLOW, T.accent); bullets(I["piping"]);
-        sub_label(*this, "Commissioning", IC_CHECK, T.accent); bullets(I["commissioning"]);
+        text(f_bold, 16, T.ink, strstr(M()["classification"]["family"].str(), "Mining") ? "Assembly & commissioning" : "Installation", false); spacer(4);
+        for (const JV& sec : I) {
+            if (!sec.isArr()) continue;
+            const char* k = sec.key;
+            int ic = !strcmp(k, "foundation") ? IC_LAYERS : !strcmp(k, "alignment") ? IC_TARGET : !strcmp(k, "piping") ? IC_FLOW : !strcmp(k, "commissioning") ? IC_CHECK : IC_LIST;
+            sub_label(*this, nice_key(k), ic, T.accent); bullets(sec);
+        }
         card_end();
         card_begin("##maint");
         text(f_bold, 16, T.ink, "Maintenance", false); spacer(4);
@@ -709,6 +735,22 @@ void App::ui_tab(int t) {
         sub_label(*this, "Overhaul", IC_GEAR, T.amber); bullets(Mt["overhaul"]);
         sub_label(*this, "Lubrication", IC_DROP, T.amber); bullets(Mt["lubrication"]);
         card_end();
+    } else if (t == TAB_OPERATION) {
+        const JV& o = s["operation"];
+        muted("How the equipment is operated in the reference plant: controls, checks, start-up, normal running, shut-down, alarms and interlocks. Always follow your site procedures and the OEM manual.", 12.5f);
+        spacer(6);
+        struct OS { const char* key; const char* title; int icon; } secs[] = {
+            {"controls", "Controls & indications", IC_GAUGE}, {"pre_start", "Pre-start checks", IC_LIST}, {"start_up", "Start-up", IC_PLAY},
+            {"normal", "Normal operation", IC_ROTATE}, {"shut_down", "Shut-down", IC_STOP}, {"alarms_interlocks", "Alarms & interlocks", IC_ALERT}, {"tips", "Operator tips", IC_SPARK}};
+        for (auto& sc : secs) {
+            if (!o[sc.key].size()) continue;
+            ImGui::PushID(sc.key);
+            card_begin("##op");
+            sub_label(*this, sc.title, sc.icon, !strcmp(sc.key, "alarms_interlocks") ? T.bad : T.accent);
+            bullets(o[sc.key]);
+            card_end();
+            ImGui::PopID();
+        }
     } else if (t == TAB_FAILURES) {
         int n = 0;
         for (const JV& f : s["failure_analysis"]["items"]) {
@@ -871,12 +913,21 @@ void App::ui_inspector() {
     { Str g(p["group"].str()); for (int i = 0; i < g.n; i++) if (g.s[i] == '_') g.s[i] = ' '; chip(g); }
     chip(p["id"].str());
     chips_end();
-    h3("Function"); para(c["function"].str());
-    h3("Construction"); para(c["construction"].str());
-    h3("Typical materials"); para(c["material"].str());
-    h3("Operating conditions"); para(c["operating_conditions"].str());
-    h3("Common failure modes"); bullets(c["failure_modes"]);
-    h3("Inspection"); bullets(c["inspection"]);
+    if (p["link"].truthy()) {                         // area/site models: jump to the detailed equipment model
+        int li = mod_index(p["link"].str());
+        if (li >= 0) {
+            spacer(4);
+            if (primary("Open detailed 3D model", IC_CUBE, false, iw, "olink", 44)) { Str l(p["link"].str()); select(nullptr); card_end(); ImGui::PopID(); open_module(mod_index(l)); return; }
+            spacer(4);
+        }
+    }
+    auto txt = [&](const char* title, const JV& v) { const char* t = v.str(); if (*t && strcmp(t, "—") && strcmp(t, "-")) { h3(title); para(t); } };
+    txt("Function", c["function"]);
+    txt("Construction", c["construction"]);
+    txt("Typical materials", c["material"]);
+    txt("Operating conditions", c["operating_conditions"]);
+    if (c["failure_modes"].size()) { h3("Common failure modes"); bullets(c["failure_modes"]); }
+    if (c["inspection"].size()) { h3("Inspection"); bullets(c["inspection"]); }
     if (p["note"].truthy()) { spacer(6); muted(p["note"].str(), 12); }
     spacer(10);
     float x0 = ImGui::GetCursorPosX();

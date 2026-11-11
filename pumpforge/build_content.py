@@ -13,6 +13,7 @@ def main():
         mods.update(importlib.import_module(f'content.{m.name}').MODULES)
     cat = json.load(open(os.path.join(R, 'catalog.json'), encoding='utf-8'))
     dept_of = {cid: d['name'] for d in cat.get('departments', []) for cid in d['categories']}
+    coll_of = {cid: d.get('collection', 'library') for d in cat.get('departments', []) for cid in d['categories']}
     os.makedirs(os.path.join(R, 'output', 'learning'), exist_ok=True)
     index, missing, bad = [], [], {}
     for c in cat['categories']:
@@ -30,10 +31,12 @@ def main():
             s = out['sections']
             index.append({'no': e['no'], 'id': pid, 'title': e['name'], 'category': c['name'], 'department': dept_of.get(c['id'], c['name']), 'phase': e['phase'], 'flagship': e.get('flagship', False),
                           'eq_id': e.get('eq_id'), 'subcategory': e.get('subcategory'),
+                          'collection': coll_of.get(c['id'], 'library'), **({'area': c['area'], 'area_name': c['name']} if c.get('area') else {}),
                           'keywords': list(dict.fromkeys([w.strip() for w in str(e.get('key_components') or '').split(',') if w.strip()] + [pp.get('name') for pp in meta.get('parts', []) if isinstance(pp, dict) and pp.get('name')])),
                           'overlays': list(meta.get('overlays', {})), 'quiz_questions': len(s['assessment']['questions']),
                           'failure_items': len(s['failure_analysis']['items']), 'video_tours': len(s['video_tutorials'])})
-    deps = [{'id': d['id'], 'name': d['name'], 'modules': sum(1 for x in index if x['department'] == d['name']), 'status': d.get('status', 'active')} for d in cat.get('departments', [])]
+    deps = [{'id': d['id'], 'name': d['name'], 'modules': sum(1 for x in index if x['department'] == d['name']), 'status': d.get('status', 'active'),
+             'collection': d.get('collection', 'library')} for d in cat.get('departments', [])]
     json.dump({'schema': 'pumpforge.learning-index/1.1', 'sections': SECTIONS, 'departments': deps, 'modules': index},
               open(os.path.join(R, 'output', 'learning', 'index.json'), 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     print(f'{len(index)} modules written; missing: {missing}')

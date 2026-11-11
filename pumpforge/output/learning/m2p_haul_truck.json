@@ -1,0 +1,1049 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "m2p_haul_truck",
+ "no": 1001,
+ "title": "Rigid Haul Truck (~90 t class)",
+ "model_title": "Rigid Rear-Dump Haul Truck (~90 t payload class, mechanical drive)",
+ "category": "m2p_a01 · A01 · Mine",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The rigid rear-dump haul truck is the workhorse of the bauxite mine. It is loaded at the face by a 200 t-class excavator in about five to six passes, hauls roughly 90 t of run-of-mine bauxite 2–8 km along engineered haul roads, and tips it into the dump hopper of the primary sizing station or onto a grade-bin finger of the ROM pad. A V12 diesel drives the rear duals through a torque converter, a planetary powershift transmission, a differential and planetary final drives (mechanical drive).",
+   "applications": [
+    "Load-and-haul of ore from the pit to the primary sizer or ROM pad (caprock to the sizer only where grade control classes it as ore, otherwise to backfill)",
+    "Overburden and backfill haulage for progressive rehabilitation",
+    "Haul distances of a few km on grades up to about 8–10 %"
+   ],
+   "key_points": [
+    "~90 t payload class, ≈ 163 t gross machine weight",
+    "~750 kW V12 diesel, mechanical drive to the rear duals",
+    "Body tips to ~45–50° with two telescopic hoist cylinders",
+    "Oil-cooled multi-disc brakes double as the retarder on downhill hauls",
+    "Tyres are limited by TKPH (tonne-km per hour) — speed and haul length heat the tyre",
+    "The canopy shields the cab from spillage and rock rolling forward during loading — the loader must never swing the bucket over the cab"
+   ],
+   "classification": {
+    "family": "Mining — load & haul",
+    "type": "Rigid rear-dump haul truck, mechanical drive, ~90 t class"
+   },
+   "hi_family": "mine_to_port",
+   "summary": "A rigid-frame rear-dump haul truck carries run-of-mine bauxite from the excavator face to the primary sizing station or the ROM pad. This ~90 t payload class (≈ 163 t gross) is mechanical drive: a ~750 kW V12 diesel drives the rear duals through a torque converter, a 7-speed planetary powershift transmission, a differential and planetary final drives. Two telescopic hoist cylinders tip the body to about 45–50° to dump in roughly 12–15 s.",
+   "plant": {
+    "area": "A01",
+    "tag": "01-HT-001…",
+    "qty": "9–10 operating + 2 standby (to be confirmed by haulage simulation)",
+    "interfaces": [
+     "Loaded by 01-EX hydraulic excavators / 01-FL wheel loader",
+     "Dumps to 01-HP truck dump hopper or the 01-RP ROM pad"
+    ]
+   }
+  },
+  "model_3d": {
+   "asset": "glb/m2p_haul_truck.glb",
+   "metadata": "meta/m2p_haul_truck.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 42864,
+   "parts": 18
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": []
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 30.0,
+   "steps": [
+    {
+     "text": "The excavator loads the body from the side in five to six passes, never swinging over the cab; the canopy shields the cab from spillage.",
+     "part": "body",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "iso"
+    },
+    {
+     "text": "The diesel engine powers the truck: torque converter, planetary powershift transmission, drive shaft and differential.",
+     "part": "engine",
+     "cut": false,
+     "operate": false,
+     "overlay": "power",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Planetary final drives in each rear wheel multiply torque again; only the rear duals drive, the front wheels steer.",
+     "part": "rear_axle",
+     "cut": false,
+     "operate": false,
+     "overlay": "power",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Nitrogen-over-oil struts carry the frame and absorb road shocks; low strut charge cracks frames.",
+     "part": "suspension",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "At the hopper the operator reverses square to the wheel stop (on the ROM pad and dumps: tip short of the crest and let the dozer push), stops on the service brake short of the wheel stop, selects NEUTRAL, applies the park brake and moves the hoist lever to RAISE.",
+     "part": "hoist_barrels",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The telescopic hoist cylinders extend stage by stage and the body pivots on the rear pins to about 48°.",
+     "part": "hoist_stage3",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Moist, clayey bauxite starts to slide at roughly 23–25°; it leaves over the tail chute (a little carry-back stays). The operator lowers the body and selects FLOAT so it seats on the frame pads before driving away.",
+     "part": "payload",
+     "cut": false,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Rimpull–speed–gradeability chart: required rimpull = gross weight × (grade % + rolling resistance %); the chart gives the gear and speed. Retarding chart: speed allowed on a downhill grade for continuous retarding."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "m2p_haul_truck_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {
+    "power": {
+     "file": "m2p_haul_truck_power.glb",
+     "title": "Power flow: engine → torque converter → transmission → differential → final drives",
+     "description": "Diesel power passes through the torque converter (which multiplies torque when starting on a grade) into the planetary powershift transmission, down the drive shaft to the rear differential and out to the planetary final drives in each rear wheel, which multiply torque again (about 4.8 : 1). Only the rear duals are driven; the front wheels steer.",
+     "render": "normal",
+     "annotations": []
+    }
+   }
+  },
+  "components": {
+   "source": "meta/m2p_haul_truck.json#components",
+   "key_components": "Dump body, hoist cylinders, V12 diesel engine, powershift transmission, planetary final drives, oil-cooled brakes, nitrogen-over-oil struts, OTR tyres, ROPS cab",
+   "parts": [
+    {
+     "id": "frame",
+     "name": "Main Frame (box-section rails, cross-members, front bumper, body pivot horns)",
+     "info_ref": "ht_frame",
+     "function": "Carries every load: engine, cab, body and payload, and transmits them to the axles.",
+     "material": "High-strength low-alloy steel; cast steel nodes."
+    },
+    {
+     "id": "front_wheels",
+     "name": "Front Wheels: 27.00R49-class radial OTR tyres on five-piece rims (steer)",
+     "info_ref": "ht_tyre",
+     "function": "Supports the ~163 t gross machine and gives traction; the tyres are the largest operating cost after fuel and labour.",
+     "material": "Rubber compounds with steel-cord carcass; steel rims."
+    },
+    {
+     "id": "rear_wheels",
+     "name": "Rear Dual Wheels (driven): 4 tyres on five-piece rims",
+     "info_ref": "ht_tyre",
+     "function": "Supports the ~163 t gross machine and gives traction; the tyres are the largest operating cost after fuel and labour.",
+     "material": "Rubber compounds with steel-cord carcass; steel rims."
+    },
+    {
+     "id": "suspension",
+     "name": "Suspension (nitrogen-over-oil struts, rear A-frame) & Steering Cylinders",
+     "info_ref": "ht_suspension",
+     "function": "Cushions the frame and gives ride comfort and tyre load sharing; steering turns the front wheels.",
+     "material": "Steel, chrome-plated rods, nitrogen and oil."
+    },
+    {
+     "id": "engine",
+     "name": "Diesel Engine (V12, ~32 L, ~750 kW class, twin turbo, air-to-air aftercooled)",
+     "info_ref": "ht_engine",
+     "function": "Produces the driving power (~750 kW class).",
+     "material": "Cast iron block and heads."
+    },
+    {
+     "id": "radiator",
+     "name": "Radiator, Fan & Shroud (front-mounted cooling module)",
+     "info_ref": "ht_radiator",
+     "function": "Rejects engine and retarder heat to the air.",
+     "material": "Aluminium/copper cores."
+    },
+    {
+     "id": "transmission",
+     "name": "Torque Converter, 7-speed Planetary Powershift Transmission & Drive Shaft",
+     "info_ref": "ht_transmission",
+     "function": "Selects gear ratios so the engine stays in its best speed range.",
+     "material": "Steel gears, clutch packs."
+    },
+    {
+     "id": "rear_axle",
+     "name": "Rear Axle: Differential, Oil-Cooled Multi-Disc Brakes & Planetary Final Drives",
+     "info_ref": "ht_axle",
+     "function": "Divides torque between the rear wheels and multiplies it; brakes and retards the truck.",
+     "material": "Steel gears, friction discs running in cooled oil."
+    },
+    {
+     "id": "hood",
+     "name": "Engine Enclosure (hood) with service doors",
+     "info_ref": "ht_hood",
+     "function": "Encloses and protects the engine; doors give service access.",
+     "material": "Steel."
+    },
+    {
+     "id": "deck",
+     "name": "Upper Deck, Front Stairway, Handrails, Air Cleaners, Exhaust, Lights, Mirrors, Fire Suppression, Buggy Whip",
+     "info_ref": "ht_deck",
+     "function": "Safe access to the cab and service points; carries air cleaners, exhaust and lights.",
+     "material": "Steel, galvanised grating."
+    },
+    {
+     "id": "cab",
+     "name": "ROPS/FOPS Operator Cab (pressurised, air-conditioned)",
+     "info_ref": "ht_cab",
+     "function": "Protects and houses the operator.",
+     "material": "Steel structure, laminated glass."
+    },
+    {
+     "id": "tanks",
+     "name": "Fuel Tank (left), Hoist/Brake Hydraulic Tank (right), Battery Box",
+     "info_ref": "ht_tanks",
+     "function": "Store fuel and hydraulic oil; batteries for starting.",
+     "material": "Steel."
+    },
+    {
+     "id": "body",
+     "name": "Dump Body (~60 m³ heaped, flat floor with tail chute, canopy over the cab, rock ejectors)",
+     "info_ref": "ht_body",
+     "function": "Carries the payload and tips it out at the dump point.",
+     "material": "Abrasion-resistant (≈ 400–500 HB) plate liners on the floor."
+    },
+    {
+     "id": "payload",
+     "name": "Payload: ~90 t of run-of-mine bauxite (≈ 60–64 m³ loose, heaped 2:1)",
+     "info_ref": "ht_payload",
+     "function": "Run-of-mine bauxite being hauled.",
+     "material": "Lateritic bauxite lumps and fines."
+    },
+    {
+     "id": "hoist_barrels",
+     "name": "Hoist Cylinders: barrels (lower pins on the frame)",
+     "info_ref": "ht_hoist",
+     "function": "Raise and lower the body.",
+     "material": "Steel barrels, chrome-plated stages."
+    },
+    {
+     "id": "hoist_stage1",
+     "name": "Hoist Cylinders: telescopic stage 1",
+     "info_ref": "ht_hoist",
+     "function": "Raise and lower the body.",
+     "material": "Steel barrels, chrome-plated stages."
+    },
+    {
+     "id": "hoist_stage2",
+     "name": "Hoist Cylinders: telescopic stage 2",
+     "info_ref": "ht_hoist",
+     "function": "Raise and lower the body.",
+     "material": "Steel barrels, chrome-plated stages."
+    },
+    {
+     "id": "hoist_stage3",
+     "name": "Hoist Cylinders: telescopic stage 3 (rod eye pinned to the body)",
+     "info_ref": "ht_hoist",
+     "function": "Raise and lower the body.",
+     "material": "Steel barrels, chrome-plated stages."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Reference-plant values: typical published envelope for this equipment class plus engineering estimates from the Mine-to-Port design basis (generic 2 Mt/yr low-temperature Bayer refinery). Knowledge-based — not verified against a live source; confirm with the selected OEM specification and your site data before use.",
+   "status": "to be verified",
+   "parameters": {
+    "nominal_payload": {
+     "typical_range": "≈ 90 – 98",
+     "unit": "t",
+     "note": "Class envelope"
+    },
+    "gross_machine_weight": {
+     "typical_range": "≈ 160 – 165",
+     "unit": "t",
+     "note": "Class envelope"
+    },
+    "engine_power_gross": {
+     "typical_range": "≈ 750 – 900",
+     "unit": "kW",
+     "note": "Gross, V12 ~30–32 L, ~1,750–1,900 rpm rated (class spread; reference plant at the ~750 kW end)"
+    },
+    "body_capacity_heaped_2_1": {
+     "typical_range": "≈ 60 – 65 (struck ≈ 42 – 46)",
+     "unit": "m³",
+     "note": "SAE 2:1 heaped; 90 t of bauxite at ~1.4–1.5 t/m³ loose fills it — bauxite haulage is close to volume-limited"
+    },
+    "top_speed_loaded": {
+     "typical_range": "≈ 60 – 65",
+     "unit": "km/h",
+     "note": "Site speed limits are much lower (typically 30–50 km/h on haul roads)"
+    },
+    "tyres": {
+     "typical_range": "27.00R49 radial, ~2.7 m diameter",
+     "unit": "",
+     "note": "Inflation ≈ 6.5–7 bar cold, nitrogen recommended (class typical)"
+    },
+    "dump_angle": {
+     "typical_range": "≈ 45 – 50",
+     "unit": "°",
+     "note": "Class envelope"
+    },
+    "body_raise_time": {
+     "typical_range": "≈ 12 – 15 (lower ≈ 10 – 14)",
+     "unit": "s",
+     "note": "Class envelope; the animation runs in real time"
+    },
+    "wheelbase_overall_length": {
+     "typical_range": "≈ 4.6 m / ≈ 10.5 m",
+     "unit": "",
+     "note": "Model geometry"
+    },
+    "overall_width_operating": {
+     "typical_range": "≈ 6 – 6.5",
+     "unit": "m",
+     "note": "Over the body / mirrors (class envelope)"
+    },
+    "haul_distance_reference_plant": {
+     "typical_range": "2 – 8",
+     "unit": "km one way",
+     "note": "Reference-plant design basis (engineering estimate)"
+    },
+    "fleet_reference_plant": {
+     "typical_range": "9–10 operating + 2 standby",
+     "unit": "",
+     "note": "Reference-plant design basis — cycle ≈ 27 min at 5 km, ≈ 1.0 Mt/yr per truck; confirm by haulage simulation"
+    }
+   },
+   "additional": {},
+   "title": "Operating parameters",
+   "selection_notes": [
+    "Match truck size to the loader: about 5–6 passes for a 200 t excavator + ~90 t truck in bauxite (~15–17 t per pass).",
+    "Fleet size from a haulage simulation: cycle time (load, haul, dump, return, queue) vs. required tonnes per hour.",
+    "Mechanical drive suits short-to-medium hauls on moderate grades; diesel-electric drive is used on bigger trucks and long ramps."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "payload_t": null,
+     "gross_weight_t": null,
+     "engine_kW": null,
+     "tyre_size": null,
+     "body_capacity_m3": null
+    },
+    "status": "empty — fill from the selected OEM specification sheet"
+   },
+   "sources": [
+    "PumpForge Mine-to-Port reference-plant design basis (m2p/basis), multi-agent SME reviewed",
+    "SME Mining Engineering Handbook, 3rd ed. (2011)",
+    "OEM performance handbooks for the equipment class (generic envelope)",
+    "Caterpillar Performance Handbook — rimpull, retarding and TKPH methods (class reference)",
+    "Tannant & Regensburg, Guidelines for Mine Haul Road Design (2001)"
+   ]
+  },
+  "installation": {
+   "site_assembly": [
+    "Delivered as modules (chassis, body, tyres, cab) and assembled on a hardstand with cranes; torque all body-pin and wheel fasteners to OEM values.",
+    "Tyre fitting with a tyre handler only, by trained tyre fitters; inflate in a cage or with the remote inflation kit."
+   ],
+   "haul_road_and_dump_design": [
+    "Two-way haul roads at least 3.5 × the widest truck (≈ 22–25 m running width for a 6.1–6.5 m truck) plus drains and berms; grades ideally ≤ 8 % sustained (≤ 10 % on short ramps).",
+    "Safety berms at least half the tyre height (≥ ~1.4 m) on every drop-off; dump stop/bund at tipping points.",
+    "Keep rolling resistance low (graded, watered, spillage removed) — every 1 % of rolling resistance acts like 1 % more grade."
+   ],
+   "pre_delivery_checks": [
+    "Fluids, filters and brake bleed; strut charge heights; body-up and payload sensors calibrated.",
+    "ROPS/FOPS plates, seat belts, fire suppression, fire extinguisher, reversing alarm, camera/proximity detection."
+   ],
+   "commissioning": [
+    "Brake tests (service, secondary, parking) on the test grade; steering and secondary steering test; hoist raise/lower times.",
+    "Payload monitor calibrated against a weighbridge; fleet-management and collision-avoidance units commissioned."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Pre-start walk-around: tyres (cuts, pressure), leaks, lights, mirrors, handrails, body seated, fluid levels.",
+     "part": "front_wheels",
+     "interval": "every shift"
+    },
+    {
+     "task": "Check strut extension (charge) visually and the auto-lube reservoir.",
+     "part": "suspension",
+     "interval": "every shift"
+    },
+    {
+     "task": "Wash carry-back from the body and clean radiator cores in dusty seasons.",
+     "part": "body",
+     "interval": "weekly / as needed"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Engine oil and filters, fuel filters, air-filter service, oil sampling (all compartments).",
+     "part": "engine",
+     "interval": "250–500 h"
+    },
+    {
+     "task": "Measure brake wear; check final-drive and differential oil; inspect hoist cylinders and hoses.",
+     "part": "rear_axle",
+     "interval": "500 h"
+    },
+    {
+     "task": "Frame and body crack inspection (visual/MPI) at high-stress welds.",
+     "part": "frame",
+     "interval": "1,000 h"
+    },
+    {
+     "task": "Recharge struts to the OEM chart.",
+     "part": "suspension",
+     "interval": "as indicated"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Component change-out (engine, transmission, final drives, struts) on a planned life-hour basis using rebuilt exchange units.",
+     "part": "transmission"
+    },
+    {
+     "task": "Body floor and liner replacement or rebuild by measured wear.",
+     "part": "body"
+    }
+   ],
+   "lubrication": [
+    "Automatic lubrication system greases steering, suspension, body-pivot and hoist pins at set intervals; check daily that every point receives grease."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Tyre separation or blow-out",
+     "category": "tyres",
+     "symptoms": [
+      "Hot tyre, bulge, smell",
+      "Rapid loss of pressure"
+     ],
+     "causes": [
+      "TKPH exceeded (long fast hauls, high loads)",
+      "Cuts from spillage rock",
+      "Under-inflation"
+     ],
+     "remedies": [
+      "Plan routes and speeds within TKPH; clean roads; nitrogen inflation; a hot, smoking or burning tyre can explode — evacuate and keep a ≥ 300 m all-round exclusion zone (site/OEM procedure)"
+     ],
+     "part": "rear_wheels"
+    },
+    {
+     "problem": "Brake / retarder overheating",
+     "category": "brakes",
+     "symptoms": [
+      "Brake oil temperature alarm",
+      "Fade on downhill"
+     ],
+     "causes": [
+      "Descending too fast for the retarding chart",
+      "Cooling-oil or radiator fault"
+     ],
+     "remedies": [
+      "Select a lower gear; use automatic retarder control; respect the retarding chart; stop safely and allow cooling"
+     ],
+     "part": "rear_axle"
+    },
+    {
+     "problem": "Frame cracking",
+     "category": "structure",
+     "symptoms": [
+      "Visible cracks at welds or cross-members"
+     ],
+     "causes": [
+      "Rough roads",
+      "Overloading beyond the 10/10/20 policy",
+      "Low strut charge"
+     ],
+     "remedies": [
+      "Grade the roads; manage payload; maintain struts; repair by approved weld procedure"
+     ],
+     "part": "frame"
+    },
+    {
+     "problem": "Body creeps up or will not hold",
+     "category": "hydraulics",
+     "symptoms": [
+      "Body drifts",
+      "Hoist slow"
+     ],
+     "causes": [
+      "Worn hoist-cylinder seals",
+      "Hoist valve leakage"
+     ],
+     "remedies": [
+      "Reseal; test hold; never work under a raised body without the body safety pin/cable"
+     ],
+     "part": "hoist_barrels"
+    },
+    {
+     "problem": "Engine overheating",
+     "category": "thermal",
+     "symptoms": [
+      "Coolant temperature alarm",
+      "Power derate"
+     ],
+     "causes": [
+      "Radiator blocked with dust/mud",
+      "Fan or coolant fault"
+     ],
+     "remedies": [
+      "Clean cores; check fan, belts, coolant level and thermostat"
+     ],
+     "part": "radiator"
+    }
+   ],
+   "safety": [
+    "Light-vehicle interaction: large blind spots — positive communication, buggy whips/flags, proximity detection and separation rules.",
+    "If a tyre is hot, smoking or on fire, or the truck has contacted power lines or been struck by lightning: stop in a safe place, evacuate and set a ≥ 300 m exclusion zone all round (per OEM/site procedure, typically ≥ 24 h); approach only from the front or rear, never in line with the rim/sidewall.",
+    "Use the body safety pin/cable and lock-out before working under a raised body.",
+    "Three points of contact on the stairway; isolate and verify zero energy before maintenance (stored hydraulic and strut pressure)."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Rigid Haul Truck (~90 t class) — Introduction",
+    "type": "in_app_tour",
+    "model": "m2p_haul_truck.glb",
+    "duration_s": 91.3,
+    "script": [
+     {
+      "narration": "This module introduces the Rigid Haul Truck (~90 t class).",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The rigid rear-dump haul truck is the workhorse of the bauxite mine.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "It is loaded at the face by a 200 t-class excavator in about five to six passes, hauls roughly 90 t of run-of-mine bauxite 2–8 km along engineered haul roads, and tips it into the dump hopper of the primary sizing station or onto a grade-bin finger of the ROM pad.",
+      "duration_s": 23.3,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "A V12 diesel drives the rear duals through a torque converter, a planetary powershift transmission, a differential and planetary final drives (mechanical drive).",
+      "duration_s": 9.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include load-and-haul of ore from the pit to the primary sizer or ROM pad (caprock to the sizer only where grade control classes it as ore, otherwise to backfill); overburden and backfill haulage for progressive rehabilitation; haul distances of a few km on grades up to about 8–10 %.",
+      "duration_s": 22.1,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Engine Enclosure (hood) with service doors, ROPS/FOPS Operator Cab (pressurised, air-conditioned), Dump Body (~60 m³ heaped, flat floor with tail chute, canopy over the cab, rock ejectors).",
+      "duration_s": 14.6,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Rigid Haul Truck (~90 t class) — Operation",
+    "type": "in_app_tour",
+    "model": "m2p_haul_truck.glb",
+    "duration_s": 110.5,
+    "script": [
+     {
+      "narration": "How the Rigid Haul Truck (~90 t class) works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The excavator loads the body from the side in five to six passes, never swinging over the cab; the canopy shields the cab from spillage.",
+      "duration_s": 10.4,
+      "action": {
+       "highlight": "body",
+       "cut": false,
+       "operate": false,
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The diesel engine powers the truck: torque converter, planetary powershift transmission, drive shaft and differential.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "engine",
+       "cut": false,
+       "operate": false,
+       "overlay": "power",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Planetary final drives in each rear wheel multiply torque again; only the rear duals drive, the front wheels steer.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "rear_axle",
+       "cut": false,
+       "operate": false,
+       "overlay": "power",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Nitrogen-over-oil struts carry the frame and absorb road shocks; low strut charge cracks frames.",
+      "duration_s": 6.7,
+      "action": {
+       "highlight": "suspension",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "At the hopper the operator reverses square to the wheel stop (on the ROM pad and dumps: tip short of the crest and let the dozer push), stops on the service brake short of the wheel stop, selects NEUTRAL, applies the park brake and moves the hoist lever to RAISE.",
+      "duration_s": 20.8,
+      "action": {
+       "highlight": "hoist_barrels",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The telescopic hoist cylinders extend stage by stage and the body pivots on the rear pins to about 48°.",
+      "duration_s": 7.9,
+      "action": {
+       "highlight": "hoist_stage3",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Moist, clayey bauxite starts to slide at roughly 23–25°; it leaves over the tail chute (a little carry-back stays). The operator lowers the body and selects FLOAT so it seats on the frame pads before driving away.",
+      "duration_s": 16.2,
+      "action": {
+       "highlight": "payload",
+       "cut": false,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The overlay shows the material path: body → tail chute → hopper / ROM pad. The bauxite slides over the tail chute when the body passes about 23–25°.",
+      "duration_s": 10.8,
+      "action": {
+       "overlay": "flow",
+       "cut": false,
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "Diesel power passes through the torque converter (which multiplies torque when starting on a grade) into the planetary powershift transmission, down the drive shaft to the rear differential and out to the planetary final drives in each rear wheel, which multiply torque again (about 4.8 : 1).",
+      "duration_s": 19.6,
+      "action": {
+       "overlay": "power",
+       "view": "front",
+       "cut": true
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Rigid Haul Truck (~90 t class) — Maintenance",
+    "type": "in_app_tour",
+    "model": "m2p_haul_truck.glb",
+    "duration_s": 71.6,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Rigid Haul Truck (~90 t class).",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Pre-start walk-around: tyres (cuts, pressure), leaks, lights, mirrors, handrails, body seated, fluid levels.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "front_wheels",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check strut extension (charge) visually and the auto-lube reservoir.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "suspension",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Wash carry-back from the body and clean radiator cores in dusty seasons.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Engine oil and filters, fuel filters, air-filter service, oil sampling (all compartments).",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "engine",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure brake wear; check final-drive and differential oil; inspect hoist cylinders and hoses.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "rear_axle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Component change-out (engine, transmission, final drives, struts) on a planned life-hour basis using rebuilt exchange units.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "transmission",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Body floor and liner replacement or rebuild by measured wear.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "body",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for tyre separation or blow-out: hot tyre, bulge, smell. Common cause: TKPH exceeded (long fast hauls, high loads).",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "rear_wheels",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for brake / retarder overheating: brake oil temperature alarm. Common cause: descending too fast for the retarding chart.",
+      "duration_s": 7.5,
+      "action": {
+       "highlight": "rear_axle",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for frame cracking: visible cracks at welds or cross-members. Common cause: rough roads.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "frame",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — wear, temperatures, pressures, leaks and performance — can be compared over time.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "How do you tip on a ROM-pad finger or a waste dump?",
+     "options": [
+      "Reverse to the crest and tip over the edge",
+      "Use the windrow to stop the truck",
+      "Tip while moving forward",
+      "Tip short of the crest (paddock dump or tip-and-push), or reverse only to an inspected windrow ≥ ½ tyre height"
+     ],
+     "answer": 3,
+     "explanation": "Edge tipping causes most truck roll-overs at dump crests; the dozer pushes the load over.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which wheels drive on a mechanical-drive rigid haul truck of this class?",
+     "options": [
+      "Only the rear duals",
+      "All six wheels",
+      "Only the front wheels",
+      "The front and inner rear wheels"
+     ],
+     "answer": 0,
+     "explanation": "Power goes through the differential to planetary final drives in the rear wheels; the front wheels steer.",
+     "level": "basic"
+    },
+    {
+     "question": "What does TKPH limit?",
+     "options": [
+      "Engine power",
+      "Brake wear",
+      "Fuel use",
+      "Tyre heat build-up from load × speed"
+     ],
+     "answer": 3,
+     "explanation": "TKPH (tonne-km per hour) is the tyre working capacity; exceeding it overheats the tyre and causes separations.",
+     "level": "basic"
+    },
+    {
+     "question": "Why does the body have a canopy over the cab?",
+     "options": [
+      "So the excavator can swing over the cab",
+      "To protect the operator from spillage and rock that falls or rolls forward during loading",
+      "To carry extra payload",
+      "For aerodynamics"
+     ],
+     "answer": 1,
+     "explanation": "The excavator loads from the side or rear and must never swing over the cab; the canopy is protection against spillage, not permission.",
+     "level": "basic"
+    },
+    {
+     "question": "What usually slows a loaded truck on a long downhill?",
+     "options": [
+      "Oil-cooled multi-disc brakes acting as the retarder",
+      "The parking brake",
+      "Engine shutdown",
+      "Raising the body"
+     ],
+     "answer": 0,
+     "explanation": "Oil-cooled brakes are applied continuously as a retarder within the retarding chart.",
+     "level": "basic"
+    },
+    {
+     "question": "What must the operator do before driving away from the dump?",
+     "options": [
+      "Lower the body fully (LOWER/FLOAT) so it seats on the frame",
+      "Leave the body half raised",
+      "Switch off the engine",
+      "Release the hoist pressure by loosening a hose"
+     ],
+     "answer": 0,
+     "explanation": "Travelling with the body up can strike overhead structures and destabilise the truck.",
+     "level": "basic"
+    },
+    {
+     "question": "A good haul-road safety berm is at least…",
+     "options": [
+      "About half the height of the largest tyre",
+      "Knee high",
+      "As tall as the cab",
+      "Not needed on a plateau mine"
+     ],
+     "answer": 0,
+     "explanation": "A berm of at least half tyre height (≥ ~1.4 m for these tyres) is standard practice.",
+     "level": "basic"
+    },
+    {
+     "question": "A loaded truck CLIMBS a 6 % ramp on a poor road with 4 % rolling resistance. The total (effective) grade it must overcome is…",
+     "options": [
+      "About 6 %",
+      "About 10 %",
+      "About 2 %",
+      "About 24 %"
+     ],
+     "answer": 1,
+     "explanation": "Uphill: effective grade = grade + rolling resistance (10 %). Downhill, rolling resistance helps: 6 − 4 = 2 % for the retarding chart.",
+     "level": "advanced"
+    },
+    {
+     "question": "Under the 10/10/20 payload policy, no single load should exceed…",
+     "options": [
+      "200 %",
+      "120 % of the target payload",
+      "100 %",
+      "150 %"
+     ],
+     "answer": 1,
+     "explanation": "No more than 10 % of loads above 110 % of target and none above 120 % — protects frames, tyres and drivetrain.",
+     "level": "advanced"
+    },
+    {
+     "question": "Which component has this function? \"Carries every load: engine, cab, body and payload, and transmits them to the axles.\"",
+     "options": [
+      "Fuel Tank (left), Hoist/Brake Hydraulic Tank (right), Battery Box",
+      "Hoist Cylinders: barrels (lower pins on the frame)",
+      "Main Frame (box-section rails, cross-members, front bumper, body pivot horns)",
+      "Diesel Engine (V12, ~32 L, ~750 kW class, twin turbo, air-to-air aftercooled)"
+     ],
+     "answer": 2,
+     "explanation": "Main Frame (box-section rails, cross-members, front bumper, body pivot horns): Carries every load: engine, cab, body and payload, and transmits them to the axles.",
+     "level": "basic",
+     "part": "frame",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Supports the ~163 t gross machine and gives traction; the tyres are the largest operating cost after fuel and labour.\"",
+     "options": [
+      "Front Wheels: 27.00R49-class radial OTR tyres on five-piece rims (steer)",
+      "Payload: ~90 t of run-of-mine bauxite (≈ 60–64 m³ loose, heaped 2:1)",
+      "Diesel Engine (V12, ~32 L, ~750 kW class, twin turbo, air-to-air aftercooled)",
+      "Fuel Tank (left), Hoist/Brake Hydraulic Tank (right), Battery Box"
+     ],
+     "answer": 0,
+     "explanation": "Front Wheels: 27.00R49-class radial OTR tyres on five-piece rims (steer): Supports the ~163 t gross machine and gives traction; the tyres are the largest operating cost after fuel and labour.",
+     "level": "basic",
+     "part": "front_wheels",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Cushions the frame and gives ride comfort and tyre load sharing; steering turns the front wheels.\"",
+     "options": [
+      "Rear Axle: Differential, Oil-Cooled Multi-Disc Brakes & Planetary Final Drives",
+      "Suspension (nitrogen-over-oil struts, rear A-frame) & Steering Cylinders",
+      "ROPS/FOPS Operator Cab (pressurised, air-conditioned)",
+      "Hoist Cylinders: telescopic stage 2"
+     ],
+     "answer": 1,
+     "explanation": "Suspension (nitrogen-over-oil struts, rear A-frame) & Steering Cylinders: Cushions the frame and gives ride comfort and tyre load sharing; steering turns the front wheels.",
+     "level": "basic",
+     "part": "suspension",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  },
+  "operation": {
+   "controls": [
+    "Steering wheel, service brake pedal, retarder lever / automatic retarder control, shift lever, hoist lever (RAISE – HOLD – FLOAT – LOWER), parking brake, secondary brake",
+    "Monitoring display: payload, engine and brake-oil temperatures, tyre pressure (TPMS), fault codes; fleet-management terminal"
+   ],
+   "pre_start": [
+    "Walk-around inspection and pre-start checklist",
+    "Body fully down, no persons near the truck, horn before moving (one blast start, two forward, three reverse — site rule)"
+   ],
+   "start_up": [
+    "Start the engine, check gauges and warning lamps; wait until brake and steering accumulator pressures are up (warnings clear) before releasing the park brake",
+    "Do the service/park brake holding test and the steering and secondary-steering check (OEM procedure) before entering the road"
+   ],
+   "normal": [
+    "Approach the loader at the spotting position the operator indicates; stop, apply the brakes and wait for the last-pass signal",
+    "Haul at the posted speed for the road and gear; on downhills use automatic retarder control and the retarding chart",
+    "At the hopper: reverse square to the wheel stop, stop on the service brake short of it (never use the bund to stop), NEUTRAL, park brake on, RAISE; lower and select FLOAT before moving off",
+    "On the ROM pad and on waste/backfill dumps: tip short of the crest (paddock dump, or tip-and-push so the dozer pushes the load over), or reverse only to a windrow at least ½ tyre height that has been inspected that shift; never reverse to an unprotected edge; stay off cracked or soft crests (report them)"
+   ],
+   "shut_down": [
+    "Park on level ground away from traffic, park brake on, body down, idle 3–5 min to cool the turbochargers, then stop the engine"
+   ],
+   "alarms_interlocks": [
+    "Body-up warning (and travel limit) when the body is not seated",
+    "Brake-oil and engine-coolant high temperature",
+    "Low steering pressure → secondary steering accumulator",
+    "Payload overload warning",
+    "Seat-belt and park-brake interlocks; proximity/collision-avoidance alarms"
+   ],
+   "tips": [
+    "Spot accurately — loader cycles drive mine productivity",
+    "Do not ride the brakes; let the retarder work",
+    "Report spillage on the road immediately (tyre cuts)"
+   ]
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

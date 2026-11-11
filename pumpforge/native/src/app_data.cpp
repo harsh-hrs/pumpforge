@@ -69,12 +69,19 @@ bool App::load_index(char* err, int errlen) {
     if (!plat::read_asset("learning/index.json", b)) { snprintf(err, (size_t)errlen, "learning/index.json missing"); return false; }
     if (!index.parse((const char*)b.d, (size_t)b.n)) { snprintf(err, (size_t)errlen, "index.json: %s", index.err); return false; }
     const JV& r = *index.root;
-    for (const JV& d : r["departments"]) { DeptInfo& x = depts.push(); x.id = d["id"].str(); x.name = d["name"].str(); x.status = d["status"].str(); x.modules = (int)d["modules"].n(); }
+    for (const JV& d : r["departments"]) { DeptInfo& x = depts.push(); x.id = d["id"].str(); x.name = d["name"].str(); x.status = d["status"].str(); x.modules = (int)d["modules"].n(); x.m2p = Str(d["collection"].str()).eq("m2p"); }
+    // Mine-to-Port overview (optional asset)
+    Vec<uint8_t> b2;
+    if (plat::read_asset("learning/m2p.json", b2) && m2p.parse((const char*)b2.d, (size_t)b2.n)) {
+        for (const JV& a : (*m2p.root)["areas"]) { AreaInfo& x = areas.push(); x.id = a["id"].str(); x.name = a["name"].str(); x.icon = a["icon"].str(); }
+    }
     for (const JV& m : r["modules"]) {
         ModInfo& x = mods.push();
         x.id = m["id"].str(); x.title = m["title"].str(); x.category = m["category"].str(); x.department = m["department"].str();
         x.eq_id = m["eq_id"].str(); x.subcategory = m["subcategory"].str(); x.no = (int)m["no"].n(); x.phase = (int)m["phase"].n();
         x.flagship = m["flagship"].truthy();
+        x.m2p = Str(m["collection"].str()).eq("m2p"); x.area = m["area"].str();
+        for (int k = 0; k < areas.n; k++) if (areas[k].id.eq(x.area)) { x.area_idx = k; areas[k].modules++; }
         x.tours = (int)m["video_tours"].n(); x.quizq = (int)m["quiz_questions"].n();
         for (int k = 0; k < depts.n; k++) if (depts[k].name.eq(x.department)) x.dept = k;
         // web search haystack: title id eq_id department category subcategory keywords (lower-case)

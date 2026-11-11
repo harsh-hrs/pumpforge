@@ -361,7 +361,7 @@ Per-model triangle counts and file sizes are listed in [docs/ANDROID_INTEGRATION
 Progress, bookmarks, notes and datasheets are stored on the device only.
 
 ## Android app (APK) — fully native since v2.0
-`python3 native/tools/build_apk.py --version-name 2.1.0 --version-code 13` builds `native/build/PumpForge-2.1.0-native.apk` (≈ 22.6 MB).
+`python3 native/tools/build_apk.py --version-name 2.2.0 --version-code 14` builds `native/build/PumpForge-2.2.0-native.apk` (≈ 22.6 MB).
 The app is **fully native**: C++17 + OpenGL ES 3.0 on `android.app.NativeActivity`, with no WebView, no JavaScript and no Java code.
 It contains all 282 modules in a compact native model format (16-bit positions, 8-bit normals; 18 MB instead of 56 MB),
 every lesson section, quiz, tour (with text-to-speech) and engineering tool of the web library. Phones use a stacked

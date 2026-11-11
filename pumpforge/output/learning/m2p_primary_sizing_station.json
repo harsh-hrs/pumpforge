@@ -1,0 +1,923 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "m2p_primary_sizing_station",
+ "no": 1004,
+ "title": "Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer)",
+ "model_title": "Primary Sizing Station: Two-Sided Truck Dump, Rock Breaker, Apron Feeder, Twin-Shaft Sizer & Discharge Conveyor",
+ "category": "m2p_a01 · A01 · Mine",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The primary sizing station is the hand-over point between the mine fleet and the conveyor system. Haul trucks reverse onto two tipping decks and tip into a lined dump hopper; a pedestal rock breaker breaks oversize and bridges without anyone entering the hopper; a heavy apron feeder draws ore out at a controlled rate; a twin-shaft mineral sizer reduces run-of-mine lumps (up to ~1.2–1.5 m) to minus ~200 mm by tension and shear; the sized ore drops onto a sacrificial conveyor that passes a self-cleaning tramp magnet and a metal detector before joining the overland conveyor to the refinery.",
+   "applications": [
+    "Primary sizing of sticky, clayey lateritic bauxite (sizers handle wet clay better than jaw or gyratory crushers)",
+    "Buffering truck deliveries so the overland conveyor runs at a steady rate",
+    "Removing tramp steel before it can rip the overland belt"
+   ],
+   "key_points": [
+    "Nominal ~1,300–1,500 t/h, design 1,800 t/h to the overland; feeder and sizer rated ~2,000–2,400 t/h for truck surges",
+    "ROM top size ~1.2–1.5 m → product –200 mm",
+    "Two-sided tipping so two trucks can tip at once",
+    "Wheel-stop bunds at least half the wheel height of the largest machine using the dump (~1.35 m for the 2.7 m truck tyres, ~1.55 m here because the loader also tips; the loader tips with its front tyres at the bund — a dedicated loader tip point with a thinner bund set closer to the edge is preferred)",
+    "Sizer shafts turn slowly (~50–100 rpm) with high torque; fluid couplings protect the drives",
+    "Magnet + metal detector protect the overland belt from bucket teeth and drill steel"
+   ],
+   "classification": {
+    "family": "Mining — primary sizing",
+    "type": "Two-sided truck dump, apron feeder, twin-shaft sizer, discharge conveyor"
+   },
+   "hi_family": "mine_to_port",
+   "summary": "The primary sizing station turns run-of-mine bauxite into a conveyable product. Haul trucks tip from two sides into a lined dump hopper; a pedestal rock breaker deals with oversize; an apron feeder draws ore out at a controlled rate into a twin-shaft mineral sizer that reduces lumps up to ~1.2–1.5 m to minus ~200 mm; the product drops onto a sacrificial conveyor that passes under a self-cleaning tramp magnet and a metal detector before the overland conveyor.",
+   "plant": {
+    "area": "A01",
+    "tag": "01-HP-001, 01-RB-001, 01-AF-001, 01-SZ-001, 01-CV-001, 01-MG-001, 01-MD-001",
+    "qty": "1 station",
+    "interfaces": [
+     "Fed by 01-HT haul trucks (and 01-FL loader from the ROM pad)",
+     "Discharges to the A02 field / overland conveyor"
+    ]
+   }
+  },
+  "model_3d": {
+   "asset": "glb/m2p_primary_sizing_station.glb",
+   "metadata": "meta/m2p_primary_sizing_station.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 34620,
+   "parts": 14
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "A truck reverses to the wheel-stop bund on the green light and tips ~90 t into the dump hopper; the rock-box ledges take the impact.",
+    "The hopper buffers 2–3 truck loads; a pedestal rock breaker breaks any oversize or bridged ore from its cabin above.",
+    "The apron feeder pans drag ore out under the hopper at a VFD-controlled speed matched to the sizer and conveyor."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 10.0,
+   "steps": [
+    {
+     "text": "A truck reverses to the wheel-stop bund on the green light and tips ~90 t into the dump hopper; the rock-box ledges take the impact.",
+     "part": "civil",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hopper buffers 2–3 truck loads; a pedestal rock breaker breaks any oversize or bridged ore from its cabin above.",
+     "part": "rock_breaker",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The apron feeder pans drag ore out under the hopper at a VFD-controlled speed matched to the sizer and conveyor.",
+     "part": "apron_feeder",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The two sizer shafts counter-rotate slowly, turning inward at the top; their horn teeth grip lumps and snap them in tension and shear, the scroll pattern moves oversize along, and lumps that pass the first nip are snapped against the breaker bar beneath the shafts (third stage).",
+     "part": "sizer_shaft_a",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Sized ore (–200 mm) falls through the discharge chute onto the impact beds of the sacrificial conveyor, which runs in a trench under the sizer and then climbs at 12°.",
+     "part": "discharge_conveyor",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The overband magnet lifts tramp steel off the belt into a chute; the metal detector stops the belt for anything non-magnetic (e.g. broken manganese-steel pans or hammer tools) or missed.",
+     "part": "tramp_metal",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Sizer capacity rises with shaft speed and shaft length; product top size is set by tooth/ring spacing and the gap to the breaker bar and grows as teeth wear; feeder speed is controlled to keep the sizer evenly loaded within motor power and the overland design rate."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "m2p_primary_sizing_station_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/m2p_primary_sizing_station.json#components",
+   "key_components": "Tipping decks, wheel stops, dump hopper, rock breaker, apron feeder, twin-shaft sizer, drives, discharge conveyor, overband magnet, metal detector",
+   "parts": [
+    {
+     "id": "civil",
+     "name": "Dump Pocket: tipping pads (sized for a 90 t truck to turn and reverse) on MSE walls with 1.55 m edge bunds, ramps (shown cut short), 1.55 m wheel stops, traffic lights, conveyor trench",
+     "info_ref": "ps_civil",
+     "function": "Lets trucks reverse up and tip safely from both sides.",
+     "material": "Reinforced concrete, compacted fill."
+    },
+    {
+     "id": "hopper",
+     "name": "Dump Hopper (~200–300 t live): AR-plate liners, rock-box ledges, skirts, impact rails, dust-spray headers",
+     "info_ref": "ps_hopper",
+     "function": "Buffers truck deliveries so the feeder and sizer run steadily.",
+     "material": "AR steel liners."
+    },
+    {
+     "id": "rock_breaker",
+     "name": "Pedestal Rock Breaker over the feeder outlet (boom, stick, ~2 t hammer, power pack, operator cabin) — tipping stops while it works",
+     "info_ref": "ps_breaker",
+     "function": "Breaks oversize and dislodges bridged ore without people entering the hopper.",
+     "material": "Steel."
+    },
+    {
+     "id": "apron_feeder",
+     "name": "Apron Feeder (3.0 m manganese-steel pans, ~0.03–0.25 m/s VFD): frame, carry rollers, head drive, tail take-up, dribble conveyor",
+     "info_ref": "ps_feeder",
+     "function": "Draws ore from the hopper at a controlled rate and protects the sizer from the dumping impact.",
+     "material": "Cast manganese steel pans, alloy chains."
+    },
+    {
+     "id": "feeder_pans",
+     "name": "Apron-Feeder Pans and Chains (carry run moves toward the sizer)",
+     "info_ref": "ps_feeder",
+     "function": "Draws ore from the hopper at a controlled rate and protects the sizer from the dumping impact.",
+     "material": "Cast manganese steel pans, alloy chains."
+    },
+    {
+     "id": "sizer_housing",
+     "name": "Twin-Shaft Sizer Housing: side liners, breaker combs, central breaker bar, top covers, bearings, discharge chute",
+     "info_ref": "ps_sizer",
+     "function": "Contains the shafts and guides material through them.",
+     "material": "Steel, wear liners."
+    },
+    {
+     "id": "sizer_shaft_a",
+     "name": "Sizer Shaft A (tooth rings, ~3 teeth per ring, scroll pattern)",
+     "info_ref": "ps_shafts",
+     "function": "Break the ore by tension and shear between counter-rotating teeth (low speed, high torque).",
+     "material": "Forged shafts; hard-faced tooth tips."
+    },
+    {
+     "id": "sizer_shaft_b",
+     "name": "Sizer Shaft B (counter-rotating, rings offset half a pitch)",
+     "info_ref": "ps_shafts",
+     "function": "Break the ore by tension and shear between counter-rotating teeth (low speed, high torque).",
+     "material": "Forged shafts; hard-faced tooth tips."
+    },
+    {
+     "id": "sizer_drives",
+     "name": "Sizer Drive Trains (each shaft: gear coupling, right-angle gearbox, fluid coupling, ~400 kW motor)",
+     "info_ref": "ps_drives",
+     "function": "Drive each shaft.",
+     "material": "Steel."
+    },
+    {
+     "id": "discharge_conveyor",
+     "name": "Sizer Discharge (sacrificial) Conveyor: 1,400 mm belt in a trench under the sizer, impact beds, then 12° incline with walkway",
+     "info_ref": "ps_conveyor",
+     "function": "Carries sized ore from under the sizer to the overland transfer.",
+     "material": "Rubber belt, steel structure."
+    },
+    {
+     "id": "belt",
+     "name": "Conveyor Belt (fabric EP, ~2.5–3 m/s)",
+     "info_ref": "ps_conveyor",
+     "function": "Carries sized ore from under the sizer to the overland transfer.",
+     "material": "Rubber belt, steel structure."
+    },
+    {
+     "id": "tramp_metal",
+     "name": "Self-Cleaning Overband Magnet, Metal Detector, Belt Scale & Rip Detector",
+     "info_ref": "ps_tramp",
+     "function": "Remove and detect tramp steel (bucket teeth, drill steel) before it reaches the overland belt.",
+     "material": "Steel, non-metallic frame."
+    },
+    {
+     "id": "electrical",
+     "name": "E-house (MCC, VFDs, PLC), Transformer and Lighting Mast",
+     "info_ref": "ps_electrical",
+     "function": "Power and control for the station.",
+     "material": "—"
+    },
+    {
+     "id": "ore",
+     "name": "Bauxite: ROM lumps (≤ 1.2–1.5 m) to sized product (–200 mm)",
+     "info_ref": "ps_ore",
+     "function": "Bauxite being sized.",
+     "material": "Bauxite."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Reference-plant values: typical published envelope for this equipment class plus engineering estimates from the Mine-to-Port design basis (generic 2 Mt/yr low-temperature Bayer refinery). Knowledge-based — not verified against a live source; confirm with the selected OEM specification and your site data before use.",
+   "status": "to be verified",
+   "parameters": {
+    "design_throughput": {
+     "typical_range": "≈ 1,300 – 1,500 nominal; 1,800 design",
+     "unit": "t/h",
+     "note": "Reference-plant basis (sized ore to the overland)"
+    },
+    "sizer_feeder_rating": {
+     "typical_range": "≈ 2,000 – 2,400",
+     "unit": "t/h",
+     "note": "Equipment rating margin for truck surges"
+    },
+    "rom_top_size": {
+     "typical_range": "≈ 1.2 – 1.5",
+     "unit": "m",
+     "note": "Reference-plant design basis"
+    },
+    "product_size": {
+     "typical_range": "–200 (P80 ~100–130)",
+     "unit": "mm",
+     "note": "Reference-plant design basis"
+    },
+    "hopper_live_capacity": {
+     "typical_range": "≈ 200 – 300",
+     "unit": "t",
+     "note": "2–3 truck loads"
+    },
+    "tipping_deck_height": {
+     "typical_range": "≈ 10 above grade (≈ 6 above the feeder pans)",
+     "unit": "m",
+     "note": "Model / engineering estimate"
+    },
+    "wheel_stop_height": {
+     "typical_range": "≥ 1.55 (≥ ½ the wheel height of the largest machine using the dump — here the wheel loader; ≥ 1.35 for trucks only)",
+     "unit": "m",
+     "note": "Dump-point design rule"
+    },
+    "apron_feeder": {
+     "typical_range": "3.0 m pans (skirts 2.6 m clear ≈ 2 × top lump), 0.03–0.25 m/s, ~2 × 132–160 kW",
+     "unit": "",
+     "note": "Engineering estimate"
+    },
+    "sizer_shaft_speed": {
+     "typical_range": "≈ 50 – 100",
+     "unit": "rpm",
+     "note": "Class typical"
+    },
+    "sizer_installed_power": {
+     "typical_range": "2 × 300 – 450",
+     "unit": "kW",
+     "note": "Class typical"
+    },
+    "discharge_belt": {
+     "typical_range": "1,400 mm, ~2.5–3 m/s",
+     "unit": "",
+     "note": "Engineering estimate"
+    }
+   },
+   "additional": {},
+   "title": "Operating parameters",
+   "selection_notes": [
+    "Sizer size from design t/h, ROM top size, ore hardness/stickiness; feeder width from hopper outlet and capacity.",
+    "Semi-mobile station near the reserve centroid, relocated every 5–10 years."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "sizer_model": null,
+     "design_tph": null,
+     "installed_kW": null,
+     "feeder_width_m": null
+    },
+    "status": "empty — fill from the selected OEM specification sheet"
+   },
+   "sources": [
+    "PumpForge Mine-to-Port reference-plant design basis (m2p/basis), multi-agent SME reviewed",
+    "SME Mining Engineering Handbook, 3rd ed. (2011)",
+    "OEM performance handbooks for the equipment class (generic envelope)",
+    "Twin-shaft mineral sizer class literature (generic)",
+    "CEMA Belt Conveyors for Bulk Materials, 7th ed."
+   ]
+  },
+  "installation": {
+   "civil_works": [
+    "MSE or RC walls retaining the tipping decks; dump pocket designed for truck impact; drainage of the pocket floor; wheel-stop bunds and lighting."
+   ],
+   "mechanical_installation": [
+    "Sizer on a massive foundation with drive bases; shafts and drives aligned (laser); apron feeder levelled with chain tension set; conveyor aligned and belt trained.",
+    "Overhead crane or monorail (~20–30 t) and lay-down area for shaft and pan change-outs."
+   ],
+   "commissioning": [
+    "No-load runs: rotation, vibration, bearing temperatures; interlock tests (pull-wires, belt drift, blocked chute, metal detector trip, emergency stops).",
+    "Load ramp-up with ROM; set feeder speed control to sizer power/conveyor load; test the tramp magnet and metal detector with test pieces."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Belt walk: spillage, idlers, belt damage, skirts; test metal detector.",
+     "part": "discharge_conveyor",
+     "interval": "every shift"
+    },
+    {
+     "task": "Check hopper level and bridging; inspect rock-breaker tool.",
+     "part": "rock_breaker",
+     "interval": "every shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Measure sizer tooth height and hardface or replace tips.",
+     "part": "sizer_shaft_a",
+     "interval": "weekly"
+    },
+    {
+     "task": "Apron-feeder pan, chain and roller inspection.",
+     "part": "apron_feeder",
+     "interval": "monthly"
+    },
+    {
+     "task": "Hopper liner thickness survey.",
+     "part": "hopper",
+     "interval": "quarterly"
+    },
+    {
+     "task": "Gearbox oil analysis; fluid-coupling oil level.",
+     "part": "sizer_drives",
+     "interval": "monthly"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Shaft change-out with the crane (spare shafts kept rebuilt).",
+     "part": "sizer_shaft_b"
+    },
+    {
+     "task": "Pan and chain replacement; liner replacement.",
+     "part": "feeder_pans"
+    }
+   ],
+   "lubrication": [
+    "Sizer bearings by automatic grease/oil system; feeder head/tail bearings and chains; gearboxes by oil level and analysis."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Sizer jam / stall",
+     "category": "blockage",
+     "symptoms": [
+      "Motor current trip",
+      "Fluid-coupling plug blows"
+     ],
+     "causes": [
+      "Tramp steel or a very hard block",
+      "Over-feeding"
+     ],
+     "remedies": [
+      "Auto-reverse cycle; remove tramp with isolation; tune feeder speed control"
+     ],
+     "part": "sizer_shaft_a"
+    },
+    {
+     "problem": "Oversize product",
+     "category": "wear",
+     "symptoms": [
+      "Lumps > 200 mm on the belt",
+      "Overland transfer chute blockages"
+     ],
+     "causes": [
+      "Worn tooth tips",
+      "Wrong shaft gap"
+     ],
+     "remedies": [
+      "Rebuild teeth; check combs"
+     ],
+     "part": "sizer_shaft_b"
+    },
+    {
+     "problem": "Hopper bridging / hang-up",
+     "category": "blockage",
+     "symptoms": [
+      "No flow with material in the hopper"
+     ],
+     "causes": [
+      "Sticky clayey ore, wet season",
+      "Large slabs of caprock"
+     ],
+     "remedies": [
+      "Rock breaker; keep the hopper cycling; never enter the hopper"
+     ],
+     "part": "hopper"
+    },
+    {
+     "problem": "Belt rip",
+     "category": "wear",
+     "symptoms": [
+      "Longitudinal cut",
+      "Rip detector trip"
+     ],
+     "causes": [
+      "Tramp steel past the magnet",
+      "Jammed chute"
+     ],
+     "remedies": [
+      "Splice/repair; check magnet and detector sensitivity"
+     ],
+     "part": "belt"
+    },
+    {
+     "problem": "Truck over-run at the tipping edge",
+     "category": "safety",
+     "symptoms": [
+      "Truck strikes or mounts the bund"
+     ],
+     "causes": [
+      "Bund too low/damaged",
+      "Speed, poor visibility"
+     ],
+     "remedies": [
+      "Maintain bunds ≥ half tyre height, lighting, traffic lights and spotting rules"
+     ],
+     "part": "civil"
+    }
+   ],
+   "safety": [
+    "Tipping decks: traffic lights, bund height, spotting rules, CCTV.",
+    "No tipping while the rock breaker is working; breaker exclusion zone for fragments.",
+    "Hopper and sizer are confined spaces with engulfment and crush hazards — isolation, permit, never enter a live hopper.",
+    "Conveyor guarding and pull-wire emergency stops along the belt; lock-out before belt cleaning or idler change.",
+    "Dust: sprays at the hopper, hoods at the sizer discharge."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer) — Introduction",
+    "type": "in_app_tour",
+    "model": "m2p_primary_sizing_station.glb",
+    "duration_s": 105.8,
+    "script": [
+     {
+      "narration": "This module introduces the Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer).",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The primary sizing station is the hand-over point between the mine fleet and the conveyor system.",
+      "duration_s": 7.1,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Haul trucks reverse onto two tipping decks and tip into a lined dump hopper; a pedestal rock breaker breaks oversize and bridges without anyone entering the hopper; a heavy apron feeder draws ore out at a controlled rate; a twin-shaft mineral sizer reduces run-of-mine lumps (up to ~1.2–1.5 m) to minus ~200 mm by tension and shear; the sized ore drops onto a sacrificial conveyor that passes a self-cleaning tramp magnet and a metal detector before joining the overland conveyor to the refinery.",
+      "duration_s": 37.5,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include primary sizing of sticky, clayey lateritic bauxite (sizers handle wet clay better than jaw or gyratory crushers); buffering truck deliveries so the overland conveyor runs at a steady rate; removing tramp steel before it can rip the overland belt.",
+      "duration_s": 17.5,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Dump Hopper (~200–300 t live): AR-plate liners, rock-box ledges, skirts, impact rails, dust-spray headers, Apron-Feeder Pans and Chains (carry run moves toward the sizer), Twin-Shaft Sizer Housing: side liners, breaker combs, central breaker bar, top covers, bearings, discharge chute, Sizer Shaft A (tooth rings, ~3 teeth per ring, scroll pattern).",
+      "duration_s": 25.8,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer) — Operation",
+    "type": "in_app_tour",
+    "model": "m2p_primary_sizing_station.glb",
+    "duration_s": 92.2,
+    "script": [
+     {
+      "narration": "How the Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer) works.",
+      "duration_s": 5.4,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "A truck reverses to the wheel-stop bund on the green light and tips ~90 t into the dump hopper; the rock-box ledges take the impact.",
+      "duration_s": 11.2,
+      "action": {
+       "highlight": "civil",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hopper buffers 2–3 truck loads; a pedestal rock breaker breaks any oversize or bridged ore from its cabin above.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "rock_breaker",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The apron feeder pans drag ore out under the hopper at a VFD-controlled speed matched to the sizer and conveyor.",
+      "duration_s": 8.8,
+      "action": {
+       "highlight": "apron_feeder",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The two sizer shafts counter-rotate slowly, turning inward at the top; their horn teeth grip lumps and snap them in tension and shear, the scroll pattern moves oversize along, and lumps that pass the first nip are snapped against the breaker bar beneath the shafts (third stage).",
+      "duration_s": 20.0,
+      "action": {
+       "highlight": "sizer_shaft_a",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Sized ore (–200 mm) falls through the discharge chute onto the impact beds of the sacrificial conveyor, which runs in a trench under the sizer and then climbs at 12°.",
+      "duration_s": 12.5,
+      "action": {
+       "highlight": "discharge_conveyor",
+       "cut": true,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The overband magnet lifts tramp steel off the belt into a chute; the metal detector stops the belt for anything non-magnetic (e.g. broken manganese-steel pans or hammer tools) or missed.",
+      "duration_s": 13.8,
+      "action": {
+       "highlight": "tramp_metal",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The overlay shows the ore path: truck → hopper → feeder → sizer → belt. Run-of-mine bauxite is tipped, fed, sized to –200 mm and conveyed to the overland conveyor.",
+      "duration_s": 11.7,
+      "action": {
+       "overlay": "flow",
+       "cut": false,
+       "view": "iso"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer) — Maintenance",
+    "type": "in_app_tour",
+    "model": "m2p_primary_sizing_station.glb",
+    "duration_s": 58.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Primary Sizing Station (truck dump, apron feeder, twin-shaft sizer).",
+      "duration_s": 5.8,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Belt walk: spillage, idlers, belt damage, skirts; test metal detector.",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "discharge_conveyor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check hopper level and bridging; inspect rock-breaker tool.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rock_breaker",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Measure sizer tooth height and hardface or replace tips.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sizer_shaft_a",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Apron-feeder pan, chain and roller inspection.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "apron_feeder",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Shaft change-out with the crane (spare shafts kept rebuilt).",
+      "duration_s": 4.2,
+      "action": {
+       "highlight": "sizer_shaft_b",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Pan and chain replacement; liner replacement.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feeder_pans",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for sizer jam / stall: motor current trip. Common cause: tramp steel or a very hard block.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "sizer_shaft_a",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for oversize product: lumps > 200 mm on the belt. Common cause: worn tooth tips.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "sizer_shaft_b",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hopper bridging / hang-up: no flow with material in the hopper. Common cause: sticky clayey ore, wet season.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "hopper",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — wear, temperatures, pressures, leaks and performance — can be compared over time.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Why is a twin-shaft sizer chosen for lateritic bauxite instead of a jaw crusher?",
+     "options": [
+      "It handles sticky, clayey wet ore and breaks by tension/shear with less fines and no packing",
+      "It is cheaper to buy",
+      "It needs no power",
+      "It produces fine powder"
+     ],
+     "answer": 0,
+     "explanation": "Sizers cope with sticky ROM and give a controlled top size.",
+     "level": "basic"
+    },
+    {
+     "question": "What does the apron feeder do?",
+     "options": [
+      "Crushes the ore",
+      "Removes tramp steel",
+      "Washes the ore",
+      "Draws ore out of the hopper at a controlled rate and takes the dumping impact off the sizer"
+     ],
+     "answer": 3,
+     "explanation": "Apron feeders are robust, controllable feeders under dump hoppers.",
+     "level": "basic"
+    },
+    {
+     "question": "What is the purpose of the wheel-stop bund?",
+     "options": [
+      "To stop a reversing truck going over the edge — at least half the wheel height of the largest machine using the dump",
+      "To hold spillage",
+      "For dust control",
+      "To mount lights"
+     ],
+     "answer": 0,
+     "explanation": "Bunds ≥ half tyre height are standard practice.",
+     "level": "basic"
+    },
+    {
+     "question": "Why are fluid couplings fitted in the sizer drives?",
+     "options": [
+      "To raise speed",
+      "To reverse the motor",
+      "Soft start and slip on overload/jam, protecting the drive train",
+      "To cool the bearings"
+     ],
+     "answer": 2,
+     "explanation": "Fluid couplings limit torque peaks.",
+     "level": "basic"
+    },
+    {
+     "question": "Which device lifts tramp steel off the belt?",
+     "options": [
+      "The metal detector",
+      "The rock breaker",
+      "The belt scale",
+      "The self-cleaning overband magnet"
+     ],
+     "answer": 3,
+     "explanation": "The magnet removes ferrous tramp; the detector trips the belt for the rest.",
+     "level": "basic"
+    },
+    {
+     "question": "Who may enter the dump hopper to clear a bridge?",
+     "options": [
+      "Truck drivers",
+      "Only at night",
+      "Nobody while it is live — use the rock breaker; entry only under isolation and confined-space permit",
+      "Any operator"
+     ],
+     "answer": 2,
+     "explanation": "Hopper entry is a high-risk confined space with engulfment hazard.",
+     "level": "basic"
+    },
+    {
+     "question": "The sizer product size is –200 mm because…",
+     "options": [
+      "It is the ROM size",
+      "It suits the 1,200 mm overland belt and its transfer chutes (lump ≤ about 1/5–1/6 of belt width with fines)",
+      "Grinding needs –200 mm",
+      "Trucks need it"
+     ],
+     "answer": 1,
+     "explanation": "CEMA lump-size guidance and chute clearances limit top size; the refinery does its own secondary crushing and grinding.",
+     "level": "advanced"
+    },
+    {
+     "question": "Which component has this function? \"Lets trucks reverse up and tip safely from both sides.\"",
+     "options": [
+      "Sizer Drive Trains (each shaft: gear coupling, right-angle gearbox, fluid coupling, ~400 kW motor)",
+      "Sizer Shaft A (tooth rings, ~3 teeth per ring, scroll pattern)",
+      "Sizer Shaft B (counter-rotating, rings offset half a pitch)",
+      "Dump Pocket: tipping pads (sized for a 90 t truck to turn and reverse) on MSE walls with 1.55 m edge bunds, ramps (shown cut short), 1.55 m wheel stops, traffic lights, conveyor trench"
+     ],
+     "answer": 3,
+     "explanation": "Dump Pocket: tipping pads (sized for a 90 t truck to turn and reverse) on MSE walls with 1.55 m edge bunds, ramps (shown cut short), 1.55 m wheel stops, traffic lights, conveyor trench: Lets trucks reverse up and tip safely from both sides.",
+     "level": "basic",
+     "part": "civil",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Buffers truck deliveries so the feeder and sizer run steadily.\"",
+     "options": [
+      "Dump Pocket: tipping pads (sized for a 90 t truck to turn and reverse) on MSE walls with 1.55 m edge bunds, ramps (shown cut short), 1.55 m wheel stops, traffic lights, conveyor trench",
+      "Conveyor Belt (fabric EP, ~2.5–3 m/s)",
+      "Dump Hopper (~200–300 t live): AR-plate liners, rock-box ledges, skirts, impact rails, dust-spray headers",
+      "Sizer Discharge (sacrificial) Conveyor: 1,400 mm belt in a trench under the sizer, impact beds, then 12° incline with walkway"
+     ],
+     "answer": 2,
+     "explanation": "Dump Hopper (~200–300 t live): AR-plate liners, rock-box ledges, skirts, impact rails, dust-spray headers: Buffers truck deliveries so the feeder and sizer run steadily.",
+     "level": "basic",
+     "part": "hopper",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Breaks oversize and dislodges bridged ore without people entering the hopper.\"",
+     "options": [
+      "Sizer Shaft B (counter-rotating, rings offset half a pitch)",
+      "Sizer Drive Trains (each shaft: gear coupling, right-angle gearbox, fluid coupling, ~400 kW motor)",
+      "Pedestal Rock Breaker over the feeder outlet (boom, stick, ~2 t hammer, power pack, operator cabin) — tipping stops while it works",
+      "Conveyor Belt (fabric EP, ~2.5–3 m/s)"
+     ],
+     "answer": 2,
+     "explanation": "Pedestal Rock Breaker over the feeder outlet (boom, stick, ~2 t hammer, power pack, operator cabin) — tipping stops while it works: Breaks oversize and dislodges bridged ore without people entering the hopper.",
+     "level": "basic",
+     "part": "rock_breaker",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  },
+  "operation": {
+   "controls": [
+    "Control-room or local HMI: feeder speed (VFD), sizer start/stop/reverse, conveyor sequence, magnet on/off, rock-breaker joysticks, traffic lights"
+   ],
+   "pre_start": [
+    "Inspect tipping decks and bunds, hopper level, guards, pull-wires; test metal detector"
+   ],
+   "start_up": [
+    "Confirm the A02 overland is running (permissive), dust sprays on",
+    "Magnet energised and metal detector healthy → discharge conveyor → sizer (inward rotation) → apron feeder at minimum speed; then green lights"
+   ],
+   "normal": [
+    "Keep the hopper partly full (protects the pans); trim feeder speed to sizer power and conveyor load",
+    "Break oversize promptly; watch sizer current and product top size",
+    "Respond to metal-detector trips: find and remove the metal before restart"
+   ],
+   "shut_down": [
+    "Red lights; leave at least ~1 truck load in the hopper to protect the pans (empty it only for liner/pan work)",
+    "Stop the feeder → sizer runs empty ~30–60 s → stop the sizer → belt runs empty → stop the conveyor → de-energise the magnet; isolate"
+   ],
+   "alarms_interlocks": [
+    "A02 overland stop → 01-CV-001 stop → sizer stop → feeder stop (sequence interlock)",
+    "Sizer stall/overload → feeder stop, auto-reverse (2–3 attempts) then trip and alarm",
+    "Zero-speed switches on the feeder tail shaft and sizer shafts; sizer bearing temperature/vibration",
+    "Blocked-chute probes at the sizer discharge and head chute; belt rip detector; metal detector → belt stop + marker spray",
+    "Belt drift, speed (slip) and pull-wire trips",
+    "Rock breaker active / hopper high level → tipping lights red; hopper low level → alarm and slow the feeder to keep a protective layer"
+   ],
+   "tips": [
+    "Never let the hopper run empty — trucks then tip straight onto the pans",
+    "Tip on both decks alternately to spread wear"
+   ]
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

@@ -1,0 +1,1133 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "m2p_mine_overview",
+ "no": 1000,
+ "title": "Mine — Area Overview (mining sequence)",
+ "model_title": "Bauxite Mine — Area Overview (mining sequence from clearing to rehabilitation)",
+ "category": "m2p_a01 · A01 · Mine",
+ "phase": 1,
+ "flagship": true,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "This area model shows the whole open-cut bauxite mining sequence on one lateritic plateau. Read the model from right to left to follow one block through time: forest, clearing, stripping, drill and blast, ore mining to the clay floor, backfill and rehabilitation. The mining face itself advances to the right, into the forest, and rehabilitation follows behind it on the left. Trucks run the load–haul–dump cycle in real time from the excavators to the primary sizing station. The scene uses a thin (~4 m) ore column and short hauls for clarity; thicker ore (up to 10–30 m on East Coast India-type deposits) is mined in several flitches or benches, and real hauls are 2–8 km. Tap any machine to open its detailed model.",
+   "applications": [
+    "Understanding the mining sequence and where each machine works",
+    "Seeing the lateritic profile on the cut face: topsoil, overburden, caprock, bauxite, clay",
+    "Following the ore from the face to the sizing station and ROM pad"
+   ],
+   "key_points": [
+    "Plateau bauxite is flat-lying and shallow: strip mining with a low strip ratio (~0.3–0.6 t waste per t ore, estimate)",
+    "Caprock (ferricrete) is drilled and blasted, and mined as ore or waste depending on its grade. The ore below is mostly free-digging or ripped; occasional hard bands are blasted",
+    "Grade control (available Al₂O₃, reactive SiO₂) decides what is ore and which grade bin it goes to. Available Al₂O₃ = gibbsite alumina extractable in a low-temperature (~145 °C) caustic digest; reactive SiO₂ = kaolinite silica that consumes caustic as DSP",
+    "Caprock is classified by grade-control assay: where available Al₂O₃ and reactive SiO₂ meet the ore cut-off it goes to the sizer as ore, otherwise to backfill as waste (reference plant: ~50 % assumed ore, to be confirmed)",
+    "Topsoil is kept separate and returned quickly — the seed bank is the key to rehabilitation",
+    "Clearing-to-rehabilitation takes ~1–3 years per pit (progressive rehabilitation); rehabilitated pits are left as shallow depressions because the ore removed is not replaced"
+   ],
+   "classification": {
+    "family": "Mining — area overview",
+    "type": "Open-cut plateau bauxite mine (strip mining with progressive rehabilitation)"
+   },
+   "hi_family": "mine_to_port",
+   "summary": "The bauxite mine area model shows the whole mining sequence on one plateau, from undisturbed forest on the right to rehabilitated land on the left: clearing, topsoil and overburden stripping, caprock drill-and-blast, excavation of the ore down to the kaolinitic clay floor, backfill, and rehabilitation. The cut face shows the lateritic profile: topsoil, laterite overburden, ferricrete caprock, friable gibbsitic bauxite and clay. Trucks run the real-time load–haul–dump cycle from the excavators, up the 10 % box-cut ramp and along the haul road to the primary sizing station; the ROM pad holds the grade-bin blending reserve.",
+   "plant": {
+    "area": "A01",
+    "tag": "A01 area model",
+    "qty": "1 operating mine with several active pits",
+    "interfaces": [
+     "Delivers sized ore to A02 Ore Transport"
+    ]
+   }
+  },
+  "model_3d": {
+   "asset": "glb/m2p_mine_overview.glb",
+   "metadata": "meta/m2p_mine_overview.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 334944,
+   "parts": 37
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The front edge of the block is a cut face that shows the lateritic profile: topsoil (~0.25 m), overburden (~1 m), ferricrete caprock (~1.5 m), gibbsitic bauxite (~4 m here, undulating base) and the kaolinitic clay floor."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 422.0,
+   "steps": [
+    {
+     "text": "0 · Grade control: RC/aircore drilling on a ~7.5–15 m grid with 0.5–1 m samples is assayed for available Al₂O₃ and reactive SiO₂; ore/waste and grade-bin polygons are loaded into excavator GPS guidance and the fleet-management system.",
+     "part": "gc_drilling",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "part"
+    },
+    {
+     "text": "1 · Clearing: timber salvaged, vegetation mulched — as late as possible before mining.",
+     "part": "zone_cleared",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "part"
+    },
+    {
+     "text": "2 · Stripping: topsoil (seed bank) and overburden removed separately by dozers and loaders.",
+     "part": "zone_stripped",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "part"
+    },
+    {
+     "text": "3 · Caprock drill & blast: the drill rig works a pegged ~3.0 × 3.5 m pattern (burden × spacing) set by the blast design, tighter in thin caprock, working toward the free face; the blast breaks the cemented ferricrete into muck.",
+     "part": "drill",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "part"
+    },
+    {
+     "text": "4 · Load & haul: the blasted caprock is loaded out first (to the sizer if grade control classes it as ore, otherwise to backfill); the ore is then dug in one or two flitches down to the clay floor. The ore excavators stand on the exposed ore surface and top-load trucks waiting on the floor below, swinging to the side of the body, never over the cab.",
+     "part": "excavators",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "part"
+    },
+    {
+     "text": "5 · Trucks climb the 10 % ramp and run the haul road to the primary sizing station, reverse square to the wheel stop and tip (at a ROM-pad finger: tip short of the crest and let the dozer push).",
+     "part": "haul_trucks",
+     "cut": false,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "6 · Backfill and rehabilitation: landform reshaped, topsoil returned, deep ripped on the contour and replanted.",
+     "part": "zone_rehab",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "part"
+    },
+    {
+     "text": "The front edge of the block is a cut face that shows the lateritic profile: topsoil (~0.25 m), overburden (~1 m), ferricrete caprock (~1.5 m), gibbsitic bauxite (~4 m here, undulating base) and the kaolinitic clay floor.",
+     "part": "profile_ore_layer",
+     "cut": true,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "front"
+    }
+   ],
+   "characteristic_curve": "Mine schedule: tonnes of ore per year at the target available alumina and reactive silica, blended through grade bins and the ROM pad."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "m2p_mine_overview_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/m2p_mine_overview.json#components",
+   "key_components": "Clearing, stripping, caprock blasting, ore mining, haul road, ROM pad, sizing station, backfill, rehabilitation",
+   "parts": [
+    {
+     "id": "profile_topsoil",
+     "name": "Topsoil (~0.1–0.3 m, the seed bank)",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "profile_laterite",
+     "name": "Overburden: lateritic soil / pisolitic gravel (~0.3–2 m)",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "profile_caprock",
+     "name": "Ferricrete caprock (~0.5–3 m, drilled & blasted)",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "profile_ore_layer",
+     "name": "Friable gibbsitic bauxite (ore, ~4–15 m by deposit)",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "profile_clay_floor",
+     "name": "Kaolinitic clay floor (left in place)",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "zone_cleared",
+     "name": "1 · Cleared (timber salvaged, vegetation mulched)",
+     "info_ref": "mn_cleared",
+     "function": "First step: remove vegetation.",
+     "material": "—"
+    },
+    {
+     "id": "zone_stripped",
+     "name": "2 · Topsoil and overburden stripped — caprock exposed, drilled",
+     "info_ref": "mn_stripped",
+     "function": "Expose the caprock / ore.",
+     "material": "Topsoil, laterite."
+    },
+    {
+     "id": "zone_blasted",
+     "name": "3 · Caprock blasted (broken muck, swelled ~1.3×) — loaded out first, to the sizer or to backfill by grade",
+     "info_ref": "mn_blasted",
+     "function": "Break the hard cemented ferricrete cap.",
+     "material": "Ferricrete caprock."
+    },
+    {
+     "id": "zone_orebench",
+     "name": "4a · Caprock removed — ore surface exposed; ore dug in one or two flitches to the clay floor",
+     "info_ref": "mn_floor",
+     "function": "Ore mined out down to the clay floor.",
+     "material": "Bauxite; clay floor."
+    },
+    {
+     "id": "zone_floor",
+     "name": "4 · Ore mined to the grade-control floor on the clay",
+     "info_ref": "mn_floor",
+     "function": "Ore mined out down to the clay floor.",
+     "material": "Bauxite; clay floor."
+    },
+    {
+     "id": "zone_backfill",
+     "name": "5 · Backfilled (battered toward the pit)",
+     "info_ref": "mn_backfill",
+     "function": "Return the pit to a stable landform.",
+     "material": "Laterite."
+    },
+    {
+     "id": "zone_rehab",
+     "name": "6 · Rehabilitated: topsoil returned, ripped, replanted — left as a shallow depression",
+     "info_ref": "mn_rehab",
+     "function": "Restore a self-sustaining ecosystem.",
+     "material": "—"
+    },
+    {
+     "id": "zone_ramp",
+     "name": "Pit access ramp: two-lane box cut, 10 % grade, toe drains",
+     "info_ref": "mn_road",
+     "function": "Truck access from the pit to the station.",
+     "material": "Compacted laterite with gravel wearing course."
+    },
+    {
+     "id": "plateau",
+     "name": "Surrounding plateau (undisturbed lateritic profile)",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "trees_plateau",
+     "name": "Native vegetation on the plateau beyond the pit",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "trees_forest",
+     "name": "Undisturbed native vegetation (forest or plateau grassland), left standing until the pit is scheduled",
+     "info_ref": "mn_forest",
+     "function": "Undisturbed ground ahead of mining.",
+     "material": "—"
+    },
+    {
+     "id": "trees_rehab",
+     "name": "Rehabilitation planting (local species, seeded and planted)",
+     "info_ref": "mn_rehab",
+     "function": "Restore a self-sustaining ecosystem.",
+     "material": "—"
+    },
+    {
+     "id": "topsoil_stockpile",
+     "name": "Topsoil stockpile (low, < 2 m; used only when direct return is not possible; respread as soon as practicable, ideally < 12 months)",
+     "info_ref": "mn_topsoil",
+     "function": "Keep topsoil alive for rehabilitation.",
+     "material": "Topsoil."
+    },
+    {
+     "id": "sediment_pond",
+     "name": "Sediment pond: earth basin (3:1 inner banks, ~2.5 m deep) with rock-armoured spillway; settled water reused for dust suppression",
+     "info_ref": "mn_pond",
+     "function": "Control sediment from pits and roads.",
+     "material": "Earth / clay."
+    },
+    {
+     "id": "pit_dewatering",
+     "name": "Pit sump with skid-mounted dewatering pump (01-PP) and HDPE line to the sediment pond",
+     "info_ref": "mn_pond",
+     "function": "Control sediment from pits and roads.",
+     "material": "Earth / clay."
+    },
+    {
+     "id": "diversion_drain",
+     "name": "Clean-water diversion drain around the pit perimeter (keeps runoff out of the pit)",
+     "info_ref": "mn_pond",
+     "function": "Control sediment from pits and roads.",
+     "material": "Earth / clay."
+    },
+    {
+     "id": "haul_road",
+     "name": "Haul roads and station ramps: two-lane ≥ 3–3.5 × truck width (~22–25 m), ≤ 10 % grade, compacted laterite with gravel wearing course",
+     "info_ref": "mn_road",
+     "function": "Truck access from the pit to the station.",
+     "material": "Compacted laterite with gravel wearing course."
+    },
+    {
+     "id": "windrows",
+     "name": "Safety windrows (trapezoid bunds ≥ ½ the tyre height of the largest machine using the road: 1.4 m for trucks, 1.55 m where the loader travels) on every open edge",
+     "info_ref": "mn_road",
+     "function": "Truck access from the pit to the station.",
+     "material": "Compacted laterite with gravel wearing course."
+    },
+    {
+     "id": "rom_pad",
+     "name": "ROM pad (~3 ha) with grade-bin finger stockpiles (~8–10 kt each; ~2–3 days of ROM blending reserve)",
+     "info_ref": "mn_rompad",
+     "function": "Blend and buffer ore.",
+     "material": "Bauxite."
+    },
+    {
+     "id": "sizing_station",
+     "name": "Primary sizing station (tap: open detailed model)",
+     "info_ref": "mn_station",
+     "function": "Size the ore for the overland conveyor.",
+     "material": "—"
+    },
+    {
+     "id": "drill",
+     "name": "Blast-hole drill working toward the free face, at right angles to the crest (tap: open detailed model)",
+     "info_ref": "mn_drill",
+     "function": "Drill the caprock blast pattern.",
+     "material": "—"
+    },
+    {
+     "id": "blast_pattern",
+     "name": "Blast pattern ~3.0 × 3.5 m: drilled rows toward the free face, pegged collars behind the rig",
+     "info_ref": "mn_pattern",
+     "function": "Holes ready for charging.",
+     "material": "Caprock."
+    },
+    {
+     "id": "dozers",
+     "name": "Dozers stripping topsoil and overburden (tap: open detailed model)",
+     "info_ref": "mn_dozer",
+     "function": "Clearing, stripping, ripping, stockpiling.",
+     "material": "—"
+    },
+    {
+     "id": "wheel_loader",
+     "name": "Wheel loader reclaiming a ROM-pad finger for blending (tap: open detailed model)",
+     "info_ref": "mn_loader",
+     "function": "Reclaim ROM-pad grade bins for blending.",
+     "material": "—"
+    },
+    {
+     "id": "gc_drilling",
+     "name": "Grade-control drilling: RC/aircore holes on a ~10 × 10 m grid (0.5–1 m samples) and the RC rig",
+     "info_ref": "mn_gc",
+     "function": "Define ore, waste and grade bins before digging.",
+     "material": "—"
+    },
+    {
+     "id": "grade_bins",
+     "name": "Grade-control polygons (GPS guidance): grade bins A/B/C on the exposed ore surface and a waste pod (high reactive SiO₂) to leave or send to backfill",
+     "info_ref": "mn_gc",
+     "function": "Define ore, waste and grade bins before digging.",
+     "material": "—"
+    },
+    {
+     "id": "excavators",
+     "name": "Hydraulic excavators top-loading trucks on the pit floor (tap: open detailed model)",
+     "info_ref": "mn_excavator",
+     "function": "Primary loading units.",
+     "material": "—"
+    },
+    {
+     "id": "caprock_truck",
+     "name": "Truck taking blasted caprock: to the sizer if grade control classes it as ore, otherwise to backfill",
+     "info_ref": "mn_truck",
+     "function": "Haul ore to the sizing station.",
+     "material": "—"
+    },
+    {
+     "id": "grader",
+     "name": "Motor grader maintaining the haul road (rolling resistance, crossfall, windrows)",
+     "info_ref": "mn_grader",
+     "function": "Keeps haul roads smooth, crowned and drained.",
+     "material": "—"
+    },
+    {
+     "id": "light_vehicles",
+     "name": "Light vehicles parked in a bunded bay set back from the haul road (buggy whips and flags; give way to haul trucks)",
+     "info_ref": "mn_lv",
+     "function": "Move people and small loads around the mine.",
+     "material": "—"
+    },
+    {
+     "id": "water_cart",
+     "name": "Water cart (truck chassis with ~70–100 kL tank, rear spray bar and cab-controlled cannon) — dust control and fire response",
+     "info_ref": "mn_wc",
+     "function": "Control dust and rolling resistance; first response to fires.",
+     "material": "Steel tank."
+    },
+    {
+     "id": "haul_trucks",
+     "name": "Haul trucks on the load–haul–dump cycle (tap: open detailed model)",
+     "info_ref": "mn_truck",
+     "function": "Haul ore to the sizing station.",
+     "material": "—"
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Reference-plant values: typical published envelope for this equipment class plus engineering estimates from the Mine-to-Port design basis (generic 2 Mt/yr low-temperature Bayer refinery). Knowledge-based — not verified against a live source; confirm with the selected OEM specification and your site data before use.",
+   "status": "to be verified",
+   "parameters": {
+    "rom_ore_mined": {
+     "typical_range": "≈ 6.2 – 6.4",
+     "unit": "Mt/yr wet",
+     "note": "Reference-plant design basis (≈ 5.4 Mt/yr dry bauxite to the refinery)"
+    },
+    "ore_thickness": {
+     "typical_range": "≈ 4 – 15 (generic plateau; thin Darling Range-type 4–8 m, East Coast India-type up to 10–30 m)",
+     "unit": "m",
+     "note": "Reference-plant design basis — deposit dependent"
+    },
+    "caprock_thickness": {
+     "typical_range": "≈ 0.5 – 3",
+     "unit": "m",
+     "note": "Ferricrete"
+    },
+    "strip_ratio": {
+     "typical_range": "≈ 0.3 – 0.6",
+     "unit": "t waste / t ore",
+     "note": "Engineering estimate"
+    },
+    "haul_distance": {
+     "typical_range": "2 – 8",
+     "unit": "km",
+     "note": "Reference-plant design basis"
+    },
+    "grade_targets": {
+     "typical_range": "Available Al₂O₃ ≈ 40 %, reactive SiO₂ ≈ 1.5–2.5 %",
+     "unit": "",
+     "note": "Reference-plant bauxite basis"
+    },
+    "rehabilitation_rate": {
+     "typical_range": "≈ 30 – 75 (≈ 72 ha/yr at 4.2 m ore, ≈ 30 ha/yr at 10 m; 6.3 Mt ÷ (thickness × ~2.1 t/m³))",
+     "unit": "ha/yr",
+     "note": "Engineering estimate from the basis tonnage"
+    },
+    "grade_control_grid": {
+     "typical_range": "≈ 7.5 – 15 (0.5–1 m samples)",
+     "unit": "m",
+     "note": "Reference-plant design basis"
+    },
+    "blast_pattern": {
+     "typical_range": "burden ≈ 2.5–3.5 × spacing ≈ 3.0–4.0 (nominal 3.0 × 3.5)",
+     "unit": "m",
+     "note": "Reference-plant design basis"
+    },
+    "haul_road": {
+     "typical_range": "Two-lane ≥ 3–3.5 × truck width (~22–25 m); ≤ 10 % grade; windrows ≥ ½ tyre height",
+     "unit": "",
+     "note": "Haul-road design practice"
+    },
+    "rom_pad": {
+     "typical_range": "≈ 3 – 6 ha; fingers ~8–10 kt each (~2–3 days of ROM)",
+     "unit": "",
+     "note": "Reference-plant design basis"
+    },
+    "fleet_reference_plant": {
+     "typical_range": "EX 3 · HT 9–10 + 2 · DZ 3 + 1 · DR 2 + 1 · FL 1 + 1 · GR 1–2 · WC 2 · RC 1–2",
+     "unit": "",
+     "note": "Reference-plant design basis"
+    }
+   },
+   "additional": {},
+   "title": "Area parameters",
+   "selection_notes": [
+    "Mining method follows the deposit: thin flat plateau bauxite → strip mining with backhoe excavators and trucks."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "mine_plan": null,
+     "ore_tonnes": null
+    },
+    "status": "empty — fill from the selected OEM specification sheet"
+   },
+   "sources": [
+    "PumpForge Mine-to-Port reference-plant design basis (m2p/basis), multi-agent SME reviewed",
+    "SME Mining Engineering Handbook, 3rd ed. (2011)",
+    "OEM performance handbooks for the equipment class (generic envelope)",
+    "Koch, J.M. (2007) Restoration Ecology — bauxite mine rehabilitation",
+    "ICMM (2019) Integrated Mine Closure — Good Practice Guide, 2nd ed.",
+    "Australian Government (2016) Leading Practice Sustainable Development Program — Mine Rehabilitation / Mine Closure handbooks",
+    "Reference-plant design basis (A01)"
+   ]
+  },
+  "installation": {
+   "mine_planning": [
+    "Resource drilling (~60–120 m grid) and grade-control drilling (~7.5–15 m grid) define ore pods and grade bins.",
+    "Pit sequence planned so clearing, mining and rehabilitation run progressively."
+   ],
+   "infrastructure": [
+    "Haul roads, sediment ponds and clean-water diversions built before mining; sizing station relocated every 5–10 years."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Haul-road grading and watering; spillage clean-up.",
+     "part": "haul_road",
+     "interval": "every shift"
+    },
+    {
+     "task": "Windrow, edge-bund and ramp inspection and repair.",
+     "part": "windrows",
+     "interval": "every shift"
+    },
+    {
+     "task": "Floor and face pickup by machine GPS; pit water pumped to the sediment pond.",
+     "part": "zone_floor",
+     "interval": "every shift"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Formal survey weekly; ore/floor reconciliation against the grade-control model monthly.",
+     "part": "zone_floor",
+     "interval": "weekly / monthly"
+    },
+    {
+     "task": "Clean diversion drains and desilt sediment ponds.",
+     "part": "sediment_pond",
+     "interval": "before the wet season and after major storms"
+    },
+    {
+     "task": "Weed control on topsoil stockpiles.",
+     "part": "topsoil_stockpile",
+     "interval": "quarterly"
+    },
+    {
+     "task": "Rehabilitation monitoring (vegetation cover, erosion).",
+     "part": "zone_rehab",
+     "interval": "annually"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Relocation of the sizing station and road network as the mine moves.",
+     "part": "sizing_station"
+    }
+   ],
+   "lubrication": [
+    "See the individual equipment models."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Ore dilution",
+     "category": "quality",
+     "symptoms": [
+      "Low available Al₂O₃ or high reactive SiO₂ at the refinery"
+     ],
+     "causes": [
+      "Digging past the ore/clay boundary",
+      "Poor grade control"
+     ],
+     "remedies": [
+      "GPS bucket guidance, grade-control drilling, blending on the ROM pad"
+     ],
+     "part": "zone_floor"
+    },
+    {
+     "problem": "Ore loss",
+     "category": "quality",
+     "symptoms": [
+      "Lower ore tonnes than the GC model",
+      "Bauxite left on the pit floor"
+     ],
+     "causes": [
+      "Stopping above the true ore/clay contact",
+      "Conservative polygons"
+     ],
+     "remedies": [
+      "GPS bucket guidance to the GC floor; floor pickup and reconciliation"
+     ],
+     "part": "zone_floor"
+    },
+    {
+     "problem": "Wet-season sticky ore and poor trafficability",
+     "category": "operation",
+     "symptoms": [
+      "Hopper bridging, truck carry-back, rutted ramps"
+     ],
+     "causes": [
+      "Mining clay-rich ore when wet",
+      "Poor drainage"
+     ],
+     "remedies": [
+      "Wet-weather dig plan from drier faces and the ROM-pad buffer; drainage; road-closure triggers"
+     ],
+     "part": "haul_road"
+    },
+    {
+     "problem": "Sediment leaving site",
+     "category": "environment",
+     "symptoms": [
+      "Turbid runoff"
+     ],
+     "causes": [
+      "Pond overflow",
+      "Missing diversion drains"
+     ],
+     "remedies": [
+      "Maintain ponds and drains; stabilise disturbed ground quickly"
+     ],
+     "part": "sediment_pond"
+    },
+    {
+     "problem": "Poor rehabilitation success",
+     "category": "environment",
+     "symptoms": [
+      "Low plant density, erosion"
+     ],
+     "causes": [
+      "Old or deep-stockpiled topsoil",
+      "Compacted pit floor"
+     ],
+     "remedies": [
+      "Direct-return topsoil, deep ripping on the contour, seeding at the right season"
+     ],
+     "part": "zone_rehab"
+    }
+   ],
+   "safety": [
+    "Heavy/light vehicle separation; light vehicles carry a buggy whip and flag, and give way to haul trucks",
+    "Windrows ≥ half the largest tyre height on every open edge, ramp and tip head",
+    "Face and crest: stay back from the crest; never work or park at the toe of a face being dug; keep out of the excavator swing radius",
+    "Blasting: exclusion zone set by the blast plan (commonly ≥ 500 m for people), guarding, sirens, all-clear; misfire procedure",
+    "Pre-start and shift road inspection; spillage removed (tyre cuts and loss of control)",
+    "Dust: water carts, pressurised cabs, respiratory protection where needed",
+    "Fatigue management and FMS proximity / collision-avoidance alarms",
+    "Phytophthora (dieback) hygiene: clean-on-entry and washdown between forest and mined areas where it is present",
+    "Sumps and ponds: fenced and signed, life rings, no lone work near water",
+    "Lightning / storm alert: stop work on exposed benches, decks and ramps and clear charged patterns",
+    "Wet roads: reduced speed limits; never over-water ramps and intersections",
+    "Brake test before descending; escape lanes or arrester berms on long downgrades",
+    "Traffic management plan: heavy vehicles have right of way, radio call-up before entering haul roads, keep-left one-way loops",
+    "Hopper: tip only on green, square to the wheel stop; ROM fingers and dumps: tip short and let the dozer push"
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Mine — Area Overview (mining sequence) — Introduction",
+    "type": "in_app_tour",
+    "model": "m2p_mine_overview.glb",
+    "duration_s": 67.8,
+    "script": [
+     {
+      "narration": "This module introduces the Mine — Area Overview (mining sequence).",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "This area model shows the whole open-cut bauxite mining sequence on one lateritic plateau.",
+      "duration_s": 6.2,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Read the model from right to left to follow one block through time: forest, clearing, stripping, drill and blast, ore mining to the clay floor, backfill and rehabilitation.",
+      "duration_s": 11.7,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The mining face itself advances to the right, into the forest, and rehabilitation follows behind it on the left.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include understanding the mining sequence and where each machine works; seeing the lateritic profile on the cut face: topsoil, overburden, caprock, bauxite, clay; following the ore from the face to the sizing station and ROM pad.",
+      "duration_s": 15.8,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The section face at the front edge shows the lateritic profile: topsoil, overburden, ferricrete caprock, gibbsitic bauxite and the kaolinitic clay floor.",
+      "duration_s": 9.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view lifts the five layers of the lateritic profile apart in the forest block, so each can be tapped.",
+      "duration_s": 8.8,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Mine — Area Overview (mining sequence) — Operation",
+    "type": "in_app_tour",
+    "model": "m2p_mine_overview.glb",
+    "duration_s": 125.9,
+    "script": [
+     {
+      "narration": "How the Mine — Area Overview (mining sequence) works.",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "0 · Grade control: RC/aircore drilling on a ~7.5–15 m grid with 0.5–1 m samples is assayed for available Al₂O₃ and reactive SiO₂; ore/waste and grade-bin polygons are loaded into excavator GPS guidance and the fleet-management system.",
+      "duration_s": 18.3,
+      "action": {
+       "highlight": "gc_drilling",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "1 · Clearing: timber salvaged, vegetation mulched — as late as possible before mining.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "zone_cleared",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "2 · Stripping: topsoil (seed bank) and overburden removed separately by dozers and loaders.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "zone_stripped",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "3 · Caprock drill & blast: the drill rig works a pegged ~3.0 × 3.5 m pattern (burden × spacing) set by the blast design, tighter in thin caprock, working toward the free face; the blast breaks the cemented ferricrete into muck.",
+      "duration_s": 16.7,
+      "action": {
+       "highlight": "drill",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "4 · Load & haul: the blasted caprock is loaded out first (to the sizer if grade control classes it as ore, otherwise to backfill); the ore is then dug in one or two flitches down to the clay floor. The ore excavators stand on the exposed ore surface and top-load trucks waiting on the floor below, swinging to the side of the body, never over the cab.",
+      "duration_s": 27.9,
+      "action": {
+       "highlight": "excavators",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "5 · Trucks climb the 10 % ramp and run the haul road to the primary sizing station, reverse square to the wheel stop and tip (at a ROM-pad finger: tip short of the crest and let the dozer push).",
+      "duration_s": 16.2,
+      "action": {
+       "highlight": "haul_trucks",
+       "cut": false,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "6 · Backfill and rehabilitation: landform reshaped, topsoil returned, deep ripped on the contour and replanted.",
+      "duration_s": 6.2,
+      "action": {
+       "highlight": "zone_rehab",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The front edge of the block is a cut face that shows the lateritic profile: topsoil (~0.25 m), overburden (~1 m), ferricrete caprock (~1.5 m), gibbsitic bauxite (~4 m here, undulating base) and the kaolinitic clay floor.",
+      "duration_s": 16.2,
+      "action": {
+       "highlight": "profile_ore_layer",
+       "cut": true,
+       "operate": false,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "The ore overlay traces bauxite from the excavator bucket to the truck, up the ramp and along the haul road to the dump hopper.",
+      "duration_s": 10.0,
+      "action": {
+       "overlay": "flow",
+       "cut": false,
+       "view": "iso"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Mine — Area Overview (mining sequence) — Maintenance",
+    "type": "in_app_tour",
+    "model": "m2p_mine_overview.glb",
+    "duration_s": 64.3,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Mine — Area Overview (mining sequence).",
+      "duration_s": 4.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Haul-road grading and watering; spillage clean-up.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "haul_road",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Windrow, edge-bund and ramp inspection and repair.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "windrows",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Floor and face pickup by machine GPS; pit water pumped to the sediment pond.",
+      "duration_s": 5.8,
+      "action": {
+       "highlight": "zone_floor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Formal survey weekly; ore/floor reconciliation against the grade-control model monthly.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "zone_floor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Clean diversion drains and desilt sediment ponds.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "sediment_pond",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Relocation of the sizing station and road network as the mine moves.",
+      "duration_s": 5.0,
+      "action": {
+       "highlight": "sizing_station",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for ore dilution: low available Al₂O₃ or high reactive SiO₂ at the refinery. Common cause: digging past the ore/clay boundary.",
+      "duration_s": 9.2,
+      "action": {
+       "highlight": "zone_floor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for ore loss: lower ore tonnes than the GC model. Common cause: stopping above the true ore/clay contact.",
+      "duration_s": 8.3,
+      "action": {
+       "highlight": "zone_floor",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for wet-season sticky ore and poor trafficability: hopper bridging, truck carry-back, rutted ramps. Common cause: mining clay-rich ore when wet.",
+      "duration_s": 10.0,
+      "action": {
+       "highlight": "haul_road",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record road, windrow, pond and rehabilitation inspections so trends can be compared.",
+      "duration_s": 5.0,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "Which layer is drilled and blasted?",
+     "options": [
+      "The friable ore",
+      "The ferricrete caprock",
+      "The topsoil",
+      "The clay floor"
+     ],
+     "answer": 1,
+     "explanation": "The cemented ferricrete cap is too hard to dig economically; the ore below is usually free-digging or ripped.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is topsoil handled separately?",
+     "options": [
+      "It is waste with no value",
+      "It feeds the sizer",
+      "It contains the seed bank needed for rehabilitation",
+      "It is the best ore"
+     ],
+     "answer": 2,
+     "explanation": "Topsoil returned quickly gives the best regrowth.",
+     "level": "basic"
+    },
+    {
+     "question": "Where does mining stop at the bottom?",
+     "options": [
+      "After exactly 20 m",
+      "At the caprock",
+      "At the kaolinitic clay floor defined by grade control",
+      "At the water table always"
+     ],
+     "answer": 2,
+     "explanation": "The clay below the ore is high in reactive silica.",
+     "level": "basic"
+    },
+    {
+     "question": "What is progressive rehabilitation?",
+     "options": [
+      "Rehabilitating only at mine closure",
+      "Planting trees on haul roads",
+      "Buying offsets",
+      "Restoring mined pits continuously as mining moves on"
+     ],
+     "answer": 3,
+     "explanation": "Pits are rehabilitated within a few years of mining.",
+     "level": "basic"
+    },
+    {
+     "question": "What two grade numbers matter most for the refinery?",
+     "options": [
+      "Lump size and density",
+      "Available Al₂O₃ and reactive SiO₂",
+      "Iron and titanium",
+      "Moisture and colour"
+     ],
+     "answer": 1,
+     "explanation": "Available alumina makes product; reactive silica costs caustic and alumina.",
+     "level": "basic"
+    },
+    {
+     "question": "How high must a windrow on an open road edge be?",
+     "options": [
+      "At least half the tyre height of the largest vehicle",
+      "About knee height",
+      "As high as the truck cab",
+      "Windrows are only needed on curves"
+     ],
+     "answer": 0,
+     "explanation": "A windrow of ≥ ½ tyre height (~1.4 m for 90 t trucks) gives the driver a tactile warning and helps stop a truck drifting over the edge; it is not a crash barrier.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which way does the mining face move in this model?",
+     "options": [
+      "To the left, toward the rehabilitated land",
+      "It does not move",
+      "Toward the viewer",
+      "To the right, into the forest; rehabilitation follows on the left"
+     ],
+     "answer": 3,
+     "explanation": "Reading right to left shows one block through time; the face itself advances into the unmined ground.",
+     "level": "basic"
+    },
+    {
+     "question": "Which component has this function? \"Undisturbed ground ahead of mining.\"",
+     "options": [
+      "Light vehicles parked in a bunded bay set back from the haul road (buggy whips and flags; give way to haul trucks)",
+      "Safety windrows (trapezoid bunds ≥ ½ the tyre height of the largest machine using the road: 1.4 m for trucks, 1.55 m where the loader travels) on every open edge",
+      "5 · Backfilled (battered toward the pit)",
+      "Topsoil (~0.1–0.3 m, the seed bank)"
+     ],
+     "answer": 3,
+     "explanation": "Topsoil (~0.1–0.3 m, the seed bank): Undisturbed ground ahead of mining.",
+     "level": "basic",
+     "part": "profile_topsoil",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"First step: remove vegetation.\"",
+     "options": [
+      "1 · Cleared (timber salvaged, vegetation mulched)",
+      "Topsoil stockpile (low, < 2 m; used only when direct return is not possible; respread as soon as practicable, ideally < 12 months)",
+      "Wheel loader reclaiming a ROM-pad finger for blending (tap: open detailed model)",
+      "Overburden: lateritic soil / pisolitic gravel (~0.3–2 m)"
+     ],
+     "answer": 0,
+     "explanation": "1 · Cleared (timber salvaged, vegetation mulched): First step: remove vegetation.",
+     "level": "basic",
+     "part": "zone_cleared",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Expose the caprock / ore.\"",
+     "options": [
+      "4 · Ore mined to the grade-control floor on the clay",
+      "2 · Topsoil and overburden stripped — caprock exposed, drilled",
+      "Haul roads and station ramps: two-lane ≥ 3–3.5 × truck width (~22–25 m), ≤ 10 % grade, compacted laterite with gravel wearing course",
+      "4a · Caprock removed — ore surface exposed; ore dug in one or two flitches to the clay floor"
+     ],
+     "answer": 1,
+     "explanation": "2 · Topsoil and overburden stripped — caprock exposed, drilled: Expose the caprock / ore.",
+     "level": "basic",
+     "part": "zone_stripped",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  },
+  "operation": {
+   "controls": [
+    "Fleet-management system assigns trucks; grade-control polygons in machine guidance; dispatch from the mine control room"
+   ],
+   "start_up": [
+    "Shift handover and pre-start meeting (blast notices, road closures, grade plan)",
+    "Machine pre-start inspections and radio check-in",
+    "Road and ramp inspection: windrows, drainage, spillage, wet-weather condition before the fleet is released",
+    "Confirm GC polygons and grade-bin destinations are loaded in GPS guidance and the FMS"
+   ],
+   "normal": [
+    "Mine to the plan and the grade bins; keep roads in good condition; progressive rehabilitation behind mining"
+   ],
+   "shut_down": [
+    "Park up in the designated park-up area, buckets and blades grounded",
+    "Blast-time clearance: all equipment and people outside the exclusion zone, guards posted, all-clear before re-entry",
+    "Wet-weather shutdown: close ramps and roads when traction or the rain trigger is exceeded"
+   ],
+   "alarms_interlocks": [
+    "Blast guard and exclusion zones",
+    "Collision-avoidance systems on the fleet",
+    "Lightning alert: stop explosives charging and clear blast areas per the site lightning plan (typically lightning within ~10–16 km)",
+    "Wet-weather road-closure trigger",
+    "Fatigue alarm",
+    "FMS overspeed alarm"
+   ],
+   "tips": [
+    "Blend at the face and on the ROM pad — the refinery wants a steady available-alumina and reactive-silica feed"
+   ]
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}
