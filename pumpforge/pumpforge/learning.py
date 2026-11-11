@@ -41,8 +41,14 @@ def F(problem, symptoms, causes, remedies, part=None, category=None):
 
 
 def Q(question, options, answer, explanation, level='basic'):
+    """Quiz item. Options are written with the correct one anywhere (usually first); they are rotated by a stable hash of the
+    question so the correct answer lands in a different position from question to question (the app does not shuffle)."""
+    import hashlib
     assert 0 <= answer < len(options)
-    return {'question': question, 'options': options, 'answer': answer, 'explanation': explanation, 'level': level}
+    n = len(options)
+    k = int(hashlib.md5(question.encode('utf-8')).hexdigest(), 16) % n
+    opts = options[k:] + options[:k]
+    return {'question': question, 'options': opts, 'answer': (answer - k) % n, 'explanation': explanation, 'level': level}
 
 
 def M(text, part=None, interval=None):
@@ -66,10 +72,15 @@ def _cat(p):
 
 
 def mod(definition, applications, principle, params, install, maint, failures, quiz, curve=None, key_points=None,
-        refs=None, selection=None, safety=None):
+        refs=None, selection=None, safety=None, operation=None, param_title=None, param_basis=None, param_sources=None, plant=None,
+        narration=None):
+    """operation (Mine-to-Port catalog): dict(controls=[...], pre_start=[...], start_up=[...], normal=[...], shut_down=[...],
+    alarms_interlocks=[...], tips=[...]) shown in the app's Operation tab. plant: dict(area, tag, qty, interfaces) — where the
+    equipment sits in the reference plant."""
     return dict(definition=definition, applications=applications, principle=principle, params=params, install=install,
                 maint=maint, failures=failures, quiz=quiz, curve=curve, key_points=key_points or [], refs=refs or [],
-                selection=selection or [], safety=safety or [])
+                selection=selection or [], safety=safety or [], operation=operation, param_title=param_title,
+                param_basis=param_basis, param_sources=param_sources, plant=plant, narration=narration or {})
 
 
 # ------------------------------------------------------------------ builder
@@ -87,19 +98,39 @@ def _sentences(s, n):
     return out[:n]
 
 
+def _lc(s):
+    """Lower-case for mid-sentence use without breaking acronyms or chemical formulas (Al₂O₃, SiO₂, TKPH, ROM)."""
+    out = []
+    for w in s.split(' '):
+        core = w.strip('(),.;:')
+        keep = (any(ch.isdigit() or ch in '₀₁₂₃₄₅₆₇₈₉' for ch in core) or sum(ch.isupper() for ch in core) >= 2)
+        out.append(w if keep else w.lower())
+    return ' '.join(out)
+
+
 def _tours(pid, title, c, meta):
     parts = {p['id']: p['name'] for p in meta['parts']}
+    nar = c.get('narration') or {}
+    m2p = pid.startswith('m2p_')
     ovl = list(meta.get('overlays', {}))
     key = [p for p in meta['parts'] if p['group'] in ('rotating_element', 'casing', 'stages', 'bowl_assembly', 'pumps', 'body')][:4]
     intro = [_line(f'This module introduces the {title}.', view='iso', cut=False, explode=0, operate=False)]
     for s_ in _sentences(c['definition'], 3):
         intro.append(_line(s_, view='orbit', operate=True))
-    lf = lambda a: a.rstrip('.') if a[:2].isupper() else a[:1].lower() + a[1:].rstrip('.')
+    lf = lambda a: a.rstrip('.') if (a[:2].isupper() or any(ch.isdigit() or ch in '₂₃' for ch in a.split(' ')[0])) else a[:1].lower() + a[1:].rstrip('.')
     intro.append(_line('Typical applications include ' + '; '.join(lf(a) for a in c['applications'][:4]) + '.', view='iso'))
-    intro.append(_line('The cutaway reveals the internal construction' + (': ' + ', '.join(p['name'] for p in key) if key else '') + '.',
-                       view='front', cut=True))
-    intro.append(_line('The exploded view separates every component so each one can be tapped for its function, material and failure modes.',
-                       view='iso', cut=False, explode=1.0))
+    has_cut = any(p.get('section_role') in ('front', 'split') for p in meta['parts'])
+    has_explode = any(any(abs(v) > 1e-6 for v in (p.get('explode_offset') or [0, 0, 0])) for p in meta['parts'])
+    if 'cutaway' in nar:
+        intro.append(_line(nar['cutaway'], view='front', cut=True))
+    elif has_cut or not m2p:
+        intro.append(_line('The cutaway reveals the internal construction' + (': ' + ', '.join(p['name'] for p in key) if key else '') + '.',
+                           view='front', cut=True))
+    if 'explode' in nar:
+        intro.append(_line(nar['explode'], view='iso', cut=False, explode=1.0))
+    elif has_explode or not m2p:
+        intro.append(_line('The exploded view separates every component so each one can be tapped for its function, material and failure modes.',
+                           view='iso', cut=False, explode=1.0))
     intro.append(_line('Next, watch the operation tutorial to see how it works.', view='iso', explode=0.0))
     op = [_line(f'How the {title} works.', view='iso', cut=True, operate=True)]
     for s in c['principle']:
@@ -107,7 +138,14 @@ def _tours(pid, title, c, meta):
                         overlay=s['overlay'] if (s['overlay'] in ovl) else None, explode=s['explode'] or None,
                         view=s['view'] or ('part' if s['part'] in parts else 'front')))
     if 'flow' in ovl:
-        op.append(_line('The flow overlay traces the liquid from suction to discharge.', overlay='flow', cut=True, view='front'))
+        fdesc = meta['overlays']['flow'].get('description') or ''
+        if 'flow' in nar:
+            ftxt = nar['flow']
+        elif m2p and fdesc and not fdesc.startswith('Suction and discharge'):
+            ftxt = 'The overlay shows the ' + _lc(meta['overlays']['flow'].get('title', 'flow path')[:1]) + meta['overlays']['flow'].get('title', 'flow path')[1:] + '. ' + fdesc
+        else:
+            ftxt = 'The flow overlay traces the liquid from suction to discharge.'
+        op.append(_line(ftxt, overlay='flow', cut=not m2p, view='front' if not m2p else 'iso'))
     for k in ovl:
         if k != 'flow':
             op.append(_line(meta['overlays'][k]['description'].split('. ')[0].rstrip('.') + '.', overlay=k, view='front',
@@ -119,10 +157,11 @@ def _tours(pid, title, c, meta):
         mt.append(_line(t['task'], highlight=pp if pp in parts else None, view='part' if pp in parts else 'iso', cut=bool(pp)))
     for f in c['failures'][:3]:
         pp = f.get('part')
-        txt = f"Watch for {f['problem'].lower()}: {f['symptoms'][0].rstrip('.').lower()}. Common cause: {f['causes'][0].rstrip('.').lower()}."
+        txt = f"Watch for {_lc(f['problem'])}: {_lc(f['symptoms'][0].rstrip('.'))}. Common cause: {_lc(f['causes'][0].rstrip('.'))}."
         mt.append(_line(txt, highlight=pp if pp in parts else None, view='part' if pp in parts else 'front', cut=True,
                         overlay='wear' if ('wear' in ovl and f['category'] == 'wear') else None))
-    mt.append(_line('Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.', view='iso', cut=False))
+    mt.append(_line(nar.get('records') or ('Record every inspection so trends — wear, temperatures, pressures, leaks and performance — can be compared over time.' if m2p else
+                    'Record every inspection so trends — vibration, temperature, leakage and performance — can be compared over time.'), view='iso', cut=False))
     out = []
     for vid, name, lines in (('introduction', 'Introduction', intro), ('operation', 'Operation', op), ('maintenance', 'Maintenance', mt)):
         out.append({'id': vid, 'title': f'{title} — {name}', 'type': 'in_app_tour', 'model': f'{pid}.glb',
@@ -213,12 +252,13 @@ def build_module(pid, c, meta, catalog_entry, family):
                        'parts': [{'id': p['id'], 'name': p['name'], 'info_ref': p['info_ref'],
                                   'function': meta['components'].get(p['info_ref'], {}).get('function'),
                                   'material': meta['components'].get(p['info_ref'], {}).get('material')} for p in meta['parts']]},
-        'engineering_parameters': {'basis': PARAM_BASIS, 'status': 'to be verified', 'parameters': params, 'additional': extra,
+        'engineering_parameters': {'basis': c.get('param_basis') or PARAM_BASIS, 'status': 'to be verified', 'parameters': params, 'additional': extra,
+                                   **({'title': c['param_title']} if c.get('param_title') else {}),
                                    'selection_notes': c['selection'],
                                    'reference_model': ref or {'manufacturer': None, 'model': None, 'datasheet': None,
                                                               'rated_point': {'flow': None, 'head': None, 'speed_rpm': None, 'efficiency_pct': None, 'npshr': None, 'power_kW': None},
                                                               'status': 'empty — fill from the selected manufacturer datasheet / test certificate'},
-                                   'sources': PARAM_SOURCES + c['refs']},
+                                   'sources': (c.get('param_sources') or PARAM_SOURCES) + c['refs']},
         'installation': c['install'],
         'maintenance': c['maint'],
         'failure_analysis': {'items': c['failures'], 'safety': c['safety']},
@@ -226,6 +266,10 @@ def build_module(pid, c, meta, catalog_entry, family):
         'assessment': {'questions': c['quiz'] + _component_questions(pid, meta), 'pass_mark_pct': 70,
                        'note': 'Questions with a "part" field can highlight that part in the 3-D model after answering.'},
     }
+    if c.get('operation'):
+        sec['operation'] = c['operation']
+    if c.get('plant'):
+        sec['introduction']['plant'] = c['plant']
     out = {'schema': 'pumpforge.learning/1.0', 'pump_id': pid, 'no': catalog_entry['no'], 'title': title,
            'model_title': meta['title'], 'category': meta['category'], 'phase': catalog_entry['phase'],
            'flagship': catalog_entry.get('flagship', False), 'sections_order': SECTIONS, 'sections': sec,

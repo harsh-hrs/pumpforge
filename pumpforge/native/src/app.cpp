@@ -131,6 +131,7 @@ bool App::back() {
         if (measuring) { measuring = false; clear_measure(); return true; }
     }
     if (screen == SCR_MORE && more_page) { more_page = MP_NONE; page_scroll_reset = 0; return true; }
+    if (screen == SCR_CATALOG && cat_coll == 1 && m2p_area >= 0) { m2p_area = -1; page_scroll_reset = 0; return true; }
     if (screen == SCR_CATALOG && nav_stack.n == 0 && (cat_dept >= 0 || !cat_query.empty() || cat_saved)) { cat_dept = -1; cat_query.clear(); cat_saved = false; return true; }
     if (nav_stack.n) { screen = nav_stack.back(); nav_stack.pop(); page_scroll_reset = -1; if (screen == SCR_VIEWER) fullscreen = false; return true; }
     if (screen != SCR_HOME) { screen = SCR_HOME; page_scroll_reset = 0; return true; }

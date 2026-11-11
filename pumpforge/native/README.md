@@ -58,9 +58,9 @@ and the `Operate`/`Explode` clips are kept. `glb2pfm.py` decodes every file agai
 ## Build (command line, no Android SDK needed)
 ```
 pip install numpy fonttools brotli          # once
-python3 native/tools/build_apk.py --version-name 2.1.0 --version-code 13
+python3 native/tools/build_apk.py --version-name 2.2.0 --version-code 14
 ```
-Output: `native/build/PumpForge-2.1.0-native.apk`, signed with `android/keystore/pumpforge-debug.jks`
+Output: `native/build/PumpForge-2.2.0-native.apk`, signed with `android/keystore/pumpforge-debug.jks`
 (same key as the WebView builds, so it installs as an update). The toolchain is clang + lld with the C library
 headers from musl (only ABI-identical parts are used: no errno, no pthread, no time_t) and link-time stub
 libraries carrying the exact bionic/NDK symbol names; every imported symbol must be on an allow-list.

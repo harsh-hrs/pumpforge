@@ -1,0 +1,952 @@
+{
+ "schema": "pumpforge.learning/1.0",
+ "pump_id": "m2p_blasthole_drill",
+ "no": 1005,
+ "title": "Crawler Blast-Hole Drill Rig (89–127 mm)",
+ "model_title": "Crawler Blast-Hole Drill Rig (top-hammer / DTH, 89–127 mm holes)",
+ "category": "m2p_a01 · A01 · Mine",
+ "phase": 1,
+ "flagship": false,
+ "sections_order": [
+  "introduction",
+  "model_3d",
+  "exploded_view",
+  "cross_section",
+  "working_principle",
+  "flow_animation",
+  "components",
+  "engineering_parameters",
+  "installation",
+  "maintenance",
+  "failure_analysis",
+  "video_tutorials",
+  "assessment"
+ ],
+ "sections": {
+  "introduction": {
+   "definition": "The crawler blast-hole drill rig drills the holes that are charged with explosives to break the hard ferricrete caprock (and occasional hard ore). The rig trams to each pegged hole, levels itself, sets the boom and tilts the feed forward from the tramming position to the design angle, then pushes the feed foot onto the ground. The hydraulic rock drill hammers and rotates the drill rods while compressed air from the on-board screw compressor flushes the cuttings out of the hole; the collar hood and dust collector capture the fines. Hole depth covers the caprock plus a short sub-drill.",
+   "applications": [
+    "Production drilling of caprock / hard ore for blasting",
+    "Secondary drilling of oversize boulders (where not broken by the rock breaker), and occasional hard ore lenses",
+    "Grade-control sampling is done by a separate RC rig (01-RC)"
+   ],
+   "key_points": [
+    "Holes 89–127 mm on a ~3.0 × 3.5 m pattern (burden × spacing) in caprock 0.5–3 m thick; where the caprock is thinner than ~1–1.5 m, rip it with a dozer instead",
+    "Top hammer: percussion + rotation at the shank; DTH: hammer at the bit (larger holes)",
+    "Flushing air goes down the hollow rods and carries the cuttings up the annulus; the collar hood and dust collector protect people and the environment",
+    "Accurate collar position and depth from GNSS high-precision guidance",
+    "Log every hole (depth, water, voids, caprock/ore contact); the shotfirer charges to the log",
+    "Never drill into or near an old socket/butt or a misfired hole",
+    "Holes are dipped, charged with bulk emulsion (always in wet holes) or ANFO (dry holes only) and stemmed under the blast plan",
+    "Short holes: stemming ~2 m (≈ 17–25 × hole diameter) of crushed aggregate leaves only ~1 m of charge; too little stemming causes flyrock and cratering — follow the blast design and the hole log"
+   ],
+   "classification": {
+    "family": "Mining — drill & blast",
+    "type": "Crawler surface drill rig, top-hammer/DTH, 89–127 mm"
+   },
+   "hi_family": "mine_to_port",
+   "summary": "A self-propelled crawler drill rig drills the blast holes that break the hard ferricrete caprock (and any hard ore). The feed (mast) is raised to vertical, the hydraulic rock drill (top hammer — or a down-the-hole hammer on larger rigs) hammers and rotates the drill string into the rock while the screw compressor blows flushing air down the rods that carries the cuttings up to the collar hood and dust collector. Holes of 89–127 mm on a ~3.0 × 3.5 m pattern are then charged with bulk emulsion/ANFO.",
+   "plant": {
+    "area": "A01",
+    "tag": "01-DR-001…003",
+    "qty": "2 operating + 1 standby",
+    "interfaces": [
+     "Drills ahead of 01-EX loading after 01-DZ stripping",
+     "Blast charged by the explosives MMU (contractor)"
+    ]
+   }
+  },
+  "model_3d": {
+   "asset": "glb/m2p_blasthole_drill.glb",
+   "metadata": "meta/m2p_blasthole_drill.json",
+   "controls": "orbit, zoom, tap a part for details",
+   "triangles": 14384,
+   "parts": 13
+  },
+  "exploded_view": {
+   "animation": "Explode",
+   "duration_s": 1.0,
+   "method": "play clip or lerp part nodes by explode_offset (0–1 slider)"
+  },
+  "cross_section": {
+   "mode": "cutaway",
+   "hide_section_roles": [
+    "front",
+    "hide"
+   ],
+   "section_material": "section",
+   "what_to_look_for": [
+    "The hole goes through the caprock and about 0.3–0.5 m of sub-drill into the soft ore, so the charge breaks the full caprock without a hard toe.",
+    "After charging, the upper ~2 m of each hole is stemming (crushed aggregate) and the ~1 m charge column of emulsion sits in the lower caprock and sub-drill — see the far hole on the section."
+   ]
+  },
+  "working_principle": {
+   "animation": "Operate",
+   "loop_s": 12.0,
+   "steps": [
+    {
+     "text": "The rig trams to the pegged hole with the feed in the tramming position, checks the collar for old sockets or misfire signs, and levels on its tracks.",
+     "part": "undercarriage",
+     "cut": false,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The boom places the feed over the hole; the feed is tilted forward from the tramming position to the design angle (here vertical) and the feed foot is pressed onto the ground. The centraliser at the foot guides the rods while collaring.",
+     "part": "feed",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The rock drill delivers rapid percussion blows (~40–60 Hz) and rotation through the rod to the button bit; the feed force keeps the bit in contact.",
+     "part": "rock_drill",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "Flushing air from the screw compressor passes through the rock drill and down the hollow rods, leaves at the bit face and carries the cuttings up the annulus to the collar hood; the dust collector sucks off and filters the fines.",
+     "part": "drill_string",
+     "cut": false,
+     "operate": true,
+     "overlay": "flow",
+     "explode": 0.0,
+     "view": null
+    },
+    {
+     "text": "The hole goes through the caprock and about 0.3–0.5 m of sub-drill into the soft ore, so the charge breaks the full caprock without a hard toe.",
+     "part": "drilled_holes",
+     "cut": true,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "front"
+    },
+    {
+     "text": "After charging, the upper ~2 m of each hole is stemming (crushed aggregate) and the ~1 m charge column of emulsion sits in the lower caprock and sub-drill — see the far hole on the section.",
+     "part": "drilled_holes",
+     "cut": true,
+     "operate": false,
+     "overlay": null,
+     "explode": 0.0,
+     "view": "front"
+    },
+    {
+     "text": "At design depth the string is withdrawn while flushing, the feed foot is lifted, the feed is put in the tramming position and the rig trams to the next hole.",
+     "part": "feed",
+     "cut": false,
+     "operate": true,
+     "overlay": null,
+     "explode": 0.0,
+     "view": null
+    }
+   ],
+   "characteristic_curve": "Penetration rate falls as rock strength (UCS) rises and as the bit wears; regrinding the buttons restores it."
+  },
+  "flow_animation": {
+   "overlay": "flow",
+   "asset": "m2p_blasthole_drill_flow.glb",
+   "tracers_in_model": false,
+   "other_overlays": {}
+  },
+  "components": {
+   "source": "meta/m2p_blasthole_drill.json#components",
+   "key_components": "Crawler undercarriage, power pack, screw compressor, dust collector, feed, rock drill, drill rods, button bit, cab",
+   "parts": [
+    {
+     "id": "undercarriage",
+     "name": "Oscillating crawler undercarriage with hydraulic track motors",
+     "info_ref": "dr_undercarriage",
+     "function": "Moves and levels the rig on rough benches.",
+     "material": "Steel."
+    },
+    {
+     "id": "chassis",
+     "name": "Chassis: diesel power pack & screw compressor, hydraulic tank, dust collector, ROPS/FOPS cab, exhaust, GNSS, beacon",
+     "info_ref": "dr_chassis",
+     "function": "Carries the power and air.",
+     "material": "Steel."
+    },
+    {
+     "id": "boom",
+     "name": "Boom with lift, swing and feed-dump cylinders; sets the hole position and angle within the coverage area",
+     "info_ref": "dr_boom",
+     "function": "Places the feed over the hole.",
+     "material": "Steel."
+    },
+    {
+     "id": "cradle",
+     "name": "Feed cradle (feed slides in it to press the foot onto the ground)",
+     "info_ref": "dr_boom",
+     "function": "Places the feed over the hole.",
+     "material": "Steel."
+    },
+    {
+     "id": "feed",
+     "name": "Feed (mast) ~8.6 m: feed foot, collar dust hood, centraliser, open rod rack with 6.1 m rods, top sheave",
+     "info_ref": "dr_feed",
+     "function": "Guides and pushes the drill.",
+     "material": "Steel/aluminium."
+    },
+    {
+     "id": "dust_hose",
+     "name": "Dust-suction hose from the collar hood to the dust collector",
+     "info_ref": "dr_dust",
+     "function": "Carries dust-laden air from the collar hood to the dust collector.",
+     "material": "Rubber, wire-reinforced."
+    },
+    {
+     "id": "rock_drill",
+     "name": "Rock drill (hydraulic top hammer) on its carriage, riding the feed guides",
+     "info_ref": "dr_hammer",
+     "function": "Breaks the rock at the bit by percussion and rotation.",
+     "material": "Steel."
+    },
+    {
+     "id": "drill_string",
+     "name": "Drill string (GT60-class 6.1 m rod + 115 mm button bit) — single pass, rotates while drilling",
+     "info_ref": "dr_string",
+     "function": "Transmits energy to the bit and carries the flushing air.",
+     "material": "Alloy steel, tungsten-carbide buttons."
+    },
+    {
+     "id": "dump_cyl",
+     "name": "Feed-dump cylinder (sets the feed angle)",
+     "info_ref": "dr_boom",
+     "function": "Places the feed over the hole.",
+     "material": "Steel."
+    },
+    {
+     "id": "dump_cyl_r0",
+     "name": "Feed-dump cylinder rod",
+     "info_ref": "dr_boom",
+     "function": "Places the feed over the hole.",
+     "material": "Steel."
+    },
+    {
+     "id": "blast_pattern",
+     "name": "Drill pattern ~3.0 × 3.5 m (burden × spacing): pegged collars and drilled holes with cuttings cones",
+     "info_ref": "dr_pattern",
+     "function": "Hole layout that gives the right fragmentation.",
+     "material": "Ferricrete caprock over gibbsitic bauxite."
+    },
+    {
+     "id": "drilled_holes",
+     "name": "Completed holes through the ~2.5 m caprock and ~0.5 m sub-drill; the far one shown after charging (~1 m emulsion, ~2 m stemming)",
+     "info_ref": "dr_pattern",
+     "function": "Hole layout that gives the right fragmentation.",
+     "material": "Ferricrete caprock over gibbsitic bauxite."
+    },
+    {
+     "id": "bench",
+     "name": "Bench: ferricrete caprock (~2.5 m here) over friable gibbsitic bauxite",
+     "info_ref": "dr_pattern",
+     "function": "Hole layout that gives the right fragmentation.",
+     "material": "Ferricrete caprock over gibbsitic bauxite."
+    }
+   ]
+  },
+  "engineering_parameters": {
+   "basis": "Reference-plant values: typical published envelope for this equipment class plus engineering estimates from the Mine-to-Port design basis (generic 2 Mt/yr low-temperature Bayer refinery). Knowledge-based — not verified against a live source; confirm with the selected OEM specification and your site data before use.",
+   "status": "to be verified",
+   "parameters": {
+    "hole_diameter": {
+     "typical_range": "89 – 127",
+     "unit": "mm",
+     "note": "Reference-plant design basis"
+    },
+    "pattern_burden_x_spacing": {
+     "typical_range": "≈ 2.5 – 3.5 × 3.0 – 4.0 (nominal 3.0 × 3.5)",
+     "unit": "m",
+     "note": "Reference-plant design basis — engineering estimate; burden shrinks for thin caprock"
+    },
+    "powder_factor": {
+     "typical_range": "≈ 0.3 – 0.6",
+     "unit": "kg/m³ bank",
+     "note": "Reference-plant design basis"
+    },
+    "hole_depth": {
+     "typical_range": "Caprock thickness + ~0.3–0.5 m sub-drill: ≈ 1.5–3.5 m typical; up to ~5 m where hard ore bands are blasted with the cap",
+     "unit": "",
+     "note": "Reference-plant design basis"
+    },
+    "penetration_rate": {
+     "typical_range": "≈ 0.5 – 1.5",
+     "unit": "m/min",
+     "note": "Reference-plant design basis (UCS 20–80 MPa)"
+    },
+    "percussion_frequency": {
+     "typical_range": "≈ 40 – 60 (top hammer); ≈ 15 – 30 (DTH)",
+     "unit": "Hz",
+     "note": "Class typical"
+    },
+    "rotation_speed": {
+     "typical_range": "≈ 60 – 150 (top hammer)",
+     "unit": "rpm",
+     "note": "Class typical"
+    },
+    "rig_mass": {
+     "typical_range": "≈ 18 – 25",
+     "unit": "t",
+     "note": "Class envelope"
+    },
+    "compressor_flushing_air": {
+     "typical_range": "Top hammer ≈ 0.15–0.3 m³/s FAD at ~10–12 bar; DTH ≈ 0.3–0.5 m³/s at 20–30 bar (up-hole velocity ≥ ~15–25 m/s)",
+     "unit": "",
+     "note": "Class typical / basis"
+    },
+    "drill_rods": {
+     "typical_range": "GT60 / T51-class rods (45–60 mm) or ST58/ST68 tube rods; 3.66 or 6.1 m long",
+     "unit": "",
+     "note": "Class typical"
+    },
+    "caprock_strength": {
+     "typical_range": "≈ 20 – 80 (UCS)",
+     "unit": "MPa",
+     "note": "Reference-plant design basis estimate"
+    },
+    "fleet_reference_plant": {
+     "typical_range": "2 operating + 1 standby (3)",
+     "unit": "",
+     "note": "Reference-plant design basis"
+    }
+   },
+   "additional": {},
+   "title": "Operating parameters",
+   "selection_notes": [
+    "Hole size from the bench (caprock) thickness and fragmentation needed; rig size from metres drilled per day."
+   ],
+   "reference_model": {
+    "manufacturer": null,
+    "model": null,
+    "datasheet": null,
+    "rated_point": {
+     "rig_model": null,
+     "hole_mm": null,
+     "engine_kW": null
+    },
+    "status": "empty — fill from the selected OEM specification sheet"
+   },
+   "sources": [
+    "PumpForge Mine-to-Port reference-plant design basis (m2p/basis), multi-agent SME reviewed",
+    "SME Mining Engineering Handbook, 3rd ed. (2011)",
+    "OEM performance handbooks for the equipment class (generic envelope)",
+    "Surface drilling class literature (generic)",
+    "Reference-plant design basis (A01)"
+   ]
+  },
+  "installation": {
+   "commissioning": [
+    "Feed alignment and hole-angle calibration; GNSS navigation calibration; dust collector and fire-suppression checks; rod-handling interlocks; anti-jamming test."
+   ]
+  },
+  "maintenance": {
+   "routine": [
+    {
+     "task": "Walk-around: rods, bit, shank, hoses and whip checks, dust-collector filters, tracks.",
+     "part": "drill_string",
+     "interval": "every shift"
+    },
+    {
+     "task": "Regrind the bit buttons before the wear flat reaches ~1/3 of the button diameter, or at the first sign of snakeskin/micro-cracks (typically every 20–80 m in abrasive caprock; track per bit).",
+     "part": "drill_string",
+     "interval": "per bit log"
+    },
+    {
+     "task": "Grease the threads at every rod/bit change; replace the shank adapter by wear/striking-face inspection.",
+     "part": "rock_drill",
+     "interval": "every change"
+    }
+   ],
+   "periodic": [
+    {
+     "task": "Check the rock-drill accumulator gas pre-charge.",
+     "part": "rock_drill",
+     "interval": "~40–100 percussion h (class typical, per OEM)"
+    },
+    {
+     "task": "Rock-drill service/reseal.",
+     "part": "rock_drill",
+     "interval": "~400–600 h (class typical, per OEM)"
+    },
+    {
+     "task": "Compressor and engine service; air-filter change.",
+     "part": "chassis",
+     "interval": "250–500 h"
+    }
+   ],
+   "overhaul": [
+    {
+     "task": "Rock-drill overhaul.",
+     "part": "rock_drill",
+     "interval": "~1,000–1,500 h (class typical, per OEM)"
+    },
+    {
+     "task": "Feed slides, chains/cylinder and cradle wear parts.",
+     "part": "feed"
+    }
+   ],
+   "lubrication": [
+    "Shank lubrication (air-oil) during drilling; grease feed, cradle and carousel; compressor oil to schedule."
+   ]
+  },
+  "failure_analysis": {
+   "items": [
+    {
+     "problem": "Drilling into a misfire / butt",
+     "category": "safety",
+     "symptoms": [
+      "Explosive residue or a socket at the collar"
+     ],
+     "causes": [
+      "Butts not marked after the last blast"
+     ],
+     "remedies": [
+      "Stop, do not withdraw the rods, evacuate, call the shotfirer; post-blast inspection marks all butts"
+     ],
+     "part": "drill_string"
+    },
+    {
+     "problem": "Stuck rods",
+     "category": "blockage",
+     "symptoms": [
+      "Rotation pressure rises, string will not retract"
+     ],
+     "causes": [
+      "Broken ground, poor flushing"
+     ],
+     "remedies": [
+      "Increase flushing, reduce feed force, back-hammer; avoid drilling through voids"
+     ],
+     "part": "drill_string"
+    },
+    {
+     "problem": "Hole collapse / blocked hole",
+     "category": "quality",
+     "symptoms": [
+      "Hole cannot be dipped to design depth",
+      "Cuttings fall back when the string is withdrawn"
+     ],
+     "causes": [
+      "Clay-rich or broken caprock, poor flushing, rain"
+     ],
+     "remedies": [
+      "Clean out by redrilling; use hole liners/collar pipes or stemming plugs; log and flag for the shotfirer"
+     ],
+     "part": "drill_string"
+    },
+    {
+     "problem": "Wet holes",
+     "category": "quality",
+     "symptoms": [
+      "Water at dip"
+     ],
+     "causes": [
+      "Groundwater / monsoon rain"
+     ],
+     "remedies": [
+      "Log the water depth; charge with emulsion (water-resistant), not ANFO; dewater holes and plan to blast quickly"
+     ],
+     "part": "drill_string"
+    },
+    {
+     "problem": "Hole deviation",
+     "category": "quality",
+     "symptoms": [
+      "Holes off-angle"
+     ],
+     "causes": [
+      "Feed misalignment, excessive feed force, fast collaring"
+     ],
+     "remedies": [
+      "Recalibrate the feed; collar gently; correct the feed force"
+     ],
+     "part": "feed"
+    },
+    {
+     "problem": "Dust exposure",
+     "category": "environment",
+     "symptoms": [
+      "Visible dust at the collar"
+     ],
+     "causes": [
+      "Dust-collector filter blocked, hood not seated"
+     ],
+     "remedies": [
+      "Clean/replace filters; seat the hood; water injection"
+     ],
+     "part": "chassis"
+    }
+   ],
+   "safety": [
+    "Never drill into or within the site minimum distance of an old socket/butt, a bootleg or a misfired hole; inspect and mark the pattern before drilling and report any suspected explosive residue to the shotfirer.",
+    "Never drill in a pattern once charging has started, except under the site procedure and at the site minimum distance from charged holes.",
+    "Check overhead clearance before raising or tramming with the feed up: the ~9 m mast must keep the site minimum approach distance to power lines.",
+    "Position the rig at right angles to the crest and outside the edge-hazard zone (site rule) when drilling the front row; tram with the feed in the tramming position, within OEM slope/tilt limits.",
+    "Rotating rods and rod handling: exclusion zone around the feed while drilling, guards and rod-handling interlocks, never reach into the feed.",
+    "Respirable crystalline silica and noise (top hammer > 100 dB(A) at the rig): dust collector working, closed pressurised cab, RPE and hearing protection outside the cab.",
+    "Before maintenance: isolate, blow down the compressor and air lines (whip checks on hoses), and depressurise the hydraulics and rock-drill accumulators (LOTO).",
+    "After charging: blast exclusion zone as the site blast plan sets (typically ≥ 300–500 m for people and ≥ 100–200 m for equipment, machines facing away) and misfire procedures.",
+    "Lightning warning (detector or site alert): stop charging, clear the blast area and the charged pattern to the exclusion distance.",
+    "Whip checks on all air couplings; depressurise before breaking a connection."
+   ]
+  },
+  "video_tutorials": [
+   {
+    "id": "introduction",
+    "title": "Crawler Blast-Hole Drill Rig (89–127 mm) — Introduction",
+    "type": "in_app_tour",
+    "model": "m2p_blasthole_drill.glb",
+    "duration_s": 88.4,
+    "script": [
+     {
+      "narration": "This module introduces the Crawler Blast-Hole Drill Rig (89–127 mm).",
+      "duration_s": 5.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 0,
+       "operate": false
+      }
+     },
+     {
+      "narration": "The crawler blast-hole drill rig drills the holes that are charged with explosives to break the hard ferricrete caprock (and occasional hard ore).",
+      "duration_s": 10.0,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The rig trams to each pegged hole, levels itself, sets the boom and tilts the feed forward from the tramming position to the design angle, then pushes the feed foot onto the ground.",
+      "duration_s": 13.8,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "The hydraulic rock drill hammers and rotates the drill rods while compressed air from the on-board screw compressor flushes the cuttings out of the hole; the collar hood and dust collector capture the fines.",
+      "duration_s": 14.6,
+      "action": {
+       "view": "orbit",
+       "operate": true
+      }
+     },
+     {
+      "narration": "Typical applications include production drilling of caprock / hard ore for blasting; secondary drilling of oversize boulders (where not broken by the rock breaker), and occasional hard ore lenses; grade-control sampling is done by a separate RC rig (01-RC).",
+      "duration_s": 16.7,
+      "action": {
+       "view": "iso"
+      }
+     },
+     {
+      "narration": "The cutaway reveals the internal construction: Chassis: diesel power pack & screw compressor, hydraulic tank, dust collector, ROPS/FOPS cab, exhaust, GNSS, beacon, Drill string (GT60-class 6.1 m rod + 115 mm button bit) — single pass, rotates while drilling.",
+      "duration_s": 16.2,
+      "action": {
+       "view": "front",
+       "cut": true
+      }
+     },
+     {
+      "narration": "The exploded view separates every component so each one can be tapped for its function, material and failure modes.",
+      "duration_s": 7.9,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "explode": 1.0
+      }
+     },
+     {
+      "narration": "Next, watch the operation tutorial to see how it works.",
+      "duration_s": 4.2,
+      "action": {
+       "view": "iso",
+       "explode": 0.0
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "operation",
+    "title": "Crawler Blast-Hole Drill Rig (89–127 mm) — Operation",
+    "type": "in_app_tour",
+    "model": "m2p_blasthole_drill.glb",
+    "duration_s": 116.3,
+    "script": [
+     {
+      "narration": "How the Crawler Blast-Hole Drill Rig (89–127 mm) works.",
+      "duration_s": 4.6,
+      "action": {
+       "view": "iso",
+       "cut": true,
+       "operate": true
+      }
+     },
+     {
+      "narration": "The rig trams to the pegged hole with the feed in the tramming position, checks the collar for old sockets or misfire signs, and levels on its tracks.",
+      "duration_s": 11.7,
+      "action": {
+       "highlight": "undercarriage",
+       "cut": false,
+       "operate": false,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The boom places the feed over the hole; the feed is tilted forward from the tramming position to the design angle (here vertical) and the feed foot is pressed onto the ground. The centraliser at the foot guides the rods while collaring.",
+      "duration_s": 17.5,
+      "action": {
+       "highlight": "feed",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The rock drill delivers rapid percussion blows (~40–60 Hz) and rotation through the rod to the button bit; the feed force keeps the bit in contact.",
+      "duration_s": 11.2,
+      "action": {
+       "highlight": "rock_drill",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "Flushing air from the screw compressor passes through the rock drill and down the hollow rods, leaves at the bit face and carries the cuttings up the annulus to the collar hood; the dust collector sucks off and filters the fines.",
+      "duration_s": 17.1,
+      "action": {
+       "highlight": "drill_string",
+       "cut": false,
+       "operate": true,
+       "overlay": "flow",
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The hole goes through the caprock and about 0.3–0.5 m of sub-drill into the soft ore, so the charge breaks the full caprock without a hard toe.",
+      "duration_s": 12.9,
+      "action": {
+       "highlight": "drilled_holes",
+       "cut": true,
+       "operate": true,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "After charging, the upper ~2 m of each hole is stemming (crushed aggregate) and the ~1 m charge column of emulsion sits in the lower caprock and sub-drill — see the far hole on the section.",
+      "duration_s": 15.0,
+      "action": {
+       "highlight": "drilled_holes",
+       "cut": true,
+       "operate": false,
+       "view": "front"
+      }
+     },
+     {
+      "narration": "At design depth the string is withdrawn while flushing, the feed foot is lifted, the feed is put in the tramming position and the rig trams to the next hole.",
+      "duration_s": 12.5,
+      "action": {
+       "highlight": "feed",
+       "cut": false,
+       "operate": true,
+       "view": "part"
+      }
+     },
+     {
+      "narration": "The overlay shows the flushing air and cuttings. Flushing air down the rods and out of the bit; cuttings and dust return up the annulus to the collar hood and the dust collector.",
+      "duration_s": 13.8,
+      "action": {
+       "overlay": "flow",
+       "cut": false,
+       "view": "iso"
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   },
+   {
+    "id": "maintenance",
+    "title": "Crawler Blast-Hole Drill Rig (89–127 mm) — Maintenance",
+    "type": "in_app_tour",
+    "model": "m2p_blasthole_drill.glb",
+    "duration_s": 81.5,
+    "script": [
+     {
+      "narration": "Maintenance essentials for the Crawler Blast-Hole Drill Rig (89–127 mm).",
+      "duration_s": 5.0,
+      "action": {
+       "view": "iso",
+       "cut": false,
+       "operate": false
+      }
+     },
+     {
+      "narration": "Walk-around: rods, bit, shank, hoses and whip checks, dust-collector filters, tracks.",
+      "duration_s": 5.4,
+      "action": {
+       "highlight": "drill_string",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Regrind the bit buttons before the wear flat reaches ~1/3 of the button diameter, or at the first sign of snakeskin/micro-cracks (typically every 20–80 m in abrasive caprock; track per bit).",
+      "duration_s": 14.6,
+      "action": {
+       "highlight": "drill_string",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Grease the threads at every rod/bit change; replace the shank adapter by wear/striking-face inspection.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "rock_drill",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Check the rock-drill accumulator gas pre-charge.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rock_drill",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rock-drill service/reseal.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rock_drill",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Rock-drill overhaul.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "rock_drill",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Feed slides, chains/cylinder and cradle wear parts.",
+      "duration_s": 4.0,
+      "action": {
+       "highlight": "feed",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for drilling into a misfire / butt: explosive residue or a socket at the collar. Common cause: butts not marked after the last blast.",
+      "duration_s": 10.0,
+      "action": {
+       "highlight": "drill_string",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for stuck rods: rotation pressure rises, string will not retract. Common cause: broken ground, poor flushing.",
+      "duration_s": 7.1,
+      "action": {
+       "highlight": "drill_string",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Watch for hole collapse / blocked hole: hole cannot be dipped to design depth. Common cause: clay-rich or broken caprock, poor flushing, rain.",
+      "duration_s": 9.6,
+      "action": {
+       "highlight": "drill_string",
+       "view": "part",
+       "cut": true
+      }
+     },
+     {
+      "narration": "Record every inspection so trends — wear, temperatures, pressures, leaks and performance — can be compared over time.",
+      "duration_s": 6.7,
+      "action": {
+       "view": "iso",
+       "cut": false
+      }
+     }
+    ],
+    "production_note": "Rendered live in the app: each line plays its narration (TTS or recorded) while applying the action (camera, cutaway, explode, operate, overlay, highlight)."
+   }
+  ],
+  "assessment": {
+   "questions": [
+    {
+     "question": "What does the flushing air do?",
+     "options": [
+      "Cools the cab",
+      "Lifts cuttings out of the hole and cools the bit",
+      "Drives the tracks",
+      "Charges the hole with explosive"
+     ],
+     "answer": 1,
+     "explanation": "Air goes down the hollow rods, out of the bit and back up the annulus carrying the cuttings.",
+     "level": "basic"
+    },
+    {
+     "question": "In a top-hammer rig, where is the hammer?",
+     "options": [
+      "On the compressor",
+      "On the feed carriage at the top of the rods",
+      "At the bit in the hole",
+      "In the cab"
+     ],
+     "answer": 1,
+     "explanation": "DTH hammers sit at the bit; top hammers ride the feed.",
+     "level": "basic"
+    },
+    {
+     "question": "Why is a short sub-drill added below the caprock?",
+     "options": [
+      "To sample ore",
+      "To anchor the rig",
+      "So the blast breaks the full caprock thickness without leaving a hard toe",
+      "To reach groundwater"
+     ],
+     "answer": 2,
+     "explanation": "A short sub-drill (~0.3–0.5 m) lets the charge break the full caprock without a hard toe; going deeper into soft ore wastes energy and dilutes ore.",
+     "level": "basic"
+    },
+    {
+     "question": "What sets the burden and spacing?",
+     "options": [
+      "The rod length",
+      "The blast design (hole diameter, bench height, rock strength, fragmentation target)",
+      "The truck payload",
+      "The rig's tramming speed"
+     ],
+     "answer": 1,
+     "explanation": "Pattern geometry and powder factor come from the blast design.",
+     "level": "basic"
+    },
+    {
+     "question": "Who charges the holes with explosives?",
+     "options": [
+      "The drill operator alone",
+      "A trained charging crew under the licensed shotfirer, to the blast plan",
+      "Any operator",
+      "Truck drivers"
+     ],
+     "answer": 1,
+     "explanation": "Explosives handling is licensed and controlled; the shotfirer is responsible.",
+     "level": "basic"
+    },
+    {
+     "question": "You find an old socket near a pegged hole. What do you do?",
+     "options": [
+      "Do not drill; mark it and report to the shotfirer/supervisor",
+      "Drill through it quickly",
+      "Flush it with air",
+      "Move the peg 0.5 m and drill"
+     ],
+     "answer": 0,
+     "explanation": "An old socket can hold undetonated explosive; drilling into or near it can set it off.",
+     "level": "intermediate"
+    },
+    {
+     "question": "Which component has this function? \"Moves and levels the rig on rough benches.\"",
+     "options": [
+      "Feed cradle (feed slides in it to press the foot onto the ground)",
+      "Feed (mast) ~8.6 m: feed foot, collar dust hood, centraliser, open rod rack with 6.1 m rods, top sheave",
+      "Oscillating crawler undercarriage with hydraulic track motors",
+      "Chassis: diesel power pack & screw compressor, hydraulic tank, dust collector, ROPS/FOPS cab, exhaust, GNSS, beacon"
+     ],
+     "answer": 2,
+     "explanation": "Oscillating crawler undercarriage with hydraulic track motors: Moves and levels the rig on rough benches.",
+     "level": "basic",
+     "part": "undercarriage",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Carries the power and air.\"",
+     "options": [
+      "Oscillating crawler undercarriage with hydraulic track motors",
+      "Feed cradle (feed slides in it to press the foot onto the ground)",
+      "Drill string (GT60-class 6.1 m rod + 115 mm button bit) — single pass, rotates while drilling",
+      "Chassis: diesel power pack & screw compressor, hydraulic tank, dust collector, ROPS/FOPS cab, exhaust, GNSS, beacon"
+     ],
+     "answer": 3,
+     "explanation": "Chassis: diesel power pack & screw compressor, hydraulic tank, dust collector, ROPS/FOPS cab, exhaust, GNSS, beacon: Carries the power and air.",
+     "level": "basic",
+     "part": "chassis",
+     "type": "identify_component"
+    },
+    {
+     "question": "Which component has this function? \"Places the feed over the hole.\"",
+     "options": [
+      "Bench: ferricrete caprock (~2.5 m here) over friable gibbsitic bauxite",
+      "Drill pattern ~3.0 × 3.5 m (burden × spacing): pegged collars and drilled holes with cuttings cones",
+      "Rock drill (hydraulic top hammer) on its carriage, riding the feed guides",
+      "Boom with lift, swing and feed-dump cylinders; sets the hole position and angle within the coverage area"
+     ],
+     "answer": 3,
+     "explanation": "Boom with lift, swing and feed-dump cylinders; sets the hole position and angle within the coverage area: Places the feed over the hole.",
+     "level": "basic",
+     "part": "boom",
+     "type": "identify_component"
+    }
+   ],
+   "pass_mark_pct": 70,
+   "note": "Questions with a \"part\" field can highlight that part in the 3-D model after answering."
+  },
+  "operation": {
+   "controls": [
+    "Tramming levers, boom and feed joysticks, percussion/rotation/feed/flushing controls, GNSS navigation display"
+   ],
+   "pre_start": [
+    "Walk-around, check rods and bit, hoses and whip checks, dust collector, fluid levels, fire suppression"
+   ],
+   "start_up": [
+    "Warm up the engine and hydraulics, then load the compressor; test feed movement, anti-jamming and interlocks"
+   ],
+   "normal": [
+    "Check the collar for old sockets/misfire indications before collaring",
+    "Navigate to the hole, level, set the boom, raise the feed, push the foot down, collar gently, drill to depth with steady feed and flushing",
+    "Withdraw while flushing; record depth, penetration, water, voids and the caprock/ore contact"
+   ],
+   "shut_down": [
+    "Withdraw the string while flushing, feed to tramming/transport position",
+    "Park on level ground away from the crest and outside any charged area",
+    "Unload the compressor and let it blow down, cool down the engine, engine off, isolate"
+   ],
+   "alarms_interlocks": [
+    "Anti-jamming (high rotation pressure auto-retracts the feed)",
+    "Flushing-air pressure low/high (blocked bit or collapse)",
+    "Rod-handling and feed guard interlocks; cab-door/E-stop interlock on feed and percussion",
+    "Dust-collector differential pressure",
+    "Compressor discharge temperature",
+    "Hydraulic oil temperature/level, engine coolant",
+    "Tilt/levelling limits and tramming-with-feed-raised warning",
+    "Fire suppression"
+   ],
+   "tips": [
+    "Collar slowly to avoid hole deviation",
+    "Report broken or wet ground to the blast engineer"
+   ]
+  }
+ },
+ "disclaimer": "Explanatory 3-D engineering model generated procedurally from typical published arrangements. Proportions are representative, not a certified manufacturer drawing. Do not use for fabrication, dimensional checks or compliance verification."
+}

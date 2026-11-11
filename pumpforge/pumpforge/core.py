@@ -100,6 +100,35 @@ MAT_LIBRARY = {
     'resin_anion':     ('#e2c27f', 0.0, 0.55, None),
     'uv_glow':         ('#c9b3ff', 0.0, 0.30, '#7a3cff'),
     'sludge':          ('#5a4a32', 0.0, 0.80, None),
+    # Mine-to-Port catalog (real-scale plant): structures, finishes and terrain
+    'galvanised':      ('#9ea4aa', 0.85, 0.48, None),  # hot-dip galvanised steel
+    'grating':         ('#7d838a', 0.85, 0.55, None),  # galvanised floor grating
+    'safety_yellow':   ('#f2b705', 0.0, 0.42, None),   # handrails, guards, cages
+    'struct_grey':     ('#6f7780', 0.0, 0.50, None),   # painted structural steel
+    'paint_white':     ('#e6e9ec', 0.0, 0.45, None),   # tanks / vessels (uninsulated)
+    'paint_green_pale':('#9fb9a5', 0.0, 0.48, None),
+    'concrete':        ('#b8b3a9', 0.0, 0.90, None),
+    'asphalt':         ('#3b3d40', 0.0, 0.90, None),
+    'haul_road':       ('#8f7862', 0.0, 0.95, None),   # compacted laterite haul road with gravel wearing course
+    'laterite':        ('#a3542e', 0.0, 0.92, None),   # lateritic overburden / roads
+    'topsoil':         ('#5a4330', 0.0, 0.95, None),
+    'vegetation':      ('#4c7038', 0.0, 0.90, None),
+    'caprock':         ('#5e2f24', 0.0, 0.88, None),   # ferricrete cap (dark, iron-cemented)
+    'ore_layer':       ('#c98d55', 0.0, 0.88, None),   # friable gibbsitic bauxite horizon
+    'clay_floor':      ('#e8dcc4', 0.0, 0.92, None),   # kaolinitic clay below the ore
+    'mine_yellow':     ('#f0a500', 0.0, 0.45, None),   # mining equipment paint
+    'cab_glass':       ('#2c3e4f', 0.6, 0.12, None),
+    'tyre':            ('#202124', 0.0, 0.85, None),
+    'pipe_liquor':     ('#7a5c3c', 0.0, 0.50, None),   # process-line paint (caustic liquor / slurry)
+    'pipe_steam':      ('#b7bcc2', 0.9, 0.38, None),   # insulated steam (aluminium jacketing)
+    'pipe_water':      ('#2f7d4e', 0.0, 0.48, None),
+    'pipe_air':        ('#4a7fb5', 0.0, 0.48, None),
+    'pipe_fire':       ('#c0392b', 0.0, 0.45, None),
+    'alumina':         ('#f4f2ee', 0.0, 0.85, None),
+    'hydrate':         ('#e9e4da', 0.0, 0.80, None),
+    'lime':            ('#ecebe6', 0.0, 0.90, None),
+    'signal_red':      ('#d0281e', 0.0, 0.40, '#5a0d08'),
+    'signal_green':    ('#2fbf4a', 0.0, 0.40, '#0d4a19'),
     # teaching overlays
     'thrust':          ('#d81b60', 0.0, 0.45, '#5a0b28'),   # axial thrust arrows
     'counter_force':   ('#2e9d4a', 0.0, 0.45, '#0f3d1b'),   # balancing force arrows
@@ -500,6 +529,73 @@ def _linearize(act):
     return len(fcs)
 
 
+def _inject_sparse(path, anims, frames):
+    """Append an 'Operate' animation to a GLB from stored sparse keys {object: [(path, [(frame, value)])]} (Blender local TRS,
+    Z-up) -> glTF node TRS (Y-up), LINEAR interpolation. Time = frame / FPS, as the Blender exporter writes it."""
+    import struct
+    from mathutils import Euler, Quaternion
+    raw = open(path, 'rb').read()
+    jl = struct.unpack('<I', raw[12:16])[0]
+    j = json.loads(raw[20:20 + jl].decode('utf-8'))
+    bl = struct.unpack('<I', raw[20 + jl:24 + jl])[0]
+    bin_ = bytearray(raw[28 + jl:28 + jl + bl])
+    names = {n.get('name'): i for i, n in enumerate(j['nodes'])}
+    an = {'name': 'Operate', 'samplers': [], 'channels': []}
+    bvs, accs = j.setdefault('bufferViews', []), j.setdefault('accessors', [])
+
+    def add(arr, ncomp, typ, minmax=False):
+        while len(bin_) % 4:
+            bin_.append(0)
+        off = len(bin_)
+        bin_.extend(struct.pack('<%df' % len(arr), *arr))
+        bvs.append({'buffer': 0, 'byteOffset': off, 'byteLength': len(arr) * 4})
+        a = {'bufferView': len(bvs) - 1, 'componentType': 5126, 'count': len(arr) // ncomp, 'type': typ}
+        if minmax:
+            a['min'], a['max'] = [min(arr)], [max(arr)]
+        accs.append(a)
+        return len(accs) - 1
+    tcache = {}
+    for obj, chans in anims.items():
+        ni = names.get(obj.name)
+        if ni is None:
+            print('WARNING: sparse animation target not exported:', obj.name)
+            continue
+        for pth, keys in chans:
+            fr = tuple(k[0] for k in keys)
+            if fr not in tcache:
+                tcache[fr] = add([f / FPS for f in fr], 1, 'SCALAR', True)
+            if pth == 'location':
+                vals, gp, nc, typ = [c for _, v in keys for c in (v[0], v[2], -v[1])], 'translation', 3, 'VEC3'
+            elif pth == 'scale':
+                vals, gp, nc, typ = [c for _, v in keys for c in (v[0], v[2], v[1])], 'scale', 3, 'VEC3'
+            elif pth == 'rotation_euler':
+                vals, prev = [], None
+                for _, v in keys:
+                    q = Euler(v, 'XYZ').to_quaternion()
+                    if prev is not None and q.dot(prev) < 0:
+                        q = -q
+                    prev = q
+                    vals += [q.x, q.z, -q.y, q.w]
+                gp, nc, typ = 'rotation', 4, 'VEC4'
+            else:
+                continue
+            out = add(vals, nc, typ)
+            an['samplers'].append({'input': tcache[fr], 'interpolation': 'LINEAR', 'output': out})
+            an['channels'].append({'sampler': len(an['samplers']) - 1, 'target': {'node': ni, 'path': gp}})
+    j['animations'] = [a for a in j.get('animations', []) if a.get('name') != 'Operate'] + [an]
+    while len(bin_) % 4:
+        bin_.append(0)
+    j['buffers'][0]['byteLength'] = len(bin_)
+    js = json.dumps(j, separators=(',', ':')).encode('utf-8')
+    while len(js) % 4:
+        js += b' '
+    total = 12 + 8 + len(js) + 8 + len(bin_)
+    with open(path, 'wb') as fh:
+        fh.write(struct.pack('<III', 0x46546C67, 2, total))
+        fh.write(struct.pack('<II', len(js), 0x4E4F534A) + js)
+        fh.write(struct.pack('<II', len(bin_), 0x004E4942) + bytes(bin_))
+
+
 class Part:
     def __init__(self, model, pid, name, group, pivot=(0, 0, 0), explode=(0, 0, 0),
                  section='keep', info=None):
@@ -551,7 +647,7 @@ class Part:
         for m in self.meshes:
             keys = []
             for i in range(0, 9):
-                fr = 1 + OPERATE_FRAMES * i / 8
+                fr = 1 + self.model.operate_frames * i / 8
                 rot = [0.0, 0.0, 0.0]
                 rot[k] = TAU * revs * i / 8
                 keys.append((fr, tuple(rot)))
@@ -560,17 +656,19 @@ class Part:
     def cycle_translate(self, samples):
         """samples: list of (phase 0..1, (dx,dy,dz)) - must start/end equal."""
         for m in self.meshes:
-            keys = [(1 + OPERATE_FRAMES * p, tuple(d)) for p, d in samples]
+            keys = [(1 + self.model.operate_frames * p, tuple(d)) for p, d in samples]
             self.model.keyframes(m, 'Operate', 'location', keys)
 
 
 class Model:
-    def __init__(self, pump_id, title, category, meta):
+    def __init__(self, pump_id, title, category, meta, operate_frames=None):
         bpy.ops.wm.read_factory_settings(use_empty=True)
         _mats.clear()
         sc = bpy.context.scene
         sc.render.fps = FPS
-        sc.frame_start, sc.frame_end = 1, 1 + OPERATE_FRAMES
+        self.operate_frames = operate_frames or OPERATE_FRAMES
+        self.sparse_anim = False          # True: export the stored keyframes as-is (no per-frame sampling) for long area clips
+        sc.frame_start, sc.frame_end = 1, 1 + self.operate_frames
         sc.frame_current = 1
         bpy.context.preferences.edit.keyframe_new_interpolation_type = 'LINEAR'
         self.id, self.title, self.category, self.meta = pump_id, title, category, meta
@@ -712,6 +810,10 @@ class Model:
                 delete(o)
         bpy.context.view_layer.update()
         meta = self._metadata()
+        sparse = {}
+        if getattr(self, 'sparse_anim', False):          # long area clips: write the stored keys straight into the GLB (no per-frame bake)
+            for key in [k for k in self._anims if k[1] == 'Operate']:
+                sparse[key[0]] = self._anims.pop(key)
         self._bake()
         bpy.context.scene.frame_set(1)
         flow = set()
@@ -725,6 +827,8 @@ class Model:
             o.select_set(o not in flow)
         path = os.path.join(out_dir, 'glb', f'{self.id}.glb')
         self._gltf(path)
+        if sparse:
+            _inject_sparse(path, sparse, self.operate_frames)
         if flow:
             for o in bpy.context.scene.objects:
                 o.select_set(o in flow)
@@ -745,7 +849,7 @@ class Model:
         bpy.ops.export_scene.gltf(
             filepath=path, export_format='GLB', export_extras=True, export_yup=True, use_selection=True,
             export_apply=True, export_animations=anim, export_animation_mode='NLA_TRACKS',
-            export_morph=True, export_morph_normal=True, export_force_sampling=True,
+            export_morph=True, export_morph_normal=True, export_force_sampling=not getattr(self, 'sparse_anim', False),
             export_frame_step=1, export_materials='EXPORT', export_cameras=False,
             export_lights=False, export_def_bones=False)
 
@@ -778,6 +882,7 @@ class Model:
                 'center': bl2gl(c),
                 'info_ref': p.info.get('ref', p.id),
                 **({'note': p.info['note']} if 'note' in p.info else {}),
+                **({'link': p.info['link']} if 'link' in p.info else {}),
             })
         m = dict(self.meta)
         from .common_meta import COMMON
@@ -788,7 +893,8 @@ class Model:
             print('WARNING: no component info for', missing)
         comps = {u: allc[u] for u in dict.fromkeys(used) if u in allc}
         cat, entry = _catalog_entry(self.id)
-        overlays = {'flow': {'file': f'{self.id}_flow.glb', 'title': 'Flow path', 'description': 'Suction and discharge flow paths with direction arrows.', 'annotations': []}} if self.flow_root else {}
+        overlays = {'flow': {'file': f'{self.id}_flow.glb', 'title': getattr(self, 'flow_title', None) or 'Flow path',
+                             'description': getattr(self, 'flow_desc', None) or 'Suction and discharge flow paths with direction arrows.', 'annotations': []}} if self.flow_root else {}
         overlays.update(self.overlay_info)
         return {
             'schema': 'pumpforge.model/1.1',
@@ -802,7 +908,7 @@ class Model:
             'units': 'metre', 'up_axis': '+Y', 'front_axis': '+Z',
             'disclaimer': DISCLAIMER,
             'animations': {
-                'Operate': {'duration_s': OPERATE_FRAMES / FPS, 'loop': True},
+                'Operate': {'duration_s': self.operate_frames / FPS, 'loop': True},
                 'Explode': {'duration_s': EXPLODE_FRAMES / FPS, 'loop': False,
                             'note': 'Play forward to explode, reverse to assemble; or lerp part nodes by explode_offset.'},
             },

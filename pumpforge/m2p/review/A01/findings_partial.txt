@@ -1,0 +1,148 @@
+## m2p_haul_truck critical safety high | content/m2p_mine.py key_points[5]; quiz Q3 explanation; META ht_body / principle step 1
+ISSUE: The lesson says the canopy protects the cab 'while the excavator loads over it' and the quiz explanation says 'The excavator swings the loaded bucket over the truck; the canopy shields the cab'. This teaches that swinging over the cab is normal. It contradicts the reference-plant basis (excavator section: 'never load over cab') and standard load-and-haul rules. The canopy (cab protector) is a FOPS-type backup against spillage and rolling rock, not permission to slew over the operator.
+FIX: key_points[5] -> 'The canopy shields the cab from spillage and rock that rolls forward during loading; the loader must never swing the bucket over the cab.' Quiz Q3 explanation -> 'The excavator loads from the side or rear and must never swing over the cab; the canopy protects the operator from spillage and rock that falls or rolls forward during loading.' Principle step 1 -> '...in five to six passes, swinging over the body from the side and never over the cab; the canopy shields the cab from spillage.'
+
+## m2p_haul_truck critical geometry high | _eq_m2p_mine.py m2p_haul_truck: body floor polygon (z 1.98-2.32), body sides from z 2.15, payload box ldb (z 2.25-4.25, y ±2.6) vs rear duals (RT=1.345, tyre top z=2.69, y 1.11-2.74)
+ISSUE: The dump body floor sits at z≈2.0-2.3 m, but the rear tyres reach z=2.69 m and lie at y 1.11-2.74 m, inside the body width of ±2.75 m. All four rear tyres pass about 0.4-0.6 m up through the body floor and into the payload. The generated metadata confirms it: body bbox_min height is 0.975 m. A rigid truck's body floor must clear the tyres plus suspension bump travel. The section view (y=0 cut) will show this clearly, so trainees would learn a physically impossible arrangement.
+FIX: Raise the body: floor underside at z ≥ 2.95 m over x ∈ [-3.7, -0.9] (tyre top 2.69 + ~0.25 m bump/clearance). Use floor top ≈ 3.05 m, and keep the top rail at z ≈ 4.35-4.45 m (class loading height ≈ 4.4 m), so side depth ≈ 1.3-1.4 m. Lengthen the body pivot brackets (pivbr) down to a pin at z ≈ 2.0-2.2 m, and raise the longitudinal under-members (lng) to z ≈ 2.85. Rebuild the payload box between the floor top (3.05) and the rail, plus the heap. Check the dumped tail clearance afterwards; it should come out at ≈ 1.0-1.3 m.
+
+## m2p_haul_truck major geometry high | body inner volume and payload mesh (ldb box 6.4×5.2×2.0 + heap ldh)
+ISSUE: Inner length 6.75 m × width 5.4 m × depth ≈ 2.2-2.35 m gives a struck volume of ≈ 80 m³, about twice the class value (struck ≈ 42-46 m³, heaped 2:1 ≈ 60-65 m³). The payload mesh is ≈ 85 m³ (66.6 m³ box + ≈ 18 m³ heap), which implies a density of ≈ 1.06 t/m³ for '90 t'. Both disagree with the label '~60 m³ heaped'.
+FIX: After the floor is raised (previous finding), aim for struck ≈ 45 m³ (6.75 × 5.4 × ~1.3 m) and heaped 2:1 ≈ 62 m³. Payload mesh: box from the floor top to the rail (≈ 1.3 m deep, 6.4 × 5.2 m), plus a half-ellipse heap with y-semi-axis 2.45 and peak ≈ 0.5-0.6 m above the rail. The total should be ≈ 60-64 m³, which equals 90 t at 1.4-1.5 t/m³ loose.
+
+## m2p_haul_truck major parameter medium | META components ht_payload ('≈ 50 m³ at ~1.8 t/m³ loose')
+ISSUE: The loose density of 1.8 t/m³ conflicts with the reference-plant basis, which gives a loose bauxite density of ~1.4-1.5 t/m³ (excavator section), and with typical lateritic/gibbsitic ROM bauxite. At 1.4-1.5 t/m³, 90 t ≈ 60-64 m³, which is the full SAE 2:1 heaped capacity. A trainee loses the key fact that bauxite trucks are close to VOLUME-limited.
+FIX: Change it to: 'About 90 t per load (≈ 60–64 m³ at ~1.4–1.5 t/m³ loose — the body is close to full heaped capacity, so bauxite haulage tends to be volume-limited; body volume/sideboards are selected for the ore density).'
+
+## m2p_haul_truck major parameter high | content definition ('four to five passes'), principle step 1, selection[0] ('about 4–5 passes')
+ISSUE: This is inconsistent with the reference-plant basis: 5-6 passes at 14-17 t per pass, from an 11-12 m³ bucket × 0.9 fill × 1.4-1.5 t/m³ ≈ 14-16 t. Four to five passes would need 18-22 t per pass. The excavator META ex_load also says 18-22 t, which is the same inconsistency and should be fixed alongside.
+FIX: Use 'about five to six passes' in the definition, principle step 1 and selection[0] ('about 5–6 passes for a 200 t excavator + ~90 t truck in bauxite'). Align ex_load to '≈ 14–17 t per pass'.
+
+## m2p_haul_truck major animation high | m2p_haul_truck FR=360, theta(t) breakpoints 0.08/0.42/0.6/0.92; model_configuration 'Dump cycle ... (12 s)'
+ISSUE: The body goes from 0° to 48° in 0.34 × 12 s ≈ 4.1 s and lowers in ≈ 3.8 s. The lesson and META state raise ≈ 12-15 s and lower ≈ 10-14 s. Shown at 'real scale', the animation teaches a dump about three times faster than real. The payload also starts sliding at 14°, which is too early for a moist, clayey bauxite on a flat steel floor (the wall-friction angle is roughly 25-35°).
+FIX: Use either real time or a labelled compression. Real time: FR = 900 (30 s at 30 fps); hold 0-0.05; raise 0.05-0.50 (≈ 13.5 s); hold at TMAX 0.50-0.62; lower 0.62-0.95 (≈ 10 s). Compressed: keep FR=360 and change model_configuration to 'Dump cycle (time-compressed ≈ 3×: real raise ≈ 12–15 s)'. In pl_scale, start the slide at ≈ 22-25° (replace 14 with 23 and 30 with 22), and leave ~5 % carry-back (min scale 0.05) to support the carry-back teaching point.
+
+## m2p_haul_truck major quiz high | quiz Q7 (rolling resistance 4 % + 6 % ramp)
+ISSUE: The question does not say whether the truck is going up or down the ramp. Downhill, the effective grade is 6 − 4 = 2 %, and 'About 2 %' is one of the distractors, so the question has two defensible answers. Effective grade = grade + RR applies to uphill (rimpull) only.
+FIX: Reword to: 'A loaded truck CLIMBS a 6 % ramp on a poor road with 4 % rolling resistance. The total (effective) grade it must overcome is…' Answer 'About 10 %'. Explanation: 'Uphill: effective grade = grade + rolling resistance (10 %). Downhill, rolling resistance helps: 6 − 4 = 2 % for the retarding chart.'
+
+## m2p_haul_truck major safety high | content safety[1]; failures[0] remedy; META ht_tyre maintenance
+ISSUE: The hot-tyre guidance is vague ('establish an exclusion zone') and mixes two different hazards. A heated or burning tyre can explode by pyrolysis in any direction, which needs a large all-round exclusion; the basis gives 300 m. Rim and lock-ring 'trajectory' is a sidewall-line hazard during inflation and tyre work. Trainees need the actual numbers.
+FIX: safety[1] -> 'If a tyre is hot, smoking, on fire, or the truck has contacted power lines or been struck by lightning: stop in a safe place, evacuate, and set a ≥ 300 m exclusion zone all around the truck (per OEM/site procedure); keep it until the site procedure allows approach (typically ≥ 24 h); approach only from the front or rear, never in line with the tyre sidewall/rim.' ht_tyre maintenance: replace 'trajectory zone' with 'never stand in line with the rim/lock-ring (sidewall) during inflation or deflation; inflate in a cage or by remote inflator'.
+
+## m2p_haul_truck major geometry medium | suspension rsc/rsr rear struts: cylinder z 1.75-2.45 at x=XR+0.25, y=±1.0
+ISSUE: The top of the rear strut (z 2.45) passes through the body under-members (lng, z 1.86-2.04) and the floor when the body is down. The strut has no upper mount on the frame because the frame rails top out at z 1.62. On the class, the rear struts run from the axle housing up to the frame rear (the rails rise over the axle), and the body sits on frame body pads above them.
+FIX: Add a rear frame riser (kick-up) over the axle: rails or box nodes at x ∈ [-3.9, -0.9] with top at z ≈ 2.45-2.55. Mount the struts from the axle-housing top (z ≈ 1.67) to that riser (rod 1.67-2.0, barrel 2.0-2.45). Add 2-4 rubber body-pad blocks (≈ 0.3 × 0.3 × 0.1 m) on the riser at z ≈ 2.55-2.65. With the floor raised to ≥ 2.95 m (geometry finding above) the body then visibly seats on the frame, as the 'body seats before driving away' step teaches.
+
+## m2p_haul_truck major parameter high | params fleet_reference_plant '≈ 9 – 11 trucks'; plant.qty '≈ 9–11 operating'
+ISSUE: The basis states 9 operating + 2 standby (11 total). The lesson calls 9-11 'operating', which overstates the fleet in service and mixes in the spares.
+FIX: params fleet_reference_plant -> P('9 operating + 2 standby (11)', '', 'Reference-plant design basis — cycle ≈ 27 min at 5 km, ≈ 1.0 Mt/yr per truck; confirm by haulage simulation'). plant.qty -> '9 operating + 2 standby (to be confirmed by haulage simulation)'.
+
+## m2p_haul_truck minor geometry medium | YRI, YRO = 1.925 ∓ 0.43; rock ejector ej (XR, ±1.925, z 0.975-2.025, 0.12 thick)
+ISSUE: The dual centre spacing is 0.86 m with tyre section width 0.77 m, leaving a 0.09 m gap between the duals. That is less than typical 27.00R49 dual spacing (≈ 0.95-1.05 m) and too narrow for a rock ejector. The 0.12 m ejector at the axle centreline clashes with both tyres and sits inside the final-drive housing (fd, r=0.6 at y 1.45-2.35). Real ejectors hang behind the axle, outside the rim radius, inside the tyre gap.
+FIX: YRI, YRO = 1.925 − 0.48, 1.925 + 0.48 (centres 0.96 m apart, gap ≈ 0.19 m; overall rear width ≈ 5.6 m). Ejector: box size (0.08, 0.08, 0.9) at (XR − 0.95, ±1.925, ≈ 2.4) so it hangs from the raised body floor down to z ≈ 1.95, outside the 0.65 m rim radius.
+
+## m2p_haul_truck minor geometry high | hoist cylinders LO/UP0 at y=±0.9, r=0.17 vs frame rails at y=±0.68 (0.55-0.81); body pivot horns at y=±1.0±0.15 vs inner rear tyre inner face y=1.11
+ISSUE: The hoist barrels (y 0.73-1.07) overlap the frame rails over z 1.3-1.62. The pivot horns (to y 1.15) overlap the inner rear tyre (from y 1.11) around x -3.0 to -3.6.
+FIX: Move the hoist cylinders and their mounts (hoistbr, hbr, LO, UP0) to y = ±1.0, outboard of the rails as on the class, or move the rails to y = ±0.6. Move the horns and pivbr to y = ±0.9 (0.75-1.05).
+
+## m2p_haul_truck minor parameter high | install.haul_road_and_dump_design[0]
+ISSUE: 'about 3–4 × the widest truck (≈ 20–25 m)': 3 × 6.1 m = 18 m is below the two-lane rule. The basis and Thompson guidance use ≥ 3.5 × width for two-way roads.
+FIX: Change to: 'Two-way haul roads at least 3.5 × the widest truck (≈ 22–25 m running width for a 6.1–6.5 m truck) plus drains and berms; grades ideally ≤ 8 % sustained (≤ 10 % on short ramps).'
+
+## m2p_haul_truck minor operation medium | operation.start_up, operation.normal[2], META ht_hoist
+ISSUE: Start-up does not tell the operator to wait for steering and brake accumulator pressure (low-pressure warnings clear) before releasing the park brake. It also omits the service and park brake holding test and the secondary-steering check. The FLOAT position for travel is not explained, and the dump step does not say never to use the windrow or wheel stop to stop the truck.
+FIX: start_up -> 'Start the engine, check gauges and warning lamps; wait until brake and steering accumulator pressures are up (warnings clear) before releasing the park brake; perform the service/park brake holding test and steering/secondary-steering check per OEM before entering the road.' normal[2] -> 'At the dump: reverse square to the edge or hopper, stopping on the service brake short of the windrow/wheel stop (never use the berm to stop); transmission NEUTRAL, park brake on, RAISE; lower and select FLOAT before moving off.' ht_hoist: add 'Travel with the lever in FLOAT so the body rests on the frame pads.'
+
+## m2p_haul_truck minor parameter medium | params engine_power_gross '≈ 750 – 760 kW'
+ISSUE: This range fits only one 777-class product. Other ~90 t mechanical trucks named in the basis (HD785 class) are rated nearer ≈ 870-900 kW gross. The basis states ~700-760 kW, so the basis is also narrow. The lesson presents the class as generic.
+FIX: P('≈ 750 – 900', 'kW', 'Gross, V12 ~30–32 L, ~1,750–1,900 rpm rated (class spread)') and widen the basis entry to match. Alternatively, state that the reference plant uses the 750 kW end.
+
+## m2p_haul_truck minor component_notes medium | META ht_axle / ht_suspension
+ISSUE: The brake description covers only the rear oil-cooled discs. Class trucks also have front service brakes (dry disc/caliper) and a spring-applied, hydraulically released parking brake on the rear. Brake-oil heat goes to oil-to-water coolers and then the radiator. The rear axle is located by an A-frame plus a lateral (panhard) link, and the strut pressures feed the payload monitor (per the basis).
+FIX: ht_axle -> '...oil-cooled multiple-disc service/retarder brakes at the rear (spring-applied, hydraulically released parking brake); dry-disc caliper service brakes on the front wheels; brake cooling oil passes through oil-to-water coolers to the radiator.' ht_suspension: add 'rear axle located by an A-frame and a lateral stabiliser (panhard) link; strut pressures are used by the payload monitoring system.'
+
+## m2p_haul_truck minor geometry medium | deck / cab / body parts
+ISSUE: Several 'details_to_model' items in the basis are missing: fire-suppression bottles, a buggy-whip flag, a GNSS/FMS antenna, rear camera / proximity radar, an auto-lube pump/reservoir and fleet numbers. The safety and operation tabs refer to these items.
+FIX: Add to the deck part: 2 fire-suppression cylinders (Ø0.25 × 0.8 m) on the deck at x ≈ 4.3, y ≈ -2.2; an auto-lube reservoir (0.4 × 0.3 × 0.5 m) on the right rail at x ≈ 1.0; and on the cab roof a GNSS mast (Ø0.05 × 0.4 m) and a buggy-whip flag pole (Ø0.03 × 3.5 m on the front-left deck corner). Add a rear camera box (0.15 m) under the body tail on the frame at x ≈ -3.9.
+
+## m2p_hydraulic_excavator major parameter high | content/m2p_mine.py MODULES['m2p_hydraulic_excavator'] definition, key_points? (summary), params.passes_per_90t_truck, curve; META summary + ex_load; part label 'bucket_load'; quiz Q5
+ISSUE: Pass matching and bucket payload contradict the design basis (01-EX: loose density 1.4-1.5 t/m3, payload 14-17 t/pass, 5-6 passes). The lesson uses 1.8 t/m3 loose, ~20 t (18-22 t) per pass and 4-5 passes. 4 x 22 t is still short of 90 t and 5 x 20 t overloads the truck by 10 %, so the numbers do not work even on their own terms. 1.8 t/m3 is close to in-situ (bank) density, not loose density.
+FIX: Use loose density ~1.45-1.6 t/m3 everywhere. Payload: 11.5 m3 x 0.9 x 1.45-1.6 = ~15-17 t per pass. Change 'four to five passes' to 'five to six passes' in the definition and in the META summary. Set passes_per_90t_truck = P('5 – 6','','Pass matching (design basis)'). Set the ex_load note to 'About 14–17 t per pass (11.5 m³ × 0.9 fill × ~1.45–1.6 t/m³ loose; engineering estimate)'. Rename the part label to 'Bucket load (~15–17 t of bauxite per pass)'. Quiz Q5: make the correct option '5 – 6', change the distractor '4 – 5' to '2 – 3', and set the explanation to 'Pass matching: ~15–17 t per pass into a ~90 t body.'
+
+## m2p_hydraulic_excavator major parameter high | content MODULES['m2p_hydraulic_excavator'].curve
+ISSUE: The worked productivity example (≈1,770 t/h) uses 1.8 t/m3 and ignores truck-exchange time. The result is about 50 % above the design-basis effective productivity of 900-1,200 t/h, which would mislead fleet-sizing exercises.
+FIX: Replace with: 'Productivity = payload per pass × passes per truck ÷ (passes × cycle time + truck exchange) × operating efficiency; e.g. 11.5 m³ × 0.9 × 1.45 t/m³ ≈ 15 t/pass; 6 passes × 30 s + ~40 s exchange ≈ 220 s per 90 t truck → ~1,470 t/h instantaneous × 0.75 ≈ 1,100 t/h effective (engineering estimate; design basis 900–1,200 t/h).'
+
+## m2p_hydraulic_excavator major parameter medium | content params.max_digging_depth, params.max_digging_reach (and missing dump height)
+ISSUE: For a ~200 t backhoe with an ~8-9 m boom and ~3.6-4 m arm, maximum digging depth is ~8-9 m and maximum reach at ground is ~14.5-15.5 m. The design basis also gives 8-9 m depth and a dump height of 7.5-8 m. The lesson's 7-8 m depth and 13-14 m reach are low, and dump height (the key truck-matching dimension) is missing.
+FIX: Set max_digging_depth = P('≈ 8 – 9','m','Below track level (class envelope)'). Set max_digging_reach = P('≈ 14.5 – 15.5','m','At ground level (class envelope)'). Add max_dump_height = P('≈ 7.5 – 8.5','m','Must clear the ~5 m loaded truck body plus the bucket height').
+
+## m2p_hydraulic_excavator major geometry high | _eq_m2p_mine.py m2p_hydraulic_excavator: BF = (2.75, 2.75); rframe box x -3.2..2.0; BB at 3.0 m along boom
+ISSUE: The boom-cylinder foot pins (BF) sit 0.75 m in front of the revolving frame's front face (rframe ends at x = 2.0 and the boom-foot brackets end at x = 2.0), so the two boom cylinders are anchored in mid-air. This is visible in excavator_side_digging.png. The pins are also so close to the boom foot (1.38 m) and the boom pin is so low (3.0 m along the boom) that the cylinder is only 2.26-3.28 m pin-to-pin over the animated range and would fall to ~1.8 m at the boom angles needed for real dig depth, which is physically too short for a ~1.5 m stroke cylinder.
+FIX: Add a frame nose and cylinder brackets on the upper. For example: up.append(box('nose', (1.0, 2.0, 0.6), (2.45, 0, ZF + 0.25), 'mine_yellow', bevel=0.04)), plus two lug plates at y = ±0.72. Move BF to (2.5, 2.3) and pin the rod end at 3.6 m along the boom with a 0.55 m underside offset: BB = B0 + 3.6·(cos62°, sin62°) + 0.55·(sin62°, −cos62°). This gives a cylinder length of ~2.8 m at boom −45° and ~4.3 m at +25° (ratio 1.54, stroke ~1.5 m), which is feasible for a single-stage cylinder.
+
+## m2p_hydraulic_excavator major animation high | m2p_hydraulic_excavator FR = 420 and POSES (swing 0→80° between t = 0.36 and 0.48)
+ISSUE: The 14 s cycle is about half the real 28-35 s stated in the lesson. The loaded swing of 80° in 1.7 s peaks at ~12 rpm, against a class maximum swing speed of ~4-5 rpm, and the return swing peaks at ~7 rpm. Trainees will form a wrong picture of swing dynamics; the inertia of a ~200 t upper plus ~15 t load is the reason for the long swing time. The swing also eases to a stop at 80° and then restarts to 90° (two separate smoothstep segments).
+FIX: Set FR = 900 (30 s) and retime POSES: dig 0.05–0.34; loaded swing with boom-up as ONE segment 0.34–0.54 (0→90°, peak ≈ 3.75 rpm); dump 0.54–0.62; return swing 0.62–0.86 (90→0°); hold to 1.0. Delete the intermediate 80° keyframe. Update model_configuration.animation to '…(30 s, real-time)'.
+
+## m2p_hydraulic_excavator major animation high | m2p_hydraulic_excavator st_ang(t) (stair raised 0–0.05, lowered 0.9–1.0, every loop)
+ISSUE: The Operate loop raises and lowers the access stairway on every dig-swing-dump cycle, which teaches a wrong practice. The stairway is raised once after the operator boards at start-up and stays up all shift; it is lowered only when the machine is parked with the controls locked out. Principle step 2 compounds this by presenting stair-raise as part of the dig cycle.
+FIX: In Operate, hold st_ang = stowed for the whole loop (constant). Show the raise/lower in a separate 'Start-up' clip or a principle step with operate=False. Reword step 2: 'At start-up, after the operator is in the cab, the access stairway is raised; the interlock then releases swing, travel and attachment motions. It stays up for the whole shift.'
+
+## m2p_hydraulic_excavator major animation high | POSES dig segment t = 0.14–0.36 (tooth tip z min ≈ −0.46 m)
+ISSUE: The defining feature of a backhoe, digging below its own track level, is not shown. The computed tooth path only reaches about 0.3-0.5 m below grade and sweeps along the floor like a trench clean-up, while the key points and quiz Q1 stress digging down into the ore horizon.
+FIX: After fixing the boom-cylinder geometry, use deeper dig poses, e.g. (t, psi, boom, arm, bucket): (0.14, 0, −35°, +30°, +20°) puts the tip at ≈(9.3, −2.6) m; (0.27, 0, −38°, 0°, −10°); (0.34, 0, −30°, −15°, −50°). Add a simple bench/face mesh (top at z = 0, cut to ~−3 m in front of the tracks) so trainees see the machine on top of the bench digging down to the floor. State in the lesson that the animation shows a ~3 m cut; the class maximum is 8-9 m.
+
+## m2p_hydraulic_excavator major failure high | content failures F('Lost bucket tooth' …) action text
+ISSUE: 'Magnet and detector on the sizer belt are the last defence' is misleading. Per the design basis, the magnet and metal detector sit downstream of the primary sizer and protect the overland belt, not the sizer. A lost tooth reaches the sizer unprotected, which is why the key point says a tooth 'can wreck the sizer'.
+FIX: Replace with: 'Stop loading; check the truck being loaded and the dig face; radio the sizing-station operator to watch for the tooth. The overband magnet and metal detector are AFTER the sizer and protect only the overland belt, so the sizer itself is not protected. Replace the tooth and pin/retainer with the correct parts; check adapter wear.'
+
+## m2p_hydraulic_excavator major safety high | content safety[] and operation.normal
+ISSUE: Core truck-loading rules from the design basis are missing: never swing a loaded bucket over the truck cab, the truck driver stays in the cab, and do not undercut high walls or caprock. The edge-proximity rule (dig with the travel final drives at the rear, away from the face) is also missing.
+FIX: Add to safety: 'Never swing the bucket over the truck cab or over people; the truck driver remains in the cab with the park brake applied during loading.' and 'Do not undercut the face or leave caprock overhangs; keep within the face-height limit.' Add to operation.normal: 'Position the machine with the travel motors/sprockets at the rear, away from the face, and the tracks square to the edge.'
+
+## m2p_hydraulic_excavator major operation high | content operation.controls and operation.alarms_interlocks
+ISSUE: The primary safety interlock of every hydraulic excavator, the pilot-control lockout (safety) lever, is not mentioned. With it in LOCK the controls are dead, and the engine will only start with it locked. Emergency stops and the travel/swing alarm are also missing.
+FIX: Add to controls: 'Pilot-control lockout (safety) lever: LOCK before starting, before leaving the seat and before lowering the stairway.' Add to alarms_interlocks: 'Pilot-control lockout (engine start only when locked; all motions dead when locked)', 'Emergency engine stops in the cab, on the upper deck and at ground level', 'Travel/swing warning alarm and beacon', 'Swing brake applied when swing is idle/parked'. Change 'Stairway-down motion interlock' to 'Stairway-down interlock: no swing, travel or attachment motion while lowered'.
+
+## m2p_hydraulic_excavator major failure high | content failures[]
+ISSUE: Hydraulic hose or fitting failure spraying oil onto the hot engine, turbos or exhaust is the leading cause of large-excavator fires and total losses. It is listed only as a safety bullet, not as a failure mode with causes and actions.
+FIX: Add F('Hydraulic hose/fitting failure → oil-spray fire', ['Sudden pressure loss, oil mist, smoke, fire-suppression alarm'], ['Chafed or aged hoses, loose clamps, missing hose shields, oil-soaked insulation'], ['Shut down, actuate fire suppression, evacuate via the stairway or emergency egress; preventively replace hoses by hours/condition, keep heat shields and clamps intact, clean oil residue'], 'power_module', 'hydraulics').
+
+## m2p_hydraulic_excavator major operation medium | content key_points ('Swing ~90° to the truck'), operation.normal, animation psi = 90°
+ISSUE: The lesson teaches ~90° as the standard swing. The design basis tip and quiz Q6 both say to keep the swing short, and the optimum truck presentation is ~45-70°. A 90° swing adds ~2-3 s per pass.
+FIX: Key point: 'Truck spotted on the operator side at a short swing angle (~45–70°); double-side loading where possible.' Operation.normal: 'Truck spotting on the operator side, swing ~45–70°…'. Animation: change the dump psi from 90° to ~65°.
+
+## m2p_hydraulic_excavator minor geometry medium | m2p_hydraulic_excavator access stairway: K.stair('acc', (3.9, 2.55, 0.15), (1.15, 2.55, ZF+0.54), width=0.7); st_ang stowed = 62°
+ISSUE: Lowered, the stair (y 2.2-2.9) lands with its foot at x = 3.9, on top of the front-left idler/track, which ends at about x ≈ 4.0 and y ≤ 2.61. Stowed at 62°, the 42.7° stair ends up tilted 19° upward, projecting ~1.5 m ahead of the cab at z ≈ 3.9 m (visible in excavator_side_digging.png).
+FIX: Move the foot clear of the idler, e.g. to (4.35, 2.55, 0.15), which gives ~39°, or move the stair centreline outboard to y ≈ 2.95. Set the stowed angle equal to the stair slope (~39–43°) so it stows horizontal at deck level rather than tilted upward.
+
+## m2p_hydraulic_excavator minor principle high | content principle step 3
+ISSUE: 'Place the teeth at the toe of the face' is face-shovel terminology. A backhoe working from the top of the bench reaches out, penetrates at the far end of the cut and pulls the bucket down and toward the machine.
+FIX: 'The arm reaches out and the boom lowers to drive the teeth into the bench ahead of the machine; the cut is then made downward and back toward the tracks, finishing on the design floor (GNSS shows the clay contact).'
+
+## m2p_hydraulic_excavator minor parameter medium | content params.engine_power; META ex_power; part label power_module 'V12 diesel (~700 kW class)'
+ISSUE: The class spans ~700-810 kW, and not every machine in it uses a V12: some use V16 or high-output in-line-6 engines, and electric (cable) versions exist.
+FIX: engine_power = P('≈ 700 – 800','kW','Diesel (class envelope)'). Labels: 'Diesel engine (~700–800 kW class, typically V12/V16)'.
+
+## m2p_hydraulic_excavator minor parameter medium | content params.tail_swing_radius vs design basis key_dimensions ('tail swing radius ~6 m')
+ISSUE: The lesson (5-5.5 m) and the model (counterweight corner ≈ 5.47 m) disagree with the basis (~6 m). Class data are ~5.3-5.6 m.
+FIX: Harmonise to '≈ 5.3 – 5.6 m' in the lesson and change the basis key_dimension to 'tail swing radius ~5.3–5.6 m'. Keep the model geometry.
+
+## m2p_hydraulic_excavator minor operation high | content operation.start_up and operation.shut_down
+ISSUE: Start-up lacks the pre-motion warning and warm-up criterion. Shut-down lacks the lockout lever, parking location and residual-pressure release.
+FIX: start_up: 'Confirm nobody is on the decks or within the swing radius; sound the horn; start with the lockout lever locked; warm up at low idle and cycle functions slowly until the hydraulic oil is ≥ ~20–30 °C (OEM value); raise the stairway; test the swing brake and all controls.' shut_down: 'Park on level ground clear of faces and drainage lines, bucket on the ground; idle 3–5 min to cool the turbos; stop the engine; operate the controls to release residual pilot/accumulator pressure; LOCK the pilot lever; lower the stairway; isolate and lock out.'
+
+## m2p_hydraulic_excavator minor component_notes medium | builder 'upper' part; META ex_upper
+ISSUE: The design basis lists a fuel tank (~3,000-3,500 L), GNSS antennas, a fire-suppression system and auto-lube. The model has a hydraulic tank but no fuel tank, and none of the other items.
+FIX: Add a fuel tank (e.g. box 1.3 × 1.2 × 1.8 m, ~2.8 m³) at the right front of the upper beside 'htank', labelled 'Fuel tank (~3,000–3,500 L)'. Add two small GNSS antenna masts on the counterweight and an auto-lube pump box on the deck. Mention them in the ex_upper note.
+
+## m2p_hydraulic_excavator minor other high | output/meta/m2p_hydraulic_excavator.json overlays.flow description; m.flow('cycle', …)
+ISSUE: The flow overlay inherits the pump wording 'Suction and discharge flow paths', which is meaningless for an excavator. The path is also static and does not follow the swing.
+FIX: Title: 'Material path: face → bucket → truck'. Description: 'Ore is dug at the face, carried in the bucket and dumped into the truck on the operator side.' Draw it from the dig point to the dump point in the swung position.
+
+## m2p_hydraulic_excavator minor maintenance medium | content maint.periodic / overhaul
+ISSUE: The schedule omits gear-oil changes for the final drives and swing reducers, and swing-bearing bolt torque checks. Overhaul has no life-hour guidance.
+FIX: Add M('Final-drive and swing-reducer gear-oil change; swing-bearing bolt torque check.', 'swing_ring', '1,000–2,000 h'). Overhaul text: '…by life hours (typ. engine ~15,000–20,000 h, main pumps ~12,000–15,000 h; OEM/site data govern).'
+

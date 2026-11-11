@@ -1,0 +1,117 @@
+=== SCORE 7 Round-2 review of m2p_mine_overview. Web search was not available, so class values come from my own knowledge (medium confidence). Geometry, kinematics and timing were recomputed from the code in pure Python (a copy of _fillet, speeds, timed, truck_state, ik and the PASSK interpolation) and checked against the round2 renders.
+
+The rework is substantial and most round-1 items are fixed:
+- The pit ramp is now a 27 m box cut at 10 % that meets the plateau at z = 0. Lanes are keep-left: x = -37 for loaded trucks and x = -26 for empties, and road lanes are y 156.5 / 145.5. No truck spins in place.
+- Truck speeds are realistic: 10.8 km/h loaded up the ramp, 32 to 40 km/h on the flat, 5.4 km/h reversing. The cycle runs in real time at about 7 min (T = 427 s; circuit A 421 s, circuit B 400 s).
+- At the hopper the truck reverses straight for 14.75 m. Its rear tyres stop 1.02 m short of the 1.55 m wheel stop, then it plays the 30 s tip clip.
+- Trucks never overlap. The closest approach between footprints is 4.4 m, where loaded and empty trucks pass on the station ramp.
+- Each truck takes 6 passes of 30 s and the excavator clip is synchronised with the truck dwell.
+- The ROM pad is 3 ha with five fingers of about 9 kt each at 35° (about 2.7 days of ROM). It no longer touches the station ramps.
+- Backfill (2.5 m at 37°) and rehabilitation (surface at -4.25 m, 15.8° landform walls) now balance with the waste removed.
+- The model now has grade control (collars, RC rig, grade-bin polygons), the drill on a pegged 3.0 x 3.5 m pattern, the loader, light vehicles, a water cart, a sump and pump, the safety, start-up and shut-down text, and area-specific narration.
+
+Remaining problems:
+1. The ore excavator's dig pose takes the bucket teeth 0.53 m below the grade-control clay floor (z -7.53). On the return swing the bucket comes within 0 to 0.1 m of the truck's tail corner. The swing is only 17.6°, while the excavator lesson teaches 45 to 70°.
+2. The station-ramp windrows sit 2.25 m outside the ramp edges, so they float beside an embankment up to 10 m high. The tipping-deck outer edges have only 1.1 m handrails.
+3. Light vehicle no. 0 is fully buried in the sediment-pond bank. The pond water slab floats about 4.8 m inside the banks, and the banks are 1.9:1, not the 3:1 the label claims.
+4. The ROM pad is about 400 m of load-and-carry (including a 10 m climb) from the hopper. The loader lesson limits load-and-carry to 100 to 150 m.
+5. The final basis m2p/basis/final_00_mining.json (written 05:05) now fixes an India East Coast deposit: 10–30 m ore on 5–8 m drill-and-blast benches, ramps no steeper than 8 %, 20–45 ha/yr. The overview still shows a 4.2 m free-dig ore flitch.
+6. The built outputs are stale again. The truck and dozer GLBs (05:42) are newer than the overview GLB (05:04), and the learning JSON (05:03) predates content/m2p_mine.py (05:05).
+
+Overall the model is close to trainee-ready once the excavator poses, the windrows and deck bunds, the light-vehicle and pond clash and the basis alignment are fixed.
+
+## partly_fixed major | EXC pos (7.3, ±, -2.8); SPOT A/B (-5.3, -15.9 / 22.1); SWING = atan2(4.0, 12.6) = 17.6°
+ISSUE: R1 excavator placement. Fixed: the track front (MK.crawler_track x1 = 3.3) is 4.0 m from the crest, the final drives are at the rear, the truck is on the operator side and the bucket never passes over the truck cab (at dump the bucket's y range is -12.1…-15.8; the canopy starts at y -17.3). Still open: the loaded swing is only 17.6°. That contradicts the excavator lesson (quiz: 'short swing angle ~45–70°'; Operate clip 65°) and the basis ('best swing angle ~45–70°'). The truck's tail (body x -5.35 → world y -10.55) also reaches the excavator's dig line (y = -10 ± 1.55). Both follow from the boom length: _ex_geom gives L1 + L2 = 7.99 + 3.6 = 11.59 m from the boom foot, about 1.4 m short of a 200 t class backhoe (my estimate, medium confidence), so the truck body centre already sits at r = 13.2 m.
+FIX: Move the dig zone away from the truck instead of moving the truck. Give the face poses a negative swing (sf = -0.68 ≈ -12° at PASSK t = 0, 17, 20, 26 and 30). The loaded swing then becomes about 30° and the dig band moves to y ≈ -6.6…-9.8. Add a return key above the rail, (14.0, 0.0, 9.0, 3.6, 30, 0). Also move SPOT A to (-5.3, -17.4) and SPOT B to (-5.3, 20.6) and set SWING = atan2(5.5, 12.6) = 23.6°. Better still, lengthen the boom in _ex_geom: KN segment 4.8 → ~5.9 m, giving B0→A0 ≈ 9.1 m (class value). Update the mn_excavator text to 'swinging ~30–45° to the side of the body'.
+
+## partly_fixed major | params.ore_thickness, rehabilitation_rate; LAY ore -2.8…-7.0; m2p/basis/final_00_mining.json (05:05)
+ISSUE: R1: two deposit types mixed. The parameters were widened (4–15 m, 30–75 ha/yr) and the forest label made generic, but the model and steps still teach a thin (4.2 m) Darling Range-type deposit dug free in one flitch. The final basis written at 05:05 now fixes the deposit as India East Coast type: 10–30 m ore mined on 5–8 m drill-and-blast benches, ramps no steeper than 8 %, about 5.9 Mt/yr wet, strip ratio 0.1–0.4, 20–45 ha/yr, haul 2–6 km, and a 4–6 ha ROM pad with 10–30 kt fingers beside the dump station.
+FIX: Pick one option. (a) Keep the thin-ore scene and label it in META model_configuration and the definition: 'Illustration uses a thin (~4 m) ore column for clarity; the reference plant (East Coast type) mines 10–30 m of ore on 5–8 m drill-and-blast benches.' Then align the params with the basis: rom_ore_mined '≈ 5.9 Mt/yr wet', strip_ratio '≈ 0.1–0.4', rehabilitation_rate '≈ 20–45 ha/yr (East Coast); ~60–110 ha/yr Darling Range-type', haul_distance '2–6 km', ramp '≤ 8 % sustained (10 % short ramps)', rom_pad '4–6 ha, fingers 10–30 kt'. (b) Or rebuild the block with two 5–8 m ore benches.
+
+## partly_fixed minor | sediment_pond: _hipped banks (bx 12.5 → tx 3, h 2.5) on z 0; pwt 38 × 22 at z 1.95; spw boxes
+ISSUE: Material, spillway, sump pump, HDPE line and diversion drain are added. Still wrong: (1) the banks are (12.5 − 3)/2 = 4.75 m per 2.5 m, i.e. 1.9H:1V, not the '3:1' in the label and mn_pond; (2) at z = 2.0 the inner bank face is 3.8 m outside the 40 × 24 toe, so the 38 × 22 water slab leaves a ~4.8 m gap and floats 2 m above a dry floor; (3) the pond is an above-ground ring dam on a flat plateau, which cannot take gravity runoff; (4) the spillway boxes at x -118, -120.5 and -123 are mostly buried in the west bank, so there is no crest notch.
+FIX: Make it an excavated basin: floor at -2.5 m, inner batters 3:1 (7.5 m run), water at -0.5 m. Size the water plane to the batter at that level, e.g. (PW + 2×6) × (PL + 2×6) if the crest is at z 0. Otherwise keep the ring dam, change the label to '~1.9:1', and set pwt to 47.6 × 31.6. Cut a spillway notch 0.5 m below the crest in the west bank and line it with the armour boxes.
+
+## not_fixed major | output/glb (overview 05:04; m2p_haul_truck and m2p_crawler_dozer 05:42); output/learning/m2p_mine_overview.json (05:03) vs content/m2p_mine.py (05:05)
+ISSUE: Area finding (stale builds) has recurred. _Rig and _import_glb bake the truck and dozer GLBs into the overview when it is built, so the overview embeds truck and dozer geometry older than the current GLBs. The learning JSON predates the content: it shows 'HT 9 + 2' where the content now says 'HT 9–10 + 2'.
+FIX: Rebuild all BUILDERS except m2p_mine_overview, then m2p_mine_overview last, then regenerate output/meta and output/learning and the round-2 renders. Make the build script enforce this order.
+
+## partly_fixed minor | META model_configuration.animation
+ISSUE: Area finding (speed): fixed in real time. The requested note on compressed distances is missing: the modelled haul is 0.36–0.46 km one way against 2–6 (basis) or 2–8 km (lesson).
+FIX: Append to the animation text: 'Distances compressed: real one-way haul 2–6 km (reference plant), real cycle ≈ 25–30 min.'
+
+## partly_fixed major | zone_orebench, exC at (19.5, 42, -0.85) with ik(9.0, -0.6, D(-20)); EXC dig PASSK t = 20 (8.6, -1.9, 10°)
+ISSUE: Area finding (selective mining). Added: an ore bench at -2.8 and a caprock excavator on the muck. Still wrong: (1) the caprock excavator's bucket teeth reach z -3.82 at x 10–12, about 1 m into the ore bench, i.e. it digs caprock and ore together; (2) it has no truck and no caprock route to the sizer or backfill; (3) there is no access ramp from the floor onto the ore bench.
+FIX: Change exC to ik(9.0, 0.4, D(-20)), which puts the teeth at -2.82, on the ore surface. Add a static, posed truck beside it at about (12.0, 28, -2.8), loading from the ore bench, labelled 'caprock: to sizer if GC ore, else backfill'. Add a 10 % access ramp from the floor to the bench (e.g. x -10…0, y 45–58).
+
+## partly_fixed major | MODULES safety / alarms_interlocks
+ISSUE: Area finding (area safety). The list now has 8 items, but key area hazards from the area finding are still missing: drowning in sumps and ponds (the model now shows both), stop-work on exposed benches and decks during lightning or storms (the alarm covers explosives only), lower speed limits on wet roads, brake tests and escape lanes on long downgrades, traffic-management plan rules (right-of-way, radio call-up, one-way loops), and tipping rules at the ROM fingers.
+FIX: Add these lines: 'Sumps and ponds: fenced and signed, life rings, no lone work near water'; 'Lightning/storm alert: stop work on exposed benches, decks and ramps and clear charged patterns'; 'Wet roads: reduced speed limits; never over-water ramps and intersections'; 'Brake test before descending; escape lanes or arrester berms on long downgrades'; 'Traffic management plan: heavy vehicles have right of way, radio call-up before entering haul roads, keep-left one-way loops'; 'Hopper: tip only on green, square to the wheel stop; ROM fingers and dumps: tip short and let the dozer push'. Add 'Fatigue alarm' and 'FMS overspeed alarm' to alarms_interlocks.
+
+## partly_fixed minor | A01 catalogue
+ISSUE: Area finding: missing machines and processes. The RC rig, water cart, light vehicles and sump pump are now static props in the overview, but there is still no grader anywhere (it controls rolling resistance) and no ROM-pad or blasting-cycle lessons.
+FIX: Add a posed motor grader on the haul road at about (-130, 145.5, 0) heading -x, ref 'mn_grader'. Keep the ROM/blending, RC and MMU lessons on the backlog.
+
+## new_issue major | m2p_mine_overview PASSK (20.0, 0, 8.6, -1.9, 10, 0) and (17.0, 0, 8.4, 1.4, 30, 0); SPOT A/B
+ISSUE: Computed from _ex_geom and the eased PASSK, with the bucket wrap and tooth tip. (1) At t = 20 s the lowest bucket point is z -7.53, 0.53 m below the GC clay floor (-7.0). This contradicts the selective-mining text and the basis rule 'stay 0.1–0.3 m above the clay'. (2) The dig starts at x -2.45…-0.42, i.e. in the truck lane in front of the face (crest at x = 0), not in the bench. (3) At t ≈ 17–18.5 s the bucket reaches x -2.72 to -2.55 with y -10.55…-11.55 and z -4.7…-4.3. That touches the truck body's right rear corner (body x ≤ -2.55, tail y = -10.55) with 0–0.1 m clearance. On the return swing (t ≈ 13.4) the bucket passes the tail at rail height (z -2.46).
+FIX: Use the swing changes in the excavator-placement finding (dig swing -12°, return key at t = 14 above the rail). Set the dig key to (20.0, f, 8.6, -1.2, 10, 0) and (26.0, f, 7.4, -0.3, -50, 0.6), which gives a lowest point of -6.83 (0.17 m above the clay) and teeth up to x +2.76 inside the bench. Re-run a bucket-vs-truck clearance check (target ≥ 0.5 m) after moving the SPOTs 1.5 m along -y.
+
+## new_issue major | m2p_mine_overview: for name, xa, xb in (('east', 34.7, 62.7), ('west', -2.7, 25.3)): xe in (xa - 2.25, xb + 2.25)
+ISSUE: The station-ramp windrows are centred 2.25 m outside the ramp fill (east ramp x 34.7–62.7; windrows at 32.45 and 64.95, each 4.5 m wide), but their base follows the ramp grade up to 10 m. They float beside an embankment up to 10 m high, and the real ramp edges have no windrow.
+FIX: Put them on the running surface: xe in (xa + 2.25, xb - 2.25), i.e. 36.95 / 60.45 and -0.45 / 23.05. The running width becomes 23.5 m, still ≥ 3.5 × 5.5 m. The loaded lane at x = 43.7 then has 1.7 m between its wheels and the windrow toe; shift the lanes to 44.5 / 54.0 if more margin is wanted.
+
+## new_issue major | Station civil 'dhr' handrail (1.1 m) on the tipping-deck outer edges, used by the overview truck route (PRE at x 54.7, front 59.6; deck edge 62.7)
+ISSUE: Trucks turn on a 10 m high deck within 3 m of an edge protected only by a 1.1 m pedestrian handrail. A handrail is not a vehicle barrier. This contradicts the overview's own safety line ('windrows ≥ half the largest tyre height on every open edge, ramp and tip head').
+FIX: In m2p_primary_sizing_station add a concrete or earth bund 1.55 m high, about 1.5 m wide, along the outer deck edges: local y = ±(HW + 27.5) for x -20…12 and x = 12 for |y| 4.7…32.7. Keep the handrail behind it for pedestrians. Rebuild the station, then the overview.
+
+## new_issue major | light_vehicles: lvbay (-62.5, 123), LVs at x0 = -67, -62.5, -58; sediment_pond east bank _hipped(cx = -68.75, bx 12.5 → x -75…-62.5, y 103…127, h 2.5)
+ISSUE: The light-vehicle bay sits inside the pond's east embankment. At x = -67 the bank surface is z ≈ 2.37, so LV no. 0 (top z 2.08) is completely buried. LV no. 1 is 0.5 m into the bank toe, and the lvbund windrow at x = -71.5 lies on the bank crest. overview_ramp.png shows 3 flags but only 2 vehicles. Separately, windrow wr_s1 (y 135.5–140) cuts into the pond's north bank (y 127–139.5).
+FIX: Move the light-vehicle bay clear of the pond and the box-cut crest, e.g. lvbay centre (-30, 175) north of the haul road with a short access stub and the bund on the road side. Or shift the pond: PX = -110, PY = 108, so the banks end at x ≥ -77 and y ≤ 132.5.
+
+## new_issue major | rom_pad at x -210…-10, y 185…335, z 0.3; hopper at world (30, 290, 10); wheel_loader at (-115, 307); loader lesson 'load-and-carry ≤ 100–150 m (ROM-pad fingers laid out within this distance of the hopper)'
+ISSUE: The loader reclaiming finger 2 would have to carry about 130 m to the west ramp foot, 100 m up the 10 % ramp and about 30 m across the deck, roughly 260–400 m loaded. That is 2–3 times the limit in the loader lesson, and it contradicts the basis ('ROM pad sits beside the dump station').
+FIX: Either build the pad at deck level beside the west tipping deck (a pad at +10 m next to world x -2.7…25.3, y 270–302, with the fingers within 100–150 m of the hopper), or keep it at grade and show the loader loading a truck that hauls to the hopper. In that case change mn_rompad and mn_loader to 'reclaimed by wheel loader into trucks (or load-and-carry ≤ 150 m where the pad adjoins the deck)'.
+
+## new_issue minor | _windrow default h = 1.4 on haul road and station ramps; station wheel stop 1.55 m; label 'Safety windrows (≥ half the largest tyre height, ~1.4 m)'
+ISSUE: The wheel stop was raised to 1.55 m because the wheel loader (tyre about 2.9–3.1 m) uses the station. The loader also uses the station ramps and the ROM access, where the 1.4 m windrows are below half its tyre height (1.45–1.55 m).
+FIX: Use h = 1.55 (base about 5.0 m) on the station ramps, deck approaches and ROM-pad access. Change the windrows label to '≥ ½ the tyre height of the largest machine using the road (1.4 m trucks; 1.55 m where the loader travels)'.
+
+## new_issue minor | trees_forest (explode 0) vs profile_topsoil explode (0, 0, 7.5)
+ISSUE: In the exploded view the 0.25 m topsoil slab of the forest block rises to z 7.25–7.5 and cuts through the trunks of the 80 forest trees (12–22 m tall) standing at z 0.
+FIX: Give trees_forest explode = (0, 0, 7.5), the same as profile_topsoil, so the trees ride on the lifted topsoil.
+
+## new_issue minor | water_cart: tank box (6.6, 4.0, 2.4) at truck-local (-2.3, 0, 3.4); wcM = T(-100, 151, 0)
+ISSUE: The tank bottom (z 2.2) is below the rear tyre tops (2.69, inner duals at |y| 1.06–1.83), the frame kick-up (2.5) and the body pads (2.6), so the tyres pass about 0.5 m into the tank. The cart is also parked on the road centreline (y = 151) facing west, not in the keep-left lane.
+FIX: Raise the tank to sit on the body pads: centre z 4.2 (bottom 3.0, top 5.4), and move the cannon and its pedestal up by 0.8. Place the cart at (-100, 145.5, 0) in the westbound left lane.
+
+## new_issue minor | gc collars grid (27 + 10i, -55 + 10j) vs rcj at (66, -38) rotated 90°; META mn_gc op
+ISSUE: The collar at (67, -35) intersects the RC rig's rear right tyre (y -35.1 ± 0.55, x 67–67.45). The mast (local x -3.6 → world (66, -41.6)) stands over no collar, so the rig is not drilling a grid hole. mn_gc says 'Drilled ahead of clearing/stripping' while the rig stands on cleared ground.
+FIX: Skip collars inside the rig footprint (x 64.5–67.5, y -42.5…-33.5), or move the rig so the mast is over a grid point: rig origin (67, -41.4), mast at (67, -45). Change mn_gc op to 'Drilled after clearing, ahead of stripping'.
+
+## new_issue minor | grade_bins k = 3: grey 'waste' polygon (-68…-40, -58…-5) at z -6.95 on the mined-out pit floor
+ISSUE: A waste polygon on a floor that is already mined to the clay contact means nothing and confuses the ore/waste concept. Haul lane x = -37 runs along its edge.
+FIX: Move the waste polygon onto the ore bench (e.g. a high-SiO₂ pod at x 1–11, y 40–58) or onto the stripped caprock as a 'waste caprock' polygon. Relabel the floor outline 'GC floor (clay) — do not dig below'.
+
+## new_issue minor | diversion_drain dd1/dd1b at y = 104 (ending at x -46 and -17), dd2 at x = 146, y -56…104
+ISSUE: dd2 floats over empty space for y < 60, because the forest block ends at x = 140 and the plateau g2 starts at y = 60. dd1 and dd1b end at the box-cut crests, so diverted water would discharge into the ramp and the pit, which defeats their purpose. The drain does not run round the west or south of the pit.
+FIX: Move dd2 to x = 138 (on the forest block) or extend the plateau to x 150 for y -60…60. Route dd1 and dd1b round the ramp head (north of y = 165) to the pond or to a natural outfall, and add a short drain segment along the west of the backfill.
+
+## new_issue minor | truck_state 'load' with wait = T − circ_T (A 6.2 s, B 27.0 s); ex_state waiting pose
+ISSUE: Every cycle the truck sits spotted under the excavator for 6–27 s while the excavator holds a full bucket at the face. Both machines wait for each other, which is the opposite of good truck-loader practice.
+FIX: Put the wait before the spot (hold the truck about 30 m back on the approach leg at (-5.3, -7) for A and (-5.3, 31) for B) and start loading as soon as the truck is spotted, or let the excavator do clean-up passes during the wait.
+
+## new_issue minor | overview truck front_wheels keyed only with spin (Rotation(dist/RT, 'Y')); fillet radii 10–20 m
+ISSUE: The front wheels never steer, although trucks take R 10–20 m turns, roughly 13–25° of wheel angle for a 4.57 m wheelbase. Steering is a component the truck lesson teaches.
+FIX: Add a yaw about each front kingpin (truck-local (2.285, ±2.08)) of δ = atan(4.57 / R), with R taken from the heading change over the dense path; use 0 on straights.
+
+## new_issue minor | principle step 5 text
+ISSUE: '…to the primary sizing station (or to a ROM-pad grade-bin finger …), reverse to the wheel stop and tip' tells trainees to reverse to a wheel stop at the ROM fingers. That conflicts with the tip-and-push rule in the truck lesson (normal[3], quiz).
+FIX: Change it to: '…to the primary sizing station, reverse square to the wheel stop and tip (at a ROM-pad finger: tip short of the crest and let the dozer push).'
+
+## new_issue minor | m.flow('ore', [(6, -10, 1.0), (-5.5, -13, -1.0)] + …)
+ISSUE: The ore overlay starts above the excavator house at (6, -10, 1.0), not at the dig face. The narration says 'from the excavator bucket'.
+FIX: Start at the face and bucket: [(-0.5, -9.0, -4.5), (-4.7, -13.8, -0.5)] + pts. With the proposed negative dig swing, the first point becomes (-0.5, -8.2, -4.5).
+
+## new_issue minor | empty lane x = 53.7 (y 155.5–162) vs road 'rew' x -160…55; box-cut walls (g1/g2/g4/g5 vertical 0–7 m faces at x -45 / -18)
+ISSUE: (1) On the straight down from the station, the empty truck's left wheels run 1.5 m off the gravel road (x up to 56.5 against an edge at 55). (2) The ramp box-cut walls are vertical 7 m faces in overburden, soft ore and clay, which is not stable practice, and their crests are unbunded for y 60–125.
+FIX: Extend 'rew' to x = 62.7 (box 222.7 × 22 centred at -48.65). Batter the box-cut walls (about 45° in overburden and ore, 60–70° in caprock), e.g. by extruding the cut as a trapezoid, and extend wr_rt1 and wr_rt2 down to y = 60, or fence those crests.

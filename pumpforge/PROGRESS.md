@@ -101,7 +101,15 @@ Phases follow the requested roadmap. Phase 1 has 12 core modules, phase 2 has 12
   buttons and full screen, How-it-works player on the model, numbered markers, pill tabs that stick while scrolling.
 - Live 3-D thumbnails rendered by the app (offscreen MSAA, one per frame, only visible cards, LRU 72); model picker search.
 - Verified: smoke script over every screen (phone 392 dp, tablet 1280 dp, dark + light), 282-module sweep, all three ABIs
-  pass the NDK symbol allow-list. Build: `python3 native/tools/build_apk.py --version-name 2.1.0 --version-code 13`.
+  pass the NDK symbol allow-list. Build: `python3 native/tools/build_apk.py --version-name 2.2.0 --version-code 14`.
+
+## v2.2 — Mine to Port catalog, Area A01 Mine (checkpoint 1)
+- New **Mine to Port** collection (catalog switch): 20 plant areas in process order from `learning/m2p.json` (built by `tools/build_m2p.py` from the reconciled design basis `m2p/basis/final_*.json`), area pages, Operation tab, plant card.
+- A01 models (catalog ids 1000–1006): mine area overview, ~90 t haul truck, ~200 t backhoe excavator, ~70 t dozer with ripper, primary sizing station, blast-hole drill, ~95–100 t wheel loader. Real scale, real-time cycles (drill clip labelled ≈30× compressed).
+- Two rounds of multi-agent SME review (`m2p/review/A01/`, round 2 in `round2/`); every finding applied. External SME review sheet: Claude Doc "A01 Mine — SME Review Sheet".
+- Area overview: real-time haul cycle (~7 min) with excavators driven by the shared `_ex_geom/_ex_mats` kinematics (top-loading), trucks posed from their own dump clip (`_Rig`), sparse keyframes injected straight into the GLB (`Model.sparse_anim`, `core._inject_sparse`).
+- Lessons: area narration overrides (`mod(narration=…)`), formulas kept case-sensitive (`_lc`), quiz answers rotated by a stable hash (the app does not shuffle).
+- Build order for A01: all equipment first, `m2p_mine_overview` last (it bakes the other GLBs), then `build_content.py`, `tools/build_m2p.py`, `native/tools/build_apk.py --version-name 2.2.0 --version-code 14`.
 
 ## Open items needing data from you
 - **WPIL WVT-30-18:** fill `engineering_parameters.reference_model` in `content/rotodynamic_a.py` from the WPIL datasheet or GA drawing. If you want the geometry matched (stages, bowl diameter, column), the model can be re-proportioned in `pumps/vertical_turbine_pump.py`.

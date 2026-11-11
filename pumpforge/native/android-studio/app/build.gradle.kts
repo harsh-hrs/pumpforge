@@ -13,8 +13,8 @@ android {
         applicationId = "com.redeyelabs.pumpforge"
         minSdk = 24
         targetSdk = 34
-        versionCode = 13
-        versionName = "2.1.0"
+        versionCode = 14
+        versionName = "2.2.0"
         ndk { abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64") }
         externalNativeBuild { cmake { arguments += listOf("-DANDROID_STL=none") } }
     }

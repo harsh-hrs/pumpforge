@@ -2,7 +2,7 @@
 
 Steps: models (.glb -> compact .pfm, verified) -> UI fonts -> libpumpforge.so for arm64-v8a + x86_64 ->
 stage (manifest, icons, assets) -> apktool b (manifest + resources) -> add lib/ -> zip align -> apksigner (v1+v2+v3) -> verify.
-Usage: python3 native/tools/build_apk.py --version-name 2.1.0 --version-code 13
+Usage: python3 native/tools/build_apk.py --version-name 2.2.0 --version-code 14
 Signed with the same key as the WebView builds, so it installs as an update of com.redeyelabs.pumpforge.
 """
 import argparse, glob, json, os, shutil, subprocess, sys, zipfile
@@ -56,8 +56,8 @@ def newer(src_glob, dst_dir):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--version-name', default='2.1.0')
-    ap.add_argument('--version-code', default='13')
+    ap.add_argument('--version-name', default='2.2.0')
+    ap.add_argument('--version-code', default='14')
     a = ap.parse_args()
     import build_assets
     sh(sys.executable, os.path.join(N, 'tools', 'build_so.py'))
